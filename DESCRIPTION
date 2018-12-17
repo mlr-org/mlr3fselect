@@ -19,7 +19,7 @@ Authors@R:
              comment = c(ORCID = "0000-0001-9754-0393")),
       person(given = "Bernd",
              family = "Bischl",
-             role = c("aut", "cre"),
+             role = "aut",
              email = "bernd_bischl@gmx.net",
              comment = c(ORCID = "0000-0001-6002-6980")))
 Description: Implements methods for feature selection and filtering in
@@ -53,3 +53,7 @@ LazyData: true
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Collate: 
+    'Filter.R'
+    'Filter.stats_linear.correlation.R'
+    'zzz.R'
