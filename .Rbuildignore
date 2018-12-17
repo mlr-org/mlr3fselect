@@ -1,0 +1,6 @@
+^LICENSE\.md$
+^\.github$
+^codecov\.yml$
+^tic\.R$
+^appveyor\.yml$
+^\.travis\.yml$

@@ -39,7 +39,8 @@ Imports:
 Suggests:
     knitr,
     rpart,
-    testthat
+    testthat,
+    covr
 VignetteBuilder:
     knitr
 Remotes:
