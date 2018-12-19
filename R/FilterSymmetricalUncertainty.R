@@ -5,24 +5,24 @@
 #'
 #' @section Usage:
 #' ```
-#' filter = FilterInformationGain$new()
+#' filter = FilterSymmetricalUncertainty$new()
 #' ```
 #'
 #' @inheritSection Filter Details
 #' @section Details:
-#' `$new()` creates a new object of class [FilterInformationGain].
+#' `$new()` creates a new object of class [FilterSymmetricalUncertainty].
 #'
-#' @name FilterInformationGain
+#' @name FilterSymmetricalUncertainty
 #' @family Filter
 #' @examples
 #' task = mlr_tasks$get("bh")
-#' filter = FilterInformationGain$new()
+#' filter = FilterSymmetricalUncertainty$new()
 #' filter$calculate(task)
 NULL
 
 #' @export
 #' @include Filter.R
-FilterInformationGain = R6Class("FilterInformationGain",
+FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty",
   inherit = Filter,
   public = list(
     initialize = function(id, packages,
@@ -30,7 +30,7 @@ FilterInformationGain = R6Class("FilterInformationGain",
       task_type,
       settings = list()) {
       super$initialize(
-        id = "FilterInformationGain",
+        id = "FilterSymmetricalUncertainty",
         packages = "FSelectorRcpp",
         feature_types = c("numeric", "integer", "factor", "ordered"),
         task_type = c("classif", "regr"),
@@ -53,7 +53,7 @@ FilterInformationGain = R6Class("FilterInformationGain",
       y = task$data(cols = task$target_names)[[task$target_names]]
 
       filter_values = invoke(FSelectorRcpp::information_gain,
-        x = x, y = y, type = "infogain", .args = settings)
+        x = x, y = y, type = "symuncert", .args = settings)
       filter_values = setNames(filter_values$importance,
         filter_values$attributes)
       self$filter_values = sort(filter_values, decreasing = TRUE,

@@ -18,6 +18,7 @@ The package is currently in development and not yet usable.
 * `stats::kruskal.test()`
 * `FSelectorRcpp::information.gain(type = "gainratop")`
 * `FSelectorRcpp::information.gain(type = "infogain")`
+* `FSelectorRcpp::information.gain(type = "symuncert")`
 
 #### Methods
 

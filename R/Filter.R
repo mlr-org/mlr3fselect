@@ -69,10 +69,8 @@ Filter = R6Class("Filter",
     filter = function(abs, perc, threshold) {
       assert_numeric(self$filter_values)
 
-      browser()
       self$filter_values = sort(self$filter_values, decreasing = TRUE)
 
-      browser()
       if (abs) {
         subs = abs
       } else if (perc) {
