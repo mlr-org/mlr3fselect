@@ -13,7 +13,6 @@
 #' `$new()` creates a new object of class [FilterKruskalTest].
 #'
 #' @name FilterKruskalTest
-#' @keywords internal
 #' @family Filter
 #' @examples
 #' task = mlr_tasks$get("iris")
@@ -37,7 +36,7 @@ FilterKruskalTest = R6Class("FilterKruskalTest",
                                   task_type = "classif",
                                   settings = settings)
                               },
-                              calculate = function(task) {
+                              calculate = function(task, settings = self$settings) {
 
                                 browser()
 
@@ -54,7 +53,8 @@ FilterKruskalTest = R6Class("FilterKruskalTest",
 
                                 filter_values = map_dbl(task$feature_names, function(.x) {
                                   f = as.formula(paste0(.x, "~", task$target_names))
-                                  t = kruskal.test(f, data = task$data())
+                                  t = invoke(kruskal.test,
+                                             f, data = task$data(), .args = settings)
                                   t$statistic
                                 })
                                 names(filter_values) = task$feature_names

@@ -13,7 +13,6 @@
 #' `$new()` creates a new object of class [FilterLinearCorrelation].
 #'
 #' @name FilterLinearCorrelation
-#' @keywords internal
 #' @family Filter
 #' @examples
 #' task = mlr_tasks$get("bh")
@@ -37,7 +36,7 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation",
                                         task_type = "regr",
                                         settings = settings)
                                     },
-                                    calculate = function(task) {
+                                    calculate = function(task, settings = self$settings) {
 
                                       # check for supported features
                                       assert_feature_types(task, self)
@@ -55,7 +54,8 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation",
                                         x = as.matrix(task$data(cols = task$feature_names)),
                                         y = as.matrix(task$data(cols = task$target_names)),
                                         use = "pairwise.complete.obs",
-                                        method = "pearson")[, 1L])
+                                        method = "pearson")[, 1L],
+                                        .args = settings)
                                     }
                                   )
 )
