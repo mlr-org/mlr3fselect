@@ -17,6 +17,8 @@ The package is currently in development and not yet usable.
 * `stats::cor(method = "spearman")`
 * `stats::cor(method = "pearson")`
 * `stats::kruskal.test()`
+* `stats::var()`
+* `AUC` -> `mlr3measures::measureAUC`
 * `FSelectorRcpp::information.gain(type = "gainratop")`
 * `FSelectorRcpp::information.gain(type = "infogain")`
 * `FSelectorRcpp::information.gain(type = "symuncert")`
