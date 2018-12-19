@@ -38,7 +38,7 @@
 #' * `$settings` is a list of hyperparamter settings for this [Filter].
 #' @name Filter
 #' @family Filter
-#' @example
+#' @examples
 #' filter = Filter$new(id = "FilterLinearCorrelation", package =  "stats",
 #'   feature_types = "numeric", task_type = "regr", settings = list())
 #'
