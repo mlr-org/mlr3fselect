@@ -46,25 +46,43 @@ NULL
 
 #' @export
 Filter = R6Class("Filter",
-                 public = list(
-                   id = NULL,
-                   task = NULL,
-                   packages = NULL,
-                   supported_features = NULL,
-                   feature_types = NULL,
-                   task_type = NULL,
-                   settings = NULL,
-                   filterValues = NULL,
+  public = list(
+    id = NULL,
+    task = NULL,
+    packages = NULL,
+    feature_types = NULL,
+    task_type = NULL,
+    settings = NULL,
+    filter_values = NULL,
+    filtered_task = NULL,
 
-                   initialize = function(id, packages,
-                                         feature_types,
-                                         task_type,
-                                         settings) {
-                     self$id = assert_string(id)
-                     self$packages = assert_character(packages)
-                     self$feature_types = assert_character(feature_types)
-                     self$task_type = assert_character(task_type)
-                     self$settings = assert_list(settings, names = "unique")
-                   }
-                 )
+    initialize = function(id, packages,
+      feature_types,
+      task_type,
+      settings) {
+      self$id = assert_string(id)
+      self$packages = assert_character(packages)
+      self$feature_types = assert_character(feature_types)
+      self$task_type = assert_character(task_type)
+      self$settings = assert_list(settings, names = "unique")
+    },
+    filter = function(abs, perc, threshold) {
+      assert_numeric(self$filter_values)
+
+      browser()
+      self$filter_values = sort(self$filter_values, decreasing = TRUE)
+
+      browser()
+      if (abs) {
+        subs = abs
+      } else if (perc) {
+        subs = round(length(task$feature_names) * perc)
+      } else if (threshold) {
+        subs = length(which(self$filter_values > threshold))
+      }
+
+      filtered_features = names(self$filter_values[1:subs])
+      self$filtered_task = task$select(filtered_features)
+    }
+  )
 )
