@@ -1,7 +1,7 @@
-#' @title Gain Ratio
+#' @title Symmetrical Uncertainty
 #'
 #' @description
-#' FilterGain Ratio
+#' FilterSymmetricalUncertainty
 #'
 #' @section Usage:
 #' ```

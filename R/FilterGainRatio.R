@@ -1,7 +1,7 @@
 #' @title Gain Ratio
 #'
 #' @description
-#' FilterGain Ratio
+#' FilterGainRatio
 #'
 #' @section Usage:
 #' ```
@@ -32,7 +32,7 @@ FilterGainRatio = R6Class("FilterGainRatio",
       super$initialize(
         id = "FilterGainRatio",
         packages = "FSelectorRcpp",
-        feature_types = c("numeric", "integer", "factor", "ordered"),
+        feature_types = c("numeric", "factor", "ordered"),
         task_type = c("classif", "regr"),
         settings = settings)
     },

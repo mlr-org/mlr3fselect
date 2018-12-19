@@ -32,7 +32,7 @@ FilterInformationGain = R6Class("FilterInformationGain",
       super$initialize(
         id = "FilterInformationGain",
         packages = "FSelectorRcpp",
-        feature_types = c("numeric", "integer", "factor", "ordered"),
+        feature_types = c("numeric", "factor", "ordered"),
         task_type = c("classif", "regr"),
         settings = settings)
     },
