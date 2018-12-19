@@ -55,5 +55,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate: 
     'Filter.R'
-    'Filter.stats_linear.correlation.R'
+    'FilterLinearCorrelation.R'
+    'helpers.R'
     'zzz.R'
