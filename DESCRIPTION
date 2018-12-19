@@ -55,6 +55,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate: 
     'Filter.R'
+    'FilterGainRatio.R'
+    'FilterKruskalTest.R'
     'FilterLinearCorrelation.R'
     'helpers.R'
     'zzz.R'
