@@ -19,7 +19,9 @@ The package is currently in development and not yet usable.
 * `FSelectorRcpp::information.gain(type = "gainratop")`
 * `FSelectorRcpp::information.gain(type = "infogain")`
 * `FSelectorRcpp::information.gain(type = "symuncert")`
+* `mRMRe::mRMR.classic() # broken`
 * `praznik::CMIM()`
+
 
 #### Methods
 
