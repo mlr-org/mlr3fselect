@@ -1,28 +1,28 @@
-#' @title Linear Correlation
+#' @title Rank Correlation
 #'
 #' @description
-#' FilterLinearCorrelation
+#' FilterRankCorrelation
 #'
 #' @section Usage:
 #' ```
-#' filter = FilterLinearCorrelation$new()
+#' filter = FilterRankCorrelation$new()
 #' ```
 #'
 #' @inheritSection Filter Details
 #' @section Details:
-#' `$new()` creates a new object of class [FilterLinearCorrelation].
+#' `$new()` creates a new object of class [FilterRankCorrelation].
 #'
-#' @name FilterLinearCorrelation
+#' @name FilterRankCorrelation
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("bh")
-#' filter = FilterLinearCorrelation$new()
+#' task = mlr_tasks$get("trees")
+#' filter = FilterRankCorrelation$new()
 #' filter$calculate(task)
 NULL
 
 #' @export
 #' @include Filter.R
-FilterLinearCorrelation = R6Class("FilterLinearCorrelation",
+FilterRankCorrelation = R6Class("FilterRankCorrelation",
   inherit = Filter,
   public = list(
     initialize = function(id, packages,
@@ -30,7 +30,7 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation",
       task_type,
       settings = list()) {
       super$initialize(
-        id = "FilterLinearCorrelation",
+        id = "FilterRankCorrelation",
         packages = "stats",
         feature_types = "numeric",
         task_type = "regr",
@@ -49,12 +49,13 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation",
       # assign task to class
       self$task = task
 
+      browser()
       filter_values = abs(invoke(
         stats::cor,
         x = as.matrix(task$data(cols = task$feature_names)),
         y = as.matrix(task$data(cols = task$target_names)),
         use = "pairwise.complete.obs",
-        method = "pearson",
+        method = "spearman",
         .args = settings)[, 1L])
       self$filter_values = sort(filter_values,
         decreasing = TRUE, na.last = TRUE)
