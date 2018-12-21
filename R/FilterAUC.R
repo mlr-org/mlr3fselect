@@ -25,16 +25,13 @@ NULL
 FilterAUC = R6Class("FilterAUC",
   inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list(na.rm = TRUE)) {
+    initialize = function(id = "FilterAUC", settings = list()) {
       super$initialize(
-        id = "FilterAUC",
+        id = assert_string(id),
         packages = "stats",
         feature_types = "numeric",
         task_type = "classif",
-        settings = settings)
+        settings = assert_list(settings, names = "unique"))
     },
     calculate = function(task, settings = self$settings) {
 
@@ -48,11 +45,6 @@ FilterAUC = R6Class("FilterAUC",
 
       # assign task to class
       self$task = task
-
-      filter_values = map_dbl(task$feature_names, function(.x) {
-        t = invoke(var, task$data(col = .x), .args = settings)
-        #t$statistic
-      })
 
       score = map_dbl(task$data(col = task$feature_names), function(x, y) {
         measureAUC(x, y, task$negative, task$positive)
