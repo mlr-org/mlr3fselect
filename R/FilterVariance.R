@@ -22,15 +22,11 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterVariance = R6Class("FilterVariance",
-  inherit = Filter,
+FilterVariance = R6Class("FilterVariance", inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list(na.rm = TRUE)) {
+    initialize = function(id = "FilterVariance", settings = list(na.rm = TRUE)) {
       super$initialize(
-        id = "FilterVariance",
+        id = id,
         packages = "stats",
         feature_types = "numeric",
         task_type = c("classif", "regr"),

@@ -22,15 +22,11 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterRankCorrelation = R6Class("FilterRankCorrelation",
-  inherit = Filter,
+FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list()) {
+    initialize = function(id = "FilterRankCorrelation", settings = list()) {
       super$initialize(
-        id = "FilterRankCorrelation",
+        id = id,
         packages = "stats",
         feature_types = "numeric",
         task_type = "regr",

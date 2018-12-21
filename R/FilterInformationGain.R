@@ -22,15 +22,11 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterInformationGain = R6Class("FilterInformationGain",
-  inherit = Filter,
+FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list()) {
+    initialize = function(id = "FilterInformationGain", settings = list()) {
       super$initialize(
-        id = "FilterInformationGain",
+        id = id,
         packages = "FSelectorRcpp",
         feature_types = c("numeric", "factor", "ordered"),
         task_type = c("classif", "regr"),

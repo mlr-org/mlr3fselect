@@ -22,15 +22,11 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty",
-  inherit = Filter,
+FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list()) {
+    initialize = function(id = "FilterSymmetricalUncertainty", settings = list()) {
       super$initialize(
-        id = "FilterSymmetricalUncertainty",
+        id = id,
         packages = "FSelectorRcpp",
         feature_types = c("numeric", "integer", "factor", "ordered"),
         task_type = c("classif", "regr"),

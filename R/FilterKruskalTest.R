@@ -23,15 +23,11 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterKruskalTest = R6Class("FilterKruskalTest",
-  inherit = Filter,
+FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list()) {
+    initialize = function(id = "FilterKruskalTest", settings = list()) {
       super$initialize(
-        id = "FilterKruskalTest",
+        id = id,
         packages = "stats",
         feature_types = "numeric",
         task_type = "classif",

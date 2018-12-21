@@ -22,16 +22,15 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterAUC = R6Class("FilterAUC",
-  inherit = Filter,
+FilterAUC = R6Class("FilterAUC", inherit = Filter,
   public = list(
     initialize = function(id = "FilterAUC", settings = list()) {
       super$initialize(
-        id = assert_string(id),
+        id = id,
         packages = "stats",
         feature_types = "numeric",
         task_type = "classif",
-        settings = assert_list(settings, names = "unique"))
+        settings = settings)
     },
     calculate = function(task, settings = self$settings) {
 

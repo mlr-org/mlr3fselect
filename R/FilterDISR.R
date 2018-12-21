@@ -22,15 +22,11 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterDISR = R6Class("FilterDISR",
-  inherit = Filter,
+FilterDISR = R6Class("FilterDISR", inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list()) {
+    initialize = function(id = "FilterDISR", settings = list()) {
       super$initialize(
-        id = "FilterDISR",
+        id = id,
         packages = "praznik",
         feature_types = c("numeric", "factor", "ordered"),
         task_type = "classif",

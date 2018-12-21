@@ -56,10 +56,7 @@ Filter = R6Class("Filter",
     filter_values = NULL,
     filtered_task = NULL,
 
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings) {
+    initialize = function(id, packages, feature_types, task_type, settings) {
       self$id = assert_string(id)
       self$packages = assert_character(packages)
       self$feature_types = assert_character(feature_types)

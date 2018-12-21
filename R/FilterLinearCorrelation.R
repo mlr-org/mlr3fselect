@@ -22,15 +22,11 @@ NULL
 
 #' @export
 #' @include Filter.R
-FilterLinearCorrelation = R6Class("FilterLinearCorrelation",
-  inherit = Filter,
+FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = Filter,
   public = list(
-    initialize = function(id, packages,
-      feature_types,
-      task_type,
-      settings = list()) {
+    initialize = function(id = "FilterLinearCorrelation", settings = list()) {
       super$initialize(
-        id = "FilterLinearCorrelation",
+        id = id,
         packages = "stats",
         feature_types = "numeric",
         task_type = "regr",
