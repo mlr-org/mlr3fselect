@@ -18,6 +18,7 @@
 #' task = mlr_tasks$get("iris")
 #' filter = FilterMIM$new()
 #' filter$calculate(task)
+#' head(as.data.table(filter), 3)
 NULL
 
 #' @export
@@ -31,27 +32,14 @@ FilterMIM = R6Class("FilterMIM", inherit = Filter,
         feature_types = c("numeric", "factor", "ordered"),
         task_type = "classif",
         settings = settings)
-    },
-    calculate = function(task, settings = self$settings) {
-
-      # check for supported features
-      assert_feature_types(task, self)
-      # check for supported task
-      assert_filter(filter, task)
-
-      # check for Namespace
-      require_namespaces(self$packages)
-
-      # assign task to class
-      self$task = task
-
+    }
+  ),
+  
+  private = list(
+    .calculate = function(task, settings = self$settings) {
       X = task$data(cols = task$feature_names)
       Y = task$data(cols = task$target_names)[[task$target_names]]
-      filter_values = invoke(
-        praznik::MIM, X = X, Y = Y, k = ncol(X), .args = settings)$score
-
-      self$filter_values = sort(filter_values, decreasing = TRUE,
-        na.last = TRUE)
+      invoke(praznik::MIM, X = X, Y = Y, k = ncol(X), .args = settings)$score
     }
   )
 )

@@ -15,9 +15,10 @@
 #' @name FilterRankCorrelation
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("trees")
+#' task = mlr_tasks$get("mtcars")
 #' filter = FilterRankCorrelation$new()
 #' filter$calculate(task)
+#' head(as.data.table(filter), 3)
 NULL
 
 #' @export
@@ -31,30 +32,18 @@ FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = Filter,
         feature_types = "numeric",
         task_type = "regr",
         settings = settings)
-    },
-    calculate = function(task, settings = self$settings) {
-
-      # check for supported features
-      assert_feature_types(task, self)
-      # check for supported task
-      assert_filter(filter, task)
-
-      # check for Namespace
-      require_namespaces(self$packages)
-
-      # assign task to class
-      self$task = task
-
-      browser()
-      filter_values = abs(invoke(
+    }
+  ),
+  
+  private = list(
+    .calculate = function(task, settings = self$settings) {
+      abs(invoke(
         stats::cor,
         x = as.matrix(task$data(cols = task$feature_names)),
         y = as.matrix(task$data(cols = task$target_names)),
         use = "pairwise.complete.obs",
         method = "spearman",
         .args = settings)[, 1L])
-      self$filter_values = sort(filter_values,
-        decreasing = TRUE, na.last = TRUE)
     }
   )
 )

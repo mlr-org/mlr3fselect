@@ -15,9 +15,10 @@
 #' @name FilterSymmetricalUncertainty
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("bh")
+#' task = mlr_tasks$get("sonar")
 #' filter = FilterSymmetricalUncertainty$new()
 #' filter$calculate(task)
+#' head(as.data.table(filter), 3)
 NULL
 
 #' @export
@@ -31,29 +32,17 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
         feature_types = c("numeric", "integer", "factor", "ordered"),
         task_type = c("classif", "regr"),
         settings = settings)
-    },
-    calculate = function(task, settings = self$settings) {
-
-      # check for supported features
-      assert_feature_types(task, self)
-      # check for supported task
-      assert_filter(filter, task)
-
-      # check for Namespace
-      require_namespaces(self$packages)
-
-      # assign task to class
-      self$task = task
-
+    }
+  ),
+  
+  private = list(
+    .calculate = function(task, settings = self$settings) {
       x = as.data.frame(task$data(cols = task$feature_names))
       y = task$data(cols = task$target_names)[[task$target_names]]
 
-      filter_values = invoke(FSelectorRcpp::information_gain,
+      fv = invoke(FSelectorRcpp::information_gain,
         x = x, y = y, type = "symuncert", .args = settings)
-      filter_values = setNames(filter_values$importance,
-        filter_values$attributes)
-      self$filter_values = sort(filter_values, decreasing = TRUE,
-        na.last = TRUE)
+      set_names(fv$importance, fv$attributes)
     }
   )
 )
