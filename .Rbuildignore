@@ -6,3 +6,5 @@
 ^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.editorconfig$
+^\.ignore$

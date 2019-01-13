@@ -39,17 +39,12 @@
 #' * `$settings` is a list of hyperparamter settings for this [Filter].
 #' @name Filter
 #' @family Filter
-#' @examples
-#' filter = Filter$new(id = "FilterLinearCorrelation", package =  "stats",
-#'   feature_types = "numeric", task_type = "regr", settings = list())
-#'
 NULL
 
 #' @export
 Filter = R6Class("Filter",
   public = list(
     id = NULL,
-    task = NULL,
     packages = NULL,
     feature_types = NULL,
     task_type = NULL,
@@ -67,7 +62,7 @@ Filter = R6Class("Filter",
     calculate = function(task, settings = self$settings) {
       assert_task(task)
       assert_feature_types(task, self)
-      assert_filter(filter, task)
+      assert_filter(self, task)
       assert_list(settings, names = "unique")
       require_namespaces(self$packages)
 
@@ -77,26 +72,39 @@ Filter = R6Class("Filter",
       self
     },
 
-    filter = function(abs, perc, threshold) {
-      assert_numeric(self$filter_values)
-      self$filter_values = sort(self$filter_values, decreasing = TRUE)
+    filter_abs = function(task, abs) {
+      assert_count(abs)
+      assert_task(task)
+      if (is.null(self$filter_values))
+        stopf("Filter values have not been computed yet")
+      filter_n(self, task, abs)
+    },
 
-      if (abs) {
-        subs = abs
-      } else if (perc) {
-        subs = round(length(task$feature_names) * perc)
-      } else if (threshold) {
-        subs = length(which(self$filter_values > threshold))
-      }
+    filter_perc = function(task, perc) {
+      assert_number(perc, lower = 0, upper = 1)
+      assert_task(task)
+      if (is.null(self$filter_values))
+        stopf("Filter values have not been computed yet")
+      filter_n(self, task, round(task$nrow * perc))
+    },
 
-      filtered_features = names(head(self$filter_values, subs))
-      task$clone(deep = TRUE)$select(filtered_features)
+    filter_thres = function(task, threshold) {
+      assert_number(threshold)
+      assert_task(task)
+      if (is.null(self$filter_values))
+        stopf("Filter values have not been computed yet")
+      filter_n(self, task, sum(self$filter_values > threshold))
     }
   )
 )
 
+filter_n = function(self, task, n) {
+  filtered_features = names(head(self$filter_values, n))
+  task$clone(deep = TRUE)$select(filtered_features)
+}
+
 #' @export
-as.data.table.Filter = function(x) {
+as.data.table.Filter = function(x, ...) {
   fv = x$filter_values
   if (is.null(fv))
     stopf("No filter data available")

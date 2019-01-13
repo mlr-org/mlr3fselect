@@ -32,7 +32,7 @@
 }
 
 \examples{
-task = mlr_tasks$get("iris")
+task = mlr3::mlr_tasks$get("iris")
 filter = FilterCMIM$new()
 filter$calculate(task)
 }

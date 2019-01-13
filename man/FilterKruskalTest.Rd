@@ -31,10 +31,10 @@ FilterKruskalTest
 }
 
 \examples{
-task = mlr_tasks$get("iris")
+task = mlr3::mlr_tasks$get("iris")
 filter = FilterKruskalTest$new()
 filter$calculate(task)
-filter$filter(abs = 2)
+filter$filter_abs(task, 2)
 head(as.data.table(filter), 3)
 }
 \seealso{

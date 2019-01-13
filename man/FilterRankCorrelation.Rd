@@ -31,7 +31,7 @@ FilterRankCorrelation
 }
 
 \examples{
-task = mlr_tasks$get("mtcars")
+task = mlr3::mlr_tasks$get("mtcars")
 filter = FilterRankCorrelation$new()
 filter$calculate(task)
 head(as.data.table(filter), 3)

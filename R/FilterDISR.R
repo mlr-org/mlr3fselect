@@ -15,7 +15,7 @@
 #' @name FilterDISR
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("iris")
+#' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterDISR$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)

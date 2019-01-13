@@ -51,11 +51,6 @@ The settings for the Filter
 }
 }
 
-\examples{
-filter = Filter$new(id = "FilterLinearCorrelation", package =  "stats",
-  feature_types = "numeric", task_type = "regr", settings = list())
-
-}
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},

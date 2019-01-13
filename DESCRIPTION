@@ -37,10 +37,12 @@ Imports:
     paradox,
     R6
 Suggests:
+    FSelectorRcpp,
     knitr,
+    mlbench,
+    praznik,
     rpart,
-    testthat,
-    covr
+    testthat
 VignetteBuilder:
     knitr
 Remotes:
@@ -53,7 +55,7 @@ LazyData: true
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Collate: 
+Collate:
     'Filter.R'
     'FilterAUC.R'
     'FilterCMIM.R'
@@ -70,4 +72,5 @@ Collate:
     'FilterSymmetricalUncertainty.R'
     'FilterVariance.R'
     'helpers.R'
+    'reexports.R'
     'zzz.R'

@@ -15,7 +15,7 @@
 #' @name FilterMIM
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("iris")
+#' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterMIM$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
@@ -34,9 +34,9 @@ FilterMIM = R6Class("FilterMIM", inherit = Filter,
         settings = settings)
     }
   ),
-  
+
   private = list(
-    .calculate = function(task, settings = self$settings) {
+    .calculate = function(task, settings) {
       X = task$data(cols = task$feature_names)
       Y = task$data(cols = task$target_names)[[task$target_names]]
       invoke(praznik::MIM, X = X, Y = Y, k = ncol(X), .args = settings)$score

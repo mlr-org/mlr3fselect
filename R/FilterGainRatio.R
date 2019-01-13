@@ -15,7 +15,7 @@
 #' @name FilterGainRatio
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("sonar")
+#' task = mlr3::mlr_tasks$get("sonar")
 #' filter = FilterGainRatio$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
@@ -33,7 +33,7 @@ FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
         task_type = c("classif", "regr"),
         settings = settings)
     }
-  ), 
+  ),
 
   private = list(
     .calculate = function(task, settings) {

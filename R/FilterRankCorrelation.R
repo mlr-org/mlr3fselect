@@ -15,7 +15,7 @@
 #' @name FilterRankCorrelation
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("mtcars")
+#' task = mlr3::mlr_tasks$get("mtcars")
 #' filter = FilterRankCorrelation$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
@@ -34,9 +34,9 @@ FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = Filter,
         settings = settings)
     }
   ),
-  
+
   private = list(
-    .calculate = function(task, settings = self$settings) {
+    .calculate = function(task, settings) {
       abs(invoke(
         stats::cor,
         x = as.matrix(task$data(cols = task$feature_names)),

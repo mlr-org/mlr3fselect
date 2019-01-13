@@ -15,7 +15,7 @@
 #' @name FilterNJMIM
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("iris")
+#' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterNJMIM$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
@@ -34,7 +34,7 @@ FilterNJMIM = R6Class("FilterNJMIM", inherit = Filter,
         settings = settings)
     }
   ),
-  
+
   private = list(
     .calculate = function(task, settings) {
       X = task$data(cols = task$feature_names)

@@ -15,10 +15,10 @@
 #' @name FilterKruskalTest
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("iris")
+#' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterKruskalTest$new()
 #' filter$calculate(task)
-#' filter$filter(abs = 2)
+#' filter$filter_abs(task, 2)
 #' head(as.data.table(filter), 3)
 NULL
 
@@ -35,9 +35,9 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
         settings = settings)
     }
   ),
-  
+
   private = list(
-    .calculate = function(task, settings = self$settings) {
+    .calculate = function(task, settings) {
       data = task$data(cols = task$feature_names)
       g = task$truth()
       filter_values = map_dbl(data, function(x) {

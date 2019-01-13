@@ -15,7 +15,7 @@
 #' @name FilterSymmetricalUncertainty
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("sonar")
+#' task = mlr3::mlr_tasks$get("sonar")
 #' filter = FilterSymmetricalUncertainty$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
@@ -34,9 +34,9 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
         settings = settings)
     }
   ),
-  
+
   private = list(
-    .calculate = function(task, settings = self$settings) {
+    .calculate = function(task, settings) {
       x = as.data.frame(task$data(cols = task$feature_names))
       y = task$data(cols = task$target_names)[[task$target_names]]
 

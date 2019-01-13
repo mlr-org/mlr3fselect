@@ -31,7 +31,7 @@ FilterAUC
 }
 
 \examples{
-task = mlr_tasks$get("spam")
+task = mlr3::mlr_tasks$get("sonar")
 filter = FilterAUC$new()
 filter$calculate(task)
 head(as.data.table(filter), 3)
