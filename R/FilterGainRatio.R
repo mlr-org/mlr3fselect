@@ -42,7 +42,7 @@ FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
 
       filter_values = invoke(FSelectorRcpp::information_gain,
         x = x, y = y, type = "gainratio")
-      filter_values = setNames(filter_values$importance,
+      filter_values = set_names(filter_values$importance,
         filter_values$attributes)
       replace(filter_values, is.nan(filter_values), 0) # FIXME: this is a technical fix, need to report
     }
