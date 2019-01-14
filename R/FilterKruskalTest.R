@@ -15,10 +15,11 @@
 #' @name FilterKruskalTest
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("iris")
+#' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterKruskalTest$new()
 #' filter$calculate(task)
-#' filter$filter(abs = 2)
+#' filter$filter_abs(task, 2)
+#' head(as.data.table(filter), 3)
 NULL
 
 #' @export
@@ -32,31 +33,17 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
         feature_types = "numeric",
         task_type = "classif",
         settings = settings)
-    },
-    calculate = function(task, settings = self$settings) {
+    }
+  ),
 
-      # check for supported features
-      assert_feature_types(task, self)
-      # check for supported task
-      assert_filter(filter, task)
-
-      # check for Namespace
-      require_namespaces(self$packages)
-
-      # assign task to class
-      self$task = task
-
-      filter_values = map_dbl(task$feature_names, function(.x) {
-        f = as.formula(paste0(.x, "~", task$target_names))
-        t = invoke(kruskal.test,
-          f, data = task$data(), .args = settings)
-        t$statistic
+  private = list(
+    .calculate = function(task, settings) {
+      data = task$data(cols = task$feature_names)
+      g = task$truth()
+      filter_values = map_dbl(data, function(x) {
+        invoke(kruskal.test, x = x, g = task$truth(), .args = settings)$statistic
       })
-      names(filter_values) = task$feature_names
-      filter_values = replace(filter_values, is.nan(filter_values), 0) # FIXME: this is a technical fix, need to report
-      self$filter_values = sort(filter_values, decreasing = TRUE,
-        na.last = TRUE)
+      replace(filter_values, is.nan(filter_values), 0) # FIXME: this is a technical fix, need to report
     }
   )
 )
-

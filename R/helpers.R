@@ -8,8 +8,7 @@ assert_feature_types = function(task, object) {
   }
 }
 
-assert_filter = function (filter, task = NULL)
-{
+assert_filter = function (filter, task = NULL) {
   assert_class(filter, "Filter")
   if (!is.null(task)) {
     if (!any(task$task_type %in% filter$task_type)) {
@@ -26,15 +25,11 @@ measureAUC = function(probabilities, truth, negative, positive) {
   } else {
     i = truth == positive
   }
-  if (length(unique(i)) < 2L) {
-    stop("truth vector must have at least two classes")
-  }
-  #Use fast ranking function from data.table for larger vectors
-  if (length(i) > 5000L) {
-    r = frankv(probabilities)
-  } else {
-    r = rank(probabilities)
-  }
+
+  if (uniqueN(i) < 2L)
+    stopf("truth vector must have at least two classes")
+
+  r = frankv(probabilities)
   n.pos = as.numeric(sum(i))
   n.neg = length(i) - n.pos
   (sum(r[i]) - n.pos * (n.pos + 1) / 2) / (n.pos * n.neg)

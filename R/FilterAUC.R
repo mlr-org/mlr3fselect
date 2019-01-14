@@ -15,9 +15,10 @@
 #' @name FilterAUC
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("spam")
+#' task = mlr3::mlr_tasks$get("sonar")
 #' filter = FilterAUC$new()
 #' filter$calculate(task)
+#' head(as.data.table(filter), 3)
 NULL
 
 #' @export
@@ -31,26 +32,15 @@ FilterAUC = R6Class("FilterAUC", inherit = Filter,
         feature_types = "numeric",
         task_type = "classif",
         settings = settings)
-    },
-    calculate = function(task, settings = self$settings) {
+    }
+  ),
 
-      # check for supported features
-      assert_feature_types(task, self)
-      # check for supported task
-      assert_filter(filter, task)
-
-      # check for Namespace
-      require_namespaces(self$packages)
-
-      # assign task to class
-      self$task = task
-
+  private = list(
+    .calculate = function(task, settings) {
       score = map_dbl(task$data(col = task$feature_names), function(x, y) {
         measureAUC(x, y, task$negative, task$positive)
       }, y = task$data(col = task$target_names)[[task$target_names]])
-      filter_values = abs(0.5 - score)
-
-      self$filter_values = sort(filter_values, decreasing = TRUE, na.last = TRUE)
+      abs(0.5 - score)
     }
   )
 )

@@ -15,9 +15,10 @@
 #' @name FilterVariance
 #' @family Filter
 #' @examples
-#' task = mlr_tasks$get("trees")
+#' task = mlr3::mlr_tasks$get("mtcars")
 #' filter = FilterVariance$new()
 #' filter$calculate(task)
+#' head(as.data.table(filter), 3)
 NULL
 
 #' @export
@@ -31,26 +32,14 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
         feature_types = "numeric",
         task_type = c("classif", "regr"),
         settings = settings)
-    },
-    calculate = function(task, settings = self$settings) {
+    }
+  ),
 
-      # check for supported features
-      assert_feature_types(task, self)
-      # check for supported task
-      assert_filter(filter, task)
-
-      # check for Namespace
-      require_namespaces(self$packages)
-
-      # assign task to class
-      self$task = task
-
-      filter_values = map_dbl(task$feature_names, function(.x) {
-        t = invoke(var, task$data(col = .x), .args = settings)
-        #t$statistic
+  private = list(
+    .calculate = function(task, settings) {
+      map_dbl(task$data(cols = task$feature_names), function(x) {
+        t = invoke(var, x, .args = settings)
       })
-
-      self$filter_values = sort(filter_values, decreasing = TRUE, na.last = TRUE)
     }
   )
 )

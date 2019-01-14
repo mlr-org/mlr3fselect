@@ -1,9 +1,9 @@
-test_that("Errors for unsupported features", {
+context("Filter")
 
-  # suppported: numeric
+test_that("Errors for unsupported features", {
+  # supported: numeric
   # supplied: factor, integer, numeric
-  task = mlr_tasks$get("bh")
+  task = mlr3::mlr_tasks$get("bh")
   filter = FilterLinearCorrelation$new()
   expect_error(filter$calculate(task))
-
 })
