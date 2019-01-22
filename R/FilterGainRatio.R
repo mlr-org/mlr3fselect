@@ -49,3 +49,5 @@ FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
   )
 )
 
+#' @include mlr_filters.R
+mlr_filters$add("FilterGainRatio", FilterGainRatio)

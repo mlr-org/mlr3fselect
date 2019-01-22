@@ -44,3 +44,6 @@ FilterAUC = R6Class("FilterAUC", inherit = Filter,
     }
   )
 )
+
+#' @include mlr_filters.R
+mlr_filters$add("FilterAUC", FilterAUC)

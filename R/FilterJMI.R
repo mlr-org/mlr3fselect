@@ -43,3 +43,6 @@ FilterJMI = R6Class("FilterJMI", inherit = Filter,
     }
   )
 )
+
+#' @include mlr_filters.R
+mlr_filters$add("FilterJMI", FilterJMI)

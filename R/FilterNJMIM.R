@@ -43,3 +43,6 @@ FilterNJMIM = R6Class("FilterNJMIM", inherit = Filter,
     }
   )
 )
+
+#' @include mlr_filters.R
+mlr_filters$add("FilterNJMIM", FilterNJMIM)

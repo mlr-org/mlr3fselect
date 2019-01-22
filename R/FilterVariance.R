@@ -43,3 +43,6 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
     }
   )
 )
+
+#' @include mlr_filters.R
+mlr_filters$add("FilterVariance", FilterVariance)

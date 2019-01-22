@@ -47,3 +47,6 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = Filter,
     }
   )
 )
+
+#' @include mlr_filters.R
+mlr_filters$add("FilterLinearCorrelation", FilterLinearCorrelation)

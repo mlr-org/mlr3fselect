@@ -47,3 +47,5 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
   )
 )
 
+#' @include mlr_filters.R
+mlr_filters$add("FilterSymmetricalUncertainty", FilterSymmetricalUncertainty)

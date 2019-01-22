@@ -44,3 +44,5 @@ FilterDISR = R6Class("FilterDISR", inherit = Filter,
   )
 )
 
+#' @include mlr_filters.R
+mlr_filters$add("FilterDISR", FilterDISR)

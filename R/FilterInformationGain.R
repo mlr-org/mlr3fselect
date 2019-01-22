@@ -47,3 +47,5 @@ FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
   )
 )
 
+#' @include mlr_filters.R
+mlr_filters$add("FilterInformationGain", FilterInformationGain)

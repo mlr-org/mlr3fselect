@@ -56,7 +56,9 @@ NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate:
+    'Dictionary.R'
     'Filter.R'
+    'mlr_filters.R'
     'FilterAUC.R'
     'FilterCMIM.R'
     'FilterDISR.R'
