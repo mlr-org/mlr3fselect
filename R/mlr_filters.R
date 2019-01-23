@@ -31,6 +31,7 @@ mlr_filters = DictionaryFilter$new()
 as.data.table.DictionaryFilter = function(x, ...) {
   setkeyv(map_dtr(x$ids(), function(id) {
     l = x$get(id)
-    list(id = id, packages = list(l$packages))
+    list(id = id, packages = list(l$packages), feature_types = list(l$feature_types),
+      task_type = list(l$task_type))
   }), "id")[]
 }
