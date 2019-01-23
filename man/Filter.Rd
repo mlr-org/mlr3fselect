@@ -62,6 +62,6 @@ Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterMIM}}, \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariance}}
+  \code{\link{FilterVariance}}, \code{\link{mlr_filters}}
 }
 \concept{Filter}
