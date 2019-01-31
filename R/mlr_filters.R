@@ -18,7 +18,6 @@
 #' mlr_filters$get("classif.featureless")
 NULL
 
-#' @include Dictionary.R
 DictionaryFilter = R6Class("DictionaryFilter",
   inherit = Dictionary,
   cloneable = FALSE
