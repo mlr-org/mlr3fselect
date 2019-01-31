@@ -20,8 +20,6 @@ as.data.table(mlr_filters)
 mlr_filters$get("classif.featureless")
 }
 \seealso{
-Other Dictionary: \code{\link{Dictionary}}
-
 Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},
   \code{\link{FilterGainRatio}},
