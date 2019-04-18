@@ -1,47 +1,36 @@
-#' @title Minimal conditional mutual information
+#' @title Minimal Conditional Mutual Information Filter
+#'
+#' @name mlr_filters_cmim
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
-#' 	Minimal conditional mutual information maximisation filter
+#' Minimal conditional mutual information maximisation filter.
+#' Calls [praznik::CMIM()].
 #'
-#' @section Usage:
-#' ```
-#' filter = FilterCMIM$new()
-#' ```
-#'
-#' @inheritSection Filter Details
-#' @section Details:
-#' `$new()` creates a new object of class [FilterCMIM].
-#'
-#' @name FilterCMIM
 #' @family Filter
+#' @export
 #' @examples
 #' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterCMIM$new()
 #' filter$calculate(task)
-NULL
-
-#' @export
-#' @include Filter.R
 FilterCMIM = R6Class("FilterCMIM", inherit = Filter,
   public = list(
-    initialize = function(id = "FilterCMIM", settings = list()) {
+    initialize = function(id = "cmim") {
       super$initialize(
         id = id,
         packages = "praznik",
         feature_types = c("numeric", "factor", "ordered"),
-        task_type = c("classif", "regr"),
-        settings = settings)
+        task_type = c("classif", "regr")
+      )
     }
   ),
 
   private = list(
-    .calculate = function(task, settings) {
+    .calculate = function(task) {
       X = task$data(cols = task$feature_names)
-      Y = task$data(cols = task$target_names)[[task$target_names]]
-      invoke(praznik::CMIM, X = X, Y = Y, k = ncol(X), .args = settings)$score
+      Y = task$truth()
+      invoke(praznik::CMIM, X = X, Y = Y, k = ncol(X), .args = self$param_set$values)$score
     }
   )
 )
-
-#' @include mlr_filters.R
-mlr_filters$add("FilterCMIM", FilterCMIM)

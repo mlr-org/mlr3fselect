@@ -1,48 +1,37 @@
-#' @title Conditional mutual information based feature selection
+#' @title Conditional Mutual Information Based Feature Selection Filter
+#'
+#' @name mlr_filters_mim
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
-#' 	Conditional mutual information based feature selection filter
+#' Conditional mutual information based feature selection filter.
+#' Calls [praznik::MIM()].
 #'
-#' @section Usage:
-#' ```
-#' filter = FilterMIM$new()
-#' ```
-#'
-#' @inheritSection Filter Details
-#' @section Details:
-#' `$new()` creates a new object of class [FilterMIM].
-#'
-#' @name FilterMIM
 #' @family Filter
+#' @export
 #' @examples
 #' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterMIM$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
-NULL
-
-#' @export
-#' @include Filter.R
 FilterMIM = R6Class("FilterMIM", inherit = Filter,
   public = list(
-    initialize = function(id = "FilterMIM", settings = list()) {
+    initialize = function(id = "mim") {
       super$initialize(
         id = id,
         packages = "praznik",
         feature_types = c("numeric", "factor", "ordered"),
-        task_type = "classif",
-        settings = settings)
+        task_type = "classif"
+      )
     }
   ),
 
   private = list(
-    .calculate = function(task, settings) {
+    .calculate = function(task) {
       X = task$data(cols = task$feature_names)
-      Y = task$data(cols = task$target_names)[[task$target_names]]
-      invoke(praznik::MIM, X = X, Y = Y, k = ncol(X), .args = settings)$score
+      Y = task$truth()
+      invoke(praznik::MIM, X = X, Y = Y, k = ncol(X))$score
     }
   )
 )
-
-#' @include mlr_filters.R
-mlr_filters$add("FilterMIM", FilterMIM)

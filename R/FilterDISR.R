@@ -1,48 +1,37 @@
-#' @title Double input symmetrical relevance
+#' @title Double Input Symmetrical Relevance Filter
+#'
+#' @name mlr_filters_disr
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
-#' 	Double input symmetrical relevance filter
+#' Double input symmetrical relevance filter.
+#' Calls [praznik::DISR()].
 #'
-#' @section Usage:
-#' ```
-#' filter = FilterDISR$new()
-#' ```
-#'
-#' @inheritSection Filter Details
-#' @section Details:
-#' `$new()` creates a new object of class [FilterDISR].
-#'
-#' @name FilterDISR
 #' @family Filter
+#' @export
 #' @examples
 #' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterDISR$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
-NULL
-
-#' @export
-#' @include Filter.R
 FilterDISR = R6Class("FilterDISR", inherit = Filter,
   public = list(
-    initialize = function(id = "FilterDISR", settings = list()) {
+    initialize = function(id = "disr") {
       super$initialize(
         id = id,
         packages = "praznik",
         feature_types = c("numeric", "factor", "ordered"),
-        task_type = "classif",
-        settings = settings)
+        task_type = "classif"
+      )
     }
   ),
 
   private = list(
-    .calculate = function(task, settings) {
+    .calculate = function(task) {
       X = task$data(cols = task$feature_names)
-      Y = task$data(cols = task$target_names)[[task$target_names]]
-      invoke(praznik::DISR, X = X, Y = Y, k = ncol(X), .args = settings)$score
+      Y = task$truth()
+      invoke(praznik::DISR, X = X, Y = Y, k = ncol(X), .args = self$param_set$values)$score
     }
   )
 )
-
-#' @include mlr_filters.R
-mlr_filters$add("FilterDISR", FilterDISR)

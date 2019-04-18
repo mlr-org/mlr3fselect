@@ -1,28 +1,20 @@
-#' @title Variance
+#' @title Variance Filter
+#'
+#' @name mlr_filters_variance
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
-#' FilterVariance
+#' Variance filter.
+#' Calls [stats::var()]. Argument `na.rm` defaults to `TRUE` here.
 #'
-#' @section Usage:
-#' ```
-#' filter = FilterVariance$new()
-#' ```
-#'
-#' @inheritSection Filter Details
-#' @section Details:
-#' `$new()` creates a new object of class [FilterVariance].
-#'
-#' @name FilterVariance
 #' @family Filter
+#' @export
 #' @examples
 #' task = mlr3::mlr_tasks$get("mtcars")
 #' filter = FilterVariance$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
-NULL
-
-#' @export
-#' @include Filter.R
 FilterVariance = R6Class("FilterVariance", inherit = Filter,
   public = list(
     initialize = function(id = "FilterVariance", settings = list(na.rm = TRUE)) {
@@ -31,18 +23,17 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
         packages = "stats",
         feature_types = "numeric",
         task_type = c("classif", "regr"),
-        settings = settings)
+        param_set = ParamSet$new(list(ParamLgl$new("na.rm", default = TRUE))),
+        param_vals = list(na.rm = TRUE)
+      )
     }
   ),
 
   private = list(
-    .calculate = function(task, settings) {
+    .calculate = function(task) {
       map_dbl(task$data(cols = task$feature_names), function(x) {
-        t = invoke(var, x, .args = settings)
+        invoke(var, x, .args = self$param_set$values)
       })
     }
   )
 )
-
-#' @include mlr_filters.R
-mlr_filters$add("FilterVariance", FilterVariance)

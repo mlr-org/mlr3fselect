@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" type="image/png" href="https://mlr-org.github.io/mlr/favicon.ico">
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -90,8 +90,13 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
-    <div id="mlr3featsel" class="section level1">
+  <div class="col-md-9">
+    
+
+    
+    
+<div class="contents">
+<div id="mlr3featsel" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#mlr3featsel" class="anchor"></a>mlr3featsel</h1></div>
 <p><em>mlr3featsel</em> adds filters, feature selection methods and embedded feature selection methods of algorithms to <em>mlr3</em>.</p>
@@ -101,12 +106,9 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The package is currently in development and not yet usable.</p>
 </div>
-<div id="implementation" class="section level2">
+<div id="filters" class="section level2">
 <h2 class="hasAnchor">
-<a href="#implementation" class="anchor"></a>Implementation</h2>
-<div id="implemented-filters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#implemented-filters" class="anchor"></a>Implemented filters</h3>
+<a href="#filters" class="anchor"></a>Filters</h2>
 <ul>
 <li><code><a href="https://www.rdocumentation.org/packages/stats/topics/cor">stats::cor(method = "spearman")</a></code></li>
 <li><code><a href="https://www.rdocumentation.org/packages/stats/topics/cor">stats::cor(method = "pearson")</a></code></li>
@@ -125,6 +127,38 @@
 <li><code><a href="https://www.rdocumentation.org/packages/praznik/topics/MIM">praznik::MIM()</a></code></li>
 <li><code><a href="https://www.rdocumentation.org/packages/praznik/topics/NJMIM">praznik::NJMIM()</a></code></li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(mlr3featsel)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="reference/as.data.table.html">as.data.table</a></span>(mlr_filters)</a></code></pre></div>
+<pre><code>##                          id      packages                  feature_types
+##  1:                     auc         stats                        numeric
+##  2:                    cmim       praznik         numeric,factor,ordered
+##  3:                    disr       praznik         numeric,factor,ordered
+##  4:              gain_ratio FSelectorRcpp         numeric,factor,ordered
+##  5:        information_gain FSelectorRcpp         numeric,factor,ordered
+##  6:                     jmi       praznik         numeric,factor,ordered
+##  7:                    jmim       praznik         numeric,factor,ordered
+##  8:            kruskal_test         stats                        numeric
+##  9:      linear_correlation         stats                        numeric
+## 10:                     mim       praznik         numeric,factor,ordered
+## 11:                   njmim       praznik         numeric,factor,ordered
+## 12:        rank_correlation         stats                        numeric
+## 13: symmetrical_uncertainty FSelectorRcpp numeric,integer,factor,ordered
+## 14:                variance         stats                        numeric
+##        task_type
+##  1:      classif
+##  2: classif,regr
+##  3:      classif
+##  4: classif,regr
+##  5: classif,regr
+##  6:      classif
+##  7:      classif
+##  8:      classif
+##  9:         regr
+## 10:      classif
+## 11:      classif
+## 12:         regr
+## 13: classif,regr
+## 14: classif,regr</code></pre>
 <div id="methods" class="section level4">
 <h4 class="hasAnchor">
 <a href="#methods" class="anchor"></a>Methods</h4>
@@ -134,7 +168,6 @@
 <li>$filter_values: Filter values</li>
 <li><p>$filtered_task: Filtered task</p></li>
 </ul>
-</div>
 </div>
 <div id="implemented-wrappers" class="section level3">
 <h3 class="hasAnchor">
@@ -146,9 +179,10 @@
 </div>
 </div>
 </div>
+</div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
@@ -175,7 +209,8 @@
 </ul>
 </div>
 
-  </div>
+      </div>
+
 </div>
 
 

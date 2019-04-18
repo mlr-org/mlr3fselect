@@ -18,19 +18,3 @@ assert_filter = function (filter, task = NULL) {
   }
   invisible(filter)
 }
-
-measureAUC = function(probabilities, truth, negative, positive) {
-  if (is.factor(truth)) {
-    i = as.integer(truth) == which(levels(truth) == positive)
-  } else {
-    i = truth == positive
-  }
-
-  if (uniqueN(i) < 2L)
-    stopf("truth vector must have at least two classes")
-
-  r = frankv(probabilities)
-  n.pos = as.numeric(sum(i))
-  n.neg = length(i) - n.pos
-  (sum(r[i]) - n.pos * (n.pos + 1) / 2) / (n.pos * n.neg)
-}

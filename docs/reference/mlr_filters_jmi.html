@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Site Verification -->
 <meta name="google-site-verification" content="BrjL5fpoyHZu1rR8rwnnM2MBO3u3iIFB8NsmSuOsY84" />
-<title>Filter Base Class — Filter • mlr3featsel</title>
+<title>Joint Mutual Information Filter — mlr_filters_jmi • mlr3featsel</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,10 +28,10 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Filter Base Class — Filter" />
+<meta property="og:title" content="Joint Mutual Information Filter — mlr_filters_jmi" />
 
-<meta property="og:description" content="This is the base class for filters.
-Predefined filters are stored in mlr_filters." />
+<meta property="og:description" content="Joint mutual information filter.
+Calls praznik::JMI()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,87 +123,30 @@ Predefined filters are stored in mlr_filters." />
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter Base Class</h1>
-    <small>Source: <a href='https://github.com/mlr-org/mlr3featsel/blob/master/R/Filter.R'><code>R/Filter.R</code></a></small>
+    <h1>Joint Mutual Information Filter</h1>
+    <small>Source: <a href='https://github.com/mlr-org/mlr3featsel/blob/master/R/FilterJMI.R'><code>R/FilterJMI.R</code></a></small>
     </div>
 
     
-    <p>This is the base class for filters.
-Predefined filters are stored in <a href='mlr_filters.html'>mlr_filters</a>.</p>
+    <p>Joint mutual information filter.
+Calls <code><a href='https://www.rdocumentation.org/packages/praznik/topics/JMI'>praznik::JMI()</a></code>.</p>
     
 
+    <pre class="usage"><span class='no'>FilterJMI</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><a href='https://www.rdocumentation.org/packages/R6/topics/R6Class'>R6::R6Class</a> object.</p>
-    
-    <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
-
-    <pre>f = Filter$new(id, task_type, param_set, param_vals, feature_types, packages)
-</pre>
-<ul>
-<li><p><code>id</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code><br />
-Identifier for the learner.</p></li>
-<li><p><code>task_type</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code><br />
-Type of the task the learner can operator on. E.g., <code>"classif"</code> or <code>"regr"</code>.</p></li>
-<li><p><code>param_set</code> :: <a href='https://www.rdocumentation.org/packages/paradox/topics/ParamSet'>paradox::ParamSet</a><br />
-Set of hyperparameters.</p></li>
-<li><p><code>param_vals</code> :: named <code><a href='https://www.rdocumentation.org/packages/base/topics/list'>list()</a></code><br />
-List of hyperparameter settings.</p></li>
-<li><p><code>feature_types</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character()</a></code><br />
-Feature types the learner operates on. Must be a subset of <code>mlr_reflections$task_feature_types</code>.</p></li>
-<li><p><code>packages</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character()</a></code><br />
-Set of required packages.
-Note that these packages will be loaded via <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace()</a></code>, and are not attached.</p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
-
-    
-    <ul>
-<li><p><code>id</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code><br />
-Stores the identifier of the filter.</p></li>
-<li><p><code>task_type</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character(1)</a></code><br />
-Stores the type of class this learner can operate on, e.g. <code>"classif"</code> or <code>"regr"</code>.
-A complete list of task types is stored in <code><a href='https://www.rdocumentation.org/packages/mlr3/topics/mlr_reflections'>mlr_reflections$task_types</a></code>.</p></li>
-<li><p><code>param_set</code> :: <a href='https://www.rdocumentation.org/packages/paradox/topics/ParamSet'>paradox::ParamSet</a><br />
-Description of available hyperparameters and hyperparameter settings.</p></li>
-<li><p><code>feature_types</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character()</a></code><br />
-Stores the feature types the learner can handle, e.g. <code>"logical"</code>, <code>"numeric"</code>, or <code>"factor"</code>.
-A complete list of candidate feature types, grouped by task type, is stored in <code><a href='https://www.rdocumentation.org/packages/mlr3/topics/mlr_reflections'>mlr_reflections$task_feature_types</a></code>.</p></li>
-<li><p><code>packages</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character()</a></code><br />
-Stores the names of required packages.</p></li>
-<li><p><code>filter_values</code> :: <code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric()</a></code><br />
-Stores the calculated filter values.</p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-    <ul>
-<li><p><code>calculate(task)</code><br />
-Task -&gt; <code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric()</a></code><br />
-Calculates the filter values for the provided Task and stores them in field <code>filter_values</code>.</p></li>
-<li><p><code>filter_abs(task, abs)</code><br />
-(Task, <code><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer(1)</a></code>) -&gt; Task<br />
-Filters the Task by reference, keeps up to <code>abs</code> features.</p></li>
-<li><p><code>filter_perc(task, perc)</code><br />
-(Task, <code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>) -&gt; Task<br />
-Filters the Task by reference, keeps <code>perc</code> percent of the features (rounded via <code><a href='https://www.rdocumentation.org/packages/base/topics/Round'>base::round()</a></code>).</p></li>
-<li><p><code>filter_perc(task, thresh)</code><br />
-(Task, <code><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>numeric(1)</a></code>) -&gt; Task<br />
-Filters the Task by reference, keeps features whose filter values exceeds <code>thresh</code>.</p></li>
-</ul>
+    <p><a href='https://www.rdocumentation.org/packages/R6/topics/R6Class'>R6::R6Class</a> inheriting from <a href='Filter.html'>Filter</a>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Filter: <code><a href='mlr_filters_auc.html'>mlr_filters_auc</a></code>,
+    <div class='dont-index'><p>Other Filter: <code><a href='Filter.html'>Filter</a></code>,
+  <code><a href='mlr_filters_auc.html'>mlr_filters_auc</a></code>,
   <code><a href='mlr_filters_cmim.html'>mlr_filters_cmim</a></code>,
   <code><a href='mlr_filters_disr.html'>mlr_filters_disr</a></code>,
   <code><a href='mlr_filters_gain_ratio.html'>mlr_filters_gain_ratio</a></code>,
   <code><a href='mlr_filters_information_gain.html'>mlr_filters_information_gain</a></code>,
   <code><a href='mlr_filters_jmim.html'>mlr_filters_jmim</a></code>,
-  <code><a href='mlr_filters_jmi.html'>mlr_filters_jmi</a></code>,
   <code><a href='mlr_filters_kruskal_test.html'>mlr_filters_kruskal_test</a></code>,
   <code><a href='mlr_filters_linear_correlation.html'>mlr_filters_linear_correlation</a></code>,
   <code><a href='mlr_filters_mim.html'>mlr_filters_mim</a></code>,
@@ -214,6 +157,14 @@ Filters the Task by reference, keeps features whose filter values exceeds <code>
   <code><a href='mlr_filters.html'>mlr_filters</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>task</span> <span class='kw'>=</span> <span class='kw pkg'>mlr3</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/mlr3/topics/mlr_tasks'>mlr_tasks</a></span>$<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/get'>get</a></span>(<span class='st'>"iris"</span>)
+<span class='no'>filter</span> <span class='kw'>=</span> <span class='no'>FilterJMI</span>$<span class='fu'>new</span>()
+<span class='no'>filter</span>$<span class='fu'>calculate</span>(<span class='no'>task</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='as.data.table.html'>as.data.table</a></span>(<span class='no'>filter</span>), <span class='fl'>3</span>)</div><div class='output co'>#&gt;            name    value
+#&gt; 1:  Sepal.Width 2.812842
+#&gt; 2: Petal.Length 2.021127
+#&gt; 3: Sepal.Length 1.040134</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -221,14 +172,10 @@ Filters the Task by reference, keeps features whose filter values exceeds <code>
       
       <li><a href="#format">Format</a></li>
 
-      <li><a href="#construction">Construction</a></li>
-
-      <li><a href="#fields">Fields</a></li>
-
-      <li><a href="#methods">Methods</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

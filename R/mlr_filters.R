@@ -13,9 +13,9 @@
 #' @family Filter
 #' @name mlr_filters
 #' @examples
-#' mlr_filters$ids()
+#' mlr_filters$keys()
 #' as.data.table(mlr_filters)
-#' mlr_filters$get("classif.featureless")
+#' mlr_filters$get("mim")
 NULL
 
 DictionaryFilter = R6Class("DictionaryFilter",
@@ -24,11 +24,11 @@ DictionaryFilter = R6Class("DictionaryFilter",
 )
 
 #' @export
-mlr_filters = DictionaryFilter$new()
+mlr_filters = NULL
 
 #' @export
 as.data.table.DictionaryFilter = function(x, ...) {
-  setkeyv(map_dtr(x$ids(), function(id) {
+  setkeyv(map_dtr(x$keys(), function(id) {
     l = x$get(id)
     list(id = id, packages = list(l$packages), feature_types = list(l$feature_types),
       task_type = list(l$task_type))

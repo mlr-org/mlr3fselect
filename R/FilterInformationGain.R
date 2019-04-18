@@ -1,51 +1,40 @@
-#' @title Gain Ratio
+#' @title Information Gain Filter
+#'
+#' @name mlr_filters_information_gain
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
-#' FilterGain Ratio
+#' Information gain filter.
+#' Calls [FSelectorRcpp::information_gain()].
 #'
-#' @section Usage:
-#' ```
-#' filter = FilterInformationGain$new()
-#' ```
-#'
-#' @inheritSection Filter Details
-#' @section Details:
-#' `$new()` creates a new object of class [FilterInformationGain].
-#'
-#' @name FilterInformationGain
 #' @family Filter
+#' @export
 #' @examples
 #' task = mlr3::mlr_tasks$get("sonar")
 #' filter = FilterInformationGain$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
-NULL
-
-#' @export
-#' @include Filter.R
 FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
   public = list(
-    initialize = function(id = "FilterInformationGain", settings = list()) {
+    initialize = function(id = "information_gain") {
       super$initialize(
         id = id,
         packages = "FSelectorRcpp",
         feature_types = c("numeric", "factor", "ordered"),
-        task_type = c("classif", "regr"),
-        settings = settings)
+        task_type = c("classif", "regr")
+      )
     }
   ),
 
   private = list(
-    .calculate = function(task, settings) {
+    .calculate = function(task) {
       x = setDF(task$data(cols = task$feature_names))
-      y = task$data(cols = task$target_names)[[task$target_names]]
+      y = task$truth()
 
       filter_values = invoke(FSelectorRcpp::information_gain,
-        x = x, y = y, type = "infogain", .args = settings)
+        x = x, y = y, type = "infogain", .args = self$param_set$values)
       set_names(filter_values$importance, filter_values$attributes)
     }
   )
 )
-
-#' @include mlr_filters.R
-mlr_filters$add("FilterInformationGain", FilterInformationGain)

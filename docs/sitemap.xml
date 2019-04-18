@@ -7,51 +7,54 @@
     <loc>https://mlr3featsel.mlr-org.com/reference/Filter.html</loc>
   </url>
   <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterAUC.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterCMIM.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterDISR.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterGainRatio.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterInformationGain.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterJMI.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterJMIM.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterKruskalTest.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterLinearCorrelation.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterMIM.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterNJMIM.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterRankCorrelation.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterSymmetricalUncertainty.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3featsel.mlr-org.com/reference/FilterVariance.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3featsel.mlr-org.com/reference/as.data.table.html</loc>
   </url>
   <url>
     <loc>https://mlr3featsel.mlr-org.com/reference/mlr3featsel-package.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_auc.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_cmim.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_disr.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_gain_ratio.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_information_gain.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_jmi.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_jmim.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_kruskal_test.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_linear_correlation.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_mim.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_njmim.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_rank_correlation.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_symmetrical_uncertainty.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3featsel.mlr-org.com/reference/mlr_filters_variance.html</loc>
   </url>
 </urlset>

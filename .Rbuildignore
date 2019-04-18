@@ -9,3 +9,5 @@
 ^\.Rproj\.user$
 ^\.editorconfig$
 ^\.ignore$
+^docs$
+^pkgdown$

@@ -57,7 +57,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate:
     'Filter.R'
-    'mlr_filters.R'
     'FilterAUC.R'
     'FilterCMIM.R'
     'FilterDISR.R'
@@ -73,5 +72,6 @@ Collate:
     'FilterSymmetricalUncertainty.R'
     'FilterVariance.R'
     'helpers.R'
+    'mlr_filters.R'
     'reexports.R'
     'zzz.R'

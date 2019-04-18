@@ -1,106 +1,133 @@
 #' @title Filter Base Class
 #'
+#' @usage NULL
+#' @format [R6::R6Class] object.
+#'
 #' @description
-#' FilterBase.
+#' This is the base class for filters.
+#' Predefined filters are stored in [mlr_filters].
 #'
-#' @section Usage:
+#' @section Construction:
 #' ```
-#' Filter = Filter$new(id)
-#' # public members
-#' filter$id
-#' filter$ff
-#' filter$settings
-#' filter$values
-#' # public methods
-#' filter$tune()
-#' filter$tune_result()
+#' f = Filter$new(id, task_type, param_set, param_vals, feature_types, packages)
 #' ```
 #'
-#' @section Arguments:
-#' * `id` (`character(1)`):\cr
-#'   The id of the Filter
-#' * `packages` (`character()`]:\cr
+#' * `id` :: `character(1)`\cr
+#'   Identifier for the learner.
+#'
+#' * `task_type` :: `character(1)`\cr
+#'   Type of the task the learner can operator on. E.g., `"classif"` or `"regr"`.
+#'
+#' * `param_set` :: [paradox::ParamSet]\cr
+#'   Set of hyperparameters.
+#'
+#' * `param_vals` :: named `list()`\cr
+#'   List of hyperparameter settings.
+#'
+#' * `feature_types` :: `character()`\cr
+#'   Feature types the learner operates on. Must be a subset of `mlr_reflections$task_feature_types`.
+#'
+#' * `packages` :: `character()`\cr
 #'   Set of required packages.
-#' * `supported_features` (`list`):\cr
-#'   The feature types supported by the filter.
-#' * `supported_tasks` (`list`):\cr
-#'   The task types supported by the filter.
-#' * `settings` (`list`):\cr
-#'   The settings for the Filter
+#'   Note that these packages will be loaded via [requireNamespace()], and are not attached.
 #'
-#' @section Details:
-#' * `$calculate(task)` calculates the filter values.
-#' * `$new()` creates a new object of class [Filter].
-#' * `$filter()` filters a [Task] using specific criteria
-#'     -  returns a subsetted [Task]
-#' * `$id` stores an identifier for this [Filter].
-#' * `$filter_values` stores the calculated filter values.
-#' * `$packages` stores the names of required packages.
-#' * `$settings` is a list of hyperparamter settings for this [Filter].
-#' @name Filter
+#'
+#' @section Fields:
+#'
+#' * `id` :: `character(1)`\cr
+#'   Stores the identifier of the filter.
+#'
+#' * `task_type` :: `character(1)`\cr
+#'   Stores the type of class this learner can operate on, e.g. `"classif"` or `"regr"`.
+#'   A complete list of task types is stored in [`mlr_reflections$task_types`][mlr3::mlr_reflections].
+#'
+#' * `param_set` :: [paradox::ParamSet]\cr
+#'   Description of available hyperparameters and hyperparameter settings.
+#'
+#' * `feature_types` :: `character()`\cr
+#'   Stores the feature types the learner can handle, e.g. `"logical"`, `"numeric"`, or `"factor"`.
+#'   A complete list of candidate feature types, grouped by task type, is stored in [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
+#'
+#' * `packages` :: `character()`\cr
+#'   Stores the names of required packages.
+#'
+#' * `filter_values` :: `numeric()`\cr
+#'   Stores the calculated filter values.
+#'
+#' @section Methods:
+#'
+#' * `calculate(task)`\cr
+#'   [Task] -> `numeric()`\cr
+#'   Calculates the filter values for the provided [Task] and stores them in field `filter_values`.
+#'
+#' * `filter_abs(task, abs)`\cr
+#'   ([Task], `integer(1)`) -> [Task]\cr
+#'   Filters the [Task] by reference, keeps up to `abs` features.
+#'
+#' * `filter_perc(task, perc)`\cr
+#'   ([Task], `numeric(1)`) -> [Task]\cr
+#'   Filters the [Task] by reference, keeps `perc` percent of the features (rounded via [base::round()]).
+#'
+#' * `filter_perc(task, thresh)`\cr
+#'   ([Task], `numeric(1)`) -> [Task]\cr
+#'   Filters the [Task] by reference, keeps features whose filter values exceeds `thresh`.
+#'
 #' @family Filter
-NULL
-
 #' @export
 Filter = R6Class("Filter",
   public = list(
     id = NULL,
-    packages = NULL,
-    feature_types = NULL,
     task_type = NULL,
-    settings = NULL,
+    param_set = NULL,
+    feature_types = NULL,
+    packages = NULL,
     filter_values = NULL,
 
-    initialize = function(id, packages, feature_types, task_type, settings) {
+    initialize = function(id, task_type, param_set = ParamSet$new(), param_vals = list(), feature_types = character(), packages = character()) {
       self$id = assert_string(id)
-      self$packages = assert_character(packages)
-      self$feature_types = assert_character(feature_types)
-      self$task_type = assert_character(task_type)
-      self$settings = assert_list(settings, names = "unique")
+      self$task_type = assert_subset(task_type, mlr_reflections$task_types, empty.ok = FALSE)
+      self$param_set = assert_param_set(param_set)
+      self$param_set$values = param_vals
+      self$feature_types = assert_subset(feature_types, mlr_reflections$task_feature_types)
+      self$packages = assert_character(packages, any.missing = FALSE, unique = TRUE)
     },
 
-    calculate = function(task, settings = self$settings) {
+    calculate = function(task) {
       assert_task(task)
       assert_feature_types(task, self)
       assert_filter(self, task)
-      assert_list(settings, names = "unique")
       require_namespaces(self$packages)
 
-
-      fv = private$.calculate(task, settings)
+      fv = private$.calculate(task)
       self$filter_values = sort(fv, decreasing = TRUE, na.last = TRUE)
-      self
+      invisible(self)
     },
 
     filter_abs = function(task, abs) {
-      assert_count(abs)
       assert_task(task)
-      if (is.null(self$filter_values))
-        stopf("Filter values have not been computed yet")
+      assert_count(abs)
       filter_n(self, task, abs)
     },
 
     filter_perc = function(task, perc) {
-      assert_number(perc, lower = 0, upper = 1)
       assert_task(task)
-      if (is.null(self$filter_values))
-        stopf("Filter values have not been computed yet")
+      assert_number(perc, lower = 0, upper = 1)
       filter_n(self, task, round(task$nrow * perc))
     },
 
     filter_thres = function(task, threshold) {
-      assert_number(threshold)
       assert_task(task)
-      if (is.null(self$filter_values))
-        stopf("Filter values have not been computed yet")
+      assert_number(threshold)
       filter_n(self, task, sum(self$filter_values > threshold))
     }
   )
 )
 
 filter_n = function(self, task, n) {
-  filtered_features = names(head(self$filter_values, n))
-  task$clone(deep = TRUE)$select(filtered_features)
+  if (is.null(self$filter_values))
+    stopf("Filter values have not been computed yet")
+  keep = names(head(self$filter_values, n))
+  task$select(keep)
 }
 
 #' @export
