@@ -29,8 +29,7 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = Filter,
 
   private = list(
     .calculate = function(task) {
-      abs(invoke(
-        stats::cor,
+      abs(stats::cor(
         x = as.matrix(task$data(cols = task$feature_names)),
         y = as.matrix(task$data(cols = task$target_names)),
         use = "pairwise.complete.obs",

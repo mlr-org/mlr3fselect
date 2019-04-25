@@ -32,8 +32,7 @@ FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
       x = setDF(task$data(cols = task$feature_names))
       y = task$truth()
 
-      scores = invoke(FSelectorRcpp::information_gain,
-        x = x, y = y, type = "gainratio")
+      scores = FSelectorRcpp::information_gain(x = x, y = y, type = "gainratio")
       scores = set_names(scores$importance, scores$attributes)
       replace(scores, is.nan(scores), 0) # FIXME: this is a technical fix, need to report
     }

@@ -17,22 +17,23 @@
 #' head(as.data.table(filter), 3)
 FilterVariance = R6Class("FilterVariance", inherit = Filter,
   public = list(
-    initialize = function(id = "FilterVariance", settings = list(na.rm = TRUE)) {
+    initialize = function(id = "FilterVariance", param_vals = list(na.rm = TRUE)) {
       super$initialize(
         id = id,
         packages = "stats",
         feature_types = c("integer", "numeric"),
         task_type = c("classif", "regr"),
-        param_set = ParamSet$new(list(ParamLgl$new("na.rm", default = TRUE))),
-        param_vals = list(na.rm = TRUE)
+        param_set = ParamSet$new(list(ParamLgl$new("na.rm", default = TRUE, tags = "required"))),
+        param_vals = param_vals
       )
     }
   ),
 
   private = list(
     .calculate = function(task) {
+      na.rm = self$param_set$values$na.rm
       map_dbl(task$data(cols = task$feature_names), function(x) {
-        invoke(var, x, .args = self$param_set$values)
+        var(x, na.rm = na.rm)
       })
     }
   )

@@ -31,7 +31,7 @@ FilterJMIM = R6Class("FilterJMIM", inherit = Filter,
     .calculate = function(task) {
       X = task$data(cols = task$feature_names)
       Y = task$truth()
-      invoke(praznik::JMIM, X = X, Y = Y, k = ncol(X), .args = self$param_set$values)$score
+      praznik::JMIM(X = X, Y = Y, k = ncol(X))$score
     }
   )
 )

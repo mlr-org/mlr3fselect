@@ -33,7 +33,7 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
       data = task$data(cols = task$feature_names)
       g = task$truth()
       scores = map_dbl(data, function(x) {
-        invoke(kruskal.test, x = x, g = task$truth())$statistic
+        kruskal.test(x = x, g = g)$statistic
       })
       replace(scores, is.nan(scores), 0) # FIXME: this is a technical fix, need to report
     }

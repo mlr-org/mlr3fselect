@@ -30,7 +30,7 @@ FilterCMIM = R6Class("FilterCMIM", inherit = Filter,
     .calculate = function(task) {
       X = task$data(cols = task$feature_names)
       Y = task$truth()
-      invoke(praznik::CMIM, X = X, Y = Y, k = ncol(X), .args = self$param_set$values)$score
+      praznik::CMIM(X = X, Y = Y, k = ncol(X))$score
     }
   )
 )

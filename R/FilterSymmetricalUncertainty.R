@@ -32,8 +32,7 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
       x = as.data.frame(task$data(cols = task$feature_names))
       y = task$truth()
 
-      fv = invoke(FSelectorRcpp::information_gain,
-        x = x, y = y, type = "symuncert")
+      fv = FSelectorRcpp::information_gain(x = x, y = y, type = "symuncert")
       set_names(fv$importance, fv$attributes)
     }
   )

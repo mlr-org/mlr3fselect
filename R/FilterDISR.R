@@ -31,7 +31,7 @@ FilterDISR = R6Class("FilterDISR", inherit = Filter,
     .calculate = function(task) {
       X = task$data(cols = task$feature_names)
       Y = task$truth()
-      invoke(praznik::DISR, X = X, Y = Y, k = ncol(X), .args = self$param_set$values)$score
+      praznik::DISR(X = X, Y = Y, k = ncol(X))$score
     }
   )
 )

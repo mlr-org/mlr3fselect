@@ -31,7 +31,7 @@ FilterMIM = R6Class("FilterMIM", inherit = Filter,
     .calculate = function(task) {
       X = task$data(cols = task$feature_names)
       Y = task$truth()
-      invoke(praznik::MIM, X = X, Y = Y, k = ncol(X))$score
+      praznik::MIM(X = X, Y = Y, k = ncol(X))$score
     }
   )
 )
