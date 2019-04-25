@@ -7,6 +7,7 @@
 #' @description
 #' Information gain filter.
 #' Calls [FSelectorRcpp::information_gain()].
+#' The target variable of regression tasks is automatically binned (argument `equal` in [FSelectorRcpp::information_gain()]).
 #'
 #' @family Filter
 #' @export
@@ -31,8 +32,7 @@ FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
     .calculate = function(task) {
       x = setDF(task$data(cols = task$feature_names))
       y = task$truth()
-
-      scores = FSelectorRcpp::information_gain(x = x, y = y, type = "infogain")
+      scores = FSelectorRcpp::information_gain(x = x, y = y, type = "infogain", equal = task$task_type == "regr")
       set_names(scores$importance, scores$attributes)
     }
   )

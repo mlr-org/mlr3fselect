@@ -6,6 +6,7 @@
 #'
 #' @description
 #' Area under the (ROC) Curve filter.
+#' Calls [Metrics::auc()], and scores with the absolute value of the difference between the AUC and 0.5.
 #'
 #' @family Filter
 #' @export

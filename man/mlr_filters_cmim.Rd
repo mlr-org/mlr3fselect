@@ -17,6 +17,7 @@ Calls \code{\link[praznik:CMIM]{praznik::CMIM()}}.
 task = mlr3::mlr_tasks$get("iris")
 filter = FilterCMIM$new()
 filter$calculate(task)
+head(as.data.table(filter), 3)
 }
 \seealso{
 Other Filter: \code{\link{Filter}},

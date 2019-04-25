@@ -17,7 +17,6 @@ Calls \code{\link[stats:kruskal.test]{stats::kruskal.test()}}.
 task = mlr3::mlr_tasks$get("iris")
 filter = FilterKruskalTest$new()
 filter$calculate(task)
-filter$filter_abs(task, 2)
 head(as.data.table(filter), 3)
 }
 \seealso{

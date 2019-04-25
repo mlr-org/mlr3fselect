@@ -7,6 +7,7 @@
 #' @description
 #' Symmetrical uncertainty filter.
 #' Calls [FSelectorRcpp::information_gain()].
+#' The target variable of regression tasks is automatically binned (argument `equal` in [FSelectorRcpp::information_gain()]).
 #'
 #' @family Filter
 #' @export
@@ -32,7 +33,7 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
       x = as.data.frame(task$data(cols = task$feature_names))
       y = task$truth()
 
-      fv = FSelectorRcpp::information_gain(x = x, y = y, type = "symuncert")
+      fv = FSelectorRcpp::information_gain(x = x, y = y, type = "symuncert", equal = task$task_type == "regr")
       set_names(fv$importance, fv$attributes)
     }
   )

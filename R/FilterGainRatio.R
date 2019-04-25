@@ -7,6 +7,7 @@
 #' @description
 #' Gain Ratio filter.
 #' Calls [FSelectorRcpp::information_gain()].
+#' The target variable of regression tasks is automatically binned (argument `equal` in [FSelectorRcpp::information_gain()]).
 #'
 #' @family Filter
 #' @export
@@ -31,8 +32,7 @@ FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
     .calculate = function(task) {
       x = setDF(task$data(cols = task$feature_names))
       y = task$truth()
-
-      scores = FSelectorRcpp::information_gain(x = x, y = y, type = "gainratio")
+      scores = FSelectorRcpp::information_gain(x = x, y = y, type = "gainratio", equal = task$task_type == "regr")
       scores = set_names(scores$importance, scores$attributes)
       replace(scores, is.nan(scores), 0) # FIXME: this is a technical fix, need to report
     }

@@ -9,6 +9,7 @@
 #' Takes a [mlr3::Learner] which supports retrieving the variable importance (property "importance"),
 #' fits the model and uses the importance values as filter scores.
 #'
+#'
 #' @family Filter
 #' @export
 #' @examples
@@ -20,7 +21,8 @@
 FilterVariableImportance = R6Class("FilterVariableImportance", inherit = Filter,
   public = list(
     learner = NULL,
-    initialize = function(id = "FilterVariableImportance", learner) {
+    # FIXME: temporary fix to allow construction w/o arguments
+    initialize = function(id = "variable_importance", learner = mlr_learners$get("classif.featureless")) {
       self$learner = assert_learner(learner, properties = "importance")
 
       super$initialize(

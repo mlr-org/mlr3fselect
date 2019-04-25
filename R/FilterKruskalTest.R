@@ -14,7 +14,6 @@
 #' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterKruskalTest$new()
 #' filter$calculate(task)
-#' filter$filter_abs(task, 2)
 #' head(as.data.table(filter), 3)
 FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
   public = list(

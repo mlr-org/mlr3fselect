@@ -12,6 +12,7 @@ FilterInformationGain
 \description{
 Information gain filter.
 Calls \code{\link[FSelectorRcpp:information_gain]{FSelectorRcpp::information_gain()}}.
+The target variable of regression tasks is automatically binned (argument \code{equal} in \code{\link[FSelectorRcpp:information_gain]{FSelectorRcpp::information_gain()}}).
 }
 \examples{
 task = mlr3::mlr_tasks$get("sonar")
