@@ -46,7 +46,8 @@ A complete list of candidate feature types, grouped by task type, is stored in \
 \item \code{packages} :: \code{character()}\cr
 Stores the names of required packages.
 \item \code{scores} :: \code{numeric()}\cr
-Stores the calculated filter score values.
+Stores the calculated filter score values as named numeric vector.
+The scores are sorted in decreasing order, with tied values in a random order.
 }
 }
 

@@ -53,7 +53,8 @@
 #'   Stores the names of required packages.
 #'
 #' * `scores` :: `numeric()`\cr
-#'   Stores the calculated filter score values.
+#'   Stores the calculated filter score values as named numeric vector.
+#'   The scores are sorted in decreasing order, with tied values in a random order.
 #'
 #' @section Methods:
 #'
@@ -98,9 +99,15 @@ Filter = R6Class("Filter",
       assert_feature_types(task, self)
       assert_filter(self, task)
       require_namespaces(self$packages)
+      fn = task$feature_names
 
       fv = private$.calculate(task)
-      self$scores = sort(fv, decreasing = TRUE, na.last = TRUE)
+      assert_numeric(fv, len = length(fn), any.missing = FALSE)
+      assert_names(names(fv), permutation.of = fn)
+
+      # shuffle fv before sort to generate a random order of tied observations
+      self$scores = sort(shuffle(fv), decreasing = TRUE, na.last = TRUE)
+
       invisible(self)
     },
 
