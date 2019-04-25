@@ -39,6 +39,7 @@ Imports:
 Suggests:
     FSelectorRcpp,
     knitr,
+    Metrics,
     mlbench,
     praznik,
     rpart,

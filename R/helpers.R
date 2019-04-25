@@ -1,13 +1,3 @@
-assert_feature_types = function(task, object) {
-  features = unique(task$feature_types$type)
-  features_unsupp = setdiff(features, object$feature_types)
-
-  if (length(features_unsupp) > 0L) {
-    stopf("Filter '%s' does not support %s features.",
-          object$id,  str_collapse(features_unsupp, sep  = " and ", quote = "'"))
-  }
-}
-
 assert_filter = function (filter, task = NULL) {
   assert_class(filter, "Filter")
   if (!is.null(task)) {

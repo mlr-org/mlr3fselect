@@ -24,6 +24,9 @@ Named list of hyperparameter settings.
 \item \code{feature_types} :: \code{character()}\cr
 Feature types the filter operates on.
 Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$task_feature_types}}.
+\item \code{task_properties} :: \code{character()}\cr
+Required task properties, see \link[mlr3:Task]{mlr3::Task}.
+Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$task_properties}}.
 \item \code{packages} :: \code{character()}\cr
 Set of required packages.
 Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.

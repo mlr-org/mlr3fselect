@@ -19,35 +19,20 @@ FilterAUC = R6Class("FilterAUC", inherit = Filter,
     initialize = function(id = "auc") {
       super$initialize(
         id = id,
-        packages = "stats",
+        packages = "Metrics",
         feature_types = c("integer", "numeric"),
-        task_type = "classif"
+        task_type = "classif",
+        task_properties = "twoclass"
       )
     }
   ),
 
   private = list(
     .calculate = function(task) {
-      score = map_dbl(task$data(col = task$feature_names), function(x, y) {
-        measureAUC(x, y, task$negative, task$positive)
-      }, y = task$data(col = task$target_names)[[task$target_names]])
+      x = task$truth() == task$positive
+      y = task$data(cols = task$feature_names)
+      score = map_dbl(y, function(y) Metrics::auc(x, y))
       abs(0.5 - score)
     }
   )
 )
-
-measureAUC = function(probabilities, truth, negative, positive) {
-  if (is.factor(truth)) {
-    i = as.integer(truth) == which(levels(truth) == positive)
-  } else {
-    i = truth == positive
-  }
-
-  if (uniqueN(i) < 2L)
-    stopf("truth vector must have at least two classes")
-
-  r = frankv(probabilities)
-  n.pos = as.numeric(sum(i))
-  n.neg = length(i) - n.pos
-  (sum(r[i]) - n.pos * (n.pos + 1) / 2) / (n.pos * n.neg)
-}

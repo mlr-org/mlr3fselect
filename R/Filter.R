@@ -28,6 +28,10 @@
 #'   Feature types the filter operates on.
 #'   Must be a subset of [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
 #'
+#' * `task_properties` :: `character()`\cr
+#'   Required task properties, see [mlr3::Task].
+#'   Must be a subset of [`mlr_reflections$task_properties`][mlr3::mlr_reflections].
+#'
 #' * `packages` :: `character()`\cr
 #'   Set of required packages.
 #'   Note that these packages will be loaded via [requireNamespace()], and are not attached.
@@ -80,14 +84,16 @@ Filter = R6Class("Filter",
   public = list(
     id = NULL,
     task_type = NULL,
+    task_properties = NULL,
     param_set = NULL,
     feature_types = NULL,
     packages = NULL,
     scores = NULL,
 
-    initialize = function(id, task_type, param_set = ParamSet$new(), param_vals = list(), feature_types = character(), packages = character()) {
+    initialize = function(id, task_type, task_properties = character(), param_set = ParamSet$new(), param_vals = list(), feature_types = character(), packages = character()) {
       self$id = assert_string(id)
       self$task_type = assert_subset(task_type, mlr_reflections$task_types, empty.ok = FALSE)
+      self$task_properties = assert_subset(task_properties, unlist(mlr_reflections$task_properties, use.names = FALSE))
       self$param_set = assert_param_set(param_set)
       self$param_set$values = param_vals
       self$feature_types = assert_subset(feature_types, mlr_reflections$task_feature_types)
@@ -95,8 +101,7 @@ Filter = R6Class("Filter",
     },
 
     calculate = function(task) {
-      assert_task(task)
-      assert_feature_types(task, self)
+      assert_task(task, feature_types = self$feature_types, task_properties = self$task_properties)
       assert_filter(self, task)
       require_namespaces(self$packages)
       fn = task$feature_names
