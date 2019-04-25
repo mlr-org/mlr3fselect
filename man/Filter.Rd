@@ -81,6 +81,7 @@ Other Filter: \code{\link{mlr_filters_auc}},
   \code{\link{mlr_filters_njmim}},
   \code{\link{mlr_filters_rank_correlation}},
   \code{\link{mlr_filters_symmetrical_uncertainty}},
+  \code{\link{mlr_filters_variable_importance}},
   \code{\link{mlr_filters_variance}},
   \code{\link{mlr_filters}}
 }
