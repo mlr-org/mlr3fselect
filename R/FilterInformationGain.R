@@ -21,7 +21,7 @@ FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
       super$initialize(
         id = id,
         packages = "FSelectorRcpp",
-        feature_types = c("numeric", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "factor", "ordered"),
         task_type = c("classif", "regr")
       )
     }
@@ -32,9 +32,9 @@ FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
       x = setDF(task$data(cols = task$feature_names))
       y = task$truth()
 
-      filter_values = invoke(FSelectorRcpp::information_gain,
+      scores = invoke(FSelectorRcpp::information_gain,
         x = x, y = y, type = "infogain", .args = self$param_set$values)
-      set_names(filter_values$importance, filter_values$attributes)
+      set_names(scores$importance, scores$attributes)
     }
   )
 )

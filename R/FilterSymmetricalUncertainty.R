@@ -21,7 +21,7 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
       super$initialize(
         id = id,
         packages = "FSelectorRcpp",
-        feature_types = c("numeric", "integer", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "integer", "factor", "ordered"),
         task_type = c("classif", "regr")
       )
     }

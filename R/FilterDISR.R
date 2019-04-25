@@ -21,7 +21,7 @@ FilterDISR = R6Class("FilterDISR", inherit = Filter,
       super$initialize(
         id = id,
         packages = "praznik",
-        feature_types = c("numeric", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "factor", "ordered"),
         task_type = "classif"
       )
     }

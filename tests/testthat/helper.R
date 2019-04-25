@@ -4,7 +4,7 @@ lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.
 
 expect_filter = function(f, task = NULL) {
   expect_r6(f, "Filter",
-    public = c("packages", "feature_types", "task_type", "param_set", "filter_values"),
+    public = c("packages", "feature_types", "task_type", "param_set", "scores"),
     private = c(".calculate")
   )
 
@@ -14,15 +14,16 @@ expect_filter = function(f, task = NULL) {
   expect_class(f$param_set, "ParamSet")
   expect_function(private(f)$.calculate, args = "task")
 
-  if (!is.null(f$filter_values)) {
-    expect_numeric(f$filter_values, any.missing = FALSE, names = "unique")
-    expect_false(is.unsorted(rev(f$filter_values)))
+  if (!is.null(f$scores)) {
+    expect_numeric(f$scores, any.missing = FALSE, names = "unique")
+    expect_false(is.unsorted(rev(f$scores)))
   }
 
   if (!is.null(task)) {
     x = f$clone(deep = TRUE)$calculate(task)
     expect_class(x, "Filter")
-    expect_numeric(x$filter_values, any.missing = FALSE, names = "unique")
-    expect_false(is.unsorted(rev(x$filter_values)))
+    expect_numeric(x$scores, any.missing = FALSE, names = "unique")
+    expect_names(names(x$scores), permutation.of = task$feature_names)
+    expect_false(is.unsorted(rev(x$scores)))
   }
 }

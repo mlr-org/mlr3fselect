@@ -21,7 +21,7 @@ FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
       super$initialize(
         id = id,
         packages = "FSelectorRcpp",
-        feature_types = c("numeric", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "factor", "ordered"),
         task_type = c("classif", "regr")
       )
     }
@@ -32,10 +32,10 @@ FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
       x = setDF(task$data(cols = task$feature_names))
       y = task$truth()
 
-      filter_values = invoke(FSelectorRcpp::information_gain,
+      scores = invoke(FSelectorRcpp::information_gain,
         x = x, y = y, type = "gainratio")
-      filter_values = set_names(filter_values$importance, filter_values$attributes)
-      replace(filter_values, is.nan(filter_values), 0) # FIXME: this is a technical fix, need to report
+      scores = set_names(scores$importance, scores$attributes)
+      replace(scores, is.nan(scores), 0) # FIXME: this is a technical fix, need to report
     }
   )
 )

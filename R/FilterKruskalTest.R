@@ -22,7 +22,7 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
       super$initialize(
         id = id,
         packages = "stats",
-        feature_types = "numeric",
+        feature_types = c("integer", "numeric"),
         task_type = "classif"
       )
     }
@@ -32,10 +32,10 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
     .calculate = function(task) {
       data = task$data(cols = task$feature_names)
       g = task$truth()
-      filter_values = map_dbl(data, function(x) {
+      scores = map_dbl(data, function(x) {
         invoke(kruskal.test, x = x, g = task$truth())$statistic
       })
-      replace(filter_values, is.nan(filter_values), 0) # FIXME: this is a technical fix, need to report
+      replace(scores, is.nan(scores), 0) # FIXME: this is a technical fix, need to report
     }
   )
 )

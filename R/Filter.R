@@ -13,19 +13,20 @@
 #' ```
 #'
 #' * `id` :: `character(1)`\cr
-#'   Identifier for the learner.
+#'   Identifier for the filter.
 #'
 #' * `task_type` :: `character(1)`\cr
-#'   Type of the task the learner can operator on. E.g., `"classif"` or `"regr"`.
+#'   Type of the task the filter can operator on. E.g., `"classif"` or `"regr"`.
 #'
 #' * `param_set` :: [paradox::ParamSet]\cr
 #'   Set of hyperparameters.
 #'
 #' * `param_vals` :: named `list()`\cr
-#'   List of hyperparameter settings.
+#'   Named list of hyperparameter settings.
 #'
 #' * `feature_types` :: `character()`\cr
-#'   Feature types the learner operates on. Must be a subset of `mlr_reflections$task_feature_types`.
+#'   Feature types the filter operates on.
+#'   Must be a subset of [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
 #'
 #' * `packages` :: `character()`\cr
 #'   Set of required packages.
@@ -38,27 +39,27 @@
 #'   Stores the identifier of the filter.
 #'
 #' * `task_type` :: `character(1)`\cr
-#'   Stores the type of class this learner can operate on, e.g. `"classif"` or `"regr"`.
+#'   Stores the type of class this filter can operate on, e.g. `"classif"` or `"regr"`.
 #'   A complete list of task types is stored in [`mlr_reflections$task_types`][mlr3::mlr_reflections].
 #'
 #' * `param_set` :: [paradox::ParamSet]\cr
 #'   Description of available hyperparameters and hyperparameter settings.
 #'
 #' * `feature_types` :: `character()`\cr
-#'   Stores the feature types the learner can handle, e.g. `"logical"`, `"numeric"`, or `"factor"`.
+#'   Stores the feature types the filter can handle, e.g. `"logical"`, `"numeric"`, or `"factor"`.
 #'   A complete list of candidate feature types, grouped by task type, is stored in [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
 #'
 #' * `packages` :: `character()`\cr
 #'   Stores the names of required packages.
 #'
-#' * `filter_values` :: `numeric()`\cr
-#'   Stores the calculated filter values.
+#' * `scores` :: `numeric()`\cr
+#'   Stores the calculated filter score values.
 #'
 #' @section Methods:
 #'
 #' * `calculate(task)`\cr
 #'   [Task] -> `numeric()`\cr
-#'   Calculates the filter values for the provided [Task] and stores them in field `filter_values`.
+#'   Calculates the filter score values for the provided [Task] and stores them in field `scores`.
 #'
 #' * `filter_abs(task, abs)`\cr
 #'   ([Task], `integer(1)`) -> [Task]\cr
@@ -70,7 +71,7 @@
 #'
 #' * `filter_perc(task, thresh)`\cr
 #'   ([Task], `numeric(1)`) -> [Task]\cr
-#'   Filters the [Task] by reference, keeps features whose filter values exceeds `thresh`.
+#'   Filters the [Task] by reference, keeps features whose filter score values exceeds `thresh`.
 #'
 #' @family Filter
 #' @export
@@ -81,7 +82,7 @@ Filter = R6Class("Filter",
     param_set = NULL,
     feature_types = NULL,
     packages = NULL,
-    filter_values = NULL,
+    scores = NULL,
 
     initialize = function(id, task_type, param_set = ParamSet$new(), param_vals = list(), feature_types = character(), packages = character()) {
       self$id = assert_string(id)
@@ -99,7 +100,7 @@ Filter = R6Class("Filter",
       require_namespaces(self$packages)
 
       fv = private$.calculate(task)
-      self$filter_values = sort(fv, decreasing = TRUE, na.last = TRUE)
+      self$scores = sort(fv, decreasing = TRUE, na.last = TRUE)
       invisible(self)
     },
 
@@ -118,22 +119,22 @@ Filter = R6Class("Filter",
     filter_thres = function(task, threshold) {
       assert_task(task)
       assert_number(threshold)
-      filter_n(self, task, sum(self$filter_values > threshold))
+      filter_n(self, task, sum(self$scores > threshold))
     }
   )
 )
 
 filter_n = function(self, task, n) {
-  if (is.null(self$filter_values))
+  if (is.null(self$scores))
     stopf("Filter values have not been computed yet")
-  keep = names(head(self$filter_values, n))
+  keep = names(head(self$scores, n))
   task$select(keep)
 }
 
 #' @export
 as.data.table.Filter = function(x, ...) {
-  fv = x$filter_values
+  fv = x$scores
   if (is.null(fv))
     stopf("No filter data available")
-  enframe(x$filter_values)
+  enframe(x$scores)
 }

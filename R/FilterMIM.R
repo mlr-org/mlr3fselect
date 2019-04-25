@@ -21,7 +21,7 @@ FilterMIM = R6Class("FilterMIM", inherit = Filter,
       super$initialize(
         id = id,
         packages = "praznik",
-        feature_types = c("numeric", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "factor", "ordered"),
         task_type = "classif"
       )
     }

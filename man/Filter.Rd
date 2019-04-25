@@ -14,15 +14,16 @@ Predefined filters are stored in \link{mlr_filters}.
 }
 \itemize{
 \item \code{id} :: \code{character(1)}\cr
-Identifier for the learner.
+Identifier for the filter.
 \item \code{task_type} :: \code{character(1)}\cr
-Type of the task the learner can operator on. E.g., \code{"classif"} or \code{"regr"}.
+Type of the task the filter can operator on. E.g., \code{"classif"} or \code{"regr"}.
 \item \code{param_set} :: \link[paradox:ParamSet]{paradox::ParamSet}\cr
 Set of hyperparameters.
 \item \code{param_vals} :: named \code{list()}\cr
-List of hyperparameter settings.
+Named list of hyperparameter settings.
 \item \code{feature_types} :: \code{character()}\cr
-Feature types the learner operates on. Must be a subset of \code{mlr_reflections$task_feature_types}.
+Feature types the filter operates on.
+Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$task_feature_types}}.
 \item \code{packages} :: \code{character()}\cr
 Set of required packages.
 Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.
@@ -35,17 +36,17 @@ Note that these packages will be loaded via \code{\link[=requireNamespace]{requi
 \item \code{id} :: \code{character(1)}\cr
 Stores the identifier of the filter.
 \item \code{task_type} :: \code{character(1)}\cr
-Stores the type of class this learner can operate on, e.g. \code{"classif"} or \code{"regr"}.
+Stores the type of class this filter can operate on, e.g. \code{"classif"} or \code{"regr"}.
 A complete list of task types is stored in \code{\link[mlr3:mlr_reflections]{mlr_reflections$task_types}}.
 \item \code{param_set} :: \link[paradox:ParamSet]{paradox::ParamSet}\cr
 Description of available hyperparameters and hyperparameter settings.
 \item \code{feature_types} :: \code{character()}\cr
-Stores the feature types the learner can handle, e.g. \code{"logical"}, \code{"numeric"}, or \code{"factor"}.
+Stores the feature types the filter can handle, e.g. \code{"logical"}, \code{"numeric"}, or \code{"factor"}.
 A complete list of candidate feature types, grouped by task type, is stored in \code{\link[mlr3:mlr_reflections]{mlr_reflections$task_feature_types}}.
 \item \code{packages} :: \code{character()}\cr
 Stores the names of required packages.
-\item \code{filter_values} :: \code{numeric()}\cr
-Stores the calculated filter values.
+\item \code{scores} :: \code{numeric()}\cr
+Stores the calculated filter score values.
 }
 }
 
@@ -54,7 +55,7 @@ Stores the calculated filter values.
 \itemize{
 \item \code{calculate(task)}\cr
 \link{Task} -> \code{numeric()}\cr
-Calculates the filter values for the provided \link{Task} and stores them in field \code{filter_values}.
+Calculates the filter score values for the provided \link{Task} and stores them in field \code{scores}.
 \item \code{filter_abs(task, abs)}\cr
 (\link{Task}, \code{integer(1)}) -> \link{Task}\cr
 Filters the \link{Task} by reference, keeps up to \code{abs} features.
@@ -63,7 +64,7 @@ Filters the \link{Task} by reference, keeps up to \code{abs} features.
 Filters the \link{Task} by reference, keeps \code{perc} percent of the features (rounded via \code{\link[base:round]{base::round()}}).
 \item \code{filter_perc(task, thresh)}\cr
 (\link{Task}, \code{numeric(1)}) -> \link{Task}\cr
-Filters the \link{Task} by reference, keeps features whose filter values exceeds \code{thresh}.
+Filters the \link{Task} by reference, keeps features whose filter score values exceeds \code{thresh}.
 }
 }
 

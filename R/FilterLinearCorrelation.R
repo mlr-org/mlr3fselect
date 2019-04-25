@@ -21,7 +21,7 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = Filter,
       super$initialize(
         id = id,
         packages = "stats",
-        feature_types = "numeric",
+        feature_types = c("integer", "numeric"),
         task_type = "regr"
       )
     }

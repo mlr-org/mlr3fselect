@@ -43,7 +43,7 @@ as.data.table(mlr_filters)
 * $calculate(): Calculates Filter values
 * $filter(): filters the task by a given criterion
 
-* $filter_values: Filter values
+* $scores: Filter score values
 * $filtered_task: Filtered task
 
 ### Implemented wrappers

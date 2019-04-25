@@ -20,7 +20,7 @@ FilterAUC = R6Class("FilterAUC", inherit = Filter,
       super$initialize(
         id = id,
         packages = "stats",
-        feature_types = "numeric",
+        feature_types = c("integer", "numeric"),
         task_type = "classif"
       )
     }

@@ -77,7 +77,7 @@ as.data.table(mlr_filters)
 
   - $filter(): filters the task by a given criterion
 
-  - $filter\_values: Filter values
+  - $scores: Filter score values
 
   - $filtered\_task: Filtered task
 
