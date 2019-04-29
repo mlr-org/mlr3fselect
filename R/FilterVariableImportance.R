@@ -21,8 +21,7 @@
 FilterVariableImportance = R6Class("FilterVariableImportance", inherit = Filter,
   public = list(
     learner = NULL,
-    # FIXME: temporary fix to allow construction w/o arguments
-    initialize = function(id = "variable_importance", learner = mlr_learners$get("classif.featureless")) {
+    initialize = function(id = "variable_importance", learner) {
       self$learner = assert_learner(learner, properties = "importance")
 
       super$initialize(

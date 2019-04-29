@@ -23,6 +23,6 @@
   mlr_filters$add("njmim", FilterNJMIM)
   mlr_filters$add("rank_correlation", FilterRankCorrelation)
   mlr_filters$add("symmetrical_uncertainty", FilterSymmetricalUncertainty)
-  mlr_filters$add("variable_importance", FilterVariableImportance)
+  mlr_filters$add("variable_importance", FilterVariableImportance, required_args = "learner")
   mlr_filters$add("variance", FilterVariance)
 } # nocov end

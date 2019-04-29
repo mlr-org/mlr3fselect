@@ -29,6 +29,8 @@ mlr_filters = NULL
 #' @export
 as.data.table.DictionaryFilter = function(x, ...) {
   setkeyv(map_dtr(x$keys(), function(id) {
+    if (length(x$required_args(id)) > 0L)
+      return(list(id = id, packages = list(NA_character_), feature_types = list(NA_character_), task_type = list(NA_character_)))
     l = x$get(id)
     list(id = id, packages = list(l$packages), feature_types = list(l$feature_types),
       task_type = list(l$task_type))
