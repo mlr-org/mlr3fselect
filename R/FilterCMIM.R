@@ -1,6 +1,6 @@
 #' @title Minimal Conditional Mutual Information Filter
 #'
-#' @name mlr_filters_cmim
+#' @aliases mlr_filters_cmim
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'

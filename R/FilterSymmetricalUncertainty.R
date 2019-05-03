@@ -1,6 +1,6 @@
 #' @title Symmetrical Uncertainty Filter
 #'
-#' @name mlr_filters_symmetrical_uncertainty
+#' @aliases mlr_filters_symmetrical_uncertainty
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'

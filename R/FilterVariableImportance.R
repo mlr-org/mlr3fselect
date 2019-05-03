@@ -1,6 +1,6 @@
 #' @title Variable Importance Filter
 #'
-#' @name mlr_filters_variable_importance
+#' @aliases mlr_filters_variable_importance
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'

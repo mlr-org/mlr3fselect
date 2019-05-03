@@ -1,6 +1,6 @@
 #' @title Gain Ratio Filter
 #'
-#' @name mlr_filters_gain_ratio
+#' @aliases mlr_filters_gain_ratio
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'

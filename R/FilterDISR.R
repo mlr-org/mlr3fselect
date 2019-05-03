@@ -1,6 +1,6 @@
 #' @title Double Input Symmetrical Relevance Filter
 #'
-#' @name mlr_filters_disr
+#' @aliases mlr_filters_disr
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'

@@ -1,6 +1,6 @@
 #' @title Information Gain Filter
 #'
-#' @name mlr_filters_information_gain
+#' @aliases mlr_filters_information_gain
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'
