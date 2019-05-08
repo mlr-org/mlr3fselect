@@ -1,6 +1,6 @@
 #' @title Variance Filter
 #'
-#' @name mlr_filters_variance
+#' @aliases mlr_filters_variance
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'

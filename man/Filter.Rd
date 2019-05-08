@@ -73,22 +73,18 @@ Filters the \link{Task} by reference, keeps features whose filter score values e
 }
 
 \seealso{
-Other Filter: \code{\link{mlr_filters_auc}},
-  \code{\link{mlr_filters_cmim}},
-  \code{\link{mlr_filters_disr}},
-  \code{\link{mlr_filters_gain_ratio}},
-  \code{\link{mlr_filters_information_gain}},
-  \code{\link{mlr_filters_jmim}},
-  \code{\link{mlr_filters_jmi}},
-  \code{\link{mlr_filters_kruskal_test}},
-  \code{\link{mlr_filters_linear_correlation}},
-  \code{\link{mlr_filters_mim}},
-  \code{\link{mlr_filters_njmim}},
-  \code{\link{mlr_filters_rank_correlation}},
-  \code{\link{mlr_filters_symmetrical_uncertainty}},
-  \code{\link{mlr_filters_variable_importance}},
-  \code{\link{mlr_filters_variance}},
-  \code{\link{mlr_filters}}
+Other Filter: \code{\link{FilterAUC}},
+  \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},
+  \code{\link{FilterGainRatio}},
+  \code{\link{FilterInformationGain}},
+  \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
+  \code{\link{FilterKruskalTest}},
+  \code{\link{FilterLinearCorrelation}},
+  \code{\link{FilterMIM}}, \code{\link{FilterNJMIM}},
+  \code{\link{FilterRankCorrelation}},
+  \code{\link{FilterSymmetricalUncertainty}},
+  \code{\link{FilterVariableImportance}},
+  \code{\link{FilterVariance}}, \code{\link{mlr_filters}}
 }
 \concept{Filter}
 \keyword{datasets}

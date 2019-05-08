@@ -1,6 +1,6 @@
 #' @title AUC Filter
 #'
-#' @name mlr_filters_auc
+#' @aliases mlr_filters_auc
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'

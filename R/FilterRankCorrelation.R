@@ -1,6 +1,6 @@
 #' @title Rank Correlation Filter
 #'
-#' @name mlr_filters_rank_correlation
+#' @aliases mlr_filters_rank_correlation
 #' @format [R6::R6Class] inheriting from [Filter].
 #' @include Filter.R
 #'
