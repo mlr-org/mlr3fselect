@@ -21,3 +21,16 @@ test_that("mlr_filters autotest", {
     }
   }
 })
+
+test_that("sanity check regression", {
+  gen = mlr_generators$get("friedman1")
+  task = gen$generate(500)
+
+  keys = as.data.table(mlr_filters)[map_lgl(task_type, is.element, el = "regr"), id]
+  keys = setdiff(keys, "variance")
+  for (key in keys) {
+    f = mlr_filters$get(key)
+    f$calculate(task)
+    expect_true(startsWith(names(head(f$scores, 1L)), "important"))
+  }
+})
