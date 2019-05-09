@@ -26,8 +26,7 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
         param_set = ParamSet$new(list(ParamLgl$new("na.rm", default = TRUE, tags = "required"))),
         param_vals = param_vals
       )
-    }
-  ),
+    }),
 
   private = list(
     .calculate = function(task) {
@@ -35,6 +34,5 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
       map_dbl(task$data(cols = task$feature_names), function(x) {
         var(x, na.rm = na.rm)
       })
-    }
-  )
+    })
 )

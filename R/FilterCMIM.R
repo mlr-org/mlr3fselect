@@ -24,14 +24,12 @@ FilterCMIM = R6Class("FilterCMIM", inherit = Filter,
         feature_types = c("integer", "numeric", "factor", "ordered"),
         task_type = c("classif", "regr")
       )
-    }
-  ),
+    }),
 
   private = list(
     .calculate = function(task) {
       X = task$data(cols = task$feature_names)
       Y = task$truth()
       praznik::CMIM(X = X, Y = Y, k = ncol(X))$score
-    }
-  )
+    })
 )

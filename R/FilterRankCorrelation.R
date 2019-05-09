@@ -24,8 +24,7 @@ FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = Filter,
         feature_types = c("integer", "numeric"),
         task_type = "regr"
       )
-    }
-  ),
+    }),
 
   private = list(
     .calculate = function(task) {
@@ -34,6 +33,5 @@ FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = Filter,
         y = as.matrix(task$data(cols = task$target_names)),
         use = "pairwise.complete.obs",
         method = "spearman")[, 1L])
-    }
-  )
+    })
 )

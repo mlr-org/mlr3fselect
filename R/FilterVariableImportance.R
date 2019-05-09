@@ -31,8 +31,7 @@ FilterVariableImportance = R6Class("FilterVariableImportance", inherit = Filter,
         task_type = learner$task_type,
         param_set = learner$param_set$clone(deep = TRUE)
       )
-    }
-  ),
+    }),
 
   private = list(
     .calculate = function(task) {
@@ -43,6 +42,5 @@ FilterVariableImportance = R6Class("FilterVariableImportance", inherit = Filter,
 
       fn = task$feature_names
       insert_named(set_names(numeric(length(fn)), fn), importance)
-    }
-  )
+    })
 )

@@ -101,6 +101,7 @@ Filter = R6Class("Filter",
     },
 
     calculate = function(task) {
+
       assert_task(task, feature_types = self$feature_types, task_properties = self$task_properties)
       assert_filter(self, task)
       require_namespaces(self$packages)
@@ -132,13 +133,13 @@ Filter = R6Class("Filter",
       assert_task(task)
       assert_number(threshold)
       filter_n(self, task, sum(self$scores > threshold))
-    }
-  )
+    })
 )
 
 filter_n = function(self, task, n) {
-  if (is.null(self$scores))
+  if (is.null(self$scores)) {
     stopf("Filter values have not been computed yet")
+  }
   keep = names(head(self$scores, n))
   task$select(keep)
 }
@@ -146,7 +147,8 @@ filter_n = function(self, task, n) {
 #' @export
 as.data.table.Filter = function(x, ...) {
   fv = x$scores
-  if (is.null(fv))
+  if (is.null(fv)) {
     stopf("No filter data available")
+  }
   enframe(x$scores)
 }

@@ -25,8 +25,7 @@ FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
         feature_types = c("integer", "numeric", "factor", "ordered"),
         task_type = c("classif", "regr")
       )
-    }
-  ),
+    }),
 
   private = list(
     .calculate = function(task) {
@@ -34,6 +33,5 @@ FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
       y = task$truth()
       scores = FSelectorRcpp::information_gain(x = x, y = y, type = "infogain", equal = task$task_type == "regr")
       set_names(scores$importance, scores$attributes)
-    }
-  )
+    })
 )
