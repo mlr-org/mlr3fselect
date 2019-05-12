@@ -133,7 +133,8 @@ Filter = R6Class("Filter",
       assert_task(task)
       assert_number(threshold)
       filter_n(self, task, sum(self$scores > threshold))
-    })
+    }
+  )
 )
 
 filter_n = function(self, task, n) {

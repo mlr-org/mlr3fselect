@@ -24,7 +24,8 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
         feature_types = c("integer", "numeric"),
         task_type = "classif"
       )
-    }),
+    }
+  ),
 
   private = list(
     .calculate = function(task) {
@@ -34,5 +35,6 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
         kruskal.test(x = x, g = g)$statistic
       })
       replace(scores, is.nan(scores), 0) # FIXME: this is a technical fix, need to report
-    })
+    }
+  )
 )

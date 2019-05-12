@@ -24,7 +24,8 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = Filter,
         feature_types = c("integer", "numeric"),
         task_type = "regr"
       )
-    }),
+    }
+  ),
 
   private = list(
     .calculate = function(task) {
@@ -33,5 +34,6 @@ FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = Filter,
         y = as.matrix(task$data(cols = task$target_names)),
         use = "pairwise.complete.obs",
         method = "pearson")[, 1L])
-    })
+    }
+  )
 )

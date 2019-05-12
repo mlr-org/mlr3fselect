@@ -25,7 +25,8 @@ FilterAUC = R6Class("FilterAUC", inherit = Filter,
         task_type = "classif",
         task_properties = "twoclass"
       )
-    }),
+    }
+  ),
 
   private = list(
     .calculate = function(task) {
@@ -33,5 +34,6 @@ FilterAUC = R6Class("FilterAUC", inherit = Filter,
       y = task$data(cols = task$feature_names)
       score = map_dbl(y, function(y) Metrics::auc(x, y))
       abs(0.5 - score)
-    })
+    }
+  )
 )

@@ -24,12 +24,14 @@ FilterNJMIM = R6Class("FilterNJMIM", inherit = Filter,
         feature_types = c("integer", "numeric", "factor", "ordered"),
         task_type = "classif"
       )
-    }),
+    }
+  ),
 
   private = list(
     .calculate = function(task) {
       X = task$data(cols = task$feature_names)
       Y = task$truth()
       praznik::NJMIM(X = X, Y = Y, k = ncol(X))$score
-    })
+    }
+  )
 )

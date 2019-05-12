@@ -25,7 +25,8 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
         feature_types = c("integer", "numeric", "integer", "factor", "ordered"),
         task_type = c("classif", "regr")
       )
-    }),
+    }
+  ),
 
   private = list(
     .calculate = function(task) {
@@ -34,5 +35,6 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
 
       fv = FSelectorRcpp::information_gain(x = x, y = y, type = "symuncert", equal = task$task_type == "regr")
       set_names(fv$importance, fv$attributes)
-    })
+    }
+  )
 )
