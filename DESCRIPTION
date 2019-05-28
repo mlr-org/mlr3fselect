@@ -38,8 +38,9 @@ Imports:
     R6
 Suggests:
     FSelectorRcpp,
-    knitr,
     Metrics,
+    knitr,
+    lgr,
     mlbench,
     praznik,
     rpart,
