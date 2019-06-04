@@ -20,23 +20,23 @@ remotes::install_github("mlr-org/mlr3featsel")
 
 ## Filters
 
-| Name                     | Package                                                     | Features                                                | Task           |
-| :----------------------- | :---------------------------------------------------------- | :------------------------------------------------------ | :------------- |
-| cmim                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered                       | Classif & Regr |
-| gain\_ratio              | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered                       | Classif & Regr |
-| information\_gain        | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered                       | Classif & Regr |
-| symmetrical\_uncertainty | <span style="  font-style: italic;   ">FSelectorRcpp</span> | c(“integer”, “numeric”, “integer”, “factor”, “ordered”) | Classif & Regr |
-| variance                 | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                                        | Classif & Regr |
-| auc                      | <span style="  font-style: italic;   ">Metrics</span>       | Integer, Numeric                                        | Classif        |
-| disr                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered                       | Classif        |
-| jmi                      | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered                       | Classif        |
-| jmim                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered                       | Classif        |
-| kruskal\_test            | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                                        | Classif        |
-| mim                      | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered                       | Classif        |
-| njmim                    | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered                       | Classif        |
-| linear\_correlation      | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                                        | Regr           |
-| rank\_correlation        | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                                        | Regr           |
-| variable\_importance     | <span style="  font-style: italic;   ">NA</span>            | NA                                                      | NA             |
+| Name                     | Package                                                     | Features                          | Task           |
+| :----------------------- | :---------------------------------------------------------- | :-------------------------------- | :------------- |
+| cmim                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| gain\_ratio              | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| information\_gain        | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| symmetrical\_uncertainty | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| variance                 | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Classif & Regr |
+| auc                      | <span style="  font-style: italic;   ">Metrics</span>       | Integer, Numeric                  | Classif        |
+| disr                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
+| jmi                      | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
+| jmim                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
+| kruskal\_test            | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Classif        |
+| mim                      | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
+| njmim                    | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
+| linear\_correlation      | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Regr           |
+| rank\_correlation        | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Regr           |
+| variable\_importance     | <span style="  font-style: italic;   ">NA</span>            | NA                                | NA             |
 
 #### Public Methods
 
@@ -77,12 +77,13 @@ filter = FilterVariableImportance$new(learner = lrn)
 filter$calculate(task)
 ```
 
-    ## INFO  [18:22:51.104] Training learner 'classif.ranger' on task 'iris' ...
-
-    ## Error: No importance stored
+    ## INFO  [18:25:33.405] Training learner 'classif.ranger' on task 'iris' ...
 
 ``` r
 head(as.data.table(filter), 3)
 ```
 
-    ## Error: No filter data available
+    ##            name    value
+    ## 1: Petal.Length 43.58996
+    ## 2:  Petal.Width 43.14815
+    ## 3: Sepal.Length 10.09467

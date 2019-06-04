@@ -6,8 +6,8 @@
 \alias{mlr3featsel-package}
 \title{mlr3featsel: Feature selection and filtering for mlr3}
 \description{
-Implements methods for feature selection and filtering in
-    mlr3.
+Implements methods for feature selection and
+    filtering in mlr3.
 }
 \seealso{
 Useful links:
