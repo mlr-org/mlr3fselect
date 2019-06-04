@@ -14,7 +14,9 @@ status](https://codecov.io/gh/mlr-org/mlr3featsel/branch/master/graph/badge.svg)
 
 ## Installation
 
-The package is currently in development and not yet usable.
+``` r
+remotes::install_github("mlr-org/mlr3featsel")
+```
 
 ## Filters
 
@@ -22,8 +24,8 @@ The package is currently in development and not yet usable.
   - `stats::cor(method = "pearson")`
   - `stats::kruskal.test()`
   - `stats::var()`
-  - `AUC` -\> `mlr3measures::measureAUC`
-  - `FSelectorRcpp::information.gain(type = "gainratop")`
+  - `AUC` -\> `Metrics::auc`
+  - `FSelectorRcpp::information.gain(type = "gainratio")`
   - `FSelectorRcpp::information.gain(type = "infogain")`
   - `FSelectorRcpp::information.gain(type = "symuncert")`
   - `praznik::CMIM()`
@@ -40,47 +42,84 @@ library(mlr3featsel)
 as.data.table(mlr_filters)
 ```
 
-    ##                               id      packages
-    ##  1:                    FilterAUC         stats
-    ##  2:                   FilterCMIM       praznik
-    ##  3:                   FilterDISR       praznik
-    ##  4:              FilterGainRatio FSelectorRcpp
-    ##  5:        FilterInformationGain FSelectorRcpp
-    ##  6:                    FilterJMI       praznik
-    ##  7:                   FilterJMIM       praznik
-    ##  8:            FilterKruskalTest         stats
-    ##  9:      FilterLinearCorrelation         stats
-    ## 10:                    FilterMIM       praznik
-    ## 11:                  FilterNJMIM       praznik
-    ## 12:        FilterRankCorrelation         stats
-    ## 13: FilterSymmetricalUncertainty FSelectorRcpp
-    ## 14:               FilterVariance         stats
-    ##                      feature_types    task_type
-    ##  1:                        numeric      classif
-    ##  2:         numeric,factor,ordered classif,regr
-    ##  3:         numeric,factor,ordered      classif
-    ##  4:         numeric,factor,ordered classif,regr
-    ##  5:         numeric,factor,ordered classif,regr
-    ##  6:         numeric,factor,ordered      classif
-    ##  7:         numeric,factor,ordered      classif
-    ##  8:                        numeric      classif
-    ##  9:                        numeric         regr
-    ## 10:         numeric,factor,ordered      classif
-    ## 11:         numeric,factor,ordered      classif
-    ## 12:                        numeric         regr
-    ## 13: numeric,integer,factor,ordered classif,regr
-    ## 14:                        numeric classif,regr
+    ##                          id      packages
+    ##  1:                     auc       Metrics
+    ##  2:                    cmim       praznik
+    ##  3:                    disr       praznik
+    ##  4:              gain_ratio FSelectorRcpp
+    ##  5:        information_gain FSelectorRcpp
+    ##  6:                     jmi       praznik
+    ##  7:                    jmim       praznik
+    ##  8:            kruskal_test         stats
+    ##  9:      linear_correlation         stats
+    ## 10:                     mim       praznik
+    ## 11:                   njmim       praznik
+    ## 12:        rank_correlation         stats
+    ## 13: symmetrical_uncertainty FSelectorRcpp
+    ## 14:     variable_importance            NA
+    ## 15:                variance         stats
+    ##                              feature_types    task_type
+    ##  1:                        integer,numeric      classif
+    ##  2:         integer,numeric,factor,ordered classif,regr
+    ##  3:         integer,numeric,factor,ordered      classif
+    ##  4:         integer,numeric,factor,ordered classif,regr
+    ##  5:         integer,numeric,factor,ordered classif,regr
+    ##  6:         integer,numeric,factor,ordered      classif
+    ##  7:         integer,numeric,factor,ordered      classif
+    ##  8:                        integer,numeric      classif
+    ##  9:                        integer,numeric         regr
+    ## 10:         integer,numeric,factor,ordered      classif
+    ## 11:         integer,numeric,factor,ordered      classif
+    ## 12:                        integer,numeric         regr
+    ## 13: integer,numeric,integer,factor,ordered classif,regr
+    ## 14:                                     NA           NA
+    ## 15:                        integer,numeric classif,regr
 
-#### Methods
+#### Public Methods
 
-  - $calculate(): Calculates Filter values
+  - `.$calculate()`: Calculates Filter values
 
-  - $filter(): filters the task by a given criterion
+  - `.$filter()`: filters the task by a given criterion
 
-  - $scores: Filter score values
+  - `.$scores`: Filter score values
 
-  - $filtered\_task: Filtered task
+  - `.$filtered_task`: Filtered task
 
-### Implemented wrappers
+## Implemented “wrapper methods”
 
-### Implemented embedded methods
+## Algorithm-embedded methods
+
+All learners that support the property “importance” can be used to
+create a filter based on their respective implemented variable
+importance measure.
+
+``` r
+library(mlr3)
+library(mlr3learners)
+mlr_learners$get("classif.ranger")$properties
+```
+
+    ## [1] "importance" "multiclass" "oob_error"  "twoclass"   "weights"
+
+Some learner need to have their variable importance measure activated
+during learner creation. For example, to use the “impurity” measure of
+Random Forest via the *ranger* package:
+
+``` r
+task = mlr_tasks$get("iris")
+lrn = mlr_learners$get("classif.ranger", 
+  param_vals = list(importance = "impurity"))
+
+filter = FilterVariableImportance$new(learner = lrn)
+filter$calculate(task)
+```
+
+    ## INFO  [16:27:49.885] Training learner 'classif.ranger' on task 'iris' ...
+
+    ## Error: No importance stored
+
+``` r
+head(as.data.table(filter), 3)
+```
+
+    ## Error: No filter data available

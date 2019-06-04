@@ -22,8 +22,8 @@ Authors@R:
              role = "aut",
              email = "bernd_bischl@gmx.net",
              comment = c(ORCID = "0000-0001-6002-6980")))
-Description: Implements methods for feature selection and filtering in
-    mlr3.
+Description: Implements methods for feature selection and
+    filtering in mlr3.
 License: MIT + file LICENSE
 URL: https://github.com/mlr-org/mlr3featsel
 BugReports: https://github.com/mlr-org/mlr3featsel/issues
@@ -38,10 +38,11 @@ Imports:
     R6
 Suggests:
     FSelectorRcpp,
-    Metrics,
     knitr,
     lgr,
+    Metrics,
     mlbench,
+    mlr3learners,
     praznik,
     rpart,
     testthat
@@ -50,6 +51,7 @@ VignetteBuilder:
 Remotes:
     mlr-org/mlr3,
     mlr-org/mlr3misc,
+    mlr-org/mlr3learners,
     mlr-org/paradox
 ByteCompile: true
 Encoding: UTF-8

@@ -13,7 +13,9 @@ _mlr3featsel_ adds filters, feature selection methods and embedded feature selec
 
 ## Installation
 
-The package is currently in development and not yet usable.
+```{r eval = FALSE}
+remotes::install_github("mlr-org/mlr3featsel")
+```
 
 ## Filters
 
@@ -21,8 +23,8 @@ The package is currently in development and not yet usable.
 * `stats::cor(method = "pearson")`
 * `stats::kruskal.test()`
 * `stats::var()`
-* `AUC` -> `mlr3measures::measureAUC`
-* `FSelectorRcpp::information.gain(type = "gainratop")`
+* `AUC` -> `Metrics::auc`
+* `FSelectorRcpp::information.gain(type = "gainratio")`
 * `FSelectorRcpp::information.gain(type = "infogain")`
 * `FSelectorRcpp::information.gain(type = "symuncert")`
 * `praznik::CMIM()`
@@ -38,14 +40,35 @@ as.data.table(mlr_filters)
 ```
 
 
-#### Methods
+#### Public Methods
 
-* $calculate(): Calculates Filter values
-* $filter(): filters the task by a given criterion
+* `.$calculate()`: Calculates Filter values
+* `.$filter()`: filters the task by a given criterion
 
-* $scores: Filter score values
-* $filtered_task: Filtered task
+* `.$scores`: Filter score values
+* `.$filtered_task`: Filtered task
 
-### Implemented wrappers
+## Implemented "wrapper methods"
 
-### Implemented embedded methods
+## Algorithm-embedded methods
+
+All learners that support the property "importance" can be used to create a filter based on their respective implemented variable importance measure.
+
+```{r}
+library(mlr3)
+library(mlr3learners)
+mlr_learners$get("classif.ranger")$properties
+```
+
+Some learner need to have their variable importance measure activated during learner creation.
+For example, to use the "impurity" measure of Random Forest via the _ranger_ package:
+
+```{r error=TRUE}
+task = mlr_tasks$get("iris")
+lrn = mlr_learners$get("classif.ranger", 
+  param_vals = list(importance = "impurity"))
+
+filter = FilterVariableImportance$new(learner = lrn)
+filter$calculate(task)
+head(as.data.table(filter), 3)
+```

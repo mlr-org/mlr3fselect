@@ -37,7 +37,6 @@ FilterVariableImportance = R6Class("FilterVariableImportance", inherit = Filter,
   private = list(
     .calculate = function(task) {
       learner = self$learner$clone(deep = TRUE)
-      learner$param_set$values = self$param_set$values
       e = Experiment$new(task = task, learner = learner)$train()
       importance = e$learner$importance()
 
