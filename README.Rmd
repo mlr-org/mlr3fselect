@@ -22,31 +22,19 @@ remotes::install_github("mlr-org/mlr3featsel")
 ```{r echo = FALSE, message=FALSE}
 library("mlr3featsel")
 library("data.table")
-library("dplyr")
-library("magrittr")
-library("tibble")
-library("kableExtra")
 
-as.data.frame(as.data.table(mlr_filters)) %>% 
-  dplyr::mutate(task_type = as.character(task_type)) %>%
-  dplyr::mutate(feature_types = as.character(feature_types)) %>%
-  
-  dplyr::mutate(task_type = dplyr::recode_factor(task_type, 'c("classif", "regr")' = 'Classif & Regr')) %>% 
-  dplyr::mutate(task_type = dplyr::recode_factor(task_type, 
-    'classif' = 'Classif')) %>% 
-  dplyr::mutate(task_type = dplyr::recode_factor(task_type, 
-    'regr' = 'Regr')) %>% 
-  dplyr::mutate(feature_types = dplyr::recode_factor(feature_types, 
-    'c(\"integer\", \"numeric\", \"factor\", \"ordered\")' = 'Integer, Numeric, Factor, Ordered')) %>% 
-  dplyr::mutate(feature_types = dplyr::recode_factor(feature_types, 
-    'c(\"integer\", \"numeric\")' = 'Integer, Numeric')) %>%
-  
-  dplyr::arrange(desc(task_type)) %>%
-  dplyr::mutate(packages = cell_spec(
-    packages,  italic = TRUE)) %>%
-  dplyr::rename(Package = packages, Features = feature_types,
-    Task = task_type, Name = id) %>% 
-  kableExtra::kable(escape = F, format = "markdown")
+capitalize <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
+
+tab = as.data.table(mlr_filters)
+tab[, task_type := sapply(task_type, function(x) paste(capitalize(x), collapse = " & "))]
+tab[, feature_types := sapply(feature_types, function(x) paste(capitalize(x), collapse = ", "))]
+setorderv(tab, "task_type")
+tab[, packages := sprintf("*%s*", packages)]
+setnames(tab, old = c("packages", "feature_types", "task_type", "id"), new = c("Package", "Features", "Task", "Name"))
+knitr::kable(tab, escape = F, format = "markdown")
 ```
 
 
@@ -75,7 +63,7 @@ For example, to use the "impurity" measure of Random Forest via the _ranger_ pac
 
 ```{r error=TRUE}
 task = mlr_tasks$get("iris")
-lrn = mlr_learners$get("classif.ranger", 
+lrn = mlr_learners$get("classif.ranger",
   param_vals = list(importance = "impurity"))
 
 filter = FilterVariableImportance$new(learner = lrn)
