@@ -74,7 +74,7 @@
 #'   ([Task], `numeric(1)`) -> [Task]\cr
 #'   Filters the [Task] by reference, keeps `perc` percent of the features (rounded via [base::round()]).
 #'
-#' * `filter_perc(task, thresh)`\cr
+#' * `filter_thresh(task, thresh)`\cr
 #'   ([Task], `numeric(1)`) -> [Task]\cr
 #'   Filters the [Task] by reference, keeps features whose filter score values exceeds `thresh`.
 #'

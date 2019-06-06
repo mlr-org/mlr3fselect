@@ -66,7 +66,7 @@ Filters the \link{Task} by reference, keeps up to \code{abs} features.
 \item \code{filter_perc(task, perc)}\cr
 (\link{Task}, \code{numeric(1)}) -> \link{Task}\cr
 Filters the \link{Task} by reference, keeps \code{perc} percent of the features (rounded via \code{\link[base:round]{base::round()}}).
-\item \code{filter_perc(task, thresh)}\cr
+\item \code{filter_thresh(task, thresh)}\cr
 (\link{Task}, \code{numeric(1)}) -> \link{Task}\cr
 Filters the \link{Task} by reference, keeps features whose filter score values exceeds \code{thresh}.
 }
