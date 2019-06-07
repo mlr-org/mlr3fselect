@@ -20,25 +20,7 @@ remotes::install_github("mlr-org/mlr3featsel")
 
 ## Filters
 
-| Name                     | Package                                                     | Features                          | Task           |
-| :----------------------- | :---------------------------------------------------------- | :-------------------------------- | :------------- |
-| cmim                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| gain\_ratio              | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| information\_gain        | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| symmetrical\_uncertainty | <span style="  font-style: italic;   ">FSelectorRcpp</span> | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| variance                 | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Classif & Regr |
-| auc                      | <span style="  font-style: italic;   ">Metrics</span>       | Integer, Numeric                  | Classif        |
-| disr                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
-| jmi                      | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
-| jmim                     | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
-| kruskal\_test            | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Classif        |
-| mim                      | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
-| njmim                    | <span style="  font-style: italic;   ">praznik</span>       | Integer, Numeric, Factor, Ordered | Classif        |
-| linear\_correlation      | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Regr           |
-| rank\_correlation        | <span style="  font-style: italic;   ">stats</span>         | Integer, Numeric                  | Regr           |
-| variable\_importance     | <span style="  font-style: italic;   ">NA</span>            | NA                                | NA             |
-
-#### Public Methods
+### Public Methods
 
   - `.$calculate()`: Calculates Filter values
 
@@ -48,42 +30,69 @@ remotes::install_github("mlr-org/mlr3featsel")
 
   - `.$filtered_task`: Filtered task
 
-## Implemented “wrapper methods”
+### Generic Filters
 
-## Algorithm-embedded methods
+| Name                     | Package         | Features                          | Task           |
+| :----------------------- | :-------------- | :-------------------------------- | :------------- |
+| auc                      | *Metrics*       | Integer, Numeric                  | Classif        |
+| disr                     | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
+| jmi                      | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
+| jmim                     | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
+| kruskal\_test            | *stats*         | Integer, Numeric                  | Classif        |
+| mim                      | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
+| njmim                    | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
+| cmim                     | *praznik*       | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| gain\_ratio              | *FSelectorRcpp* | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| information\_gain        | *FSelectorRcpp* | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| symmetrical\_uncertainty | *FSelectorRcpp* | Integer, Numeric, Factor, Ordered | Classif & Regr |
+| variance                 | *stats*         | Integer, Numeric                  | Classif & Regr |
+| variable\_importance     | *NA*            | NA                                | NA             |
+| linear\_correlation      | *stats*         | Integer, Numeric                  | Regr           |
+| rank\_correlation        | *stats*         | Integer, Numeric                  | Regr           |
 
-All learners that support the property “importance” can be used to
-create a filter based on their respective implemented variable
-importance measure.
+### Embedded Filters
 
-``` r
-library(mlr3)
-library(mlr3learners)
-mlr_learners$get("classif.ranger")$properties
-```
+The following learners have embedded filter methods which are supported
+via class `FilterVariableImportance`:
 
-    ## [1] "importance" "multiclass" "oob_error"  "twoclass"   "weights"
+    ## [1] "classif.featureless"
+    ## [1] "classif.ranger"
+    ## [1] "classif.rpart"
+    ## [1] "classif.xgboost"
+    ## [1] "regr.featureless"
+    ## [1] "regr.ranger"
+    ## [1] "regr.rpart"
+    ## [1] "regr.xgboost"
 
-Some learner need to have their variable importance measure activated
+If your learner is listed here, the reason is most likely that it is not
+integrated into [mlr3learners](https://github.com/mlr-org/mlr3learners)
+or [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners).
+Please open an issue so we can add your package.
+
+Some learners need to have their variable importance measure “activated”
 during learner creation. For example, to use the “impurity” measure of
 Random Forest via the *ranger* package:
 
 ``` r
 task = mlr_tasks$get("iris")
-lrn = mlr_learners$get("classif.ranger", 
+lrn = mlr_learners$get("classif.ranger",
   param_vals = list(importance = "impurity"))
 
 filter = FilterVariableImportance$new(learner = lrn)
 filter$calculate(task)
 ```
 
-    ## INFO  [18:25:33.405] Training learner 'classif.ranger' on task 'iris' ...
+    ## INFO  [15:26:14.896] Training learner 'classif.ranger' on task 'iris' ...
 
 ``` r
 head(as.data.table(filter), 3)
 ```
 
     ##            name    value
-    ## 1: Petal.Length 43.58996
-    ## 2:  Petal.Width 43.14815
-    ## 3: Sepal.Length 10.09467
+    ## 1:  Petal.Width 44.34799
+    ## 2: Petal.Length 41.55511
+    ## 3: Sepal.Length 10.78146
+
+## “Wrapper” Methods
+
+Work in progress.

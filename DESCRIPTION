@@ -40,18 +40,20 @@ Suggests:
     FSelectorRcpp,
     knitr,
     lgr,
+    magrittr,
     Metrics,
     mlbench,
     mlr3learners,
     praznik,
+    purrr,
     rpart,
     testthat
 VignetteBuilder:
     knitr
 Remotes:
     mlr-org/mlr3,
-    mlr-org/mlr3misc,
     mlr-org/mlr3learners,
+    mlr-org/mlr3misc,
     mlr-org/paradox
 ByteCompile: true
 Encoding: UTF-8

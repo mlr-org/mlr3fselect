@@ -17,7 +17,17 @@ _mlr3featsel_ adds filters, feature selection methods and embedded feature selec
 remotes::install_github("mlr-org/mlr3featsel")
 ```
 
-## Filters
+## Filters 
+
+### Public Methods
+
+* `.$calculate()`: Calculates Filter values
+* `.$filter()`: filters the task by a given criterion
+
+* `.$scores`: Filter score values
+* `.$filtered_task`: Filtered task
+
+### Generic Filters
 
 ```{r echo = FALSE, message=FALSE}
 library("mlr3featsel")
@@ -37,28 +47,24 @@ setnames(tab, old = c("packages", "feature_types", "task_type", "id"), new = c("
 knitr::kable(tab, escape = F, format = "markdown")
 ```
 
+### Embedded Filters
 
-#### Public Methods
+The following learners have embedded filter methods which are supported via class `FilterVariableImportance`:
 
-* `.$calculate()`: Calculates Filter values
-* `.$filter()`: filters the task by a given criterion
-
-* `.$scores`: Filter score values
-* `.$filtered_task`: Filtered task
-
-## Implemented "wrapper methods"
-
-## Algorithm-embedded methods
-
-All learners that support the property "importance" can be used to create a filter based on their respective implemented variable importance measure.
-
-```{r}
-library(mlr3)
-library(mlr3learners)
-mlr_learners$get("classif.ranger")$properties
+```{r echo=FALSE}
+library("mlr3learners")
+# library("mlr3extralearners")
+library("mlr3")
+library("magrittr")
+all_learners = mlr_learners$mget(mlr_learners$keys())
+purrr::keep(all_learners, ~ "importance" %in% .x$properties, "importance") %>% 
+  purrr::walk(~ print(.x$id))
 ```
 
-Some learner need to have their variable importance measure activated during learner creation.
+If your learner is listed here, the reason is most likely that it is not integrated into [mlr3learners](https://github.com/mlr-org/mlr3learners) or [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners). 
+Please open an issue so we can add your package.
+
+Some learners need to have their variable importance measure "activated" during learner creation.
 For example, to use the "impurity" measure of Random Forest via the _ranger_ package:
 
 ```{r error=TRUE}
@@ -70,3 +76,7 @@ filter = FilterVariableImportance$new(learner = lrn)
 filter$calculate(task)
 head(as.data.table(filter), 3)
 ```
+
+## "Wrapper" Methods
+
+Work in progress.
