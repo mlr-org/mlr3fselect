@@ -1,15 +1,10 @@
 Package: mlr3featsel
 Title: Feature selection and filtering for mlr3
 Version: 0.1.0-9000
-Authors@R:
-    c(person(given = "Janek",
-             family = "Thomas",
-             role = c("aut", "cre"),
-             email = "janek.thomas@stat.uni-muenchen.de",
-             comment = c(ORCID = "0000-0003-4511-6245")),
-      person(given = "Patrick",
+Authors@R: 
+    c(person(given = "Patrick",
              family = "Schratz",
-             role = "aut",
+             role = c("aut", "cre"),
              email = "patrick.schratz@gmail.com",
              comment = c(ORCID = "0000-0003-0748-6624")),
       person(given = "Michel",
