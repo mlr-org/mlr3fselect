@@ -58,7 +58,8 @@ library("mlr3")
 library("magrittr")
 all_learners = mlr_learners$mget(mlr_learners$keys())
 purrr::keep(all_learners, ~ "importance" %in% .x$properties, "importance") %>% 
-  purrr::walk(~ print(.x$id))
+  purrr::map(~ .x$id) %>% 
+  purrr::flatten_chr()
 ```
 
 If your learner is listed here, the reason is most likely that it is not integrated into [mlr3learners](https://github.com/mlr-org/mlr3learners) or [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners). 

@@ -55,14 +55,9 @@ remotes::install_github("mlr-org/mlr3featsel")
 The following learners have embedded filter methods which are supported
 via class `FilterVariableImportance`:
 
-    ## [1] "classif.featureless"
-    ## [1] "classif.ranger"
-    ## [1] "classif.rpart"
-    ## [1] "classif.xgboost"
-    ## [1] "regr.featureless"
-    ## [1] "regr.ranger"
-    ## [1] "regr.rpart"
-    ## [1] "regr.xgboost"
+    ## [1] "classif.featureless" "classif.ranger"      "classif.rpart"      
+    ## [4] "classif.xgboost"     "regr.featureless"    "regr.ranger"        
+    ## [7] "regr.rpart"          "regr.xgboost"
 
 If your learner is listed here, the reason is most likely that it is not
 integrated into [mlr3learners](https://github.com/mlr-org/mlr3learners)
@@ -82,16 +77,16 @@ filter = FilterVariableImportance$new(learner = lrn)
 filter$calculate(task)
 ```
 
-    ## INFO  [15:26:14.896] Training learner 'classif.ranger' on task 'iris' ...
+    ## INFO  [15:36:19.726] Training learner 'classif.ranger' on task 'iris' ...
 
 ``` r
 head(as.data.table(filter), 3)
 ```
 
-    ##            name    value
-    ## 1:  Petal.Width 44.34799
-    ## 2: Petal.Length 41.55511
-    ## 3: Sepal.Length 10.78146
+    ##            name     value
+    ## 1:  Petal.Width 44.300510
+    ## 2: Petal.Length 42.870670
+    ## 3: Sepal.Length  9.786203
 
 ## “Wrapper” Methods
 
