@@ -1,0 +1,69 @@
+#' @title FeatureSelectionForward
+#'
+#' @description
+#' FeatureSelection child class to conduct forward search.
+#'
+#' @section Usage:
+#'  ```
+#' fs = FeatureSelectionForward$new()
+#' ```
+#' See [FeatureSelection] for a description of the interface.
+#'
+#' @section Arguments:
+#' * `pe` (`[PerformanceEvaluator]`).
+#' * `tm` (`[Terminator]`).
+#'
+#' @section Details:
+#' `$new()` creates a new object of class [FeatureSelectionForward].
+#' `$get_result()` Returns selected features in each step.
+#' The interface is described in [FeatureSelection].
+#'
+#' Each step is possibly executed in parallel via [mlr3::benchmark()]
+#'
+#' @name FeatureSelectionForward
+#' @family FeatureSelection
+#' @examples
+#' task = mlr3::mlr_tasks$get("pima")
+#' measures = mlr3::mlr_measures$mget(c("classif.acc"))
+#' task$measures = measures
+#' learner = mlr3::mlr_learners$get("classif.rpart")
+#' resampling = mlr_resamplings$get("cv", param_vals = list(folds = 5L))
+#' pe = PerformanceEvaluator$new(task, learner, resampling)
+#' tm = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 3)
+#' fs = FeatureSelectionForward$new(pe, tm)
+#' fs$calculate()
+#' fs$get_result()
+NULL
+
+#' @export
+#' @include FeatureSelection.R
+
+FeatureSelectionForward = R6Class("FeatureSelectionRandom",
+   inherit = FeatureSelection,
+   public = list(
+      initialize = function(pe, tm) {
+         super$initialize(id = "forward_selection", pe = pe, tm = tm, settings = list())
+
+         self$state = rep(0, length(pe$task$feature_names))
+     },
+
+     get_result = function() {
+        bmr = self$pe$bmr[[length(self$pe$bmr)]]$get_best(self$pe$task$measures[[1L]]$id)
+        list(features = bmr$task$feature_names,
+             performance = bmr$aggregated)
+     }
+   ),
+   private = list(
+      generate_states = function() {
+         new_states = list()
+         for (i in seq_along(self$state)) {
+            if (self$state[i] == 0) {
+            state = self$state
+            state[i] = 1
+            new_states[[length(new_states) + 1]] = state
+            }
+         }
+         new_states
+      }
+   )
+)

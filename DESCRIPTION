@@ -16,7 +16,11 @@ Authors@R:
              family = "Bischl",
              role = "aut",
              email = "bernd_bischl@gmx.net",
-             comment = c(ORCID = "0000-0001-6002-6980")))
+             comment = c(ORCID = "0000-0001-6002-6980")),
+      person(given = "Marc",
+             family = "Becker",
+             role = "aut",
+             email = "marcbecker@posteo.de"))
 Description: Implements methods for feature selection and
     filtering in mlr3.
 License: MIT + file LICENSE
@@ -57,6 +61,9 @@ NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate:
+    'FeatureSelection.R'
+    'FeatureSelectionForward.R'
+    'FeatureSelectionRandom.R'
     'Filter.R'
     'FilterAUC.R'
     'FilterCMIM.R'
@@ -75,5 +82,9 @@ Collate:
     'FilterVariance.R'
     'helpers.R'
     'mlr_filters.R'
+    'PerformanceEvaluator.R'
     'reexports.R'
+    'Terminator.R'
+    'TerminatorEvaluations.R'
+    'TerminatorPerformanceStep.R'
     'zzz.R'
