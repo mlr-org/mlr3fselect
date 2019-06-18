@@ -27,6 +27,9 @@
 #' * `$state` (`list()`) arbitrary state of the Terminator. Gets updated with each call of `update_start()` and `update_end()`.
 #' * `$update_start()` is called in each tuning iteration before the evaluation.
 #' * `$update_end()` is called in each tuning iteration after the evaluation.
+#' @name Terminator
+#' @keywords internal
+#' @family Terminator
 NULL
 
 #' @export

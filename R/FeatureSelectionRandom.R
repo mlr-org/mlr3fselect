@@ -26,9 +26,9 @@
 #' @name FeatureSelectionRandom
 #' @family FeatureSelection
 #' @examples
-#' task = mlr_tasks$get("boston_housing")
-#' learner = mlr_learners$get("regr.rpart")
-#' resampling = mlr_resamplings$get("cv", param_vals = list(folds = 5L))
+#' task = mlr3::mlr_tasks$get("boston_housing")
+#' learner = mlr3::mlr_learners$get("regr.rpart")
+#' resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
 #' pe = PerformanceEvaluator$new(task = task,learner = learner, resampling = resampling)
 #' tm = TerminatorEvaluations$new(max_evaluations = 20)
 #' fs = FeatureSelectionRandom$new(pe, tm, batch_size = 10, max_features = 8)

@@ -24,7 +24,11 @@
 #' @name TerminatorPerformanceStep
 #' @family Terminator
 #' @examples
-#' t = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 100)
+#' task = mlr3::mlr_tasks$get("iris")
+#' learner = mlr3::mlr_learners$get("classif.rpart")
+#' resampling = mlr3::mlr_resamplings$get("holdout")
+#' pe = PerformanceEvaluator$new(task, learner, resampling)
+#' t = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 2)
 NULL
 
 #' @export

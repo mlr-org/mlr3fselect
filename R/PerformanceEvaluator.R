@@ -40,6 +40,9 @@
 #' @keywords internal
 #' @family PerformanceEvaluator
 #' @examples
+#' task = mlr3::mlr_tasks$get("iris")
+#' learner = mlr3::mlr_learners$get("classif.rpart")
+#' resampling = mlr3::mlr_resamplings$get("holdout")
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
 NULL
 
