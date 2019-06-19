@@ -18,11 +18,10 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Janek Thomas \email{janek.thomas@stat.uni-muenchen.de} (0000-0003-4511-6245)
+\strong{Maintainer}: Patrick Schratz \email{patrick.schratz@gmail.com} (0000-0003-0748-6624)
 
 Authors:
 \itemize{
-  \item Patrick Schratz \email{patrick.schratz@gmail.com} (0000-0003-0748-6624)
   \item Michel Lang \email{michellang@gmail.com} (0000-0001-9754-0393)
   \item Bernd Bischl \email{bernd_bischl@gmx.net} (0000-0001-6002-6980)
 }
