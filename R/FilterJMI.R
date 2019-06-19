@@ -1,7 +1,7 @@
 #' @title Joint Mutual Information Filter
 #'
 #' @aliases mlr_filters_jmi
-#' @format [R6::R6Class] inheriting from [Filter].
+#' @format [R6::R6Class] inheriting from [FilterResult].
 #' @include Filter.R
 #'
 #' @description
@@ -14,8 +14,8 @@
 #' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterJMI$new()
 #' filter$calculate(task)
-#' head(as.data.table(filter), 3)
-FilterJMI = R6Class("FilterJMI", inherit = Filter,
+#' as.data.table(filter)[1:3]
+FilterJMI = R6Class("FilterJMI", inherit = FilterResult,
   public = list(
     initialize = function(id = "jmi") {
       super$initialize(
@@ -35,3 +35,5 @@ FilterJMI = R6Class("FilterJMI", inherit = Filter,
     }
   )
 )
+
+register_filter("jmi", FilterJMI)

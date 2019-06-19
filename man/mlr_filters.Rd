@@ -5,7 +5,7 @@
 \title{Dictionary of Filters}
 \format{\link{R6Class} object}
 \description{
-A simple \link{Dictionary} storing objects of class \link{Filter}.
+A simple \link{Dictionary} storing objects of class \link{FilterResult}.
 Each Filter has an associated help page, see \code{mlr_filters_[id]}.
 }
 \section{Usage}{
@@ -30,9 +30,9 @@ Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
+  \code{\link{FilterResult}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariableImportance}},
-  \code{\link{FilterVariance}}, \code{\link{Filter}}
+  \code{\link{FilterVariance}}
 }
 \concept{Dictionary}
 \concept{Filter}

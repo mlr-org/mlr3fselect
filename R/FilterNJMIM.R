@@ -1,7 +1,7 @@
 #' @title Minimal Normalised Joint Mutual Information Maximisation Filter
 #'
 #' @aliases mlr_filters_njmim
-#' @format [R6::R6Class] inheriting from [Filter].
+#' @format [R6::R6Class] inheriting from [FilterResult].
 #' @include Filter.R
 #'
 #' @description
@@ -14,8 +14,8 @@
 #' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterNJMIM$new()
 #' filter$calculate(task)
-#' head(as.data.table(filter), 3)
-FilterNJMIM = R6Class("FilterNJMIM", inherit = Filter,
+#' as.data.table(filter)[1:3]
+FilterNJMIM = R6Class("FilterNJMIM", inherit = FilterResult,
   public = list(
     initialize = function(id = "njmim") {
       super$initialize(
@@ -35,3 +35,5 @@ FilterNJMIM = R6Class("FilterNJMIM", inherit = Filter,
     }
   )
 )
+
+register_filter("njmim", FilterNJMIM)

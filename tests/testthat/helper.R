@@ -2,9 +2,9 @@ library(checkmate)
 library(mlr3)
 lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.*\\.[rR]", full.names = TRUE), source)
 
-expect_filter = function(f, task = NULL) {
+expect_filter_result = function(f, task = NULL) {
 
-  expect_r6(f, "Filter",
+  expect_r6(f, "FilterResult",
     public = c("packages", "feature_types", "task_type", "param_set", "scores"),
     private = c(".calculate")
   )
@@ -16,15 +16,16 @@ expect_filter = function(f, task = NULL) {
   expect_function(private(f)$.calculate, args = "task")
 
   if (!is.null(f$scores)) {
-    expect_numeric(f$scores, any.missing = FALSE, names = "unique")
-    expect_false(is.unsorted(rev(f$scores)))
+    expect_data_table(f$scores)
+    checkSubset(colnames(f$scores), c("method", "scores"))
   }
 
   if (!is.null(task)) {
     x = f$clone(deep = TRUE)$calculate(task)
-    expect_class(x, "Filter")
-    expect_numeric(x$scores, any.missing = FALSE, names = "unique")
-    expect_names(names(x$scores), permutation.of = task$feature_names)
-    expect_false(is.unsorted(rev(x$scores)))
+    expect_class(x, "FilterResult")
+    # FIXME
+    # expect_data_table(f$scores)
+    # FIXME
+    # expect_names(names(x$scores), permutation.of = task$feature_names)
   }
 }

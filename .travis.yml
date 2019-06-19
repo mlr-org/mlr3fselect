@@ -34,5 +34,4 @@ env:
   global:
   - _R_CHECK_FORCE_SUGGESTS_=false
   - MAKEFLAGS="-j 2"
-  - BUILD_PKGDOWN=true
   - _R_CHECK_TESTS_NLINES_=0

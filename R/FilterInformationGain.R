@@ -1,7 +1,7 @@
 #' @title Information Gain Filter
 #'
 #' @aliases mlr_filters_information_gain
-#' @format [R6::R6Class] inheriting from [Filter].
+#' @format [R6::R6Class] inheriting from [FilterResult].
 #' @include Filter.R
 #'
 #' @description
@@ -15,8 +15,8 @@
 #' task = mlr3::mlr_tasks$get("sonar")
 #' filter = FilterInformationGain$new()
 #' filter$calculate(task)
-#' head(as.data.table(filter), 3)
-FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
+#' as.data.table(filter)[1:3]
+FilterInformationGain = R6Class("FilterInformationGain", inherit = FilterResult,
   public = list(
     initialize = function(id = "information_gain") {
       super$initialize(
@@ -37,3 +37,5 @@ FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
     }
   )
 )
+
+register_filter("information_gain", FilterInformationGain)

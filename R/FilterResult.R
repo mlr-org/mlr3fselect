@@ -9,7 +9,7 @@
 #'
 #' @section Construction:
 #' ```
-#' f = Filter$new(id, task_type, param_set, param_vals, feature_types, packages)
+#' f = FilterResult$new(id, task_type, param_set, param_vals, feature_types, packages)
 #' ```
 #'
 #' * `id` :: `character(1)`\cr
@@ -80,7 +80,7 @@
 #'
 #' @family Filter
 #' @export
-Filter = R6Class("Filter",
+FilterResult = R6Class("FilterResult",
   public = list(
     id = NULL,
     task_type = NULL,
@@ -100,10 +100,18 @@ Filter = R6Class("Filter",
       self$packages = assert_character(packages, any.missing = FALSE, unique = TRUE)
     },
 
+    format = function() {
+      sprintf("<%s:%s>", class(self)[1L], self$id)
+    },
+
+    print = function() {
+      filter_print(self)
+    },
+
     calculate = function(task) {
 
       assert_task(task, feature_types = self$feature_types, task_properties = self$task_properties)
-      assert_filter(self, task)
+      assert_filter_result(self, task)
       require_namespaces(self$packages)
       fn = task$feature_names
 
@@ -111,9 +119,14 @@ Filter = R6Class("Filter",
       assert_numeric(fv, len = length(fn), any.missing = FALSE)
       assert_names(names(fv), permutation.of = fn)
 
-      # shuffle fv before sort to generate a random order of tied observations
-      self$scores = sort(shuffle(fv), decreasing = TRUE, na.last = TRUE)
+      self$scores = data.table(score = fv, feature = fn, method = self$id)[order(method, -score)]
 
+      invisible(self)
+    },
+
+    combine = function(fr) {
+      assert_filter_result(fr)
+      self$scores = rbindlist(list(self$scores, fr$scores))
       invisible(self)
     },
 
@@ -146,10 +159,18 @@ filter_n = function(self, task, n) {
 }
 
 #' @export
-as.data.table.Filter = function(x, ...) {
+as.data.table.FilterResult = function(x, ...) {
   fv = x$scores
   if (is.null(fv)) {
     stopf("No filter data available")
   }
-  enframe(x$scores)
+  return(fv)
+}
+
+filter_print = function(self) {
+  catf(format(self))
+  catf(str_indent("Task Types:", self$task_type))
+  catf(str_indent("Task Properties:", self$task_properties))
+  catf(str_indent("Packages:", self$packages))
+  catf(str_indent("Feature types:", self$feature_types))
 }

@@ -43,7 +43,9 @@ tab[, task_type := sapply(task_type, function(x) paste(capitalize(x), collapse =
 tab[, feature_types := sapply(feature_types, function(x) paste(capitalize(x), collapse = ", "))]
 setorderv(tab, "task_type")
 tab[, packages := sprintf("*%s*", packages)]
-setnames(tab, old = c("packages", "feature_types", "task_type", "id"), new = c("Package", "Features", "Task", "Name"))
+setnames(tab, 
+  old = c("key", "task_type", "task_properties", "param_set", "feature_types", "packages"), 
+  new = c("Name", "Task Type", "Task Properties", "Parameter Set", "Feature Types", "Package"))
 knitr::kable(tab, escape = F, format = "markdown")
 ```
 

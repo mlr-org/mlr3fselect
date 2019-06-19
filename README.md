@@ -32,23 +32,22 @@ remotes::install_github("mlr-org/mlr3featsel")
 
 ### Generic Filters
 
-| Name                     | Package         | Features                          | Task           |
-| :----------------------- | :-------------- | :-------------------------------- | :------------- |
-| auc                      | *Metrics*       | Integer, Numeric                  | Classif        |
-| disr                     | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
-| jmi                      | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
-| jmim                     | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
-| kruskal\_test            | *stats*         | Integer, Numeric                  | Classif        |
-| mim                      | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
-| njmim                    | *praznik*       | Integer, Numeric, Factor, Ordered | Classif        |
-| cmim                     | *praznik*       | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| gain\_ratio              | *FSelectorRcpp* | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| information\_gain        | *FSelectorRcpp* | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| symmetrical\_uncertainty | *FSelectorRcpp* | Integer, Numeric, Factor, Ordered | Classif & Regr |
-| variance                 | *stats*         | Integer, Numeric                  | Classif & Regr |
-| variable\_importance     | *NA*            | NA                                | NA             |
-| linear\_correlation      | *stats*         | Integer, Numeric                  | Regr           |
-| rank\_correlation        | *stats*         | Integer, Numeric                  | Regr           |
+| Name                     | Task Type      | Task Properties | Parameter Set | Feature Types                                         | Package         |
+| :----------------------- | :------------- | :-------------- | :------------ | :---------------------------------------------------- | :-------------- |
+| auc                      | Classif        | twoclass        | <environment> | Integer, Numeric                                      | *Metrics*       |
+| disr                     | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
+| jmi                      | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
+| kruskal\_test            | Classif        | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
+| mim                      | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
+| njmim                    | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
+| variable\_importance     | Classif        | character(0)    | <environment> | Logical, Integer, Numeric, Character, Factor, Ordered | *rpart*         |
+| cmim                     | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
+| gain\_ratio              | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *FSelectorRcpp* |
+| information\_gain        | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *FSelectorRcpp* |
+| symmetrical\_uncertainty | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *FSelectorRcpp* |
+| variance                 | Classif & Regr | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
+| linear\_correlation      | Regr           | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
+| rank\_correlation        | Regr           | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
 
 ### Embedded Filters
 
@@ -77,16 +76,16 @@ filter = FilterVariableImportance$new(learner = lrn)
 filter$calculate(task)
 ```
 
-    ## INFO  [15:36:19.726] Training learner 'classif.ranger' on task 'iris' ...
+    ## INFO  [13:41:25.182] Training learner 'classif.ranger' on task 'iris' ...
 
 ``` r
 head(as.data.table(filter), 3)
 ```
 
-    ##            name     value
-    ## 1:  Petal.Width 44.300510
-    ## 2: Petal.Length 42.870670
-    ## 3: Sepal.Length  9.786203
+    ##       score      feature              method
+    ## 1: 43.67502 Petal.Length variable_importance
+    ## 2: 42.75024  Petal.Width variable_importance
+    ## 3: 10.37421 Sepal.Length variable_importance
 
 ## “Wrapper” Methods
 

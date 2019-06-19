@@ -5,7 +5,7 @@
 \alias{FilterVariableImportance}
 \alias{mlr_filters_variable_importance}
 \title{Variable Importance Filter}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{Filter}.}
+\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{FilterResult}.}
 \usage{
 FilterVariableImportance
 }
@@ -19,22 +19,7 @@ task = mlr3::mlr_tasks$get("iris")
 learner = mlr3::mlr_learners$get("classif.rpart")
 filter = FilterVariableImportance$new(learner = learner)
 filter$calculate(task)
-head(as.data.table(filter), 3)
+as.data.table(filter)[1:3]
 }
-\seealso{
-Other Filter: \code{\link{FilterAUC}},
-  \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},
-  \code{\link{FilterGainRatio}},
-  \code{\link{FilterInformationGain}},
-  \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
-  \code{\link{FilterKruskalTest}},
-  \code{\link{FilterLinearCorrelation}},
-  \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
-  \code{\link{FilterNJMIM}},
-  \code{\link{FilterRankCorrelation}},
-  \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariance}}, \code{\link{Filter}},
-  \code{\link{mlr_filters}}
-}
-\concept{Filter}
+\concept{FilterResult}
 \keyword{datasets}

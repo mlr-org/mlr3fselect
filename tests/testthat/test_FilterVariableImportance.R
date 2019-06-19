@@ -6,6 +6,6 @@ test_that("FilterVariableImportance", {
   f = FilterVariableImportance$new(learner = learner)
   f$calculate(task)
   fn = task$feature_names
-  expect_numeric(f$scores, len = length(fn), any.missing = FALSE, names = "unique")
-  expect_names(names(f$scores), permutation.of = fn)
+  expect_data_table(f$scores)
+  expect_names(f$scores$feature, permutation.of = fn)
 })

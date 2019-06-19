@@ -5,7 +5,7 @@
 \alias{FilterKruskalTest}
 \alias{mlr_filters_kruskal_test}
 \title{Kruskal-Wallis Test Filter}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{Filter}.}
+\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{FilterResult}.}
 \usage{
 FilterKruskalTest
 }
@@ -17,7 +17,7 @@ Calls \code{\link[stats:kruskal.test]{stats::kruskal.test()}}.
 task = mlr3::mlr_tasks$get("iris")
 filter = FilterKruskalTest$new()
 filter$calculate(task)
-head(as.data.table(filter), 3)
+as.data.table(filter)[1:3]
 }
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
@@ -29,10 +29,9 @@ Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
+  \code{\link{FilterResult}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariableImportance}},
-  \code{\link{FilterVariance}}, \code{\link{Filter}},
-  \code{\link{mlr_filters}}
+  \code{\link{FilterVariance}}, \code{\link{mlr_filters}}
 }
 \concept{Filter}
 \keyword{datasets}

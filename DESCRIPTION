@@ -25,6 +25,7 @@ BugReports: https://github.com/mlr-org/mlr3featsel/issues
 Depends:
     R (>= 3.1.0)
 Imports:
+    backports,
     checkmate,
     data.table,
     mlr3,
@@ -57,7 +58,8 @@ NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate:
-    'Filter.R'
+    'mlr_filters.R'
+    'FilterResult.R'
     'FilterAUC.R'
     'FilterCMIM.R'
     'FilterDISR.R'
@@ -74,7 +76,7 @@ Collate:
     'FilterSymmetricalUncertainty.R'
     'FilterVariableImportance.R'
     'FilterVariance.R'
+    'helper_expectations.R'
     'helpers.R'
-    'mlr_filters.R'
     'reexports.R'
     'zzz.R'

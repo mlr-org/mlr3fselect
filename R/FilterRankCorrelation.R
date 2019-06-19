@@ -1,7 +1,7 @@
 #' @title Rank Correlation Filter
 #'
 #' @aliases mlr_filters_rank_correlation
-#' @format [R6::R6Class] inheriting from [Filter].
+#' @format [R6::R6Class] inheriting from [FilterResult].
 #' @include Filter.R
 #'
 #' @description
@@ -14,8 +14,8 @@
 #' task = mlr3::mlr_tasks$get("mtcars")
 #' filter = FilterRankCorrelation$new()
 #' filter$calculate(task)
-#' head(as.data.table(filter), 3)
-FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = Filter,
+#' as.data.table(filter)[1:3]
+FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = FilterResult,
   public = list(
     initialize = function(id = "rank_correlation") {
       super$initialize(
@@ -37,3 +37,5 @@ FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = Filter,
     }
   )
 )
+
+register_filter("rank_correlation", FilterRankCorrelation)

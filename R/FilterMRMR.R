@@ -1,7 +1,7 @@
 #' @title Minimum redundancy maximal relevancy filter
 #'
 #' @aliases mlr_filters_MRMR
-#' @format [R6::R6Class] inheriting from [Filter].
+#' @format [R6::R6Class] inheriting from [FilterResult].
 #' @include Filter.R
 #'
 #' @description
@@ -15,7 +15,7 @@
 #' filter = FilterMRMR$new()
 #' filter$calculate(task)
 #' head(as.data.table(filter), 3)
-FilterMRMR = R6Class("FilterMRMR", inherit = Filter,
+FilterMRMR = R6Class("FilterMRMR", inherit = FilterResult,
   public = list(
     initialize = function(id = "MRMR") {
       super$initialize(

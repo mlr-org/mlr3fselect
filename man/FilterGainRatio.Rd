@@ -5,7 +5,7 @@
 \alias{FilterGainRatio}
 \alias{mlr_filters_gain_ratio}
 \title{Gain Ratio Filter}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{Filter}.}
+\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{FilterResult}.}
 \usage{
 FilterGainRatio
 }
@@ -18,7 +18,7 @@ The target variable of regression tasks is automatically binned (argument \code{
 task = mlr3::mlr_tasks$get("sonar")
 filter = FilterGainRatio$new()
 filter$calculate(task)
-head(as.data.table(filter), 3)
+as.data.table(filter)[1:3]
 }
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
@@ -30,10 +30,9 @@ Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
+  \code{\link{FilterResult}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariableImportance}},
-  \code{\link{FilterVariance}}, \code{\link{Filter}},
-  \code{\link{mlr_filters}}
+  \code{\link{FilterVariance}}, \code{\link{mlr_filters}}
 }
 \concept{Filter}
 \keyword{datasets}

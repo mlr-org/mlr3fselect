@@ -1,7 +1,7 @@
 #' @title Conditional Mutual Information Based Feature Selection Filter
 #'
 #' @aliases mlr_filters_mim
-#' @format [R6::R6Class] inheriting from [Filter].
+#' @format [R6::R6Class] inheriting from [FilterResult].
 #' @include Filter.R
 #'
 #' @description
@@ -14,8 +14,8 @@
 #' task = mlr3::mlr_tasks$get("iris")
 #' filter = FilterMIM$new()
 #' filter$calculate(task)
-#' head(as.data.table(filter), 3)
-FilterMIM = R6Class("FilterMIM", inherit = Filter,
+#' as.data.table(filter)[1:3]
+FilterMIM = R6Class("FilterMIM", inherit = FilterResult,
   public = list(
     initialize = function(id = "mim") {
       super$initialize(
@@ -35,3 +35,5 @@ FilterMIM = R6Class("FilterMIM", inherit = Filter,
     }
   )
 )
+
+register_filter("mim", FilterMIM)
