@@ -39,7 +39,8 @@ tm$update_end(pe)
 
 \seealso{
 Other Terminator: \code{\link{TerminatorEvaluations}},
-  \code{\link{TerminatorPerformanceStep}}
+  \code{\link{TerminatorPerformanceStep}},
+  \code{\link{TerminatorRuntime}}
 }
 \concept{Terminator}
 \keyword{internal}

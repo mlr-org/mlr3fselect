@@ -37,6 +37,6 @@ tm = TerminatorPerformanceStep$new(threshold = 0.01)
 }
 \seealso{
 Other Terminator: \code{\link{TerminatorEvaluations}},
-  \code{\link{Terminator}}
+  \code{\link{TerminatorRuntime}}, \code{\link{Terminator}}
 }
 \concept{Terminator}

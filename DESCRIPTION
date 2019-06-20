@@ -84,6 +84,7 @@ Collate:
     'Terminator.R'
     'TerminatorEvaluations.R'
     'TerminatorPerformanceStep.R'
+    'TerminatorRuntime.R'
     'helpers.R'
     'mlr_filters.R'
     'reexports.R'
