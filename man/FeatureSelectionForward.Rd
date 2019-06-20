@@ -37,7 +37,7 @@ task$measures = measures
 learner = mlr3::mlr_learners$get("classif.rpart")
 resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
 pe = PerformanceEvaluator$new(task, learner, resampling)
-tm = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 3)
+tm = TerminatorPerformanceStep$new(threshold = 0.01)
 fs = FeatureSelectionForward$new(pe, tm)
 fs$calculate()
 fs$get_result()

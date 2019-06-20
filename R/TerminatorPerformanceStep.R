@@ -10,11 +10,8 @@
 #' See [Terminator] for a description of the interface.
 #'
 #' @section Arguments:
-#' * `pe` (`[PerformanceEvaluator]`)
 #' * `threshold` (`numeric(1)``):
-#' The feature selection is terminated if the performance improvement between two steps is less than the threshold.
-#' * `max_features` (`integer(1)`)
-#' Maximum number of features. Only effects [FeatureSelectionForward].
+#'   The feature selection is terminated if the performance improvement between two steps is less than the threshold.
 #'
 #' @section Details:
 #' `$new()` creates a new object of class [TerminatorPerformanceStep].
@@ -28,7 +25,7 @@
 #' learner = mlr3::mlr_learners$get("classif.rpart")
 #' resampling = mlr3::mlr_resamplings$get("holdout")
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
-#' tm = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 2)
+#' tm = TerminatorPerformanceStep$new(threshold = 0.01)
 NULL
 
 #' @export
@@ -36,26 +33,18 @@ NULL
 TerminatorPerformanceStep = R6Class("TerminatorPerformanceStep",
   inherit = Terminator,
   public = list(
-    initialize = function(pe, threshold, max_features = NA) {
-      super$initialize(pe = pe, settings = list(threshold = checkmate::assert_numeric(threshold),
-                                                max_features = checkmate::assert_numeric(max_features,
-                                                                                         lower = 1,
-                                                                                         upper = length(pe$task$feature_names))))
+    initialize = function(threshold) {
+      super$initialize(settings = list(threshold = checkmate::assert_numeric(threshold)))
+
       self$terminated = FALSE
       self$state = list(step_performance = NA)
     },
 
-    update_start = function() {
+    update_start = function(pe) {
       invisible(self)
     },
-    update_end = function() {
-      # Stop if max_features is reached or all features are included
-      # Is only evaluated if enable_maximum_features is TRUE
-      # FeatureSelectionForward and FeatureSelectionGenetic enable this
-      private$check_maximum_features()
-
-      # Stop if threshold is reached
-      bmr = self$pe$get_best()
+    update_end = function(pe) {
+      bmr = pe$get_best()
       if(!is.na(self$state$step_performance)) {
         if(pe$task$measures[[1]]$minimize) {
           if(self$state$step_performance - bmr[[length(bmr)]]$performance <= self$settings$threshold) {

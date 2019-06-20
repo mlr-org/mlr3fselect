@@ -37,10 +37,10 @@ The settings for the FeatureSelection.
 
 \itemize{
 \item \code{$new()} creates a new object of class \code{[FeatureSelection]}.
-\item \code{id} stores an identifier for this \code{[FeatureSelection]}.
-\item \code{pe} stores the \link{PerformanceEvaluator} to optimize.
-\item \code{tm} stores the \code{[Terminator]}.
-\item \code{settings} is a list of settings for this \code{[FeatureSelection]}.
+\item \code{$id} stores an identifier for this \code{[FeatureSelection]}.
+\item \code{$pe} stores the \link{PerformanceEvaluator} to optimize.
+\item \code{$tm} stores the \code{[Terminator]}.
+\item \code{$settings} is a list of settings for this \code{[FeatureSelection]}.
 \item \code{calculate()} performs the feature selection, until the budget of the \code{[Terminator]} in the \code{[PerformanceEvaluator]} is exhausted.
 }
 }

@@ -42,8 +42,8 @@ The Resampling method that is used to evaluate the learner.
 \item \code{$learner} (\code{mlr3::Learner}) the algorithm for which the feature selection should be conducted.
 \item \code{$resampling} (\code{mlr3::Resampling}) strategy to evaluate a feature combination
 \item \code{$bmr} (\code{list}) of (\code{mlr3::BenchmarkResult}) objects. Each entry corresponds to one batch or step depending one the used feature selection method.
-\item \code{eval_states(states)} evaluates the feature combinations \code{states}
-\item \code{get_best()} returns selected features with the best performance of each entry in \code{$bmr}
+\item \code{$eval_states(states)} evaluates the feature combinations \code{states}.
+\item \code{$get_best()} returns selected features with the best performance of each entry in \code{$bmr}.
 }
 }
 

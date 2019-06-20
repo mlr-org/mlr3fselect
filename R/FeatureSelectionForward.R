@@ -29,7 +29,7 @@
 #' learner = mlr3::mlr_learners$get("classif.rpart")
 #' resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
-#' tm = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 3)
+#' tm = TerminatorPerformanceStep$new(threshold = 0.01)
 #' fs = FeatureSelectionForward$new(pe, tm)
 #' fs$calculate()
 #' fs$get_result()
@@ -41,11 +41,17 @@ NULL
 FeatureSelectionForward = R6Class("FeatureSelectionRandom",
    inherit = FeatureSelection,
    public = list(
-      initialize = function(pe, tm) {
-         super$initialize(id = "forward_selection", pe = pe, tm = tm, settings = list())
+      initialize = function(pe, tm, max_features = NA) {
+         if(is.na(max_features)) {
+            max_features = length(pe$task$feature_names)
+         }
+
+         super$initialize(id = "forward_selection", pe = pe, tm = tm,
+                          settings = list(max_features = checkmate::assert_numeric(max_features,
+                                                                                   lower = 1,
+                                                                                   upper = length(pe$task$feature_names))))
 
          self$state = rep(0, length(pe$task$feature_names))
-         tm$set_enable_maximum_features(TRUE)
      },
 
      get_result = function() {
@@ -64,6 +70,11 @@ FeatureSelectionForward = R6Class("FeatureSelectionRandom",
             new_states[[length(new_states) + 1]] = state
             }
          }
+         # Side-effect stop
+         if(sum(new_states[[1]]) == self$settings$max_features) {
+            self$tm$terminated = TRUE
+         }
+
          new_states
       }
    )

@@ -26,10 +26,10 @@
 #'
 #' @section Details:
 #' * `$new()` creates a new object of class `[FeatureSelection]`.
-#' * `id` stores an identifier for this `[FeatureSelection]`.
-#' * `pe` stores the [PerformanceEvaluator] to optimize.
-#' * `tm` stores the `[Terminator]`.
-#' * `settings` is a list of settings for this `[FeatureSelection]`.
+#' * `$id` stores an identifier for this `[FeatureSelection]`.
+#' * `$pe` stores the [PerformanceEvaluator] to optimize.
+#' * `$tm` stores the `[Terminator]`.
+#' * `$settings` is a list of settings for this `[FeatureSelection]`.
 #' * `calculate()` performs the feature selection, until the budget of the `[Terminator]` in the `[PerformanceEvaluator]` is exhausted.
 #' @name FeatureSelection
 #' @family FeatureSelection
@@ -72,9 +72,9 @@ FeatureSelection = R6Class("FeatureSelection",
          task$feature_names[as.logical(binary_features)]
       },
       eval_states_terminator = function(states) {
-         self$tm$update_start()
+         self$tm$update_start(self$pe)
          self$pe$eval_states(states)
-         self$tm$update_end()
+         self$tm$update_end(self$pe)
       }
  )
 )

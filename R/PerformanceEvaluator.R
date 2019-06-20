@@ -33,8 +33,8 @@
 #' * `$learner` (`mlr3::Learner`) the algorithm for which the feature selection should be conducted.
 #' * `$resampling` (`mlr3::Resampling`) strategy to evaluate a feature combination
 #' * `$bmr` (`list`) of (`mlr3::BenchmarkResult`) objects. Each entry corresponds to one batch or step depending one the used feature selection method.
-#' * `eval_states(states)` evaluates the feature combinations `states`
-#' * `get_best()` returns selected features with the best performance of each entry in `$bmr`
+#' * `$eval_states(states)` evaluates the feature combinations `states`.
+#' * `$get_best()` returns selected features with the best performance of each entry in `$bmr`.
 #'
 #' @name PerformanceEvaluator
 #' @keywords internal
