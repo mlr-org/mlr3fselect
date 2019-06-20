@@ -45,6 +45,7 @@ FeatureSelectionForward = R6Class("FeatureSelectionRandom",
          super$initialize(id = "forward_selection", pe = pe, tm = tm, settings = list())
 
          self$state = rep(0, length(pe$task$feature_names))
+         tm$set_enable_maximum_features(TRUE)
      },
 
      get_result = function() {

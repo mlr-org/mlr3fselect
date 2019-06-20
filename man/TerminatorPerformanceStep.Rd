@@ -20,7 +20,7 @@ See \link{Terminator} for a description of the interface.
 \item \code{threshold} (`numeric(1)``):
 The feature selection is terminated if the performance improvement between two steps is less than the threshold.
 \item \code{max_features} (\code{integer(1)})
-Maximum number of features
+Maximum number of features. Only effects \link{FeatureSelectionForward}.
 }
 }
 
@@ -36,7 +36,7 @@ task = mlr3::mlr_tasks$get("iris")
 learner = mlr3::mlr_learners$get("classif.rpart")
 resampling = mlr3::mlr_resamplings$get("holdout")
 pe = PerformanceEvaluator$new(task, learner, resampling)
-t = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 2)
+tm = TerminatorPerformanceStep$new(pe, threshold = 0.01, max_features = 2)
 }
 \seealso{
 Other Terminator: \code{\link{TerminatorEvaluations}},

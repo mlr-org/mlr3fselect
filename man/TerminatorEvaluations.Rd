@@ -16,8 +16,11 @@ See \link{Terminator} for a description of the interface.
 \section{Arguments}{
 
 \itemize{
+\item \code{pe} (\code{[PerformanceEvaluator]})
 \item \code{max_evaluations} (\code{integer(1)}):
 Maximum number of function evaluations.
+\item \code{max_features} (\code{integer(1)})
+Maximum number of features. Only effects \link{FeatureSelectionForward}.
 }
 }
 
@@ -29,7 +32,11 @@ The interface is described in \link{Terminator}.
 }
 
 \examples{
-t = TerminatorEvaluations$new(max_evaluations = 100)
+task = mlr3::mlr_tasks$get("iris")
+learner = mlr3::mlr_learners$get("classif.rpart")
+resampling = mlr3::mlr_resamplings$get("holdout")
+pe = PerformanceEvaluator$new(task, learner, resampling)
+tm = TerminatorEvaluations$new(pe, max_evaluations = 100)
 }
 \seealso{
 Other Terminator: \code{\link{TerminatorPerformanceStep}},

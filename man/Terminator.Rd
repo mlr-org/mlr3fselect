@@ -37,6 +37,7 @@ tm$update_end(pe)
 \item \code{$state} (\code{list()}) arbitrary state of the Terminator. Gets updated with each call of \code{update_start()} and \code{update_end()}.
 \item \code{$update_start()} is called in each tuning iteration before the evaluation.
 \item \code{$update_end()} is called in each tuning iteration after the evaluation.
+\item \code{$set_enable_maximum_features} is called by FeatureSelection classes to enable check for maximum features.
 }
 }
 
