@@ -2,7 +2,7 @@
 #'
 #' @aliases mlr_filters_kruskal_test
 #' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include Filter.R
+#' @include FilterResult.R
 #'
 #' @description
 #' Kruskal-Wallis rank sum test filter.

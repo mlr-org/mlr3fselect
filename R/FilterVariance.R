@@ -2,7 +2,7 @@
 #'
 #' @aliases mlr_filters_variance
 #' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include Filter.R
+#' @include FilterResult.R
 #'
 #' @description
 #' Variance filter.

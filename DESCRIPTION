@@ -33,6 +33,7 @@ Imports:
     paradox,
     R6
 Suggests:
+    care,
     FSelectorRcpp,
     knitr,
     lgr,
@@ -62,6 +63,7 @@ Collate:
     'FilterResult.R'
     'FilterAUC.R'
     'FilterCMIM.R'
+    'FilterCarScore.R'
     'FilterDISR.R'
     'FilterGainRatio.R'
     'FilterInformationGain.R'

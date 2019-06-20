@@ -22,9 +22,10 @@ as.data.table(filter)[1:3]
 }
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
-  \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},
-  \code{\link{FilterGainRatio}}, \code{\link{FilterJMIM}},
-  \code{\link{FilterJMI}}, \code{\link{FilterKruskalTest}},
+  \code{\link{FilterCMIM}}, \code{\link{FilterCarScore}},
+  \code{\link{FilterDISR}}, \code{\link{FilterGainRatio}},
+  \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
+  \code{\link{FilterKruskalTest}},
   \code{\link{FilterLinearCorrelation}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},

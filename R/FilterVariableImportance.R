@@ -2,7 +2,7 @@
 #'
 #' @aliases mlr_filters_variable_importance
 #' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include Filter.R
+#' @include FilterResult.R
 #'
 #' @description
 #' Variable Importance filter.

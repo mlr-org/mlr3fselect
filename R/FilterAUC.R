@@ -2,7 +2,8 @@
 #'
 #' @aliases mlr_filters_auc
 #' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include Filter.R
+#' @include FilterResult.R
+#' @include mlr_filters.R
 #'
 #' @description
 #' Area under the (ROC) Curve filter.

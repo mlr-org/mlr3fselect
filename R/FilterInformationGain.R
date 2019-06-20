@@ -2,7 +2,7 @@
 #'
 #' @aliases mlr_filters_information_gain
 #' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include Filter.R
+#' @include FilterResult.R
 #'
 #' @description
 #' Information gain filter.

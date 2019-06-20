@@ -2,7 +2,7 @@
 #'
 #' @aliases mlr_filters_njmim
 #' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include Filter.R
+#' @include FilterResult.R
 #'
 #' @description
 #' Minimal normalised joint mutual information maximisation filter.

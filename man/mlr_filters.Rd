@@ -21,8 +21,8 @@ mlr_filters$get("mim")
 }
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
-  \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},
-  \code{\link{FilterGainRatio}},
+  \code{\link{FilterCMIM}}, \code{\link{FilterCarScore}},
+  \code{\link{FilterDISR}}, \code{\link{FilterGainRatio}},
   \code{\link{FilterInformationGain}},
   \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
   \code{\link{FilterKruskalTest}},
