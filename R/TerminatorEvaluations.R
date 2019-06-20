@@ -48,9 +48,7 @@ TerminatorEvaluations = R6Class("TerminatorEvaluations",
         self$state$evals = Reduce("sum", row_num)
       }
 
-      if(self$state$evals >= self$settings$max_evaluations) {
-        self$terminated = TRUE
-      }
+      self$terminated = self$state$evals >= self$settings$max_evaluations
 
       invisible(self)
     },

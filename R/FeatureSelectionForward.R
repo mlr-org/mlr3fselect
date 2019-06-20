@@ -70,12 +70,17 @@ FeatureSelectionForward = R6Class("FeatureSelectionRandom",
             new_states[[length(new_states) + 1]] = state
             }
          }
-         # Side-effect stop
-         if(sum(new_states[[1]]) == self$settings$max_features) {
-            self$tm$terminated = TRUE
-         }
-
          new_states
+      },
+      eval_states_terminator = function(states) {
+         self$tm$update_start(self$pe)
+         self$pe$eval_states(states)
+         self$tm$update_end(self$pe)
+
+         # Side-effect stop maximum features
+         if(!self$tm$terminated) {
+            self$tm$terminated = (length(states[[1]]) == self$settings$max_features)
+         }
       }
    )
 )
