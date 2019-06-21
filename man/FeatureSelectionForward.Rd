@@ -43,7 +43,8 @@ fs$calculate()
 fs$get_result()
 }
 \seealso{
-Other FeatureSelection: \code{\link{FeatureSelectionRandom}},
+Other FeatureSelection: \code{\link{FeatureSelectionGenetic}},
+  \code{\link{FeatureSelectionRandom}},
   \code{\link{FeatureSelection}}
 }
 \concept{FeatureSelection}

@@ -45,6 +45,7 @@ fs$get_result()
 }
 \seealso{
 Other FeatureSelection: \code{\link{FeatureSelectionForward}},
+  \code{\link{FeatureSelectionGenetic}},
   \code{\link{FeatureSelection}}
 }
 \concept{FeatureSelection}

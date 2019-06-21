@@ -63,6 +63,7 @@ RoxygenNote: 6.1.1
 Collate:
     'FeatureSelection.R'
     'FeatureSelectionForward.R'
+    'FeatureSelectionGenetic.R'
     'FeatureSelectionRandom.R'
     'Filter.R'
     'FilterAUC.R'

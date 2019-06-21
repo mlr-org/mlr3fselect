@@ -47,6 +47,7 @@ The settings for the FeatureSelection.
 
 \seealso{
 Other FeatureSelection: \code{\link{FeatureSelectionForward}},
+  \code{\link{FeatureSelectionGenetic}},
   \code{\link{FeatureSelectionRandom}}
 }
 \concept{FeatureSelection}
