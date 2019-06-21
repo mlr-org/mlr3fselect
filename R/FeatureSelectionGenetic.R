@@ -57,7 +57,7 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
       mutation_rate = 0.05, max_features = NA, strategy = "plus") {
       super$initialize(id = "genetic_selection", pe = pe, tm = tm,
         settings = list(
-          max_features = checkmate::assert_numeric(max_features, ower = 1, upper = length(pe$task$feature_names)),
+          max_features = checkmate::assert_numeric(max_features, lower = 1, upper = length(pe$task$feature_names)),
           mu = checkmate::assert_numeric(mu),
           lambda = checkmate::assert_numeric(lambda),
           crossover_rate = checkmate::assert_numeric(crossover_rate, lower = 0, upper = 1),
