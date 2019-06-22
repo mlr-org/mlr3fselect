@@ -58,6 +58,13 @@ FeatureSelectionForward = R6Class("FeatureSelectionRandom",
         bmr = self$pe$bmr[[length(self$pe$bmr)]]$get_best(self$pe$task$measures[[1L]]$id)
         list(features = bmr$task$feature_names,
              performance = bmr$aggregated)
+     },
+     get_path = function() {
+        lapply(self$pe$bmr, function(bmr) {
+           bmr = bmr$get_best(self$pe$task$measures[[1L]]$id)
+           list(features = bmr$task$feature_names,
+                performance = bmr$aggregated)
+        })
      }
    ),
    private = list(
