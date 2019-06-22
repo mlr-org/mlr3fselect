@@ -51,10 +51,14 @@ FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
       }
 
       super$initialize(id = "sequential_selection", pe = pe, tm = tm,
-        settings = list(max_features = checkmate::assert_numeric(max_features,
-          lower = 1,
-          upper = length(pe$task$feature_names)),
-        strategy = checkmate::assert_string(strategy, pattern = "(^fsf$|^fsb$)")))
+        settings = list(
+          max_features = checkmate::assert_numeric(
+            max_features,
+            lower = 1,
+            upper = length(pe$task$feature_names)),
+          strategy = checkmate::assert_string(
+            strategy,
+            pattern = "(^fsf$|^fsb$)")))
 
       if (strategy == "fsf") {
         self$state = private$generate_states(rep(0, length(pe$task$feature_names)))

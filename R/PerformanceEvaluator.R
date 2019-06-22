@@ -53,7 +53,6 @@ PerformanceEvaluator = R6Class("PerformanceEvaluator",
     learner = NULL,
     resampling = NULL,
     bmr = list(),
-    states = list(),
 
     initialize = function(task, learner, resampling) {
       self$task = mlr3::assert_task(task)
@@ -62,27 +61,27 @@ PerformanceEvaluator = R6Class("PerformanceEvaluator",
     },
 
     eval_states = function(states) {
-      self$states[[length(self$states)+1]] <- states
       # For each state, clone task and set feature subset
       task_list <- list()
-      for(state in states) {
+      for (state in states) {
         task = self$task$clone()
         task$select(state)
-        task_list[[length(task_list)+1]] <- task
+        task_list[[length(task_list) + 1]] <- task
       }
 
-      new_bmr = benchmark(data.table::data.table(task = task_list,
-                                     learner = list(self$learner),
-                                     resampling = list(self$resampling)))
-
-      self$bmr[[length(self$bmr)+1]] <- new_bmr
+      # Evaluate
+      new_bmr = benchmark(data.table::data.table(
+        task = task_list,
+        learner = list(self$learner),
+        resampling = list(self$resampling)))
+      self$bmr[[length(self$bmr) + 1]] <- new_bmr
     },
-
     get_best = function() {
       lapply(self$bmr, function(x) {
         rr = x$get_best(self$task$measures[[1L]]$id)
-        list(features = rr$task$feature_names,
-             performance = mean(rr$performance(self$task$measures[[1L]]$id)))
+        list(
+          features = rr$task$feature_names,
+          performance = mean(rr$performance(self$task$measures[[1L]]$id)))
       })
     }
   )

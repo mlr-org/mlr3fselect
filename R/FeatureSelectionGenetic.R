@@ -96,6 +96,7 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
   ),
   private = list(
     calculate_step = function() {
+
       # Generate population depending on strategy
       if (self$settings$strategy == "plus") {
         states = c(self$state, private$generate_states())

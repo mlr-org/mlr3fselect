@@ -34,7 +34,8 @@ TerminatorPerformanceStep = R6Class("TerminatorPerformanceStep",
   inherit = Terminator,
   public = list(
     initialize = function(threshold) {
-      super$initialize(settings = list(threshold = checkmate::assert_numeric(threshold)))
+      super$initialize(
+        settings = list(threshold = checkmate::assert_numeric(threshold)))
 
       self$terminated = FALSE
       self$state = list(step_performance = NA)
@@ -45,13 +46,13 @@ TerminatorPerformanceStep = R6Class("TerminatorPerformanceStep",
     },
     update_end = function(pe) {
       bmr = pe$get_best()
-      if(!is.na(self$state$step_performance)) {
-        if(pe$task$measures[[1]]$minimize) {
-          if(self$state$step_performance - bmr[[length(bmr)]]$performance <= self$settings$threshold) {
+      if (!is.na(self$state$step_performance)) {
+        if (pe$task$measures[[1]]$minimize) {
+          if (self$state$step_performance - bmr[[length(bmr)]]$performance <= self$settings$threshold) {
             self$terminated = TRUE
           }
         } else {
-          if(bmr[[length(bmr)]]$performance - self$state$step_performance <= self$settings$threshold) {
+          if (bmr[[length(bmr)]]$performance - self$state$step_performance <= self$settings$threshold) {
             self$terminated = TRUE
           }
         }

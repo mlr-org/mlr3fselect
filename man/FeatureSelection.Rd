@@ -41,7 +41,8 @@ The settings for the FeatureSelection.
 \item \code{$pe} stores the \link{PerformanceEvaluator} to optimize.
 \item \code{$tm} stores the \code{[Terminator]}.
 \item \code{$settings} is a list of settings for this \code{[FeatureSelection]}.
-\item \code{calculate()} performs the feature selection, until the budget of the \code{[Terminator]} in the \code{[PerformanceEvaluator]} is exhausted.
+\item \code{$state} stores currently evaluated 0/1 encoded feature combinations.
+\item \code{$calculate()} performs the feature selection, until the budget of the \code{[Terminator]} in the \code{[PerformanceEvaluator]} is exhausted.
 }
 }
 
