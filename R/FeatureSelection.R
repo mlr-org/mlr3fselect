@@ -58,16 +58,6 @@ FeatureSelection = R6Class("FeatureSelection",
       }
   ),
    private = list(
-      calculate_step = function() {
-         states = private$generate_states()
-         named_states = lapply(states, private$binary_to_features)
-
-         private$eval_states_terminator(named_states)
-
-         bmr = self$pe$get_best()
-         features = bmr[[length(bmr)]]$features
-         self$state = as.numeric(Reduce("|", lapply(features, function(x) x == self$pe$task$feature_names)))
-      },
       binary_to_features = function(binary_features) {
          task$feature_names[as.logical(binary_features)]
       },
