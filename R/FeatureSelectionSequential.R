@@ -1,11 +1,11 @@
-#' @title FeatureSelectionForward
+#' @title FeatureSelectionSequential
 #'
 #' @description
 #' FeatureSelection child class to conduct forward search.
 #'
 #' @section Usage:
 #'  ```
-#' fs = FeatureSelectionForward$new()
+#' fs = FeatureSelectionSequential$new()
 #' ```
 #' See [FeatureSelection] for a description of the interface.
 #'
@@ -14,13 +14,13 @@
 #' * `tm` (`[Terminator]`).
 #'
 #' @section Details:
-#' `$new()` creates a new object of class [FeatureSelectionForward].
+#' `$new()` creates a new object of class [FeatureSelectionSequential].
 #' `$get_result()` Returns selected features in each step.
 #' The interface is described in [FeatureSelection].
 #'
 #' Each step is possibly executed in parallel via [mlr3::benchmark()]
 #'
-#' @name FeatureSelectionForward
+#' @name FeatureSelectionSequential
 #' @family FeatureSelection
 #' @examples
 #' task = mlr3::mlr_tasks$get("pima")
@@ -30,7 +30,7 @@
 #' resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' tm = TerminatorPerformanceStep$new(threshold = 0.01)
-#' fs = FeatureSelectionForward$new(pe, tm)
+#' fs = FeatureSelectionSequential$new(pe, tm)
 #' fs$calculate()
 #' fs$get_result()
 NULL
@@ -38,7 +38,7 @@ NULL
 #' @export
 #' @include FeatureSelection.R
 
-FeatureSelectionForward = R6Class("FeatureSelectionRandom",
+FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
    inherit = FeatureSelection,
    public = list(
       initialize = function(pe, tm, max_features = NA) {

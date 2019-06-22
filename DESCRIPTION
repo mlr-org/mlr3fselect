@@ -62,9 +62,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate:
     'FeatureSelection.R'
-    'FeatureSelectionForward.R'
     'FeatureSelectionGenetic.R'
     'FeatureSelectionRandom.R'
+    'FeatureSelectionSequential.R'
     'Filter.R'
     'FilterAUC.R'
     'FilterCMIM.R'
