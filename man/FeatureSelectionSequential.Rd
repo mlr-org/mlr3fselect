@@ -4,7 +4,7 @@
 \alias{FeatureSelectionSequential}
 \title{FeatureSelectionSequential}
 \description{
-FeatureSelection child class to conduct forward search.
+FeatureSelection child class to conduct sequential search.
 }
 \section{Usage}{
 \preformatted{fs = FeatureSelectionSequential$new()
@@ -18,6 +18,10 @@ See \link{FeatureSelection} for a description of the interface.
 \itemize{
 \item \code{pe} (\code{[PerformanceEvaluator]}).
 \item \code{tm} (\code{[Terminator]}).
+\item \code{max_features} (\code{integer(1)})
+Maximum number of features
+\item \code{strategy} (\code{character(1)}).
+Forward selection \code{fsf} or backward selection \code{fsb}.
 }
 }
 
