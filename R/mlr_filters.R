@@ -19,7 +19,7 @@
 NULL
 
 DictionaryFilterResult = R6Class("DictionaryFilterResult",
-  inherit = mlr3::Dictionary,
+  inherit = mlr3misc::Dictionary,
   cloneable = FALSE
 )
 
