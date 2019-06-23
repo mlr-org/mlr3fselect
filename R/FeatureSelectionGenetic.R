@@ -148,7 +148,7 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
           children = (children + mutation) %% 2
 
           # Check max features
-          if (is.na(self$settings$max_features) || sum(kid) <= self$settings$max_features) {
+          if (is.na(self$settings$max_features) || sum(children) <= self$settings$max_features) {
             break
           }
         }
