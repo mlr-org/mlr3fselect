@@ -29,11 +29,13 @@ FilterRankCorrelation = R6Class("FilterRankCorrelation", inherit = FilterResult,
 
   private = list(
     .calculate = function(task) {
-      abs(stats::cor(
+      fn = task$feature_names
+      m = abs(stats::cor(
         x = as.matrix(task$data(cols = task$feature_names)),
         y = as.matrix(task$data(cols = task$target_names)),
         use = "pairwise.complete.obs",
         method = "spearman")[, 1L])
+      set_names(m, fn)
     }
   )
 )

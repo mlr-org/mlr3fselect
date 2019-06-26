@@ -154,7 +154,7 @@ filter_n = function(self, task, n) {
   if (is.null(self$scores)) {
     stopf("Filter values have not been computed yet")
   }
-  keep = names(head(self$scores, n))
+  keep = head(self$scores$feature, n)
   task$select(keep)
 }
 
