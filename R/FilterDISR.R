@@ -1,8 +1,8 @@
 #' @title Double Input Symmetrical Relevance Filter
 #'
 #' @aliases mlr_filters_disr
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Double input symmetrical relevance filter.
@@ -15,7 +15,7 @@
 #' filter = FilterDISR$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterDISR = R6Class("FilterDISR", inherit = FilterResult,
+FilterDISR = R6Class("FilterDISR", inherit = Filter,
   public = list(
     initialize = function(id = "disr") {
       super$initialize(

@@ -1,8 +1,8 @@
 #' @title Variance Filter
 #'
 #' @aliases mlr_filters_variance
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Variance filter.
@@ -15,7 +15,7 @@
 #' filter = FilterVariance$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterVariance = R6Class("FilterVariance", inherit = FilterResult,
+FilterVariance = R6Class("FilterVariance", inherit = Filter,
   public = list(
     initialize = function(id = "variance", param_vals = list(na.rm = TRUE)) {
       super$initialize(

@@ -1,8 +1,8 @@
 #' @title Gain Ratio Filter
 #'
 #' @aliases mlr_filters_gain_ratio
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Gain Ratio filter.
@@ -16,7 +16,7 @@
 #' filter = FilterGainRatio$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterGainRatio = R6Class("FilterGainRatio", inherit = FilterResult,
+FilterGainRatio = R6Class("FilterGainRatio", inherit = Filter,
   public = list(
     initialize = function(id = "gain_ratio") {
       super$initialize(

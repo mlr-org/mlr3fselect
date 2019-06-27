@@ -2,7 +2,7 @@
 #'
 #' @format [R6Class] object
 #' @description
-#' A simple [Dictionary] storing objects of class [FilterResult].
+#' A simple [Dictionary] storing objects of class [Filter].
 #' Each Filter has an associated help page, see `mlr_filters_[id]`.
 #'
 #' @section Usage:
@@ -18,7 +18,7 @@
 #' mlr_filters$get("mim")
 NULL
 
-DictionaryFilterResult = R6Class("DictionaryFilterResult",
+DictionaryFilter = R6Class("DictionaryFilter",
   inherit = mlr3misc::Dictionary,
   cloneable = FALSE
 )
@@ -27,7 +27,7 @@ DictionaryFilterResult = R6Class("DictionaryFilterResult",
 mlr_filters = NULL
 
 #' @export
-as.data.table.DictionaryFilterResult = function(x, ...) {
+as.data.table.DictionaryFilter = function(x, ...) {
   setkeyv(map_dtr(x$keys(), function(key) {
     l = x$get(key)
     list(
@@ -56,7 +56,7 @@ register_filter = function(key, value) {
 }
 
 publish_registered_filters = function() {
-  mlr_filters <<- DictionaryFilterResult$new()
+  mlr_filters <<- DictionaryFilter$new()
 
   for (registercall in as.list(mlr_filter_register)) {
     registercall[[1]] = quote(mlr_filters$add)

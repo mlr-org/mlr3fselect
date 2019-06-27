@@ -5,7 +5,7 @@
 \alias{FilterCarScore}
 \alias{mlr_filters_carscore}
 \title{Conditional Mutual Information Based Feature Selection Filter}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{FilterResult}.}
+\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{Filter}.}
 \usage{
 FilterCarScore
 }
@@ -17,6 +17,7 @@ correlations between the target and the decorrelated features.
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},
+  \code{\link{FilterEmbedded}},
   \code{\link{FilterGainRatio}},
   \code{\link{FilterInformationGain}},
   \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
@@ -25,9 +26,9 @@ Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
-  \code{\link{FilterResult}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariance}}, \code{\link{mlr_filters}}
+  \code{\link{FilterVariance}}, \code{\link{Filter}},
+  \code{\link{mlr_filters}}
 }
 \concept{Filter}
 \keyword{datasets}

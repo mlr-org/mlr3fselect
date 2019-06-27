@@ -5,7 +5,7 @@
 \alias{FilterJMIM}
 \alias{mlr_filters_jmim}
 \title{Minimal Joint Mutual Information Maximisation Filter}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{FilterResult}.}
+\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{Filter}.}
 \usage{
 FilterJMIM
 }
@@ -22,16 +22,17 @@ as.data.table(filter)[1:3]
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterCMIM}}, \code{\link{FilterCarScore}},
-  \code{\link{FilterDISR}}, \code{\link{FilterGainRatio}},
+  \code{\link{FilterDISR}}, \code{\link{FilterEmbedded}},
+  \code{\link{FilterGainRatio}},
   \code{\link{FilterInformationGain}},
   \code{\link{FilterJMI}}, \code{\link{FilterKruskalTest}},
   \code{\link{FilterLinearCorrelation}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
-  \code{\link{FilterResult}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariance}}, \code{\link{mlr_filters}}
+  \code{\link{FilterVariance}}, \code{\link{Filter}},
+  \code{\link{mlr_filters}}
 }
 \concept{Filter}
 \keyword{datasets}

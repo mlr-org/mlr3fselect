@@ -1,7 +1,7 @@
 expect_filter_result = function(fr) {
 
-  checkmate::expect_r6(fr, "FilterResult", public = c("scores"))
-  testthat::expect_output(print(fr), "FilterResult")
+  checkmate::expect_r6(fr, "Filter", public = c("scores"))
+  testthat::expect_output(print(fr), "Filter")
 
   checkmate::expect_data_table(fr$scores)
   checkmate::expect_names(names(fr$scores), must.include = c("method", "scores"))

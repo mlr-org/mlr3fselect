@@ -1,8 +1,8 @@
 #' @title Kruskal-Wallis Test Filter
 #'
 #' @aliases mlr_filters_kruskal_test
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Kruskal-Wallis rank sum test filter.
@@ -15,7 +15,7 @@
 #' filter = FilterKruskalTest$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterKruskalTest = R6Class("FilterKruskalTest", inherit = FilterResult,
+FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
   public = list(
     initialize = function(id = "kruskal_test") {
       super$initialize(

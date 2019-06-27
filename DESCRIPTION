@@ -59,8 +59,8 @@ NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate:
+    'Filter.R'
     'mlr_filters.R'
-    'FilterResult.R'
     'FilterAUC.R'
     'FilterCMIM.R'
     'FilterCarScore.R'

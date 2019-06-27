@@ -5,7 +5,7 @@
 \alias{FilterInformationGain}
 \alias{mlr_filters_information_gain}
 \title{Information Gain Filter}
-\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{FilterResult}.}
+\format{\link[R6:R6Class]{R6::R6Class} inheriting from \link{Filter}.}
 \usage{
 FilterInformationGain
 }
@@ -23,16 +23,16 @@ as.data.table(filter)[1:3]
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterCMIM}}, \code{\link{FilterCarScore}},
-  \code{\link{FilterDISR}}, \code{\link{FilterGainRatio}},
-  \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
-  \code{\link{FilterKruskalTest}},
+  \code{\link{FilterDISR}}, \code{\link{FilterEmbedded}},
+  \code{\link{FilterGainRatio}}, \code{\link{FilterJMIM}},
+  \code{\link{FilterJMI}}, \code{\link{FilterKruskalTest}},
   \code{\link{FilterLinearCorrelation}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
-  \code{\link{FilterResult}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariance}}, \code{\link{mlr_filters}}
+  \code{\link{FilterVariance}}, \code{\link{Filter}},
+  \code{\link{mlr_filters}}
 }
 \concept{Filter}
 \keyword{datasets}

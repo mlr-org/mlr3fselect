@@ -1,8 +1,8 @@
 #' @title Symmetrical Uncertainty Filter
 #'
 #' @aliases mlr_filters_symmetrical_uncertainty
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Symmetrical uncertainty filter.
@@ -16,7 +16,7 @@
 #' filter = FilterSymmetricalUncertainty$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit = FilterResult,
+FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit = Filter,
   public = list(
     initialize = function(id = "symmetrical_uncertainty") {
       super$initialize(

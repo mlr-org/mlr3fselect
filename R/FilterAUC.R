@@ -1,8 +1,8 @@
 #' @title AUC Filter
 #'
 #' @aliases mlr_filters_auc
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #' @include mlr_filters.R
 #'
 #' @description
@@ -16,7 +16,7 @@
 #' filter = FilterAUC$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterAUC = R6Class("FilterAUC", inherit = FilterResult,
+FilterAUC = R6Class("FilterAUC", inherit = Filter,
   public = list(
     initialize = function(id = "auc") {
       super$initialize(

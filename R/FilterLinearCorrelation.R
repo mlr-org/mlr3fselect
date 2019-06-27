@@ -1,8 +1,8 @@
 #' @title Linear Correlation Filter
 #'
 #' @aliases mlr_filters_linear_correlation
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Linear correlation filter.
@@ -15,7 +15,7 @@
 #' filter = FilterLinearCorrelation$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = FilterResult,
+FilterLinearCorrelation = R6Class("FilterLinearCorrelation", inherit = Filter,
   public = list(
     initialize = function(id = "linear_correlation") {
       super$initialize(

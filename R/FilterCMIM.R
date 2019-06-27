@@ -1,8 +1,8 @@
 #' @title Minimal Conditional Mutual Information Filter
 #'
 #' @aliases mlr_filters_cmim
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Minimal conditional mutual information maximisation filter.
@@ -15,7 +15,7 @@
 #' filter = FilterCMIM$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterCMIM = R6Class("FilterCMIM", inherit = FilterResult,
+FilterCMIM = R6Class("FilterCMIM", inherit = Filter,
   public = list(
     initialize = function(id = "cmim") {
       super$initialize(

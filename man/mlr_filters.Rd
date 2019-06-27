@@ -5,7 +5,7 @@
 \title{Dictionary of Filters}
 \format{\link{R6Class} object}
 \description{
-A simple \link{Dictionary} storing objects of class \link{FilterResult}.
+A simple \link{Dictionary} storing objects of class \link{Filter}.
 Each Filter has an associated help page, see \code{mlr_filters_[id]}.
 }
 \section{Usage}{
@@ -22,7 +22,8 @@ mlr_filters$get("mim")
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterCMIM}}, \code{\link{FilterCarScore}},
-  \code{\link{FilterDISR}}, \code{\link{FilterGainRatio}},
+  \code{\link{FilterDISR}}, \code{\link{FilterEmbedded}},
+  \code{\link{FilterGainRatio}},
   \code{\link{FilterInformationGain}},
   \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
   \code{\link{FilterKruskalTest}},
@@ -30,9 +31,8 @@ Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
   \code{\link{FilterRankCorrelation}},
-  \code{\link{FilterResult}},
   \code{\link{FilterSymmetricalUncertainty}},
-  \code{\link{FilterVariance}}
+  \code{\link{FilterVariance}}, \code{\link{Filter}}
 }
 \concept{Dictionary}
 \concept{Filter}

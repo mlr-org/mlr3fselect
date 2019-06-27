@@ -1,8 +1,8 @@
 #' @title Conditional Mutual Information Based Feature Selection Filter
 #'
 #' @aliases mlr_filters_carscore
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Filter `carscore` determines the Correlation-Adjusted (marginal) coRelation
@@ -11,7 +11,7 @@
 #'
 #' @family Filter
 #' @export
-FilterCarScore = R6Class("FilterCarScore", inherit = FilterResult,
+FilterCarScore = R6Class("FilterCarScore", inherit = Filter,
   public = list(
     initialize = function(id = "carscore") {
       super$initialize(

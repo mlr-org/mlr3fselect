@@ -1,5 +1,5 @@
 assert_filter_result = function(filter, task = NULL) {
-  filter = cast_from_dict(filter, "FilterResult", mlr_filters, FALSE)[[1L]]
+  filter = cast_from_dict(filter, "Filter", mlr_filters, FALSE)[[1L]]
 
   if (!is.null(task)) {
     if (task$task_type %nin% filter$task_type) {

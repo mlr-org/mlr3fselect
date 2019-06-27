@@ -4,7 +4,7 @@ lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.
 
 expect_filter_result = function(f, task = NULL) {
 
-  expect_r6(f, "FilterResult",
+  expect_r6(f, "Filter",
     public = c("packages", "feature_types", "task_type", "param_set", "scores"),
     private = c(".calculate")
   )
@@ -22,7 +22,7 @@ expect_filter_result = function(f, task = NULL) {
 
   if (!is.null(task)) {
     x = f$clone(deep = TRUE)$calculate(task)
-    expect_class(x, "FilterResult")
+    expect_class(x, "Filter")
     # FIXME
     # expect_data_table(f$scores)
     # FIXME

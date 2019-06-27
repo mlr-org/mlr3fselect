@@ -9,7 +9,7 @@
 #'
 #' @section Construction:
 #' ```
-#' f = FilterResult$new(id, task_type, param_set, param_vals, feature_types, packages)
+#' f = Filter$new(id, task_type, param_set, param_vals, feature_types, packages)
 #' ```
 #'
 #' * `id` :: `character(1)`\cr
@@ -80,7 +80,7 @@
 #'
 #' @family Filter
 #' @export
-FilterResult = R6Class("FilterResult",
+Filter = R6Class("Filter",
   public = list(
     id = NULL,
     task_type = NULL,
@@ -159,7 +159,7 @@ filter_n = function(self, task, n) {
 }
 
 #' @export
-as.data.table.FilterResult = function(x, ...) {
+as.data.table.Filter = function(x, ...) {
   fv = x$scores
   if (is.null(fv)) {
     stopf("No filter data available")

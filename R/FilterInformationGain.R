@@ -1,8 +1,8 @@
 #' @title Information Gain Filter
 #'
 #' @aliases mlr_filters_information_gain
-#' @format [R6::R6Class] inheriting from [FilterResult].
-#' @include FilterResult.R
+#' @format [R6::R6Class] inheriting from [Filter].
+#' @include Filter.R
 #'
 #' @description
 #' Information gain filter.
@@ -16,7 +16,7 @@
 #' filter = FilterInformationGain$new()
 #' filter$calculate(task)
 #' as.data.table(filter)[1:3]
-FilterInformationGain = R6Class("FilterInformationGain", inherit = FilterResult,
+FilterInformationGain = R6Class("FilterInformationGain", inherit = Filter,
   public = list(
     initialize = function(id = "information_gain") {
       super$initialize(
