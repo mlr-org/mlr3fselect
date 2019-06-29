@@ -139,7 +139,7 @@ Filter = R6Class("Filter",
     filter_perc = function(task, perc) {
       assert_task(task)
       assert_number(perc, lower = 0, upper = 1)
-      filter_n(self, task, round(task$nrow * perc))
+      filter_n(self, task, round(task$ncol * perc))
     },
 
     filter_thresh = function(task, threshold) {
