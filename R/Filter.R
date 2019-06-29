@@ -152,7 +152,7 @@ Filter = R6Class("Filter",
 
 filter_n = function(self, task, n) {
   if (is.null(self$scores)) {
-    stopf("Filter values have not been computed yet")
+    filter$calculate(task)
   }
   keep = head(self$scores$feature, n)
   task$select(keep)
