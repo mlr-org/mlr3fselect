@@ -20,9 +20,9 @@
 #' as.data.table(filter)[1:3]
 FilterEmbedded = R6Class("FilterEmbedded", inherit = Filter,
   public = list(
-    learner = mlr3::mlr_learners$get("classif.rpart"),
-    initialize = function(id = "embedded", learner = self$learner) {
-      self$learner = assert_learner(learner, properties = "importance")
+    learner = NULL,
+    initialize = function(id = "embedded", learner = "classif.rpart") {
+      self$learner = learner = assert_learner(learner, properties = "importance")
 
       super$initialize(
         id = id,
@@ -37,8 +37,8 @@ FilterEmbedded = R6Class("FilterEmbedded", inherit = Filter,
   private = list(
     .calculate = function(task) {
       learner = self$learner$clone(deep = TRUE)
-      e = Experiment$new(task = task, learner = learner)$train()
-      importance = e$learner$importance()
+      learner = learner$train(task = task)
+      importance = learner$importance()
 
       fn = task$feature_names
       insert_named(set_names(numeric(length(fn)), fn), importance)
