@@ -23,7 +23,12 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
         packages = "stats",
         feature_types = c("integer", "numeric"),
         task_type = c("classif", "regr"),
-        param_set = ParamSet$new(list(ParamLgl$new("na.rm", default = TRUE, tags = "required"))),
+        param_set = ParamSet$new(list(
+          ParamLgl$new("na.rm", default = TRUE, tags = "required"),
+          ParamInt$new("nfeat", lower = 1, tags = "generic"),
+          ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
+          ParamDbl$new("cutoff", tags = "generic")
+        )),
         param_vals = param_vals
       )
     }
@@ -31,7 +36,14 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
 
   private = list(
     .calculate = function(task, n = NULL) {
+
+      # setting params
       na.rm = self$param_set$values$na.rm
+
+      if (is.null(na.rm)) {
+        na.rm = self$param_set$default$na.rm
+      }
+
       map_dbl(task$data(cols = task$feature_names), function(x) {
         var(x, na.rm = na.rm)
       })
