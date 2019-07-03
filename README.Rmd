@@ -22,7 +22,7 @@ remotes::install_github("mlr-org/mlr3featsel")
 ### Public Methods
 
 * `.$calculate()`: Calculates Filter values
-* `.$filter()`: filters the task by a given criterion
+* `.$filter_*()`: filters the task by a given criterion
 
 * `.$scores`: Filter score values
 * `.$filtered_task`: Filtered task
@@ -45,13 +45,13 @@ setorderv(tab, "task_type")
 tab[, packages := sprintf("*%s*", packages)]
 setnames(tab, 
   old = c("key", "task_type", "task_properties", "param_set", "feature_types", "packages"), 
-  new = c("Name", "Task Type", "Task Properties", "Parameter Set", "Feature Types", "Package"))
+  new = c("Name", "Task Type", "Task Properties", "Param Set", "Feature Types", "Package"))
 knitr::kable(tab, escape = F, format = "markdown")
 ```
 
 ### Embedded Filters
 
-The following learners have embedded filter methods which are supported via class `FilterVariableImportance`:
+The following learners have embedded filter methods which are supported via class `FilterEmbedded`:
 
 ```{r echo=FALSE}
 library("mlr3learners")
@@ -70,12 +70,12 @@ Please open an issue so we can add your package.
 Some learners need to have their variable importance measure "activated" during learner creation.
 For example, to use the "impurity" measure of Random Forest via the _ranger_ package:
 
-```{r error=TRUE}
+```{r }
 task = mlr_tasks$get("iris")
 lrn = mlr_learners$get("classif.ranger",
   param_vals = list(importance = "impurity"))
 
-filter = FilterVariableImportance$new(learner = lrn)
+filter = FilterEmbedded$new(learner = lrn)
 filter$calculate(task)
 head(as.data.table(filter), 3)
 ```

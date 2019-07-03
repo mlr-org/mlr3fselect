@@ -24,7 +24,7 @@ remotes::install_github("mlr-org/mlr3featsel")
 
   - `.$calculate()`: Calculates Filter values
 
-  - `.$filter()`: filters the task by a given criterion
+  - `.$filter_*()`: filters the task by a given criterion
 
   - `.$scores`: Filter score values
 
@@ -32,22 +32,22 @@ remotes::install_github("mlr-org/mlr3featsel")
 
 ### Generic Filters
 
-| Name                     | Task Type      | Task Properties | Parameter Set | Feature Types                                         | Package         |
+| Name                     | Task Type      | Task Properties | Param Set     | Feature Types                                         | Package         |
 | :----------------------- | :------------- | :-------------- | :------------ | :---------------------------------------------------- | :-------------- |
 | auc                      | Classif        | twoclass        | <environment> | Integer, Numeric                                      | *Metrics*       |
 | disr                     | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
+| embedded                 | Classif        | character(0)    | <environment> | Logical, Integer, Numeric, Character, Factor, Ordered | *rpart*         |
 | jmi                      | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
 | kruskal\_test            | Classif        | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
 | mim                      | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
 | njmim                    | Classif        | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
-| variable\_importance     | Classif        | character(0)    | <environment> | Logical, Integer, Numeric, Character, Factor, Ordered | *rpart*         |
 | cmim                     | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *praznik*       |
 | gain\_ratio              | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *FSelectorRcpp* |
 | information\_gain        | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *FSelectorRcpp* |
 | symmetrical\_uncertainty | Classif & Regr | character(0)    | <environment> | Integer, Numeric, Factor, Ordered                     | *FSelectorRcpp* |
 | variance                 | Classif & Regr | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
-| linear\_correlation      | Regr           | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
-| rank\_correlation        | Regr           | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
+| carscore                 | Regr           | character(0)    | <environment> | Numeric                                               | *care*          |
+| correlation              | Regr           | character(0)    | <environment> | Integer, Numeric                                      | *stats*         |
 
 ### Embedded Filters
 
@@ -72,20 +72,15 @@ task = mlr_tasks$get("iris")
 lrn = mlr_learners$get("classif.ranger",
   param_vals = list(importance = "impurity"))
 
-filter = FilterVariableImportance$new(learner = lrn)
+filter = FilterEmbedded$new(learner = lrn)
 filter$calculate(task)
-```
-
-    ## INFO  [13:41:25.182] Training learner 'classif.ranger' on task 'iris' ...
-
-``` r
 head(as.data.table(filter), 3)
 ```
 
-    ##       score      feature              method
-    ## 1: 43.67502 Petal.Length variable_importance
-    ## 2: 42.75024  Petal.Width variable_importance
-    ## 3: 10.37421 Sepal.Length variable_importance
+    ##        score      feature   method
+    ## 1: 44.226483 Petal.Length embedded
+    ## 2: 43.186325  Petal.Width embedded
+    ## 3:  9.610886 Sepal.Length embedded
 
 ## “Wrapper” Methods
 
