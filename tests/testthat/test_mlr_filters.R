@@ -1,7 +1,7 @@
 context("mlr_filters")
 
 test_that("mlr_filters autotest", {
-  keys = setdiff(mlr_filters$keys(), "variable_importance")
+  keys = setdiff(mlr_filters$keys(), "embedded")
 
   task = mlr_tasks$get("sonar")
   for (key in keys) {

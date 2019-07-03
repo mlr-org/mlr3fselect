@@ -3,80 +3,76 @@
 #' @usage NULL
 #' @format [R6::R6Class] object.
 #'
-#' @description
-#' This is the base class for filters.
-#' Predefined filters are stored in [mlr_filters].
+#' @description This is the base class for filters. Predefined filters are
+#' stored in [mlr_filters].
 #'
-#' @section Construction:
-#' ```
-#' f = Filter$new(id, task_type, param_set, param_vals, feature_types, packages)
-#' ```
+#' @section Construction: ``` f = Filter$new(id, task_type, param_set,
+#'   param_vals, feature_types, packages) ```
 #'
-#' * `id` :: `character(1)`\cr
-#'   Identifier for the filter.
+#'   * `id` :: `character(1)`\cr Identifier for the filter.
 #'
-#' * `task_type` :: `character(1)`\cr
-#'   Type of the task the filter can operator on. E.g., `"classif"` or `"regr"`.
+#'   * `task_type` :: `character(1)`\cr Type of the task the filter can operator
+#'   on. E.g., `"classif"` or `"regr"`.
 #'
-#' * `param_set` :: [paradox::ParamSet]\cr
-#'   Set of hyperparameters.
+#'   * `param_set` :: [paradox::ParamSet]\cr Set of hyperparameters.
 #'
-#' * `param_vals` :: named `list()`\cr
-#'   Named list of hyperparameter settings.
+#'   * `param_vals` :: named `list()`\cr Named list of hyperparameter settings.
 #'
-#' * `feature_types` :: `character()`\cr
-#'   Feature types the filter operates on.
-#'   Must be a subset of [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
+#'   * `feature_types` :: `character()`\cr Feature types the filter operates on.
+#'   Must be a subset of
+#'   [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
 #'
-#' * `task_properties` :: `character()`\cr
-#'   Required task properties, see [mlr3::Task].
-#'   Must be a subset of [`mlr_reflections$task_properties`][mlr3::mlr_reflections].
+#'   * `task_properties` :: `character()`\cr Required task properties, see
+#'   [mlr3::Task]. Must be a subset of
+#'   [`mlr_reflections$task_properties`][mlr3::mlr_reflections].
 #'
-#' * `packages` :: `character()`\cr
-#'   Set of required packages.
-#'   Note that these packages will be loaded via [requireNamespace()], and are not attached.
-#'
+#'   * `packages` :: `character()`\cr Set of required packages. Note that these
+#'   packages will be loaded via [requireNamespace()], and are not attached.
 #'
 #' @section Fields:
 #'
-#' * `id` :: `character(1)`\cr
-#'   Stores the identifier of the filter.
+#'   * `id` :: `character(1)`\cr Stores the identifier of the filter.
 #'
-#' * `task_type` :: `character(1)`\cr
-#'   Stores the type of class this filter can operate on, e.g. `"classif"` or `"regr"`.
-#'   A complete list of task types is stored in [`mlr_reflections$task_types`][mlr3::mlr_reflections].
+#'   * `task_type` :: `character(1)`\cr Stores the type of class this filter can
+#'   operate on, e.g. `"classif"` or `"regr"`. A complete list of task types is
+#'   stored in [`mlr_reflections$task_types`][mlr3::mlr_reflections].
 #'
-#' * `param_set` :: [paradox::ParamSet]\cr
-#'   Description of available hyperparameters and hyperparameter settings.
+#'   * `param_set` :: [paradox::ParamSet]\cr Description of available
+#'   hyperparameters and hyperparameter settings.
 #'
-#' * `feature_types` :: `character()`\cr
-#'   Stores the feature types the filter can handle, e.g. `"logical"`, `"numeric"`, or `"factor"`.
-#'   A complete list of candidate feature types, grouped by task type, is stored in [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
+#'   * `feature_types` :: `character()`\cr Stores the feature types the filter
+#'   can handle, e.g. `"logical"`, `"numeric"`, or `"factor"`. A complete list
+#'   of candidate feature types, grouped by task type, is stored in
+#'   [`mlr_reflections$task_feature_types`][mlr3::mlr_reflections].
 #'
-#' * `packages` :: `character()`\cr
-#'   Stores the names of required packages.
+#'   * `packages` :: `character()`\cr Stores the names of required packages.
 #'
-#' * `scores` :: `numeric()`\cr
-#'   Stores the calculated filter score values as named numeric vector.
-#'   The scores are sorted in decreasing order, with tied values in a random order.
+#'   * `scores` :: `numeric()`\cr Stores the calculated filter score values as
+#'   named numeric vector. The scores are sorted in decreasing order, with tied
+#'   values in a random order.
 #'
 #' @section Methods:
 #'
-#' * `calculate(task)`\cr
+#'   * `calculate(task, n = NULL)`\cr
 #'   [Task] -> `numeric()`\cr
-#'   Calculates the filter score values for the provided [Task] and stores them in field `scores`.
+#'   `n` ->`integer()`\cr
+#'   Calculates the filter score values for the provided [Task]
+#'   and stores them in field `scores`. Some filter support partial scoring via
+#'   argument `n`.
 #'
-#' * `filter_abs(task, abs)`\cr
+#'   * `filter_abs(task, abs)`\cr
 #'   ([Task], `integer(1)`) -> [Task]\cr
 #'   Filters the [Task] by reference, keeps up to `abs` features.
 #'
-#' * `filter_perc(task, perc)`\cr
+#'   * `filter_perc(task, perc)`\cr
 #'   ([Task], `numeric(1)`) -> [Task]\cr
-#'   Filters the [Task] by reference, keeps `perc` percent of the features (rounded via [base::round()]).
+#'   Filters the [Task] by reference, keeps `perc` percent of the features
+#'   (rounded via [base::round()]).
 #'
-#' * `filter_thresh(task, thresh)`\cr
+#'   * `filter_thresh(task, thresh)`\cr
 #'   ([Task], `numeric(1)`) -> [Task]\cr
-#'   Filters the [Task] by reference, keeps features whose filter score values exceeds `thresh`.
+#'   Filters the [Task] by reference, keeps features whose filter score values
+#'   exceeds `thresh`.
 #'
 #' @family Filter
 #' @export
@@ -108,16 +104,25 @@ Filter = R6Class("Filter",
       filter_print(self)
     },
 
-    calculate = function(task) {
+    calculate = function(task, n = NULL) {
 
       assert_task(task, feature_types = self$feature_types, task_properties = self$task_properties)
       assert_filter_result(self, task)
       require_namespaces(self$packages)
       fn = task$feature_names
 
-      fv = private$.calculate(task)
-      assert_numeric(fv, len = length(fn), any.missing = FALSE)
-      assert_names(names(fv), permutation.of = fn)
+      fv = private$.calculate(task, n)
+
+      # if 'n' is given (e.g. for praznik filter), we only get 'n' scores back
+      if (is.null(n)) {
+        assert_numeric(fv, len = length(fn), any.missing = FALSE)
+        assert_names(names(fv), permutation.of = fn)
+      } else {
+        assert_numeric(fv, len = n, any.missing = FALSE)
+        # no name assertion possible here because we do not know which features
+        # will be returned
+      }
+
 
       self$scores = data.table(score = fv, feature = fn, method = self$id)[order(method, -score)]
 
@@ -131,18 +136,60 @@ Filter = R6Class("Filter",
     },
 
     filter_abs = function(task, abs) {
+
+      # check if abs was supplied in any way
+      if (is.null(self$param_set$values$abs) && missing(abs)) {
+        stopf("No 'abs' supplied. Either pass 'abs' directly or define it during construction in the ParamSet.")
+      }
+      # check if abs was supplied during construction AND in the function call
+      else if (!is.null(self$param_set$values$abs) && !missing(abs)) {
+        warningf("Taking the user supplied value of 'abs' and ignoring the value set during construction.")
+      }
+      # if construction value is missing and abs is supplied, take abs
+      else if (!is.null(self$param_set$values$abs) && missing(abs)) {
+        abs = self$param_set$values$abs
+      }
+
       assert_task(task)
       assert_count(abs)
       filter_n(self, task, abs)
     },
 
     filter_perc = function(task, perc) {
+
+      # check if perc was supplied in any way
+      if (is.null(self$param_set$values$perc) && missing(perc)) {
+        stopf("No 'perc' supplied. Either pass 'perc' directly or define it during construction in the ParamSet.")
+      }
+      # check if perc was supplied during construction AND in the function call
+      else if (!is.null(self$param_set$values$perc) && !missing(perc)) {
+        warningf("Taking the user supplied value of 'perc' and ignoring the value set during construction.")
+      }
+      # if construction value is missing and perc is supplied, take perc
+      else if (!is.null(self$param_set$values$perc) && missing(perc)) {
+        perc = self$param_set$values$perc
+      }
+
       assert_task(task)
       assert_number(perc, lower = 0, upper = 1)
       filter_n(self, task, round(task$ncol * perc))
     },
 
     filter_thresh = function(task, threshold) {
+
+      # check if thresh was supplied in any way
+      if (is.null(self$param_set$values$thresh) && missing(thresh)) {
+        stopf("No 'thresh' supplied. Either pass 'thresh' directly or define it during construction in the ParamSet.")
+      }
+      # check if thresh was supplied during construction AND in the function call
+      else if (!is.null(self$param_set$values$thresh) && !missing(thresh)) {
+        warningf("Taking the user supplied value of 'thresh' and ignoring the value set during construction.")
+      }
+      # if construction value is missing and thresh is supplied, take thresh
+      else if (!is.null(self$param_set$values$thresh) && missing(thresh)) {
+        thresh = self$param_set$values$thresh
+      }
+
       assert_task(task)
       assert_number(threshold)
       filter_n(self, task, sum(self$scores > threshold))
@@ -152,7 +199,7 @@ Filter = R6Class("Filter",
 
 filter_n = function(self, task, n) {
   if (is.null(self$scores)) {
-    self$calculate(task)
+    self$calculate(task, n)
   }
   keep = head(self$scores$feature, n)
   task$select(keep)

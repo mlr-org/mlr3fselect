@@ -21,7 +21,7 @@
 FilterEmbedded = R6Class("FilterEmbedded", inherit = Filter,
   public = list(
     learner = NULL,
-    initialize = function(id = "embedded", learner = "classif.rpart") {
+    initialize = function(id = "embedded", learner = "classif.rpart", param_vals = list()) {
       self$learner = learner = assert_learner(learner, properties = "importance")
 
       super$initialize(
@@ -29,13 +29,18 @@ FilterEmbedded = R6Class("FilterEmbedded", inherit = Filter,
         packages = learner$packages,
         feature_types = learner$feature_types,
         task_type = learner$task_type,
-        param_set = learner$param_set$clone(deep = TRUE)
+        param_set = ParamSet$new(list(
+          ParamInt$new("abs", lower = 1, tags = "generic"),
+          ParamDbl$new("perc", lower = 0, upper = 1, tags = "generic"),
+          ParamDbl$new("thresh", tags = "generic")
+        )),
+        param_vals = param_vals
       )
     }
   ),
 
   private = list(
-    .calculate = function(task) {
+    .calculate = function(task, n = NULL) {
       learner = self$learner$clone(deep = TRUE)
       learner = learner$train(task = task)
       importance = learner$importance()

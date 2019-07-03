@@ -10,22 +10,26 @@
 FilterCarScore
 }
 \description{
-Filter \code{carscore} determines the Correlation-Adjusted (marginal) coRelation
-scores (short CAR scores). The CAR scores for a set of features are defined as the
-correlations between the target and the decorrelated features.
+Filter \code{carscore} determines the Correlation-Adjusted (marginal)
+coRelation scores (short CAR scores). The CAR scores for a set of features
+are defined as the correlations between the target and the decorrelated
+features.
+}
+\examples{
+task = mlr3::mlr_tasks$get("mtcars")
+filter = FilterCarScore$new()
+filter$calculate(task)
 }
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
-  \code{\link{FilterCMIM}}, \code{\link{FilterDISR}},
-  \code{\link{FilterEmbedded}},
+  \code{\link{FilterCMIM}},
+  \code{\link{FilterCorrelation}},
+  \code{\link{FilterDISR}}, \code{\link{FilterEmbedded}},
   \code{\link{FilterGainRatio}},
   \code{\link{FilterInformationGain}},
   \code{\link{FilterJMIM}}, \code{\link{FilterJMI}},
-  \code{\link{FilterKruskalTest}},
-  \code{\link{FilterLinearCorrelation}},
-  \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
-  \code{\link{FilterNJMIM}},
-  \code{\link{FilterRankCorrelation}},
+  \code{\link{FilterKruskalTest}}, \code{\link{FilterMIM}},
+  \code{\link{FilterMRMR}}, \code{\link{FilterNJMIM}},
   \code{\link{FilterSymmetricalUncertainty}},
   \code{\link{FilterVariance}}, \code{\link{Filter}},
   \code{\link{mlr_filters}}

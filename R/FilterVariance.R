@@ -30,7 +30,7 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
   ),
 
   private = list(
-    .calculate = function(task) {
+    .calculate = function(task, n = NULL) {
       na.rm = self$param_set$values$na.rm
       map_dbl(task$data(cols = task$feature_names), function(x) {
         var(x, na.rm = na.rm)

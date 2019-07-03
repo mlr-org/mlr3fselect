@@ -10,8 +10,14 @@
 FilterJMIM
 }
 \description{
-Minimal joint mutual information maximisation filter.
-Calls \code{\link[praznik:JMIM]{praznik::JMIM()}}.
+Minimal joint mutual information maximisation filter. Calls
+\code{\link[praznik:JMIM]{praznik::JMIM()}}.
+}
+\details{
+This filter supports partial scoring via hyperparameter \code{k}. To use
+it, set \code{k} during construction via \code{param_vals.} By default all filter
+scores are calculated and the default of \code{k = 3} in the ParamSet does not
+apply.
 }
 \examples{
 task = mlr3::mlr_tasks$get("iris")
@@ -22,14 +28,13 @@ as.data.table(filter)[1:3]
 \seealso{
 Other Filter: \code{\link{FilterAUC}},
   \code{\link{FilterCMIM}}, \code{\link{FilterCarScore}},
+  \code{\link{FilterCorrelation}},
   \code{\link{FilterDISR}}, \code{\link{FilterEmbedded}},
   \code{\link{FilterGainRatio}},
   \code{\link{FilterInformationGain}},
   \code{\link{FilterJMI}}, \code{\link{FilterKruskalTest}},
-  \code{\link{FilterLinearCorrelation}},
   \code{\link{FilterMIM}}, \code{\link{FilterMRMR}},
   \code{\link{FilterNJMIM}},
-  \code{\link{FilterRankCorrelation}},
   \code{\link{FilterSymmetricalUncertainty}},
   \code{\link{FilterVariance}}, \code{\link{Filter}},
   \code{\link{mlr_filters}}
