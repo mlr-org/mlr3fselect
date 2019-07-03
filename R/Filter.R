@@ -136,7 +136,6 @@ Filter = R6Class("Filter",
     },
 
     filter_nfeat = function(task, nfeat) {
-
       # check if nfeat was supplied in any way
       if (is.null(self$param_set$values$nfeat) && missing(nfeat)) {
         stopf("No 'nfeat' supplied. Either pass 'nfeat' directly or define it during construction in the ParamSet.")
@@ -156,7 +155,6 @@ Filter = R6Class("Filter",
     },
 
     filter_frac = function(task, frac) {
-
       # check if frac was supplied in any way
       if (is.null(self$param_set$values$frac) && missing(frac)) {
         stopf("No 'frac' supplied. Either pass 'frac' directly or define it during construction in the ParamSet.")
@@ -176,7 +174,6 @@ Filter = R6Class("Filter",
     },
 
     filter_cutoff = function(task, cutoff) {
-
       # check if cutoff was supplied in any way
       if (is.null(self$param_set$values$cutoff) && missing(cutoff)) {
         stopf("No 'cutoff' supplied. Either pass 'cutoff' directly or define it during construction in the ParamSet.")
