@@ -30,9 +30,9 @@ FilterCMIM = R6Class("FilterCMIM", inherit = Filter,
         param_set = ParamSet$new(list(
           ParamInt$new("k", lower = 1L, default = 3L, tags = "filter"),
           ParamInt$new("threads", lower = 0L, default = 0L, tags = "filter"),
-          ParamInt$new("abs", lower = 1, tags = "generic"),
-          ParamDbl$new("perc", lower = 0, upper = 1, tags = "generic"),
-          ParamDbl$new("thresh", tags = "generic")
+          ParamInt$new("nfeat", lower = 1, tags = "generic"),
+          ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
+          ParamDbl$new("cutoff", tags = "generic")
         )),
         param_vals = param_vals
       )

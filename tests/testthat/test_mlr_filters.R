@@ -9,12 +9,12 @@ test_that("mlr_filters autotest", {
     if (task$task_type %in% f$task_type) {
       f$calculate(task)
       expect_filter_result(f, task = task)
-      new_task = f$filter_abs(task$clone(), 1)
+      new_task = f$filter_nfeat(task$clone(), 1)
       expect_string(new_task$feature_names)
 
       # try re-filtering
       f = mlr_filters$get(key)
-      f$calculate(new_task)$filter_abs(new_task, 1)
+      f$calculate(new_task)$filter_nfeat(new_task, 1)
     }
   }
 
@@ -24,12 +24,12 @@ test_that("mlr_filters autotest", {
     if (task$task_type %in% f$task_type) {
       f$calculate(task)
       expect_filter_result(f, task = task)
-      new_task = f$filter_abs(task$clone(), 1)
+      new_task = f$filter_nfeat(task$clone(), 1)
       expect_string(new_task$feature_names)
 
       # try re-filtering
       f = mlr_filters$get(key)
-      f$calculate(new_task)$filter_abs(new_task, 1)
+      f$calculate(new_task)$filter_nfeat(new_task, 1)
     }
   }
 })

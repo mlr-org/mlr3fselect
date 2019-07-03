@@ -25,9 +25,9 @@ FilterKruskalTest = R6Class("FilterKruskalTest", inherit = Filter,
         param_set = ParamSet$new(list(
           ParamFct$new("na.action", default = "na.omit",
             levels = c("na.omit", "na.fail", "na.exclude", "na.pass"), tags = "filter"),
-          ParamInt$new("abs", lower = 1, tags = "generic"),
-          ParamDbl$new("perc", lower = 0, upper = 1, tags = "generic"),
-          ParamDbl$new("thresh", tags = "generic")
+          ParamInt$new("nfeat", lower = 1, tags = "generic"),
+          ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
+          ParamDbl$new("cutoff", tags = "generic")
         )),
         param_vals = param_vals
       )

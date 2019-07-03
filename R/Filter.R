@@ -60,19 +60,19 @@
 #'   and stores them in field `scores`. Some filter support partial scoring via
 #'   argument `n`.
 #'
-#'   * `filter_abs(task, abs)`\cr
+#'   * `filter_nfeat(task, nfeat)`\cr
 #'   ([Task], `integer(1)`) -> [Task]\cr
-#'   Filters the [Task] by reference, keeps up to `abs` features.
+#'   Filters the [Task] by reference, keeps up to `nfeat` features.
 #'
-#'   * `filter_perc(task, perc)`\cr
+#'   * `filter_frac(task, frac)`\cr
 #'   ([Task], `numeric(1)`) -> [Task]\cr
-#'   Filters the [Task] by reference, keeps `perc` percent of the features
+#'   Filters the [Task] by reference, keeps `frac` fracent of the features
 #'   (rounded via [base::round()]).
 #'
-#'   * `filter_thresh(task, thresh)`\cr
+#'   * `filter_cutoff(task, cutoff)`\cr
 #'   ([Task], `numeric(1)`) -> [Task]\cr
 #'   Filters the [Task] by reference, keeps features whose filter score values
-#'   exceeds `thresh`.
+#'   exceeds `cutoff`.
 #'
 #' @family Filter
 #' @export
@@ -135,64 +135,64 @@ Filter = R6Class("Filter",
       invisible(self)
     },
 
-    filter_abs = function(task, abs) {
+    filter_nfeat = function(task, nfeat) {
 
-      # check if abs was supplied in any way
-      if (is.null(self$param_set$values$abs) && missing(abs)) {
-        stopf("No 'abs' supplied. Either pass 'abs' directly or define it during construction in the ParamSet.")
+      # check if nfeat was supplied in any way
+      if (is.null(self$param_set$values$nfeat) && missing(nfeat)) {
+        stopf("No 'nfeat' supplied. Either pass 'nfeat' directly or define it during construction in the ParamSet.")
       }
-      # check if abs was supplied during construction AND in the function call
-      else if (!is.null(self$param_set$values$abs) && !missing(abs)) {
-        warningf("Taking the user supplied value of 'abs' and ignoring the value set during construction.")
+      # check if nfeat was supplied during construction AND in the function call
+      else if (!is.null(self$param_set$values$nfeat) && !missing(nfeat)) {
+        warningf("Taking the user supplied value of 'nfeat' and ignoring the value set during construction.")
       }
-      # if construction value is missing and abs is supplied, take abs
-      else if (!is.null(self$param_set$values$abs) && missing(abs)) {
-        abs = self$param_set$values$abs
+      # if construction value is missing and nfeat is supplied, take nfeat
+      else if (!is.null(self$param_set$values$nfeat) && missing(nfeat)) {
+        nfeat = self$param_set$values$nfeat
       }
 
       assert_task(task)
-      assert_count(abs)
-      filter_n(self, task, abs)
+      assert_count(nfeat)
+      filter_n(self, task, nfeat)
     },
 
-    filter_perc = function(task, perc) {
+    filter_frac = function(task, frac) {
 
-      # check if perc was supplied in any way
-      if (is.null(self$param_set$values$perc) && missing(perc)) {
-        stopf("No 'perc' supplied. Either pass 'perc' directly or define it during construction in the ParamSet.")
+      # check if frac was supplied in any way
+      if (is.null(self$param_set$values$frac) && missing(frac)) {
+        stopf("No 'frac' supplied. Either pass 'frac' directly or define it during construction in the ParamSet.")
       }
-      # check if perc was supplied during construction AND in the function call
-      else if (!is.null(self$param_set$values$perc) && !missing(perc)) {
-        warningf("Taking the user supplied value of 'perc' and ignoring the value set during construction.")
+      # check if frac was supplied during construction AND in the function call
+      else if (!is.null(self$param_set$values$frac) && !missing(frac)) {
+        warningf("Taking the user supplied value of 'frac' and ignoring the value set during construction.")
       }
-      # if construction value is missing and perc is supplied, take perc
-      else if (!is.null(self$param_set$values$perc) && missing(perc)) {
-        perc = self$param_set$values$perc
+      # if construction value is missing and frac is supplied, take frac
+      else if (!is.null(self$param_set$values$frac) && missing(frac)) {
+        frac = self$param_set$values$frac
       }
 
       assert_task(task)
-      assert_number(perc, lower = 0, upper = 1)
-      filter_n(self, task, round(task$ncol * perc))
+      assert_number(frac, lower = 0, upper = 1)
+      filter_n(self, task, round(task$ncol * frac))
     },
 
-    filter_thresh = function(task, threshold) {
+    filter_cutoff = function(task, cutoff) {
 
-      # check if thresh was supplied in any way
-      if (is.null(self$param_set$values$thresh) && missing(thresh)) {
-        stopf("No 'thresh' supplied. Either pass 'thresh' directly or define it during construction in the ParamSet.")
+      # check if cutoff was supplied in any way
+      if (is.null(self$param_set$values$cutoff) && missing(cutoff)) {
+        stopf("No 'cutoff' supplied. Either pass 'cutoff' directly or define it during construction in the ParamSet.")
       }
-      # check if thresh was supplied during construction AND in the function call
-      else if (!is.null(self$param_set$values$thresh) && !missing(thresh)) {
-        warningf("Taking the user supplied value of 'thresh' and ignoring the value set during construction.")
+      # check if cutoff was supplied during construction AND in the function call
+      else if (!is.null(self$param_set$values$cutoff) && !missing(cutoff)) {
+        warningf("Taking the user supplied value of 'cutoff' and ignoring the value set during construction.")
       }
-      # if construction value is missing and thresh is supplied, take thresh
-      else if (!is.null(self$param_set$values$thresh) && missing(thresh)) {
-        thresh = self$param_set$values$thresh
+      # if construction value is missing and cutoff is supplied, take cutoff
+      else if (!is.null(self$param_set$values$cutoff) && missing(cutoff)) {
+        cutoff = self$param_set$values$cutoff
       }
 
       assert_task(task)
-      assert_number(threshold)
-      filter_n(self, task, sum(self$scores > threshold))
+      assert_number(cutoffold)
+      filter_n(self, task, sum(self$scores > cutoffold))
     }
   )
 )

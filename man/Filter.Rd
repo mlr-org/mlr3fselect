@@ -57,17 +57,17 @@ values in a random order.
 Calculates the filter score values for the provided \link{Task}
 and stores them in field \code{scores}. Some filter support partial scoring via
 argument \code{n}.
-\item \code{filter_abs(task, abs)}\cr
+\item \code{filter_nfeat(task, nfeat)}\cr
 (\link{Task}, \code{integer(1)}) -> \link{Task}\cr
-Filters the \link{Task} by reference, keeps up to \code{abs} features.
-\item \code{filter_perc(task, perc)}\cr
+Filters the \link{Task} by reference, keeps up to \code{nfeat} features.
+\item \code{filter_frac(task, frac)}\cr
 (\link{Task}, \code{numeric(1)}) -> \link{Task}\cr
-Filters the \link{Task} by reference, keeps \code{perc} percent of the features
+Filters the \link{Task} by reference, keeps \code{frac} fracent of the features
 (rounded via \code{\link[base:round]{base::round()}}).
-\item \code{filter_thresh(task, thresh)}\cr
+\item \code{filter_cutoff(task, cutoff)}\cr
 (\link{Task}, \code{numeric(1)}) -> \link{Task}\cr
 Filters the \link{Task} by reference, keeps features whose filter score values
-exceeds \code{thresh}.
+exceeds \code{cutoff}.
 }
 }
 

@@ -30,9 +30,9 @@ FilterEmbedded = R6Class("FilterEmbedded", inherit = Filter,
         feature_types = learner$feature_types,
         task_type = learner$task_type,
         param_set = ParamSet$new(list(
-          ParamInt$new("abs", lower = 1, tags = "generic"),
-          ParamDbl$new("perc", lower = 0, upper = 1, tags = "generic"),
-          ParamDbl$new("thresh", tags = "generic")
+          ParamInt$new("nfeat", lower = 1, tags = "generic"),
+          ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
+          ParamDbl$new("cutoff", tags = "generic")
         )),
         param_vals = param_vals
       )
