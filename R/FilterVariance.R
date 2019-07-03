@@ -24,10 +24,7 @@ FilterVariance = R6Class("FilterVariance", inherit = Filter,
         feature_types = c("integer", "numeric"),
         task_type = c("classif", "regr"),
         param_set = ParamSet$new(list(
-          ParamLgl$new("na.rm", default = TRUE, tags = "required"),
-          ParamInt$new("nfeat", lower = 1, tags = "generic"),
-          ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
-          ParamDbl$new("cutoff", tags = "generic")
+          ParamLgl$new("na.rm", default = TRUE, tags = "required")
         )),
         param_vals = param_vals
       )

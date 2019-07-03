@@ -86,7 +86,17 @@ Filter = R6Class("Filter",
     packages = NULL,
     scores = NULL,
 
-    initialize = function(id, task_type, task_properties = character(), param_set = ParamSet$new(), param_vals = list(), feature_types = character(), packages = character()) {
+    initialize = function(id, task_type, task_properties = character(),
+      param_set = list(), param_vals = list(), feature_types = character(),
+      packages = character()) {
+
+      # add generic hyperpars to param_set of filter
+      param_set$add(ParamSet$new(list(
+        ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
+        ParamDbl$new("cutoff", tags = "generic"),
+        ParamInt$new("nfeat", lower = 1, tags = "generic")
+      )))
+
       self$id = assert_string(id)
       self$task_type = assert_subset(task_type, mlr_reflections$task_types, empty.ok = FALSE)
       self$task_properties = assert_subset(task_properties, unlist(mlr_reflections$task_properties, use.names = FALSE))

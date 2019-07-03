@@ -27,10 +27,7 @@ FilterSymmetricalUncertainty = R6Class("FilterSymmetricalUncertainty", inherit =
         param_set = ParamSet$new(list(
           ParamLgl$new("equal", default = FALSE, tags = "filter"),
           ParamLgl$new("discIntegers", default = TRUE, tags = "filter"),
-          ParamInt$new("threads", lower = 0L, default = 1L, tags = "filter"),
-          ParamInt$new("nfeat", lower = 1, tags = "generic"),
-          ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
-          ParamDbl$new("cutoff", tags = "generic")
+          ParamInt$new("threads", lower = 0L, default = 1L, tags = "filter")
         )),
         param_vals = param_vals
       )

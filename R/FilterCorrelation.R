@@ -26,10 +26,7 @@ FilterCorrelation = R6Class("FilterCorrelation", inherit = Filter,
             "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"),
           tags = "filter"),
           ParamFct$new("method", default = "pearson",
-            levels = c("pearson", "kendall", "spearman"), tags = "filter"),
-          ParamInt$new("nfeat", lower = 1, tags = "generic"),
-          ParamDbl$new("frac", lower = 0, upper = 1, tags = "generic"),
-          ParamDbl$new("cutoff", tags = "generic")
+            levels = c("pearson", "kendall", "spearman"), tags = "filter")
         )),
         param_vals = param_vals
       )
