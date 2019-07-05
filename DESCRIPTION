@@ -1,5 +1,5 @@
 Package: mlr3featsel
-Title: Feature selection and filtering for mlr3
+Title: Feature Selection for 'mlr3'
 Version: 0.1.0-9000
 Authors@R:
     c(person(given = "Patrick",
@@ -18,7 +18,7 @@ Authors@R:
              email = "bernd_bischl@gmx.net",
              comment = c(ORCID = "0000-0001-6002-6980")))
 Description: Implements methods for feature selection and
-    filtering in mlr3.
+    filtering in 'mlr3'.
 License: LGPL-3
 URL: https://github.com/mlr-org/mlr3featsel
 BugReports: https://github.com/mlr-org/mlr3featsel/issues

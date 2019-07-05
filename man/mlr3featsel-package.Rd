@@ -4,10 +4,10 @@
 \name{mlr3featsel-package}
 \alias{mlr3featsel}
 \alias{mlr3featsel-package}
-\title{mlr3featsel: Feature selection and filtering for mlr3}
+\title{mlr3featsel: Feature Selection for 'mlr3'}
 \description{
 Implements methods for feature selection and
-    filtering in mlr3.
+    filtering in 'mlr3'.
 }
 \seealso{
 Useful links:
