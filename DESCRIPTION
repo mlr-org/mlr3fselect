@@ -1,7 +1,7 @@
 Package: mlr3featsel
 Title: Feature selection and filtering for mlr3
 Version: 0.1.0-9000
-Authors@R: 
+Authors@R:
     c(person(given = "Patrick",
              family = "Schratz",
              role = c("aut", "cre"),
@@ -19,7 +19,7 @@ Authors@R:
              comment = c(ORCID = "0000-0001-6002-6980")))
 Description: Implements methods for feature selection and
     filtering in mlr3.
-License: MIT + file LICENSE
+License: LGPL-3
 URL: https://github.com/mlr-org/mlr3featsel
 BugReports: https://github.com/mlr-org/mlr3featsel/issues
 Depends:
@@ -35,7 +35,6 @@ Imports:
 Suggests:
     care,
     FSelectorRcpp,
-    knitr,
     lgr,
     magrittr,
     Metrics,
@@ -45,8 +44,6 @@ Suggests:
     purrr,
     rpart,
     testthat
-VignetteBuilder:
-    knitr
 Remotes:
     mlr-org/mlr3,
     mlr-org/mlr3learners,
