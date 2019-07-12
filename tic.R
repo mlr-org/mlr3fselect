@@ -7,3 +7,6 @@ get_stage("install") %>%
 if (ci_on_travis()) {
   do_pkgdown(orphan = TRUE, document = FALSE)
 }
+
+get_stage("after_success") %>%
+  add_code_step(system("bash ./inst/trigger-mlr3book.sh"))
