@@ -47,7 +47,8 @@ The settings for the FeatureSelection.
 }
 
 \seealso{
-Other FeatureSelection: \code{\link{FeatureSelectionGenetic}},
+Other FeatureSelection: \code{\link{FeatureSelectionExhaustive}},
+  \code{\link{FeatureSelectionGenetic}},
   \code{\link{FeatureSelectionRandom}},
   \code{\link{FeatureSelectionSequential}}
 }

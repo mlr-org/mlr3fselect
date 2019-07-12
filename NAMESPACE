@@ -3,6 +3,7 @@
 S3method(as.data.table,DictionaryFilter)
 S3method(as.data.table,Filter)
 export(FeatureSelection)
+export(FeatureSelectionExhaustive)
 export(FeatureSelectionGenetic)
 export(FeatureSelectionRandom)
 export(FeatureSelectionSequential)

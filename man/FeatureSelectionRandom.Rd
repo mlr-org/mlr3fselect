@@ -44,7 +44,8 @@ fs$calculate()
 fs$get_result()
 }
 \seealso{
-Other FeatureSelection: \code{\link{FeatureSelectionGenetic}},
+Other FeatureSelection: \code{\link{FeatureSelectionExhaustive}},
+  \code{\link{FeatureSelectionGenetic}},
   \code{\link{FeatureSelectionSequential}},
   \code{\link{FeatureSelection}}
 }

@@ -55,7 +55,8 @@ fs$get_result()
 fs$get_path()
 }
 \seealso{
-Other FeatureSelection: \code{\link{FeatureSelectionRandom}},
+Other FeatureSelection: \code{\link{FeatureSelectionExhaustive}},
+  \code{\link{FeatureSelectionRandom}},
   \code{\link{FeatureSelectionSequential}},
   \code{\link{FeatureSelection}}
 }
