@@ -53,10 +53,11 @@ NULL
 FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
   inherit = FeatureSelection,
   public = list(
-    initialize = function(pe, tm, mu, param_vals = list()) {
+    initialize = function(pe, tm, measure, param_vals = list()) {
       super$initialize(id = "genetic_selection",
         pe = pe,
         tm = tm,
+        measure = measure,
         param_set = ParamSet$new(list(
           ParamInt$new("mu", tags = "wrapper", default = 10),
           ParamInt$new("lambda", tags = "wrapper", default = 5),
@@ -91,22 +92,22 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
     },
 
     get_result = function() {
+      bmr = self$pe$bmr[[1]]$clone()
       if (length(self$pe$bmr) > 1) {
-        bmr = lapply(self$pe$bmr[1:length(self$pe$bmr)], function(bmr) self$pe$bmr[[1]]$combine(bmr))
-      } else {
-        bmr = self$pe$bmr
+        lapply(self$pe$bmr[2:length(self$pe$bmr)], function(x) bmr$combine(x))
       }
-      bmr_best = bmr[[length(bmr)]]$get_best(self$pe$task$measures[[1L]]$id)
+      bmr_best = bmr$best(self$measure)
       list(
         features = bmr_best$task$feature_names,
-        performance = bmr_best$aggregated)
+        performance = bmr_best$aggregate(self$measure))
     },
     get_path = function() {
       lapply(self$pe$bmr, function(bmr) {
-        aggr = bmr$aggregated()
-        aggr = setorderv(aggr, self$pe$task$measures[[1]]$id, order = -1)[1:self$param_set$values$mu, ]
-        performance = aggr[, self$pe$task$measures[[1]]$id, with = FALSE][[1]]
-        features = lapply(aggr$task, function(task) task$feature_names)
+        aggr = bmr$aggregate(self$measure)
+        order_typ = ifelse(self$measure$minimize, 1, -1)
+        aggr = setorderv(aggr, self$measure$id, order = order_typ)[1:self$param_set$values$mu, ]
+        performance = aggr[, self$measure$id, with = FALSE][[1]]
+        features = lapply(aggr$hash, function(hash_task) bmr$data[hash == hash_task, task][[1]]$feature_names)
         list(
           features = features,
           performance = performance)
@@ -129,12 +130,13 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
       bmr = self$pe$bmr[[length(self$pe$bmr)]]
 
       # Select mu best results
-      aggr = bmr$aggregated()
-      aggr = setorderv(aggr, self$pe$task$measures[[1]]$id, order = -1)[1:self$param_set$values$mu, ]
+      aggr = bmr$aggregate(self$measure)
+      order_typ = ifelse(self$measure$minimize, 1, -1)
+      aggr = setorderv(aggr, self$measure$id, order = order_typ)[1:self$param_set$values$mu, ]
 
       # Convert feature names to 0/1 encoding and set state
-      features = lapply(aggr$task, function(task) {
-        task$feature_names
+      features = lapply(aggr$hash, function(hash_task) {
+        bmr$data[hash == hash_task, task][[1]]$feature_names
       })
       self$state = lapply(features, function(y) {
         as.numeric(Reduce("|", lapply(y, function(x) x == self$pe$task$feature_names)))
