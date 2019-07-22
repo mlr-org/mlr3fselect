@@ -53,18 +53,37 @@ NULL
 FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
   inherit = FeatureSelection,
   public = list(
-    initialize = function(pe, tm, mu, lambda, crossover_rate = 0.5,
-      mutation_rate = 0.05, max_features = NA, strategy = "plus") {
-      super$initialize(id = "genetic_selection", pe = pe, tm = tm,
-        settings = list(
-          max_features = checkmate::assert_numeric(max_features, lower = 1, upper = length(pe$task$feature_names)),
-          mu = checkmate::assert_numeric(mu),
-          lambda = checkmate::assert_numeric(lambda),
-          crossover_rate = checkmate::assert_numeric(crossover_rate, lower = 0, upper = 1),
-          mutation_rate = checkmate::assert_numeric(mutation_rate, lower = 0, upper = 1),
-          strategy = checkmate::assert_string(strategy, pattern = "(^comma$|^plus$)")))
+    initialize = function(pe, tm, mu, param_vals = list()) {
+      super$initialize(id = "genetic_selection",
+        pe = pe,
+        tm = tm,
+        param_set = ParamSet$new(list(
+          ParamInt$new("mu", tags = "wrapper", default = 10),
+          ParamInt$new("lambda", tags = "wrapper", default = 5),
+          ParamDbl$new("crossover_rate", lower = 0, upper = 1, tags = "wrapper", default = 0.5),
+          ParamDbl$new("mutation_rate", lower = 0, upper = 1, tags = "wrapper", default = 0.05),
+          ParamFct$new("strategy", levels = c("comma", "plus"), default = "plus"))),
+        param_vals = param_vals
+      )
 
-      if (strategy == "comma" & lambda < mu) {
+      # Set values to default if missing
+      if (is.null(self$param_set$values$mu)) {
+        self$param_set$values$mu = self$param_set$default[["mu"]]
+      }
+      if (is.null(self$param_set$values$lambda)) {
+        self$param_set$values$lambda = self$param_set$default[["lambda"]]
+      }
+      if (is.null(self$param_set$values$crossover_rate)) {
+        self$param_set$values$crossover_rate = self$param_set$default[["crossover_rate"]]
+      }
+      if (is.null(self$param_set$values$mutation_rate)) {
+        self$param_set$values$mutation_rate = self$param_set$default[["mutation_rate"]]
+      }
+      if (is.null(self$param_set$values$strategy)) {
+        self$param_set$values$strategy = self$param_set$default[["strategy"]]
+      }
+
+      if (self$param_set$values$strategy == "comma" & self$param_set$values$lambda < self$param_set$values$mu) {
         stop("For comma strategy lambda >= mu")
       }
 
@@ -85,7 +104,7 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
     get_path = function() {
       lapply(self$pe$bmr, function(bmr) {
         aggr = bmr$aggregated()
-        aggr = setorderv(aggr, self$pe$task$measures[[1]]$id, order = -1)[1:self$settings$mu, ]
+        aggr = setorderv(aggr, self$pe$task$measures[[1]]$id, order = -1)[1:self$param_set$values$mu, ]
         performance = aggr[, self$pe$task$measures[[1]]$id, with = FALSE][[1]]
         features = lapply(aggr$task, function(task) task$feature_names)
         list(
@@ -98,9 +117,9 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
     calculate_step = function() {
 
       # Generate population depending on strategy
-      if (self$settings$strategy == "plus") {
+      if (self$param_set$values$strategy == "plus") {
         states = c(self$state, private$generate_states())
-      } else if (self$settings$strategy == "comma") {
+      } else if (self$param_set$values$strategy == "comma") {
         states = private$generate_states()
       }
       named_states = lapply(states, private$binary_to_features)
@@ -111,7 +130,7 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
 
       # Select mu best results
       aggr = bmr$aggregated()
-      aggr = setorderv(aggr, self$pe$task$measures[[1]]$id, order = -1)[1:self$settings$mu, ]
+      aggr = setorderv(aggr, self$pe$task$measures[[1]]$id, order = -1)[1:self$param_set$values$mu, ]
 
       # Convert feature names to 0/1 encoding and set state
       features = lapply(aggr$task, function(task) {
@@ -122,33 +141,33 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
       })
     },
     initialize_states = function() {
-      lapply(seq_len(self$settings$mu), function(i) {
-        if (is.na(self$settings$max_features)) {
+      lapply(seq_len(self$param_set$values$mu), function(i) {
+        if (is.na(self$param_set$values$max_features)) {
           return(rbinom(length(self$pe$task$feature_names), 1, 0.5))
         }
         x = Inf
-        while (sum(x) >= self$settings$max_features) {
+        while (sum(x) >= self$param_set$values$max_features) {
           x = rbinom(length(self$pe$task$feature_names), 1, 0.5)
         }
         return(x)
       })
     },
     generate_states = function() {
-      lapply(seq_len(self$settings$lambda), function(i) {
+      lapply(seq_len(self$param_set$values$lambda), function(i) {
         while (TRUE) {
           # Randomly select parents
           parents = sample(1:length(self$state), 2, replace = TRUE)
 
           # Crossover
-          cross = rbinom(length(self$state[[parents[1]]]), 1, self$settings$crossover_rate)
+          cross = rbinom(length(self$state[[parents[1]]]), 1, self$param_set$values$crossover_rate)
           children = ifelse(cross == 1, self$state[[parents[1]]], self$state[[parents[2L]]])
 
           # Mutation
-          mutation = rbinom(length(self$state[[parents[1]]]), 1, self$settings$mutation_rate)
+          mutation = rbinom(length(self$state[[parents[1]]]), 1, self$param_set$values$mutation_rate)
           children = (children + mutation) %% 2
 
           # Check max features
-          if (is.na(self$settings$max_features) || sum(children) <= self$settings$max_features) {
+          if (is.na(self$param_set$values$max_features) || sum(children) <= self$param_set$values$max_features) {
             break
           }
         }
