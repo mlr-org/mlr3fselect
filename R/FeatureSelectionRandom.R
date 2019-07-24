@@ -79,10 +79,14 @@ FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
     generate_states = function() {
       lapply(seq_len(10), function(i) {
         if (is.na(self$param_set$values$max_features)) {
-          return(rbinom(length(self$pe$task$feature_names), 1, 0.5))
+          x = 0
+          while(sum(x) == 0) {
+            x = rbinom(length(self$pe$task$feature_names), 1, 0.5)
+          }
+          return(x)
         }
         x = Inf
-        while (sum(x) >= self$param_set$values$max_features) {
+        while (sum(x) > self$param_set$values$max_features | sum(x) == 0) {
           x = rbinom(length(self$pe$task$feature_names), 1, 0.5)
         }
         return(x)
