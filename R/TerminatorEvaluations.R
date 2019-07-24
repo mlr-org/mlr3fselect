@@ -40,11 +40,11 @@ TerminatorEvaluations = R6Class("TerminatorEvaluations",
       self$terminated = FALSE
     },
 
-    update_start = function(pe) {
+    update_start = function(pe, measure = NA) {
       if (length(pe$bmr) < 1) {
         self$state$evals = 0L
       } else {
-        row_num = lapply(pe$bmr, function(bmr) nrow(bmr$aggregated()))
+        row_num = lapply(pe$bmr, function(bmr) nrow(bmr$aggregate()))
         self$state$evals = Reduce("sum", row_num)
       }
 
@@ -53,7 +53,7 @@ TerminatorEvaluations = R6Class("TerminatorEvaluations",
       invisible(self)
     },
 
-    update_end = function(pe) {
+    update_end = function(pe, measure = NA) {
       self$update_start(pe)
     }
   )

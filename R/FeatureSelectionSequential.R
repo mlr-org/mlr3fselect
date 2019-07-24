@@ -45,33 +45,32 @@ NULL
 FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
   inherit = FeatureSelection,
   public = list(
-    initialize = function(pe, tm, max_features = NA, strategy = "fsf") {
-      if (is.na(max_features)) {
-        max_features = length(pe$task$feature_names)
+    initialize = function(pe, tm, measure, param_vals) {
+      super$initialize(id = "sequential_selection",
+                       pe = pe,
+                       tm = tm,
+                       measure = measure,
+                       param_set = ParamSet$new(list(
+                         ParamFct$new("strategy", levels = c("fsf", "fsb"), default = "fsf"))),
+                       param_vals = param_vals)
+
+      # Set values to default if missing
+      if (is.null(self$param_set$values$strategy)) {
+        self$param_set$values$strategy = self$param_set$default[["strategy"]]
       }
 
-      super$initialize(id = "sequential_selection", pe = pe, tm = tm,
-        settings = list(
-          max_features = checkmate::assert_numeric(
-            max_features,
-            lower = 1,
-            upper = length(pe$task$feature_names)),
-          strategy = checkmate::assert_string(
-            strategy,
-            pattern = "(^fsf$|^fsb$)")))
-
-      if (strategy == "fsf") {
+      if (self$param_set$values$strategy == "fsf") {
         self$state = private$generate_states(rep(0, length(pe$task$feature_names)))
-      } else if (strategy == "fsb") {
+      } else if (self$param_set$values$strategy == "fsb") {
         self$state = rep(list(rep(1, length(pe$task$feature_names))), length(pe$task$feature_names))
       }
     },
 
     get_result = function() {
-      bmr = self$pe$bmr[[length(self$pe$bmr)]]$get_best(self$pe$task$measures[[1L]]$id)
+      bmr_best = self$pe$bmr[[length(self$pe$bmr)]]$best(self$measure)
       list(
-        features = bmr$task$feature_names,
-        performance = bmr$aggregated)
+        features = bmr_best$task$feature_names,
+        performance = bmr_best$aggregate(self$measure))
     },
     get_path = function() {
       lapply(self$pe$bmr, function(bmr) {
@@ -84,7 +83,6 @@ FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
   ),
   private = list(
     calculate_step = function() {
-
       # Convert 0/1 states to feature names
       named_states = lapply(self$state, private$binary_to_features)
 
@@ -92,16 +90,16 @@ FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
       private$eval_states_terminator(named_states)
 
       # Select best state
-      bmr = self$pe$get_best()
-      features = bmr[[length(bmr)]]$features
-      best_state = as.numeric(Reduce("|", lapply(features, function(x) x == self$pe$task$feature_names)))
+      bmr = self$pe$bmr[[length(self$pe$bmr)]]
+      bmr_best = bmr$best(self$measure)
+      best_state = as.numeric(Reduce("|", lapply(bmr_best$task$feature_names, function(x) x == self$pe$task$feature_names)))
 
       # Generate new states
       self$state = private$generate_states(best_state)
     },
     generate_states = function(state) {
-      x = ifelse(self$settings$strategy == "fsf", 0, 1)
-      y = ifelse(self$settings$strategy == "fsf", 1, 0)
+      x = ifelse(self$param_set$values$strategy == "fsf", 0, 1)
+      y = ifelse(self$param_set$values$strategy == "fsf", 1, 0)
       new_states = list()
       for (i in seq_along(state)) {
         if (state[i] == x) {
@@ -113,15 +111,15 @@ FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
       new_states
     },
     eval_states_terminator = function(states) {
-      self$tm$update_start(self$pe)
+      self$tm$update_start(self$pe, self$measure)
       self$pe$eval_states(states)
-      self$tm$update_end(self$pe)
+      self$tm$update_end(self$pe, self$measure)
 
       # Side-effect stop
       if (!self$tm$terminated) {
-        if (self$settings$strategy == "fsf") {
-          self$tm$terminated = (length(states[[1]]) == self$settings$max_features)
-        } else if (self$settings$strategy == "fsb") {
+        if (self$param_set$values$strategy == "fsf") {
+          self$tm$terminated = (length(states[[1]]) == self$param_set$values$max_features)
+        } else if (self$param_set$values$strategy == "fsb") {
           self$tm$terminated = (length(states[[1]]) == 1)
         }
       }

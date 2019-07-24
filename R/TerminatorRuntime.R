@@ -52,12 +52,12 @@ TerminatorRuntime = R6Class("TerminatorRuntime",
       self$terminated = FALSE
     },
 
-    update_start = function(pe) {
+    update_start = function(pe, measure = NA) {
       self$state$time_start = Sys.time()
       invisible(self)
     },
 
-    update_end = function(pe) {
+    update_end = function(pe, measure = NA) {
       self$state$time_end = Sys.time()
       dtime = difftime(
         time1 = self$state$time_end,

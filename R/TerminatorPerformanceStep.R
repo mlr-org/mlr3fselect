@@ -41,23 +41,26 @@ TerminatorPerformanceStep = R6Class("TerminatorPerformanceStep",
       self$state = list(step_performance = NA)
     },
 
-    update_start = function(pe) {
+    update_start = function(pe, measure) {
       invisible(self)
     },
-    update_end = function(pe) {
-      bmr = pe$get_best()
+    update_end = function(pe, measure) {
+      bmr = pe$bmr[[length(pe$bmr)]]
+      bmr_best = bmr$best(measure)
+      performance_best = bmr_best$aggregate(measure)
+
       if (!is.na(self$state$step_performance)) {
-        if (pe$task$measures[[1]]$minimize) {
-          if (self$state$step_performance - bmr[[length(bmr)]]$performance <= self$settings$threshold) {
+        if (measure$minimize) {
+          if (self$state$step_performance - performance_best <= self$settings$threshold) {
             self$terminated = TRUE
           }
         } else {
-          if (bmr[[length(bmr)]]$performance - self$state$step_performance <= self$settings$threshold) {
+          if (performance_best - self$state$step_performance <= self$settings$threshold) {
             self$terminated = TRUE
           }
         }
       }
-      self$state$step_performance = bmr[[length(bmr)]]$performance
+      self$state$step_performance = performance_best
       invisible(self)
     }
   )

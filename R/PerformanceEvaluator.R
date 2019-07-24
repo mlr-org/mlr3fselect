@@ -75,14 +75,6 @@ PerformanceEvaluator = R6Class("PerformanceEvaluator",
         learner = list(self$learner),
         resampling = list(self$resampling)))
       self$bmr[[length(self$bmr) + 1]] <- new_bmr
-    },
-    get_best = function() {
-      lapply(self$bmr, function(x) {
-        rr = x$get_best(self$task$measures[[1L]]$id)
-        list(
-          features = rr$task$feature_names,
-          performance = mean(rr$performance(self$task$measures[[1L]]$id)))
-      })
     }
   )
 )
