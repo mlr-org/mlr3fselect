@@ -40,17 +40,12 @@ NULL
 FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
   inherit = FeatureSelection,
   public = list(
-    initialize = function(pe, tm, max_features = NA) {
-      if (is.na(max_features)) {
-        max_features = length(pe$task$feature_names)
-      }
-
-      super$initialize(id = "exhaustive_selection", pe = pe, tm = tm,
-        settings = list(
-          max_features = checkmate::assert_numeric(
-            max_features,
-            lower = 1,
-            upper = length(pe$task$feature_names))))
+    initialize = function(pe, tm, measure, param_vals = list()) {
+      super$initialize(id = "exhaustive_selection",
+                       pe = pe,
+                       tm = tm,
+                       measure = measure,
+                       param_vals = param_vals)
 
       self$state = private$generate_states(1)
     },
@@ -78,7 +73,7 @@ FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
 
       # Generate new states
       self$state = private$generate_states(
-        min((sum(self$state[[1]]) + 1), self$settings$max_features))
+        min((sum(self$state[[1]]) + 1), self$param_set$values$max_features))
     },
     generate_states = function(feature_count) {
       combinations = combn(length(self$pe$task$feature_names), feature_count)
@@ -95,7 +90,7 @@ FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
 
       # Side-effect stop
       if (!self$tm$terminated) {
-        self$tm$terminated = (length(states[[1]]) == self$settings$max_features)
+        self$tm$terminated = (length(states[[1]]) == self$param_set$values$max_features)
       }
     }
   )
