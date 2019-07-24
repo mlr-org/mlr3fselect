@@ -42,14 +42,12 @@ NULL
 FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
   inherit = FeatureSelection,
   public = list(
-    initialize = function(pe, tm, max_features = NA, batch_size = 10) {
-      super$initialize(id = "random_selection", pe = pe, tm = tm,
-        settings = list(
-          max_features = checkmate::assert_numeric(
-            max_features,
-            lower = 1,
-            upper = length(pe$task$feature_names)),
-          batch_size = checkmate::assert_numeric(batch_size)))
+    initialize = function(pe, tm, measure, param_vals = list()) {
+      super$initialize(id = "random_selection",
+                       pe = pe,
+                       tm = tm,
+                       measure = measure,
+                       param_vals = param_vals)
 
       self$state = private$generate_states()
     },
@@ -79,12 +77,12 @@ FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
       self$state = private$generate_states()
     },
     generate_states = function() {
-      lapply(seq_len(self$settings$batch_size), function(i) {
-        if (is.na(self$settings$max_features)) {
+      lapply(seq_len(10), function(i) {
+        if (is.na(self$param_set$values$max_features)) {
           return(rbinom(length(self$pe$task$feature_names), 1, 0.5))
         }
         x = Inf
-        while (sum(x) >= self$settings$max_features) {
+        while (sum(x) >= self$param_set$values$max_features) {
           x = rbinom(length(self$pe$task$feature_names), 1, 0.5)
         }
         return(x)
