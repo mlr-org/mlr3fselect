@@ -51,16 +51,14 @@ FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
     },
 
     get_result = function() {
+      bmr = self$pe$bmr[[1]]$clone()
       if (length(self$pe$bmr) > 1) {
-        bmr = lapply(self$pe$bmr[1:length(self$pe$bmr)],
-                     function(bmr) self$pe$bmr[[1]]$combine(bmr))
-      } else {
-        bmr = self$pe$bmr
+        lapply(self$pe$bmr[2:length(self$pe$bmr)], function(x) bmr$combine(x))
       }
-      bmr_best = bmr[[length(bmr)]]$get_best(self$pe$task$measures[[1L]]$id)
+      bmr_best = bmr$best(self$measure)
       list(
         features = bmr_best$task$feature_names,
-        performance = bmr_best$aggregated)
+        performance = bmr_best$aggregate(self$measure))
     }
   ),
   private = list(
