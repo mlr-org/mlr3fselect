@@ -168,8 +168,8 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
           mutation = rbinom(length(self$state[[parents[1]]]), 1, self$param_set$values$mutation_rate)
           children = (children + mutation) %% 2
 
-          # Check max features
-          if (is.na(self$param_set$values$max_features) || sum(children) <= self$param_set$values$max_features) {
+          # Check zero and max features
+          if (sum(children) > 0 & (is.na(self$param_set$values$max_features) || sum(children) <= self$param_set$values$max_features)) {
             break
           }
         }
