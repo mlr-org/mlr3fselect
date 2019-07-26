@@ -81,9 +81,9 @@ FeatureSelection = R6Class("FeatureSelection",
       task$feature_names[as.logical(binary_features)]
     },
     eval_states_terminator = function(states) {
-      self$tm$update_start(self$pe)
+      self$tm$update_start(self$pe, self$measure)
       self$pe$eval_states(states)
-      self$tm$update_end(self$pe)
+      self$tm$update_end(self$pe, self$measure)
     }
   )
 )
