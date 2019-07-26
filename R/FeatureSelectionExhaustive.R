@@ -83,9 +83,9 @@ FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
       })
     },
     eval_states_terminator = function(states) {
-      self$tm$update_start(self$pe)
+      self$tm$update_start(self$pe, self$measure)
       self$pe$eval_states(states)
-      self$tm$update_end(self$pe)
+      self$tm$update_end(self$pe, self$measure)
 
       # Side-effect stop
       if (!self$tm$terminated) {
