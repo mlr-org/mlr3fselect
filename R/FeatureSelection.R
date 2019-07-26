@@ -1,41 +1,41 @@
-#' @title Abstract FeatureSelection Class
+#' @title Feature Selection Wrapper Base Class
 #'
-#' @description `FeatureSelection` class that implements the main functionality each fs must have. A fs is an object that describes the optimization method for choosing the features given within the `[PerformanceEvaluator]` object.
+#' @usage NULL
+#' @format [R6::R6Class] object.
 #'
-#' @section Usage:
+#' @description This is the base class for feature selection wrappers.
+#'
+#' @section Construction:
 #' ```
-#' # Construction
-#' fs = FeatureSelectionr$new(id, pe, tm, settings = list())
-#'
-#' # public members
-#' fs$id
-#' fs$pe
-#' fs$tm
-#' fs$settings
-#'
-#' # public methods
-#' fs$calculate()
+#' fs = FeatureSelectionr$new(id, pe, tm, measure, param_set, param_vals)
 #' ```
-#' @section Arguments:
-#' * `id` (`character(1)`):\cr
-#'   The id of the FeatureSelection.
-#' * `pe` (`[PerformanceEvaluator]`).
-#' * `tm` (`[Terminator]`).
-#' * `settings` (`list`):\cr
-#'   The settings for the FeatureSelection.
 #'
-#' @section Details:
-#' * `$new()` creates a new object of class `[FeatureSelection]`.
-#' * `$id` stores an identifier for this `[FeatureSelection]`.
-#' * `$pe` stores the [PerformanceEvaluator] to optimize.
-#' * `$tm` stores the `[Terminator]`.
-#' * `$settings` is a list of settings for this `[FeatureSelection]`.
-#' * `$state` stores currently evaluated 0/1 encoded feature combinations.
-#' * `$calculate()` performs the feature selection, until the budget of the `[Terminator]` in the `[PerformanceEvaluator]` is exhausted.
+#' * `id` :: `character(1)`\cr Identifier for the wrapper
+#'
+#' * `pe` :: [PerformanceEvaluator]\cr
+#'
+#' * `tm` :: [Terminator]\cr
+#'
+#' * `param_set` :: [paradox::ParamSet]\cr Set of hyperparameters.
+#'
+#' * `param_vals` :: named `list()`\cr Named list of hyperparameter settings.
+#'
+#' @section Fields:
+#' * `id` :: `character(1)`\cr Stores the identifier of of the wrapper.
+#'
+#' * `pe` :: [PerformanceEvaluator]\cr The current state of the [PerformanceEvaluator].
+#'
+#' * `tm` :: [Terminator]\cr The current state of the [Terminator].
+#'
+#' * `measure` :: [mlr3::Measure]\cr Stores the measure.
+#'
+#' * `param_set` :: [paradox::ParamSet]\cr Description of available hyperparameters and hyperparameter settings.
+#'
+#' @section Methods:
+#' * `$calculate()`\cr Performs the feature selection until the budget of [Terminator] is exhausted.
+#'
 #' @name FeatureSelection
 #' @family FeatureSelection
-NULL
-
 #' @export
 FeatureSelection = R6Class("FeatureSelection",
   public = list(
@@ -46,7 +46,8 @@ FeatureSelection = R6Class("FeatureSelection",
     param_set = NULL,
     state = NULL,
 
-    initialize = function(id, pe, tm, measure, param_set = ParamSet$new(), param_vals = list()) {
+    initialize = function(id, pe, tm, measure, param_set = ParamSet$new(),
+      param_vals = list()) {
 
       self$id = checkmate::assert_string(id)
       self$pe = checkmate::assert_r6(pe, "PerformanceEvaluator")
@@ -69,7 +70,6 @@ FeatureSelection = R6Class("FeatureSelection",
 
       self$param_set$values = param_vals
     },
-
     calculate = function() {
       while (!self$tm$terminated) {
         private$calculate_step()

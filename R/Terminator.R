@@ -1,36 +1,36 @@
-#' @title Abstract Terminator Class
+#' @title Terminator Base Class
 #'
-#' @description Abstract `Terminator` class that implements the main functionality each terminator must have. A terminator is an object that says when to stop the feature selection.
+#' @usage NULL
+#' @format [R6::R6Class] object.
 #'
-#' @section Usage:
+#' @description This is the base class for terminators.
+#'
+#' @section Construction:
 #' ```
-#' # Construction
-#' tm = Terminator$new()
-#'
-#' # Public members
-#' tm$terminated
-#' tm$state
-#'
-#' # Public methods
-#' tm$update_state(pe)
-#' tm$update_end(pe)
+#' fs = Terminator$new(settings)
 #' ```
 #'
-#' @section Arguments:
-#' *`settings` (`list(0)`)
+#' * `settings` :: named `list()`\cr Arbitrary settings required by the child class.
 #'
-#' @section Details:
-#' * `$new()` creates a new object of class [Terminator].
-#' * `$terminated` (`logical(1)`) is the termination criterion met? Updated by each call of `update_start()`/`update_end()`.
-#' * `$settings` (`list()`) settings that are set by the child classes to define stopping criteria.
-#' * `$state` (`list()`) arbitrary state of the Terminator. Gets updated with each call of `update_start()` and `update_end()`.
-#' * `$update_start()` is called in each tuning iteration before the evaluation.
-#' * `$update_end()` is called in each tuning iteration after the evaluation.
+#' @section Fields:
+#' * `settings` :: named `list()`\cr Settings passed during construction.
+#'
+#' * `terminated` :: `logical(1)`\cr Is `TRUE` if the termination criterion if the child class is met.
+#'
+#' * `state` :: `list()`\cr Arbitrary state, depending on the child class.
+#'
+#' @section Methods:
+#' * `update_start(pe)`\cr
+#'   [PerformanceEvaluator] -> `self`\cr
+#'   [mlr3:Measure] -> `self`\cr
+#'   Is called in each feature selection iteration before the evaluation.
+#' * `update_end(pe)`\cr
+#'   [PerformanceEvaluator] -> `self`\cr
+#'   [mlr3:Measure] -> `self`\cr
+#'   Is called in each feature selection iteration after the evaluation.
+#'
 #' @name Terminator
-#' @keywords internal
 #' @family Terminator
-NULL
-
 #' @export
 Terminator = R6Class("Terminator",
   public = list(
@@ -42,10 +42,10 @@ Terminator = R6Class("Terminator",
       self$settings = checkmate::assert_list(settings, names = "unique")
     },
 
-    update_start = function(pe) {
+    update_start = function(pe, measure) {
       stop("$update_start() not implemented for Terminator")
     },
-    update_end = function(pe) {
+    update_end = function(pe, measure) {
       stop("$update_end() not implemented for Terminator")
     }
   )

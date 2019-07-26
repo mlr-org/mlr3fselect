@@ -1,47 +1,46 @@
 #' @title FeatureSelectionSequential
 #'
+#' @format [R6::R6Class] inheriting from [FeatureSelection].
+#' @include FeatureSelection.R
+#'
 #' @description
-#' FeatureSelection child class to conduct sequential search.
+#' Sequential feature selection wrapper.
 #'
-#' @section Usage:
+#' @section Construction:
 #'  ```
-#' fs = FeatureSelectionSequential$new()
+#' fs = FeatureSelectionSequential$new(pe, tm, measure, param_vals)
 #' ```
-#' See [FeatureSelection] for a description of the interface.
+#' For arguments, see [FeatureSelection].
 #'
-#' @section Arguments:
-#' * `pe` (`[PerformanceEvaluator]`).
-#' * `tm` (`[Terminator]`).
-#' * `max_features` (`integer(1)`)
-#'   Maximum number of features
-#' * `strategy` (`character(1)`).
-#'   Forward selection `fsf` or backward selection `fsb`.
+#' @section Fields:
+#' See [FeatureSelection].
 #'
-#' @section Details:
-#' `$new()` creates a new object of class [FeatureSelectionSequential].
-#' `$get_result()` Returns selected features in each step.
-#' The interface is described in [FeatureSelection].
+#' @section Methods:
+#' See [FeatureSelection] and additionally:
 #'
-#' Each step is possibly executed in parallel via [mlr3::benchmark()]
+#' * `$get_result()`\cr Returns best feature set.
+#'
+#' * `$get_path()`\cr Returns each step.
+#'
+#' @section Parameter Values:
+#' * `max_features` (`integer(1)`)\cr Maximum number of features in set.
+#' * `strategy` (`character(1)`)\cr `fsf` for forward or `fsb` for backward feature selection.
 #'
 #' @name FeatureSelectionSequential
 #' @family FeatureSelection
 #' @examples
 #' task = mlr3::mlr_tasks$get("pima")
-#' measures = mlr3::mlr_measures$mget(c("classif.acc"))
-#' task$measures = measures
+#' measure = mlr3::mlr_measures$get(c("classif.acc"))
 #' learner = mlr3::mlr_learners$get("classif.rpart")
 #' resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
+#' resampling$instantiate(task)
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' tm = TerminatorPerformanceStep$new(threshold = 0.01)
-#' fs = FeatureSelectionSequential$new(pe, tm)
+#' fs = FeatureSelectionSequential$new(pe = pe, tm = tm, measure,
+#'                                     param_vals = list(max_features = 4))
 #' fs$calculate()
 #' fs$get_result()
-NULL
-
 #' @export
-#' @include FeatureSelection.R
-
 FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
   inherit = FeatureSelection,
   public = list(

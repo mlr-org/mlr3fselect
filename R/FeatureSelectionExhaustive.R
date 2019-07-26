@@ -1,24 +1,27 @@
 #' @title FeatureSelectionExhaustive
 #'
+#' @format [R6::R6Class] inheriting from [FeatureSelection].
+#' @include FeatureSelection.R
+#'
 #' @description
-#' FeatureSelection child class to conduct exhaustive search
+#' Exhaustive feature selection wrapper.
 #'
-#' @section Usage:
+#' @section Construction:
 #'  ```
-#' fs = FeatureSelectionExhaustive$new()
+#' fs = FeatureSelectionExhaustive$new(pe, tm, measure, param_vals)
 #' ```
-#' See [FeatureSelection] for a description of the interface.
+#' For arguments, see [FeatureSelection].
 #'
-#' @section Arguments:
-#' * `pe` (`[PerformanceEvaluator]`).
-#' * `tm` (`[Terminator]`).
-#' * `max_features` (`integer(1)`)
-#'   Maximum number of features
+#' @section Fields:
+#' See [FeatureSelection].
 #'
-#' @section Details:
-#' `$new()` creates a new object of class [FeatureSelectionExhaustive].
-#' `$get_result()` Returns best feature combination.
-#' The interface is described in [FeatureSelection].
+#' @section Methods:
+#' See [FeatureSelection] and additionally:
+#'
+#' * `$get_result()`\cr Returns best feature set.
+#'
+#' @section Parameter Values:
+#' * `max_features` (`integer(1)`)\cr Maximum number of features in set.
 #'
 #' @name FeatureSelectionExhaustive
 #' @family FeatureSelection
@@ -32,11 +35,7 @@
 #' fs = FeatureSelectionExhaustive$new(pe = pe, tm = tm, max_features = 3)
 #' fs$calculate()
 #' fs$get_result()
-NULL
-
 #' @export
-#' @include FeatureSelection.R
-
 FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
   inherit = FeatureSelection,
   public = list(

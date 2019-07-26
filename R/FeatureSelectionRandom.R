@@ -1,44 +1,43 @@
 #' @title FeatureSelectionRandom
 #'
+#' @format [R6::R6Class] inheriting from [FeatureSelection].
+#' @include FeatureSelection.R
+#'
 #' @description
-#' FeatureSelection child class to conduct random search
+#' Random feature selection wrapper.
 #'
-#' @section Usage:
+#' @section Construction:
 #'  ```
-#' fs = FeatureSelectionRandom$new()
+#' fs = FeatureSelectionRandom$new(pe, tm, measure, param_vals)
 #' ```
-#' See [FeatureSelection] for a description of the interface.
+#' For arguments, see [FeatureSelection].
 #'
-#' @section Arguments:
-#' * `pe` (`[PerformanceEvaluator]`).
-#' * `tm` (`[Terminator]`).
-#' * `max_features` (`integer(1)`)
-#'   Maximum number of features
-#' * `batch_size` (`integer(1`):
-#'   Maximum number of feature combinations to try in a batch.
-#'   Each batch is possibly executed in parallel via [mlr3::benchmark()].
+#' @section Fields:
+#' See [FeatureSelection].
 #'
-#' @section Details:
-#' `$new()` creates a new object of class [FeatureSelectionRandom].
-#' `$get_result()` Returns best feature combination.
-#' The interface is described in [FeatureSelection].
+#' @section Methods:
+#' See [FeatureSelection] and additionally:
+#'
+#' * `$get_result()`\cr Returns best feature set.
+#'
+#' @section Parameter Values:
+#' * `max_features` (`integer(1)`)\cr Maximum number of features in set.
 #'
 #' @name FeatureSelectionRandom
 #' @family FeatureSelection
 #' @examples
-#' task = mlr3::mlr_tasks$get("boston_housing")
-#' learner = mlr3::mlr_learners$get("regr.rpart")
+#' task = mlr3::mlr_tasks$get("pima")
+#' measure = mlr3::mlr_measures$get(c("classif.acc"))
+#' learner = mlr3::mlr_learners$get("classif.rpart")
 #' resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
-#' pe = PerformanceEvaluator$new(task = task, learner = learner, resampling = resampling)
-#' tm = TerminatorEvaluations$new(max_evaluations = 20)
-#' fs = FeatureSelectionRandom$new(pe, tm, batch_size = 10, max_features = 8)
+#' resampling$instantiate(task)
+#' pe = PerformanceEvaluator$new(task, learner, resampling)
+#' tm = TerminatorEvaluations$new(max_evaluations = 50)
+#' fs = FeatureSelectionRandom$new(pe, tm, measure,
+#'                                 param_vals = list(max_features = 4))
 #' fs$calculate()
 #' fs$get_result()
-NULL
-
 #' @export
-#' @include FeatureSelection.R
-
 FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
   inherit = FeatureSelection,
   public = list(

@@ -1,35 +1,28 @@
 #' @title TerminatorEvaluations
 #'
+#' @format [R6::R6Class] inheriting from [Terminator].
+#' @include Terminator.R
+#'
 #' @description
-#' Terminator child class to terminate the feature selection if the model performance does not improve to a specified threshold in the next step.
+#' Feature selection terminates depending on the number of evalutions. An evalution is defined by one resampling of a feature set.
 #'
-#' @section Usage:
+#' @section Construction:
 #'  ```
-#' tm = TerminatorEvaluations$new()
+#' fs = TerminatorEvaluations$new(max_evaluations)
 #' ```
-#' See [Terminator] for a description of the interface.
 #'
-#' @section Arguments:
-#' * `max_evaluations` (`integer(1)`):
-#'   Maximum number of function evaluations.
+#' * `max_evaluations` (`integer(1)`)\cr Maximum number of evaluations.
 #'
-#' @section Details:
-#' `$new()` creates a new object of class [TerminatorEvaluations].
+#' @section Fields:
+#' See [Terminator].
 #'
-#' The interface is described in [Terminator].
+#' @section Methods:
+#' See [Terminator].
 #'
-#' @name TerminatorEvaluations
 #' @family Terminator
 #' @examples
-#' task = mlr3::mlr_tasks$get("iris")
-#' learner = mlr3::mlr_learners$get("classif.rpart")
-#' resampling = mlr3::mlr_resamplings$get("holdout")
-#' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' tm = TerminatorEvaluations$new(max_evaluations = 100)
-NULL
-
 #' @export
-#' @include Terminator.R
 TerminatorEvaluations = R6Class("TerminatorEvaluations",
   inherit = Terminator,
   public = list(

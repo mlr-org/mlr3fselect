@@ -1,37 +1,30 @@
 #' @title TerminatorRuntime Class
 #'
+#' @format [R6::R6Class] inheriting from [Terminator].
+#' @include Terminator.R
+#'
 #' @description
-#' Terminator child class to terminate the feature selection after a specific time. Note that the runtime is checked after each step and therefore it could happen that the final runtime is longer than the specified one. Time is measured for everything that happens between update_start and update_end.
-#' @section Usage:
+#' Feature selection terminates depeding on the runtime.
+#'
+#' @section Construction:
 #'  ```
 #' tm = TerminatorRuntime$new(max_time, time_unit)
 #' ```
-#' See [Terminator] for a description of the interface.
 #'
-#' @section Arguments:
-#' * `max_time` (integer(1)):
-#'   Maximal amount of time measures in `units`.
-#' * `units` (character(1)):
-#'   Unit used for measuring time. Possible choices are "secs", "mins", "hours", "days", and "weeks" that
-#'   are directly passed to `difftime()`.
+#' * `max_time` :: `numeric(1)`\cr Maximum allowed runtime.
 #'
-#' @section Details:
-#' `$new()` creates a new object of class [TerminatorRuntime].
+#' * `units` :: `character(1)`\cr Unit of the maximum allowed runtime in `secs`, `mins`, `hours`, `days`, or `weeks`.
 #'
-#' The interface is described in [Terminator].
+#' @section Fields:
+#' See [Terminator].
 #'
-#' @name TerminatorRuntime
+#' @section Methods:
+#' See [Terminator].
+#'
 #' @family Terminator
 #' @examples
-#' task = mlr3::mlr_tasks$get("iris")
-#' learner = mlr3::mlr_learners$get("classif.rpart")
-#' resampling = mlr3::mlr_resamplings$get("holdout")
-#' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' tm = TerminatorRuntime$new(max_time = 5, units = "secs")
-NULL
-
 #' @export
-#' @include Terminator.R
 TerminatorRuntime = R6Class("TerminatorRuntime",
   inherit = Terminator,
   public = list(

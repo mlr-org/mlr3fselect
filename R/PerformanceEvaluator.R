@@ -1,51 +1,40 @@
-#' @title Abstract PerformanceEvaluator Class
+#' @title PerformanceEvaluator Class
+#'
+#' @usage NULL
+#' @format [R6::R6Class] object.
 #'
 #' @description
-#' `PerformanceEvaluator` class that implements the performance evaluation on a set of feature combinations. A pe is an object that stores all informations that are necesarry to conduct a feature selection (`mlr3::Task`, `mlr3::Learner`, `mlr3::Resampling`).
+#' Evaluates feature sets with [mlr3::Benchmark] genereated by [FeatureSelection].
 #'
-#' @section Usage:
+#' @section Construction:
 #' ```
 #' # Construction
-#' pe = PerformanceEvaluator$new()
-#'
-#' # Public members
-#' pe$task
-#' pe$learner
-#' pe$resampling
-#' pe$bmr
-#'
-#' # Public methods
-#' pe$eval_states(states)
-#' pe$get_best()
+#' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' ```
 #'
-#' @section Arguments:
-#' * `task` (`mlr3::Task`):
-#'   The task that we want to evaluate.
-#' * `learner` (`mlr3::Learner`):
-#'   The learner that we want to evaluate.
-#' * `resampling` (`mlr3::Resampling`):
-#'   The Resampling method that is used to evaluate the learner.
+#' * `task` :: [mlr3::Task]\cr
 #'
-#' @section Details:
-#' * `$new()` creates a new object of class [PerformanceEvaluator].
-#' * `$task` (`mlr3::Task`) the task for which the feature selection should be conducted.
-#' * `$learner` (`mlr3::Learner`) the algorithm for which the feature selection should be conducted.
-#' * `$resampling` (`mlr3::Resampling`) strategy to evaluate a feature combination
-#' * `$bmr` (`list`) of (`mlr3::BenchmarkResult`) objects. Each entry corresponds to one batch or step depending one the used feature selection method.
-#' * `$eval_states(states)` evaluates the feature combinations `states`.
-#' * `$get_best()` returns selected features with the best performance of each entry in `$bmr`.
+#' * `learner` :: [mlr3::Learner]\cr
 #'
-#' @name PerformanceEvaluator
-#' @keywords internal
+#' * `resampling` :: [mlr3::Resampling]\cr
+#'
+#' @section Fields:
+#' * `task` :: [mlr3::Task]\cr Stores the task.
+#' * `learner` :: [mlr3::Learner]\cr Stores the learner.
+#' * `resampling` :: [mlr3::Resampling]\cr Stores the resampling.
+#' * `bmr` :: list of [mlr3::BenchmarkResult]\cr Stores the benchmark results.
+#'
+#' @section Methods:
+#' * `eval_states(states)`\cr
+#'   list of `integer()` -> `self`\cr
+#'   Evaluates feature sets.
+#'
 #' @family PerformanceEvaluator
 #' @examples
 #' task = mlr3::mlr_tasks$get("iris")
 #' learner = mlr3::mlr_learners$get("classif.rpart")
 #' resampling = mlr3::mlr_resamplings$get("holdout")
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
-NULL
-
 #' @export
 PerformanceEvaluator = R6Class("PerformanceEvaluator",
   public = list(
