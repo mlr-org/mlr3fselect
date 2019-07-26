@@ -2,82 +2,10 @@
 output: github_document
 ---
 
-# mlr3featsel
-
-_mlr3featsel_ adds filters, feature selection methods and embedded feature selection methods of algorithms to _mlr3_.
-
-[![Travis build status](https://travis-ci.org/mlr-org/mlr3featsel.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3featsel)
-[![CRAN status](https://www.r-pkg.org/badges/version/mlr3featsel)](https://cran.r-project.org/package=mlr3featsel)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Coverage status](https://codecov.io/gh/mlr-org/mlr3featsel/branch/master/graph/badge.svg)](https://codecov.io/github/mlr-org/mlr3featsel?branch=master)
+# mlr3fswrap
 
 ## Installation
 
 ```{r eval = FALSE}
-remotes::install_github("mlr-org/mlr3featsel")
+remotes::install_github("mlr-org/mlr3fswrap)
 ```
-
-## Filters 
-
-### Public Methods
-
-* `.$calculate()`: Calculates Filter values
-* `.$filter()`: filters the task by a given criterion
-
-* `.$scores`: Filter score values
-* `.$filtered_task`: Filtered task
-
-### Generic Filters
-
-```{r echo = FALSE, message=FALSE}
-library("mlr3featsel")
-library("data.table")
-
-capitalize <- function(x) {
-  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
-  x
-}
-
-tab = as.data.table(mlr_filters)
-tab[, task_type := sapply(task_type, function(x) paste(capitalize(x), collapse = " & "))]
-tab[, feature_types := sapply(feature_types, function(x) paste(capitalize(x), collapse = ", "))]
-setorderv(tab, "task_type")
-tab[, packages := sprintf("*%s*", packages)]
-setnames(tab, old = c("packages", "feature_types", "task_type", "id"), new = c("Package", "Features", "Task", "Name"))
-knitr::kable(tab, escape = F, format = "markdown")
-```
-
-### Embedded Filters
-
-The following learners have embedded filter methods which are supported via class `FilterVariableImportance`:
-
-```{r echo=FALSE}
-library("mlr3learners")
-# library("mlr3extralearners")
-library("mlr3")
-library("magrittr")
-all_learners = mlr_learners$mget(mlr_learners$keys())
-purrr::keep(all_learners, ~ "importance" %in% .x$properties, "importance") %>% 
-  purrr::map(~ .x$id) %>% 
-  purrr::flatten_chr()
-```
-
-If your learner is listed here, the reason is most likely that it is not integrated into [mlr3learners](https://github.com/mlr-org/mlr3learners) or [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners). 
-Please open an issue so we can add your package.
-
-Some learners need to have their variable importance measure "activated" during learner creation.
-For example, to use the "impurity" measure of Random Forest via the _ranger_ package:
-
-```{r error=TRUE}
-task = mlr_tasks$get("iris")
-lrn = mlr_learners$get("classif.ranger",
-  param_vals = list(importance = "impurity"))
-
-filter = FilterVariableImportance$new(learner = lrn)
-filter$calculate(task)
-head(as.data.table(filter), 3)
-```
-
-## "Wrapper" Methods
-
-Work in progress.
