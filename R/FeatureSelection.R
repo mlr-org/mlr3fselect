@@ -52,7 +52,7 @@ FeatureSelection = R6Class("FeatureSelection",
       self$id = checkmate::assert_string(id)
       self$pe = checkmate::assert_r6(pe, "PerformanceEvaluator")
       self$tm = checkmate::assert_r6(tm, "Terminator")
-      self$measure = checkmate::assert_r6(measure[[1]], "Measure")
+      self$measure = checkmate::assert_r6(measure, "Measure")
 
       param_set$add(ParamSet$new(list(
         ParamInt$new("max_features",
