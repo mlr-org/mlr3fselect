@@ -44,7 +44,7 @@
 FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
   inherit = FeatureSelection,
   public = list(
-    initialize = function(pe, tm, measure, param_vals) {
+    initialize = function(pe, tm, measure, param_vals = list()) {
       super$initialize(id = "sequential_selection",
                        pe = pe,
                        tm = tm,
