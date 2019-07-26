@@ -11,3 +11,5 @@
 ^\.ignore$
 ^docs$
 ^pkgdown$
+^renv$
+renv\.lock
