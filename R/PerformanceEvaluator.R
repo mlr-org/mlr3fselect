@@ -4,7 +4,7 @@
 #' @format [R6::R6Class] object.
 #'
 #' @description
-#' Evaluates feature sets with [mlr3::Benchmark] genereated by [FeatureSelection].
+#' Evaluates feature sets with [mlr3::benchmark] genereated by [FeatureSelection].
 #'
 #' @section Construction:
 #' ```

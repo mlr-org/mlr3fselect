@@ -22,11 +22,11 @@
 #' @section Methods:
 #' * `update_start(pe)`\cr
 #'   [PerformanceEvaluator] -> `self`\cr
-#'   [mlr3:Measure] -> `self`\cr
+#'   [mlr3::Measure] -> `self`\cr
 #'   Is called in each feature selection iteration before the evaluation.
 #' * `update_end(pe)`\cr
 #'   [PerformanceEvaluator] -> `self`\cr
-#'   [mlr3:Measure] -> `self`\cr
+#'   [mlr3::Measure] -> `self`\cr
 #'   Is called in each feature selection iteration after the evaluation.
 #'
 #' @name Terminator

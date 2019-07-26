@@ -27,12 +27,14 @@
 #' @family FeatureSelection
 #' @examples
 #' task = mlr3::mlr_tasks$get("pima")
-#' task$select(c("age", "glucose", "insulin", "mass"))
+#' measure = mlr3::mlr_measures$get(c("classif.acc"))
 #' learner = mlr3::mlr_learners$get("classif.rpart")
 #' resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
+#' resampling$instantiate(task)
 #' pe = PerformanceEvaluator$new(task = task, learner = learner, resampling = resampling)
 #' tm = TerminatorRuntime$new(max_time = 20, units = "secs")
-#' fs = FeatureSelectionExhaustive$new(pe = pe, tm = tm, max_features = 3)
+#' fs = FeatureSelectionExhaustive$new(pe = pe, tm = tm, measure,
+#'                                     param_vals = list(max_features = 3))
 #' fs$calculate()
 #' fs$get_result()
 #' @export

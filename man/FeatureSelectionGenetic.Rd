@@ -48,7 +48,7 @@ See \link{FeatureSelection} and additionally:
 task = mlr3::mlr_tasks$get("pima")
 measures = mlr3::mlr_measures$get(c("classif.acc"))
 learner = mlr3::mlr_learners$get("classif.rpart")
-resampling = mlr_resamplings$get("cv", param_vals = list(folds = 5L))
+resampling = mlr3::mlr_resamplings$get("cv", param_vals = list(folds = 5L))
 resampling$instantiate(task)
 pe = PerformanceEvaluator$new(task, learner, resampling)
 tm = TerminatorRuntime$new(max_time = 10, units = "secs")

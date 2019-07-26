@@ -6,7 +6,7 @@
 \title{PerformanceEvaluator Class}
 \format{\link[R6:R6Class]{R6::R6Class} object.}
 \description{
-Evaluates feature sets with \link[mlr3:Benchmark]{mlr3::Benchmark} genereated by \link{FeatureSelection}.
+Evaluates feature sets with \link[mlr3:benchmark]{mlr3::benchmark} genereated by \link{FeatureSelection}.
 }
 \section{Construction}{
 \preformatted{# Construction
