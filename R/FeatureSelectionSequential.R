@@ -73,10 +73,10 @@ FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
     },
     get_path = function() {
       lapply(self$pe$bmr, function(bmr) {
-        bmr = bmr$get_best(self$pe$task$measures[[1L]]$id)
+        bmr = bmr$best(self$measure)
         list(
           features = bmr$task$feature_names,
-          performance = bmr$aggregated)
+          performance = bmr$aggregate(self$measure))
       })
     }
   ),
