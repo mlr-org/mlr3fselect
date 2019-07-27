@@ -9,7 +9,7 @@
 TerminatorRuntime
 }
 \description{
-Feature selection terminates depeding on the runtime.
+Feature selection terminates depending on the runtime.
 }
 \section{Construction}{
 \preformatted{tm = TerminatorRuntime$new(max_time, time_unit)

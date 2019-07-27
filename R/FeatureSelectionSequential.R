@@ -10,6 +10,7 @@
 #'  ```
 #' fs = FeatureSelectionSequential$new(pe, tm, measure, param_vals)
 #' ```
+#'
 #' For arguments, see [FeatureSelection].
 #'
 #' @section Fields:
@@ -24,6 +25,7 @@
 #'
 #' @section Parameter Values:
 #' * `max_features` (`integer(1)`)\cr Maximum number of features in set.
+#'
 #' * `strategy` (`character(1)`)\cr `fsf` for forward or `fsb` for backward feature selection.
 #'
 #' @name FeatureSelectionSequential

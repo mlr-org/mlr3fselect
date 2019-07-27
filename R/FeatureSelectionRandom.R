@@ -10,6 +10,7 @@
 #'  ```
 #' fs = FeatureSelectionRandom$new(pe, tm, measure, param_vals)
 #' ```
+#'
 #' For arguments, see [FeatureSelection].
 #'
 #' @section Fields:

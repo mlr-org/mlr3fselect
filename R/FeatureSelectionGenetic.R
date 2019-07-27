@@ -10,6 +10,7 @@
 #'  ```
 #' fs = FeatureSelectionGenetic$new(pe, tm, measure, param_vals)
 #' ```
+#'
 #' For arguments, see [FeatureSelection].
 #'
 #' @section Fields:
@@ -24,10 +25,15 @@
 #'
 #' @section Parameter Values:
 #' * `mu` (`integer(1)`)\cr Size of the parent population.
+#'
 #' * `lambda` (`integer(1)`)\cr Size of the children population.
+#'
 #' * `crossover_rate` (`numeric(1)`)\cr Probability of choosing a bit from the first parent within the crossover mutation.
+#'
 #' * `mutation_rate` (`numeric(1)`)\cr Probability of flipping a feature bit, i.e. switch between selecting / deselecting a feature.
+#'
 #' * `max_features` (`integer(1)`)\cr Maximum number of features.
+#'
 #' * `strategy` (`character(1)`)\cr `plus` or `comma`. Indicates whether to use a `(mu, lambda)` or `(mu + lambda)` genetic algorithm.
 #'
 #' @name FeatureSelectionGenetic

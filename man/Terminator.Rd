@@ -28,11 +28,11 @@ This is the base class for terminators.
 \section{Methods}{
 
 \itemize{
-\item \code{update_start(pe)}\cr
+\item \code{update_start(pe, measure)}\cr
 \link{PerformanceEvaluator} -> \code{self}\cr
 \link[mlr3:Measure]{mlr3::Measure} -> \code{self}\cr
 Is called in each feature selection iteration before the evaluation.
-\item \code{update_end(pe)}\cr
+\item \code{update_end(pe, measure)}\cr
 \link{PerformanceEvaluator} -> \code{self}\cr
 \link[mlr3:Measure]{mlr3::Measure} -> \code{self}\cr
 Is called in each feature selection iteration after the evaluation.

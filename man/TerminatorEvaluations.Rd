@@ -9,7 +9,7 @@
 TerminatorEvaluations
 }
 \description{
-Feature selection terminates depending on the number of evalutions. An evalution is defined by one resampling of a feature set.
+Feature selection terminates depending on the number of evaluations. An evaluation is defined by one resampling of a feature set.
 }
 \section{Construction}{
 \preformatted{fs = TerminatorEvaluations$new(max_evaluations)

@@ -4,7 +4,7 @@
 #' @include Terminator.R
 #'
 #' @description
-#' Feature selection terminates depeding on the runtime.
+#' Feature selection terminates depending on the runtime.
 #'
 #' @section Construction:
 #'  ```

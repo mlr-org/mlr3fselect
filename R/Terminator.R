@@ -20,11 +20,12 @@
 #' * `state` :: `list()`\cr Arbitrary state, depending on the child class.
 #'
 #' @section Methods:
-#' * `update_start(pe)`\cr
+#' * `update_start(pe, measure)`\cr
 #'   [PerformanceEvaluator] -> `self`\cr
 #'   [mlr3::Measure] -> `self`\cr
 #'   Is called in each feature selection iteration before the evaluation.
-#' * `update_end(pe)`\cr
+#'
+#' * `update_end(pe, measure)`\cr
 #'   [PerformanceEvaluator] -> `self`\cr
 #'   [mlr3::Measure] -> `self`\cr
 #'   Is called in each feature selection iteration after the evaluation.

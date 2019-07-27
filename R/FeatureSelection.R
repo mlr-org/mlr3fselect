@@ -10,7 +10,7 @@
 #' fs = FeatureSelectionr$new(id, pe, tm, measure, param_set, param_vals)
 #' ```
 #'
-#' * `id` :: `character(1)`\cr Identifier for the wrapper
+#' * `id` :: `character(1)`\cr Identifier for the wrapper.
 #'
 #' * `pe` :: [PerformanceEvaluator]\cr
 #'

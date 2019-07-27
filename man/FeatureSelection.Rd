@@ -12,7 +12,7 @@ This is the base class for feature selection wrappers.
 \preformatted{fs = FeatureSelectionr$new(id, pe, tm, measure, param_set, param_vals)
 }
 \itemize{
-\item \code{id} :: \code{character(1)}\cr Identifier for the wrapper
+\item \code{id} :: \code{character(1)}\cr Identifier for the wrapper.
 \item \code{pe} :: \link{PerformanceEvaluator}\cr
 \item \code{tm} :: \link{Terminator}\cr
 \item \code{param_set} :: \link[paradox:ParamSet]{paradox::ParamSet}\cr Set of hyperparameters.
