@@ -34,6 +34,7 @@ tm = TerminatorEvaluations$new(max_evaluations = 100)
 }
 \seealso{
 Other Terminator: \code{\link{TerminatorPerformanceStep}},
+  \code{\link{TerminatorPerformance}},
   \code{\link{TerminatorRuntime}}, \code{\link{Terminator}}
 }
 \concept{Terminator}

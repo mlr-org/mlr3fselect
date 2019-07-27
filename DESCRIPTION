@@ -66,6 +66,7 @@ Collate:
     'PerformanceEvaluator.R'
     'Terminator.R'
     'TerminatorEvaluations.R'
+    'TerminatorPerformance.R'
     'TerminatorPerformanceStep.R'
     'TerminatorRuntime.R'
     'reexports.R'

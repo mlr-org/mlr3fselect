@@ -42,6 +42,7 @@ Is called in each feature selection iteration after the evaluation.
 \seealso{
 Other Terminator: \code{\link{TerminatorEvaluations}},
   \code{\link{TerminatorPerformanceStep}},
+  \code{\link{TerminatorPerformance}},
   \code{\link{TerminatorRuntime}}
 }
 \concept{Terminator}

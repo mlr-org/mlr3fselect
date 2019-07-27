@@ -36,6 +36,7 @@ tm = TerminatorRuntime$new(max_time = 5, units = "secs")
 \seealso{
 Other Terminator: \code{\link{TerminatorEvaluations}},
   \code{\link{TerminatorPerformanceStep}},
+  \code{\link{TerminatorPerformance}},
   \code{\link{Terminator}}
 }
 \concept{Terminator}
