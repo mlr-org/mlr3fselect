@@ -23,7 +23,7 @@ Authors@R:
              email = "marcbecker@posteo.de"))
 Description: Implements methods for feature selection in mlr3.
 License: MIT + file LICENSE
-URL: https://github.com/mlr-org/mlr3featsel
+URL: https://github.com/mlr-org/mlr3fswrap
 BugReports: https://github.com/mlr-org/mlr3fswrap/issues
 Depends:
     R (>= 3.1.0)

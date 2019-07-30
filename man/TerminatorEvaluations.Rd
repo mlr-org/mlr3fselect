@@ -15,7 +15,7 @@ Feature selection terminates depending on the number of evaluations. An evaluati
 \preformatted{fs = TerminatorEvaluations$new(max_evaluations)
 }
 \itemize{
-\item \code{max_evaluations} (\code{integer(1)})\cr Maximum number of evaluations.
+\item \code{max_evaluations} :: \code{integer(1)}\cr Maximum number of evaluations.
 }
 }
 

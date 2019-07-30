@@ -11,7 +11,7 @@
 #' fs = TerminatorEvaluations$new(max_evaluations)
 #' ```
 #'
-#' * `max_evaluations` (`integer(1)`)\cr Maximum number of evaluations.
+#' * `max_evaluations` :: `integer(1)`\cr Maximum number of evaluations.
 #'
 #' @section Fields:
 #' See [Terminator].

@@ -34,13 +34,14 @@ See \link{FeatureSelection} and additionally:
 
 \section{Parameter Values}{
 
+See \link{FeatureSelection} and additionally:
 \itemize{
-\item \code{mu} (\code{integer(1)})\cr Size of the parent population.
-\item \code{lambda} (\code{integer(1)})\cr Size of the children population.
-\item \code{crossover_rate} (\code{numeric(1)})\cr Probability of choosing a bit from the first parent within the crossover mutation.
-\item \code{mutation_rate} (\code{numeric(1)})\cr Probability of flipping a feature bit, i.e. switch between selecting / deselecting a feature.
-\item \code{max_features} (\code{integer(1)})\cr Maximum number of features.
-\item \code{strategy} (\code{character(1)})\cr \code{plus} or \code{comma}. Indicates whether to use a \code{(mu, lambda)} or \code{(mu + lambda)} genetic algorithm.
+\item \code{mu} :: \code{integer(1)}\cr Size of the parent population.
+\item \code{lambda} :: \code{integer(1)}\cr Size of the children population.
+\item \code{crossover_rate} :: \code{numeric(1)}\cr Probability of choosing a feature from the first parent within the crossover mutation.
+\item \code{mutation_rate} :: \code{numeric(1)}\cr Probability of flipping a feature, i.e. switch between selecting / deselecting a feature.
+\item \code{max_features} :: \code{integer(1)}\cr Maximum number of features.
+\item \code{strategy} :: \code{character(1)}\cr \code{plus} or \code{comma}. Indicates whether to use a \code{(mu, lambda)} or \code{(mu + lambda)} genetic algorithm.
 }
 }
 

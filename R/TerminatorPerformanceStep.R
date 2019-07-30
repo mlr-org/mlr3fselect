@@ -11,7 +11,7 @@
 #' tm = TerminatorPerformanceStep$new(threshold)
 #' ```
 #'
-#' * `threshold` (`numeric(1)``)\cr
+#' * `threshold` :: `numeric(1)`\cr
 #'
 #' @section Fields:
 #' See [Terminator].

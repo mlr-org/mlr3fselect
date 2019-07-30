@@ -15,7 +15,7 @@ Feature selection terminates depending on the performance.
 \preformatted{tm = TerminatorPerformance$new(threshold)
 }
 \itemize{
-\item \code{threshold} (`numeric(1)``)\cr
+\item \code{threshold} :: \code{numeric(1)}\cr
 }
 }
 

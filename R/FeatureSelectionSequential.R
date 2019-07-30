@@ -24,9 +24,9 @@
 #' * `$get_path()`\cr Returns each step.
 #'
 #' @section Parameter Values:
-#' * `max_features` (`integer(1)`)\cr Maximum number of features in set.
+#' See [FeatureSelection] and additionally:
 #'
-#' * `strategy` (`character(1)`)\cr `fsf` for forward or `fsb` for backward feature selection.
+#' * `strategy` :: `character(1)`\cr `fsf` for forward or `fsb` for backward feature selection.
 #'
 #' @name FeatureSelectionSequential
 #' @family FeatureSelection

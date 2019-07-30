@@ -34,9 +34,9 @@ See \link{FeatureSelection} and additionally:
 
 \section{Parameter Values}{
 
+See \link{FeatureSelection} and additionally:
 \itemize{
-\item \code{max_features} (\code{integer(1)})\cr Maximum number of features in set.
-\item \code{strategy} (\code{character(1)})\cr \code{fsf} for forward or \code{fsb} for backward feature selection.
+\item \code{strategy} :: \code{character(1)}\cr \code{fsf} for forward or \code{fsb} for backward feature selection.
 }
 }
 

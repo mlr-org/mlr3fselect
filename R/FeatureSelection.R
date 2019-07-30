@@ -31,8 +31,13 @@
 #'
 #' * `param_set` :: [paradox::ParamSet]\cr Description of available hyperparameters and hyperparameter settings.
 #'
+#' * `state` :: list of `integer()`\cr Stores the currently evaluated feature sets in 0/1 encodings.
+#'
 #' @section Methods:
 #' * `$calculate()`\cr Performs the feature selection until the budget of [Terminator] is exhausted.
+#'
+#' @section Parameter Values:
+#' * `max_features` :: `integer(1)`\cr Maximum number of features in set.
 #'
 #' @name FeatureSelection
 #' @family FeatureSelection

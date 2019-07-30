@@ -24,17 +24,19 @@
 #' * `$get_path()`\cr Returns each generation.
 #'
 #' @section Parameter Values:
-#' * `mu` (`integer(1)`)\cr Size of the parent population.
+#' See [FeatureSelection] and additionally:
 #'
-#' * `lambda` (`integer(1)`)\cr Size of the children population.
+#' * `mu` :: `integer(1)`\cr Size of the parent population.
 #'
-#' * `crossover_rate` (`numeric(1)`)\cr Probability of choosing a bit from the first parent within the crossover mutation.
+#' * `lambda` :: `integer(1)`\cr Size of the children population.
 #'
-#' * `mutation_rate` (`numeric(1)`)\cr Probability of flipping a feature bit, i.e. switch between selecting / deselecting a feature.
+#' * `crossover_rate` :: `numeric(1)`\cr Probability of choosing a feature from the first parent within the crossover mutation.
 #'
-#' * `max_features` (`integer(1)`)\cr Maximum number of features.
+#' * `mutation_rate` :: `numeric(1)`\cr Probability of flipping a feature, i.e. switch between selecting / deselecting a feature.
 #'
-#' * `strategy` (`character(1)`)\cr `plus` or `comma`. Indicates whether to use a `(mu, lambda)` or `(mu + lambda)` genetic algorithm.
+#' * `max_features` :: `integer(1)`\cr Maximum number of features.
+#'
+#' * `strategy` :: `character(1)`\cr `plus` or `comma`. Indicates whether to use a `(mu, lambda)` or `(mu + lambda)` genetic algorithm.
 #'
 #' @name FeatureSelectionGenetic
 #' @family FeatureSelection

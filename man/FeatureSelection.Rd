@@ -28,6 +28,7 @@ This is the base class for feature selection wrappers.
 \item \code{tm} :: \link{Terminator}\cr The current state of the \link{Terminator}.
 \item \code{measure} :: \link[mlr3:Measure]{mlr3::Measure}\cr Stores the measure.
 \item \code{param_set} :: \link[paradox:ParamSet]{paradox::ParamSet}\cr Description of available hyperparameters and hyperparameter settings.
+\item \code{state} :: list of \code{integer()}\cr Stores the currently evaluated feature sets in 0/1 encodings.
 }
 }
 
@@ -35,6 +36,13 @@ This is the base class for feature selection wrappers.
 
 \itemize{
 \item \code{$calculate()}\cr Performs the feature selection until the budget of \link{Terminator} is exhausted.
+}
+}
+
+\section{Parameter Values}{
+
+\itemize{
+\item \code{max_features} :: \code{integer(1)}\cr Maximum number of features in set.
 }
 }
 

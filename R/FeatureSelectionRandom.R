@@ -22,7 +22,7 @@
 #' * `$get_result()`\cr Returns best feature set.
 #'
 #' @section Parameter Values:
-#' * `max_features` (`integer(1)`)\cr Maximum number of features in set.
+#' See [FeatureSelection].
 #'
 #' @name FeatureSelectionRandom
 #' @family FeatureSelection

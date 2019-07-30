@@ -33,9 +33,7 @@ See \link{FeatureSelection} and additionally:
 
 \section{Parameter Values}{
 
-\itemize{
-\item \code{max_features} (\code{integer(1)})\cr Maximum number of features in set.
-}
+See \link{FeatureSelection}.
 }
 
 \examples{
