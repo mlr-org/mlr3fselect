@@ -64,9 +64,9 @@ FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
   ),
   private = list(
     calculate_step = function() {
-
       # Convert 0/1 states to feature names
-      named_states = lapply(self$state, private$binary_to_features)
+      named_states = lapply(self$state, function(state) {
+        self$pe$task$feature_names[as.logical(state)]})
 
       # Evaluation
       private$eval_states_terminator(named_states)

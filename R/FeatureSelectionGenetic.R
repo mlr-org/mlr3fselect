@@ -120,14 +120,16 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
   ),
   private = list(
     calculate_step = function() {
-
       # Generate population depending on strategy
       if (self$param_set$values$strategy == "plus") {
         states = c(self$state, private$generate_states())
       } else if (self$param_set$values$strategy == "comma") {
         states = private$generate_states()
       }
-      named_states = lapply(states, private$binary_to_features)
+
+      # Convert 0/1 states to feature names
+      named_states = lapply(self$state, function(state) {
+        self$pe$task$feature_names[as.logical(state)]})
 
       # Evaluation
       private$eval_states_terminator(named_states)
