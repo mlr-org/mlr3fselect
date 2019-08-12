@@ -2,9 +2,13 @@ Package: mlr3fswrap
 Title: Feature selection for mlr3
 Version: 0.1.0-9000
 Authors@R: 
-    c(person(given = "Patrick",
-             family = "Schratz",
+    c(person(given = "Marc",
+             family = "Becker",
              role = c("aut", "cre"),
+             email = "marcbecker@posteo.de"),
+      person(given = "Patrick",
+             family = "Schratz",
+             role = "aut",
              email = "patrick.schratz@gmail.com",
              comment = c(ORCID = "0000-0003-0748-6624")),
       person(given = "Michel",
@@ -16,14 +20,11 @@ Authors@R:
              family = "Bischl",
              role = "aut",
              email = "bernd_bischl@gmx.net",
-             comment = c(ORCID = "0000-0001-6002-6980")),
-      person(given = "Marc",
-             family = "Becker",
-             role = "aut",
-             email = "marcbecker@posteo.de"))
+             comment = c(ORCID = "0000-0001-6002-6980")))
 Description: Implements methods for feature selection in mlr3.
 License: MIT + file LICENSE
-URL: https://github.com/mlr-org/mlr3fswrap
+URL: https://mlr3fswrap.mlr-org.com
+    https://github.com/mlr-org/mlr3fswrap
 BugReports: https://github.com/mlr-org/mlr3fswrap/issues
 Depends:
     R (>= 3.1.0)
