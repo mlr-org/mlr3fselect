@@ -39,7 +39,7 @@
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' tm = TerminatorPerformanceStep$new(threshold = 0.01)
 #' fs = FeatureSelectionSequential$new(pe = pe, tm = tm, measure,
-#'                                     param_vals = list(max_features = 4))
+#'   param_vals = list(max_features = 4))
 #' fs$calculate()
 #' fs$get_result()
 #' @export
@@ -48,12 +48,12 @@ FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
   public = list(
     initialize = function(pe, tm, measure, param_vals = list()) {
       super$initialize(id = "sequential_selection",
-                       pe = pe,
-                       tm = tm,
-                       measure = measure,
-                       param_set = ParamSet$new(list(
-                         ParamFct$new("strategy", levels = c("fsf", "fsb"), default = "fsf"))),
-                       param_vals = param_vals)
+        pe = pe,
+        tm = tm,
+        measure = measure,
+        param_set = ParamSet$new(list(
+          ParamFct$new("strategy", levels = c("fsf", "fsb"), default = "fsf"))),
+        param_vals = param_vals)
 
       # Set values to default if missing
       if (is.null(self$param_set$values$strategy)) {
@@ -84,9 +84,11 @@ FeatureSelectionSequential = R6Class("FeatureSelectionSequential",
   ),
   private = list(
     calculate_step = function() {
+
       # Convert 0/1 states to feature names
       named_states = lapply(self$state, function(state) {
-        self$pe$task$feature_names[as.logical(state)]})
+        self$pe$task$feature_names[as.logical(state)]
+      })
 
       # Evaluation
       private$eval_states_terminator(named_states)

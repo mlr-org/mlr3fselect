@@ -49,9 +49,9 @@
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' tm = TerminatorRuntime$new(max_time = 10, units = "secs")
 #' fs = FeatureSelectionGenetic$new(pe, tm, measures,
-#'                                  param_vals = list(mu = 10,
-#'                                                    lambda = 20,
-#'                                                    strategy = "comma"))
+#'   param_vals = list(mu = 10,
+#'     lambda = 20,
+#'     strategy = "comma"))
 #' fs$calculate()
 #' fs$get_result()
 #' fs$get_path()
@@ -60,6 +60,7 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
   inherit = FeatureSelection,
   public = list(
     initialize = function(pe, tm, measure, param_vals = list()) {
+
       super$initialize(id = "genetic_selection",
         pe = pe,
         tm = tm,
@@ -122,6 +123,7 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
   ),
   private = list(
     calculate_step = function() {
+
       # Generate population depending on strategy
       if (self$param_set$values$strategy == "plus") {
         states = c(self$state, private$generate_states())
@@ -131,7 +133,8 @@ FeatureSelectionGenetic = R6Class("FeatureSelectionGenetic",
 
       # Convert 0/1 states to feature names
       named_states = lapply(self$state, function(state) {
-        self$pe$task$feature_names[as.logical(state)]})
+        self$pe$task$feature_names[as.logical(state)]
+      })
 
       # Evaluation
       private$eval_states_terminator(named_states)

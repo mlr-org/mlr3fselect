@@ -35,7 +35,7 @@
 #' pe = PerformanceEvaluator$new(task, learner, resampling)
 #' tm = TerminatorEvaluations$new(max_evaluations = 50)
 #' fs = FeatureSelectionRandom$new(pe, tm, measure,
-#'                                 param_vals = list(max_features = 4))
+#'   param_vals = list(max_features = 4))
 #' fs$calculate()
 #' fs$get_result()
 #' @export
@@ -44,10 +44,10 @@ FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
   public = list(
     initialize = function(pe, tm, measure, param_vals = list()) {
       super$initialize(id = "random_selection",
-                       pe = pe,
-                       tm = tm,
-                       measure = measure,
-                       param_vals = param_vals)
+        pe = pe,
+        tm = tm,
+        measure = measure,
+        param_vals = param_vals)
 
       self$state = private$generate_states()
     },
@@ -66,7 +66,8 @@ FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
     calculate_step = function() {
       # Convert 0/1 states to feature names
       named_states = lapply(self$state, function(state) {
-        self$pe$task$feature_names[as.logical(state)]})
+        self$pe$task$feature_names[as.logical(state)]
+      })
 
       # Evaluation
       private$eval_states_terminator(named_states)
@@ -78,7 +79,7 @@ FeatureSelectionRandom = R6Class("FeatureSelectionRandom",
       lapply(seq_len(10), function(i) {
         if (is.na(self$param_set$values$max_features)) {
           x = 0
-          while(sum(x) == 0) {
+          while (sum(x) == 0) {
             x = rbinom(length(self$pe$task$feature_names), 1, 0.5)
           }
           return(x)
