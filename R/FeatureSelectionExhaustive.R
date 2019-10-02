@@ -35,7 +35,7 @@
 #' pe = PerformanceEvaluator$new(task = task, learner = learner, resampling = resampling)
 #' tm = TerminatorRuntime$new(max_time = 20, units = "secs")
 #' fs = FeatureSelectionExhaustive$new(pe = pe, tm = tm, measure,
-#'                                     param_vals = list(max_features = 3))
+#'   param_vals = list(max_features = 3))
 #' fs$calculate()
 #' fs$get_result()
 #' @export
@@ -44,10 +44,10 @@ FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
   public = list(
     initialize = function(pe, tm, measure, param_vals = list()) {
       super$initialize(id = "exhaustive_selection",
-                       pe = pe,
-                       tm = tm,
-                       measure = measure,
-                       param_vals = param_vals)
+        pe = pe,
+        tm = tm,
+        measure = measure,
+        param_vals = param_vals)
 
       self$state = private$generate_states(1)
     },
@@ -67,7 +67,8 @@ FeatureSelectionExhaustive = R6Class("FeatureSelectionExhaustive",
     calculate_step = function() {
       # Convert 0/1 states to feature names
       named_states = lapply(self$state, function(state) {
-        self$pe$task$feature_names[as.logical(state)]})
+        self$pe$task$feature_names[as.logical(state)]
+      })
 
       # Evaluation
       private$eval_states_terminator(named_states)
