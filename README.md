@@ -1,5 +1,6 @@
-
 # mlr3fswrap
+
+Wrapper feature selection for mlr3.
 
 [![Build Status](https://travis-ci.org/mlr-org/mlr3fswrap.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3fswrap)
 [![CRAN](https://www.r-pkg.org/badges/version/mlr3fswrap)](https://cran.r-project.org/package=mlr3fswrap)
