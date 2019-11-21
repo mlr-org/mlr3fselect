@@ -1,3 +1,3 @@
-# mlr3featsel 0.1.0-9000
+# mlr3fselect 0.1.0-9000
 
 * Added a `NEWS.md` file to track changes to the package.
