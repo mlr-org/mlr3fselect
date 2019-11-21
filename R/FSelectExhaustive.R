@@ -45,3 +45,5 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
    }
   )
 )
+
+mlr_fselectors$add("exhaustive", FSelectExhaustive)

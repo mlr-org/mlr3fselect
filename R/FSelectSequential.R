@@ -68,3 +68,5 @@ FSelectSequential = R6Class("FSelectSequential",
     }
   )
 )
+
+mlr_fselectors$add("sequential", FSelectSequential)

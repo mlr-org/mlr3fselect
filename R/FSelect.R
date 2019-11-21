@@ -1,5 +1,7 @@
 #' FSelect
 #'
+#' @include mlr_fselectors.R
+#'
 #' @description
 #' Abstract `FSelect` class that implements the base functionality each `FSelect*` class must provide.
 #'

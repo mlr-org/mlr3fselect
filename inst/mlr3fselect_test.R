@@ -9,7 +9,7 @@ resampling = rsmp("cv")
 terminator = mlr3tuning::term("model_time", secs = 5)
 
 instance = FSelectInstance$new(task, learner, resampling, measure, terminator)
-fs = FSelectExhaustive$new()
+fs = mlr_fselectors$get("exhaustive")
 fs$select(instance)
 
 instance$best()
@@ -24,7 +24,7 @@ resampling = rsmp("cv")
 terminator = mlr3tuning::term("model_time", secs = 30)
 
 instance = FSelectInstance$new(task, learner, resampling, measure, terminator)
-fs = FSelectSequential$new()
+fs = mlr_fselectors$get("sequential")
 fs$select(instance)
 
 instance$best()
@@ -39,7 +39,7 @@ resampling = rsmp("cv")
 terminator = mlr3tuning::term("model_time", secs = 30)
 
 instance = FSelectInstance$new(task, learner, resampling, measure, terminator)
-fs = FSelectSequential$new()
+fs = mlr_fselectors$get("sequential")
 fs$param_set$values = mlr3misc::insert_named(fs$param_set$values, list(strategy = "fsb"))
 fs$select(instance)
 
