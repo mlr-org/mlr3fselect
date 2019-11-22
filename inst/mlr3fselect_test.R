@@ -1,12 +1,41 @@
 library(mlr3)
 library(mlr3fselect)
 
+# Random + Runtime
+task = tsk("pima")
+measure = msr("classif.acc")
+learner = lrn("classif.rpart")
+resampling = rsmp("cv")
+terminator = mlr3tuning::term("model_time", secs = 10)
+
+instance = FSelectInstance$new(task, learner, resampling, measure, terminator)
+fs = mlr_fselectors$get("random")
+fs$select(instance)
+
+instance$best()
+instance$best_by_batch(2)
+
 # Exhaustive + Runtime
 task = tsk("pima")
 measure = msr("classif.acc")
 learner = lrn("classif.rpart")
 resampling = rsmp("cv")
 terminator = mlr3tuning::term("model_time", secs = 5)
+
+instance = FSelectInstance$new(task, learner, resampling, measure, terminator)
+fs = mlr_fselectors$get("exhaustive")
+fs$select(instance)
+
+instance$best()
+instance$best_by_batch(2)
+
+# Exhaustive + Runtime
+task = tsk("pima")
+task$select(c("age", "insulin", "pregnant"))
+measure = msr("classif.acc")
+learner = lrn("classif.rpart")
+resampling = rsmp("cv")
+terminator = mlr3tuning::term("model_time", secs = 30)
 
 instance = FSelectInstance$new(task, learner, resampling, measure, terminator)
 fs = mlr_fselectors$get("exhaustive")
@@ -45,3 +74,10 @@ fs$select(instance)
 
 instance$best()
 instance$best_by_batch(1)
+
+
+
+
+
+
+
