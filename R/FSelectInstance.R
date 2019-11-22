@@ -87,17 +87,34 @@ FSelectInstance = R6Class("FSelectInstance",
       self$bmr$combine(bmr)
 
       # Logger
-      performance = bmr$aggregate(self$measures[[1]], ids = FALSE)[, self$measures[[1]]$id, with = FALSE]
+      perf = bmr$aggregate(self$measures[[1]], ids = FALSE)[, self$measures[[1]]$id, with = FALSE]
       states = data.table(states)
       names(states) = self$task$feature_names
 
       lg$info("Result")
       lg$info(sprintf("Batch %d", batch_nr))
-      lg$info(capture.output(print(cbind(states, performance), class = FALSE, row.names = FALSE, print.keys = FALSE)))
+      lg$info(capture.output(print(cbind(states, perf), class = FALSE, row.names = FALSE, print.keys = FALSE)))
 
       if (self$terminator$is_terminated(self)) {
         stop(terminated_error(self))
       }
+      return(list(batch_nr = batch_nr, uhashes = bmr$uhashes, perf = perf))
+    },
+
+    #' @description
+    #' Evaluates a feature combination `x` and returns a scalar objective value,
+    #' where the return value is negated if the measure is maximized.
+    #' This method is useful for feature selection algorithms that take a objective function.
+    #' @param x `numeric`
+    #' 0/1 encoded feature combination
+    #' @return
+    fselect_objective = function(x) {
+      assert_numeric(x, len = length(self$task$feature_names))
+      x = matrix(x, nrow=1)
+      z = self$eval_batch(x)
+      m = self$measures[[1L]]
+      y = z$perf[[m$id]]
+      if (m$minimize) y else -y
     },
 
     #' @description

@@ -30,6 +30,7 @@ Specifies a general feature selection scenario.
 \item \href{#method-format}{\code{FSelectInstance$format()}}
 \item \href{#method-print}{\code{FSelectInstance$print()}}
 \item \href{#method-eval_batch}{\code{FSelectInstance$eval_batch()}}
+\item \href{#method-fselect_objective}{\code{FSelectInstance$fselect_objective()}}
 \item \href{#method-best}{\code{FSelectInstance$best()}}
 \item \href{#method-best_by_batch}{\code{FSelectInstance$best_by_batch()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
@@ -97,6 +98,28 @@ Evaluates all feature combinations in \code{states} through resampling.
 \item{\code{states}}{(\code{matrix}) Each row represents a 0/1 encoded feature combination.}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-fselect_objective"></a>}}
+\subsection{Method \code{fselect_objective()}}{
+Evaluates a feature combination \code{x} and returns a scalar objective value,
+where the return value is negated if the measure is maximized.
+This method is useful for feature selection algorithms that take a objective function.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$fselect_objective(x)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{\code{numeric}
+0/1 encoded feature combination}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
 }
 }
 \if{html}{\out{<hr>}}
