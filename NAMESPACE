@@ -3,6 +3,7 @@
 export(FSelect)
 export(FSelectExhaustive)
 export(FSelectInstance)
+export(FSelectRandom)
 export(FSelectSequential)
 export(mlr_fselectors)
 import(checkmate)

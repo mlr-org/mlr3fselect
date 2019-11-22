@@ -52,6 +52,7 @@ Collate:
     'FSelect.R'
     'FSelectExhaustive.R'
     'FSelectInstance.R'
+    'FSelectRandom.R'
     'FSelectSequential.R'
     'assertions.R'
     'helper.R'
