@@ -118,6 +118,19 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
+    #' Returns a table of contained resample results with corresponding feature combinations.
+    #' @return A [data.table::data.table] object
+    archive = function() {
+      dt = self$bmr$aggregate(self$measures)
+      features = as.data.table(t(sapply(dt$resample_result, function(x) {
+        as.numeric(self$task$feature_names %in% x$task$feature_names)
+      })))
+      names(features) = self$task$feature_names
+
+      cbind(dt, features)
+    },
+
+    #' @description
     #' Queries the [mlr3::BenchmarkResult] for the `n` best feature combinations.
     #' @param n (`ìnteger`)
     #' @return A [data.table::data.table] object.

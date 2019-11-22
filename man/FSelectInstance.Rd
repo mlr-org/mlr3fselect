@@ -31,6 +31,7 @@ Specifies a general feature selection scenario.
 \item \href{#method-print}{\code{FSelectInstance$print()}}
 \item \href{#method-eval_batch}{\code{FSelectInstance$eval_batch()}}
 \item \href{#method-fselect_objective}{\code{FSelectInstance$fselect_objective()}}
+\item \href{#method-archive}{\code{FSelectInstance$archive()}}
 \item \href{#method-best}{\code{FSelectInstance$best()}}
 \item \href{#method-best_by_batch}{\code{FSelectInstance$best_by_batch()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
@@ -120,6 +121,18 @@ This method is useful for feature selection algorithms that take a objective fun
 }
 \subsection{Returns}{
 
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-archive"></a>}}
+\subsection{Method \code{archive()}}{
+Returns a table of contained resample results with corresponding feature combinations.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$archive()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A \link[data.table:data.table]{data.table::data.table} object
 }
 }
 \if{html}{\out{<hr>}}
