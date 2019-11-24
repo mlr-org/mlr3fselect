@@ -23,7 +23,7 @@ Authors@R:
              comment = c(ORCID = "0000-0001-6002-6980")))
 Description: Implements methods for feature selection in mlr3.
 License: LGPL-3
-URL: https://mlr3fselect.mlr-org.com
+URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
 BugReports: https://github.com/mlr-org/mlr3fselect/issues
 Depends:
