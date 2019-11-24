@@ -172,5 +172,8 @@ FSelectInstance = R6Class("FSelectInstance",
       names(res) = self$task$feature_names
       cbind(res, tab[, list(batch_nr), ], tab[, self$measures[[1]]$id, with = FALSE])
     }
+  ),
+  active = list(
+    n_evals = function() self$bmr$n_resample_results
   )
 )
