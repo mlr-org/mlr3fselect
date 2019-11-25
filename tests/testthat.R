@@ -1,2 +1,4 @@
 library(testthat)
-library(mlr3fswrap)
+library(mlr3)
+library(mlr3fselect)
+library(checkmate)

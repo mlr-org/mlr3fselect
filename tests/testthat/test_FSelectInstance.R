@@ -1,0 +1,33 @@
+context("FSelectInstance")
+
+test_that("FSelect", {
+
+  inst = TEST_MAKE_INST1(values = list(maxdepth = 10), folds = 2L, measures = msr("classif.ce"), n_dim = 2L, term_evals = 5L)
+
+  # Test empty instance
+  expect_data_table(inst$bmr$data, nrows = 0)
+
+  # Test instance
+  z = inst$eval_batch(matrix(c(1,1,1,0,1,0,0,0), nrow = 2, ncol = 4))
+  expect_data_table(inst$bmr$data, nrows = 4L)
+  expect_identical(inst$n_evals, 2L)
+  expect_list(z, len = 3)
+  expect_named(z, c("batch_nr", "uhashes", "perf"))
+  expect_equal(z$batch_nr, 1L)
+  expect_character(z$uhashes, len = 2L)
+  expect_data_table(z$perf, nrows = 2L, ncols = 1L)
+  expect_named(z$perf, "classif.ce")
+  expect_equal(inst$bmr$data$task[[1]]$feature_names, c("Petal.Length", "Petal.Width", "Sepal.Length")) # 1,1,1,0
+  expect_vector(inst$bmr$data$task[[3]]$feature_names, c("Petal.Length")) # 1,0,0,0
+  expect_equal(z$batch_nr, 1L)
+
+  # Test best method
+  expect_data_table(inst$best(n = 1), nrows = 1L, ncols = 5L)
+  expect_data_table(inst$best(n = 2), nrows = 2L, ncols = 5L)
+
+  # Test archive method
+  a = inst$archive()
+  expect_data_table(a)
+  expect_true(all(inst$task$feature_names %in% colnames(a)))
+  expect_true("classif.ce" %in% colnames(a))
+})
