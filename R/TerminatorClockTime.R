@@ -40,7 +40,7 @@ TerminatorClockTime = R6Class("TerminatorClockTime",
     #' @description
     #' Is `TRUE` if after the complete process took a number of seconds on the clock
     #' or a fixed time point has been reached, and `FALSE` otherwise.
-    #' @param instance object of class [FSelect] or [Tuner].
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) {
       pv = self$param_set$values

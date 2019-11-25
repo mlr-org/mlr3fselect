@@ -20,7 +20,7 @@ TerminatorNone = R6Class("TerminatorNone",
 
     #' @description
     #' Is always `FALSE`.
-    #' @param instance object of class [FSelect] or [Tuner].
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) return(FALSE)
   )

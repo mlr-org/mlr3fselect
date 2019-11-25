@@ -63,7 +63,7 @@ Is \code{TRUE} depending on the number of evaluations, and \code{FALSE} otherwis
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{instance}}{object of class \link{FSelect} or \link{Tuner}.}
+\item{\code{instance}}{object of class \link{FSelect}.}
 }
 \if{html}{\out{</div>}}
 }

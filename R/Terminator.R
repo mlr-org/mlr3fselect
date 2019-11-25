@@ -49,7 +49,7 @@ Terminator = R6Class("Terminator",
     #' @description
     #' Is `TRUE` if the termination criterion is positive, and `FALSE` otherwise.
     #' Must be implemented in each subclass.
-    #' @param instance object of class [FSelect] or [Tuner].
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) TRUE # overwrite in subclasses
   )

@@ -82,6 +82,9 @@ Format method.
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$format()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+\code{character()}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
@@ -91,6 +94,9 @@ Print method.
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$print()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+\code{character()}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-eval_batch"></a>}}
@@ -106,6 +112,9 @@ Evaluates all feature combinations in \code{states} through resampling.
 \item{\code{states}}{(\code{matrix}) Each row represents a 0/1 encoded feature combination.}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{list()}
 }
 }
 \if{html}{\out{<hr>}}
@@ -127,7 +136,7 @@ This method is useful for feature selection algorithms that take a objective fun
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-
+\code{numeric(1)}
 }
 }
 \if{html}{\out{<hr>}}

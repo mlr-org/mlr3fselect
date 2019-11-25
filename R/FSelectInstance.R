@@ -42,12 +42,14 @@ FSelectInstance = R6Class("FSelectInstance",
 
     #' @description
     #' Format method.
+    #' @return `character()`
     format = function() {
       sprintf("<%s>", class(self)[1L])
     },
 
     #' @description
     #' Print method.
+    #' @return `character()`
     print = function() {
       catf(self$format())
       catf(str_indent("* Task:", format(self$task)))
@@ -60,6 +62,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @description
     #' Evaluates all feature combinations in `states` through resampling.
     #' @param states (`matrix`) Each row represents a 0/1 encoded feature combination.
+    #' @return `list()`
     eval_batch = function(states) {
 
       if (self$terminator$is_terminated(self)) {
@@ -107,7 +110,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' This method is useful for feature selection algorithms that take a objective function.
     #' @param x `numeric`
     #' 0/1 encoded feature combination
-    #' @return
+    #' @return `numeric(1)`
     fselect_objective = function(x) {
       assert_numeric(x, len = length(self$task$feature_names))
       x = matrix(x, nrow=1)

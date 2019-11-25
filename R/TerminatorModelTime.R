@@ -31,7 +31,7 @@ TerminatorModelTime = R6Class("TerminatorModelTime",
 
     #' @description
     #' Is `TRUE` if after a given model evaluation budget is exceeded, and `FALSE` otherwise.
-    #' @param instance object of class [FSelect] or [Tuner].
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) {
       if (is.null(instance$bmr))

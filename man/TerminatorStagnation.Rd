@@ -64,7 +64,7 @@ Is \code{TRUE} after the performance stagnates, and \code{FALSE} otherwise.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{instance}}{object of class \link{FSelect}}
+\item{\code{instance}}{object of class \link{FSelect}.}
 }
 \if{html}{\out{</div>}}
 }

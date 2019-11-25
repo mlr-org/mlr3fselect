@@ -49,7 +49,7 @@ Is always \code{FALSE}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{instance}}{object of class \link{FSelect} or \link{Tuner}.}
+\item{\code{instance}}{object of class \link{FSelect}.}
 }
 \if{html}{\out{</div>}}
 }

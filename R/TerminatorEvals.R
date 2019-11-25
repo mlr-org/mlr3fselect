@@ -32,7 +32,7 @@ TerminatorEvals = R6Class("TerminatorEvals",
 
     #' @description
     #' Is `TRUE` depending on the number of evaluations, and `FALSE` otherwise.
-    #' @param instance object of class [FSelect] or [Tuner].
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) {
       instance$n_evals >= self$param_set$values$n_evals

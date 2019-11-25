@@ -33,7 +33,7 @@ TerminatorPerfReached = R6Class("TerminatorPerfReached",
 
     #' @description
     #' Is `TRUE` after a performance level has been hit, and `FALSE` otherwise.
-    #' @param instance object of class [FSelect] or [Tuner].
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) {
       pv = self$param_set$values

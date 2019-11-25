@@ -36,7 +36,7 @@ TerminatorStagnation = R6Class("TerminatorStagnation",
 
     #' @description
     #' Is `TRUE` after the performance stagnates, and `FALSE` otherwise.
-    #' @param instance object of class [FSelect]
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) {
       pv = self$param_set$values

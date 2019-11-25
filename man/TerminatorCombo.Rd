@@ -77,7 +77,7 @@ Is \code{TRUE} if as soon as one or all of the included terminators are positive
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{instance}}{object of class \link{FSelect} or \link{Tuner}.}
+\item{\code{instance}}{object of class \link{FSelect}.}
 }
 \if{html}{\out{</div>}}
 }

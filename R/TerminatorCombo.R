@@ -36,7 +36,7 @@ TerminatorCombo = R6Class("TerminatorCombo",
 
     #' @description
     #' Is `TRUE` if as soon as one or all of the included terminators are positive, and `FALSE` otherwise.
-    #' @param instance object of class [FSelect] or [Tuner].
+    #' @param instance object of class [FSelect].
     #' @return `logical(1)`
     is_terminated = function(instance) {
       g = if (self$param_set$values$any) any else all
