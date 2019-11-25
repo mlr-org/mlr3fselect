@@ -11,8 +11,8 @@ Implements methods for feature selection in mlr3.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://mlr3fselect.mlr-org.com
-    https://github.com/mlr-org/mlr3fselect}
+  \item \url{https://mlr3fselect.mlr-org.com}
+  \item \url{https://github.com/mlr-org/mlr3fselect}
   \item Report bugs at \url{https://github.com/mlr-org/mlr3fselect/issues}
 }
 

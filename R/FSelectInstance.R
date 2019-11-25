@@ -174,6 +174,7 @@ FSelectInstance = R6Class("FSelectInstance",
     }
   ),
   active = list(
+    #' @field n_evals Number of evaluations.
     n_evals = function() self$bmr$n_resample_results
   )
 )
