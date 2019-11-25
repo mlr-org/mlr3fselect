@@ -22,7 +22,7 @@ FSelectRandom = R6Class("FSelectRandom",
     }
   ),
   private = list(
-    search_internal = function(instance) {
+    select_internal = function(instance) {
       pars = self$param_set$values
 
       states = t(sapply(seq_len(pars$batch_size), function(i) {

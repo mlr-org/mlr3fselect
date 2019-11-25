@@ -22,7 +22,7 @@ FSelectSequential = R6Class("FSelectSequential",
     }
   ),
   private = list(
-    search_internal = function(instance) {
+    select_internal = function(instance) {
       pars = self$param_set$values
 
       # Initialize states for first batch

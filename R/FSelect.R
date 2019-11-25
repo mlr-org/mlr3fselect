@@ -28,7 +28,7 @@ FSelect = R6Class("FSelect",
 
       tryCatch({
         while (TRUE) {
-          private$search_internal(instance)
+          private$select_internal(instance)
         }
       }, terminated_error = function(cond) {
       })
@@ -36,7 +36,7 @@ FSelect = R6Class("FSelect",
   ),
 
   private = list(
-    search_internal = function() {
+    select_internal = function() {
       # Implemented by subclass
       stop("Abstract")
     },

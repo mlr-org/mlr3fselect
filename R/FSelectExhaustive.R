@@ -21,7 +21,7 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
    }
   ),
   private = list(
-   search_internal = function(instance) {
+   select_internal = function(instance) {
      pars = self$param_set$values
 
      if(length(instance$bmr$rr_data$batch_n) == 0) f_nr = 1 else f_nr = instance$bmr$rr_data$batch_n[length(instance$bmr$rr_data$batch_n)] + 1
