@@ -39,6 +39,7 @@ Imports:
 Suggests:
     rpart,
     ecr,
+    withr,
     testthat
 Remotes:
     mlr-org/mlr3,
