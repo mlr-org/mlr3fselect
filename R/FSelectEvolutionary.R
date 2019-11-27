@@ -75,8 +75,6 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       ctrl = ecr::registerECROperator(ctrl, "selectForMating", pars$parent.selector)
       ctrl = ecr::registerECROperator(ctrl, "selectForSurvival", pars$survival.selector)
 
-      browser()
-
       population = ecr::initPopulation(mu = pars$mu,
         gen.fun = ecr::genBin,
         initial.solutions = pars$initial.solutions,
