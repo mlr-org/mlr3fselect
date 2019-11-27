@@ -16,8 +16,8 @@ Class for evolutionary feature selection calling \code{\link[ecr:ecr]{ecr::ecr()
 \item{\code{survival.strategy}}{\code{character(1)}}
 \item{\code{n.elite}}{\code{integer(1)}}
 \item{\code{initial.solutions}}{list of \code{integer()}}
-\item{\code{parent.selector}}{object of class \link[ecr:selector]{ecr::selector}}
-\item{\code{survival.selector}}{object of class \link[ecr:selector]{ecr::selector}}}
+\item{\code{parent.selector}}{object of class \code{ecr::selector}}
+\item{\code{survival.selector}}{object of class \code{ecr::selector}}}
 
 For the meaning of the control parameter, see \code{\link[ecr:ecr]{ecr::ecr()}}.
 Note that \code{mu} and \code{lambda} must be set by the user.

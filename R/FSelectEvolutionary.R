@@ -12,8 +12,8 @@
 #' \item{\code{survival.strategy}}{\code{character(1)}}
 #' \item{\code{n.elite}}{\code{integer(1)}}
 #' \item{\code{initial.solutions}}{list of \code{integer()}}
-#' \item{\code{parent.selector}}{object of class [ecr::selector]}
-#' \item{\code{survival.selector}}{object of class [ecr::selector]}}
+#' \item{\code{parent.selector}}{object of class `ecr::selector`}
+#' \item{\code{survival.selector}}{object of class `ecr::selector`}}
 #'
 #' For the meaning of the control parameter, see [ecr::ecr()].
 #' Note that `mu` and `lambda` must be set by the user.
@@ -30,8 +30,9 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       ps = ParamSet$new(list(
         ParamInt$new("mu"),
         ParamInt$new("lambda"),
-        ParamDbl$new("p.recomb", default = 0.7),
-        ParamDbl$new("p.mut", default = 0.3),
+        ParamDbl$new("p.mutBitflip", default = 0.1, lower = 0, upper = 1),
+        ParamDbl$new("p.recomb", default = 0.7, lower = 0, upper = 1),
+        ParamDbl$new("p.mut", default = 0.1, lower = 0, upper = 1),
         ParamFct$new("survival.strategy", default = "plus", levels = c("plus", "comma")),
         ParamDbl$new("n.elite", default = 0),
         ParamUty$new("initial.solutions", default = NULL),
@@ -69,10 +70,12 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         selDomHV = ecr::selDomHV)
 
       ctrl = ecr::initECRControl(instance$fselect_objective, n.objectives = 1)
-      ctrl = ecr::registerECROperator(ctrl, "mutate", ecr::mutBitflip, p = 0.1)
+      ctrl = ecr::registerECROperator(ctrl, "mutate", ecr::mutBitflip, p = pars$p.mutBitflip)
       ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
       ctrl = ecr::registerECROperator(ctrl, "selectForMating", pars$parent.selector)
       ctrl = ecr::registerECROperator(ctrl, "selectForSurvival", pars$survival.selector)
+
+      browser()
 
       population = ecr::initPopulation(mu = pars$mu,
         gen.fun = ecr::genBin,
@@ -109,6 +112,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
     },
 
     set_defaults = function(instance) {
+      if (is.null(self$param_set$values$p.mutBitflip)) self$param_set$values$p.mutBitflip = self$param_set$default[["p.mutBitflip"]]
       if (is.null(self$param_set$values$p.recomb)) self$param_set$values$p.recomb = self$param_set$default[["p.recomb"]]
       if (is.null(self$param_set$values$p.mut)) self$param_set$values$p.mut = self$param_set$default[["p.mut"]]
       if (is.null(self$param_set$values$survival.strategy)) self$param_set$values$survival.strategy = self$param_set$default[["survival.strategy"]]
