@@ -16,7 +16,7 @@
 #' \item{\code{survival.selector}}{object of class [ecr::selector]}}
 #'
 #' For the meaning of the control parameter, see [ecr::ecr()].
-#' Note that `mu` is set to 25 by default, `lambda` to 30, `parent.selector` to [ecr::selTournament] and `survival.selector` to [ecr::selGreedy].
+#' Note that `mu` and `lambda` must be set by the user.
 #' The `terminators` parameter is replaced by the `Terminator` subclasses.
 #'
 #' @export
@@ -28,15 +28,15 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
     #' @return A `FSelectEvolutionary ` object.
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamInt$new("mu", default = 25),
-        ParamInt$new("lambda", default = 30),
+        ParamInt$new("mu"),
+        ParamInt$new("lambda"),
         ParamDbl$new("p.recomb", default = 0.7),
         ParamDbl$new("p.mut", default = 0.3),
         ParamFct$new("survival.strategy", default = "plus", levels = c("plus", "comma")),
         ParamDbl$new("n.elite", default = 0),
         ParamUty$new("initial.solutions", default = NULL),
-        ParamFct$new("parent.selector", default = "selTournament", levels = c("selTournament", "selRoulette", "selRanking", "selGreedy", "selNondom", "selDomHV")),
-        ParamFct$new("survival.selector", default = "selGreedy", levels = c("selTournament", "selRoulette", "selRanking", "selGreedy", "selNondom", "selDomHV")))
+        ParamFct$new("parent.selector", default = "selTournament", levels = c("selTournament", "selRoulette", "selRanking", "selGreedy")),
+        ParamFct$new("survival.selector", default = "selGreedy", levels = c("selTournament", "selRoulette", "selRanking", "selGreedy")))
       )
       ps$add_dep("n.elite", "survival.strategy", CondEqual$new("comma"))
 
@@ -48,6 +48,9 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
+
+      assert_numeric(pars$mu)
+      assert_numeric(pars$lambda)
 
       pars$parent.selector = switch(pars$parent.selector,
         selTournament = ecr::selTournament,
@@ -65,22 +68,52 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
 
+      ctrl = ecr::initECRControl(instance$fselect_objective, n.objectives = 1)
+      ctrl = ecr::registerECROperator(ctrl, "mutate", ecr::mutBitflip, p = 0.1)
+      ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
+      ctrl = ecr::registerECROperator(ctrl, "selectForMating", pars$parent.selector)
+      ctrl = ecr::registerECROperator(ctrl, "selectForSurvival", pars$survival.selector)
+
+      population = ecr::initPopulation(mu = pars$mu,
+        gen.fun = ecr::genBin,
+        initial.solutions = pars$initial.solutions,
+        n.dim = length(instance$task$feature_names))
+      population = map_if(population,
+                          function(x) sum(x) == 0,
+                          function(x) {
+                            x[sample(1:length(x), 1)] = 1
+                            x}) # Tasks without features cannot be evaluated
+
       withr::with_package("ecr", {
-        invoke(ecr::ecr, instance$fselect_objective,
-          minimize = TRUE,
-          n.objective = 1L,
-          n.bits = length(instance$task$feature_names),
-          representation = "binary",
-          mutator = ecr::mutBitflip,
-          recombinator = ecr::recCrossover,
-          terminators = list(ecr::stopOnMaxTime(max.time = NULL)),
-          .args = pars)
+        fitness = ecr::evaluateFitness(ctrl, population)
       })
+
+      while (TRUE) {
+        offspring = ecr::generateOffspring(ctrl, population, fitness, pars$lambda, p.recomb = pars$p.recomb, p.mut = pars$p.mut)
+        offspring = map_if(offspring,
+                           function(x) sum(x) == 0,
+                           function(x) {
+                             x[sample(1:length(x), 1)] = 1
+                             x})
+
+        withr::with_package("ecr", {
+          fitness_o = ecr::evaluateFitness(ctrl, offspring)
+        })
+        if (pars$survival.strategy == "plus") {
+          selection = ecr::replaceMuPlusLambda(ctrl, population, offspring, fitness, fitness_o)
+        } else {
+          selection = ecr::replaceMuCommaLambda(ctrl, population, offspring, fitness, fitness_o, n.elite = pars$n.elite)
+        }
+        population = selection$population
+      }
     },
 
     set_defaults = function(instance) {
-      if (is.null(self$param_set$values$mu)) self$param_set$values$mu = self$param_set$default[["mu"]]
-      if (is.null(self$param_set$values$lambda)) self$param_set$values$lambda = self$param_set$default[["lambda"]]
+      if (is.null(self$param_set$values$p.recomb)) self$param_set$values$p.recomb = self$param_set$default[["p.recomb"]]
+      if (is.null(self$param_set$values$p.mut)) self$param_set$values$p.mut = self$param_set$default[["p.mut"]]
+      if (is.null(self$param_set$values$survival.strategy)) self$param_set$values$survival.strategy = self$param_set$default[["survival.strategy"]]
+      if (is.null(self$param_set$values$n.elite) && self$param_set$values$survival.strategy == "comma") self$param_set$values$n.elite = self$param_set$default[["n.elite"]]
+      if (is.null(self$param_set$values$initial.solutions)) self$param_set$values$initial.solutions = self$param_set$default[["initial.solutions"]]
       if (is.null(self$param_set$values$parent.selector)) self$param_set$values$parent.selector = self$param_set$default[["parent.selector"]]
       if (is.null(self$param_set$values$survival.selector)) self$param_set$values$survival.selector = self$param_set$default[["survival.selector"]]
     }

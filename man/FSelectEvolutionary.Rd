@@ -20,7 +20,7 @@ Class for evolutionary feature selection calling \code{\link[ecr:ecr]{ecr::ecr()
 \item{\code{survival.selector}}{object of class \link[ecr:selector]{ecr::selector}}}
 
 For the meaning of the control parameter, see \code{\link[ecr:ecr]{ecr::ecr()}}.
-Note that \code{mu} is set to 25 by default, \code{lambda} to 30, \code{parent.selector} to \link[ecr:selTournament]{ecr::selTournament} and \code{survival.selector} to \link[ecr:selGreedy]{ecr::selGreedy}.
+Note that \code{mu} and \code{lambda} must be set by the user.
 The \code{terminators} parameter is replaced by the \code{Terminator} subclasses.
 }
 
