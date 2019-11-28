@@ -1,7 +1,14 @@
 #' FSelectExhaustive Class
 #'
 #' @description
-#' Exhaustive feature selection.
+#' Class for exhaustive feature selection.
+#'
+#' @section Parameters:
+#' \describe{
+#' \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in [mlr3::Task].}}
+#'
+#' The feature combinations are evaluated in batches.
+#' Each batch increases the number features.
 #'
 #' @export
 FSelectExhaustive = R6Class("FSelectExhaustive",

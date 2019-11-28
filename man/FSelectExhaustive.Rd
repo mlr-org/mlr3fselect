@@ -4,8 +4,17 @@
 \alias{FSelectExhaustive}
 \title{FSelectExhaustive Class}
 \description{
-Exhaustive feature selection.
+Class for exhaustive feature selection.
 }
+\section{Parameters}{
+
+\describe{
+\item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}}
+
+The feature combinations are evaluated in batches.
+Each batch increases the number features.
+}
+
 \section{Super class}{
 \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectExhaustive}
 }

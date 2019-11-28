@@ -1,7 +1,17 @@
 #' FSelectRandom Class
 #'
 #' @description
-#' Random feature selection.
+#' Class for random feature selection.
+#'
+#' @section Parameters:
+#' \describe{
+#' \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in [mlr3::Task].}
+#' \item{\code{batch_size}}{\code{integer(1)} Maximum number of feature combinations to try in a batch.}}
+#'
+#' In order to support general termination criteria and parallelization,
+#' feature combinations are evaluated in a batch-fashion of size `batch_size`.
+#' Larger batches mean more is parallelized, smaller batches imply a more fine-grained checking
+#' of termination criteria.
 #'
 #' @export
 FSelectRandom = R6Class("FSelectRandom",

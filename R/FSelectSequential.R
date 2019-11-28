@@ -1,7 +1,16 @@
 #' FSelectSequential Class
 #'
 #' @description
-#' Sequential feature selection.
+#' Class for sequential feature selection.
+#'
+#' \describe{
+#' \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in [mlr3::Task].}
+#' \item{\code{strategy}}{\code{character(1)} For forward feature selection `fsf`, for backward feature selection `fsb`}}
+#'
+#' The feature combinations are evaluated in batches.
+#' Each batch is one step in the sequential feature selection.
+#' In order to diplay the selected features of each step,
+#' use the `best_by_batch` method of the [FSelectInstance].
 #'
 #' @export
 FSelectSequential = R6Class("FSelectSequential",
