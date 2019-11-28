@@ -113,7 +113,6 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @return `numeric(1)`
     fselect_objective = function(x) {
       assert_numeric(x, len = length(self$task$feature_names))
-      if(sum(x) == 0) return(NA)
       x = matrix(x, nrow=1)
       z = self$eval_batch(x)
       m = self$measures[[1L]]
