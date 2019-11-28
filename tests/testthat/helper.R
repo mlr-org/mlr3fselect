@@ -3,7 +3,7 @@ lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.
 expect_fselect = function(fselect) {
   expect_r6(fselect, "FSelect",
             public = c("select", "param_set"),
-            private = c("select_internal", "set_defaults")
+            private = "select_internal"
   )
   expect_is(fselect$param_set, "ParamSet")
   expect_function(fselect$select, args = "instance")
@@ -40,7 +40,6 @@ test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals) {
   inst = FSelectInstance$new(tsk("iris"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term)
   fselect = fs(key, ...)
   expect_fselect(fselect)
-
 
   fselect$select(inst)
   bmr = inst$bmr

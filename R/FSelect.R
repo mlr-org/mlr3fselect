@@ -24,8 +24,6 @@ FSelect = R6Class("FSelect",
     #' Performce the feature selection on a [FSelectInstance] until termination.
     #' @param instance [FSelectInstance]
     select = function(instance) {
-      private$set_defaults(instance)
-
       tryCatch({
         while (TRUE) {
           private$select_internal(instance)
@@ -37,11 +35,6 @@ FSelect = R6Class("FSelect",
 
   private = list(
     select_internal = function() {
-      # Implemented by subclass
-      stop("Abstract")
-    },
-
-    set_defaults = function() {
       # Implemented by subclass
       stop("Abstract")
     }

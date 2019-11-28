@@ -28,11 +28,15 @@ FSelectSequential = R6Class("FSelectSequential",
       super$initialize(
         param_set = ps
       )
+      if (is.null(self$param_set$values$strategy)) {
+        self$param_set$values = insert_named(self$param_set$values, list(strategy = "fsf"))
+      }
     }
   ),
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
+      if (is.null(pars$max_features)) pars$max_features = length(instance$task$feature_names)
 
       # Initialize states for first batch
       if (length(instance$bmr$rr_data$batch_n) == 0) {
@@ -59,7 +63,7 @@ FSelectSequential = R6Class("FSelectSequential",
         # Generate new states based on best feature combination
         x = ifelse(pars$strategy == "fsf", 0, 1)
         y = ifelse(pars$strategy == "fsf", 1, 0)
-        z = if(pars$strategy == "fsf") !as.logical(best_state) else as.logical(best_state)
+        z = if (pars$strategy == "fsf") !as.logical(best_state) else as.logical(best_state)
         states = t(sapply(seq_along(best_state)[z], function(i) {
           if (best_state[i] == x) {
             new_state = best_state
@@ -69,11 +73,6 @@ FSelectSequential = R6Class("FSelectSequential",
         }))
       }
       instance$eval_batch(states)
-    },
-
-    set_defaults = function(instance) {
-      if (is.null(self$param_set$values$max_features)) self$param_set$values$max_features = length(instance$task$feature_names)
-      if (is.null(self$param_set$values$strategy)) self$param_set$values$strategy = self$param_set$default[["strategy"]]
     }
   )
 )
