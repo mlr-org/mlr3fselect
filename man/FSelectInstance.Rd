@@ -71,7 +71,7 @@ Create new \code{FSelectInstance} object.
 
 \item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
 
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}}
+\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling} Note that uninstantiated resamplings are instantiated during construction so that all configurations}
 
 \item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
 

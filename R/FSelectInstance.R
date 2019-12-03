@@ -25,7 +25,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' Create new `FSelectInstance` object.
     #' @param task [mlr3::Task]
     #' @param learner [mlr3::Learner]
-    #' @param resampling [mlr3::Resampling]
+    #' @param resampling [mlr3::Resampling] Note that uninstantiated resamplings are instantiated during construction so that all configurations
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param bmr [mlr3::BenchmarkResult]
@@ -42,6 +42,8 @@ FSelectInstance = R6Class("FSelectInstance",
       self$bmr = BenchmarkResult$new(data.table())
       self$bmr$rr_data[, c("batch_nr", "feat") := list(integer(), character())]
       self$resampling$instantiate(self$task)
+
+      if (!resampling$is_instantiated) self$resampling$instantiate(self$task)
     },
 
     #' @description
