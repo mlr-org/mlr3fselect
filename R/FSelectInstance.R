@@ -246,7 +246,7 @@ FSelectInstance = R6Class("FSelectInstance",
 
     #' @field n_batch Number of batches.
     n_batch = function() {
-      if(length(self$bmr$rr_data$batch_n) == 0) 0 else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
+      if(length(self$bmr$rr_data$batch_n) == 0) 0L else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
     },
 
     #' @field result Result of the feature selection i.e. the optimal feature  subset and its estimated performances.
