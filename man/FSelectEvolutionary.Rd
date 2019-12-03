@@ -37,6 +37,8 @@ The \code{terminators} parameter is replaced by the \code{Terminator} subclasses
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="format">}\href{../../mlr3fselect/html/FSelect.html#method-format}{\code{mlr3fselect::FSelect$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="print">}\href{../../mlr3fselect/html/FSelect.html#method-print}{\code{mlr3fselect::FSelect$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="select">}\href{../../mlr3fselect/html/FSelect.html#method-select}{\code{mlr3fselect::FSelect$select()}}\out{</span>}
 }
 \out{</details>}

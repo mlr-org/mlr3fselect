@@ -5,11 +5,22 @@
 \title{FSelect}
 \description{
 Abstract \code{FSelect} class that implements the base functionality each \verb{FSelect*} class must provide.
+A \link{FSelect} object describes the feature selection strategy,
+i.e. how to optimize the black-box function
+and its feasible set defined by the \link{FSelectInstance} object.
+
+A list of measures can be passed to the instance, and they will always be all evaluated.
+However, single-criteria algortihms optimize only the first measure
+
+A \link{FSelect} object must write its result to the \code{assign_result} method of the \link{FSelectInstance} at the end in
+order to store the best selected feature subset and its estimated performance vector.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}}
+
+\item{\code{packages}}{\code{character()}}
 }
 \if{html}{\out{</div>}}
 }
@@ -17,6 +28,8 @@ Abstract \code{FSelect} class that implements the base functionality each \verb{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelect$new()}}
+\item \href{#method-format}{\code{FSelect$format()}}
+\item \href{#method-print}{\code{FSelect$print()}}
 \item \href{#method-select}{\code{FSelect$select()}}
 \item \href{#method-clone}{\code{FSelect$clone()}}
 }
@@ -26,19 +39,45 @@ Abstract \code{FSelect} class that implements the base functionality each \verb{
 \subsection{Method \code{new()}}{
 Create new \code{FSelect} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, packages = character())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}
+\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}}
+
+\item{\code{packages}}{\code{character()}
 Set of control parameter for the feature selection.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A \code{FSelect} object.
+\code{FSelect} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-format"></a>}}
+\subsection{Method \code{format()}}{
+Format method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$format()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+`character()
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\subsection{Method \code{print()}}{
+Print method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$print()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{character()}
 }
 }
 \if{html}{\out{<hr>}}
