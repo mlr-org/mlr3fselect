@@ -189,6 +189,8 @@ of batch  \code{m} (default is the last batch).
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{measure}}{\link[mlr3:Measure]{mlr3::Measure}}
+
 \item{\code{m}}{(\code{ìnteger})}
 }
 \if{html}{\out{</div>}}
