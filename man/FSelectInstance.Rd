@@ -19,6 +19,8 @@ Specifies a general feature selection scenario.
 
 \item{\code{terminator}}{\link[mlr3tuning:Terminator]{mlr3tuning::Terminator}}
 
+\item{\code{bm_args}}{named \code{list()}}
+
 \item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
 }
 \if{html}{\out{</div>}}
@@ -52,7 +54,14 @@ Specifies a general feature selection scenario.
 \subsection{Method \code{new()}}{
 Create new \code{FSelectInstance} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$new(task, learner, resampling, measures, terminator)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$new(
+  task,
+  learner,
+  resampling,
+  measures,
+  terminator,
+  bm_args = list()
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -68,8 +77,10 @@ Create new \code{FSelectInstance} object.
 
 \item{\code{terminator}}{\link{Terminator}}
 
-\item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}
+\item{\code{bm_args}}{named \code{list()}
 Stores all evaluated \link[mlr3:ResampleResult]{mlr3::ResampleResult}s when evaluating feature combinations.}
+
+\item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
 }
 \if{html}{\out{</div>}}
 }

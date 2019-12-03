@@ -11,12 +11,14 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field resampling [mlr3::Resampling]
     #' @field measures list of [mlr3::Measure]
     #' @field terminator [mlr3tuning::Terminator]
+    #' @field bm_args named `list()`
     #' @field bmr [mlr3::BenchmarkResult]
     task = NULL,
     learner = NULL,
     resampling = NULL,
     measures = NULL,
     terminator = NULL,
+    bm_args = NULL,
     bmr = NULL,
 
     #' @description
@@ -27,16 +29,18 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param bmr [mlr3::BenchmarkResult]
+    #' @param bm_args named `list()`
     #' Stores all evaluated [mlr3::ResampleResult]s when evaluating feature combinations.
     #' @return A `FSelectInstance` object.
-    initialize = function(task, learner, resampling, measures, terminator) {
+    initialize = function(task, learner, resampling, measures, terminator, bm_args = list()) {
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
       self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
       self$measures = assert_measures(as_measures(measures, clone = TRUE), task = self$task, learner = self$learner)
       self$terminator = assert_terminator(terminator)
+      self$bm_args = assert_list(bm_args, names = "unique")
       self$bmr = BenchmarkResult$new(data.table())
-      self$bmr$rr_data[, c("batch_nr") := list(integer())]
+      self$bmr$rr_data[, c("batch_nr", "feat") := list(integer(), character())]
       self$resampling$instantiate(self$task)
     },
 
@@ -57,6 +61,7 @@ FSelectInstance = R6Class("FSelectInstance",
       catf(str_indent("* Measures:", map_chr(self$measures, "id")))
       catf(str_indent("* Resampling:", format(self$resampling)))
       catf(str_indent("* Terminator:", format(self$terminator)))
+      catf(str_indent("* bm_args:", as_short_string(self$bm_args)))
     },
 
     #' @description
@@ -79,7 +84,7 @@ FSelectInstance = R6Class("FSelectInstance",
 
       # Evaluate states
       d = data.table::data.table(task = tsks, learner = list(self$learner), resampling = list(self$resampling))
-      bmr = benchmark(d)
+      bmr = invoke(benchmark, d, .args = self$bm_args)
 
       # Add batch_nr
       batch_nr = self$bmr$rr_data$batch_nr
