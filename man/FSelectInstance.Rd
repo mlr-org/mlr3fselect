@@ -36,7 +36,7 @@ in varying levels of detail (\verb{$optimization_path}).
 
 \item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
 
-\item{\code{terminator}}{\link[mlr3tuning:Terminator]{mlr3tuning::Terminator}}
+\item{\code{terminator}}{\link{Terminator}}
 
 \item{\code{bm_args}}{named \code{list()}}
 
@@ -48,6 +48,8 @@ in varying levels of detail (\verb{$optimization_path}).
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{n_evals}}{Number of evaluations.}
+
+\item{\code{n_batch}}{Number of batches.}
 
 \item{\code{result}}{Result of the feature selection i.e. the optimal feature  subset and its estimated performances.}
 }
@@ -193,7 +195,7 @@ Returns a table of contained resample results with corresponding feature subsets
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-optimization_path"></a>}}
 \subsection{Method \code{optimization_path()}}{
-Queries the \link[ml3:BenchmarkResult]{ml3::BenchmarkResult} for the \code{n} best feature subsets (default is \code{1})
+Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the \code{n} best feature subsets (default is \code{1})
 of the batches specified in \code{m} (default is the last batch).
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$optimization_path(n = 1, m = NULL)}\if{html}{\out{</div>}}

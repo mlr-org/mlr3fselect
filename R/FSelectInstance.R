@@ -29,7 +29,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field learner [mlr3::Learner]
     #' @field resampling [mlr3::Resampling]
     #' @field measures list of [mlr3::Measure]
-    #' @field terminator [mlr3tuning::Terminator]
+    #' @field terminator [Terminator]
     #' @field bm_args named `list()`
     #' @field bmr [mlr3::BenchmarkResult]
     task = NULL,
@@ -171,7 +171,7 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
-    #' Queries the [ml3::BenchmarkResult] for the `n` best feature subsets (default is `1`)
+    #' Queries the [mlr3::BenchmarkResult] for the `n` best feature subsets (default is `1`)
     #' of the batches specified in `m` (default is the last batch).
     #' @param n (`integer`)
     #' @param m (`integer`)
