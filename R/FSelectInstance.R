@@ -83,6 +83,8 @@ FSelectInstance = R6Class("FSelectInstance",
       catf(str_indent("* Resampling:", format(self$resampling)))
       catf(str_indent("* Terminator:", format(self$terminator)))
       catf(str_indent("* bm_args:", as_short_string(self$bm_args)))
+      catf("Archive:")
+      print(self$archive())
     },
 
     #' @description
