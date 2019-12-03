@@ -43,7 +43,12 @@ FSelectSequential = R6Class("FSelectSequential",
         if (self$param_set$values$strategy == "fsf") {
           states = diag(1, length(instance$task$feature_names), length(instance$task$feature_names))
         } else {
-          states = matrix(1, nrow = 1, ncol = length(instance$task$feature_names))
+          combinations = combn(length(instance$task$feature_names), pars$max_features)
+          states = t(sapply(seq_len(ncol(combinations)), function(j) {
+            state = rep(0, length(instance$task$feature_names))
+            state[combinations[, j]] = 1
+            state
+          }))
         }
       } else {
         if (instance$n_batch == pars$max_features) {
