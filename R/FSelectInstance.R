@@ -1,7 +1,26 @@
 #' FSelectInstance Class
 #'
 #' @description
-#' Specifies a general feature selection scenario.
+#' Specifies a general feature selection scenario including performance evaluator
+#' and archive for [FSelect] objects to act upon.
+#' This class encodes the black box objective function that a [FSelect] object has to optimize.
+#' It allows the basis operations of querying the objective with feature subsets (`$eval_batch()`),
+#' storing the evaluations in an internal archive and querying the archive (`$archive()`).
+#'
+#' Evaluations of feature subsets are performed in batches by calling [mlr3::benchmark()] internally.
+#' Before and after a batch is evaluated, the [Terminator] is queried for the remaining budget.
+#' If the available budget is exhausted, an exception is raised,
+#' and no further evaluations can be performed from this point on.
+#'
+#' A list of measures can be passed to the instance, and they will always be all evaluated.
+#' However, single-criteria tuners optimize only the first measure.
+#'
+#' The [FSelect] object is also supposed to store its final result,
+#' consisting of a selected feature subset
+#' and associated estimated performance values, by calling the method `instance$assign_result`.
+#'
+#' This class allows to display the optimization path of the feature selection
+#' in varying levels of detail (`$optimization_path`).
 #'
 #' @export
 FSelectInstance = R6Class("FSelectInstance",
@@ -25,11 +44,11 @@ FSelectInstance = R6Class("FSelectInstance",
     #' Create new `FSelectInstance` object.
     #' @param task [mlr3::Task]
     #' @param learner [mlr3::Learner]
-    #' @param resampling [mlr3::Resampling] Note that uninstantiated resamplings are instantiated during construction so that all configurations
+    #' @param resampling [mlr3::Resampling] Note that uninstantiated resamplings are instantiated during construction so that all configurations.
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param bmr [mlr3::BenchmarkResult]
-    #' @param bm_args named `list()`
+    #' @param bm_args named `list()` Further arguments for [mlr3::benchmark()].
     #' Stores all evaluated [mlr3::ResampleResult]s when evaluating feature combinations.
     #' @return A `FSelectInstance` object.
     initialize = function(task, learner, resampling, measures, terminator, bm_args = list()) {
@@ -67,9 +86,14 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
-    #' Evaluates all feature combinations in `states` through resampling.
-    #' @param states (`matrix`) Each row represents a 0/1 encoded feature combination.
-    #' @return `list()`
+    #' Evaluates all feature subsets in `states` through resampling.
+    #' Updates the internal [BenchmarkResult] `$bmr` by reference.
+    #' Before and after each batch-evaluation, the [Terminator] is checked,
+    #' and if it is positive, an exception of class `terminated_error` is raised.
+    #' This function should be internally called by the [FSelect] object.
+    #' @param states (`matrix`)
+    #' Each row represents a 0/1 encoded feature subset.
+    #' @return named `list()`
     eval_batch = function(states) {
 
       if (self$terminator$is_terminated(self)) {
@@ -88,12 +112,12 @@ FSelectInstance = R6Class("FSelectInstance",
       d = data.table::data.table(task = tsks, learner = list(self$learner), resampling = list(self$resampling))
       bmr = invoke(benchmark, d, .args = self$bm_args)
 
-      # Add batch_nr
+      # Add batch_nr to rr_data
       batch_nr = self$bmr$rr_data$batch_nr
       batch_nr = if (length(batch_nr)) max(batch_nr) + 1L else 1L
       bmr$rr_data[, ("batch_nr") := batch_nr]
 
-      # Add column feat
+      # Add feat to rr_data
       feat_list = lapply(tsks, function(x) {x$feature_names})
       bmr$rr_data[, ("feat") := list(feat_list)]
 
@@ -116,11 +140,12 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
-    #' Evaluates a feature combination `x` and returns a scalar objective value,
+    #' Evaluates a feature subset `x` and returns a scalar objective value,
     #' where the return value is negated if the measure is maximized.
+    #' Internally, `$eval_batch()` is called with a single row.
     #' This method is useful for feature selection algorithms that take a objective function.
     #' @param x `numeric`
-    #' 0/1 encoded feature combination
+    #' 0/1 encoded feature subset
     #' @return `numeric(1)`
     fselect_objective = function(x) {
       assert_numeric(x, len = length(self$task$feature_names))
@@ -133,7 +158,7 @@ FSelectInstance = R6Class("FSelectInstance",
 
     #' @description
     #' Returns a table of contained resample results with corresponding feature subsets.
-    #' @return A [data.table::data.table] object
+    #' @return [data.table::data.table]
     archive = function() {
       self$bmr$aggregate(self$measures)
     },
@@ -143,7 +168,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' of the batches specified in `m` (default is the last batch).
     #' @param n (`integer`)
     #' @param m (`integer`)
-    #' @return A [data.table::data.table] object.
+    #' @return [data.table::data.table]
     optimization_path = function(n = 1, m = NULL) {
       assert_int(n, lower = 1)
       assert_integerish(m, null.ok = TRUE)
@@ -167,9 +192,10 @@ FSelectInstance = R6Class("FSelectInstance",
     #' Queries the [mlr3::BenchmarkResult] for the best [mlr3::ResampleResult]
     #' according to `measure` (default is the first measure in `$measures`)
     #' of batch  `m` (default is the last batch).
+    #' In case of ties, one of the tied values is selected randomly.
     #' @param measure [mlr3::Measure]
     #' @param m (`ìnteger`)
-    #' @return A [mlr3::ResampleResult] objects.
+    #' @return [mlr3::ResampleResult]
     best = function(measure = NULL, m = NULL) {
       if (is.null(measure)) {
         measure = self$measures[[1L]]
@@ -194,7 +220,8 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
-    #' The [FSelect] object writes the best found feature subset and estimated performance values here. For internal use.
+    #' The [FSelect] object writes the best found feature subset
+    #' and estimated performance values here. For internal use.
     #' @param feat (`character`) Must be character vector of feature names existing in `task`
     #' @param perf (`numeric`) Must be named numeric of performance measures, named with performance IDs, regarding all elements in `measures`.
     #' @return `NULL`
@@ -209,7 +236,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field n_evals Number of evaluations.
     n_evals = function() self$bmr$n_resample_results,
 
-    #' @field result Result of the feature selection i.e. the optimal feature combination and its estimated performances.
+    #' @field result Result of the feature selection i.e. the optimal feature  subset and its estimated performances.
     result = function() {
       list(feat = private$.result$feat, perf = private$.result$perf)
     }

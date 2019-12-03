@@ -4,7 +4,26 @@
 \alias{FSelectInstance}
 \title{FSelectInstance Class}
 \description{
-Specifies a general feature selection scenario.
+Specifies a general feature selection scenario including performance evaluator
+and archive for \link{FSelect} objects to act upon.
+This class encodes the black box objective function that a \link{FSelect} object has to optimize.
+It allows the basis operations of querying the objective with feature subsets (\verb{$eval_batch()}),
+storing the evaluations in an internal archive and querying the archive (\verb{$archive()}).
+
+Evaluations of feature subsets are performed in batches by calling \code{\link[mlr3:benchmark]{mlr3::benchmark()}} internally.
+Before and after a batch is evaluated, the \link{Terminator} is queried for the remaining budget.
+If the available budget is exhausted, an exception is raised,
+and no further evaluations can be performed from this point on.
+
+A list of measures can be passed to the instance, and they will always be all evaluated.
+However, single-criteria tuners optimize only the first measure.
+
+The \link{FSelect} object is also supposed to store its final result,
+consisting of a selected feature subset
+and associated estimated performance values, by calling the method \code{instance$assign_result}.
+
+This class allows to display the optimization path of the feature selection
+in varying levels of detail (\verb{$optimization_path}).
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -30,7 +49,7 @@ Specifies a general feature selection scenario.
 \describe{
 \item{\code{n_evals}}{Number of evaluations.}
 
-\item{\code{result}}{Result of the feature selection i.e. the optimal feature combination and its estimated performances.}
+\item{\code{result}}{Result of the feature selection i.e. the optimal feature  subset and its estimated performances.}
 }
 \if{html}{\out{</div>}}
 }
@@ -71,13 +90,13 @@ Create new \code{FSelectInstance} object.
 
 \item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
 
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling} Note that uninstantiated resamplings are instantiated during construction so that all configurations}
+\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling} Note that uninstantiated resamplings are instantiated during construction so that all configurations.}
 
 \item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
 
 \item{\code{terminator}}{\link{Terminator}}
 
-\item{\code{bm_args}}{named \code{list()}
+\item{\code{bm_args}}{named \code{list()} Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
 Stores all evaluated \link[mlr3:ResampleResult]{mlr3::ResampleResult}s when evaluating feature combinations.}
 
 \item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
@@ -115,7 +134,11 @@ Print method.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-eval_batch"></a>}}
 \subsection{Method \code{eval_batch()}}{
-Evaluates all feature combinations in \code{states} through resampling.
+Evaluates all feature subsets in \code{states} through resampling.
+Updates the internal \link{BenchmarkResult} \verb{$bmr} by reference.
+Before and after each batch-evaluation, the \link{Terminator} is checked,
+and if it is positive, an exception of class \code{terminated_error} is raised.
+This function should be internally called by the \link{FSelect} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$eval_batch(states)}\if{html}{\out{</div>}}
 }
@@ -123,19 +146,21 @@ Evaluates all feature combinations in \code{states} through resampling.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{states}}{(\code{matrix}) Each row represents a 0/1 encoded feature combination.}
+\item{\code{states}}{(\code{matrix})
+Each row represents a 0/1 encoded feature subset.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{list()}
+named \code{list()}
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-fselect_objective"></a>}}
 \subsection{Method \code{fselect_objective()}}{
-Evaluates a feature combination \code{x} and returns a scalar objective value,
+Evaluates a feature subset \code{x} and returns a scalar objective value,
 where the return value is negated if the measure is maximized.
+Internally, \verb{$eval_batch()} is called with a single row.
 This method is useful for feature selection algorithms that take a objective function.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$fselect_objective(x)}\if{html}{\out{</div>}}
@@ -145,7 +170,7 @@ This method is useful for feature selection algorithms that take a objective fun
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{x}}{\code{numeric}
-0/1 encoded feature combination}
+0/1 encoded feature subset}
 }
 \if{html}{\out{</div>}}
 }
@@ -162,7 +187,7 @@ Returns a table of contained resample results with corresponding feature subsets
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} object
+\link[data.table:data.table]{data.table::data.table}
 }
 }
 \if{html}{\out{<hr>}}
@@ -184,7 +209,7 @@ of the batches specified in \code{m} (default is the last batch).
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} object.
+\link[data.table:data.table]{data.table::data.table}
 }
 }
 \if{html}{\out{<hr>}}
@@ -193,6 +218,7 @@ A \link[data.table:data.table]{data.table::data.table} object.
 Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the best \link[mlr3:ResampleResult]{mlr3::ResampleResult}
 according to \code{measure} (default is the first measure in \verb{$measures})
 of batch  \code{m} (default is the last batch).
+In case of ties, one of the tied values is selected randomly.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$best(measure = NULL, m = NULL)}\if{html}{\out{</div>}}
 }
@@ -207,13 +233,14 @@ of batch  \code{m} (default is the last batch).
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A \link[mlr3:ResampleResult]{mlr3::ResampleResult} objects.
+\link[mlr3:ResampleResult]{mlr3::ResampleResult}
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-assign_result"></a>}}
 \subsection{Method \code{assign_result()}}{
-The \link{FSelect} object writes the best found feature subset and estimated performance values here. For internal use.
+The \link{FSelect} object writes the best found feature subset
+and estimated performance values here. For internal use.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$assign_result(feat, perf)}\if{html}{\out{</div>}}
 }
