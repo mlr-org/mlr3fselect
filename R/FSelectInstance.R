@@ -100,6 +100,10 @@ FSelectInstance = R6Class("FSelectInstance",
         stop(terminated_error(self))
       }
 
+      assert_matrix(states, ncols = length(self$task$feature_names))
+
+      lg$info("Evaluating %i feature subsets", nrow(states))
+
       # Clone task and set feature subset
       tsks = apply(states, 1, function(x) {
         state = self$task$feature_names[as.logical(x)]
@@ -125,7 +129,8 @@ FSelectInstance = R6Class("FSelectInstance",
       self$bmr$combine(bmr)
 
       # Logger
-      perf = bmr$aggregate(self$measures[[1]], ids = FALSE)[, self$measures[[1]]$id, with = FALSE]
+      mids = ids(self$measures)
+      perf = bmr$aggregate(self$measures, ids = FALSE)[, mids, with = FALSE]
       states = data.table(states)
       names(states) = self$task$feature_names
 

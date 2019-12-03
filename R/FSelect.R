@@ -51,7 +51,7 @@ fselect_assign_result_default = function(instance) {
   assert_r6(instance, "FSelectInstance")
 
   rr = instance$best()
-  perf = rr$aggregate(instance$measures[[1]])
+  perf = rr$aggregate(instance$measures)
   feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
 
   instance$assign_result(feat, perf)
