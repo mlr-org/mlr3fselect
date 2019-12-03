@@ -177,7 +177,7 @@ FSelectInstance = R6Class("FSelectInstance",
     optimization_path = function(n = 1, m = NULL) {
       assert_int(n, lower = 1)
       assert_integerish(m, null.ok = TRUE)
-      if(is.null(m)) m = self$bmr$rr_data$batch_nr[length(self$bmr$rr_data$batch_nr)]
+      if(is.null(m)) m = self$n_batch
 
       tab = self$bmr$aggregate(self$measures[[1]], ids = FALSE)
       order = if (self$measures[[1]]$minimize) 1 else -1
@@ -213,7 +213,7 @@ FSelectInstance = R6Class("FSelectInstance",
         stopf("Measure '%s' has minimize = NA and hence cannot be used for feature selection", measure$id)
 
       assert_int(m, null.ok = TRUE)
-      if(is.null(m)) m = self$bmr$rr_data$batch_nr[length(self$bmr$rr_data$batch_nr)]
+      if(is.null(m)) m = self$n_batch
 
       tab = self$bmr$aggregate(measure, ids = FALSE)
       tab = tab[batch_nr == m]
@@ -243,6 +243,11 @@ FSelectInstance = R6Class("FSelectInstance",
   active = list(
     #' @field n_evals Number of evaluations.
     n_evals = function() self$bmr$n_resample_results,
+
+    #' @field n_batch Number of batches.
+    n_batch = function() {
+      if(length(self$bmr$rr_data$batch_n) == 0) 0 else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
+    },
 
     #' @field result Result of the feature selection i.e. the optimal feature  subset and its estimated performances.
     result = function() {

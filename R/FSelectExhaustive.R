@@ -33,13 +33,11 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
       pars = self$param_set$values
       if (is.null(pars$max_features)) pars$max_features = length(instance$task$feature_names)
 
-      if (length(instance$bmr$rr_data$batch_n) == 0) f_nr = 1 else f_nr = instance$bmr$rr_data$batch_n[length(instance$bmr$rr_data$batch_n)] + 1
-
-      if (f_nr > pars$max_features) {
+      if (instance$n_batch + 1 > pars$max_features) {
         stop(terminated_error(instance))
       }
 
-      combinations = combn(length(instance$task$feature_names), f_nr)
+      combinations = combn(length(instance$task$feature_names), instance$n_batch + 1)
       states = t(sapply(seq_len(ncol(combinations)), function(j) {
         state = rep(0, length(instance$task$feature_names))
         state[combinations[, j]] = 1

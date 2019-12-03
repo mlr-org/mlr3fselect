@@ -39,14 +39,14 @@ FSelectSequential = R6Class("FSelectSequential",
       if (is.null(pars$max_features)) pars$max_features = length(instance$task$feature_names)
 
       # Initialize states for first batch
-      if (length(instance$bmr$rr_data$batch_n) == 0) {
+      if (instance$n_batch == 0) {
         if (self$param_set$values$strategy == "fsf") {
           states = diag(1, length(instance$task$feature_names), length(instance$task$feature_names))
         } else {
           states = matrix(1, nrow = 1, ncol = length(instance$task$feature_names))
         }
       } else {
-        if (instance$bmr$rr_data$batch_n[length(instance$bmr$rr_data$batch_n)] == pars$max_features) {
+        if (n_batch == pars$max_features) {
           stop(terminated_error(instance))
         }
 
