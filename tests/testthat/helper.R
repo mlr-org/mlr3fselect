@@ -9,6 +9,13 @@ expect_fselect = function(fselect) {
   expect_function(fselect$select, args = "instance")
 }
 
+expect_features = function(features, n) {
+  res = sapply(features, function(x){
+    length(x)
+  })
+  expect_equal(max(res), n)
+}
+
 
 TEST_MAKE_PS1 = function(n_dim = 1L) {
   if (n_dim == 1) {
