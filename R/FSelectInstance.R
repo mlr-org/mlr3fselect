@@ -208,6 +208,9 @@ FSelectInstance = R6Class("FSelectInstance",
         measure = as_measure(measure, task_type = self$task$task_type)
         assert_choice(measure$id, map_chr(self$measures, "id"))
       }
+      assert_measure(measure, task = self$task, learner = self$learner)
+      if (is.na(measure$minimize))
+        stopf("Measure '%s' has minimize = NA and hence cannot be used for feature selection", measure$id)
 
       assert_int(m, null.ok = TRUE)
       if(is.null(m)) m = self$bmr$rr_data$batch_nr[length(self$bmr$rr_data$batch_nr)]
