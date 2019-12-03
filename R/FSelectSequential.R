@@ -46,7 +46,7 @@ FSelectSequential = R6Class("FSelectSequential",
           states = matrix(1, nrow = 1, ncol = length(instance$task$feature_names))
         }
       } else {
-        if (n_batch == pars$max_features) {
+        if (instance$n_batch == pars$max_features) {
           stop(terminated_error(instance))
         }
 
