@@ -50,15 +50,10 @@ FSelectSequential = R6Class("FSelectSequential",
           stop(terminated_error(instance))
         }
 
-        # Query bmr for best feature combintion of last batch
-        aggr = instance$bmr$aggregate(instance$measures[[1]])
-        max_batch = instance$bmr$rr_data$batch_n[length(instance$bmr$rr_data$batch_n)]
-        aggr = aggr[batch_nr == max_batch]
-        performance = aggr[[instance$measures[[1]]$id]]
-        which_best = if (instance$measures[[1]]$minimize) which_min else which_max
-        best_index = which_best(performance, na_rm = TRUE)
-        named_state = aggr$resample_result[[best_index]]$task$feature_names
-        best_state = as.numeric(instance$task$feature_names %in% named_state)
+        # Query bmr for best feature subset of last batch
+        rr = instance$best()
+        feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
+        best_state = as.numeric(instance$task$feature_names %in% feat)
 
         # Generate new states based on best feature combination
         x = ifelse(pars$strategy == "fsf", 0, 1)

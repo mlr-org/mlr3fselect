@@ -86,6 +86,10 @@ FSelectInstance = R6Class("FSelectInstance",
       batch_nr = if (length(batch_nr)) max(batch_nr) + 1L else 1L
       bmr$rr_data[, ("batch_nr") := batch_nr]
 
+      # Add column feat
+      feat_list = lapply(tsks, function(x) {x$feature_names})
+      bmr$rr_data[, ("feat") := list(feat_list)]
+
       # Store evaluated states
       self$bmr$combine(bmr)
 
@@ -121,51 +125,27 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
-    #' Returns a table of contained resample results with corresponding feature combinations.
+    #' Returns a table of contained resample results with corresponding feature subsets.
     #' @return A [data.table::data.table] object
     archive = function() {
-      dt = self$bmr$aggregate(self$measures)
-      features = as.data.table(t(sapply(dt$resample_result, function(x) {
-        as.numeric(self$task$feature_names %in% x$task$feature_names)
-      })))
-      names(features) = self$task$feature_names
-
-      cbind(dt, features)
+      self$bmr$aggregate(self$measures)
     },
 
     #' @description
-    #' Queries the [mlr3::BenchmarkResult] for the `n` best feature combinations.
-    #' @param n (`ìnteger`)
+    #' Queries the [ml3::BenchmarkResult] for the `n` best feature subsets (default is `1`)
+    #' of the batches specified in `m` (default is the last batch).
+    #' @param n (`integer`)
+    #' @param m (`integer`)
     #' @return A [data.table::data.table] object.
-    best = function(n = 1) {
-
+    optimization_path = function(n = 1, m = NULL) {
       assert_int(n, lower = 1)
-
-      tab = self$bmr$aggregate(self$measures[[1]], ids = FALSE)
-      order = if (self$measures[[1]]$minimize) 1 else -1
-      setorderv(tab, self$measures[[1]]$id, order = order)
-
-      res = t(sapply(tab[1:n]$resample_result, function(x) {
-        as.numeric(self$task$feature_names %in% x$task$feature_names)
-      }))
-
-      res = as.data.table(res)
-      names(res) = self$task$feature_names
-      cbind(res, tab[1:n, self$measures[[1]]$id, with = FALSE])
-    },
-
-    #' @description
-    #' Queries the [mlr3::BenchmarkResult] for the `n` best feature combinations in each batch.
-    #' @param n (`ìnteger`)
-    #' @return A [data.table::data.table] object.
-    best_by_batch = function(n = 1) {
-
-      assert_int(n, lower = 1)
+      assert_integerish(m, null.ok = TRUE)
+      if(is.null(m)) m = self$bmr$rr_data$batch_nr[length(self$bmr$rr_data$batch_nr)]
 
       tab = self$bmr$aggregate(self$measures[[1]], ids = FALSE)
       order = if (self$measures[[1]]$minimize) 1 else -1
       setorderv(tab, c("batch_nr", self$measures[[1]]$id), order = order)
-      tab = tab[, head(.SD, n), by = batch_nr]
+      tab = tab[batch_nr %in% m, head(.SD, n), by = batch_nr]
 
       res = t(sapply(tab$resample_result, function(x) {
         as.numeric(self$task$feature_names %in% x$task$feature_names)
@@ -173,11 +153,62 @@ FSelectInstance = R6Class("FSelectInstance",
 
       res = as.data.table(res)
       names(res) = self$task$feature_names
-      cbind(res, tab[, list(batch_nr), ], tab[, self$measures[[1]]$id, with = FALSE])
+      cbind(tab[,list(batch_nr)], res, tab[, self$measures[[1]]$id, with = FALSE])
+    },
+
+    #' @description
+    #' Queries the [mlr3::BenchmarkResult] for the best [mlr3::ResampleResult]
+    #' according to `measure` (default is the first measure in `$measures`)
+    #' of batch  `m` (default is the last batch).
+    #' @param measure [mlr3::Measure]
+    #' @param m (`ìnteger`)
+    #' @return A [mlr3::ResampleResult] objects.
+    best = function(measure = NULL, m = NULL) {
+      if (is.null(measure)) {
+        measure = self$measures[[1L]]
+      } else {
+        measure = as_measure(measure, task_type = self$task$task_type)
+        assert_choice(measure$id, map_chr(self$measures, "id"))
+      }
+
+      assert_int(m, null.ok = TRUE)
+      if(is.null(m)) m = self$bmr$rr_data$batch_nr[length(self$bmr$rr_data$batch_nr)]
+
+      tab = self$bmr$aggregate(measure, ids = FALSE)
+      tab = tab[batch_nr == m]
+
+      y = tab[[measure$id]]
+      if (allMissing(y))
+        stopf("No non-missing performance value stored")
+
+      which_best = if (measure$minimize) which_min else which_max
+      best_index = which_best(y, na_rm = TRUE)
+      tab$resample_result[[best_index]]
+    },
+
+    #' @description
+    #' The [FSelect] object writes the best found feature subset and estimated performance values here. For internal use.
+    #' @param feat (`character`) Must be character vector of feature names existing in `task`
+    #' @param perf (`numeric`) Must be named numeric of performance measures, named with performance IDs, regarding all elements in `measures`.
+    #' @return `NULL`
+    assign_result = function(feat, perf) {
+      assert_names(feat, subset.of = self$task$feature_names)
+      assert_numeric(perf)
+      assert_names(names(perf), permutation.of = ids(self$measures))
+      private$.result = list(feat = feat, perf = perf)
     }
   ),
   active = list(
     #' @field n_evals Number of evaluations.
-    n_evals = function() self$bmr$n_resample_results
+    n_evals = function() self$bmr$n_resample_results,
+
+    #' @field result Result of the feature selection i.e. the optimal feature combination and its estimated performances.
+    result = function() {
+      list(feat = private$.result$feat, perf = private$.result$perf)
+    }
+  ),
+
+  private = list(
+    .result = NULL
   )
 )

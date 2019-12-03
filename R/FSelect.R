@@ -28,8 +28,10 @@ FSelect = R6Class("FSelect",
         while (TRUE) {
           private$select_internal(instance)
         }
-      }, terminated_error = function(cond) {
-      })
+      }, terminated_error = function(cond) {})
+
+      private$assign_result(instance)
+      invisible(NULL)
     }
   ),
 
@@ -37,6 +39,21 @@ FSelect = R6Class("FSelect",
     select_internal = function() {
       # Implemented by subclass
       stop("Abstract")
+    },
+
+    assign_result = function(instance) {
+      fselect_assign_result_default(instance)
     }
   )
 )
+
+fselect_assign_result_default = function(instance) {
+  assert_r6(instance, "FSelectInstance")
+
+  rr = instance$best()
+  perf = rr$aggregate(instance$measures[[1]])
+  feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
+
+  instance$assign_result(feat, perf)
+  invisible(NULL)
+}

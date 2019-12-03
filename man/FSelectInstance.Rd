@@ -27,6 +27,8 @@ Specifies a general feature selection scenario.
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{n_evals}}{Number of evaluations.}
+
+\item{\code{result}}{Result of the feature selection i.e. the optimal feature combination and its estimated performances.}
 }
 \if{html}{\out{</div>}}
 }
@@ -39,8 +41,9 @@ Specifies a general feature selection scenario.
 \item \href{#method-eval_batch}{\code{FSelectInstance$eval_batch()}}
 \item \href{#method-fselect_objective}{\code{FSelectInstance$fselect_objective()}}
 \item \href{#method-archive}{\code{FSelectInstance$archive()}}
+\item \href{#method-optimization_path}{\code{FSelectInstance$optimization_path()}}
 \item \href{#method-best}{\code{FSelectInstance$best()}}
-\item \href{#method-best_by_batch}{\code{FSelectInstance$best_by_batch()}}
+\item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
 }
@@ -142,7 +145,7 @@ This method is useful for feature selection algorithms that take a objective fun
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-archive"></a>}}
 \subsection{Method \code{archive()}}{
-Returns a table of contained resample results with corresponding feature combinations.
+Returns a table of contained resample results with corresponding feature subsets.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$archive()}\if{html}{\out{</div>}}
 }
@@ -152,17 +155,20 @@ A \link[data.table:data.table]{data.table::data.table} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-best"></a>}}
-\subsection{Method \code{best()}}{
-Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the \code{n} best feature combinations.
+\if{html}{\out{<a id="method-optimization_path"></a>}}
+\subsection{Method \code{optimization_path()}}{
+Queries the \link[ml3:BenchmarkResult]{ml3::BenchmarkResult} for the \code{n} best feature subsets (default is \code{1})
+of the batches specified in \code{m} (default is the last batch).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$best(n = 1)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$optimization_path(n = 1, m = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{n}}{(\code{ìnteger})}
+\item{\code{n}}{(\code{integer})}
+
+\item{\code{m}}{(\code{integer})}
 }
 \if{html}{\out{</div>}}
 }
@@ -171,22 +177,45 @@ A \link[data.table:data.table]{data.table::data.table} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-best_by_batch"></a>}}
-\subsection{Method \code{best_by_batch()}}{
-Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the \code{n} best feature combinations in each batch.
+\if{html}{\out{<a id="method-best"></a>}}
+\subsection{Method \code{best()}}{
+Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the best \link[mlr3:ResampleResult]{mlr3::ResampleResult}
+according to \code{measure} (default is the first measure in \verb{$measures})
+of batch  \code{m} (default is the last batch).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$best_by_batch(n = 1)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$best(measure = NULL, m = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{n}}{(\code{ìnteger})}
+\item{\code{m}}{(\code{ìnteger})}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} object.
+A \link[mlr3:ResampleResult]{mlr3::ResampleResult} objects.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-assign_result"></a>}}
+\subsection{Method \code{assign_result()}}{
+The \link{FSelect} object writes the best found feature subset and estimated performance values here. For internal use.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$assign_result(feat, perf)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{feat}}{(\code{character}) Must be character vector of feature names existing in \code{task}}
+
+\item{\code{perf}}{(\code{numeric}) Must be named numeric of performance measures, named with performance IDs, regarding all elements in \code{measures}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{NULL}
 }
 }
 \if{html}{\out{<hr>}}
