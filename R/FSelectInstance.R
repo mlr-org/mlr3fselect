@@ -177,6 +177,10 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @param m (`integer`)
     #' @return [data.table::data.table]
     optimization_path = function(n = 1, m = NULL) {
+
+      if(self$n_batch == 0)
+        stop("No feature selection conducted")
+
       assert_int(n, lower = 1)
       assert_integerish(m, null.ok = TRUE)
       if(is.null(m)) m = self$n_batch
@@ -204,6 +208,10 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @param m (`ìnteger`)
     #' @return [mlr3::ResampleResult]
     best = function(measure = NULL, m = NULL) {
+
+      if(self$n_batch == 0)
+        stop("No feature selection conducted")
+
       if (is.null(measure)) {
         measure = self$measures[[1L]]
       } else {
