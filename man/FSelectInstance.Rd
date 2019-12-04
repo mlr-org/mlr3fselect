@@ -219,7 +219,7 @@ of the batches specified in \code{m} (default is the last batch).
 \subsection{Method \code{best()}}{
 Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the best \link[mlr3:ResampleResult]{mlr3::ResampleResult}
 according to \code{measure} (default is the first measure in \verb{$measures})
-of batch  \code{m} (default is the last batch).
+of the batches specified in \code{m} (default is the all batches).
 In case of ties, one of the tied values is selected randomly.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$best(measure = NULL, m = NULL)}\if{html}{\out{</div>}}
