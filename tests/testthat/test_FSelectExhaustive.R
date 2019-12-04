@@ -10,8 +10,14 @@ test_that("FSelectExhaustive", {
   expect_features(a[batch_nr == 2, feat], n = 2)
   expect_features(a[batch_nr == 3, feat], n = 3)
   expect_features(a[batch_nr == 4, feat], n = 4)
+  expect_data_table(a, nrows = 15L)
+  r = z$inst$result
+  expect_equal(r$feat, c("Petal.Length", "Petal.Width", "Sepal.Length"))
 
   z = test_fselect("exhaustive", max_features = 2, term_evals = 10)
   a = z$inst$archive()
   expect_features(a[, feat], n = 2)
+  expect_data_table(a, nrows = 10L)
+  r = z$inst$result
+  expect_equal(r$feat, c("Petal.Length", "Petal.Width"))
 })
