@@ -50,6 +50,7 @@ NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.0
 Collate: 
+    'AutoFSelect.R'
     'mlr_fselectors.R'
     'FSelect.R'
     'FSelectEvolutionary.R'
