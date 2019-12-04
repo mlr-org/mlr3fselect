@@ -56,7 +56,7 @@ FSelectSequential = R6Class("FSelectSequential",
         }
 
         # Query bmr for best feature subset of last batch
-        rr = instance$best()
+        rr = instance$best(m = instance$n_batch)
         feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
         best_state = as.numeric(instance$task$feature_names %in% feat)
 

@@ -202,7 +202,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @description
     #' Queries the [mlr3::BenchmarkResult] for the best [mlr3::ResampleResult]
     #' according to `measure` (default is the first measure in `$measures`)
-    #' of batch  `m` (default is the last batch).
+    #' of the batches specified in `m` (default is the all batches).
     #' In case of ties, one of the tied values is selected randomly.
     #' @param measure [mlr3::Measure]
     #' @param m (`ìnteger`)
@@ -223,10 +223,10 @@ FSelectInstance = R6Class("FSelectInstance",
         stopf("Measure '%s' has minimize = NA and hence cannot be used for feature selection", measure$id)
 
       assert_int(m, null.ok = TRUE)
-      if(is.null(m)) m = self$n_batch
+      if(is.null(m)) m = 1:self$n_batch
 
       tab = self$bmr$aggregate(measure, ids = FALSE)
-      tab = tab[batch_nr == m]
+      tab = tab[batch_nr %in% m]
 
       y = tab[[measure$id]]
       if (allMissing(y))
