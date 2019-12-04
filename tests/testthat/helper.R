@@ -2,15 +2,15 @@ lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.
 
 expect_fselect = function(fselect) {
   expect_r6(fselect, "FSelect",
-            public = c("select", "param_set"),
-            private = "select_internal"
+    public = c("select", "param_set"),
+    private = "select_internal"
   )
   expect_is(fselect$param_set, "ParamSet")
   expect_function(fselect$select, args = "instance")
 }
 
 expect_features = function(features, n) {
-  res = sapply(features, function(x){
+  res = sapply(features, function(x) {
     length(x)
   })
   expect_equal(max(res), n)
@@ -27,37 +27,6 @@ TEST_MAKE_PS1 = function(n_dim = 1L) {
       ParamInt$new("minsplit", lower = 1, upper = 9)
     ))
   }
-}
-
-TEST_MAKE_INST1 = function(values = NULL, folds = 2L, measures = msr("classif.ce"), n_dim = 1L, term_evals = 5L) {
-  ps = TEST_MAKE_PS1(n_dim = n_dim)
-  lrn = mlr_learners$get("classif.rpart")
-  if (!is.null(values)) {
-    lrn$param_set$values = values
-  }
-  rs = rsmp("cv", folds = folds)
-  term = term("evals", n_evals = term_evals)
-  inst = FSelectInstance$new(tsk("iris"), lrn, rs, measures, term)
-  return(inst)
-}
-
-test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals) {
-  term = term("evals", n_evals = term_evals)
-  inst = FSelectInstance$new(tsk("iris"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term)
-  fselect = fs(key, ...)
-  expect_fselect(fselect)
-
-  fselect$select(inst)
-  bmr = inst$bmr
-  expect_data_table(bmr$data, nrows = real_evals)
-  expect_equal(inst$n_evals, real_evals)
-
-  r = inst$result
-  feat = r$feat
-  perf = r$perf
-  expect_character(feat)
-  expect_numeric(perf)
-  list(fselect = fselect, inst = inst)
 }
 
 make_dummy_feature_measure = function(type) {
@@ -83,13 +52,13 @@ make_dummy_feature_measure = function(type) {
       },
 
       score_internal = function(prediction, learner, task, ...) {
-        if(test_names(task$feature_names, permutation.of = "Petal.Length")) {
+        if (test_names(task$feature_names, permutation.of = "Petal.Length")) {
           return(1)
-        } else if(test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width"))) {
+        } else if (test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width"))) {
           return(2)
-        } else if(test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width", "Sepal.Length"))) {
+        } else if (test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width", "Sepal.Length"))) {
           return(4)
-        } else if(test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))) {
+        } else if (test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))) {
           return(3)
         } else {
           return(0)
@@ -102,3 +71,35 @@ MeasureDummyCPClassif = make_dummy_feature_measure("classif")
 mlr3::mlr_measures$add("dummy.cp.classif", MeasureDummyCPClassif)
 MeasureDummyCPRegr = make_dummy_feature_measure("regr")
 mlr3::mlr_measures$add("dummy.cp.regr", MeasureDummyCPRegr)
+
+
+TEST_MAKE_INST1 = function(values = NULL, folds = 2L, measures = msr("dummy.cp.classif"), n_dim = 1L, term_evals = 5L) {
+  ps = TEST_MAKE_PS1(n_dim = n_dim)
+  lrn = mlr_learners$get("classif.rpart")
+  if (!is.null(values)) {
+    lrn$param_set$values = values
+  }
+  rs = rsmp("cv", folds = folds)
+  term = term("evals", n_evals = term_evals)
+  inst = FSelectInstance$new(tsk("iris"), lrn, rs, measures, term)
+  return(inst)
+}
+
+test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals) {
+  term = term("evals", n_evals = term_evals)
+  inst = FSelectInstance$new(tsk("iris"), lrn("classif.rpart"), rsmp("holdout"), msr("dummy.cp.classif"), term)
+  fselect = fs(key, ...)
+  expect_fselect(fselect)
+
+  fselect$select(inst)
+  bmr = inst$bmr
+  expect_data_table(bmr$data, nrows = real_evals)
+  expect_equal(inst$n_evals, real_evals)
+
+  r = inst$result
+  feat = r$feat
+  perf = r$perf
+  expect_character(feat)
+  expect_numeric(perf)
+  list(fselect = fselect, inst = inst)
+}
