@@ -16,7 +16,6 @@ expect_features = function(features, n) {
   expect_equal(max(res), n)
 }
 
-
 TEST_MAKE_PS1 = function(n_dim = 1L) {
   if (n_dim == 1) {
     ParamSet$new(params = list(
@@ -60,3 +59,46 @@ test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals) {
   expect_numeric(perf)
   list(fselect = fselect, inst = inst)
 }
+
+make_dummy_feature_measure = function(type) {
+  if (type == "classif") {
+    id = "dummy.feature.classif"
+    inh = MeasureClassif
+    cl = "MeaureDummyCPClassif"
+  } else {
+    id = "dummy.feature.regr"
+    inh = MeasureRegr
+    cl = "MeaureDummyCPRegr"
+  }
+  m = R6Class(cl,
+    inherit = inh,
+    public = list(
+      initialize = function() {
+        super$initialize(
+          id = id,
+          range = c(0, 4),
+          minimize = FALSE,
+          properties = "requires_learner"
+        )
+      },
+
+      score_internal = function(prediction, learner, task, ...) {
+        if(test_names(task$feature_names, permutation.of = "Petal.Length")) {
+          return(1)
+        } else if(test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width"))) {
+          return(2)
+        } else if(test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width", "Sepal.Length"))) {
+          return(4)
+        } else if(test_names(task$feature_names, permutation.of = c("Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))) {
+          return(3)
+        } else {
+          return(0)
+        }
+      }
+    )
+  )
+}
+MeasureDummyCPClassif = make_dummy_feature_measure("classif")
+mlr3::mlr_measures$add("dummy.cp.classif", MeasureDummyCPClassif)
+MeasureDummyCPRegr = make_dummy_feature_measure("regr")
+mlr3::mlr_measures$add("dummy.cp.regr", MeasureDummyCPRegr)
