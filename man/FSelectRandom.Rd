@@ -10,7 +10,8 @@ Class for random feature selection.
 
 \describe{
 \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
-\item{\code{batch_size}}{\code{integer(1)} Maximum number of feature combinations to try in a batch.}}
+\item{\code{batch_size}}{\code{integer(1)} Maximum number of feature combinations to try in a batch.}
+\item{\code{prob}}{\code{double(1)} Probability of choosing a feature.}}
 
 In order to support general termination criteria and parallelization,
 feature combinations are evaluated in a batch-fashion of size \code{batch_size}.

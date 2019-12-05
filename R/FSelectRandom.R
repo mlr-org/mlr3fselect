@@ -6,7 +6,8 @@
 #' @section Parameters:
 #' \describe{
 #' \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in [mlr3::Task].}
-#' \item{\code{batch_size}}{\code{integer(1)} Maximum number of feature combinations to try in a batch.}}
+#' \item{\code{batch_size}}{\code{integer(1)} Maximum number of feature combinations to try in a batch.}
+#' \item{\code{prob}}{\code{double(1)} Probability of choosing a feature.}}
 #'
 #' In order to support general termination criteria and parallelization,
 #' feature combinations are evaluated in a batch-fashion of size `batch_size`.
@@ -23,7 +24,8 @@ FSelectRandom = R6Class("FSelectRandom",
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("max_features", lower = 1),
-        ParamInt$new("batch_size", default = 10, lower = 1))
+        ParamInt$new("batch_size", default = 10, lower = 1),
+        ParamDbl$new("prob", default = 0.5, lower = 0, upper = 1))
       )
 
       super$initialize(
@@ -31,6 +33,9 @@ FSelectRandom = R6Class("FSelectRandom",
       )
       if (is.null(self$param_set$values$batch_size)) {
         self$param_set$values = insert_named(self$param_set$values, list(batch_size = 10))
+      }
+      if (is.null(self$param_set$values$prob)) {
+        self$param_set$values = insert_named(self$param_set$values, list(prob = 0.5))
       }
     }
   ),
@@ -42,7 +47,7 @@ FSelectRandom = R6Class("FSelectRandom",
       states = t(sapply(seq_len(pars$batch_size), function(i) {
         x = Inf
         while (sum(x) > pars$max_features | sum(x) == 0) {
-          x = rbinom(length(instance$task$feature_names), 1, 0.5)
+          x = rbinom(length(instance$task$feature_names), 1, pars$prob)
         }
         return(x)
       }))
