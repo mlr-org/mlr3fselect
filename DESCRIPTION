@@ -56,6 +56,7 @@ Collate:
     'FSelectEvolutionary.R'
     'FSelectExhaustive.R'
     'FSelectInstance.R'
+    'FSelectRFE.R'
     'FSelectRandom.R'
     'FSelectSequential.R'
     'mlr_terminators.R'
