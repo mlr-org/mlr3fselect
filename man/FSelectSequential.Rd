@@ -5,16 +5,21 @@
 \title{FSelectSequential Class}
 \description{
 Class for sequential feature selection.
+The sequential forward selection (\code{strategy = fsf}) extends the feature set in each step with the feature
+that increases the models performance the most.
+The sequential backward selection (\code{strategy = fsb}) starts with the complete future set
+and removes in each step the feature that decreases the models performance the least.
+}
+\section{Parameters}{
 
 \describe{
 \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
-\item{\code{strategy}}{\code{character(1)} For forward feature selection \code{fsf}, for backward feature selection \code{fsb}}}
+\item{\code{strategy}}{\code{character(1)} For forward feature selection \code{fsf}, for backward feature selection \code{fsb}.}}
 
-The feature combinations are evaluated in batches.
+The feature sets are evaluated in batches.
 Each batch is one step in the sequential feature selection.
-In order to diplay the selected features of each step,
-use the \code{best_by_batch} method of the \link{FSelectInstance}.
 }
+
 \section{Super class}{
 \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectSequential}
 }
@@ -43,7 +48,7 @@ Create new \code{FSelectSequential} object.
 }
 
 \subsection{Returns}{
-A \code{FSelectSequential} object.
+\code{FSelectSequential}
 }
 }
 \if{html}{\out{<hr>}}

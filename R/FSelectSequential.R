@@ -2,15 +2,18 @@
 #'
 #' @description
 #' Class for sequential feature selection.
+#' The sequential forward selection (`strategy = fsf`) extends the feature set in each step with the feature
+#' that increases the models performance the most.
+#' The sequential backward selection (`strategy = fsb`) starts with the complete future set
+#' and removes in each step the feature that decreases the models performance the least.
 #'
+#' @section Parameters:
 #' \describe{
 #' \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in [mlr3::Task].}
-#' \item{\code{strategy}}{\code{character(1)} For forward feature selection `fsf`, for backward feature selection `fsb`}}
+#' \item{\code{strategy}}{\code{character(1)} For forward feature selection `fsf`, for backward feature selection `fsb`.}}
 #'
-#' The feature combinations are evaluated in batches.
+#' The feature sets are evaluated in batches.
 #' Each batch is one step in the sequential feature selection.
-#' In order to diplay the selected features of each step,
-#' use the `best_by_batch` method of the [FSelectInstance].
 #'
 #' @export
 FSelectSequential = R6Class("FSelectSequential",
@@ -18,7 +21,7 @@ FSelectSequential = R6Class("FSelectSequential",
   public = list(
     #' @description
     #' Create new `FSelectSequential` object.
-    #' @return A `FSelectSequential` object.
+    #' @return `FSelectSequential`
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("max_features", lower = 1),
@@ -60,7 +63,7 @@ FSelectSequential = R6Class("FSelectSequential",
         feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
         best_state = as.numeric(instance$task$feature_names %in% feat)
 
-        # Generate new states based on best feature combination
+        # Generate new states based on best feature set
         x = ifelse(pars$strategy == "fsf", 0, 1)
         y = ifelse(pars$strategy == "fsf", 1, 0)
         z = if (pars$strategy == "fsf") !as.logical(best_state) else as.logical(best_state)

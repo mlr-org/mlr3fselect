@@ -4,14 +4,14 @@
 #'
 #' @description
 #' Abstract `FSelect` class that implements the base functionality each `FSelect*` class must provide.
-#' A [FSelect] object describes the feature selection strategy,
+#' A `FSelect` object describes the feature selection strategy,
 #' i.e. how to optimize the black-box function
 #' and its feasible set defined by the [FSelectInstance] object.
 #'
 #' A list of measures can be passed to the instance, and they will always be all evaluated.
-#' However, single-criteria algortihms optimize only the first measure
+#' However, single-criteria algorithms optimize only the first measure
 #'
-#' A [FSelect] object must write its result to the `assign_result` method of the [FSelectInstance] at the end in
+#' A `FSelect` object must write its result to the `$assign_result()` method of the [FSelectInstance] at the end in
 #' order to store the best selected feature subset and its estimated performance vector.
 #'
 #' @export
@@ -27,7 +27,7 @@ FSelect = R6Class("FSelect",
     #' @param param_set [paradox::ParamSet]
     #' @param packages `character()`
     #' Set of control parameter for the feature selection.
-    #' @return `FSelect` object.
+    #' @return `FSelect`
     initialize = function(param_set, packages = character()) {
       self$param_set = assert_param_set(param_set)
       self$packages = assert_set(packages)
@@ -35,7 +35,7 @@ FSelect = R6Class("FSelect",
 
     #' @description
     #' Format method.
-    #' @return `character()
+    #' @return `character()`
     format = function() {
       sprintf("<%s>", class(self)[1L])
     },
@@ -50,7 +50,7 @@ FSelect = R6Class("FSelect",
     },
 
     #' @description
-    #' Performce the feature selection on a [FSelectInstance] until termination.
+    #' Performs the feature selection on a [FSelectInstance] until termination.
     #' @param instance [FSelectInstance]
     select = function(instance) {
       assert_r6(instance, "FSelectInstance")

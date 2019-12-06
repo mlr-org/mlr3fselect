@@ -4,15 +4,15 @@
 \alias{FSelectExhaustive}
 \title{FSelectExhaustive Class}
 \description{
-Class for exhaustive feature selection.
+Class for exhaustive feature selection. All feature sets are searched.
 }
 \section{Parameters}{
 
 \describe{
 \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}}
 
-The feature combinations are evaluated in batches.
-Each batch increases the number features.
+In order to support general termination criteria and parallelization, feature sets are evaluated in batches.
+The size of the feature sets is increased by 1 in each batch.
 }
 
 \section{Super class}{
@@ -43,7 +43,7 @@ Create new \code{FSelectExhaustive} object.
 }
 
 \subsection{Returns}{
-A \code{FSelectExhaustive} object.
+\code{FSelectExhaustive}
 }
 }
 \if{html}{\out{<hr>}}

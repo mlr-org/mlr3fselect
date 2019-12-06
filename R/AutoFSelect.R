@@ -1,8 +1,8 @@
 #' AutoFeselect
 #'
 #' @description
-#' The `AutoFSelect` is a [mlr3::Learner] which automatically selects the optimal feature subset and
-#' fits the model on the traning data with the optimal feature subset.
+#' The `AutoFSelect` is a [mlr3::Learner] which automatically selects the optimal feature set and
+#' fits the model on the training data with the optimal feature set.
 #'
 #' @export
 AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
@@ -15,14 +15,14 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     store_fselect_instance = TRUE,
 
     #' @description
-    #' Create new [AutoFSelect] object.
+    #' Create new `AutoFSelect` object.
     #' @param learner [mlr3::Learner]
     #' @param resampling [mlr3::Resampling]
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param bm_args named `list()` Further arguments for [mlr3::benchmark()].
     #' @param fselect [FSelect]
-    #' @return [AutoFSelect]
+    #' @return `AutoFSelect`
     initialize = function(learner, resampling, measures, terminator, fselect, bm_args = list()) {
       ia = list()
       ia$learner = assert_learner(learner)$clone()
@@ -47,10 +47,10 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     },
 
     #' @description
-    #' Selects the optimal feature subset, applies the feature subset to the task
+    #' Selects the optimal feature set, applies the feature set to the task
     #' and fits the model on the training data.
     #' If `store_fselect_instance` is `TRUE`, the [mlr3::Learner] with the [FSelectInstance]
-    #' is returned, otherweise just the [mlr3::Learner]. For internal use.
+    #' is returned, otherwise just the [mlr3::Learner]. For internal use.
     #' @param task [mlr3::Task]
     #' @return list([mlr3::Learner]) or list([mlr3::Learner], [FSelectInstance])
     train_internal = function(task) {
@@ -72,7 +72,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     },
 
     #' @description
-    #' Creates a new [mlr3::Prediction] based on the learner fittet
+    #' Creates a new [mlr3::Prediction] based on the learner fitted
     #' on the training data with the optimal feature subset.
     #' For internal use.
     #' @param task [mlr3::Task]
@@ -82,7 +82,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     },
 
     #' @description
-    #' Returns a table of contained resample results with corresponding feature subsets.
+    #' Returns a table of contained resample results with corresponding feature sets.
     #' @return [data.table::data.table]
     archive = function() self$fselect_instance$archive()
   ),
@@ -101,7 +101,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @field fselect_instance [FSelectInstance]
     fselect_instance = function() self$model$fselect_instance,
 
-    #' @field fselect_result `list()` Result of the feature selection i.e. the optimal feature  subset and its estimated performances.
+    #' @field fselect_result `list()` Result of the feature selection i.e. the optimal feature set and its estimated performances.
     fselect_result = function() self$fselect_instance$result
   )
 )

@@ -21,7 +21,7 @@ Class for evolutionary feature selection calling \code{\link[ecr:ecr]{ecr::ecr()
 
 For the meaning of the control parameter, see \code{\link[ecr:ecr]{ecr::ecr()}}.
 Note that \code{mu} and \code{lambda} must be set by the user.
-The \code{terminators} parameter is replaced by the \code{Terminator} subclasses.
+The \code{terminators} parameter is replaced by the \link{Terminator} subclasses.
 }
 
 \section{Super class}{
@@ -52,7 +52,7 @@ Create new \code{FSelectEvolutionary } object.
 }
 
 \subsection{Returns}{
-A \code{FSelectEvolutionary } object.
+\code{FSelectEvolutionary}
 }
 }
 \if{html}{\out{<hr>}}

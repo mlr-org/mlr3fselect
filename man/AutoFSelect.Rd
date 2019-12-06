@@ -4,8 +4,8 @@
 \alias{AutoFSelect}
 \title{AutoFeselect}
 \description{
-The \code{AutoFSelect} is a \link[mlr3:Learner]{mlr3::Learner} which automatically selects the optimal feature subset and
-fits the model on the traning data with the optimal feature subset.
+The \code{AutoFSelect} is a \link[mlr3:Learner]{mlr3::Learner} which automatically selects the optimal feature set and
+fits the model on the training data with the optimal feature set.
 }
 \section{Super class}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{AutoFSelect}
@@ -28,7 +28,7 @@ fits the model on the traning data with the optimal feature subset.
 
 \item{\code{fselect_instance}}{\link{FSelectInstance}}
 
-\item{\code{fselect_result}}{\code{list()} Result of the feature selection i.e. the optimal feature  subset and its estimated performances.}
+\item{\code{fselect_result}}{\code{list()} Result of the feature selection i.e. the optimal feature set and its estimated performances.}
 }
 \if{html}{\out{</div>}}
 }
@@ -57,7 +57,7 @@ fits the model on the traning data with the optimal feature subset.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
 \subsection{Method \code{new()}}{
-Create new \link{AutoFSelect} object.
+Create new \code{AutoFSelect} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(
   learner,
@@ -87,16 +87,16 @@ Create new \link{AutoFSelect} object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\link{AutoFSelect}
+\code{AutoFSelect}
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-train_internal"></a>}}
 \subsection{Method \code{train_internal()}}{
-Selects the optimal feature subset, applies the feature subset to the task
+Selects the optimal feature set, applies the feature set to the task
 and fits the model on the training data.
 If \code{store_fselect_instance} is \code{TRUE}, the \link[mlr3:Learner]{mlr3::Learner} with the \link{FSelectInstance}
-is returned, otherweise just the \link[mlr3:Learner]{mlr3::Learner}. For internal use.
+is returned, otherwise just the \link[mlr3:Learner]{mlr3::Learner}. For internal use.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$train_internal(task)}\if{html}{\out{</div>}}
 }
@@ -115,7 +115,7 @@ list(\link[mlr3:Learner]{mlr3::Learner}) or list(\link[mlr3:Learner]{mlr3::Learn
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-predict_internal"></a>}}
 \subsection{Method \code{predict_internal()}}{
-Creates a new \link[mlr3:Prediction]{mlr3::Prediction} based on the learner fittet
+Creates a new \link[mlr3:Prediction]{mlr3::Prediction} based on the learner fitted
 on the training data with the optimal feature subset.
 For internal use.
 \subsection{Usage}{
@@ -136,7 +136,7 @@ For internal use.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-archive"></a>}}
 \subsection{Method \code{archive()}}{
-Returns a table of contained resample results with corresponding feature subsets.
+Returns a table of contained resample results with corresponding feature sets.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$archive()}\if{html}{\out{</div>}}
 }

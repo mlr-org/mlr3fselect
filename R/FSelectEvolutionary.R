@@ -17,7 +17,7 @@
 #'
 #' For the meaning of the control parameter, see [ecr::ecr()].
 #' Note that `mu` and `lambda` must be set by the user.
-#' The `terminators` parameter is replaced by the `Terminator` subclasses.
+#' The `terminators` parameter is replaced by the [Terminator] subclasses.
 #'
 #' @export
 FSelectEvolutionary = R6Class("FSelectEvolutionary",
@@ -25,7 +25,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
   public = list(
     #' @description
     #' Create new `FSelectEvolutionary ` object.
-    #' @return A `FSelectEvolutionary ` object.
+    #' @return `FSelectEvolutionary`
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("mu"),

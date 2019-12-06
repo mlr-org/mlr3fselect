@@ -5,14 +5,14 @@
 \title{FSelect}
 \description{
 Abstract \code{FSelect} class that implements the base functionality each \verb{FSelect*} class must provide.
-A \link{FSelect} object describes the feature selection strategy,
+A \code{FSelect} object describes the feature selection strategy,
 i.e. how to optimize the black-box function
 and its feasible set defined by the \link{FSelectInstance} object.
 
 A list of measures can be passed to the instance, and they will always be all evaluated.
-However, single-criteria algortihms optimize only the first measure
+However, single-criteria algorithms optimize only the first measure
 
-A \link{FSelect} object must write its result to the \code{assign_result} method of the \link{FSelectInstance} at the end in
+A \code{FSelect} object must write its result to the \verb{$assign_result()} method of the \link{FSelectInstance} at the end in
 order to store the best selected feature subset and its estimated performance vector.
 }
 \section{Public fields}{
@@ -53,7 +53,7 @@ Set of control parameter for the feature selection.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{FSelect} object.
+\code{FSelect}
 }
 }
 \if{html}{\out{<hr>}}
@@ -65,7 +65,7 @@ Format method.
 }
 
 \subsection{Returns}{
-`character()
+\code{character()}
 }
 }
 \if{html}{\out{<hr>}}
@@ -83,7 +83,7 @@ Print method.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-select"></a>}}
 \subsection{Method \code{select()}}{
-Performce the feature selection on a \link{FSelectInstance} until termination.
+Performs the feature selection on a \link{FSelectInstance} until termination.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelect$select(instance)}\if{html}{\out{</div>}}
 }
