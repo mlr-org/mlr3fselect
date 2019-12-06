@@ -42,7 +42,8 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       ps$add_dep("n.elite", "survival.strategy", CondEqual$new("comma"))
 
       super$initialize(
-        param_set = ps
+        param_set = ps,
+        packages = "ecr"
       )
     }
   ),
