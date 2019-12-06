@@ -6,9 +6,9 @@
 \description{
 Class for feature selection by recursive feature elimination (RFE).
 The recursive algorithm (\code{recursive = TRUE}) recomputes the feature importances
-on the reduced feature subset in every iteration.
+on the reduced feature set in every iteration.
 The non-recursive algorithm (\code{recursive = TRUE}) only uses the feature importances
-of the model fitted with all features to eliminate the next most unimportant feature in ever iteration.
+of the model fitted with all features to eliminate the next most unimportant feature in every iteration.
 }
 \section{Parameters}{
 
@@ -46,13 +46,13 @@ of the model fitted with all features to eliminate the next most unimportant fea
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
 \subsection{Method \code{new()}}{
-Create new \link{FSelectRFE} object.
+Create new \code{FSelectRFE} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectRFE$new()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-\link{FSelectRFE}
+\code{FSelectRFE}
 }
 }
 \if{html}{\out{<hr>}}

@@ -3,10 +3,9 @@
 #' @description
 #' Class for feature selection by recursive feature elimination (RFE).
 #' The recursive algorithm (`recursive = TRUE`) recomputes the feature importances
-#' on the reduced feature subset in every iteration.
+#' on the reduced feature set in every iteration.
 #' The non-recursive algorithm (`recursive = TRUE`) only uses the feature importances
-#' of the model fitted with all features to eliminate the next most unimportant feature in ever iteration.
-#'
+#' of the model fitted with all features to eliminate the next most unimportant feature in every iteration.
 #'
 #' @section Parameters:
 #' \describe{
@@ -27,12 +26,12 @@ FSelectRFE = R6Class("FSelectRFE",
     # But we could store here also the feature importances of every iteration in a list format
     # since it is a valuable information for the user.
     # However, I am not sure if this is the right place for it.
-    # I suscepect that the user would assume that this information is stored in the archive
+    # I suspect that the user would assume that this information is stored in the archive
     # along with the other information about the feature selection.
 
     #' @description
-    #' Create new [FSelectRFE] object.
-    #' @return [FSelectRFE]
+    #' Create new `FSelectRFE` object.
+    #' @return `FSelectRFE`
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("min_features", lower = 1),
@@ -89,10 +88,10 @@ FSelectRFE = R6Class("FSelectRFE",
 
 mlr_fselectors$add("rfe", FSelectRFE)
 
-# Calculates the average feature importances on all resample iteratons.
+# Calculates the average feature importances on all resample iterations.
 # Returns a numeric vector of average feature importances in ascending order.
 # Some learners omit features that are not used at all,
-# thus we have to assign zero to these features.
+# thus we have to assign zero to these features
 importance_average = function(learners, features) {
   imp = sapply(learners, function(x) {
     imp_r = x$importance()
