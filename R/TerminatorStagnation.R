@@ -42,7 +42,7 @@ TerminatorStagnation = R6Class("TerminatorStagnation",
       pv = self$param_set$values
       iters = pv$iters
 
-      aggr = instance$archive(unnest = "no")
+      aggr = instance$archive()
       if (nrow(aggr) <= iters) {
         return(FALSE)
       }
