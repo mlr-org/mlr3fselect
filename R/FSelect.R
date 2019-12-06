@@ -57,6 +57,7 @@ FSelect = R6Class("FSelect",
       assert_r6(instance, "FSelectInstance")
       require_namespaces(self$packages)
 
+      instance$start_time = Sys.time()
       lg$info("Starting the feature selection with '%s' and '%s'",
         self$format(), instance$terminator$format())
       lg$info("Terminator settings: %s", as_short_string(instance$terminator$param_set$values))

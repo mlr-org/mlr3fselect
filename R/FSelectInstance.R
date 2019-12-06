@@ -32,6 +32,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field terminator [Terminator]
     #' @field bm_args named `list()`
     #' @field bmr [mlr3::BenchmarkResult]
+    #' @field start_time `POSIXct(1)`
     task = NULL,
     learner = NULL,
     resampling = NULL,
@@ -39,6 +40,7 @@ FSelectInstance = R6Class("FSelectInstance",
     terminator = NULL,
     bm_args = NULL,
     bmr = NULL,
+    start_time = NULL,
 
     #' @description
     #' Create new `FSelectInstance` object.

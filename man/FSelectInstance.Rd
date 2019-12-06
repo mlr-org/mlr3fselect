@@ -41,6 +41,8 @@ in varying levels of detail (\verb{$optimization_path}).
 \item{\code{bm_args}}{named \code{list()}}
 
 \item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
+
+\item{\code{start_time}}{\code{POSIXct(1)}}
 }
 \if{html}{\out{</div>}}
 }
