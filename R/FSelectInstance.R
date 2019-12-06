@@ -52,6 +52,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' Stores all evaluated [mlr3::ResampleResult]s when evaluating feature combinations.
     #' @return `FSelectInstance`
     initialize = function(task, learner, resampling, measures, terminator, bm_args = list()) {
+
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
       self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
@@ -124,7 +125,9 @@ FSelectInstance = R6Class("FSelectInstance",
       bmr$rr_data[, ("batch_nr") := batch_nr]
 
       # Add feat to rr_data
-      feat_list = lapply(tsks, function(x) {x$feature_names})
+      feat_list = lapply(tsks, function(x) {
+        x$feature_names
+      })
       bmr$rr_data[, ("feat") := list(feat_list)]
 
       # Store evaluated states
@@ -156,7 +159,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @return `numeric(1)`
     fselect_objective = function(x) {
       assert_numeric(x, len = length(self$task$feature_names))
-      x = matrix(x, nrow=1)
+      x = matrix(x, nrow = 1)
       z = self$eval_batch(x)
       m = self$measures[[1L]]
       y = z$perf[[m$id]]
@@ -180,12 +183,13 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @return [data.table::data.table]
     optimization_path = function(n = 1, m = NULL) {
 
-      if(self$n_batch == 0)
+      if (self$n_batch == 0) {
         stop("No feature selection conducted")
+      }
 
       assert_int(n, lower = 1)
       assert_integerish(m, null.ok = TRUE)
-      if(is.null(m)) m = self$n_batch
+      if (is.null(m)) m = self$n_batch
 
       tab = self$bmr$aggregate(self$measures[[1]], ids = FALSE)
       order = if (self$measures[[1]]$minimize) 1 else -1
@@ -198,7 +202,7 @@ FSelectInstance = R6Class("FSelectInstance",
 
       res = as.data.table(res)
       names(res) = self$task$feature_names
-      cbind(tab[,list(batch_nr)], res, tab[, self$measures[[1]]$id, with = FALSE])
+      cbind(tab[, list(batch_nr)], res, tab[, self$measures[[1]]$id, with = FALSE])
     },
 
     #' @description
@@ -211,8 +215,9 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @return [mlr3::ResampleResult]
     best = function(measure = NULL, m = NULL) {
 
-      if(self$n_batch == 0)
+      if (self$n_batch == 0) {
         stop("No feature selection conducted")
+      }
 
       if (is.null(measure)) {
         measure = self$measures[[1L]]
@@ -221,18 +226,20 @@ FSelectInstance = R6Class("FSelectInstance",
         assert_choice(measure$id, map_chr(self$measures, "id"))
       }
       assert_measure(measure, task = self$task, learner = self$learner)
-      if (is.na(measure$minimize))
+      if (is.na(measure$minimize)) {
         stopf("Measure '%s' has minimize = NA and hence cannot be used for feature selection", measure$id)
+      }
 
       assert_int(m, null.ok = TRUE)
-      if(is.null(m)) m = 1:self$n_batch
+      if (is.null(m)) m = 1:self$n_batch
 
       tab = self$bmr$aggregate(measure, ids = FALSE)
       tab = tab[batch_nr %in% m]
 
       y = tab[[measure$id]]
-      if (allMissing(y))
+      if (allMissing(y)) {
         stopf("No non-missing performance value stored")
+      }
 
       which_best = if (measure$minimize) which_min else which_max
       best_index = which_best(y, na_rm = TRUE)
@@ -257,7 +264,7 @@ FSelectInstance = R6Class("FSelectInstance",
 
     #' @field n_batch Number of batches.
     n_batch = function() {
-      if(length(self$bmr$rr_data$batch_n) == 0) 0L else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
+      if (length(self$bmr$rr_data$batch_n) == 0) 0L else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
     },
 
     #' @field result Result of the feature selection i.e. the optimal feature set and its estimated performances.

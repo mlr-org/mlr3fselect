@@ -53,18 +53,20 @@ FSelect = R6Class("FSelect",
     #' Performs the feature selection on a [FSelectInstance] until termination.
     #' @param instance [FSelectInstance]
     select = function(instance) {
+
       assert_r6(instance, "FSelectInstance")
       require_namespaces(self$packages)
 
-      lg$info("Starting the feature selection with '%s' and '%s'" ,
-              self$format(), instance$terminator$format())
+      lg$info("Starting the feature selection with '%s' and '%s'",
+        self$format(), instance$terminator$format())
       lg$info("Terminator settings: %s", as_short_string(instance$terminator$param_set$values))
 
       tryCatch({
         while (TRUE) {
           private$select_internal(instance)
         }
-      }, terminated_error = function(cond) {})
+      }, terminated_error = function(cond) {
+      })
 
       private$assign_result(instance)
       invisible(NULL)
