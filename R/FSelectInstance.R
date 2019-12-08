@@ -20,7 +20,7 @@
 #' and associated estimated performance values, by calling the method `instance$assign_result()`.
 #'
 #' This class allows to display the optimization path of the feature selection
-#' in varying levels of detail (`$optimization_path`).
+#' in varying levels of detail (`$optimization_path()`).
 #'
 #' @export
 #' @examples

@@ -23,7 +23,7 @@ consisting of a selected feature set
 and associated estimated performance values, by calling the method \code{instance$assign_result()}.
 
 This class allows to display the optimization path of the feature selection
-in varying levels of detail (\verb{$optimization_path}).
+in varying levels of detail (\verb{$optimization_path()}).
 }
 \examples{
 library(mlr3)
