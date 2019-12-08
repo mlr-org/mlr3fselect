@@ -23,6 +23,28 @@
 #' in varying levels of detail (`$optimization_path`).
 #'
 #' @export
+#' @examples
+#' library(mlr3)
+#'
+#' # Objects required to define the performance evaluator
+#' task = tsk("iris")
+#' measures = msrs(c("classif.ce"))
+#' learner = lrn("classif.rpart")
+#' resampling = rsmp("cv")
+#' terminator = term("evals", n_evals = 8)
+#'
+#' instance = FSelectInstance$new(
+#'   task = task,
+#'   learner = learner,
+#'   resampling = resampling,
+#'   measures = measures,
+#'   terminator = terminator
+#' )
+#'
+#' # Evaluate 4 feature sets
+#' m = diag(4)
+#' instance$eval_batch(m)
+#' instance$archive()
 FSelectInstance = R6Class("FSelectInstance",
   public = list(
     #' @field task [mlr3::Task]

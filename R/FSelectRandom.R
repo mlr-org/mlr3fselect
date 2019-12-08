@@ -15,6 +15,23 @@
 #' of termination criteria.
 #'
 #' @export
+#' @examples
+#' library(mlr3)
+#'
+#' terminator = term("evals", n_evals = 10)
+#' instance = FSelectInstance$new(
+#'   task = tsk("iris"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measures = msr("classif.ce"),
+#'   terminator = terminator
+#' )
+#'
+#' fs = fs("random")
+#' fs$select(instance) # modifies the instance by reference
+#' instance$result # returns best configuration and best performance
+#' instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
+#' instance$optimization_path(n = 1) # returns best feature set
 FSelectRandom = R6Class("FSelectRandom",
   inherit = FSelect,
   public = list(

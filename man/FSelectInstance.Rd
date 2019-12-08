@@ -25,6 +25,29 @@ and associated estimated performance values, by calling the method \code{instanc
 This class allows to display the optimization path of the feature selection
 in varying levels of detail (\verb{$optimization_path}).
 }
+\examples{
+library(mlr3)
+
+# Objects required to define the performance evaluator
+task = tsk("iris")
+measures = msrs(c("classif.ce"))
+learner = lrn("classif.rpart")
+resampling = rsmp("cv")
+terminator = term("evals", n_evals = 8)
+
+instance = FSelectInstance$new(
+  task = task,
+  learner = learner,
+  resampling = resampling,
+  measures = measures,
+  terminator = terminator
+)
+
+# Evaluate 4 feature sets
+m = diag(4)
+instance$eval_batch(m)
+instance$archive()
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

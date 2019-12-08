@@ -24,6 +24,23 @@ Note that \code{mu} and \code{lambda} must be set by the user.
 The \code{terminators} parameter is replaced by the \link{Terminator} subclasses.
 }
 
+\examples{
+library(mlr3)
+
+terminator = term("evals", n_evals = 20)
+instance = FSelectInstance$new(
+  task = tsk("iris"),
+  learner = lrn("classif.rpart"),
+  resampling = rsmp("holdout"),
+  measures = msr("classif.ce"),
+  terminator = terminator
+)
+
+fs = fs("evolutionary", mu = 4, lambda = 8)
+fs$select(instance) # modifies the instance by reference
+instance$result # returns best configuration and best performance
+instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
+}
 \section{Super class}{
 \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectEvolutionary}
 }

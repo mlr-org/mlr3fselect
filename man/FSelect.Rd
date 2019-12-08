@@ -15,6 +15,23 @@ However, single-criteria algorithms optimize only the first measure
 A \code{FSelect} object must write its result to the \verb{$assign_result()} method of the \link{FSelectInstance} at the end in
 order to store the best selected feature subset and its estimated performance vector.
 }
+\examples{
+library(mlr3)
+
+terminator = term("evals", n_evals = 15)
+instance = FSelectInstance$new(
+  task = tsk("iris"),
+  learner = lrn("classif.rpart"),
+  resampling = rsmp("holdout"),
+  measures = msr("classif.ce"),
+  terminator = terminator
+)
+
+fs = fs("random") # swap this line to use a different feature selection algorithm
+fs$select(instance) # modifies the instance by reference
+instance$result # returns best configuration and best performance
+instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

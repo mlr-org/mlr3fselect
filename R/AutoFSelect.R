@@ -5,6 +5,22 @@
 #' fits the model on the training data with the optimal feature set.
 #'
 #' @export
+#' @examples
+#' library(mlr3)
+#'
+#' task = tsk("iris")
+#' learner = lrn("classif.rpart")
+#' resampling = rsmp("holdout")
+#' measures = msr("classif.ce")
+#'
+#' terminator = term("evals", n_evals = 15)
+#' fs = fs("exhaustive")
+#' afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
+#' afs$store_fselect_instance = TRUE
+#'
+#' afs$train(task)
+#' afs$model
+#' afs$learner
 AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
   public = list(
     #' @field instance_args `list()`
