@@ -54,8 +54,6 @@ instance$archive()
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{n_evals}}{Number of evaluations.}
-
 \item{\code{n_batch}}{Number of batches.}
 
 \item{\code{result}}{Result of the feature selection i.e. the optimal feature set and its estimated performances.}

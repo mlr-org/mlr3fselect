@@ -249,9 +249,6 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     }
   ),
   active = list(
-    #' @field n_evals Number of evaluations.
-    n_evals = function() self$bmr$n_resample_results,
-
     #' @field n_batch Number of batches.
     n_batch = function() {
       if (length(self$bmr$rr_data$batch_n) == 0) 0L else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
