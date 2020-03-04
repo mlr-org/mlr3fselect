@@ -186,11 +186,10 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
       setorderv(tab, c("batch_nr", self$measures[[1]]$id), order = order)
       tab = tab[batch_nr %in% m, head(.SD, n), by = batch_nr]
 
-      res = t(sapply(tab$resample_result, function(x) {
+      res = data.table::transpose(map_dtc(tab$resample_result, function(x) {
         as.numeric(self$task$feature_names %in% x$task$feature_names)
       }))
 
-      res = as.data.table(res)
       names(res) = self$task$feature_names
       cbind(tab[, list(batch_nr)], res, tab[, self$measures[[1]]$id, with = FALSE])
     },
