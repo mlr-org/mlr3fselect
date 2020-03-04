@@ -35,20 +35,19 @@ Imports:
     mlr3,
     mlr3misc,
     paradox,
-    R6
+    R6,
+    bbotk
 Suggests:
     rpart,
     ecr,
     withr,
     testthat
 Remotes:
-    mlr-org/mlr3,
-    mlr-org/mlr3misc,
-    mlr-org/paradox
+    mlr-org/bbotk@mlr3fselect_integration
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2
 Collate: 
     'AutoFSelect.R'
     'mlr_fselectors.R'
@@ -59,16 +58,7 @@ Collate:
     'FSelectRFE.R'
     'FSelectRandom.R'
     'FSelectSequential.R'
-    'mlr_terminators.R'
-    'Terminator.R'
-    'TerminatorClockTime.R'
-    'TerminatorCombo.R'
-    'TerminatorEvals.R'
-    'TerminatorModelTime.R'
-    'TerminatorNone.R'
-    'TerminatorPerfReached.R'
-    'TerminatorStagnation.R'
-    'assertions.R'
     'helper.R'
+    'reexports.R'
     'sugar.R'
     'zzz.R'

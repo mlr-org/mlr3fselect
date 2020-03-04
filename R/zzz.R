@@ -3,6 +3,7 @@
 #' @import paradox
 #' @import mlr3misc
 #' @import mlr3
+#' @import bbotk
 #' @importFrom R6 R6Class
 "_PACKAGE"
 
