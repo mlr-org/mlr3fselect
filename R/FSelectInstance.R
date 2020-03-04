@@ -45,24 +45,8 @@
 #' m = diag(4)
 #' instance$eval_batch(m)
 #' instance$archive()
-FSelectInstance = R6Class("FSelectInstance",
+FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
   public = list(
-    #' @field task [mlr3::Task]
-    #' @field learner [mlr3::Learner]
-    #' @field resampling [mlr3::Resampling]
-    #' @field measures list of [mlr3::Measure]
-    #' @field terminator [Terminator]
-    #' @field bm_args named `list()`
-    #' @field bmr [mlr3::BenchmarkResult]
-    #' @field start_time `POSIXct(1)`
-    task = NULL,
-    learner = NULL,
-    resampling = NULL,
-    measures = NULL,
-    terminator = NULL,
-    bm_args = NULL,
-    bmr = NULL,
-    start_time = NULL,
 
     #' @description
     #' Create new `FSelectInstance` object.
@@ -76,25 +60,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' Stores all evaluated [mlr3::ResampleResult]s when evaluating feature combinations.
     #' @return `FSelectInstance`
     initialize = function(task, learner, resampling, measures, terminator, bm_args = list()) {
-
-      self$task = assert_task(as_task(task, clone = TRUE))
-      self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
-      self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
-      self$measures = assert_measures(as_measures(measures, clone = TRUE), task = self$task, learner = self$learner)
-      self$terminator = assert_terminator(terminator)
-      self$bm_args = assert_list(bm_args, names = "unique")
-      self$bmr = BenchmarkResult$new(data.table())
-      self$bmr$rr_data[, c("batch_nr", "feat") := list(integer(), character())]
-      self$resampling$instantiate(self$task)
-
-      if (!resampling$is_instantiated) self$resampling$instantiate(self$task)
-    },
-
-    #' @description
-    #' Format method.
-    #' @return `character()`
-    format = function() {
-      sprintf("<%s>", class(self)[1L])
+      super$initialize(task, learner, resampling, measures, terminator, bm_args)
     },
 
     #' @description

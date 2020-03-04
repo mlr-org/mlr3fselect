@@ -48,26 +48,8 @@ m = diag(4)
 instance$eval_batch(m)
 instance$archive()
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{task}}{\link[mlr3:Task]{mlr3::Task}}
-
-\item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
-
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}}
-
-\item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
-
-\item{\code{terminator}}{\link{Terminator}}
-
-\item{\code{bm_args}}{named \code{list()}}
-
-\item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
-
-\item{\code{start_time}}{\code{POSIXct(1)}}
-}
-\if{html}{\out{</div>}}
+\section{Super class}{
+\code{\link[bbotk:Instance]{bbotk::Instance}} -> \code{FSelectInstance}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -84,7 +66,6 @@ instance$archive()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
-\item \href{#method-format}{\code{FSelectInstance$format()}}
 \item \href{#method-print}{\code{FSelectInstance$print()}}
 \item \href{#method-eval_batch}{\code{FSelectInstance$eval_batch()}}
 \item \href{#method-fselect_objective}{\code{FSelectInstance$fselect_objective()}}
@@ -94,6 +75,14 @@ instance$archive()
 \item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Instance" data-id="format">}\href{../../bbotk/html/Instance.html#method-format}{\code{bbotk::Instance$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Instance" data-id="objective">}\href{../../bbotk/html/Instance.html#method-objective}{\code{bbotk::Instance$objective()}}\out{</span>}
+}
+\out{</details>}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
@@ -132,18 +121,6 @@ Stores all evaluated \link[mlr3:ResampleResult]{mlr3::ResampleResult}s when eval
 }
 \subsection{Returns}{
 \code{FSelectInstance}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-format"></a>}}
-\subsection{Method \code{format()}}{
-Format method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$format()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{character()}
 }
 }
 \if{html}{\out{<hr>}}
