@@ -58,7 +58,6 @@ Collate:
     'FSelectRFE.R'
     'FSelectRandom.R'
     'FSelectSequential.R'
-    'assertions.R'
     'helper.R'
     'reexports.R'
     'sugar.R'
