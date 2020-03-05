@@ -58,6 +58,7 @@ Collate:
     'FSelectRFE.R'
     'FSelectRandom.R'
     'FSelectSequential.R'
+    'TaskClassif_titanic.R'
     'helper.R'
     'reexports.R'
     'sugar.R'
