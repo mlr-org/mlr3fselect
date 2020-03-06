@@ -73,7 +73,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     train_internal = function(task) {
 
       ia = self$instance_args
-      ia$task = task$clone(deep = TRUE)
+      ia$task = task$clone()
       instance = invoke(FSelectInstance$new, .args = ia)
       self$fselect$select(instance)
 
