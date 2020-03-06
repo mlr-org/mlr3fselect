@@ -42,7 +42,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     initialize = function(learner, resampling, measures, terminator, fselect, bm_args = list()) {
 
       ia = list()
-      ia$learner = assert_learner(learner)$clone()
+      ia$learner = assert_learner(learner)$clone(deep = TRUE)
       ia$resampling = assert_resampling(resampling, instantiated = FALSE)$clone()
       ia$measures = assert_measures(as_measures(measures), learner = learner)
       ia$terminator = assert_terminator(terminator)$clone()
@@ -78,7 +78,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       self$fselect$select(instance)
 
       ia$task$select(instance$result$feat)
-      learner = ia$learner
+      learner = ia$learner$clone(deep = TRUE)
       learner$train(ia$task)
 
       result_model = list()
