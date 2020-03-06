@@ -8,7 +8,6 @@ test_that("FSelect", {
   expect_data_table(inst$bmr$data, nrows = 0)
   expect_identical(inst$n_evals, 0L)
   expect_identical(inst$n_batch, 0L)
-  expect_output(print(inst), "Empty data.table")
   expect_error(inst$optimization_path())
   expect_error(inst$best())
   expect_list(inst$result)
