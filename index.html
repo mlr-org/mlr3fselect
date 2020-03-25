@@ -19,7 +19,7 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,7 +33,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org"></a>
-        <a class="navbar-brand" href="index.html">mlr3fselect <small>v0.1.0.9000</small></a>
+        <a class="navbar-brand" href="index.html">mlr3fselect <small>v0.1.0-9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -45,7 +45,7 @@
   <a href="news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/mlr-org/mlr3fselect">
+  <a href="https://github.com/mlr-org/mlr3fselect/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -83,22 +83,22 @@
 <div id="mlr3fselect" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#mlr3fselect" class="anchor"></a>mlr3fselect</h1></div>
-<p>Wrapper feature selection for mlr3.</p>
+<p>Wrapper feature selection for {mlr3}.</p>
 <!-- badges: start -->
-
+<p><a href="https://github.com/mlr-org/mlr3fselect/actions"><img src="https://github.com/mlr-org/mlr3fselect/workflows/R%20CMD%20Check%20via%20%7Btic%7D/badge.svg?branch=master" alt="R CMD Check via {tic}"></a> <a href="https://cran.r-project.org/package=mlr3fselect"><img src="https://www.r-pkg.org/badges/version/mlr3fselect" alt="CRAN"></a> <a href="https://codecov.io/gh/mlr-org/mlr3fselect"><img src="https://codecov.io/gh/mlr-org/mlr3fselect/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a> <!-- badges: end --></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"mlr-org/mlr3fselect"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"mlr-org/mlr3fselect"</span>)</pre></div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/mlr-org/mlr3fselect">https://​github.com/​mlr-org/​mlr3fselect</a>
+<li>Browse source code at <br><a href="https://github.com/mlr-org/mlr3fselect/">https://​github.com/​mlr-org/​mlr3fselect/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/mlr-org/mlr3fselect/issues">https://​github.com/​mlr-org/​mlr3fselect/​issues</a>
 </li>
@@ -120,22 +120,13 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Marc Becker <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Patrick Schratz <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0748-6624" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
-<li>Michel Lang <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9754-0393" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
-<li>Bernd Bischl <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6002-6980" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Patrick Schratz <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0748-6624" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Michel Lang <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9754-0393" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Bernd Bischl <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6002-6980" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/mlr-org/mlr3pipelines/actions"><img src="https://img.shields.io/github/workflow/status/mlr-org/mlr3pipelines/R%20CMD%20Check%20via%20%7Btic%7D?logo=github&amp;label=R%20CMD%20Check%20via%20%7Btic%7D&amp;style=flat-square" alt="R CMD Check via {tic}"></a></li>
-<li><a href="https://cran.r-project.org/package=mlr3fselect"><img src="https://www.r-pkg.org/badges/version/mlr3fselect" alt="CRAN"></a></li>
-<li><a href="https://codecov.io/gh/mlr-org/mlr3fselect"><img src="https://codecov.io/gh/mlr-org/mlr3fselect/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a></li>
-</ul>
-</div>
-</div>
+  </div>
 </div>
 
 
@@ -144,7 +135,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>

@@ -56,7 +56,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +71,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.1.0.9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.1.0-9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -83,7 +83,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/mlr-org/mlr3fselect">
+  <a href="https://github.com/mlr-org/mlr3fselect/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -134,7 +134,7 @@
 
     
 
-<dl class='dl-horizontal'>
+<dl'>
 <dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code> Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
 <dt><code>batch_size</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code> Maximum number of feature sets to try in a batch.</p></dd>
 <dt><code>prob</code></dt><dd><p><code><a href='https://rdrr.io/r/base/double.html'>double(1)</a></code> Probability of choosing a feature.</p></dd>
@@ -167,17 +167,17 @@ of termination criteria.</p>
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
 <p>Create new <code>FSelectRandom</code> object.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectRandom$new()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectRandom</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
 <h3>Returns</h3>
 <p><code>FSelectRandom</code></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectRandom$clone(deep = FALSE)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectRandom</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
@@ -228,15 +228,10 @@ of termination criteria.</p>
 #&gt; 10:        1              Petal.Width,Sepal.Length,Sepal.Width</div><div class='input'><span class='no'>instance</span>$<span class='fu'>optimization_path</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='co'># returns best feature set</span></div><div class='output co'>#&gt;    batch_nr Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt; 1:        1            0           1            0           0       0.06</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#parameters">Parameters</a></li>
-      <li><a href="#super-class">Super class</a></li>
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -247,7 +242,7 @@ of termination criteria.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>

@@ -71,7 +71,7 @@ in varying levels of detail ($optimization_path())." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -86,7 +86,7 @@ in varying levels of detail ($optimization_path())." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.1.0.9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.1.0-9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -98,7 +98,7 @@ in varying levels of detail ($optimization_path())." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/mlr-org/mlr3fselect">
+  <a href="https://github.com/mlr-org/mlr3fselect/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -165,7 +165,7 @@ in varying levels of detail (<code>$optimization_path()</code>).</p>
     <p><code><a href='https://rdrr.io/pkg/bbotk/man/Instance.html'>bbotk::Instance</a></code> -&gt; <code>FSelectInstance</code></p>
     <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
 
-    <p><div class="r6-active-bindings"></p><dl class='dl-horizontal'>
+    <p><div class="r6-active-bindings"></p><dl'>
 <dt><code>n_batch</code></dt><dd><p>Number of batches.</p></dd>
 
 <dt><code>result</code></dt><dd><p>Result of the feature selection i.e. the optimal feature set and its estimated performances.</p></dd>
@@ -197,17 +197,17 @@ in varying levels of detail (<code>$optimization_path()</code>).</p>
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
 <p>Create new <code>FSelectInstance</code> object.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$new(
-  task,
-  learner,
-  resampling,
-  measures,
-  terminator,
-  bm_args = list()
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
+  <span class='no'>task</span>,
+  <span class='no'>learner</span>,
+  <span class='no'>resampling</span>,
+  <span class='no'>measures</span>,
+  <span class='no'>terminator</span>,
+  <span class='kw'>bm_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
 )</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>task</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a></p></dd>
 
 <dt><code>learner</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></p></dd>
@@ -229,7 +229,7 @@ Stores all evaluated <a href='https://mlr3.mlr-org.com/reference/ResampleResult.
 <p><hr>
 <a id="method-print"></a></p><h3>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
 <p>Print method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$print()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>()</pre><p></div></p>
 
 <h3>Returns</h3>
 <p><code><a href='https://rdrr.io/r/base/character.html'>character()</a></code></p>
@@ -240,10 +240,10 @@ Updates the internal <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult
 Before and after each batch-evaluation, the <a href='Terminator.html'>Terminator</a> is checked,
 and if it is positive, an exception of class <code>terminated_error</code> is raised.
 This function should be internally called by the <a href='FSelect.html'>FSelect</a> object.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$eval_batch(states)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>eval_batch</span>(<span class='no'>states</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>states</code></dt><dd><p><code>matrix</code>
 Each row represents a 0/1 encoded feature set.</p></dd>
 
@@ -256,10 +256,10 @@ Each row represents a 0/1 encoded feature set.</p></dd>
 where the return value is negated if the measure is maximized.
 Internally, <code>$eval_batch()</code> is called with a single row.
 This method is useful for feature selection algorithms that take a objective function.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$fselect_objective(x)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>fselect_objective</span>(<span class='no'>x</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>x</code></dt><dd><p><code>numeric</code>
 0/1 encoded feature set</p></dd>
 
@@ -269,7 +269,7 @@ This method is useful for feature selection algorithms that take a objective fun
 <p><hr>
 <a id="method-archive"></a></p><h3>Method <code>archive()</code></h3>
 <p>Returns a table of contained resample results with corresponding feature sets.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$archive()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>archive</span>()</pre><p></div></p>
 
 <h3>Returns</h3>
 <p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p>
@@ -277,10 +277,10 @@ This method is useful for feature selection algorithms that take a objective fun
 <a id="method-optimization_path"></a></p><h3>Method <code>optimization_path()</code></h3>
 <p>Queries the <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a> for the <code>n</code> best feature sets (default is <code>1</code>)
 of the batches specified in <code>m</code> (default is the last batch).</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$optimization_path(n = 1, m = NULL)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>optimization_path</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>n</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>
 Number of feature sets per batch.</p></dd>
 
@@ -296,10 +296,10 @@ Batch numbers.</p></dd>
 according to <code>measure</code> (default is the first measure in <code>$measures</code>
 of the batches specified in <code>m</code> (default is the all batches).
 In case of ties, one of the tied values is selected randomly.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$best(measure = NULL, m = NULL)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>best</span>(<span class='kw'>measure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>measure</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a></p></dd>
 
 <dt><code>m</code></dt><dd><p><code>ìnteger</code></p></dd>
@@ -311,10 +311,10 @@ In case of ties, one of the tied values is selected randomly.</p><h3>Usage</h3>
 <a id="method-assign_result"></a></p><h3>Method <code>assign_result()</code></h3>
 <p>The <a href='FSelect.html'>FSelect</a> object writes the best found feature set
 and estimated performance values here. For internal use.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$assign_result(feat, perf)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>assign_result</span>(<span class='no'>feat</span>, <span class='no'>perf</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>feat</code></dt><dd><p><code>character</code> Must be character vector of feature names existing in <code>task</code></p></dd>
 
 <dt><code>perf</code></dt><dd><p><code>numeric</code> Must be named numeric of performance measures, named with performance IDs, regarding all elements in <code>measures</code>.</p></dd>
@@ -323,10 +323,10 @@ and estimated performance values here. For internal use.</p><h3>Usage</h3>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>FSelectInstance$clone(deep = FALSE)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
@@ -357,10 +357,10 @@ and estimated performance values here. For internal use.</p><h3>Usage</h3>
 #&gt; [1] 1
 #&gt; 
 #&gt; $uhashes
-#&gt; [1] "691bcfba-fd39-4254-8425-8f83feb3f6a7"
-#&gt; [2] "d7503455-d80f-4f34-8288-0911b9aaeaa7"
-#&gt; [3] "ba1565e9-f570-4bb9-a80e-7d9cd69c38da"
-#&gt; [4] "fc22540a-52d0-406b-8a70-4a61fe03d1e9"
+#&gt; [1] "cc7ad2ad-a572-4717-b708-561fcadedbb0"
+#&gt; [2] "41e630be-e9cb-4e27-83a1-abf0ed725c6e"
+#&gt; [3] "54ae99f5-9827-4494-ae6e-065bdb1c57cd"
+#&gt; [4] "560be912-a731-47a1-951f-39c90a09ae64"
 #&gt; 
 #&gt; $perf
 #&gt;    classif.ce
@@ -379,15 +379,10 @@ and estimated performance values here. For internal use.</p><h3>Usage</h3>
 #&gt; 3:        1 Sepal.Length
 #&gt; 4:        1  Sepal.Width</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#super-class">Super class</a></li>
-      <li><a href="#active-bindings">Active bindings</a></li>
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -398,7 +393,7 @@ and estimated performance values here. For internal use.</p><h3>Usage</h3>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>

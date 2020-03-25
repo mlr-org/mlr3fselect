@@ -56,7 +56,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +71,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.1.0.9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.1.0-9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -83,7 +83,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/mlr-org/mlr3fselect">
+  <a href="https://github.com/mlr-org/mlr3fselect/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -141,21 +141,10 @@
 </div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#see-also">See also</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Marc Becker <a href='mailto:marcbecker@posteo.de'>marcbecker@posteo.de</a></p>
-<p>Authors:</p><ul>
-<li><p>Patrick Schratz <a href='mailto:patrick.schratz@gmail.com'>patrick.schratz@gmail.com</a> (<a href='https://orcid.org/0000-0003-0748-6624'>ORCID</a>)</p></li>
-<li><p>Michel Lang <a href='mailto:michellang@gmail.com'>michellang@gmail.com</a> (<a href='https://orcid.org/0000-0001-9754-0393'>ORCID</a>)</p></li>
-<li><p>Bernd Bischl <a href='mailto:bernd_bischl@gmx.net'>bernd_bischl@gmx.net</a> (<a href='https://orcid.org/0000-0001-6002-6980'>ORCID</a>)</p></li>
-</ul>
-
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -166,7 +155,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
