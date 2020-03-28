@@ -7,7 +7,7 @@
 Class for feature selection by recursive feature elimination (RFE).
 The recursive algorithm (\code{recursive = TRUE}) recomputes the feature importances
 on the reduced feature set in every iteration.
-The non-recursive algorithm (\code{recursive = TRUE}) only uses the feature importances
+The non-recursive algorithm (\code{recursive = FALSE}) only uses the feature importances
 of the model fitted with all features to eliminate the next most unimportant feature in every iteration.
 }
 \section{Parameters}{
