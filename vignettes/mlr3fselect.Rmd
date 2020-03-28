@@ -396,13 +396,3 @@ instance$optimization_path(n = 1, m = 1:7)
 #> 7:        7   1        1    1     1      1   1      1  0.2037037
 ```
 
-# FIXME
-
-* Missing truth does not work
-* FSelectInstance printer does not work with empty archive
-* Fix archive
-* Archive unnest no Terminator bug
-* New terminator with stagnation between batches
-* recursive = TRUE Fix
-
-
