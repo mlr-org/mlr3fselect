@@ -13,3 +13,5 @@
 ^pkgdown$
 ^renv$
 ^renv\.lock$
+^\.ccache$
+^clang-.*
