@@ -41,7 +41,9 @@ Suggests:
     rpart,
     ecr,
     withr,
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Remotes:
     mlr-org/bbotk@mlr3fselect_integration
 Encoding: UTF-8
@@ -58,8 +60,8 @@ Collate:
     'FSelectRFE.R'
     'FSelectRandom.R'
     'FSelectSequential.R'
-    'TaskClassif_titanic.R'
     'helper.R'
     'reexports.R'
     'sugar.R'
     'zzz.R'
+VignetteBuilder: knitr
