@@ -161,7 +161,7 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     #' @description
     #' Returns a table of contained resample results with corresponding feature sets.
     #' @return [data.table::data.table]
-    archive = function() {
+    archive = function(unnest = "no") {
       self$bmr$aggregate(self$measures)
     },
 
