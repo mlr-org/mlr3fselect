@@ -13,6 +13,4 @@
   if (Sys.getenv("IN_PKGDOWN") == "true") {
     lg$set_threshold("warn")
   }
-
-  mlr_tasks$add("titanic", load_task_titanic)
 } # nocov end
