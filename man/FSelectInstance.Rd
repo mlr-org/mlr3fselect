@@ -185,7 +185,7 @@ This method is useful for feature selection algorithms that take a objective fun
 \subsection{Method \code{archive()}}{
 Returns a table of contained resample results with corresponding feature sets.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$archive()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$archive(unnest = "no")}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
