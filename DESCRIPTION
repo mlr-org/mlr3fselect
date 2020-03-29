@@ -47,11 +47,11 @@ Suggests:
     mlr3data,
     mlr3learners
 Remotes:
-    mlr-org/bbotk@mlr3fselect_integration
+    mlr-org/bbotk@terminator_instance 
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Collate: 
     'AutoFSelect.R'
     'mlr_fselectors.R'
