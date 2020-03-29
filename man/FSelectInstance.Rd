@@ -188,8 +188,15 @@ Returns a table of contained resample results with corresponding feature sets.
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$archive(unnest = "no")}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{unnest}}{Implemented for compatibility to bbotk}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}
+\link{data.tabl}e::data.table]
 }
 }
 \if{html}{\out{<hr>}}
