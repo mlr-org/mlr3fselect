@@ -196,7 +196,7 @@ Returns a table of contained resample results with corresponding feature sets.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\link{data.tabl}e::data.table]
+\link[data.table:data.table]{data.table::data.table}
 }
 }
 \if{html}{\out{<hr>}}
