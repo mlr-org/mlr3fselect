@@ -15,7 +15,7 @@
 #' of termination criteria.
 #'
 #' @export
-#' @templateVar id random
+#' @templateVar fs "random"
 #' @template example
 FSelectRandom = R6Class("FSelectRandom",
   inherit = FSelect,

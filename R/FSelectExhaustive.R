@@ -11,7 +11,7 @@
 #' The size of the feature sets is increased by 1 in each batch.
 #'
 #' @export
-#' @templateVar id exhaustive
+#' @templateVar fs "exhaustive"
 #' @template example
 FSelectExhaustive = R6Class("FSelectExhaustive",
   inherit = FSelect,

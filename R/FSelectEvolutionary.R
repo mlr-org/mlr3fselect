@@ -20,7 +20,7 @@
 #' The `terminators` parameter is replaced by the [Terminator] subclasses.
 #'
 #' @export
-#' @templateVar id evolutionary
+#' @templateVar fs "evolutionary", mu = 10, lambda = 5
 #' @template example
 FSelectEvolutionary = R6Class("FSelectEvolutionary",
   inherit = FSelect,

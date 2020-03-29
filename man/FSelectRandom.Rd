@@ -31,7 +31,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs(random)
+fs = fs("random")
 fs$select(instance)
 instance$result
 instance$archive()

@@ -36,7 +36,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs(evolutionary)
+fs = fs("evolutionary", mu = 10, lambda = 5)
 fs$select(instance)
 instance$result
 instance$archive()

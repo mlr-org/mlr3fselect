@@ -32,7 +32,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs(sequential)
+fs = fs("sequential")
 fs$select(instance)
 instance$result
 instance$archive()

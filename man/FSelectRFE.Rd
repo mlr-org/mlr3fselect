@@ -29,7 +29,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs(rfe)
+fs = fs("rfe")
 fs$select(instance)
 instance$result
 instance$archive()

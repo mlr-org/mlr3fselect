@@ -10,7 +10,7 @@
 #'   terminator = terminator
 #' )
 #'
-#' fs = fs(<%= id %>)
+#' fs = fs(<%= fs %>)
 #' fs$select(instance)
 #' instance$result
 #' instance$archive()

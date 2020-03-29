@@ -16,7 +16,7 @@
 #' Each batch is one step in the sequential feature selection.
 #'
 #' @export
-#' @templateVar id sequential
+#' @templateVar fs "sequential"
 #' @template example
 FSelectSequential = R6Class("FSelectSequential",
   inherit = FSelect,

@@ -27,7 +27,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs(exhaustive)
+fs = fs("exhaustive")
 fs$select(instance)
 instance$result
 instance$archive()
