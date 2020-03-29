@@ -42,9 +42,9 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         ParamDbl$new("n.elite", default = 0),
         ParamUty$new("initial.solutions", default = NULL),
         ParamFct$new("parent.selector", default = "selTournament",
-          levels = c("selTournament", "selRoulette", "selRanking", "selGreedy")),
+          levels = c("selTournament", "selRoulette", "selGreedy")),
         ParamFct$new("survival.selector", default = "selGreedy",
-          levels = c("selTournament", "selRoulette", "selRanking", "selGreedy")))
+          levels = c("selTournament", "selRoulette", "selGreedy")))
       )
       ps$add_dep("n.elite", "survival.strategy", CondEqual$new("comma"))
 
@@ -73,7 +73,6 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       pars$parent.selector = switch(pars$parent.selector,
         selTournament = ecr::selTournament,
         selRoulette = ecr::selRoulette,
-        selRanking = ecr::selRanking,
         selGreedy = ecr::selGreedy,
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
@@ -81,7 +80,6 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       pars$survival.selector = switch(pars$survival.selector,
         selTournament = ecr::selTournament,
         selRoulette = ecr::selRoulette,
-        selRanking = ecr::selRanking,
         selGreedy = ecr::selGreedy,
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)

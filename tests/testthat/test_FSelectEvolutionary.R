@@ -10,12 +10,9 @@ test_that("FSelectEvolutionary", {
   expect_equal(r$feat, c("Petal.Length", "Petal.Width", "Sepal.Length"))
 
   test_fselect("evolutionary", mu = 4, lambda = 8, parent.selector = "selRoulette", term_evals = 12)
-  test_fselect("evolutionary", mu = 4, lambda = 8, parent.selector = "selRanking", term_evals = 12)
   test_fselect("evolutionary", mu = 10, lambda = 8, parent.selector = "selGreedy", term_evals = 12)
 
   test_fselect("evolutionary", mu = 4, lambda = 8, survival.selector = "selRoulette", term_evals = 12)
-  test_fselect("evolutionary", mu = 4, lambda = 8, survival.selector = "selRanking", term_evals = 12)
-  test_fselect("evolutionary", mu = 4, lambda = 8, survival.selector = "selRanking", term_evals = 12)
 
   test_fselect("evolutionary", mu = 4, lambda = 8, survival.strategy = "comma",  term_evals = 12)
   test_fselect("evolutionary", mu = 4, lambda = 8, survival.strategy = "comma", n.elite = 1,  term_evals = 12)
