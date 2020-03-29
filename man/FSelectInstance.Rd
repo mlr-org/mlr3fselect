@@ -84,6 +84,7 @@ instance$archive()
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create new \code{FSelectInstance} object.
 \subsection{Usage}{
@@ -123,6 +124,7 @@ Stores all evaluated \link[mlr3:ResampleResult]{mlr3::ResampleResult}s when eval
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
 Print method.
 \subsection{Usage}{
@@ -135,6 +137,7 @@ Print method.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-eval_batch"></a>}}
+\if{latex}{\out{\hypertarget{method-eval_batch}{}}}
 \subsection{Method \code{eval_batch()}}{
 Evaluates all feature sets in \code{states} through resampling.
 Updates the internal \link{BenchmarkResult} \verb{$bmr} by reference.
@@ -159,6 +162,7 @@ named \code{list()}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-fselect_objective"></a>}}
+\if{latex}{\out{\hypertarget{method-fselect_objective}{}}}
 \subsection{Method \code{fselect_objective()}}{
 Evaluates a feature set \code{x} and returns a scalar objective value,
 where the return value is negated if the measure is maximized.
@@ -182,6 +186,7 @@ This method is useful for feature selection algorithms that take a objective fun
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-archive"></a>}}
+\if{latex}{\out{\hypertarget{method-archive}{}}}
 \subsection{Method \code{archive()}}{
 Returns a table of contained resample results with corresponding feature sets.
 \subsection{Usage}{
@@ -201,6 +206,7 @@ Returns a table of contained resample results with corresponding feature sets.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-optimization_path"></a>}}
+\if{latex}{\out{\hypertarget{method-optimization_path}{}}}
 \subsection{Method \code{optimization_path()}}{
 Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the optimization path.
 \subsection{Usage}{
@@ -213,6 +219,7 @@ Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the optimizat
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-best"></a>}}
+\if{latex}{\out{\hypertarget{method-best}{}}}
 \subsection{Method \code{best()}}{
 Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the best \link[mlr3:ResampleResult]{mlr3::ResampleResult}
 according to \code{measure} (default is the first measure in \verb{$measures}
@@ -237,6 +244,7 @@ In case of ties, one of the tied values is selected randomly.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-assign_result"></a>}}
+\if{latex}{\out{\hypertarget{method-assign_result}{}}}
 \subsection{Method \code{assign_result()}}{
 The \link{FSelect} object writes the best found feature set
 and estimated performance values here. For internal use.
@@ -256,6 +264,7 @@ and estimated performance values here. For internal use.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -74,6 +74,7 @@ afs$learner
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create new \code{AutoFSelect} object.
 \subsection{Usage}{
@@ -110,6 +111,7 @@ Create new \code{AutoFSelect} object.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-train_internal"></a>}}
+\if{latex}{\out{\hypertarget{method-train_internal}{}}}
 \subsection{Method \code{train_internal()}}{
 Selects the optimal feature set, applies the feature set to the task
 and fits the model on the training data.
@@ -132,6 +134,7 @@ list(\link[mlr3:Learner]{mlr3::Learner}) or list(\link[mlr3:Learner]{mlr3::Learn
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-predict_internal"></a>}}
+\if{latex}{\out{\hypertarget{method-predict_internal}{}}}
 \subsection{Method \code{predict_internal()}}{
 Creates a new \link[mlr3:Prediction]{mlr3::Prediction} based on the learner fitted
 on the training data with the optimal feature subset.
@@ -153,6 +156,7 @@ For internal use.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-archive"></a>}}
+\if{latex}{\out{\hypertarget{method-archive}{}}}
 \subsection{Method \code{archive()}}{
 Returns a table of contained resample results with corresponding feature sets.
 \subsection{Usage}{
@@ -165,6 +169,7 @@ Returns a table of contained resample results with corresponding feature sets.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

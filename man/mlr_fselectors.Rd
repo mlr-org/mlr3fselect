@@ -4,7 +4,9 @@
 \name{mlr_fselectors}
 \alias{mlr_fselectors}
 \title{mlr_fselectors}
-\format{An object of class \code{DictionaryFSelect} (inherits from \code{Dictionary}, \code{R6}) of length 13.}
+\format{
+An object of class \code{DictionaryFSelect} (inherits from \code{Dictionary}, \code{R6}) of length 13.
+}
 \usage{
 mlr_fselectors
 }

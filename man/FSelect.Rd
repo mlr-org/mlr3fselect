@@ -53,6 +53,7 @@ instance$archive() # allows access of data.table / benchmark result of full path
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create new \code{FSelect} object.
 \subsection{Usage}{
@@ -75,6 +76,7 @@ Set of control parameter for the feature selection.}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-format"></a>}}
+\if{latex}{\out{\hypertarget{method-format}{}}}
 \subsection{Method \code{format()}}{
 Format method.
 \subsection{Usage}{
@@ -87,6 +89,7 @@ Format method.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
 Print method.
 \subsection{Usage}{
@@ -99,6 +102,7 @@ Print method.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-select"></a>}}
+\if{latex}{\out{\hypertarget{method-select}{}}}
 \subsection{Method \code{select()}}{
 Performs the feature selection on a \link{FSelectInstance} until termination.
 \subsection{Usage}{
@@ -115,6 +119,7 @@ Performs the feature selection on a \link{FSelectInstance} until termination.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
