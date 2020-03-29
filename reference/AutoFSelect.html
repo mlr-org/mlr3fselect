@@ -37,8 +37,9 @@
 
 
 <meta property="og:title" content="AutoFeselect — AutoFSelect" />
-<meta property="og:description" content="The AutoFSelect is a mlr3::Learner which automatically selects the optimal feature set and
-fits the model on the training data with the optimal feature set." />
+<meta property="og:description" content="The AutoFSelect is a mlr3::Learner which automatically selects the
+optimal feature set and fits the model on the training data with the optimal
+feature set." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,8 +130,9 @@ fits the model on the training data with the optimal feature set." />
     </div>
 
     <div class="ref-description">
-    <p>The <code>AutoFSelect</code> is a <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> which automatically selects the optimal feature set and
-fits the model on the training data with the optimal feature set.</p>
+    <p>The <code>AutoFSelect</code> is a <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> which automatically selects the
+optimal feature set and fits the model on the training data with the optimal
+feature set.</p>
     </div>
 
 
@@ -155,7 +157,9 @@ fits the model on the training data with the optimal feature set.</p>
 
 <dt><code>fselect_instance</code></dt><dd><p><a href='FSelectInstance.html'>FSelectInstance</a></p></dd>
 
-<dt><code>fselect_result</code></dt><dd><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> Result of the feature selection i.e. the optimal feature set and its estimated performances.</p></dd>
+<dt><code>fselect_result</code></dt><dd><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>
+Result of the feature selection i.e. the optimal feature set and its
+estimated performances.</p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -184,7 +188,7 @@ fits the model on the training data with the optimal feature set.</p>
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Create new <code>AutoFSelect</code> object.</p><h3>Usage</h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>AutoFSelect</span>$<span class='fu'>new</span>(
   <span class='no'>learner</span>,
   <span class='no'>resampling</span>,
@@ -206,17 +210,16 @@ fits the model on the training data with the optimal feature set.</p>
 
 <dt><code>fselect</code></dt><dd><p><a href='FSelect.html'>FSelect</a></p></dd>
 
-<dt><code>bm_args</code></dt><dd><p>named <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> Further arguments for <code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>mlr3::benchmark()</a></code>.</p></dd>
+<dt><code>bm_args</code></dt><dd><p>named <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>
+Further arguments for <code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>mlr3::benchmark()</a></code>.</p></dd>
 
 </dl><p></div></p>
-<h3>Returns</h3>
-<p><code>AutoFSelect</code></p>
 <p><hr>
 <a id="method-train_internal"></a></p><h3>Method <code>train_internal()</code></h3>
-<p>Selects the optimal feature set, applies the feature set to the task
-and fits the model on the training data.
-If <code>store_fselect_instance</code> is <code>TRUE</code>, the <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> with the <a href='FSelectInstance.html'>FSelectInstance</a>
-is returned, otherwise just the <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>. For internal use.</p><h3>Usage</h3>
+<p>Selects the optimal feature set, applies the feature set to the task and
+fits the model on the training data. If <code>store_fselect_instance</code> is
+<code>TRUE</code>, the <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> with the <a href='FSelectInstance.html'>FSelectInstance</a> is returned,
+otherwise just the <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>. For internal use.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>AutoFSelect</span>$<span class='fu'>train_internal</span>(<span class='no'>task</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
@@ -228,9 +231,8 @@ is returned, otherwise just the <a href='https://mlr3.mlr-org.com/reference/Lear
 <p>list(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>) or list(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>, <a href='FSelectInstance.html'>FSelectInstance</a>)</p>
 <p><hr>
 <a id="method-predict_internal"></a></p><h3>Method <code>predict_internal()</code></h3>
-<p>Creates a new <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a> based on the learner fitted
-on the training data with the optimal feature subset.
-For internal use.</p><h3>Usage</h3>
+<p>Creates a new <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a> based on the learner fitted on the
+training data with the optimal feature subset. For internal use.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>AutoFSelect</span>$<span class='fu'>predict_internal</span>(<span class='no'>task</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
@@ -242,7 +244,8 @@ For internal use.</p><h3>Usage</h3>
 <p><a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a></p>
 <p><hr>
 <a id="method-archive"></a></p><h3>Method <code>archive()</code></h3>
-<p>Returns a table of contained resample results with corresponding feature sets.</p><h3>Usage</h3>
+<p>Returns a table of contained resample results with corresponding feature
+sets.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>AutoFSelect</span>$<span class='fu'>archive</span>()</pre><p></div></p>
 
 <h3>Returns</h3>
