@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FSelectSequential Class — FSelectSequential • mlr3fselect</title>
+<title>FSelectSequential — FSelectSequential • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -36,12 +36,12 @@
 
 
 
-<meta property="og:title" content="FSelectSequential Class — FSelectSequential" />
-<meta property="og:description" content="Class for sequential feature selection.
-The sequential forward selection (strategy = fsf) extends the feature set in each step with the feature
-that increases the models performance the most.
-The sequential backward selection (strategy = fsb) starts with the complete future set
-and removes in each step the feature that decreases the models performance the least." />
+<meta property="og:title" content="FSelectSequential — FSelectSequential" />
+<meta property="og:description" content="Subclass for sequential feature selection. The sequential forward selection
+(strategy = fsf) extends the feature set in each step with the feature that
+increases the models performance the most. The sequential backward selection
+(strategy = fsb) starts with the complete future set and removes in each
+step the feature that decreases the models performance the least." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,32 +126,37 @@ and removes in each step the feature that decreases the models performance the l
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FSelectSequential Class</h1>
+    <h1>FSelectSequential</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelectSequential.R'><code>R/FSelectSequential.R</code></a></small>
     <div class="hidden name"><code>FSelectSequential.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Class for sequential feature selection.
-The sequential forward selection (<code>strategy = fsf</code>) extends the feature set in each step with the feature
-that increases the models performance the most.
-The sequential backward selection (<code>strategy = fsb</code>) starts with the complete future set
-and removes in each step the feature that decreases the models performance the least.</p>
+    <p>Subclass for sequential feature selection. The sequential forward selection
+(<code>strategy = fsf</code>) extends the feature set in each step with the feature that
+increases the models performance the most. The sequential backward selection
+(<code>strategy = fsb</code>) starts with the complete future set and removes in each
+step the feature that decreases the models performance the least.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Feature sets are evaluated in batches, where each batch is one step in the
+sequential feature selection.</p>
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
 
     
 
 <dl'>
-<dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code> Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
-<dt><code>strategy</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> For forward feature selection <code>fsf</code>, for backward feature selection <code>fsb</code>.</p></dd>
+<dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>
+Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
+<dt><code>strategy</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>
+Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward search).</p></dd>
+
 </dl>
 
-<p>The feature sets are evaluated in batches.
-Each batch is one step in the sequential feature selection.</p>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
     <p><code><a href='FSelect.html'>mlr3fselect::FSelect</a></code> -&gt; <code>FSelectSequential</code></p>
@@ -174,11 +179,9 @@ Each batch is one step in the sequential feature selection.</p>
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Create new <code>FSelectSequential</code> object.</p><h3>Usage</h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.`</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>FSelectSequential</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
-<h3>Returns</h3>
-<p><code>FSelectSequential</code></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>

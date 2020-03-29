@@ -37,7 +37,8 @@
 
 
 <meta property="og:title" content="FSelectExhaustive Class — FSelectExhaustive" />
-<meta property="og:description" content="Class for exhaustive feature selection. All feature sets are searched." />
+<meta property="og:description" content="Subclass for exhaustive feature selection. Evaluates every possible feature
+subset." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +129,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Class for exhaustive feature selection. All feature sets are searched.</p>
+    <p>Subclass for exhaustive feature selection. Evaluates every possible feature
+subset.</p>
     </div>
 
 
@@ -138,11 +140,14 @@
     
 
 <dl'>
-<dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code> Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
+<dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>
+Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
+
 </dl>
 
-<p>In order to support general termination criteria and parallelization, feature sets are evaluated in batches.
-The size of the feature sets is increased by 1 in each batch.</p>
+<p>In order to support general termination criteria and parallelization, feature
+sets are evaluated in batches. The size of the feature sets is increased by 1
+in each batch.</p>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
     <p><code><a href='FSelect.html'>mlr3fselect::FSelect</a></code> -&gt; <code>FSelectExhaustive</code></p>
@@ -165,11 +170,9 @@ The size of the feature sets is increased by 1 in each batch.</p>
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Create new <code>FSelectExhaustive</code> object.</p><h3>Usage</h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>FSelectExhaustive</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
-<h3>Returns</h3>
-<p><code>FSelectExhaustive</code></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>

@@ -37,7 +37,8 @@
 
 
 <meta property="og:title" content="FSelectEvolutionary Class — FSelectEvolutionary" />
-<meta property="og:description" content="Class for evolutionary feature selection calling ecr::ecr() from package ecr." />
+<meta property="og:description" content="Subclass for evolutionary feature selection. Calls ecr::ecr() from package
+ecr." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +129,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Class for evolutionary feature selection calling <code><a href='https://rdrr.io/pkg/ecr/man/ecr.html'>ecr::ecr()</a></code> from package <a href='https://CRAN.R-project.org/package=ecr'><span class="pkg">ecr</span></a>.</p>
+    <p>Subclass for evolutionary feature selection. Calls <code><a href='https://rdrr.io/pkg/ecr/man/ecr.html'>ecr::ecr()</a></code> from package
+<a href='https://CRAN.R-project.org/package=ecr'><span class="pkg">ecr</span></a>.</p>
     </div>
 
 
@@ -145,13 +147,14 @@
 <dt><code>survival.strategy</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code></p></dd>
 <dt><code>n.elite</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code></p></dd>
 <dt><code>initial.solutions</code></dt><dd><p>list of <code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code></p></dd>
-<dt><code>parent.selector</code></dt><dd><p>object of class <code>ecr::selector</code></p></dd>
-<dt><code>survival.selector</code></dt><dd><p>object of class <code>ecr::selector</code></p></dd>
+<dt><code>parent.selector</code></dt><dd><p><code>ecr</code> selector</p></dd>
+<dt><code>survival.selector</code></dt><dd><p><code>ecr</code> selector</p></dd>
+
 </dl>
 
-<p>For the meaning of the control parameter, see <code><a href='https://rdrr.io/pkg/ecr/man/ecr.html'>ecr::ecr()</a></code>.
-Note that <code>mu</code> and <code>lambda</code> must be set by the user.
-The <code>terminators</code> parameter is replaced by the <a href='Terminator.html'>Terminator</a> subclasses.</p>
+<p>For the meaning of the control parameter, see <code><a href='https://rdrr.io/pkg/ecr/man/ecr.html'>ecr::ecr()</a></code>. Note that <code>mu</code>
+and <code>lambda</code> must be set by the user. The <code>terminators</code> parameter is replaced
+by the <a href='Terminator.html'>Terminator</a> subclasses.</p>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
     <p><code><a href='FSelect.html'>mlr3fselect::FSelect</a></code> -&gt; <code>FSelectEvolutionary</code></p>
@@ -174,11 +177,9 @@ The <code>terminators</code> parameter is replaced by the <a href='Terminator.ht
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Create new <code>FSelectEvolutionary </code> object.</p><h3>Usage</h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>FSelectEvolutionary</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
-<h3>Returns</h3>
-<p><code>FSelectEvolutionary</code></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>

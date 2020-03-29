@@ -37,7 +37,7 @@
 
 
 <meta property="og:title" content="FSelectRandom Class — FSelectRandom" />
-<meta property="og:description" content="Class for random feature selection. Feature sets are randomly drawn." />
+<meta property="og:description" content="Subclass for random feature selection. Feature sets are randomly drawn." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +128,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Class for random feature selection. Feature sets are randomly drawn.</p>
+    <p>Subclass for random feature selection. Feature sets are randomly drawn.</p>
     </div>
 
 
@@ -138,14 +138,18 @@
     
 
 <dl'>
-<dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code> Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
-<dt><code>batch_size</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code> Maximum number of feature sets to try in a batch.</p></dd>
-<dt><code>prob</code></dt><dd><p><code><a href='https://rdrr.io/r/base/double.html'>double(1)</a></code> Probability of choosing a feature.</p></dd>
+<dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>
+Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
+<dt><code>batch_size</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>
+Maximum number of feature sets to try in a batch.</p></dd>
+<dt><code>prob</code></dt><dd><p><code><a href='https://rdrr.io/r/base/double.html'>double(1)</a></code>
+Probability of choosing a feature.</p></dd>
+
 </dl>
 
-<p>In order to support general termination criteria and parallelization,
-feature sets are evaluated in a batch-fashion of size <code>batch_size</code>.
-Larger batches mean more is parallelized, smaller batches imply a more fine-grained checking
+<p>In order to support general termination criteria and parallelization, feature
+sets are evaluated in a batch-fashion of size <code>batch_size</code>. Larger batches
+mean more is parallelized, smaller batches imply a more fine-grained checking
 of termination criteria.</p>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
@@ -169,11 +173,9 @@ of termination criteria.</p>
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Create new <code>FSelectRandom</code> object.</p><h3>Usage</h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>FSelectRandom</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
-<h3>Returns</h3>
-<p><code>FSelectRandom</code></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
