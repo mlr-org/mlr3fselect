@@ -166,27 +166,18 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     },
 
     #' @description
-    #' Queries the [mlr3::BenchmarkResult] for the `n` best feature sets (default is `1`)
-    #' of the batches specified in `m` (default is the last batch).
-    #' @param n `integer(1)`
-    #' Number of feature sets per batch.
-    #' @param m `integer`
-    #' Batch numbers.
+    #' Queries the [mlr3::BenchmarkResult] for the optimization path.
     #' @return [data.table::data.table]
-    optimization_path = function(n = 1, m = NULL) {
+    optimization_path = function() {
 
       if (self$n_batch == 0) {
         stop("No feature selection conducted")
       }
 
-      assert_int(n, lower = 1)
-      assert_integerish(m, null.ok = TRUE)
-      if (is.null(m)) m = self$n_batch
-
       tab = self$bmr$aggregate(self$measures[[1]], ids = FALSE)
       order = if (self$measures[[1]]$minimize) 1 else -1
       setorderv(tab, c("batch_nr", self$measures[[1]]$id), order = order)
-      tab = tab[batch_nr %in% m, head(.SD, n), by = batch_nr]
+      tab = tab[, head(.SD, 1), by = batch_nr]
 
       res = data.table::transpose(map_dtc(tab$resample_result, function(x) {
         as.numeric(self$task$feature_names %in% x$task$feature_names)

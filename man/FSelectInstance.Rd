@@ -195,23 +195,11 @@ Returns a table of contained resample results with corresponding feature sets.
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-optimization_path"></a>}}
 \subsection{Method \code{optimization_path()}}{
-Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the \code{n} best feature sets (default is \code{1})
-of the batches specified in \code{m} (default is the last batch).
+Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the optimization path.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$optimization_path(n = 1, m = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$optimization_path()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{n}}{\code{integer(1)}
-Number of feature sets per batch.}
-
-\item{\code{m}}{\code{integer}
-Batch numbers.}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
 \link[data.table:data.table]{data.table::data.table}
 }
