@@ -38,17 +38,21 @@ FSelectRandom = R6Class("FSelectRandom",
         param_set = ps
       )
       if (is.null(self$param_set$values$batch_size)) {
-        self$param_set$values = insert_named(self$param_set$values, list(batch_size = 10))
+        self$param_set$values =
+          insert_named(self$param_set$values, list(batch_size = 10))
       }
       if (is.null(self$param_set$values$prob)) {
-        self$param_set$values = insert_named(self$param_set$values, list(prob = 0.5))
+        self$param_set$values =
+          insert_named(self$param_set$values, list(prob = 0.5))
       }
     }
   ),
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
-      if (is.null(pars$max_features)) pars$max_features = length(instance$task$feature_names)
+      if (is.null(pars$max_features)) {
+        pars$max_features = length(instance$task$feature_names)
+      }
 
       states = t(sapply(seq_len(pars$batch_size), function(i) {
         x = Inf

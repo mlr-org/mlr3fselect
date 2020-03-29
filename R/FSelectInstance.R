@@ -64,7 +64,8 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     #' Further arguments for [mlr3::benchmark()]. Stores all evaluated
     #' [mlr3::ResampleResult]s when evaluating feature combinations.
     #' @return `FSelectInstance`
-    initialize = function(task, learner, resampling, measures, terminator, bm_args = list()) {
+    initialize = function(task, learner, resampling, measures, terminator,
+      bm_args = list()) {
       super$initialize(task, learner, resampling, measures, terminator, bm_args)
     },
 
@@ -79,9 +80,10 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
       catf(str_indent("* Resampling:", format(self$resampling)))
       catf(str_indent("* Terminator:", format(self$terminator)))
       catf(str_indent("* bm_args:", as_short_string(self$bm_args)))
-      if(!is.null(self$result$perf)) {
+      if (!is.null(self$result$perf)) {
         catf(str_indent("* Result feat:", self$result$feat))
-        catf(str_indent("* Result perf:", as_short_string(as.list(self$result$perf))))
+        catf(str_indent("* Result perf:",
+          as_short_string(as.list(self$result$perf))))
       }
     },
 
@@ -113,7 +115,8 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
       })
 
       # Evaluate states
-      d = data.table::data.table(task = tsks, learner = list(self$learner), resampling = list(self$resampling))
+      d = data.table::data.table(task = tsks, learner = list(self$learner),
+        resampling = list(self$resampling))
       bmr = invoke(benchmark, d, .args = self$bm_args)
 
       # Add batch_nr to rr_data
@@ -138,7 +141,8 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
 
       lg$info("Result")
       lg$info(sprintf("Batch %d", batch_nr))
-      lg$info(capture.output(print(cbind(states, perf), class = FALSE, row.names = FALSE, print.keys = FALSE)))
+      lg$info(capture.output(print(cbind(states, perf), class = FALSE,
+        row.names = FALSE, print.keys = FALSE)))
 
       if (self$terminator$is_terminated(self)) {
         stop(terminated_error(self))
@@ -163,7 +167,8 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     },
 
     #' @description
-    #' Returns a table of contained resample results with corresponding feature sets.
+    #' Returns a table of contained resample results with corresponding feature
+    #' sets.
     #' @param unnest
     #' Implemented for compatibility to bbotk
     #' @return [data.table::data.table]
@@ -190,7 +195,8 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
       }))
 
       names(res) = self$task$feature_names
-      cbind(tab[, list(batch_nr)], res, tab[, self$measures[[1]]$id, with = FALSE])
+      cbind(tab[, list(batch_nr)], res,
+        tab[, self$measures[[1]]$id, with = FALSE])
     },
 
     #' @description
@@ -216,7 +222,8 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
       }
       assert_measure(measure, task = self$task, learner = self$learner)
       if (is.na(measure$minimize)) {
-        stopf("Measure '%s' has minimize = NA and hence cannot be used for feature selection", measure$id)
+        stopf("Measure '%s' has minimize = NA and hence cannot be used for feature selection",
+          measure$id)
       }
 
       assert_int(m, null.ok = TRUE)
@@ -253,7 +260,12 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
   active = list(
     #' @field n_batch Number of batches.
     n_batch = function() {
-      if (length(self$bmr$rr_data$batch_n) == 0) 0L else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
+      if (length(self$bmr$rr_data$batch_n) == 0) {
+        0L
+      }
+      else {
+        self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
+      }
     },
 
     #' @field result Result of the feature selection i.e. the optimal feature

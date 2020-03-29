@@ -194,7 +194,8 @@ useful for feature selection algorithms that take a objective function.
 \if{html}{\out{<a id="method-archive"></a>}}
 \if{latex}{\out{\hypertarget{method-archive}{}}}
 \subsection{Method \code{archive()}}{
-Returns a table of contained resample results with corresponding feature sets.
+Returns a table of contained resample results with corresponding feature
+sets.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$archive(unnest = "no")}\if{html}{\out{</div>}}
 }

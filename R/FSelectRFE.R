@@ -38,10 +38,12 @@ FSelectRFE = R6Class("FSelectRFE",
         param_set = ps
       )
       if (is.null(self$param_set$values$min_features)) {
-        self$param_set$values = insert_named(self$param_set$values, list(min_features = 1))
+        self$param_set$values =
+          insert_named(self$param_set$values, list(min_features = 1))
       }
       if (is.null(self$param_set$values$recursive)) {
-        self$param_set$values = insert_named(self$param_set$values, list(recursive = FALSE))
+        self$param_set$values =
+          insert_named(self$param_set$values, list(recursive = FALSE))
       }
     }
   ),
@@ -50,7 +52,8 @@ FSelectRFE = R6Class("FSelectRFE",
       pars = self$param_set$values
 
       if (instance$n_batch == 0) {
-        instance$bm_args = insert_named(instance$bm_args, list(store_models = TRUE))
+        instance$bm_args =
+          insert_named(instance$bm_args, list(store_models = TRUE))
         states = matrix(1, nrow = 1, ncol = length(instance$task$feature_names))
       } else {
         if (length(instance$task$feature_names) - instance$n_batch < pars$min_features) {
@@ -64,15 +67,18 @@ FSelectRFE = R6Class("FSelectRFE",
           imp = importance_average(learners, feat)
 
           # Eliminate the most unimportant feature of the feature subset
-          states = as.numeric(instance$task$feature_names %in% feat & !instance$task$feature_names %in% names(imp[1]))
+          states =
+            as.numeric(instance$task$feature_names %in% feat & !instance$task$feature_names %in% names(imp[1]))
         } else {
           if (instance$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
-            self$importance = importance_average(instance$bmr$data$learner, instance$task$feature_names)
+            self$importance =
+              importance_average(instance$bmr$data$learner, instance$task$feature_names)
           }
 
           # Eliminate the most unimportant features
-          states = as.numeric(!instance$task$feature_names %in% names(self$importance[1:instance$n_batch]))
+          states =
+            as.numeric(!instance$task$feature_names %in% names(self$importance[1:instance$n_batch]))
         }
       }
       # Fit the model on the reduced feature subset
