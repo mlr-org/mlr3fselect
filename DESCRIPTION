@@ -43,7 +43,9 @@ Suggests:
     withr,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    mlr3data,
+    mlr3learners
 Remotes:
     mlr-org/bbotk@mlr3fselect_integration
 Encoding: UTF-8
