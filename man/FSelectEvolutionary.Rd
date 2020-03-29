@@ -27,7 +27,7 @@ The \code{terminators} parameter is replaced by the \link{Terminator} subclasses
 \examples{
 library(mlr3)
 
-terminator = term("evals", n_evals = 20)
+terminator = term("evals", n_evals = 10)
 instance = FSelectInstance$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
@@ -36,10 +36,11 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs("evolutionary", mu = 4, lambda = 8)
-fs$select(instance) # modifies the instance by reference
-instance$result # returns best configuration and best performance
-instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
+fs = fs(evolutionary)
+fs$select(instance)
+instance$result
+instance$archive()
+instance$optimization_path()
 }
 \section{Super class}{
 \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectEvolutionary}

@@ -31,11 +31,11 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs("random")
-fs$select(instance) # modifies the instance by reference
-instance$result # returns best configuration and best performance
-instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
-instance$optimization_path(n = 1) # returns best feature set
+fs = fs(random)
+fs$select(instance)
+instance$result
+instance$archive()
+instance$optimization_path()
 }
 \section{Super class}{
 \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectRandom}

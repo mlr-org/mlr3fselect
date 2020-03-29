@@ -11,23 +11,8 @@
 #' The size of the feature sets is increased by 1 in each batch.
 #'
 #' @export
-#' @examples
-#' library(mlr3)
-#'
-#' terminator = term("evals", n_evals = 15)
-#' instance = FSelectInstance$new(
-#'   task = tsk("iris"),
-#'   learner = lrn("classif.rpart"),
-#'   resampling = rsmp("holdout"),
-#'   measures = msr("classif.ce"),
-#'   terminator = terminator
-#' )
-#'
-#' fs = fs("exhaustive")
-#' fs$select(instance) # modifies the instance by reference
-#' instance$result # returns best configuration and best performance
-#' instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
-#' instance$optimization_path(n = 1, m = 1:4) # returns best feature set of each batch
+#' @templateVar id exhaustive
+#' @template example
 FSelectExhaustive = R6Class("FSelectExhaustive",
   inherit = FSelect,
   public = list(

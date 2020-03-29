@@ -13,6 +13,8 @@
 #' \item{\code{recursive}}{\code{logical(1)}}}
 #'
 #' @export
+#' @templateVar id rfe
+#' @template example
 FSelectRFE = R6Class("FSelectRFE",
   inherit = FSelect,
   public = list(
