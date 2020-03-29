@@ -51,7 +51,7 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
   public = list(
 
     #' @description
-    #' Create new `FSelectInstance` object.
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     #' @param task [mlr3::Task]
     #' @param learner [mlr3::Learner]
     #' @param resampling [mlr3::Resampling]
@@ -63,7 +63,6 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     #' @param bm_args named `list()`
     #' Further arguments for [mlr3::benchmark()]. Stores all evaluated
     #' [mlr3::ResampleResult]s when evaluating feature combinations.
-    #' @return `FSelectInstance`
     initialize = function(task, learner, resampling, measures, terminator,
       bm_args = list()) {
       super$initialize(task, learner, resampling, measures, terminator, bm_args)

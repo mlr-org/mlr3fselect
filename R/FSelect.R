@@ -39,11 +39,10 @@ FSelect = R6Class("FSelect",
     packages = NULL,
 
     #' @description
-    #' Create new `FSelect` object.
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     #' @param param_set [paradox::ParamSet]
     #' @param packages `character()`
     #' Set of control parameter for the feature selection.
-    #' @return `FSelect`
     initialize = function(param_set, packages = character()) {
       self$param_set = assert_param_set(param_set)
       self$packages = assert_set(packages)

@@ -55,7 +55,7 @@ instance$archive() # allows access of data.table / benchmark result of full path
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelect} object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, packages = character())}\if{html}{\out{</div>}}
 }
@@ -69,9 +69,6 @@ Create new \code{FSelect} object.
 Set of control parameter for the feature selection.}
 }
 \if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{FSelect}
 }
 }
 \if{html}{\out{<hr>}}

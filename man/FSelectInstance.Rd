@@ -89,7 +89,7 @@ set and its estimated performances.}
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelectInstance} object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$new(
   task,
@@ -123,9 +123,6 @@ Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}. Stores al
 \item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
 }
 \if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{FSelectInstance}
 }
 }
 \if{html}{\out{<hr>}}
