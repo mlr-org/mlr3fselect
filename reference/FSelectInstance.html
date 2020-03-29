@@ -97,6 +97,9 @@ in varying levels of detail ($optimization_path())." />
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
+<li>
+  <a href="../articles/mlr3fselect.html">Get started</a>
+</li>
         <li>
   <a href="https://github.com/mlr-org/mlr3fselect/">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -269,25 +272,20 @@ This method is useful for feature selection algorithms that take a objective fun
 <p><hr>
 <a id="method-archive"></a></p><h3>Method <code>archive()</code></h3>
 <p>Returns a table of contained resample results with corresponding feature sets.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>archive</span>()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>archive</span>(<span class='kw'>unnest</span> <span class='kw'>=</span> <span class='st'>"no"</span>)</pre><p></div></p>
 
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl'>
+<dt><code>unnest</code></dt><dd><p>Implemented for compatibility to bbotk</p></dd>
+
+</dl><p></div></p>
 <h3>Returns</h3>
 <p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p>
 <p><hr>
 <a id="method-optimization_path"></a></p><h3>Method <code>optimization_path()</code></h3>
-<p>Queries the <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a> for the <code>n</code> best feature sets (default is <code>1</code>)
-of the batches specified in <code>m</code> (default is the last batch).</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>optimization_path</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre><p></div></p>
+<p>Queries the <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a> for the optimization path.</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>optimization_path</span>()</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
-<dt><code>n</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>
-Number of feature sets per batch.</p></dd>
-
-<dt><code>m</code></dt><dd><p><code>integer</code>
-Batch numbers.</p></dd>
-
-</dl><p></div></p>
 <h3>Returns</h3>
 <p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p>
 <p><hr>
@@ -357,22 +355,22 @@ and estimated performance values here. For internal use.</p><h3>Usage</h3>
 #&gt; [1] 1
 #&gt; 
 #&gt; $uhashes
-#&gt; [1] "2401eaf2-f186-4123-907b-b58607edfb44"
-#&gt; [2] "0cd73ece-3736-408c-a612-5f4fc89533a0"
-#&gt; [3] "54475d16-ecf0-4883-8d71-19454ec6809d"
-#&gt; [4] "e552aade-dced-4a66-a007-34f0550ba540"
+#&gt; [1] "fc6e4e58-1b30-43d6-89f4-6f6f7b0871e0"
+#&gt; [2] "8b632e33-8303-4bd3-872d-1b52c0b58296"
+#&gt; [3] "f23c1cc4-84dd-4041-a4c3-8bc2c0db4a22"
+#&gt; [4] "47b5295c-5450-459b-ac35-8c115ff7d429"
 #&gt; 
 #&gt; $perf
 #&gt;    classif.ce
-#&gt; 1: 0.06000000
+#&gt; 1: 0.05333333
 #&gt; 2: 0.04666667
-#&gt; 3: 0.30000000
-#&gt; 4: 0.50000000
+#&gt; 3: 0.26666667
+#&gt; 4: 0.46666667
 #&gt; </div><div class='input'><span class='no'>instance</span>$<span class='fu'>archive</span>()</div><div class='output co'>#&gt;    nr  resample_result task_id    learner_id resampling_id iters classif.ce
-#&gt; 1:  1 &lt;ResampleResult&gt;    iris classif.rpart            cv    10 0.06000000
+#&gt; 1:  1 &lt;ResampleResult&gt;    iris classif.rpart            cv    10 0.05333333
 #&gt; 2:  2 &lt;ResampleResult&gt;    iris classif.rpart            cv    10 0.04666667
-#&gt; 3:  3 &lt;ResampleResult&gt;    iris classif.rpart            cv    10 0.30000000
-#&gt; 4:  4 &lt;ResampleResult&gt;    iris classif.rpart            cv    10 0.50000000
+#&gt; 3:  3 &lt;ResampleResult&gt;    iris classif.rpart            cv    10 0.26666667
+#&gt; 4:  4 &lt;ResampleResult&gt;    iris classif.rpart            cv    10 0.46666667
 #&gt;    batch_nr         feat
 #&gt; 1:        1 Petal.Length
 #&gt; 2:        1  Petal.Width

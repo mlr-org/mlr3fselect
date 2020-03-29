@@ -40,7 +40,7 @@
 <meta property="og:description" content="Class for feature selection by recursive feature elimination (RFE).
 The recursive algorithm (recursive = TRUE) recomputes the feature importances
 on the reduced feature set in every iteration.
-The non-recursive algorithm (recursive = TRUE) only uses the feature importances
+The non-recursive algorithm (recursive = FALSE) only uses the feature importances
 of the model fitted with all features to eliminate the next most unimportant feature in every iteration." />
 <meta name="twitter:card" content="summary" />
 
@@ -85,6 +85,9 @@ of the model fitted with all features to eliminate the next most unimportant fea
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
+</li>
+<li>
+  <a href="../articles/mlr3fselect.html">Get started</a>
 </li>
         <li>
   <a href="https://github.com/mlr-org/mlr3fselect/">
@@ -132,7 +135,7 @@ of the model fitted with all features to eliminate the next most unimportant fea
     <p>Class for feature selection by recursive feature elimination (RFE).
 The recursive algorithm (<code>recursive = TRUE</code>) recomputes the feature importances
 on the reduced feature set in every iteration.
-The non-recursive algorithm (<code>recursive = TRUE</code>) only uses the feature importances
+The non-recursive algorithm (<code>recursive = FALSE</code>) only uses the feature importances
 of the model fitted with all features to eliminate the next most unimportant feature in every iteration.</p>
     </div>
 
@@ -193,6 +196,40 @@ of the model fitted with all features to eliminate the next most unimportant fea
 
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
+
+<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='term.html'>term</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
+  <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
+  <span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
+  <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
+  <span class='kw'>measures</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
+  <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>
+)
+
+<span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"rfe"</span>)
+<span class='no'>fs</span>$<span class='fu'>select</span>(<span class='no'>instance</span>)
+<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt; $feat
+#&gt; [1] "Petal.Width"
+#&gt; 
+#&gt; $perf
+#&gt; classif.ce 
+#&gt;       0.08 
+#&gt; </div><div class='input'><span class='no'>instance</span>$<span class='fu'>archive</span>()</div><div class='output co'>#&gt;    nr  resample_result task_id    learner_id resampling_id iters classif.ce
+#&gt; 1:  1 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt; 2:  2 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt; 3:  3 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt; 4:  4 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt;    batch_nr                                              feat
+#&gt; 1:        1 Petal.Length,Petal.Width,Sepal.Length,Sepal.Width
+#&gt; 2:        2             Petal.Length,Petal.Width,Sepal.Length
+#&gt; 3:        3                          Petal.Length,Petal.Width
+#&gt; 4:        4                                       Petal.Width</div><div class='input'><span class='no'>instance</span>$<span class='fu'>optimization_path</span>()</div><div class='output co'>#&gt;    batch_nr Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt; 1:        1            1           1            1           1       0.08
+#&gt; 2:        2            1           1            1           0       0.08
+#&gt; 3:        3            1           1            0           0       0.08
+#&gt; 4:        4            0           1            0           0       0.08</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

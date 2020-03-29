@@ -86,6 +86,9 @@ and removes in each step the feature that decreases the models performance the l
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
+<li>
+  <a href="../articles/mlr3fselect.html">Get started</a>
+</li>
         <li>
   <a href="https://github.com/mlr-org/mlr3fselect/">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -192,7 +195,7 @@ Each batch is one step in the sequential feature selection.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
 
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='term.html'>term</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>15</span>)
+<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='term.html'>term</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
   <span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
@@ -202,24 +205,24 @@ Each batch is one step in the sequential feature selection.</p>
 )
 
 <span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)
-<span class='no'>fs</span>$<span class='fu'>select</span>(<span class='no'>instance</span>) <span class='co'># modifies the instance by reference</span>
-<span class='no'>instance</span>$<span class='no'>result</span> <span class='co'># returns best configuration and best performance</span></div><div class='output co'>#&gt; $feat
-#&gt; [1] "Petal.Width"  "Sepal.Length" "Sepal.Width" 
+<span class='no'>fs</span>$<span class='fu'>select</span>(<span class='no'>instance</span>)
+<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt; $feat
+#&gt; [1] "Petal.Width" "Sepal.Width"
 #&gt; 
 #&gt; $perf
 #&gt; classif.ce 
 #&gt;       0.02 
-#&gt; </div><div class='input'><span class='no'>instance</span>$<span class='fu'>archive</span>() <span class='co'># allows access of data.table / benchmark result of full path of all evaluation</span></div><div class='output co'>#&gt;     nr  resample_result task_id    learner_id resampling_id iters classif.ce
-#&gt;  1:  1 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.12
+#&gt; </div><div class='input'><span class='no'>instance</span>$<span class='fu'>archive</span>()</div><div class='output co'>#&gt;     nr  resample_result task_id    learner_id resampling_id iters classif.ce
+#&gt;  1:  1 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.04
 #&gt;  2:  2 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.02
-#&gt;  3:  3 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.28
-#&gt;  4:  4 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.44
-#&gt;  5:  5 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.12
+#&gt;  3:  3 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.30
+#&gt;  4:  4 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.38
+#&gt;  5:  5 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.02
 #&gt;  6:  6 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.02
 #&gt;  7:  7 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.02
-#&gt;  8:  8 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.12
+#&gt;  8:  8 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.02
 #&gt;  9:  9 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.02
-#&gt; 10: 10 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.12
+#&gt; 10: 10 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.02
 #&gt;     batch_nr                                              feat
 #&gt;  1:        1                                      Petal.Length
 #&gt;  2:        1                                       Petal.Width
@@ -229,12 +232,12 @@ Each batch is one step in the sequential feature selection.</p>
 #&gt;  6:        2                          Petal.Width,Sepal.Length
 #&gt;  7:        2                           Petal.Width,Sepal.Width
 #&gt;  8:        3             Petal.Length,Petal.Width,Sepal.Length
-#&gt;  9:        3              Petal.Width,Sepal.Length,Sepal.Width
-#&gt; 10:        4 Petal.Length,Petal.Width,Sepal.Length,Sepal.Width</div><div class='input'><span class='no'>instance</span>$<span class='fu'>optimization_path</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>) <span class='co'># returns selected feature of each step</span></div><div class='output co'>#&gt;    batch_nr Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt;  9:        3              Petal.Length,Petal.Width,Sepal.Width
+#&gt; 10:        4 Petal.Length,Petal.Width,Sepal.Length,Sepal.Width</div><div class='input'><span class='no'>instance</span>$<span class='fu'>optimization_path</span>()</div><div class='output co'>#&gt;    batch_nr Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt; 1:        1            0           1            0           0       0.02
-#&gt; 2:        2            0           1            1           0       0.02
-#&gt; 3:        3            0           1            1           1       0.02
-#&gt; 4:        4            1           1            1           1       0.12</div></pre>
+#&gt; 2:        2            1           1            0           0       0.02
+#&gt; 3:        3            1           1            1           0       0.02
+#&gt; 4:        4            1           1            1           1       0.02</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

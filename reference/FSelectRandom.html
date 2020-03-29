@@ -82,6 +82,9 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
+<li>
+  <a href="../articles/mlr3fselect.html">Get started</a>
+</li>
         <li>
   <a href="https://github.com/mlr-org/mlr3fselect/">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -197,36 +200,36 @@ of termination criteria.</p>
 )
 
 <span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"random"</span>)
-<span class='no'>fs</span>$<span class='fu'>select</span>(<span class='no'>instance</span>) <span class='co'># modifies the instance by reference</span>
-<span class='no'>instance</span>$<span class='no'>result</span> <span class='co'># returns best configuration and best performance</span></div><div class='output co'>#&gt; $feat
-#&gt; [1] "Petal.Width"
+<span class='no'>fs</span>$<span class='fu'>select</span>(<span class='no'>instance</span>)
+<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt; $feat
+#&gt; [1] "Petal.Length"
 #&gt; 
 #&gt; $perf
 #&gt; classif.ce 
-#&gt;       0.06 
-#&gt; </div><div class='input'><span class='no'>instance</span>$<span class='fu'>archive</span>() <span class='co'># allows access of data.table / benchmark result of full path of all evaluation</span></div><div class='output co'>#&gt;     nr  resample_result task_id    learner_id resampling_id iters classif.ce
-#&gt;  1:  1 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;  2:  2 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;  3:  3 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.26
-#&gt;  4:  4 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;  5:  5 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;  6:  6 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;  7:  7 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;  8:  8 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;  9:  9 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt; 10: 10 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.06
-#&gt;     batch_nr                                              feat
-#&gt;  1:        1                                       Petal.Width
-#&gt;  2:        1                                      Petal.Length
-#&gt;  3:        1                                      Sepal.Length
-#&gt;  4:        1 Petal.Length,Petal.Width,Sepal.Length,Sepal.Width
-#&gt;  5:        1                                       Petal.Width
-#&gt;  6:        1                                      Petal.Length
-#&gt;  7:        1                         Petal.Length,Sepal.Length
-#&gt;  8:        1                          Petal.Length,Sepal.Width
-#&gt;  9:        1              Petal.Length,Petal.Width,Sepal.Width
-#&gt; 10:        1              Petal.Width,Sepal.Length,Sepal.Width</div><div class='input'><span class='no'>instance</span>$<span class='fu'>optimization_path</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='co'># returns best feature set</span></div><div class='output co'>#&gt;    batch_nr Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt; 1:        1            0           1            0           0       0.06</div></pre>
+#&gt;       0.08 
+#&gt; </div><div class='input'><span class='no'>instance</span>$<span class='fu'>archive</span>()</div><div class='output co'>#&gt;     nr  resample_result task_id    learner_id resampling_id iters classif.ce
+#&gt;  1:  1 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt;  2:  2 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.28
+#&gt;  3:  3 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt;  4:  4 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt;  5:  5 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.28
+#&gt;  6:  6 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt;  7:  7 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt;  8:  8 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt;  9:  9 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.08
+#&gt; 10: 10 &lt;ResampleResult&gt;    iris classif.rpart       holdout     1       0.28
+#&gt;     batch_nr                                 feat
+#&gt;  1:        1             Petal.Length,Petal.Width
+#&gt;  2:        1                         Sepal.Length
+#&gt;  3:        1                          Petal.Width
+#&gt;  4:        1                          Petal.Width
+#&gt;  5:        1                         Sepal.Length
+#&gt;  6:        1 Petal.Length,Petal.Width,Sepal.Width
+#&gt;  7:        1            Petal.Length,Sepal.Length
+#&gt;  8:        1                         Petal.Length
+#&gt;  9:        1              Petal.Width,Sepal.Width
+#&gt; 10:        1             Sepal.Length,Sepal.Width</div><div class='input'><span class='no'>instance</span>$<span class='fu'>optimization_path</span>()</div><div class='output co'>#&gt;    batch_nr Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt; 1:        1            1           1            0           0       0.08</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

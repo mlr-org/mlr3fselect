@@ -61,12 +61,12 @@
     <loc>https://mlr3fswrap.mlr-org.com/reference/mlr_fselectors.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/mlr_tasks_titanic.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3fswrap.mlr-org.com/reference/term.html</loc>
   </url>
   <url>
     <loc>https://mlr3fswrap.mlr-org.com/reference/terms.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fswrap.mlr-org.com/articles/mlr3fselect.html</loc>
   </url>
 </urlset>
