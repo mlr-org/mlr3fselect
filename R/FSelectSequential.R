@@ -1,19 +1,23 @@
-#' FSelectSequential Class
+#' @title FSelectSequential
 #'
 #' @description
-#' Class for sequential feature selection.
-#' The sequential forward selection (`strategy = fsf`) extends the feature set in each step with the feature
-#' that increases the models performance the most.
-#' The sequential backward selection (`strategy = fsb`) starts with the complete future set
-#' and removes in each step the feature that decreases the models performance the least.
+#' Subclass for sequential feature selection. The sequential forward selection
+#' (`strategy = fsf`) extends the feature set in each step with the feature that
+#' increases the models performance the most. The sequential backward selection
+#' (`strategy = fsb`) starts with the complete future set and removes in each
+#' step the feature that decreases the models performance the least.
 #'
 #' @section Parameters:
 #' \describe{
-#' \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in [mlr3::Task].}
-#' \item{\code{strategy}}{\code{character(1)} For forward feature selection `fsf`, for backward feature selection `fsb`.}}
+#' \item{`max_features`}{`integer(1)`
+#' Maximum number of features. By default, number of features in [mlr3::Task].}
+#' \item{`strategy`}{`character(1)`
+#' Search method `sfs` (forward search) or `sbs` (backward search).}
+#' }
 #'
-#' The feature sets are evaluated in batches.
-#' Each batch is one step in the sequential feature selection.
+#' @note
+#' Feature sets are evaluated in batches, where each batch is one step in the
+#' sequential feature selection.
 #'
 #' @export
 #' @templateVar fs "sequential"
@@ -21,20 +25,20 @@
 FSelectSequential = R6Class("FSelectSequential",
   inherit = FSelect,
   public = list(
+
     #' @description
-    #' Create new `FSelectSequential` object.
-    #' @return `FSelectSequential`
+    #' Creates a new instance of this [R6][R6::R6Class] class.`
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("max_features", lower = 1),
-        ParamFct$new("strategy", levels = c("fsf", "fsb"), default = "fsf"))
+        ParamFct$new("strategy", levels = c("sfs", "sbs"), default = "sfs"))
       )
 
       super$initialize(
         param_set = ps
       )
       if (is.null(self$param_set$values$strategy)) {
-        self$param_set$values = insert_named(self$param_set$values, list(strategy = "fsf"))
+        self$param_set$values = insert_named(self$param_set$values, list(strategy = "sfs"))
       }
     }
   ),
@@ -45,7 +49,7 @@ FSelectSequential = R6Class("FSelectSequential",
 
       # Initialize states for first batch
       if (instance$n_batch == 0) {
-        if (self$param_set$values$strategy == "fsf") {
+        if (self$param_set$values$strategy == "sfs") {
           states = diag(1, length(instance$task$feature_names), length(instance$task$feature_names))
         } else {
           combinations = combn(length(instance$task$feature_names), pars$max_features)
@@ -66,9 +70,9 @@ FSelectSequential = R6Class("FSelectSequential",
         best_state = as.numeric(instance$task$feature_names %in% feat)
 
         # Generate new states based on best feature set
-        x = ifelse(pars$strategy == "fsf", 0, 1)
-        y = ifelse(pars$strategy == "fsf", 1, 0)
-        z = if (pars$strategy == "fsf") !as.logical(best_state) else as.logical(best_state)
+        x = ifelse(pars$strategy == "sfs", 0, 1)
+        y = ifelse(pars$strategy == "sfs", 1, 0)
+        z = if (pars$strategy == "sfs") !as.logical(best_state) else as.logical(best_state)
         states = t(sapply(seq_along(best_state)[z], function(i) {
           if (best_state[i] == x) {
             new_state = best_state

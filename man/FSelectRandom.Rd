@@ -4,18 +4,22 @@
 \alias{FSelectRandom}
 \title{FSelectRandom Class}
 \description{
-Class for random feature selection. Feature sets are randomly drawn.
+Subclass for random feature selection. Feature sets are randomly drawn.
 }
 \section{Parameters}{
 
 \describe{
-\item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
-\item{\code{batch_size}}{\code{integer(1)} Maximum number of feature sets to try in a batch.}
-\item{\code{prob}}{\code{double(1)} Probability of choosing a feature.}}
+\item{\code{max_features}}{\code{integer(1)}
+Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
+\item{\code{batch_size}}{\code{integer(1)}
+Maximum number of feature sets to try in a batch.}
+\item{\code{prob}}{\code{double(1)}
+Probability of choosing a feature.}
+}
 
-In order to support general termination criteria and parallelization,
-feature sets are evaluated in a batch-fashion of size \code{batch_size}.
-Larger batches mean more is parallelized, smaller batches imply a more fine-grained checking
+In order to support general termination criteria and parallelization, feature
+sets are evaluated in a batch-fashion of size \code{batch_size}. Larger batches
+mean more is parallelized, smaller batches imply a more fine-grained checking
 of termination criteria.
 }
 
@@ -60,14 +64,11 @@ instance$optimization_path()
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelectRandom} object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectRandom$new()}\if{html}{\out{</div>}}
 }
 
-\subsection{Returns}{
-\code{FSelectRandom}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

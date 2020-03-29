@@ -1,16 +1,19 @@
-#' FSelectRFE Class
+#' @title FSelectRFE Class
 #'
 #' @description
-#' Class for feature selection by recursive feature elimination (RFE).
-#' The recursive algorithm (`recursive = TRUE`) recomputes the feature importances
-#' on the reduced feature set in every iteration.
-#' The non-recursive algorithm (`recursive = FALSE`) only uses the feature importances
-#' of the model fitted with all features to eliminate the next most unimportant feature in every iteration.
+#' Class for feature selection by recursive feature elimination (RFE). The
+#' recursive algorithm (`recursive = TRUE`) recomputes the feature importances
+#' on the reduced feature set in every iteration.  The non-recursive algorithm
+#' (`recursive = FALSE`) only uses the feature importances of the model fitted
+#' with all features to eliminate the next most unimportant feature in every
+#' iteration.
 #'
 #' @section Parameters:
 #' \describe{
-#' \item{\code{min_features}}{\code{integer(1)} Minimum number of features. By default, 1.}
-#' \item{\code{recursive}}{\code{logical(1)}}}
+#' \item{`min_features`}{`integer(1)`
+#' Minimum number of features. By default, 1.}
+#' \item{`recursive`}{`logical(1)`}
+#' }
 #'
 #' @export
 #' @templateVar fs "rfe"
@@ -18,18 +21,9 @@
 FSelectRFE = R6Class("FSelectRFE",
   inherit = FSelect,
   public = list(
-    #' @field importance Stores the feature importance of the model with all variables if `recrusive` is set to `FALSE`
+    #' @field importance Stores the feature importance of the model with all
+    #'   variables if `recrusive` is set to `FALSE`
     importance = NULL,
-    # FIXME
-    # We store the feature importance of the model with all variables here
-    # if we conduct the non-recursive version since we need it in every iteration again.
-    # We do not need this for the recursive version
-    # since the feature importances are calculated in every iteration again on the reduced feature subset.
-    # But we could store here also the feature importances of every iteration in a list format
-    # since it is a valuable information for the user.
-    # However, I am not sure if this is the right place for it.
-    # I suspect that the user would assume that this information is stored in the archive
-    # along with the other information about the feature selection.
 
     #' @description
     #' Create new `FSelectRFE` object.

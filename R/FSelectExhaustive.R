@@ -1,14 +1,18 @@
 #' FSelectExhaustive Class
 #'
 #' @description
-#' Class for exhaustive feature selection. All feature sets are searched.
+#' Subclass for exhaustive feature selection. Evaluates every possible feature
+#' subset.
 #'
 #' @section Parameters:
 #' \describe{
-#' \item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in [mlr3::Task].}}
+#' \item{`max_features`}{`integer(1)`
+#' Maximum number of features. By default, number of features in [mlr3::Task].}
+#' }
 #'
-#' In order to support general termination criteria and parallelization, feature sets are evaluated in batches.
-#' The size of the feature sets is increased by 1 in each batch.
+#' In order to support general termination criteria and parallelization, feature
+#' sets are evaluated in batches. The size of the feature sets is increased by 1
+#' in each batch.
 #'
 #' @export
 #' @templateVar fs "exhaustive"
@@ -16,9 +20,9 @@
 FSelectExhaustive = R6Class("FSelectExhaustive",
   inherit = FSelect,
   public = list(
+
     #' @description
-    #' Create new `FSelectExhaustive` object.
-    #' @return `FSelectExhaustive`
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("max_features", lower = 1))

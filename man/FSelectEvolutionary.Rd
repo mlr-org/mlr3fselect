@@ -4,7 +4,8 @@
 \alias{FSelectEvolutionary}
 \title{FSelectEvolutionary Class}
 \description{
-Class for evolutionary feature selection calling \code{\link[ecr:ecr]{ecr::ecr()}} from package \CRANpkg{ecr}.
+Subclass for evolutionary feature selection. Calls \code{\link[ecr:ecr]{ecr::ecr()}} from package
+\CRANpkg{ecr}.
 }
 \section{Parameters}{
 
@@ -16,12 +17,13 @@ Class for evolutionary feature selection calling \code{\link[ecr:ecr]{ecr::ecr()
 \item{\code{survival.strategy}}{\code{character(1)}}
 \item{\code{n.elite}}{\code{integer(1)}}
 \item{\code{initial.solutions}}{list of \code{integer()}}
-\item{\code{parent.selector}}{object of class \code{ecr::selector}}
-\item{\code{survival.selector}}{object of class \code{ecr::selector}}}
+\item{\code{parent.selector}}{\code{ecr} selector}
+\item{\code{survival.selector}}{\code{ecr} selector}
+}
 
-For the meaning of the control parameter, see \code{\link[ecr:ecr]{ecr::ecr()}}.
-Note that \code{mu} and \code{lambda} must be set by the user.
-The \code{terminators} parameter is replaced by the \link{Terminator} subclasses.
+For the meaning of the control parameter, see \code{\link[ecr:ecr]{ecr::ecr()}}. Note that \code{mu}
+and \code{lambda} must be set by the user. The \code{terminators} parameter is replaced
+by the \link{Terminator} subclasses.
 }
 
 \examples{
@@ -65,14 +67,11 @@ instance$optimization_path()
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelectEvolutionary } object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectEvolutionary$new()}\if{html}{\out{</div>}}
 }
 
-\subsection{Returns}{
-\code{FSelectEvolutionary}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

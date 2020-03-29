@@ -1,23 +1,25 @@
-#' FSelectInstance Class
+#' @title FSelectInstance Class
 #'
 #' @description
-#' Specifies a general feature selection scenario including performance evaluator
-#' and archive for [FSelect] objects to act upon.
-#' This class encodes the black box objective function that a [FSelect] object has to optimize.
-#' It allows the basis operations of querying the objective with feature sets (`$eval_batch()`),
-#' storing the evaluations in an internal archive and querying the archive (`$archive()`).
+#' Specifies a general feature selection scenario including performance
+#' evaluator and archive for [FSelect] objects to act upon. This class encodes
+#' the black box objective function that a [FSelect] object has to optimize. It
+#' allows the basis operations of querying the objective with feature sets
+#' (`$eval_batch()`), storing the evaluations in an internal archive and
+#' querying the archive (`$archive()`).
 #'
-#' Evaluations of feature sets are performed in batches by calling [mlr3::benchmark()] internally.
-#' Before and after a batch is evaluated, the [Terminator] is queried for the remaining budget.
-#' If the available budget is exhausted, an exception is raised,
-#' and no further evaluations can be performed from this point on.
+#' Evaluations of feature sets are performed in batches by calling
+#' [mlr3::benchmark()] internally. Before and after a batch is evaluated, the
+#' [Terminator] is queried for the remaining budget. If the available budget is
+#' exhausted, an exception is raised, and no further evaluations can be
+#' performed from this point on.
 #'
-#' A list of measures can be passed to the instance, and they will always be all evaluated.
-#' However, single-criteria tuners optimize only the first measure.
+#' A list of measures can be passed to the instance, and they will always be all
+#' evaluated. However, single-criteria tuners optimize only the first measure.
 #'
-#' The [FSelect] object is also supposed to store its final result,
-#' consisting of a selected feature set
-#' and associated estimated performance values, by calling the method `instance$assign_result()`.
+#' The [FSelect] object is also supposed to store its final result, consisting
+#' of a selected feature set and associated estimated performance values, by
+#' calling the method `instance$assign_result()`.
 #'
 #' This class allows to display the optimization path of the feature selection
 #' in varying levels of detail (`$optimization_path()`).
@@ -52,12 +54,15 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     #' Create new `FSelectInstance` object.
     #' @param task [mlr3::Task]
     #' @param learner [mlr3::Learner]
-    #' @param resampling [mlr3::Resampling] Note that uninstantiated resamplings are instantiated during construction so that all configurations.
+    #' @param resampling [mlr3::Resampling]
+    #' Note that uninstantiated resamplings are instantiated during construction
+    #' so that all configurations.
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param bmr [mlr3::BenchmarkResult]
-    #' @param bm_args named `list()` Further arguments for [mlr3::benchmark()].
-    #' Stores all evaluated [mlr3::ResampleResult]s when evaluating feature combinations.
+    #' @param bm_args named `list()`
+    #' Further arguments for [mlr3::benchmark()]. Stores all evaluated
+    #' [mlr3::ResampleResult]s when evaluating feature combinations.
     #' @return `FSelectInstance`
     initialize = function(task, learner, resampling, measures, terminator, bm_args = list()) {
       super$initialize(task, learner, resampling, measures, terminator, bm_args)
@@ -81,11 +86,11 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     },
 
     #' @description
-    #' Evaluates all feature sets in `states` through resampling.
-    #' Updates the internal [BenchmarkResult] `$bmr` by reference.
-    #' Before and after each batch-evaluation, the [Terminator] is checked,
-    #' and if it is positive, an exception of class `terminated_error` is raised.
-    #' This function should be internally called by the [FSelect] object.
+    #' Evaluates all feature sets in `states` through resampling. Updates the
+    #' internal [BenchmarkResult] `$bmr` by reference. Before and after each
+    #' batch-evaluation, the [Terminator] is checked, and if it is positive, an
+    #' exception of class `terminated_error` is raised. This function should be
+    #' internally called by the [FSelect] object.
     #' @param states `matrix`
     #' Each row represents a 0/1 encoded feature set.
     #' @return named `list()`
@@ -141,11 +146,10 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
       return(list(batch_nr = batch_nr, uhashes = bmr$uhashes, perf = perf))
     },
 
-    #' @description
-    #' Evaluates a feature set `x` and returns a scalar objective value,
-    #' where the return value is negated if the measure is maximized.
-    #' Internally, `$eval_batch()` is called with a single row.
-    #' This method is useful for feature selection algorithms that take a objective function.
+    #' @description Evaluates a feature set `x` and returns a scalar objective
+    #' value, where the return value is negated if the measure is maximized.
+    #' Internally, `$eval_batch()` is called with a single row. This method is
+    #' useful for feature selection algorithms that take a objective function.
     #' @param x `numeric`
     #' 0/1 encoded feature set
     #' @return `numeric(1)`
@@ -196,6 +200,7 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     #' In case of ties, one of the tied values is selected randomly.
     #' @param measure [mlr3::Measure]
     #' @param m `ìnteger`
+    #' Vector of batches
     #' @return [mlr3::ResampleResult]
     best = function(measure = NULL, m = NULL) {
 
@@ -233,8 +238,11 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
     #' @description
     #' The [FSelect] object writes the best found feature set
     #' and estimated performance values here. For internal use.
-    #' @param feat `character` Must be character vector of feature names existing in `task`
-    #' @param perf `numeric` Must be named numeric of performance measures, named with performance IDs, regarding all elements in `measures`.
+    #' @param feat `character`
+    #' Must be character vector of feature names existing in `task`
+    #' @param perf `numeric`
+    #' Must be named numeric of performance measures, named with performance
+    #' IDs, regarding all elements in `measures`.
     assign_result = function(feat, perf) {
       assert_names(feat, subset.of = self$task$feature_names)
       assert_numeric(perf)
@@ -248,7 +256,8 @@ FSelectInstance = R6Class("FSelectInstance", inherit = Instance,
       if (length(self$bmr$rr_data$batch_n) == 0) 0L else self$bmr$rr_data$batch_n[length(self$bmr$rr_data$batch_n)]
     },
 
-    #' @field result Result of the feature selection i.e. the optimal feature set and its estimated performances.
+    #' @field result Result of the feature selection i.e. the optimal feature
+    #'   set and its estimated performances.
     result = function() {
       list(feat = private$.result$feat, perf = private$.result$perf)
     }

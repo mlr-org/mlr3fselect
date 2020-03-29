@@ -4,15 +4,19 @@
 \alias{FSelectExhaustive}
 \title{FSelectExhaustive Class}
 \description{
-Class for exhaustive feature selection. All feature sets are searched.
+Subclass for exhaustive feature selection. Evaluates every possible feature
+subset.
 }
 \section{Parameters}{
 
 \describe{
-\item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}}
+\item{\code{max_features}}{\code{integer(1)}
+Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
+}
 
-In order to support general termination criteria and parallelization, feature sets are evaluated in batches.
-The size of the feature sets is increased by 1 in each batch.
+In order to support general termination criteria and parallelization, feature
+sets are evaluated in batches. The size of the feature sets is increased by 1
+in each batch.
 }
 
 \examples{
@@ -56,14 +60,11 @@ instance$optimization_path()
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelectExhaustive} object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectExhaustive$new()}\if{html}{\out{</div>}}
 }
 
-\subsection{Returns}{
-\code{FSelectExhaustive}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

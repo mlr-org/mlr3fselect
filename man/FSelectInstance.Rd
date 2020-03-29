@@ -4,23 +4,25 @@
 \alias{FSelectInstance}
 \title{FSelectInstance Class}
 \description{
-Specifies a general feature selection scenario including performance evaluator
-and archive for \link{FSelect} objects to act upon.
-This class encodes the black box objective function that a \link{FSelect} object has to optimize.
-It allows the basis operations of querying the objective with feature sets (\verb{$eval_batch()}),
-storing the evaluations in an internal archive and querying the archive (\verb{$archive()}).
+Specifies a general feature selection scenario including performance
+evaluator and archive for \link{FSelect} objects to act upon. This class encodes
+the black box objective function that a \link{FSelect} object has to optimize. It
+allows the basis operations of querying the objective with feature sets
+(\verb{$eval_batch()}), storing the evaluations in an internal archive and
+querying the archive (\verb{$archive()}).
 
-Evaluations of feature sets are performed in batches by calling \code{\link[mlr3:benchmark]{mlr3::benchmark()}} internally.
-Before and after a batch is evaluated, the \link{Terminator} is queried for the remaining budget.
-If the available budget is exhausted, an exception is raised,
-and no further evaluations can be performed from this point on.
+Evaluations of feature sets are performed in batches by calling
+\code{\link[mlr3:benchmark]{mlr3::benchmark()}} internally. Before and after a batch is evaluated, the
+\link{Terminator} is queried for the remaining budget. If the available budget is
+exhausted, an exception is raised, and no further evaluations can be
+performed from this point on.
 
-A list of measures can be passed to the instance, and they will always be all evaluated.
-However, single-criteria tuners optimize only the first measure.
+A list of measures can be passed to the instance, and they will always be all
+evaluated. However, single-criteria tuners optimize only the first measure.
 
-The \link{FSelect} object is also supposed to store its final result,
-consisting of a selected feature set
-and associated estimated performance values, by calling the method \code{instance$assign_result()}.
+The \link{FSelect} object is also supposed to store its final result, consisting
+of a selected feature set and associated estimated performance values, by
+calling the method \code{instance$assign_result()}.
 
 This class allows to display the optimization path of the feature selection
 in varying levels of detail (\verb{$optimization_path()}).
@@ -56,7 +58,8 @@ instance$archive()
 \describe{
 \item{\code{n_batch}}{Number of batches.}
 
-\item{\code{result}}{Result of the feature selection i.e. the optimal feature set and its estimated performances.}
+\item{\code{result}}{Result of the feature selection i.e. the optimal feature
+set and its estimated performances.}
 }
 \if{html}{\out{</div>}}
 }
@@ -105,14 +108,17 @@ Create new \code{FSelectInstance} object.
 
 \item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
 
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling} Note that uninstantiated resamplings are instantiated during construction so that all configurations.}
+\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}
+Note that uninstantiated resamplings are instantiated during construction
+so that all configurations.}
 
 \item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
 
 \item{\code{terminator}}{\link{Terminator}}
 
-\item{\code{bm_args}}{named \code{list()} Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
-Stores all evaluated \link[mlr3:ResampleResult]{mlr3::ResampleResult}s when evaluating feature combinations.}
+\item{\code{bm_args}}{named \code{list()}
+Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}. Stores all evaluated
+\link[mlr3:ResampleResult]{mlr3::ResampleResult}s when evaluating feature combinations.}
 
 \item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
 }
@@ -139,11 +145,11 @@ Print method.
 \if{html}{\out{<a id="method-eval_batch"></a>}}
 \if{latex}{\out{\hypertarget{method-eval_batch}{}}}
 \subsection{Method \code{eval_batch()}}{
-Evaluates all feature sets in \code{states} through resampling.
-Updates the internal \link{BenchmarkResult} \verb{$bmr} by reference.
-Before and after each batch-evaluation, the \link{Terminator} is checked,
-and if it is positive, an exception of class \code{terminated_error} is raised.
-This function should be internally called by the \link{FSelect} object.
+Evaluates all feature sets in \code{states} through resampling. Updates the
+internal \link{BenchmarkResult} \verb{$bmr} by reference. Before and after each
+batch-evaluation, the \link{Terminator} is checked, and if it is positive, an
+exception of class \code{terminated_error} is raised. This function should be
+internally called by the \link{FSelect} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$eval_batch(states)}\if{html}{\out{</div>}}
 }
@@ -164,10 +170,10 @@ named \code{list()}
 \if{html}{\out{<a id="method-fselect_objective"></a>}}
 \if{latex}{\out{\hypertarget{method-fselect_objective}{}}}
 \subsection{Method \code{fselect_objective()}}{
-Evaluates a feature set \code{x} and returns a scalar objective value,
-where the return value is negated if the measure is maximized.
-Internally, \verb{$eval_batch()} is called with a single row.
-This method is useful for feature selection algorithms that take a objective function.
+Evaluates a feature set \code{x} and returns a scalar objective
+value, where the return value is negated if the measure is maximized.
+Internally, \verb{$eval_batch()} is called with a single row. This method is
+useful for feature selection algorithms that take a objective function.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$fselect_objective(x)}\if{html}{\out{</div>}}
 }
@@ -234,7 +240,8 @@ In case of ties, one of the tied values is selected randomly.
 \describe{
 \item{\code{measure}}{\link[mlr3:Measure]{mlr3::Measure}}
 
-\item{\code{m}}{\code{ìnteger}}
+\item{\code{m}}{\code{ìnteger}
+Vector of batches}
 }
 \if{html}{\out{</div>}}
 }
@@ -255,9 +262,12 @@ and estimated performance values here. For internal use.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{feat}}{\code{character} Must be character vector of feature names existing in \code{task}}
+\item{\code{feat}}{\code{character}
+Must be character vector of feature names existing in \code{task}}
 
-\item{\code{perf}}{\code{numeric} Must be named numeric of performance measures, named with performance IDs, regarding all elements in \code{measures}.}
+\item{\code{perf}}{\code{numeric}
+Must be named numeric of performance measures, named with performance
+IDs, regarding all elements in \code{measures}.}
 }
 \if{html}{\out{</div>}}
 }

@@ -4,17 +4,20 @@
 \alias{FSelectRFE}
 \title{FSelectRFE Class}
 \description{
-Class for feature selection by recursive feature elimination (RFE).
-The recursive algorithm (\code{recursive = TRUE}) recomputes the feature importances
-on the reduced feature set in every iteration.
-The non-recursive algorithm (\code{recursive = FALSE}) only uses the feature importances
-of the model fitted with all features to eliminate the next most unimportant feature in every iteration.
+Class for feature selection by recursive feature elimination (RFE). The
+recursive algorithm (\code{recursive = TRUE}) recomputes the feature importances
+on the reduced feature set in every iteration.  The non-recursive algorithm
+(\code{recursive = FALSE}) only uses the feature importances of the model fitted
+with all features to eliminate the next most unimportant feature in every
+iteration.
 }
 \section{Parameters}{
 
 \describe{
-\item{\code{min_features}}{\code{integer(1)} Minimum number of features. By default, 1.}
-\item{\code{recursive}}{\code{logical(1)}}}
+\item{\code{min_features}}{\code{integer(1)}
+Minimum number of features. By default, 1.}
+\item{\code{recursive}}{\code{logical(1)}}
+}
 }
 
 \examples{
@@ -41,7 +44,8 @@ instance$optimization_path()
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{importance}}{Stores the feature importance of the model with all variables if \code{recrusive} is set to \code{FALSE}}
+\item{\code{importance}}{Stores the feature importance of the model with all
+variables if \code{recrusive} is set to \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }

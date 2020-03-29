@@ -1,23 +1,25 @@
-#' FSelectEvolutionary Class
+#' @title FSelectEvolutionary Class
 #'
 #' @description
-#' Class for evolutionary feature selection calling [ecr::ecr()] from package \CRANpkg{ecr}.
+#' Subclass for evolutionary feature selection. Calls [ecr::ecr()] from package
+#' \CRANpkg{ecr}.
 #'
 #' @section Parameters:
 #' \describe{
-#' \item{\code{mu}}{\code{integer(1)}}
-#' \item{\code{lambda}}{\code{integer(1)}}
-#' \item{\code{p.recomb}}{\code{double(1)}}
-#' \item{\code{p.mut}}{\code{double(1)}}
-#' \item{\code{survival.strategy}}{\code{character(1)}}
-#' \item{\code{n.elite}}{\code{integer(1)}}
-#' \item{\code{initial.solutions}}{list of \code{integer()}}
-#' \item{\code{parent.selector}}{object of class `ecr::selector`}
-#' \item{\code{survival.selector}}{object of class `ecr::selector`}}
+#' \item{`mu`}{`integer(1)`}
+#' \item{`lambda`}{`integer(1)`}
+#' \item{`p.recomb`}{`double(1)`}
+#' \item{`p.mut`}{`double(1)`}
+#' \item{`survival.strategy`}{`character(1)`}
+#' \item{`n.elite`}{`integer(1)`}
+#' \item{`initial.solutions`}{list of `integer()`}
+#' \item{`parent.selector`}{`ecr` selector}
+#' \item{`survival.selector`}{`ecr` selector}
+#' }
 #'
-#' For the meaning of the control parameter, see [ecr::ecr()].
-#' Note that `mu` and `lambda` must be set by the user.
-#' The `terminators` parameter is replaced by the [Terminator] subclasses.
+#' For the meaning of the control parameter, see [ecr::ecr()]. Note that `mu`
+#' and `lambda` must be set by the user. The `terminators` parameter is replaced
+#' by the [Terminator] subclasses.
 #'
 #' @export
 #' @templateVar fs "evolutionary", mu = 10, lambda = 5
@@ -25,9 +27,9 @@
 FSelectEvolutionary = R6Class("FSelectEvolutionary",
   inherit = FSelect,
   public = list(
+
     #' @description
-    #' Create new `FSelectEvolutionary ` object.
-    #' @return `FSelectEvolutionary`
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("mu"),

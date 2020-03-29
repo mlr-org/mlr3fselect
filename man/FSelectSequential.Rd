@@ -2,22 +2,26 @@
 % Please edit documentation in R/FSelectSequential.R
 \name{FSelectSequential}
 \alias{FSelectSequential}
-\title{FSelectSequential Class}
+\title{FSelectSequential}
 \description{
-Class for sequential feature selection.
-The sequential forward selection (\code{strategy = fsf}) extends the feature set in each step with the feature
-that increases the models performance the most.
-The sequential backward selection (\code{strategy = fsb}) starts with the complete future set
-and removes in each step the feature that decreases the models performance the least.
+Subclass for sequential feature selection. The sequential forward selection
+(\code{strategy = fsf}) extends the feature set in each step with the feature that
+increases the models performance the most. The sequential backward selection
+(\code{strategy = fsb}) starts with the complete future set and removes in each
+step the feature that decreases the models performance the least.
+}
+\note{
+Feature sets are evaluated in batches, where each batch is one step in the
+sequential feature selection.
 }
 \section{Parameters}{
 
 \describe{
-\item{\code{max_features}}{\code{integer(1)} Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
-\item{\code{strategy}}{\code{character(1)} For forward feature selection \code{fsf}, for backward feature selection \code{fsb}.}}
-
-The feature sets are evaluated in batches.
-Each batch is one step in the sequential feature selection.
+\item{\code{max_features}}{\code{integer(1)}
+Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
+\item{\code{strategy}}{\code{character(1)}
+Search method \code{sfs} (forward search) or \code{sbs} (backward search).}
+}
 }
 
 \examples{
@@ -61,14 +65,11 @@ instance$optimization_path()
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelectSequential} object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.`
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectSequential$new()}\if{html}{\out{</div>}}
 }
 
-\subsection{Returns}{
-\code{FSelectSequential}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
