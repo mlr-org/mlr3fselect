@@ -167,7 +167,7 @@ fs$select(instance)
 ```
 
 ```{r, eval=FALSE}
-instance$optimization_path(n = 1, m = 1:7)
+instance$optimization_path()
 #>    batch_nr age embarked fare parch pclass sex sib_sp classif.ce
 #> 1:        1   0        0    0     0      0   1      0  0.2132435
 #> 2:        2   0        0    0     0      0   1      1  0.2093154
@@ -233,7 +233,7 @@ fs$select(instance)
 We get the best feature sets in increasing size with
 
 ```{r, eval=FALSE}
-instance$optimization_path(n = 1, m = 1:7)
+instance$optimization_path()
 #>    batch_nr age embarked fare parch pclass sex sib_sp classif.ce
 #> 1:        1   0        0    0     0      0   1      0  0.2132435
 #> 2:        2   0        0    0     0      0   1      1  0.2093154
@@ -385,7 +385,7 @@ fs$select(instance)
 We access the optimization path.
 
 ```{r, eval=FALSE}
-instance$optimization_path(n = 1, m = 1:7)
+instance$optimization_path()
 #>    batch_nr age embarked fare parch pclass sex sib_sp classif.ce
 #> 1:        1   0        0    0     0      0   1      0  0.2132435
 #> 2:        2   0        0    0     0      0   1      1  0.2093154
