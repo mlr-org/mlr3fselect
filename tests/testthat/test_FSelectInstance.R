@@ -26,7 +26,6 @@ test_that("FSelect", {
   expect_vector(inst$bmr$data$task[[3]]$feature_names, c("Petal.Length")) # 1,0,0,0
 
   expect_data_table(inst$optimization_path(), nrows = 1)
-  expect_data_table(inst$optimization_path(n = 2), nrows = 2)
   expect_r6(inst$best(), "ResampleResult")
   expect_data_table(inst$archive(), nrows = 2)
 })
