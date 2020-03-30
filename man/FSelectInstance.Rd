@@ -4,18 +4,12 @@
 \alias{FSelectInstance}
 \title{FSelectInstance Class}
 \description{
-Specifies a general feature selection scenario including performance
-evaluator and archive for \link{FSelect} objects to act upon. This class encodes
-the black box objective function that a \link{FSelect} object has to optimize. It
-allows the basis operations of querying the objective with feature sets
-(\verb{$eval_batch()}), storing the evaluations in an internal archive and
-querying the archive (\verb{$archive()}).
+Specifies a general feature selection scenario.
 
-Evaluations of feature sets are performed in batches by calling
-\code{\link[mlr3:benchmark]{mlr3::benchmark()}} internally. Before and after a batch is evaluated, the
-\link{Terminator} is queried for the remaining budget. If the available budget is
-exhausted, an exception is raised, and no further evaluations can be
-performed from this point on.
+Evaluations of feature sets are performed in batches. Before and after a
+batch is evaluated, the \link{Terminator} is queried for the remaining budget. If
+the available budget is exhausted, an exception is raised, and no further
+evaluations can be performed from this point on.
 
 A list of measures can be passed to the instance, and they will always be all
 evaluated. However, single-criteria tuners optimize only the first measure.
@@ -23,9 +17,6 @@ evaluated. However, single-criteria tuners optimize only the first measure.
 The \link{FSelect} object is also supposed to store its final result, consisting
 of a selected feature set and associated estimated performance values, by
 calling the method \code{instance$assign_result()}.
-
-This class allows to display the optimization path of the feature selection
-in varying levels of detail (\verb{$optimization_path()}).
 }
 \examples{
 library(mlr3)
@@ -50,14 +41,26 @@ m = diag(4)
 instance$eval_batch(m)
 instance$archive()
 }
-\section{Super class}{
-\code{\link[bbotk:Instance]{bbotk::Instance}} -> \code{FSelectInstance}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task}).}
+
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner}).}
+
+\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})}
+
+\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure}).}
+
+\item{\code{terminator}}{(\link{Terminator}).}
+
+\item{\code{evaluator}}{(\link[bbotk:evaluator]{bbotk::evaluator}).}
+}
+\if{html}{\out{</div>}}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{n_batch}}{Number of batches.}
-
 \item{\code{result}}{Result of the feature selection i.e. the optimal feature
 set and its estimated performances.}
 }
@@ -68,22 +71,9 @@ set and its estimated performances.}
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
 \item \href{#method-print}{\code{FSelectInstance$print()}}
-\item \href{#method-eval_batch}{\code{FSelectInstance$eval_batch()}}
-\item \href{#method-fselect_objective}{\code{FSelectInstance$fselect_objective()}}
-\item \href{#method-archive}{\code{FSelectInstance$archive()}}
-\item \href{#method-optimization_path}{\code{FSelectInstance$optimization_path()}}
-\item \href{#method-best}{\code{FSelectInstance$best()}}
 \item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
-}
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Instance" data-id="format">}\href{../../bbotk/html/Instance.html#method-format}{\code{bbotk::Instance$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Instance" data-id="objective">}\href{../../bbotk/html/Instance.html#method-objective}{\code{bbotk::Instance$objective()}}\out{</span>}
-}
-\out{</details>}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
@@ -91,14 +81,7 @@ set and its estimated performances.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$new(
-  task,
-  learner,
-  resampling,
-  measures,
-  terminator,
-  bm_args = list()
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$new(task, learner, resampling, measures, terminator)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -115,12 +98,6 @@ so that all configurations.}
 \item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
 
 \item{\code{terminator}}{\link{Terminator}}
-
-\item{\code{bm_args}}{named \code{list()}
-Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}. Stores all evaluated
-\link[mlr3:ResampleResult]{mlr3::ResampleResult}s when evaluating feature combinations.}
-
-\item{\code{bmr}}{\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}}
 }
 \if{html}{\out{</div>}}
 }
@@ -136,115 +113,6 @@ Print method.
 
 \subsection{Returns}{
 \code{character()}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-eval_batch"></a>}}
-\if{latex}{\out{\hypertarget{method-eval_batch}{}}}
-\subsection{Method \code{eval_batch()}}{
-Evaluates all feature sets in \code{states} through resampling. Updates the
-internal \link{BenchmarkResult} \verb{$bmr} by reference. Before and after each
-batch-evaluation, the \link{Terminator} is checked, and if it is positive, an
-exception of class \code{terminated_error} is raised. This function should be
-internally called by the \link{FSelect} object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$eval_batch(states)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{states}}{\code{matrix}
-Each row represents a 0/1 encoded feature set.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-named \code{list()}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-fselect_objective"></a>}}
-\if{latex}{\out{\hypertarget{method-fselect_objective}{}}}
-\subsection{Method \code{fselect_objective()}}{
-Evaluates a feature set \code{x} and returns a scalar objective
-value, where the return value is negated if the measure is maximized.
-Internally, \verb{$eval_batch()} is called with a single row. This method is
-useful for feature selection algorithms that take a objective function.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$fselect_objective(x)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{\code{numeric}
-0/1 encoded feature set}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{numeric(1)}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-archive"></a>}}
-\if{latex}{\out{\hypertarget{method-archive}{}}}
-\subsection{Method \code{archive()}}{
-Returns a table of contained resample results with corresponding feature
-sets.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$archive(unnest = "no")}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{unnest}}{Implemented for compatibility to bbotk}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-optimization_path"></a>}}
-\if{latex}{\out{\hypertarget{method-optimization_path}{}}}
-\subsection{Method \code{optimization_path()}}{
-Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the optimization path.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$optimization_path()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-best"></a>}}
-\if{latex}{\out{\hypertarget{method-best}{}}}
-\subsection{Method \code{best()}}{
-Queries the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for the best \link[mlr3:ResampleResult]{mlr3::ResampleResult}
-according to \code{measure} (default is the first measure in \verb{$measures}
-of the batches specified in \code{m} (default is the all batches).
-In case of ties, one of the tied values is selected randomly.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$best(measure = NULL, m = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{measure}}{\link[mlr3:Measure]{mlr3::Measure}}
-
-\item{\code{m}}{\code{ìnteger}
-Vector of batches}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\link[mlr3:ResampleResult]{mlr3::ResampleResult}
 }
 }
 \if{html}{\out{<hr>}}

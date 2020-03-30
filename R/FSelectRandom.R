@@ -54,15 +54,17 @@ FSelectRandom = R6Class("FSelectRandom",
         pars$max_features = length(instance$task$feature_names)
       }
 
-      states = t(sapply(seq_len(pars$batch_size), function(i) {
-        x = Inf
-        while (sum(x) > pars$max_features | sum(x) == 0) {
-          x = rbinom(length(instance$task$feature_names), 1, pars$prob)
-        }
-        return(x)
-      }))
+      states =
+        data.table::transpose(map_dtc(seq_len(pars$batch_size), function(i) {
+          x = Inf
+          while (sum(x) > pars$max_features | sum(x) == 0) {
+            x = rbinom(length(instance$task$feature_names), 1, pars$prob)
+          }
+          return(as.logical(x))
+        }))
+      names(states) = task$feature_names
 
-      instance$eval_batch(states)
+      instance$evaluator$eval_batch(states)
     }
   )
 )

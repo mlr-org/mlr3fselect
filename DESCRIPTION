@@ -47,7 +47,7 @@ Suggests:
     mlr3data,
     mlr3learners
 Remotes:
-    mlr-org/bbotk@terminator_instance 
+    mlr-org/bbotk
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)

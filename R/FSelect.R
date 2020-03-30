@@ -68,14 +68,10 @@ FSelect = R6Class("FSelect",
     #' Performs the feature selection on a [FSelectInstance] until termination.
     #' @param instance [FSelectInstance]
     select = function(instance) {
-
       assert_r6(instance, "FSelectInstance")
       require_namespaces(self$packages)
 
-      instance$start_time = Sys.time()
-      lg$info("Starting the feature selection with '%s' and '%s'",
-        self$format(), instance$terminator$format())
-      lg$info("Terminator settings: %s", as_short_string(instance$terminator$param_set$values))
+      lg$info("Starting feature selection")
 
       tryCatch({
         while (TRUE) {
@@ -104,9 +100,9 @@ FSelect = R6Class("FSelect",
 fselect_assign_result_default = function(instance) {
   assert_r6(instance, "FSelectInstance")
 
-  rr = instance$best()
-  perf = rr$aggregate(instance$measures)
-  feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
+  res = instance$evaluator$archive$best()
+  feat = task$feature_names[as.matrix(res[,instance$task$feature_names,with=FALSE])]
+  perf = as.matrix((res[,instance$evaluator$objective$codomain$ids(),with=FALSE]))[1,]
 
   instance$assign_result(feat, perf)
   invisible(NULL)
