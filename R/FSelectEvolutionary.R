@@ -105,11 +105,12 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         }) # Tasks without features cannot be evaluated
 
       withr::with_package("ecr", {
-        fitness = ecr::evaluateFitness(ctrl, population)
+        fitness = ecr::evaluateFitness(ctrl, population, instance)
       })
 
       while (TRUE) {
         fitness = as.matrix(fitness)
+
         offspring = invoke(ecr::generateOffspring, ctrl, population, fitness,
           .args = pars_generateOffspring)
 
@@ -121,7 +122,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
           })
 
         withr::with_package("ecr", {
-          fitness_o = ecr::evaluateFitness(ctrl, offspring)
+          fitness_o = ecr::evaluateFitness(ctrl, offspring, instance)
         })
         fitness_o = as.matrix(fitness_o )
         if (pars$survival.strategy == "plus") {
@@ -142,7 +143,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
   )
 )
 
-objective_fun = function(x) {
+objective_fun = function(x, instance) {
   x = as.list(as.logical(x))
   names(x) = instance$task$feature_names
   x = as.data.table(x)
