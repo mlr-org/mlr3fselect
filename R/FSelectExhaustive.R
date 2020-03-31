@@ -41,19 +41,20 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
         pars$max_features = length(instance$task$feature_names)
       }
 
-      if (instance$n_batch + 1 > pars$max_features) {
+      if (instance$evaluator$archive$n_batch + 1 > pars$max_features) {
         stop(terminated_error(instance))
       }
 
       combinations = combn(length(instance$task$feature_names),
-        instance$n_batch + 1)
-      states = t(sapply(seq_len(ncol(combinations)), function(j) {
+        instance$evaluator$archive$n_batch + 1)
+      states = data.table::transpose(map_dtc(seq_len(ncol(combinations)), function(j) {
         state = rep(0, length(instance$task$feature_names))
         state[combinations[, j]] = 1
         state
       }))
+      names(states) = instance$task$feature_names
 
-      instance$eval_batch(states)
+      instance$evaluator$eval_batch(states)
     }
   )
 )
