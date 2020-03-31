@@ -78,16 +78,19 @@ FSelectInstance = R6Class("FSelectInstance",
         self$resampling$instantiate(self$task)
       }
 
-      fun = function(x) {
-        state = self$task$feature_names[as.logical(x)]
-        task = self$task$clone(deep = TRUE)
-        task$select(state)
+      fun = function(xdt) {
+        tasks = map(1:nrow(xdt), function(x) {
+          state = self$task$feature_names[as.logical(xdt[x,])]
+          tsk = self$task$clone(deep = TRUE)
+          tsk$select(state)
+          return(tsk)
+        })
 
-        rr = resample(task = task,
-          learner = self$learner,
-          resampling = self$resampling)
+        design = benchmark_grid(tasks = tasks, self$learner, self$resampling)
+        bmr = benchmark(design)
+        aggr = bmr$aggregate(self$measures)
 
-        rr$aggregate(self$measures)
+        cbind(xdt, aggr[,self$measures[[1]]$id, with=FALSE])
       }
 
       minimize = sapply(self$measures, function(s)  s$minimize)
