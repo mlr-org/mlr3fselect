@@ -73,14 +73,15 @@ FSelectRFE = R6Class("FSelectRFE",
           states = as.data.table(states)
 
         } else {
-          if (instance$n_batch == 1) {
+          if (instance$evaluator$archive$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
-            self$importance =
-              importance_average(instance$bmr$data$learner, instance$task$feature_names)
-          }
+            learners = instance$evaluator$archive$data[, learner][[1]]
 
+            self$importance =
+              importance_average(learners, instance$task$feature_names)
+          }
           # Eliminate the most unimportant features
-          states = as.list(!instance$task$feature_names %in% names(self$importance[1:instance$n_batch]))
+          states = as.list(!instance$task$feature_names %in% names(self$importance[1:instance$evaluator$archive$n_batch]))
           names(states) = instance$task$feature_names
           states = as.data.table(states)
         }
