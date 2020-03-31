@@ -14,19 +14,6 @@ expect_features = function(features, n) {
   expect_equal(max(res), n)
 }
 
-TEST_MAKE_PS1 = function(n_dim = 1L) {
-  if (n_dim == 1) {
-    ParamSet$new(params = list(
-      ParamDbl$new("cp", lower = 0.1, upper = 0.3)
-    ))
-  } else if (n_dim == 2) {
-    ParamSet$new(params = list(
-      ParamDbl$new("cp", lower = 0.1, upper = 0.3),
-      ParamInt$new("minsplit", lower = 1, upper = 9)
-    ))
-  }
-}
-
 make_dummy_feature_measure = function(type) {
   if (type == "classif") {
     id = "dummy.feature.classif"
@@ -71,8 +58,7 @@ MeasureDummyCPRegr = make_dummy_feature_measure("regr")
 mlr3::mlr_measures$add("dummy.cp.regr", MeasureDummyCPRegr)
 
 
-TEST_MAKE_INST1 = function(values = NULL, folds = 2L, measures = msr("dummy.cp.classif"), n_dim = 1L, term_evals = 5L) {
-  ps = TEST_MAKE_PS1(n_dim = n_dim)
+TEST_MAKE_INST1 = function(values = NULL, folds = 2L, measures = msr("dummy.cp.classif"), term_evals = 5L) {
   lrn = mlr_learners$get("classif.rpart")
   if (!is.null(values)) {
     lrn$param_set$values = values
