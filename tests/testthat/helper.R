@@ -10,9 +10,7 @@ expect_fselect = function(fselect) {
 }
 
 expect_features = function(features, n) {
-  res = sapply(features, function(x) {
-    length(x)
-  })
+  res = max(rowSums(features))
   expect_equal(max(res), n)
 }
 
