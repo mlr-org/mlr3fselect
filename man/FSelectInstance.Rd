@@ -54,7 +54,7 @@ instance$archive()
 
 \item{\code{terminator}}{(\link{Terminator}).}
 
-\item{\code{evaluator}}{(\link[bbotk:evaluator]{bbotk::evaluator}).}
+\item{\code{evaluator}}{(\link[bbotk:Evaluator]{bbotk::Evaluator}).}
 }
 \if{html}{\out{</div>}}
 }

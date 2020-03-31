@@ -55,7 +55,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field terminator ([Terminator]).
     terminator = NULL,
 
-    #' @field evaluator ([bbotk::evaluator]).
+    #' @field evaluator ([bbotk::Evaluator]).
     evaluator = NULL,
 
     #' @description
