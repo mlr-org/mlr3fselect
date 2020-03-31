@@ -58,6 +58,9 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field evaluator ([bbotk::Evaluator]).
     evaluator = NULL,
 
+    #' @field store_models (`logical(1)`).
+    store_models = FALSE,
+
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #' @param task [mlr3::Task]
@@ -87,10 +90,12 @@ FSelectInstance = R6Class("FSelectInstance",
         })
 
         design = benchmark_grid(tasks = tasks, self$learner, self$resampling)
-        bmr = benchmark(design)
+        bmr = benchmark(design, store_models = self$store_models)
         aggr = bmr$aggregate(self$measures)
 
-        cbind(xdt, aggr[,self$measures[[1]]$id, with=FALSE])
+        cbind(xdt,
+              aggr[,self$measures[[1]]$id, with=FALSE],
+              learner = list(bmr$data$learner))
       }
 
       minimize = sapply(self$measures, function(s)  s$minimize)
@@ -105,7 +110,6 @@ FSelectInstance = R6Class("FSelectInstance",
         minimize = minimize)
       archive = Archive$new(objective)
       self$evaluator = Evaluator$new(objective, archive, terminator)
-
     },
 
     #' @description
