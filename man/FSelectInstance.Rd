@@ -70,6 +70,7 @@ set and its estimated performances.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
+\item \href{#method-format}{\code{FSelectInstance$format()}}
 \item \href{#method-print}{\code{FSelectInstance$print()}}
 \item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
@@ -101,6 +102,16 @@ so that all configurations.}
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-format"></a>}}
+\if{latex}{\out{\hypertarget{method-format}{}}}
+\subsection{Method \code{format()}}{
+Helper for print outputs.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$format()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}

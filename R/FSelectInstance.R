@@ -106,6 +106,12 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
+    #' Helper for print outputs.
+    format = function() {
+      sprintf("<%s>", class(self)[1L])
+    },
+
+    #' @description
     #' Print method.
     #' @return `character()`
     print = function() {
