@@ -13,8 +13,7 @@
 #' fs = fs(<%= fs %>)
 #' fs$select(instance)
 #' instance$result
-#' instance$archive()
-#' instance$optimization_path()
+#' instance$evaluator$archive$data
 
 
 

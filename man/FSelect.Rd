@@ -18,7 +18,7 @@ order to store the best selected feature subset and its estimated performance ve
 \examples{
 library(mlr3)
 
-terminator = term("evals", n_evals = 15)
+terminator = term("evals", n_evals = 10)
 instance = FSelectInstance$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
@@ -27,10 +27,10 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs("random") # swap this line to use a different feature selection algorithm
-fs$select(instance) # modifies the instance by reference
-instance$result # returns best configuration and best performance
-instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
+fs = fs("random")
+fs$select(instance)
+instance$result
+instance$evaluator$archive$data
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

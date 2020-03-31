@@ -81,14 +81,7 @@ estimated performances.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(
-  learner,
-  resampling,
-  measures,
-  terminator,
-  fselect,
-  bm_args = list()
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(learner, resampling, measures, terminator, fselect)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -103,9 +96,6 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \item{\code{terminator}}{\link{Terminator}}
 
 \item{\code{fselect}}{\link{FSelect}}
-
-\item{\code{bm_args}}{named \code{list()}
-Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.}
 }
 \if{html}{\out{</div>}}
 }

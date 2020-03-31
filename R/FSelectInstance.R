@@ -33,11 +33,6 @@
 #'   measures = measures,
 #'   terminator = terminator
 #' )
-#'
-#' # Evaluate 4 feature sets
-#' m = diag(4)
-#' instance$eval_batch(m)
-#' instance$archive()
 FSelectInstance = R6Class("FSelectInstance",
   public = list(
     #' @field task ([mlr3::Task]).

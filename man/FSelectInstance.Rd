@@ -35,11 +35,6 @@ instance = FSelectInstance$new(
   measures = measures,
   terminator = terminator
 )
-
-# Evaluate 4 feature sets
-m = diag(4)
-instance$eval_batch(m)
-instance$archive()
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -55,6 +50,8 @@ instance$archive()
 \item{\code{terminator}}{(\link{Terminator}).}
 
 \item{\code{evaluator}}{(\link[bbotk:Evaluator]{bbotk::Evaluator}).}
+
+\item{\code{store_models}}{(\code{logical(1)}).}
 }
 \if{html}{\out{</div>}}
 }

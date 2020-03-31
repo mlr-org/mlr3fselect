@@ -39,8 +39,7 @@ instance = FSelectInstance$new(
 fs = fs("sequential")
 fs$select(instance)
 instance$result
-instance$archive()
-instance$optimization_path()
+instance$evaluator$archive$data
 }
 \section{Super class}{
 \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectSequential}
