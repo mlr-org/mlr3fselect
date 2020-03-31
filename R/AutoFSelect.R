@@ -37,11 +37,8 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @param resampling [mlr3::Resampling]
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
-    #' @param bm_args named `list()`
-    #' Further arguments for [mlr3::benchmark()].
     #' @param fselect [FSelect]
-    initialize = function(learner, resampling, measures, terminator, fselect,
-      bm_args = list()) {
+    initialize = function(learner, resampling, measures, terminator, fselect) {
 
       ia = list()
       ia$learner = assert_learner(learner)$clone(deep = TRUE)
@@ -49,7 +46,6 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
         instantiated = FALSE)$clone()
       ia$measures = assert_measures(as_measures(measures), learner = learner)
       ia$terminator = assert_terminator(terminator)$clone()
-      ia$bm_args = assert_list(bm_args, names = "unique")
       self$instance_args = ia
       self$fselect = assert_r6(fselect, "FSelect")$clone()
 
@@ -74,7 +70,6 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @param task [mlr3::Task]
     #' @return list([mlr3::Learner]) or list([mlr3::Learner], [FSelectInstance])
     train_internal = function(task) {
-
       ia = self$instance_args
       ia$task = task$clone()
       instance = invoke(FSelectInstance$new, .args = ia)
