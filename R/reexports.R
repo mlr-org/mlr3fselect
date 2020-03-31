@@ -34,12 +34,12 @@ NULL
 #' @export
 NULL
 
-#' @title Re-export of `TerminatorModelTime`
+#' @title Re-export of `TerminatorRunTime`
 #'
-#' See [bbotk::TerminatorModelTime].
+#' See [bbotk::TerminatorRunTime].
 #'
-#' @name TerminatorModelTime
-#' @rdname TerminatorModelTime
+#' @name TerminatorRunTime
+#' @rdname TerminatorRunTime
 #' @export
 NULL
 
