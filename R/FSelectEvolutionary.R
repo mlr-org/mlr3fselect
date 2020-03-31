@@ -109,8 +109,6 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       })
 
       while (TRUE) {
-        fitness = as.matrix(fitness)
-
         offspring = invoke(ecr::generateOffspring, ctrl, population, fitness,
           .args = pars_generateOffspring)
 
@@ -124,7 +122,6 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         withr::with_package("ecr", {
           fitness_o = ecr::evaluateFitness(ctrl, offspring, instance)
         })
-        fitness_o = as.matrix(fitness_o )
         if (pars$survival.strategy == "plus") {
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
             fitness, fitness_o)
@@ -148,7 +145,8 @@ objective_fun = function(x, instance) {
   names(x) = instance$task$feature_names
   x = as.data.table(x)
 
-  instance$evaluator$eval_batch(x)
+  res = instance$evaluator$eval_batch(x)
+  as.numeric(res[,instance$measures[[1]]$id, with=FALSE])
 }
 
 mlr_fselectors$add("evolutionary", FSelectEvolutionary)
