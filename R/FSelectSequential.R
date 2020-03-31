@@ -51,28 +51,28 @@ FSelectSequential = R6Class("FSelectSequential",
       }
 
       # Initialize states for first batch
-      if (instance$n_batch == 0) {
+      if (instance$evaluator$archive$n_batch == 0) {
         if (self$param_set$values$strategy == "sfs") {
-          states = diag(1, length(instance$task$feature_names),
-            length(instance$task$feature_names))
+          states = as.data.table(diag(1, length(instance$task$feature_names),
+            length(instance$task$feature_names)))
+          names(states) = instance$task$feature_names
         } else {
           combinations = combn(length(instance$task$feature_names),
             pars$max_features)
-          states = t(sapply(seq_len(ncol(combinations)), function(j) {
+          states = data.table::transpose(map_dtc(seq_len(ncol(combinations)), function(j) {
             state = rep(0, length(instance$task$feature_names))
             state[combinations[, j]] = 1
             state
           }))
+          names(states) = instance$task$feature_names
         }
       } else {
-        if (instance$n_batch == pars$max_features) {
+        if (instance$evaluator$archive$n_batch == pars$max_features) {
           stop(terminated_error(instance))
         }
 
-        # Query bmr for best feature subset of last batch
-        rr = instance$best(m = instance$n_batch)
-        feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
-        best_state = as.numeric(instance$task$feature_names %in% feat)
+        res = instance$evaluator$archive$get_best(m = instance$evaluator$archive$n_batch)
+        best_state = as.numeric(as.matrix(res[1,instance$task$feature_names, with=FALSE]))
 
         # Generate new states based on best feature set
         x = ifelse(pars$strategy == "sfs", 0, 1)
@@ -83,15 +83,16 @@ FSelectSequential = R6Class("FSelectSequential",
         else {
           as.logical(best_state)
         }
-        states = t(sapply(seq_along(best_state)[z], function(i) {
+        states = data.table::transpose(map_dtc(seq_along(best_state)[z], function(i) {
           if (best_state[i] == x) {
             new_state = best_state
             new_state[i] = y
             new_state
           }
         }))
+        names(states) = instance$task$feature_names
       }
-      instance$eval_batch(states)
+      instance$evaluator$eval_batch(states)
     }
   )
 )
