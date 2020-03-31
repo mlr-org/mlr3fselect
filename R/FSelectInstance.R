@@ -90,8 +90,8 @@ FSelectInstance = R6Class("FSelectInstance",
         rr$aggregate(self$measures)
       }
 
-      minimize = sapply(measures, function(s)  s$minimize)
-      names(minimize) = unlist(sapply(measures, function(s)  s$id))
+      minimize = sapply(self$measures, function(s)  s$minimize)
+      names(minimize) = unlist(sapply(self$measures, function(s)  s$id))
 
       domain = ParamSet$new(lapply(task$feature_names,
         function(s) ParamLgl$new(id = s)))
