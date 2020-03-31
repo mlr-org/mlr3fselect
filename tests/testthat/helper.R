@@ -92,9 +92,9 @@ test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals) {
   expect_fselect(fselect)
 
   fselect$select(inst)
-  bmr = inst$bmr
-  expect_data_table(bmr$data, nrows = real_evals)
-  expect_equal(inst$n_evals, real_evals)
+  data = inst$evaluator$archive$data
+  expect_data_table(data, nrows = real_evals)
+  expect_equal(inst$evaluator$archive$n_evals, real_evals)
 
   r = inst$result
   feat = r$feat
