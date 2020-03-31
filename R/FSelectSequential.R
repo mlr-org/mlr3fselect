@@ -53,18 +53,19 @@ FSelectSequential = R6Class("FSelectSequential",
       # Initialize states for first batch
       if (instance$evaluator$archive$n_batch == 0) {
         if (self$param_set$values$strategy == "sfs") {
-          states = as.data.table(diag(1, length(instance$task$feature_names),
+          states = as.data.table(diag(TRUE, length(instance$task$feature_names),
             length(instance$task$feature_names)))
           names(states) = instance$task$feature_names
         } else {
           combinations = combn(length(instance$task$feature_names),
             pars$max_features)
-          states = data.table::transpose(map_dtc(seq_len(ncol(combinations)), function(j) {
+          states = map_dtr(seq_len(ncol(combinations)), function(j) {
             state = rep(0, length(instance$task$feature_names))
             state[combinations[, j]] = 1
+            state = as.list(as.logical(state))
+            names(state) = instance$task$feature_names
             state
-          }))
-          names(states) = instance$task$feature_names
+          })
         }
       } else {
         if (instance$evaluator$archive$n_batch == pars$max_features) {
@@ -83,14 +84,15 @@ FSelectSequential = R6Class("FSelectSequential",
         else {
           as.logical(best_state)
         }
-        states = data.table::transpose(map_dtc(seq_along(best_state)[z], function(i) {
+        states = map_dtr(seq_along(best_state)[z], function(i) {
           if (best_state[i] == x) {
             new_state = best_state
             new_state[i] = y
+            new_state = as.list(as.logical(new_state))
+            names(new_state) = instance$task$feature_names
             new_state
           }
-        }))
-        names(states) = instance$task$feature_names
+        })
       }
       instance$evaluator$eval_batch(states)
     }
