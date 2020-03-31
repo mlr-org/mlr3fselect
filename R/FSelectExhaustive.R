@@ -47,13 +47,13 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
 
       combinations = combn(length(instance$task$feature_names),
         instance$evaluator$archive$n_batch + 1)
-      states = data.table::transpose(map_dtc(seq_len(ncol(combinations)), function(j) {
+      states = map_dtr(seq_len(ncol(combinations)), function(j) {
         state = rep(0, length(instance$task$feature_names))
         state[combinations[, j]] = 1
+        state = as.list(as.logical(state))
+        names(state) = instance$task$feature_names
         state
-      }))
-      names(states) = instance$task$feature_names
-
+      })
       instance$evaluator$eval_batch(states)
     }
   )
