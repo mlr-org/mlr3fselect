@@ -51,24 +51,27 @@ FSelectRFE = R6Class("FSelectRFE",
     select_internal = function(instance) {
       pars = self$param_set$values
 
-      if (instance$n_batch == 0) {
-        instance$bm_args =
-          insert_named(instance$bm_args, list(store_models = TRUE))
-        states = matrix(1, nrow = 1, ncol = length(instance$task$feature_names))
+      if (instance$evaluator$archive$n_batch == 0) {
+        instance$store_models = TRUE
+        states = as.list(rep(TRUE, length(instance$task$feature_names)))
+        names(states) = instance$task$feature_names
+        states = as.data.table(states)
       } else {
-        if (length(instance$task$feature_names) - instance$n_batch < pars$min_features) {
+        if (length(instance$task$feature_names) - instance$evaluator$archive$n_batch < pars$min_features) {
           stop(terminated_error(instance))
         }
         if (pars$recursive) {
           # Recalculate the variable importance on the reduced feature subset
-          id = instance$bmr$rr_data[batch_nr == instance$n_batch, uhash]
-          feat = instance$bmr$rr_data[uhash == id, feat][[1]]
-          learners = instance$bmr$data[uhash == id, learner]
+          feat = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, instance$task$feature_names, with=FALSE]
+          feat = instance$task$feature_names[as.logical(feat)]
+          learners = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, learner][[1]]
           imp = importance_average(learners, feat)
 
           # Eliminate the most unimportant feature of the feature subset
-          states =
-            as.numeric(instance$task$feature_names %in% feat & !instance$task$feature_names %in% names(imp[1]))
+          states = as.list(instance$task$feature_names %in% feat & !instance$task$feature_names %in% names(imp[1]))
+          names(states) = instance$task$feature_names
+          states = as.data.table(states)
+
         } else {
           if (instance$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
@@ -77,13 +80,13 @@ FSelectRFE = R6Class("FSelectRFE",
           }
 
           # Eliminate the most unimportant features
-          states =
-            as.numeric(!instance$task$feature_names %in% names(self$importance[1:instance$n_batch]))
+          states = as.list(!instance$task$feature_names %in% names(self$importance[1:instance$n_batch]))
+          names(states) = instance$task$feature_names
+          states = as.data.table(states)
         }
       }
       # Fit the model on the reduced feature subset
-      states = matrix(states, ncol = length(instance$task$feature_names))
-      instance$eval_batch(states)
+      instance$evaluator$eval_batch(states)
     }
   )
 )
