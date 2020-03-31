@@ -84,7 +84,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
 
-      ctrl = ecr::initECRControl(instance$fselect_objective, n.objectives = 1)
+      ctrl = ecr::initECRControl(objective_fun, n.objectives = 1)
       ctrl = invoke(ecr::registerECROperator, ctrl, "mutate",
         ecr::mutBitflip, .args = pars_mutBitflip)
       ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
@@ -109,8 +109,10 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       })
 
       while (TRUE) {
+        fitness = as.matrix(fitness)
         offspring = invoke(ecr::generateOffspring, ctrl, population, fitness,
           .args = pars_generateOffspring)
+
         offspring = map_if(offspring,
           function(x) sum(x) == 0,
           function(x) {
@@ -121,6 +123,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         withr::with_package("ecr", {
           fitness_o = ecr::evaluateFitness(ctrl, offspring)
         })
+        fitness_o = as.matrix(fitness_o )
         if (pars$survival.strategy == "plus") {
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
             fitness, fitness_o)
@@ -138,5 +141,13 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
     }
   )
 )
+
+objective_fun = function(x) {
+  x = as.list(as.logical(x))
+  names(x) = instance$task$feature_names
+  x = as.data.table(x)
+
+  instance$evaluator$eval_batch(x)
+}
 
 mlr_fselectors$add("evolutionary", FSelectEvolutionary)
