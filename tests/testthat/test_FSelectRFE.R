@@ -7,6 +7,6 @@ test_that("FSelectRFE", {
   test_fselect("rfe", min_features = 2L, recursive = TRUE, term_evals = 3L)
 
   z = test_fselect("rfe", term_evals = 4L)
-  a = z$inst$archive()
+  a = z$inst$evaluator$archive$data
   expect_data_table(a, nrows = 4L)
 })
