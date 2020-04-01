@@ -33,25 +33,18 @@ FSelectRFE = R6Class("FSelectRFE",
         ParamInt$new("min_features", lower = 1),
         ParamLgl$new("recursive", default = FALSE))
       )
+      ps$values = list(min_features = 1L, recursive = FALSE)
 
       super$initialize(
         param_set = ps
       )
-      if (is.null(self$param_set$values$min_features)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(min_features = 1))
-      }
-      if (is.null(self$param_set$values$recursive)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(recursive = FALSE))
-      }
     }
   ),
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
 
-      if (instance$evaluator$archive$n_batch == 0) {
+      if (instance$evaluator$archive$n_batch == 0L) {
         instance$store_models = TRUE
         states = as.list(rep(TRUE, length(instance$task$feature_names)))
         names(states) = instance$task$feature_names

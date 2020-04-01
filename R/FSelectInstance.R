@@ -66,7 +66,6 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     initialize = function(task, learner, resampling, measures, terminator) {
-
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
       self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
@@ -77,8 +76,8 @@ FSelectInstance = R6Class("FSelectInstance",
       }
 
       fun = function(xdt) {
-        tasks = map(1:nrow(xdt), function(x) {
-          state = self$task$feature_names[as.logical(xdt[x,])]
+        tasks = map(seq_row(xdt), function(x) {
+          state = self$task$feature_names[as.logical(xdt[x, ])]
           tsk = self$task$clone(deep = TRUE)
           tsk$select(state)
           return(tsk)

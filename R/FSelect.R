@@ -29,7 +29,7 @@ FSelect = R6Class("FSelect",
     #' @param param_set [paradox::ParamSet]
     #' @param packages `character()`
     #' Set of control parameter for the feature selection.
-    initialize = function(param_set, packages = character()) {
+    initialize = function(param_set = ParamSet$new(), packages = character()) {
       self$param_set = assert_param_set(param_set)
       self$packages = assert_set(packages)
     },
@@ -63,8 +63,7 @@ FSelect = R6Class("FSelect",
         while (TRUE) {
           private$select_internal(instance)
         }
-      }, terminated_error = function(cond) {
-      })
+      }, terminated_error = function(cond) { })
 
       private$assign_result(instance)
       invisible(NULL)
@@ -87,7 +86,7 @@ fselect_assign_result_default = function(instance) {
   assert_r6(instance, "FSelectInstance")
 
   res = instance$evaluator$archive$get_best()
-  feat = instance$task$feature_names[as.matrix(res[,instance$task$feature_names,with=FALSE])]
+  feat = instance$task$feature_names[as.matrix(res[, instance$task$feature_names, with=FALSE])]
   perf = as.matrix((res[,instance$evaluator$objective$codomain$ids(),with=FALSE]))[1,]
 
   instance$assign_result(feat, perf)

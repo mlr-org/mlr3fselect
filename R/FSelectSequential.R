@@ -33,14 +33,11 @@ FSelectSequential = R6Class("FSelectSequential",
         ParamInt$new("max_features", lower = 1),
         ParamFct$new("strategy", levels = c("sfs", "sbs"), default = "sfs"))
       )
+      ps$values = list(strategy = "sfs")
 
       super$initialize(
         param_set = ps
       )
-      if (is.null(self$param_set$values$strategy)) {
-        self$param_set$values = insert_named(self$param_set$values,
-          list(strategy = "sfs"))
-      }
     }
   ),
   private = list(

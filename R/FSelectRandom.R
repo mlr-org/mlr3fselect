@@ -34,19 +34,14 @@ FSelectRandom = R6Class("FSelectRandom",
         ParamDbl$new("prob", default = 0.5, lower = 0, upper = 1))
       )
 
+      ps$values = list(batch_size = 10L, prob = 0.5)
+
       super$initialize(
         param_set = ps
       )
-      if (is.null(self$param_set$values$batch_size)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(batch_size = 10))
-      }
-      if (is.null(self$param_set$values$prob)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(prob = 0.5))
-      }
     }
   ),
+
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
@@ -60,9 +55,7 @@ FSelectRandom = R6Class("FSelectRandom",
           while (sum(x) > pars$max_features | sum(x) == 0) {
             x = rbinom(length(instance$task$feature_names), 1, pars$prob)
           }
-          x = as.list(as.logical(x))
-          names(x) = instance$task$feature_names
-          x
+          set_names(as.list(as.logical(x)), instance$task$feature_names)
         })
 
       instance$evaluator$eval_batch(states)

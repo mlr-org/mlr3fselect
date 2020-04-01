@@ -57,7 +57,7 @@ instance$evaluator$archive$data
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, packages = character())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set = ParamSet$new(), packages = character())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
