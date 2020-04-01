@@ -92,9 +92,9 @@ FSelectInstance = R6Class("FSelectInstance",
         bmr_data = split(bmr$data, by = "uhash")
         aggr = bmr$aggregate(self$measures)
 
-        cbind(xdt,
-          aggr[, self$measures[[1]]$id, with = FALSE],
-          bmr_data = bmr_data)
+        y = map_chr(self$measures, function(s) s$id)
+
+        cbind(xdt, aggr[, y, with = FALSE], bmr_data = bmr_data)
       }
 
       minimize = map_lgl(self$measures, function(s) s$minimize)
@@ -106,6 +106,7 @@ FSelectInstance = R6Class("FSelectInstance",
       objective = Objective$new(id = "feature_selection",
         fun = fun,
         domain = domain,
+        ydim = length(minimize),
         minimize = minimize)
       archive = Archive$new(objective)
       self$evaluator = Evaluator$new(objective, archive, terminator)
