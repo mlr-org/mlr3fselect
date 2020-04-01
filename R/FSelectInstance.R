@@ -85,11 +85,12 @@ FSelectInstance = R6Class("FSelectInstance",
 
         design = benchmark_grid(tasks = tasks, self$learner, self$resampling)
         bmr = benchmark(design, store_models = self$store_models)
+        bmr_data = split(bmr$data, by = "uhash")
         aggr = bmr$aggregate(self$measures)
 
         cbind(xdt,
               aggr[,self$measures[[1]]$id, with=FALSE],
-              learner = list(bmr$data$learner))
+              bmr_data = bmr_data)
       }
 
       minimize = sapply(self$measures, function(s)  s$minimize)
