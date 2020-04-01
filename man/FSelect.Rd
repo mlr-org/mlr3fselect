@@ -4,16 +4,18 @@
 \alias{FSelect}
 \title{FSelect}
 \description{
-Abstract \code{FSelect} class that implements the base functionality each \verb{FSelect*} class must provide.
-A \code{FSelect} object describes the feature selection strategy,
-i.e. how to optimize the black-box function
-and its feasible set defined by the \link{FSelectInstance} object.
+Abstract \code{FSelect} class that implements the base functionality each
+\verb{FSelect*} class must provide. A \code{FSelect} object describes the feature
+selection strategy, i.e. how to optimize the black-box function and its
+feasible set defined by the \link{FSelectInstance} object.
 
-A list of measures can be passed to the instance, and they will always be all evaluated.
-However, single-criteria algorithms optimize only the first measure
+A list of measures can be passed to the instance, and they will always be all
+evaluated. However, single-criteria algorithms optimize only the first
+measure
 
-A \code{FSelect} object must write its result to the \verb{$assign_result()} method of the \link{FSelectInstance} at the end in
-order to store the best selected feature subset and its estimated performance vector.
+A \code{FSelect} object must write its result to the \verb{$assign_result()} method of
+the \link{FSelectInstance} at the end in order to store the best selected feature
+subset and its estimated performance vector.
 }
 \examples{
 library(mlr3)
