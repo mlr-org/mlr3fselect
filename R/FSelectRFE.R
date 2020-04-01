@@ -64,7 +64,9 @@ FSelectRFE = R6Class("FSelectRFE",
           # Recalculate the variable importance on the reduced feature subset
           feat = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, instance$task$feature_names, with=FALSE]
           feat = instance$task$feature_names[as.logical(feat)]
-          learners = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, learner][[1]]
+
+          bmr_data = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, bmr_data][[1]]
+          learners = bmr_data$learner
           imp = importance_average(learners, feat)
 
           # Eliminate the most unimportant feature of the feature subset
@@ -75,7 +77,8 @@ FSelectRFE = R6Class("FSelectRFE",
         } else {
           if (instance$evaluator$archive$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
-            learners = instance$evaluator$archive$data[, learner][[1]]
+            bmr_data = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, bmr_data][[1]]
+            learners = bmr_data$learner
 
             self$importance =
               importance_average(learners, instance$task$feature_names)
