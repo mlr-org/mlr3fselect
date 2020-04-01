@@ -37,7 +37,7 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
     select_internal = function(instance) {
       pars = self$param_set$values
       feature_names = instance$task$feature_names
-      archive = instance$evaluator$archive
+      archive = instance$objective$archive
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)
@@ -56,7 +56,7 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
         names(state) = feature_names
         state
       })
-      instance$evaluator$eval_batch(states)
+      instance$objective$eval_batch(states)
     }
   )
 )

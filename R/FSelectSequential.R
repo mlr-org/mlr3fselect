@@ -43,7 +43,7 @@ FSelectSequential = R6Class("FSelectSequential",
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
-      archive = instance$evaluator$archive
+      archive = instance$objective$archive
       feature_names = instance$task$feature_names
 
       if (is.null(pars$max_features)) {
@@ -94,7 +94,7 @@ FSelectSequential = R6Class("FSelectSequential",
           }
         })
       }
-      instance$evaluator$eval_batch(states)
+      instance$objective$eval_batch(states)
     }
   )
 )

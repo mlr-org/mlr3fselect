@@ -50,8 +50,8 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field terminator ([Terminator]).
     terminator = NULL,
 
-    #' @field evaluator ([bbotk::Evaluator]).
-    evaluator = NULL,
+    #' @field objective ([bbotk::Objective]).
+    objective = NULL,
 
     #' @field store_models (`logical(1)`).
     store_models = FALSE,
@@ -79,22 +79,23 @@ FSelectInstance = R6Class("FSelectInstance",
         self$resampling$instantiate(self$task)
       }
 
-      fun = function(xdt) {
-        tasks = map(seq_row(xdt), function(x) {
-          state = self$task$feature_names[as.logical(xdt[x, ])]
+      fun = function(xxs) {
+
+        tasks = map(xss, function(x) {
+          state = self$task$feature_names[unlist(x)]
           tsk = self$task$clone(deep = TRUE)
           tsk$select(state)
           return(tsk)
         })
 
-        design = benchmark_grid(tasks = tasks, self$learner, self$resampling)
+        design = benchmark_grid(tasks, self$learner, self$resampling)
         bmr = benchmark(design, store_models = self$store_models)
         bmr_data = split(bmr$data, by = "uhash")
         aggr = bmr$aggregate(self$measures)
 
         y = map_chr(self$measures, function(s) s$id)
 
-        cbind(xdt, aggr[, y, with = FALSE], bmr_data = bmr_data)
+        cbind(aggr[, y, with = FALSE], bmr_data = bmr_data)
       }
 
       minimize = map_lgl(self$measures, function(s) s$minimize)
@@ -102,14 +103,16 @@ FSelectInstance = R6Class("FSelectInstance",
 
       domain = ParamSet$new(map(task$feature_names,
         function(s) ParamLgl$new(id = s)))
+      codomain = ParamSet$new(list(
+        map(self$measures, function(s) ParamDbl$new(id = s$id))))
 
-      objective = Objective$new(id = "feature_selection",
+      self$objective = Objective$new(
+        id = "feature_selection",
         fun = fun,
-        domain = domain,
-        ydim = length(minimize),
-        minimize = minimize)
-      archive = Archive$new(objective)
-      self$evaluator = Evaluator$new(objective, archive, terminator)
+        domain = param_set,
+        codomain = codomain,
+        minimize = minimize,
+        terminator = terminator)
     },
 
     #' @description

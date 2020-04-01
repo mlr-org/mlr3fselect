@@ -43,7 +43,7 @@ FSelectRFE = R6Class("FSelectRFE",
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
-      archive = instance$evaluator$archive
+      archive = instance$objective$archive
       feature_names = instance$task$feature_names
 
       if (archive$n_batch == 0L) {
@@ -88,7 +88,7 @@ FSelectRFE = R6Class("FSelectRFE",
         }
       }
       # Fit the model on the reduced feature subset
-      instance$evaluator$eval_batch(states)
+      instance$objective$eval_batch(states)
     }
   )
 )

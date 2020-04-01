@@ -140,11 +140,9 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
 )
 
 objective_fun = function(x, instance) {
-  x = as.list(as.logical(x))
-  names(x) = instance$task$feature_names
-  x = as.data.table(x)
+  set_names(as.data.table(as.list(as.logical(x))), instance$task$feature_names)
 
-  res = instance$evaluator$eval_batch(x)
+  res = instance$objective$eval_batch(x)
   as.numeric(res[, instance$measures[[1]]$id, with = FALSE])
 }
 
