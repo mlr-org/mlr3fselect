@@ -84,10 +84,12 @@ FSelect = R6Class("FSelect",
 
 fselect_assign_result_default = function(instance) {
   assert_r6(instance, "FSelectInstance")
+  feature_names = instance$task$feature_names
 
   res = instance$evaluator$archive$get_best()
-  feat = instance$task$feature_names[as.matrix(res[, instance$task$feature_names, with=FALSE])]
-  perf = as.matrix((res[,instance$evaluator$objective$codomain$ids(),with=FALSE]))[1,]
+  feat = feature_names[as.matrix(res[, feature_names, with=FALSE])]
+  perf =
+    as.matrix(res[,instance$evaluator$objective$codomain$ids(),with=FALSE])[1,]
 
   instance$assign_result(feat, perf)
   invisible(NULL)

@@ -56,7 +56,6 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
   ),
   private = list(
     select_internal = function(instance) {
-
       pars = self$param_set$values
       pars_mutBitflip =
         pars[which(names(pars) %in% formalArgs(ecr::mutBitflip))]
@@ -146,7 +145,7 @@ objective_fun = function(x, instance) {
   x = as.data.table(x)
 
   res = instance$evaluator$eval_batch(x)
-  as.numeric(res[,instance$measures[[1]]$id, with=FALSE])
+  as.numeric(res[, instance$measures[[1]]$id, with = FALSE])
 }
 
 mlr_fselectors$add("evolutionary", FSelectEvolutionary)

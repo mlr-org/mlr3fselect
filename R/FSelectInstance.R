@@ -66,10 +66,13 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     initialize = function(task, learner, resampling, measures, terminator) {
+
       self$task = assert_task(as_task(task, clone = TRUE))
-      self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
+      self$learner = assert_learner(as_learner(learner, clone = TRUE),
+        task = self$task)
       self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
-      self$measures = assert_measures(as_measures(measures, clone = TRUE), task = self$task, learner = self$learner)
+      self$measures = assert_measures(as_measures(measures, clone = TRUE),
+        task = self$task, learner = self$learner)
       terminator = assert_terminator(terminator)
       if (!resampling$is_instantiated) {
         self$resampling$instantiate(self$task)
@@ -89,12 +92,12 @@ FSelectInstance = R6Class("FSelectInstance",
         aggr = bmr$aggregate(self$measures)
 
         cbind(xdt,
-              aggr[,self$measures[[1]]$id, with=FALSE],
-              bmr_data = bmr_data)
+          aggr[, self$measures[[1]]$id, with = FALSE],
+          bmr_data = bmr_data)
       }
 
-      minimize = sapply(self$measures, function(s)  s$minimize)
-      names(minimize) = unlist(sapply(self$measures, function(s)  s$id))
+      minimize = sapply(self$measures, function(s) s$minimize)
+      names(minimize) = unlist(sapply(self$measures, function(s) s$id))
 
       domain = ParamSet$new(lapply(task$feature_names,
         function(s) ParamLgl$new(id = s)))

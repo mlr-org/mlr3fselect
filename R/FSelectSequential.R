@@ -43,34 +43,37 @@ FSelectSequential = R6Class("FSelectSequential",
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
+      archive = instance$evaluator$archive
+      feature_names = instance$task$feature_names
+
       if (is.null(pars$max_features)) {
-        pars$max_features = length(instance$task$feature_names)
+        pars$max_features = length(feature_names)
       }
 
       # Initialize states for first batch
-      if (instance$evaluator$archive$n_batch == 0) {
+      if (archive$n_batch == 0) {
         if (self$param_set$values$strategy == "sfs") {
-          states = as.data.table(diag(TRUE, length(instance$task$feature_names),
-            length(instance$task$feature_names)))
-          names(states) = instance$task$feature_names
+          states = as.data.table(diag(TRUE, length(feature_names),
+            length(feature_names)))
+          names(states) = feature_names
         } else {
-          combinations = combn(length(instance$task$feature_names),
+          combinations = combn(length(feature_names),
             pars$max_features)
           states = map_dtr(seq_len(ncol(combinations)), function(j) {
-            state = rep(0, length(instance$task$feature_names))
+            state = rep(0, length(feature_names))
             state[combinations[, j]] = 1
             state = as.list(as.logical(state))
-            names(state) = instance$task$feature_names
+            names(state) = feature_names
             state
           })
         }
       } else {
-        if (instance$evaluator$archive$n_batch == pars$max_features) {
+        if (archive$n_batch == pars$max_features) {
           stop(terminated_error(instance))
         }
 
-        res = instance$evaluator$archive$get_best(m = instance$evaluator$archive$n_batch)
-        best_state = as.numeric(as.matrix(res[1,instance$task$feature_names, with=FALSE]))
+        res = archive$get_best(m = archive$n_batch)
+        best_state = as.numeric(as.matrix(res[1, feature_names, with = FALSE]))
 
         # Generate new states based on best feature set
         x = ifelse(pars$strategy == "sfs", 0, 1)
@@ -86,7 +89,7 @@ FSelectSequential = R6Class("FSelectSequential",
             new_state = best_state
             new_state[i] = y
             new_state = as.list(as.logical(new_state))
-            names(new_state) = instance$task$feature_names
+            names(new_state) = feature_names
             new_state
           }
         })

@@ -58,7 +58,8 @@ FSelectRFE = R6Class("FSelectRFE",
 
         if (pars$recursive) {
           # Recalculate the variable importance on the reduced feature subset
-          feat = archive$data[batch_nr == archive$n_batch, feature_names, with = FALSE]
+          feat = archive$data[batch_nr == archive$n_batch, feature_names,
+            with = FALSE]
           feat = feature_names[as.logical(feat)]
 
           bmr_data = archive$data[batch_nr == archive$n_batch, bmr_data][[1]]
@@ -80,8 +81,8 @@ FSelectRFE = R6Class("FSelectRFE",
             self$importance = importance_average(learners, feature_names)
           }
           # Eliminate the most unimportant features
-          states =
-            as.list(!feature_names %in% names(self$importance[1:archive$n_batch]))
+          states = as.list(!feature_names %in% names(
+            self$importance[1:archive$n_batch]))
           names(states) = instance$task$feature_names
           states = as.data.table(states)
         }

@@ -45,17 +45,19 @@ FSelectRandom = R6Class("FSelectRandom",
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
+      feature_names = instance$task$feature_names
+
       if (is.null(pars$max_features)) {
-        pars$max_features = length(instance$task$feature_names)
+        pars$max_features = length(feature_names)
       }
 
       states =
         map_dtr(seq_len(pars$batch_size), function(i) {
           x = Inf
           while (sum(x) > pars$max_features | sum(x) == 0) {
-            x = rbinom(length(instance$task$feature_names), 1, pars$prob)
+            x = rbinom(length(feature_names), 1, pars$prob)
           }
-          set_names(as.list(as.logical(x)), instance$task$feature_names)
+          set_names(as.list(as.logical(x)), feature_names)
         })
 
       instance$evaluator$eval_batch(states)
