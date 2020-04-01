@@ -70,7 +70,8 @@ FSelectInstance = R6Class("FSelectInstance",
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE),
         task = self$task)
-      self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
+      self$resampling = assert_resampling(as_resampling(resampling,
+        clone = TRUE))
       self$measures = assert_measures(as_measures(measures, clone = TRUE),
         task = self$task, learner = self$learner)
       terminator = assert_terminator(terminator)
@@ -96,10 +97,10 @@ FSelectInstance = R6Class("FSelectInstance",
           bmr_data = bmr_data)
       }
 
-      minimize = sapply(self$measures, function(s) s$minimize)
-      names(minimize) = unlist(sapply(self$measures, function(s) s$id))
+      minimize = map_lgl(self$measures, function(s) s$minimize)
+      names(minimize) = map_chr(self$measures, function(s) s$id)
 
-      domain = ParamSet$new(lapply(task$feature_names,
+      domain = ParamSet$new(map(task$feature_names,
         function(s) ParamLgl$new(id = s)))
 
       objective = Objective$new(id = "feature_selection",
