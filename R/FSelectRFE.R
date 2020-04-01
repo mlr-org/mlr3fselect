@@ -43,41 +43,45 @@ FSelectRFE = R6Class("FSelectRFE",
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
+      archive = instance$evaluator$archive
+      feature_names = instance$task$feature_names
 
-      if (instance$evaluator$archive$n_batch == 0L) {
+      if (archive$n_batch == 0L) {
         instance$store_models = TRUE
-        states = as.list(rep(TRUE, length(instance$task$feature_names)))
-        names(states) = instance$task$feature_names
+        states = as.list(rep(TRUE, length(feature_names)))
+        names(states) = feature_names
         states = as.data.table(states)
       } else {
-        if (length(instance$task$feature_names) - instance$evaluator$archive$n_batch < pars$min_features) {
+        if (length(feature_names) - archive$n_batch < pars$min_features) {
           stop(terminated_error(instance))
         }
+
         if (pars$recursive) {
           # Recalculate the variable importance on the reduced feature subset
-          feat = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, instance$task$feature_names, with=FALSE]
-          feat = instance$task$feature_names[as.logical(feat)]
+          feat = archive$data[batch_nr == archive$n_batch, feature_names, with = FALSE]
+          feat = feature_names[as.logical(feat)]
 
-          bmr_data = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, bmr_data][[1]]
+          bmr_data = archive$data[batch_nr == archive$n_batch, bmr_data][[1]]
           learners = bmr_data$learner
           imp = importance_average(learners, feat)
 
           # Eliminate the most unimportant feature of the feature subset
-          states = as.list(instance$task$feature_names %in% feat & !instance$task$feature_names %in% names(imp[1]))
-          names(states) = instance$task$feature_names
+          states =
+            as.list(feature_names %in% feat & !feature_names %in% names(imp[1]))
+          names(states) = feature_names
           states = as.data.table(states)
 
         } else {
-          if (instance$evaluator$archive$n_batch == 1) {
+          if (archive$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
-            bmr_data = instance$evaluator$archive$data[batch_nr == instance$evaluator$archive$n_batch, bmr_data][[1]]
+            bmr_data = archive$data[batch_nr == archive$n_batch, bmr_data][[1]]
             learners = bmr_data$learner
 
-            self$importance =
-              importance_average(learners, instance$task$feature_names)
+            self$importance = importance_average(learners, feature_names)
           }
           # Eliminate the most unimportant features
-          states = as.list(!instance$task$feature_names %in% names(self$importance[1:instance$evaluator$archive$n_batch]))
+          states =
+            as.list(!feature_names %in% names(self$importance[1:archive$n_batch]))
           names(states) = instance$task$feature_names
           states = as.data.table(states)
         }
@@ -87,8 +91,6 @@ FSelectRFE = R6Class("FSelectRFE",
     }
   )
 )
-
-mlr_fselectors$add("rfe", FSelectRFE)
 
 # Calculates the average feature importances on all resample iterations.
 # Returns a numeric vector of average feature importances in ascending order.
@@ -103,3 +105,5 @@ importance_average = function(learners, features) {
   })
   sort(apply(imp, 1, mean))
 }
+
+mlr_fselectors$add("rfe", FSelectRFE)
