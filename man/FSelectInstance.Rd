@@ -49,7 +49,7 @@ instance = FSelectInstance$new(
 
 \item{\code{terminator}}{(\link{Terminator}).}
 
-\item{\code{evaluator}}{(\link[bbotk:Evaluator]{bbotk::Evaluator}).}
+\item{\code{objective}}{(\link[bbotk:Objective]{bbotk::Objective}).}
 
 \item{\code{store_models}}{(\code{logical(1)}).}
 }
