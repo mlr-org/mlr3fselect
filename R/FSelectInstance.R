@@ -101,14 +101,12 @@ FSelectInstance = R6Class("FSelectInstance",
 
       domain = ParamSet$new(map(task$feature_names,
         function(s) ParamLgl$new(id = s)))
-      codomain = ParamSet$new(list(
-        map(self$measures, function(s) ParamDbl$new(id = s$id))))
 
       self$objective = Objective$new(
         id = "feature_selection",
         fun = fun,
         domain = param_set,
-        codomain = codomain,
+        ydim = length(minimize),
         minimize = minimize,
         terminator = terminator)
     },
