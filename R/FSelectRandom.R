@@ -60,7 +60,7 @@ FSelectRandom = R6Class("FSelectRandom",
           set_names(as.list(as.logical(x)), feature_names)
         })
 
-      instance$evaluator$eval_batch(states)
+      instance$objective$eval_batch(states)
     }
   )
 )

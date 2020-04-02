@@ -78,7 +78,7 @@ FSelectInstance = R6Class("FSelectInstance",
         self$resampling$instantiate(self$task)
       }
 
-      fun = function(xxs) {
+      fun = function(xss) {
         tasks = map(xss, function(x) {
           state = self$task$feature_names[unlist(x)]
           tsk = self$task$clone(deep = TRUE)
@@ -105,7 +105,7 @@ FSelectInstance = R6Class("FSelectInstance",
       self$objective = Objective$new(
         id = "feature_selection",
         fun = fun,
-        domain = param_set,
+        domain = domain,
         ydim = length(minimize),
         minimize = minimize,
         terminator = terminator)
