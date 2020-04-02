@@ -36,6 +36,9 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 }
+\section{Super class}{
+\code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{FSelectInstance}
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
@@ -48,8 +51,6 @@ instance = FSelectInstance$new(
 \item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure}).}
 
 \item{\code{terminator}}{(\link{Terminator}).}
-
-\item{\code{objective}}{(\link[bbotk:Objective]{bbotk::Objective}).}
 
 \item{\code{store_models}}{(\code{logical(1)}).}
 }
@@ -72,6 +73,13 @@ set and its estimated performances.}
 \item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch">}\href{../../bbotk/html/OptimInstance.html#method-eval_batch}{\code{bbotk::OptimInstance$eval_batch()}}\out{</span>}
+}
+\out{</details>}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}

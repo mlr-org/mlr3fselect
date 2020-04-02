@@ -37,8 +37,8 @@ fs$select(instance)
 instance$result
 instance$evaluator$archive$data
 }
-\section{Super class}{
-\code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectRFE}
+\section{Super classes}{
+\code{\link[bbotk:Optimizer]{bbotk::Optimizer}} -> \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectRFE}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -58,6 +58,7 @@ variables if \code{recrusive} is set to \code{FALSE}}
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="optimize">}\href{../../bbotk/html/Optimizer.html#method-optimize}{\code{bbotk::Optimizer$optimize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="format">}\href{../../mlr3fselect/html/FSelect.html#method-format}{\code{mlr3fselect::FSelect$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="print">}\href{../../mlr3fselect/html/FSelect.html#method-print}{\code{mlr3fselect::FSelect$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="select">}\href{../../mlr3fselect/html/FSelect.html#method-select}{\code{mlr3fselect::FSelect$select()}}\out{</span>}

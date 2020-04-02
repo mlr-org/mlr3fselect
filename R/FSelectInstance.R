@@ -34,6 +34,7 @@
 #'   terminator = terminator
 #' )
 FSelectInstance = R6Class("FSelectInstance",
+  inherit = OptimInstance,
   public = list(
     #' @field task ([mlr3::Task]).
     task = NULL,
@@ -50,9 +51,6 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @field terminator ([Terminator]).
     terminator = NULL,
 
-    #' @field objective ([bbotk::Objective]).
-    objective = NULL,
-
     #' @field store_models (`logical(1)`).
     store_models = FALSE,
 
@@ -65,7 +63,9 @@ FSelectInstance = R6Class("FSelectInstance",
     #' so that all configurations.
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
-    initialize = function(task, learner, resampling, measures, terminator) {
+    initialize = function(task, learner, resampling, measures, terminator,
+      store_models = FALSE) {
+
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE),
         task = self$task)
@@ -74,47 +74,28 @@ FSelectInstance = R6Class("FSelectInstance",
       self$measures = assert_measures(as_measures(measures, clone = TRUE),
         task = self$task, learner = self$learner)
       terminator = assert_terminator(terminator)
+      self$store_models = store_models
       if (!resampling$is_instantiated) {
         self$resampling$instantiate(self$task)
       }
 
-      fun = function(xss) {
-        tasks = map(xss, function(x) {
-          state = self$task$feature_names[unlist(x)]
-          tsk = self$task$clone(deep = TRUE)
-          tsk$select(state)
-          return(tsk)
-        })
-
-        design = benchmark_grid(tasks, self$learner, self$resampling)
-        bmr = benchmark(design, store_models = self$store_models)
-        bmr_data = split(bmr$data, by = "uhash")
-        aggr = bmr$aggregate(self$measures)
-
-        y = map_chr(self$measures, function(s) s$id)
-
-        cbind(aggr[, y, with = FALSE], bmr_data = bmr_data)
-      }
-
-      minimize = map_lgl(self$measures, function(s) s$minimize)
-      names(minimize) = map_chr(self$measures, function(s) s$id)
-
       domain = ParamSet$new(map(task$feature_names,
         function(s) ParamLgl$new(id = s)))
 
-      self$objective = Objective$new(
-        id = "feature_selection",
-        fun = fun,
-        domain = domain,
-        ydim = length(minimize),
-        minimize = minimize,
-        terminator = terminator)
-    },
+      codomain = ParamSet$new(map(self$measures,
+        function(s) {
+          ParamDbl$new(id = s$id,
+          tags = ifelse(s$minimize, "minimize", "maximize"))
+        }))
 
-    #' @description
-    #' Helper for print outputs.
-    format = function() {
-      sprintf("<%s>", class(self)[1L])
+      objective = ObjectiveFSelect$new(
+        id = "feature_selection",
+        domain = domain,
+        codomain = codomain)
+
+      objective$fselectinstance = self
+
+      super$initialize(objective, domain, terminator)
     },
 
     #' @description

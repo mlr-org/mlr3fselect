@@ -10,7 +10,7 @@ test_that("AutoFSelect / train+predict", {
   at$train(task)
   expect_learner(at)
   inst = at$fselect_instance
-  a = inst$evaluator$archive$data
+  a = inst$archive$data
   expect_data_table(a, nrows = 10L)
   r = at$fselect_result
   expect_equal(r$feat, c("Petal.Length", "Petal.Width", "Sepal.Length"))

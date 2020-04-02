@@ -71,14 +71,14 @@ TEST_MAKE_INST1 = function(values = NULL, folds = 2L, measures = msr("dummy.cp.c
 
 test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals) {
   term = term("evals", n_evals = term_evals)
-  inst = FSelectInstance$new(tsk("iris"), lrn("classif.rpart"), rsmp("holdout"), msr("dummy.cp.classif"), term)
+  inst = FSelectInstance$new(tsk("iris"), lrn("classif.rpart"), rsmp("holdout"), msr("dummy.cp.classif"), term, store_models = TRUE)
   fselect = fs(key, ...)
   expect_fselect(fselect)
 
   fselect$select(inst)
-  data = inst$evaluator$archive$data
+  data = inst$archive$data
   expect_data_table(data, nrows = real_evals)
-  expect_equal(inst$evaluator$archive$n_evals, real_evals)
+  expect_equal(inst$archive$n_evals, real_evals)
 
   r = inst$result
   feat = r$feat

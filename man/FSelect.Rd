@@ -34,14 +34,8 @@ fs$select(instance)
 instance$result
 instance$evaluator$archive$data
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}}
-
-\item{\code{packages}}{\code{character()}}
-}
-\if{html}{\out{</div>}}
+\section{Super class}{
+\code{\link[bbotk:Optimizer]{bbotk::Optimizer}} -> \code{FSelect}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -53,13 +47,20 @@ instance$evaluator$archive$data
 \item \href{#method-clone}{\code{FSelect$clone()}}
 }
 }
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="optimize">}\href{../../bbotk/html/Optimizer.html#method-optimize}{\code{bbotk::Optimizer$optimize()}}\out{</span>}
+}
+\out{</details>}
+}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set = ParamSet$new(), packages = character())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, param_classes, properties, packages = character(0))}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -67,8 +68,11 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \describe{
 \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}}
 
-\item{\code{packages}}{\code{character()}
-Set of control parameter for the feature selection.}
+\item{\code{param_classes}}{\code{character()}}
+
+\item{\code{properties}}{\code{character()}}
+
+\item{\code{packages}}{\code{character()}}
 }
 \if{html}{\out{</div>}}
 }

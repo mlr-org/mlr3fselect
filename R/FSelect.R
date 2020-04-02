@@ -18,20 +18,18 @@
 #' @templateVar fs "random"
 #' @template example
 FSelect = R6Class("FSelect",
+  inherit = Optimizer,
   public = list(
-    #' @field param_set [paradox::ParamSet]
-    #' @field packages `character()`
-    param_set = NULL,
-    packages = NULL,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #' @param param_set [paradox::ParamSet]
+    #' @param param_classes `character()`
+    #' @param properties `character()`
     #' @param packages `character()`
-    #' Set of control parameter for the feature selection.
-    initialize = function(param_set = ParamSet$new(), packages = character()) {
-      self$param_set = assert_param_set(param_set)
-      self$packages = assert_set(packages)
+    initialize = function(param_set, param_classes, properties, packages = character(0)) {
+      super$initialize(param_set = param_set, param_classes = param_classes,
+        properties = properties)
     },
 
     #' @description
@@ -86,7 +84,7 @@ fselect_assign_result_default = function(instance) {
   assert_r6(instance, "FSelectInstance")
   feature_names = instance$task$feature_names
 
-  res = instance$objective$archive$get_best()
+  res = instance$archive$get_best()
   feat = feature_names[as.matrix(res[, feature_names, with=FALSE])]
   perf = as.matrix(res[,instance$objective$codomain$ids(),with=FALSE])[1,]
 

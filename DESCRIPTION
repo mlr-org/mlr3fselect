@@ -63,6 +63,7 @@ Collate:
     'FSelectRandom.R'
     'FSelectSequential.R'
     'helper.R'
+    'ObjectiveFSelect.R'
     'reexports.R'
     'sugar.R'
     'zzz.R'

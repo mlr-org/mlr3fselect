@@ -49,7 +49,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       ps$add_dep("n.elite", "survival.strategy", CondEqual$new("comma"))
 
       super$initialize(
-        param_set = ps,
+        param_set = ps, param_classes = "ParamLgl", properties = character(0),
         packages = "ecr"
       )
     }
@@ -140,9 +140,9 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
 )
 
 objective_fun = function(x, instance) {
-  set_names(as.data.table(as.list(as.logical(x))), instance$task$feature_names)
+  x = set_names(as.data.table(as.list(as.logical(x))), instance$task$feature_names)
 
-  res = instance$objective$eval_batch(x)
+  res = instance$eval_batch(x)
   as.numeric(res[, instance$measures[[1]]$id, with = FALSE])
 }
 

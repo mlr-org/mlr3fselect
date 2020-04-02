@@ -36,18 +36,17 @@ FSelectRFE = R6Class("FSelectRFE",
       ps$values = list(min_features = 1L, recursive = FALSE)
 
       super$initialize(
-        param_set = ps
+        param_set = ps, param_classes = "ParamLgl", properties = character(0)
       )
     }
   ),
   private = list(
     select_internal = function(instance) {
       pars = self$param_set$values
-      archive = instance$objective$archive
+      archive = instance$archive
       feature_names = instance$task$feature_names
 
       if (archive$n_batch == 0L) {
-        instance$store_models = TRUE
         states = as.list(rep(TRUE, length(feature_names)))
         names(states) = feature_names
         states = as.data.table(states)
@@ -83,12 +82,12 @@ FSelectRFE = R6Class("FSelectRFE",
           # Eliminate the most unimportant features
           states = as.list(!feature_names %in% names(
             self$importance[1:archive$n_batch]))
-          names(states) = instance$task$feature_names
+          names(states) = feature_names
           states = as.data.table(states)
         }
       }
       # Fit the model on the reduced feature subset
-      instance$objective$eval_batch(states)
+      instance$eval_batch(states)
     }
   )
 )

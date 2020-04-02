@@ -37,7 +37,7 @@ FSelectRandom = R6Class("FSelectRandom",
       ps$values = list(batch_size = 10L, prob = 0.5)
 
       super$initialize(
-        param_set = ps
+        param_set = ps, param_classes = "ParamLgl", properties = character(0)
       )
     }
   ),
@@ -60,7 +60,7 @@ FSelectRandom = R6Class("FSelectRandom",
           set_names(as.list(as.logical(x)), feature_names)
         })
 
-      instance$objective$eval_batch(states)
+      instance$eval_batch(states)
     }
   )
 )
