@@ -32,7 +32,7 @@ instance = FSelectInstance$new(
 fs = fs("random")
 fs$select(instance)
 instance$result
-instance$evaluator$archive$data
+instance$archive$data
 }
 \section{Super class}{
 \code{\link[bbotk:Optimizer]{bbotk::Optimizer}} -> \code{FSelect}

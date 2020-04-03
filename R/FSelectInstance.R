@@ -63,6 +63,7 @@ FSelectInstance = R6Class("FSelectInstance",
     #' so that all configurations.
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
+    #' @param store_models (`logical(1)`)
     initialize = function(task, learner, resampling, measures, terminator,
       store_models = FALSE) {
 

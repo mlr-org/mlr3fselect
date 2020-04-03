@@ -16,8 +16,23 @@
 #' }
 #'
 #' @export
-#' @templateVar fs "rfe"
-#' @template example
+#' @examples
+#' library(mlr3)
+#'
+#' terminator = term("evals", n_evals = 10)
+#' instance = FSelectInstance$new(
+#'   task = tsk("iris"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measures = msr("classif.ce"),
+#'   terminator = terminator,
+#'   store_models = TRUE
+#' )
+#'
+#' fs = fs("rfe")
+#' fs$select(instance)
+#' instance$result
+#' instance$archive$data
 FSelectRFE = R6Class("FSelectRFE",
   inherit = FSelect,
   public = list(

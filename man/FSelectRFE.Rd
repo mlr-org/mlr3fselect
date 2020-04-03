@@ -29,13 +29,14 @@ instance = FSelectInstance$new(
   learner = lrn("classif.rpart"),
   resampling = rsmp("holdout"),
   measures = msr("classif.ce"),
-  terminator = terminator
+  terminator = terminator,
+  store_models = TRUE
 )
 
 fs = fs("rfe")
 fs$select(instance)
 instance$result
-instance$evaluator$archive$data
+instance$archive$data
 }
 \section{Super classes}{
 \code{\link[bbotk:Optimizer]{bbotk::Optimizer}} -> \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectRFE}

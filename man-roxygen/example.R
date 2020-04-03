@@ -13,7 +13,7 @@
 #' fs = fs(<%= fs %>)
 #' fs$select(instance)
 #' instance$result
-#' instance$evaluator$archive$data
+#' instance$archive$data
 
 
 

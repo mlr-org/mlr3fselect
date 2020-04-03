@@ -41,7 +41,7 @@ instance = FSelectInstance$new(
 fs = fs("evolutionary", mu = 10, lambda = 5)
 fs$select(instance)
 instance$result
-instance$evaluator$archive$data
+instance$archive$data
 }
 \section{Super classes}{
 \code{\link[bbotk:Optimizer]{bbotk::Optimizer}} -> \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectEvolutionary}

@@ -68,7 +68,6 @@ set and its estimated performances.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
-\item \href{#method-format}{\code{FSelectInstance$format()}}
 \item \href{#method-print}{\code{FSelectInstance$print()}}
 \item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
@@ -78,6 +77,7 @@ set and its estimated performances.}
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch">}\href{../../bbotk/html/OptimInstance.html#method-eval_batch}{\code{bbotk::OptimInstance$eval_batch()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format">}\href{../../bbotk/html/OptimInstance.html#method-format}{\code{bbotk::OptimInstance$format()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -87,7 +87,14 @@ set and its estimated performances.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$new(task, learner, resampling, measures, terminator)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$new(
+  task,
+  learner,
+  resampling,
+  measures,
+  terminator,
+  store_models = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -104,19 +111,11 @@ so that all configurations.}
 \item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
 
 \item{\code{terminator}}{\link{Terminator}}
+
+\item{\code{store_models}}{(\code{logical(1)})}
 }
 \if{html}{\out{</div>}}
 }
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-format"></a>}}
-\if{latex}{\out{\hypertarget{method-format}{}}}
-\subsection{Method \code{format()}}{
-Helper for print outputs.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$format()}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
