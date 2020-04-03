@@ -30,7 +30,7 @@ instance = FSelectInstance$new(
 )
 
 fs = fs("random")
-fs$select(instance)
+fs$optimize(instance)
 instance$result
 instance$archive$data
 }
@@ -43,14 +43,13 @@ instance$archive$data
 \item \href{#method-new}{\code{FSelect$new()}}
 \item \href{#method-format}{\code{FSelect$format()}}
 \item \href{#method-print}{\code{FSelect$print()}}
-\item \href{#method-select}{\code{FSelect$select()}}
+\item \href{#method-optimize}{\code{FSelect$optimize()}}
 \item \href{#method-clone}{\code{FSelect$clone()}}
 }
 }
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="optimize">}\href{../../bbotk/html/Optimizer.html#method-optimize}{\code{bbotk::Optimizer$optimize()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -104,18 +103,18 @@ Print method.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-select"></a>}}
-\if{latex}{\out{\hypertarget{method-select}{}}}
-\subsection{Method \code{select()}}{
+\if{html}{\out{<a id="method-optimize"></a>}}
+\if{latex}{\out{\hypertarget{method-optimize}{}}}
+\subsection{Method \code{optimize()}}{
 Performs the feature selection on a \link{FSelectInstance} until termination.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$select(instance)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$optimize(inst)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{instance}}{\link{FSelectInstance}}
+\item{\code{inst}}{\link{FSelectInstance}}
 }
 \if{html}{\out{</div>}}
 }

@@ -43,9 +43,9 @@ FSelectRandom = R6Class("FSelectRandom",
   ),
 
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
-      feature_names = instance$task$feature_names
+      feature_names = inst$objective$task$feature_names
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)
@@ -60,7 +60,7 @@ FSelectRandom = R6Class("FSelectRandom",
           set_names(as.list(as.logical(x)), feature_names)
         })
 
-      instance$eval_batch(states)
+      inst$eval_batch(states)
     }
   )
 )

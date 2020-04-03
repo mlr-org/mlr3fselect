@@ -36,79 +36,19 @@
 FSelectInstance = R6Class("FSelectInstance",
   inherit = OptimInstance,
   public = list(
-    #' @field task ([mlr3::Task]).
-    task = NULL,
-
-    #' @field learner ([mlr3::Learner]).
-    learner = NULL,
-
-    #' @field resampling ([mlr3::Resampling])
-    resampling = NULL,
-
-    #' @field measures (list of [mlr3::Measure]).
-    measures = NULL,
-
-    #' @field terminator ([Terminator]).
-    terminator = NULL,
-
-    #' @field store_models (`logical(1)`).
-    store_models = FALSE,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #' @param task [mlr3::Task]
     #' @param learner [mlr3::Learner]
     #' @param resampling [mlr3::Resampling]
-    #' Note that uninstantiated resamplings are instantiated during construction
-    #' so that all configurations.
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
-    #' @param store_models (`logical(1)`)
-    initialize = function(task, learner, resampling, measures, terminator,
-      store_models = FALSE) {
-
-      self$task = assert_task(as_task(task, clone = TRUE))
-      self$learner = assert_learner(as_learner(learner, clone = TRUE),
-        task = self$task)
-      self$resampling = assert_resampling(as_resampling(resampling,
-        clone = TRUE))
-      self$measures = assert_measures(as_measures(measures, clone = TRUE),
-        task = self$task, learner = self$learner)
-      terminator = assert_terminator(terminator)
-      self$store_models = store_models
-      if (!resampling$is_instantiated) {
-        self$resampling$instantiate(self$task)
-      }
-
-      domain = ParamSet$new(map(task$feature_names,
-        function(s) ParamLgl$new(id = s)))
-
-      codomain = ParamSet$new(map(self$measures,
-        function(s) {
-          ParamDbl$new(id = s$id,
-          tags = ifelse(s$minimize, "minimize", "maximize"))
-        }))
-
-      objective = ObjectiveFSelect$new(
-        id = "feature_selection",
-        domain = domain,
-        codomain = codomain)
-
-      objective$fselectinstance = self
-
-      super$initialize(objective, domain, terminator)
-    },
-
-    #' @description
-    #' Print method.
-    #' @return `character()`
-    print = function() {
-      catf(self$format())
-      catf(str_indent("* Task:", format(self$task)))
-      catf(str_indent("* Learner:", format(self$learner)))
-      catf(str_indent("* Measures:", map_chr(self$measures, "id")))
-      catf(str_indent("* Resampling:", format(self$resampling)))
-      catf(str_indent("* Terminator:", format(self$terminator)))
+    #' @param store_models `logical(1)`
+    initialize = function(task, learner, resampling, measures, terminator, store_models = FALSE) {
+      obj = ObjectiveFSelect$new(task = task, learner = learner,
+        resampling = resampling, measures = measures, store_models = store_models)
+      super$initialize(obj, obj$domain, terminator)
     },
 
     #' @description
@@ -120,9 +60,9 @@ FSelectInstance = R6Class("FSelectInstance",
     #' Must be named numeric of performance measures, named with performance
     #' IDs, regarding all elements in `measures`.
     assign_result = function(feat, perf) {
-      assert_names(feat, subset.of = self$task$feature_names)
+      assert_names(feat, subset.of = self$objective$task$feature_names)
       assert_numeric(perf)
-      assert_names(names(perf), permutation.of = ids(self$measures))
+      assert_names(names(perf), permutation.of = ids(self$objective$measures))
       private$.result = list(feat = feat, perf = perf)
     }
   ),

@@ -2,11 +2,11 @@ lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.
 
 expect_fselect = function(fselect) {
   expect_r6(fselect, "FSelect",
-    public = c("select", "param_set"),
-    private = "select_internal"
+    public = c("optimize", "param_set"),
+    private = ".optimize"
   )
   expect_is(fselect$param_set, "ParamSet")
-  expect_function(fselect$select, args = "instance")
+  expect_function(fselect$optimize, args = "inst")
 }
 
 expect_features = function(features, n) {
@@ -75,7 +75,7 @@ test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals) {
   fselect = fs(key, ...)
   expect_fselect(fselect)
 
-  fselect$select(inst)
+  fselect$optimize(inst)
   data = inst$archive$data
   expect_data_table(data, nrows = real_evals)
   expect_equal(inst$archive$n_evals, real_evals)

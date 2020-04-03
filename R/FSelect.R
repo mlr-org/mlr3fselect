@@ -50,44 +50,37 @@ FSelect = R6Class("FSelect",
 
     #' @description
     #' Performs the feature selection on a [FSelectInstance] until termination.
-    #' @param instance [FSelectInstance]
-    select = function(instance) {
-      assert_r6(instance, "FSelectInstance")
+    #' @param inst [FSelectInstance]
+    optimize = function(inst) {
+      assert_r6(inst, "OptimInstance")
       require_namespaces(self$packages)
-
-      lg$info("Starting feature selection")
 
       tryCatch({
         while (TRUE) {
-          private$select_internal(instance)
+          private$.optimize(inst)
         }
       }, terminated_error = function(cond) { })
 
-      private$assign_result(instance)
+      private$.assign_result(inst)
       invisible(NULL)
     }
   ),
 
   private = list(
-    select_internal = function() {
-      # Implemented by subclass
-      stop("Abstract")
-    },
-
-    assign_result = function(instance) {
-      fselect_assign_result_default(instance)
+    .assign_result = function(inst) {
+      fselect_assign_result_default(inst)
     }
   )
 )
 
-fselect_assign_result_default = function(instance) {
-  assert_r6(instance, "FSelectInstance")
-  feature_names = instance$task$feature_names
+fselect_assign_result_default = function(inst) {
+  assert_r6(inst, "FSelectInstance")
+  feature_names = inst$objective$task$feature_names
 
-  res = instance$archive$get_best()
+  res = inst$archive$get_best()
   feat = feature_names[as.matrix(res[, feature_names, with=FALSE])]
-  perf = as.matrix(res[,instance$objective$codomain$ids(),with=FALSE])[1,]
+  perf = as.matrix(res[,inst$objective$codomain$ids(),with=FALSE])[1,]
 
-  instance$assign_result(feat, perf)
+  inst$assign_result(feat, perf)
   invisible(NULL)
 }

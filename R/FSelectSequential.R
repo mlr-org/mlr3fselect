@@ -41,10 +41,10 @@ FSelectSequential = R6Class("FSelectSequential",
     }
   ),
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
-      archive = instance$archive
-      feature_names = instance$task$feature_names
+      archive = inst$archive
+      feature_names = inst$objective$task$feature_names
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)
@@ -69,7 +69,7 @@ FSelectSequential = R6Class("FSelectSequential",
         }
       } else {
         if (archive$n_batch == pars$max_features) {
-          stop(terminated_error(instance))
+          stop(terminated_error(inst))
         }
 
         res = archive$get_best(m = archive$n_batch)
@@ -94,7 +94,7 @@ FSelectSequential = R6Class("FSelectSequential",
           }
         })
       }
-      instance$eval_batch(states)
+      inst$eval_batch(states)
     }
   )
 )

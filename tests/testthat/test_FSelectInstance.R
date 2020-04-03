@@ -13,11 +13,11 @@ test_that("FSelect", {
 test_that("Budget",  {
   inst = TEST_MAKE_INST1(term_evals = 2L)
   fs = fs("random", batch_size = 6)
-  fs$select(inst)
+  fs$optimize(inst)
   tab = inst$archive$data
   expect_data_table(tab, nrows = 6)
 
-  fs$select(inst)
+  fs$optimize(inst)
   tab = inst$archive$data
   expect_data_table(tab, nrows = 6)
 })

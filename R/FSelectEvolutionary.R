@@ -55,7 +55,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
     }
   ),
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
       pars_mutBitflip =
         pars[which(names(pars) %in% formalArgs(ecr::mutBitflip))]
@@ -94,7 +94,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
 
       population = invoke(ecr::initPopulation,
         gen.fun = ecr::genBin,
-        n.dim = length(instance$task$feature_names),
+        n.dim = length(inst$objective$task$feature_names),
         .args = pars_initPopulation)
       population = map_if(population,
         function(x) sum(x) == 0,
@@ -104,7 +104,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         }) # Tasks without features cannot be evaluated
 
       withr::with_package("ecr", {
-        fitness = ecr::evaluateFitness(ctrl, population, instance)
+        fitness = ecr::evaluateFitness(ctrl, population, inst)
       })
 
       while (TRUE) {
@@ -119,7 +119,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
           })
 
         withr::with_package("ecr", {
-          fitness_o = ecr::evaluateFitness(ctrl, offspring, instance)
+          fitness_o = ecr::evaluateFitness(ctrl, offspring, inst)
         })
         if (pars$survival.strategy == "plus") {
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
@@ -139,11 +139,11 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
   )
 )
 
-objective_fun = function(x, instance) {
-  x = set_names(as.data.table(as.list(as.logical(x))), instance$task$feature_names)
+objective_fun = function(x, inst) {
+  x = set_names(as.data.table(as.list(as.logical(x))), inst$objective$task$feature_names)
 
-  res = instance$eval_batch(x)
-  as.numeric(res[, instance$measures[[1]]$id, with = FALSE])
+  res = inst$eval_batch(x)
+  as.numeric(res[, inst$objective$measures[[1]]$id, with = FALSE])
 }
 
 mlr_fselectors$add("evolutionary", FSelectEvolutionary)

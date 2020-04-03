@@ -39,23 +39,6 @@ instance = FSelectInstance$new(
 \section{Super class}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{FSelectInstance}
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task}).}
-
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner}).}
-
-\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})}
-
-\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure}).}
-
-\item{\code{terminator}}{(\link{Terminator}).}
-
-\item{\code{store_models}}{(\code{logical(1)}).}
-}
-\if{html}{\out{</div>}}
-}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
@@ -68,7 +51,6 @@ set and its estimated performances.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
-\item \href{#method-print}{\code{FSelectInstance$print()}}
 \item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
@@ -104,30 +86,15 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 \item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
 
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}
-Note that uninstantiated resamplings are instantiated during construction
-so that all configurations.}
+\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}}
 
 \item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
 
 \item{\code{terminator}}{\link{Terminator}}
 
-\item{\code{store_models}}{(\code{logical(1)})}
+\item{\code{store_models}}{\code{logical(1)}}
 }
 \if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
-\subsection{Method \code{print()}}{
-Print method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$print()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{character()}
 }
 }
 \if{html}{\out{<hr>}}

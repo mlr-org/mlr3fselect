@@ -30,7 +30,7 @@
 #' )
 #'
 #' fs = fs("rfe")
-#' fs$select(instance)
+#' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data
 FSelectRFE = R6Class("FSelectRFE",
@@ -56,10 +56,10 @@ FSelectRFE = R6Class("FSelectRFE",
     }
   ),
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
-      archive = instance$archive
-      feature_names = instance$task$feature_names
+      archive = inst$archive
+      feature_names = inst$objective$task$feature_names
 
       if (archive$n_batch == 0L) {
         states = as.list(rep(TRUE, length(feature_names)))
@@ -67,7 +67,7 @@ FSelectRFE = R6Class("FSelectRFE",
         states = as.data.table(states)
       } else {
         if (length(feature_names) - archive$n_batch < pars$min_features) {
-          stop(terminated_error(instance))
+          stop(terminated_error(inst))
         }
 
         if (pars$recursive) {
@@ -102,7 +102,7 @@ FSelectRFE = R6Class("FSelectRFE",
         }
       }
       # Fit the model on the reduced feature subset
-      instance$eval_batch(states)
+      inst$eval_batch(states)
     }
   )
 )

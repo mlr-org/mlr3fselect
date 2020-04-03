@@ -11,7 +11,7 @@
 #' )
 #'
 #' fs = fs(<%= fs %>)
-#' fs$select(instance)
+#' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data
 

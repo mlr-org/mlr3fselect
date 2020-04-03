@@ -34,17 +34,17 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
     }
   ),
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
-      feature_names = instance$task$feature_names
-      archive = instance$archive
+      feature_names = inst$objective$task$feature_names
+      archive = inst$archive
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)
       }
 
       if (archive$n_batch + 1 > pars$max_features) {
-        stop(terminated_error(instance))
+        stop(terminated_error(inst))
       }
 
       combinations = combn(length(feature_names),
@@ -56,7 +56,7 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
         names(state) = feature_names
         state
       })
-      instance$eval_batch(states)
+      inst$eval_batch(states)
     }
   )
 )
