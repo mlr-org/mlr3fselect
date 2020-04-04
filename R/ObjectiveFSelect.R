@@ -35,11 +35,16 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param store_models `logical(1)`
-    initialize = function(task, learner, resampling, measures, store_models = FALSE) {
+    initialize = function(task, learner, resampling, measures,
+      store_models = FALSE) {
+
       self$task = assert_task(as_task(task, clone = TRUE))
-      self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
-      self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
-      self$measures = assert_measures(as_measures(measures, clone = TRUE), task = self$task, learner = self$learner)
+      self$learner = assert_learner(as_learner(learner, clone = TRUE),
+        task = self$task)
+      self$resampling = assert_resampling(as_resampling(resampling,
+        clone = TRUE))
+      self$measures = assert_measures(as_measures(measures, clone = TRUE),
+        task = self$task, learner = self$learner)
       self$store_models = assert_logical(store_models)
       if (!resampling$is_instantiated) {
         self$resampling$instantiate(self$task)
@@ -54,7 +59,8 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
             tags = ifelse(s$minimize, "minimize", "maximize"))
         }))
 
-      super$initialize(id = "feature_selection", domain = domain, codomain = codomain)
+      super$initialize(id = "feature_selection", domain = domain,
+        codomain = codomain)
     },
 
     #' @description
