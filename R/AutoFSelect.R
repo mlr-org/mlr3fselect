@@ -24,11 +24,14 @@
 #' afs$learner
 AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
   public = list(
+
     #' @field instance_args `list()`
-    #' @field fselect [FSelect]
-    #' @field store_fselect_instance `logical(1)`
     instance_args = NULL,
+
+    #' @field fselect [FSelect]
     fselect = NULL,
+
+    #' @field store_fselect_instance `logical(1)`
     store_fselect_instance = TRUE,
 
     #' @description
@@ -59,16 +62,12 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       )
 
       self$predict_type = learner$predict_type
-    },
+    }
+  ),
 
-    #' @description
-    #' Selects the optimal feature set, applies the feature set to the task and
-    #' fits the model on the training data. If `store_fselect_instance` is
-    #' `TRUE`, the [mlr3::Learner] with the [FSelectInstance] is returned,
-    #' otherwise just the [mlr3::Learner]. For internal use.
-    #' @param task [mlr3::Task]
-    #' @return list([mlr3::Learner]) or list([mlr3::Learner], [FSelectInstance])
-    train_internal = function(task) {
+  private = list(
+
+    .train = function(task) {
       ia = self$instance_args
       ia$task = task$clone()
       instance = invoke(FSelectInstance$new, .args = ia)
@@ -86,23 +85,15 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       return(result_model)
     },
 
-    #' @description
-    #' Creates a new [mlr3::Prediction] based on the learner fitted on the
-    #' training data with the optimal feature subset. For internal use.
-    #' @param task [mlr3::Task]
-    #' @return [mlr3::Prediction]
-    predict_internal = function(task) {
+    .predict = function(task) {
       self$model$learner$predict(task)
-    },
-
-    #' @description
-    #' Returns a table of contained resample results with corresponding feature
-    #' sets.
-    #' @return [data.table::data.table]
-    archive = function() self$fselect_instance$archive()
+    }
   ),
 
   active = list(
+
+    #' @field archive FSelectInstance archive
+    archive = function() self$fselect_instance$archive,
 
     #' @field learner [mlr3::Learner]
     learner = function() {
