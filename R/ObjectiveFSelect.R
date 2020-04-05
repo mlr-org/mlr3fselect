@@ -75,15 +75,13 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
         return(tsk)
       })
 
-      design = benchmark_grid(tasks, self$learner,
-        self$resampling)
+      design = benchmark_grid(tasks, self$learner, self$resampling)
       bmr = benchmark(design, store_models = self$store_models)
-      bmr_data = split(bmr$data, by = "uhash")
+      rr = map(seq(bmr$n_resample_results), function(x) bmr$resample_result(x))
       aggr = bmr$aggregate(self$measures)
-
       y = map_chr(self$measures, function(s) s$id)
 
-      cbind(aggr[, y, with = FALSE], bmr_data = bmr_data)
+      cbind(aggr[, y, with = FALSE], resample_result = rr)
     }
   )
 )

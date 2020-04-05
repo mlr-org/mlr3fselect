@@ -76,8 +76,8 @@ FSelectRFE = R6Class("FSelectRFE",
             with = FALSE]
           feat = feature_names[as.logical(feat)]
 
-          bmr_data = archive$data[batch_nr == archive$n_batch, bmr_data][[1]]
-          learners = bmr_data$learner
+          rr = archive$data[batch_nr == archive$n_batch, resample_result][[1]]
+          learners = rr$learners
           imp = importance_average(learners, feat)
 
           # Eliminate the most unimportant feature of the feature subset
@@ -89,8 +89,8 @@ FSelectRFE = R6Class("FSelectRFE",
         } else {
           if (archive$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
-            bmr_data = archive$data[batch_nr == archive$n_batch, bmr_data][[1]]
-            learners = bmr_data$learner
+            rr = archive$data[batch_nr == archive$n_batch, resample_result][[1]]
+            learners = rr$learners
 
             self$importance = importance_average(learners, feature_names)
           }
