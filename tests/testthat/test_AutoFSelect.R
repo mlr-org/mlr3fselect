@@ -30,7 +30,8 @@ test_that("AutoFSelect - resample", {
   fs = fs("sequential")
   terminator = term("evals", n_evals = 10L)
 
-  at = AutoFSelect$new(learner, resampling_inner, measures, terminator, fselect = fs)
+  at = AutoFSelect$new(learner, resampling_inner, measures, terminator,
+    fselect = fs)
   expect_null(at$fselect_instance)
 
   resampling_outer = rsmp("cv", folds = 2)
