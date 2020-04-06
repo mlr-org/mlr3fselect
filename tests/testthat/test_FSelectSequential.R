@@ -20,9 +20,10 @@ test_that("FSelectSequential", {
 
   z = test_fselect("sequential", max_features = 2, term_evals = 7)
   a = z$inst$archive$data
-  expect_features(a[,1:4], n = 2)
+  expect_features(a[, 1:4], n = 2)
 
-  z = test_fselect("sequential", max_features = 2, strategy = "sbs", term_evals = 8)
+  z = test_fselect("sequential", max_features = 2, strategy = "sbs",
+    term_evals = 8)
   a = z$inst$archive$data
-  expect_features(a[,1:4], n = 2)
+  expect_features(a[, 1:4], n = 2)
 })

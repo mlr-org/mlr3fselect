@@ -1,43 +1,58 @@
 context("ObjectiveFSelect")
 
 test_that("ObjectiveFSelect", {
-  task = tsk("iris")
-  learner = lrn("classif.rpart")
+  task = TEST_MAKE_TSK()
+  learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
-  measures = msr("dummy.cp.classif")
+  measures = msr("dummy.sequential")
 
   obj = ObjectiveFSelect$new(task = task, learner = learner,
     resampling = resampling, measures = measures)
 
   xss = list(
-    list("Petal.Length" = TRUE,
-      "Petal.Width" = FALSE,
-      "Sepal.Length" = TRUE,
-      "Sepal.Width" = TRUE),
-    list("Petal.Length" = FALSE,
-      "Petal.Width" = TRUE,
-      "Sepal.Length" = TRUE,
-      "Sepal.Width" = TRUE))
+    list("x1" = TRUE,  "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
+    list("x1" = FALSE,  "x2" = TRUE, "x3" = TRUE, "x4" = TRUE))
 
   z = obj$eval_many(xss)
   expect_data_table(z, nrows = 2, ncols = 2)
-  expect_equal(z$resample_result[[1]]$task$feature_names, c("Petal.Length",
-    "Sepal.Length", "Sepal.Width"))
-  expect_equal(z$resample_result[[2]]$task$feature_names, c("Petal.Width",
-    "Sepal.Length", "Sepal.Width"))
+  expect_equal(z$resample_result[[1]]$task$feature_names, c("x1", "x3", "x4"))
+  expect_equal(z$resample_result[[2]]$task$feature_names, c("x2", "x3", "x4"))
   expect_null(z$resample_result[[1]]$learners[[1]]$model)
+})
 
-  measures = msrs(c("dummy.cp.classif", "classif.ce"))
+test_that("ObjectiveFSelect - Multiple measures", {
+  task = TEST_MAKE_TSK()
+  learner = lrn("regr.rpart")
+  resampling = rsmp("holdout")
+  measures = msrs(c("dummy.sequential", "regr.mse"))
+
   obj = ObjectiveFSelect$new(task = task, learner = learner,
-    resampling = resampling, measures = measures)
+                             resampling = resampling, measures = measures)
+
+  xss = list(
+    list("x1" = TRUE,  "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
+    list("x1" = FALSE,  "x2" = TRUE, "x3" = TRUE, "x4" = TRUE))
 
   z = obj$eval_many(xss)
   expect_data_table(z, nrows = 2, ncols = 3)
+})
+
+test_that("ObjectiveFSelect - Store models", {
+  task = TEST_MAKE_TSK()
+  learner = lrn("regr.rpart")
+  resampling = rsmp("holdout")
+  measures = msr("dummy.sequential")
 
   obj = ObjectiveFSelect$new(task = task, learner = learner,
                              resampling = resampling, measures = measures,
                              store_models = TRUE)
 
+  xss = list(
+    list("x1" = TRUE,  "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
+    list("x1" = FALSE,  "x2" = TRUE, "x3" = TRUE, "x4" = TRUE))
+
   z = obj$eval_many(xss)
   expect_class(z$resample_result[[1]]$learners[[1]]$model, "rpart")
 })
+
+
