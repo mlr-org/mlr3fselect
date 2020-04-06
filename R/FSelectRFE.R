@@ -51,7 +51,7 @@ FSelectRFE = R6Class("FSelectRFE",
       ps$values = list(min_features = 1L, recursive = FALSE)
 
       super$initialize(
-        param_set = ps, param_classes = "ParamLgl", properties = character(0)
+        param_set = ps, properties = character(0)
       )
     }
   ),

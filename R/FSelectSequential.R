@@ -36,7 +36,7 @@ FSelectSequential = R6Class("FSelectSequential",
       ps$values = list(strategy = "sfs")
 
       super$initialize(
-        param_set = ps, param_classes = "ParamLgl", properties = character(0)
+        param_set = ps, properties = character(0)
       )
     }
   ),

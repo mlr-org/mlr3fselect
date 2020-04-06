@@ -27,8 +27,8 @@ FSelect = R6Class("FSelect",
     #' @param param_classes `character()`
     #' @param properties `character()`
     #' @param packages `character()`
-    initialize = function(param_set, param_classes, properties, packages = character(0)) {
-      super$initialize(param_set = param_set, param_classes = param_classes,
+    initialize = function(param_set, properties, packages = character(0)) {
+      super$initialize(param_set = param_set, param_classes = "ParamLgl",
         properties = properties)
     },
 

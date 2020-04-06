@@ -29,7 +29,7 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
       )
 
       super$initialize(
-        param_set = ps, param_classes = "ParamLgl", properties = character(0)
+        param_set = ps, properties = character(0)
       )
     }
   ),
