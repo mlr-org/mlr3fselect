@@ -83,7 +83,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
 
-      ctrl = ecr::initECRControl(objective_fun, n.objectives = 1)
+      ctrl = ecr::initECRControl(objective_wrapper, n.objectives = 1)
       ctrl = invoke(ecr::registerECROperator, ctrl, "mutate",
         ecr::mutBitflip, .args = pars_mutBitflip)
       ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
@@ -139,7 +139,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
   )
 )
 
-objective_fun = function(x, inst) {
+objective_wrapper = function(x, inst) {
   x = set_names(as.data.table(as.list(as.logical(x))), inst$objective$task$feature_names)
 
   res = inst$eval_batch(x)
