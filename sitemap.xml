@@ -28,28 +28,7 @@
     <loc>https://mlr3fswrap.mlr-org.com/reference/FSelectSequential.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/Terminator.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/TerminatorClockTime.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/TerminatorCombo.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/TerminatorEvals.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/TerminatorModelTime.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/TerminatorNone.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/TerminatorPerfReached.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/TerminatorStagnation.html</loc>
+    <loc>https://mlr3fswrap.mlr-org.com/reference/ObjectiveFSelect.html</loc>
   </url>
   <url>
     <loc>https://mlr3fswrap.mlr-org.com/reference/fs.html</loc>
@@ -61,12 +40,12 @@
     <loc>https://mlr3fswrap.mlr-org.com/reference/mlr_fselectors.html</loc>
   </url>
   <url>
+    <loc>https://mlr3fswrap.mlr-org.com/reference/mlr_terminators.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3fswrap.mlr-org.com/reference/term.html</loc>
   </url>
   <url>
     <loc>https://mlr3fswrap.mlr-org.com/reference/terms.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/articles/mlr3fselect.html</loc>
   </url>
 </urlset>

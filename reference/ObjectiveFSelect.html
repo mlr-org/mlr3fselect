@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FSelectInstance Class — FSelectInstance • mlr3fselect</title>
+<title>ObjectiveFSelect — ObjectiveFSelect • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,17 +40,9 @@
 
 
 
-<meta property="og:title" content="FSelectInstance Class — FSelectInstance" />
-<meta property="og:description" content="Specifies a general feature selection scenario.
-Evaluations of feature sets are performed in batches. Before and after a
-batch is evaluated, the Terminator is queried for the remaining budget. If
-the available budget is exhausted, an exception is raised, and no further
-evaluations can be performed from this point on.
-A list of measures can be passed to the instance, and they will always be all
-evaluated. However, single-criteria tuners optimize only the first measure.
-The FSelect object is also supposed to store its final result, consisting
-of a selected feature set and associated estimated performance values, by
-calling the method instance$assign_result()." />
+<meta property="og:title" content="ObjectiveFSelect — ObjectiveFSelect" />
+<meta property="og:description" content="Describes the objective function that estimates the performance of feature
+sets." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -132,35 +124,33 @@ calling the method instance$assign_result()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FSelectInstance Class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelectInstance.R'><code>R/FSelectInstance.R</code></a></small>
-    <div class="hidden name"><code>FSelectInstance.Rd</code></div>
+    <h1>ObjectiveFSelect</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/ObjectiveFSelect.R'><code>R/ObjectiveFSelect.R</code></a></small>
+    <div class="hidden name"><code>ObjectiveFSelect.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Specifies a general feature selection scenario.</p>
-<p>Evaluations of feature sets are performed in batches. Before and after a
-batch is evaluated, the Terminator is queried for the remaining budget. If
-the available budget is exhausted, an exception is raised, and no further
-evaluations can be performed from this point on.</p>
-<p>A list of measures can be passed to the instance, and they will always be all
-evaluated. However, single-criteria tuners optimize only the first measure.</p>
-<p>The <a href='FSelect.html'>FSelect</a> object is also supposed to store its final result, consisting
-of a selected feature set and associated estimated performance values, by
-calling the method <code>instance$assign_result()</code>.</p>
+    <p>Describes the objective function that estimates the performance of feature
+sets.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/bbotk/man/OptimInstance.html'>bbotk::OptimInstance</a></code> -&gt; <code>FSelectInstance</code></p>
-    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
+    <p><code><a href='https://rdrr.io/pkg/bbotk/man/Objective.html'>bbotk::Objective</a></code> -&gt; <code>ObjectiveFSelect</code></p>
+    <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
-    <p><div class="r6-active-bindings"></p><dl'>
-<dt><code>result</code></dt><dd><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code><br />
-Result of the feature selection i.e. the optimal feature set and its
-estimated performances.</p></dd>
+    <p><div class="r6-fields"></p><dl'>
+<dt><code>task</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a></p></dd>
+
+<dt><code>learner</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></p></dd>
+
+<dt><code>resampling</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a></p></dd>
+
+<dt><code>measures</code></dt><dd><p>list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a></p></dd>
+
+<dt><code>store_models</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -169,28 +159,26 @@ estimated performances.</p></dd>
 <h3>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-new'><code>FSelectInstance$new()</code></a></p></li>
-<li><p><a href='#method-assign_result'><code>FSelectInstance$assign_result()</code></a></p></li>
-<li><p><a href='#method-clone'><code>FSelectInstance$clone()</code></a></p></li>
+<li><p><a href='#method-new'><code>ObjectiveFSelect$new()</code></a></p></li>
+<li><p><a href='#method-eval_many'><code>ObjectiveFSelect$eval_many()</code></a></p></li>
+<li><p><a href='#method-clone'><code>ObjectiveFSelect$clone()</code></a></p></li>
 </ul>
 <p><details open ><summary>Inherited methods</summary>
 <ul>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href='../../bbotk/html/OptimInstance.html#method-eval_batch'><code>bbotk::OptimInstance$eval_batch()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-format'><code>bbotk::OptimInstance$format()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval"><a href='../../bbotk/html/Objective.html#method-eval'><code>bbotk::Objective$eval()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_checked"><a href='../../bbotk/html/Objective.html#method-eval_checked'><code>bbotk::Objective$eval_checked()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_many_checked"><a href='../../bbotk/html/Objective.html#method-eval_many_checked'><code>bbotk::Objective$eval_many_checked()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="format"><a href='../../bbotk/html/Objective.html#method-format'><code>bbotk::Objective$format()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="print"><a href='../../bbotk/html/Objective.html#method-print'><code>bbotk::Objective$print()</code></a></span></p></li>
 </ul>
 </details>
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p>
+
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
-  <span class='no'>task</span>,
-  <span class='no'>learner</span>,
-  <span class='no'>resampling</span>,
-  <span class='no'>measures</span>,
-  <span class='no'>terminator</span>,
-  <span class='kw'>store_models</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>ObjectiveFSelect</span>$<span class='fu'>new</span>(<span class='no'>task</span>, <span class='no'>learner</span>, <span class='no'>resampling</span>, <span class='no'>measures</span>, <span class='kw'>store_models</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
@@ -202,31 +190,26 @@ estimated performances.</p></dd>
 
 <dt><code>measures</code></dt><dd><p>list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a></p></dd>
 
-<dt><code>terminator</code></dt><dd><p>Terminator</p></dd>
-
 <dt><code>store_models</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
+
+<dt><code>terminator</code></dt><dd><p>Terminator</p></dd>
 
 </dl><p></div></p>
 <p><hr>
-<a id="method-assign_result"></a></p><h3>Method <code>assign_result()</code></h3>
-<p>The <a href='FSelect.html'>FSelect</a> object writes the best found feature set
-and estimated performance values here. For internal use.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>assign_result</span>(<span class='no'>feat</span>, <span class='no'>perf</span>)</pre><p></div></p>
+<a id="method-eval_many"></a></p><h3>Method <code>eval_many()</code></h3>
+<p>Evaluates multiple feature sets on the objective function</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>ObjectiveFSelect</span>$<span class='fu'>eval_many</span>(<span class='no'>xss</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
-<dt><code>feat</code></dt><dd><p><code>character</code><br />
-Must be character vector of feature names existing in <code>task</code></p></dd>
-
-<dt><code>perf</code></dt><dd><p><code>numeric</code><br />
-Must be named numeric of performance measures, named with performance
-IDs, regarding all elements in <code>measures</code>.</p></dd>
+<dt><code>xss</code></dt><dd><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code><br />
+A list of lists that contains multiple feature sets</p></dd>
 
 </dl><p></div></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>ObjectiveFSelect</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
@@ -236,23 +219,6 @@ IDs, regarding all elements in <code>measures</code>.</p></dd>
 
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
-
-<span class='co'># Objects required to define the performance evaluator</span>
-<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>)
-<span class='no'>measures</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msrs</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classif.ce"</span>))
-<span class='no'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>)
-<span class='no'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>)
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='term.html'>term</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>8</span>)
-
-<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
-  <span class='kw'>task</span> <span class='kw'>=</span> <span class='no'>task</span>,
-  <span class='kw'>learner</span> <span class='kw'>=</span> <span class='no'>learner</span>,
-  <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='no'>resampling</span>,
-  <span class='kw'>measures</span> <span class='kw'>=</span> <span class='no'>measures</span>,
-  <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>
-)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
