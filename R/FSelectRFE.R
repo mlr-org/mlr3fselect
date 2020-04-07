@@ -8,9 +8,12 @@
 #' with all features to eliminate the next most unimportant feature in every
 #' iteration.
 #'
+#' @templateVar id rfe
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`min_features`}{`integer(1)`
+#' \item{`min_features`}{`integer(1)`\cr
 #' Minimum number of features. By default, 1.}
 #' \item{`recursive`}{`logical(1)`}
 #' }

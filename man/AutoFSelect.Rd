@@ -48,7 +48,7 @@ afs$learner
 
 \item{\code{fselect_instance}}{\link{FSelectInstance}}
 
-\item{\code{fselect_result}}{\code{list()}
+\item{\code{fselect_result}}{\code{list()}\cr
 Result of the feature selection i.e. the optimal feature set and its
 estimated performances.}
 }

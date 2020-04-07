@@ -4,6 +4,9 @@
 #' Subclass for evolutionary feature selection. Calls [ecr::ecr()] from package
 #' \CRANpkg{ecr}.
 #'
+#' @templateVar id evolutionary
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
 #' \item{`mu`}{`integer(1)`}
@@ -22,8 +25,22 @@
 #' by the [Terminator] subclasses.
 #'
 #' @export
-#' @templateVar fs "evolutionary", mu = 10, lambda = 5
-#' @template example
+#' @examples
+#' library(mlr3)
+#'
+#' terminator = term("evals", n_evals = 10)
+#' instance = FSelectInstance$new(
+#'   task = tsk("iris"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measures = msr("classif.ce"),
+#'   terminator = terminator
+#' )
+#'
+#' fs = fs("evolutionary", mu = 10, lambda = 5)
+#' fs$optimize(instance)
+#' instance$result
+#' instance$archive$data
 FSelectEvolutionary = R6Class("FSelectEvolutionary",
   inherit = FSelect,
   public = list(

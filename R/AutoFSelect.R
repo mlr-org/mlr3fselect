@@ -107,7 +107,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @field fselect_instance [FSelectInstance]
     fselect_instance = function() self$model$fselect_instance,
 
-    #' @field fselect_result `list()`
+    #' @field fselect_result `list()`\cr
     #' Result of the feature selection i.e. the optimal feature set and its
     #' estimated performances.
     fselect_result = function() self$fselect_instance$result

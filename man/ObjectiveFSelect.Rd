@@ -86,7 +86,8 @@ Evaluates multiple feature sets on the objective function
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{xss}}{\code{list()} A list of lists that contains multiple feature sets}
+\item{\code{xss}}{\code{list()}\cr
+A list of lists that contains multiple feature sets}
 }
 \if{html}{\out{</div>}}
 }

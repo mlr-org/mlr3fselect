@@ -42,8 +42,9 @@ instance = FSelectInstance$new(
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{result}}{Result of the feature selection i.e. the optimal feature
-set and its estimated performances.}
+\item{\code{result}}{\code{list()}\cr
+Result of the feature selection i.e. the optimal feature set and its
+estimated performances.}
 }
 \if{html}{\out{</div>}}
 }
@@ -110,10 +111,10 @@ and estimated performance values here. For internal use.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{feat}}{\code{character}
+\item{\code{feat}}{\code{character}\cr
 Must be character vector of feature names existing in \code{task}}
 
-\item{\code{perf}}{\code{numeric}
+\item{\code{perf}}{\code{numeric}\cr
 Must be named numeric of performance measures, named with performance
 IDs, regarding all elements in \code{measures}.}
 }

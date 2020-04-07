@@ -6,14 +6,22 @@
 \description{
 Subclass for random feature selection. Feature sets are randomly drawn.
 }
+\section{Dictionary}{
+
+This \link{FSelect} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
+\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:\preformatted{mlr_fselectors$get("random")
+fs("random")
+}
+}
+
 \section{Parameters}{
 
 \describe{
-\item{\code{max_features}}{\code{integer(1)}
+\item{\code{max_features}}{\code{integer(1)}\cr
 Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
-\item{\code{batch_size}}{\code{integer(1)}
+\item{\code{batch_size}}{\code{integer(1)}\cr
 Maximum number of feature sets to try in a batch.}
-\item{\code{prob}}{\code{double(1)}
+\item{\code{prob}}{\code{double(1)}\cr
 Probability of choosing a feature.}
 }
 
@@ -53,9 +61,9 @@ instance$archive$data
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="format">}\href{../../mlr3fselect/html/FSelect.html#method-format}{\code{mlr3fselect::FSelect$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="format">}\href{../../bbotk/html/Optimizer.html#method-format}{\code{bbotk::Optimizer$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="print">}\href{../../bbotk/html/Optimizer.html#method-print}{\code{bbotk::Optimizer$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="optimize">}\href{../../mlr3fselect/html/FSelect.html#method-optimize}{\code{mlr3fselect::FSelect$optimize()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="print">}\href{../../mlr3fselect/html/FSelect.html#method-print}{\code{mlr3fselect::FSelect$print()}}\out{</span>}
 }
 \out{</details>}
 }

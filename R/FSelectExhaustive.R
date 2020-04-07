@@ -4,9 +4,12 @@
 #' Subclass for exhaustive feature selection. Evaluates every possible feature
 #' subset.
 #'
+#' @templateVar id exhaustive
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`max_features`}{`integer(1)`
+#' \item{`max_features`}{`integer(1)`\cr
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
 #' }
 #'
@@ -15,7 +18,6 @@
 #' in each batch.
 #'
 #' @export
-#' @templateVar fs "exhaustive"
 #' @template example
 FSelectExhaustive = R6Class("FSelectExhaustive",
   inherit = FSelect,

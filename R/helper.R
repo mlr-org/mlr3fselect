@@ -6,5 +6,6 @@ terminated_error = function(inst) {
     format(inst$terminator)
   )
 
-  set_class(list(message = msg, call = NULL), c("terminated_error", "error", "condition"))
+  set_class(list(message = msg, call = NULL),
+    c("terminated_error", "error", "condition"))
 }

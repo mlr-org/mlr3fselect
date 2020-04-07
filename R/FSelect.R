@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Abstract `FSelect` class that implements the base functionality each
-#' `FSelect*` class must provide. A `FSelect` object describes the feature
+#' `FSelect` subclass must provide. A `FSelect` object describes the feature
 #' selection strategy, i.e. how to optimize the black-box function and its
 #' feasible set defined by the [FSelectInstance] object.
 #'
@@ -15,7 +15,7 @@
 #' subset and its estimated performance vector.
 #'
 #' @export
-#' @templateVar fs "random"
+#' @templateVar id random
 #' @template example
 FSelect = R6Class("FSelect",
   inherit = Optimizer,
@@ -30,22 +30,6 @@ FSelect = R6Class("FSelect",
     initialize = function(param_set, properties, packages = character(0)) {
       super$initialize(param_set = param_set, param_classes = "ParamLgl",
         properties = properties)
-    },
-
-    #' @description
-    #' Format method.
-    #' @return `character()`
-    format = function() {
-      sprintf("<%s>", class(self)[1L])
-    },
-
-    #' @description
-    #' Print method.
-    #' @return `character()`
-    print = function() {
-      catf(format(self))
-      catf(str_indent("* Parameters:", as_short_string(self$param_set$values)))
-      catf(str_indent("* Packages:", self$packages))
     },
 
     #' @description

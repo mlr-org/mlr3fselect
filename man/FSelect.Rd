@@ -5,7 +5,7 @@
 \title{FSelect}
 \description{
 Abstract \code{FSelect} class that implements the base functionality each
-\verb{FSelect*} class must provide. A \code{FSelect} object describes the feature
+\code{FSelect} subclass must provide. A \code{FSelect} object describes the feature
 selection strategy, i.e. how to optimize the black-box function and its
 feasible set defined by the \link{FSelectInstance} object.
 
@@ -41,8 +41,6 @@ instance$archive$data
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelect$new()}}
-\item \href{#method-format}{\code{FSelect$format()}}
-\item \href{#method-print}{\code{FSelect$print()}}
 \item \href{#method-optimize}{\code{FSelect$optimize()}}
 \item \href{#method-clone}{\code{FSelect$clone()}}
 }
@@ -50,6 +48,8 @@ instance$archive$data
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="format">}\href{../../bbotk/html/Optimizer.html#method-format}{\code{bbotk::Optimizer$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="print">}\href{../../bbotk/html/Optimizer.html#method-print}{\code{bbotk::Optimizer$print()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -59,7 +59,7 @@ instance$archive$data
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, param_classes, properties, packages = character(0))}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, properties, packages = character(0))}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -67,39 +67,13 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \describe{
 \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}}
 
-\item{\code{param_classes}}{\code{character()}}
-
 \item{\code{properties}}{\code{character()}}
 
 \item{\code{packages}}{\code{character()}}
+
+\item{\code{param_classes}}{\code{character()}}
 }
 \if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-format"></a>}}
-\if{latex}{\out{\hypertarget{method-format}{}}}
-\subsection{Method \code{format()}}{
-Format method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$format()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{character()}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
-\subsection{Method \code{print()}}{
-Print method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$print()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{character()}
 }
 }
 \if{html}{\out{<hr>}}

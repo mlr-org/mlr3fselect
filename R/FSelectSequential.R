@@ -7,11 +7,14 @@
 #' (`strategy = fsb`) starts with the complete future set and removes in each
 #' step the feature that decreases the models performance the least.
 #'
+#' @templateVar id sequential
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`max_features`}{`integer(1)`
+#' \item{`max_features`}{`integer(1)`\cr
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
-#' \item{`strategy`}{`character(1)`
+#' \item{`strategy`}{`character(1)`\cr
 #' Search method `sfs` (forward search) or `sbs` (backward search).}
 #' }
 #'
@@ -20,7 +23,6 @@
 #' sequential feature selection.
 #'
 #' @export
-#' @templateVar fs "sequential"
 #' @template example
 FSelectSequential = R6Class("FSelectSequential",
   inherit = FSelect,

@@ -65,7 +65,8 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
 
     #' @description
     #' Evaluates multiple feature sets on the objective function
-    #' @param xss `list()` A list of lists that contains multiple feature sets
+    #' @param xss `list()`\cr
+    #' A list of lists that contains multiple feature sets
     eval_many = function(xss) {
 
       tasks = map(xss, function(x) {

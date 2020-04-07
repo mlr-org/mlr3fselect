@@ -45,18 +45,19 @@ FSelectInstance = R6Class("FSelectInstance",
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param store_models `logical(1)`
-    initialize = function(task, learner, resampling, measures, terminator, store_models = FALSE) {
-      obj = ObjectiveFSelect$new(task = task, learner = learner,
-        resampling = resampling, measures = measures, store_models = store_models)
-      super$initialize(obj, obj$domain, terminator)
+    initialize = function(task, learner, resampling, measures, terminator,
+      store_models = FALSE) {
+        obj = ObjectiveFSelect$new(task = task, learner = learner,
+          resampling = resampling, measures = measures, store_models = store_models)
+        super$initialize(obj, obj$domain, terminator)
     },
 
     #' @description
     #' The [FSelect] object writes the best found feature set
     #' and estimated performance values here. For internal use.
-    #' @param feat `character`
+    #' @param feat `character`\cr
     #' Must be character vector of feature names existing in `task`
-    #' @param perf `numeric`
+    #' @param perf `numeric`\cr
     #' Must be named numeric of performance measures, named with performance
     #' IDs, regarding all elements in `measures`.
     assign_result = function(feat, perf) {
@@ -67,8 +68,9 @@ FSelectInstance = R6Class("FSelectInstance",
     }
   ),
   active = list(
-    #' @field result Result of the feature selection i.e. the optimal feature
-    #'   set and its estimated performances.
+    #' @field result `list()`\cr
+    #' Result of the feature selection i.e. the optimal feature set and its
+    #' estimated performances.
     result = function() {
       list(feat = private$.result$feat, perf = private$.result$perf)
     }

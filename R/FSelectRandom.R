@@ -3,13 +3,16 @@
 #' @description
 #' Subclass for random feature selection. Feature sets are randomly drawn.
 #'
+#' @templateVar id random
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`max_features`}{`integer(1)`
+#' \item{`max_features`}{`integer(1)`\cr
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
-#' \item{`batch_size`}{`integer(1)`
+#' \item{`batch_size`}{`integer(1)`\cr
 #' Maximum number of feature sets to try in a batch.}
-#' \item{`prob`}{`double(1)`
+#' \item{`prob`}{`double(1)`\cr
 #' Probability of choosing a feature.}
 #' }
 #'
@@ -19,7 +22,6 @@
 #' of termination criteria.
 #'
 #' @export
-#' @templateVar fs "random"
 #' @template example
 FSelectRandom = R6Class("FSelectRandom",
   inherit = FSelect,
