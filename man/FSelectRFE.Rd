@@ -77,14 +77,11 @@ variables if \code{recrusive} is set to \code{FALSE}}
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelectRFE} object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectRFE$new()}\if{html}{\out{</div>}}
 }
 
-\subsection{Returns}{
-\code{FSelectRFE}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

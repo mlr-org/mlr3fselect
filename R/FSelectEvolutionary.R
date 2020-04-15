@@ -157,7 +157,8 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
 )
 
 objective_wrapper = function(x, inst) {
-  x = set_names(as.data.table(as.list(as.logical(x))), inst$objective$task$feature_names)
+  x = set_names(as.data.table(as.list(as.logical(x))),
+    inst$objective$task$feature_names)
 
   res = inst$eval_batch(x)
   as.numeric(res[, inst$objective$measures[[1]]$id, with = FALSE])

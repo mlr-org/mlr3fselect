@@ -4,7 +4,7 @@
 #' Abstract `FSelect` class that implements the base functionality each
 #' `FSelect` subclass must provide. A `FSelect` object describes the feature
 #' selection strategy, i.e. how to optimize the black-box function and its
-#' feasible set defined by the [FSelectInstance] object.
+#' feasible set defined by the [ObjectiveFSelect] object.
 #'
 #' A list of measures can be passed to the instance, and they will always be all
 #' evaluated. However, single-criteria algorithms optimize only the first

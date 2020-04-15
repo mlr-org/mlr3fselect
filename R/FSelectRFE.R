@@ -44,8 +44,7 @@ FSelectRFE = R6Class("FSelectRFE",
     importance = NULL,
 
     #' @description
-    #' Create new `FSelectRFE` object.
-    #' @return `FSelectRFE`
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("min_features", lower = 1),
