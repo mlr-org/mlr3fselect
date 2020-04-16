@@ -25,6 +25,7 @@ vignettes/*.pdf
 *.knit.md
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
-.Rprofile
-renv
-renv.lock
+# CRAN
+cran-comments.md
+.vscode/
+docs/
