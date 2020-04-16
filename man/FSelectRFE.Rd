@@ -11,10 +11,18 @@ on the reduced feature set in every iteration.  The non-recursive algorithm
 with all features to eliminate the next most unimportant feature in every
 iteration.
 }
+\section{Dictionary}{
+
+This \link{FSelect} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
+\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:\preformatted{mlr_fselectors$get("rfe")
+fs("rfe")
+}
+}
+
 \section{Parameters}{
 
 \describe{
-\item{\code{min_features}}{\code{integer(1)}
+\item{\code{min_features}}{\code{integer(1)}\cr
 Minimum number of features. By default, 1.}
 \item{\code{recursive}}{\code{logical(1)}}
 }
@@ -29,17 +37,17 @@ instance = FSelectInstance$new(
   learner = lrn("classif.rpart"),
   resampling = rsmp("holdout"),
   measures = msr("classif.ce"),
-  terminator = terminator
+  terminator = terminator,
+  store_models = TRUE
 )
 
 fs = fs("rfe")
-fs$select(instance)
+fs$optimize(instance)
 instance$result
-instance$archive()
-instance$optimization_path()
+instance$archive$data
 }
-\section{Super class}{
-\code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectRFE}
+\section{Super classes}{
+\code{\link[bbotk:Optimizer]{bbotk::Optimizer}} -> \code{\link[mlr3fselect:FSelect]{mlr3fselect::FSelect}} -> \code{FSelectRFE}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -59,9 +67,9 @@ variables if \code{recrusive} is set to \code{FALSE}}
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="format">}\href{../../mlr3fselect/html/FSelect.html#method-format}{\code{mlr3fselect::FSelect$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="print">}\href{../../mlr3fselect/html/FSelect.html#method-print}{\code{mlr3fselect::FSelect$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="select">}\href{../../mlr3fselect/html/FSelect.html#method-select}{\code{mlr3fselect::FSelect$select()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="format">}\href{../../bbotk/html/Optimizer.html#method-format}{\code{bbotk::Optimizer$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="print">}\href{../../bbotk/html/Optimizer.html#method-print}{\code{bbotk::Optimizer$print()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="optimize">}\href{../../mlr3fselect/html/FSelect.html#method-optimize}{\code{mlr3fselect::FSelect$optimize()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -69,14 +77,11 @@ variables if \code{recrusive} is set to \code{FALSE}}
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create new \code{FSelectRFE} object.
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectRFE$new()}\if{html}{\out{</div>}}
 }
 
-\subsection{Returns}{
-\code{FSelectRFE}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

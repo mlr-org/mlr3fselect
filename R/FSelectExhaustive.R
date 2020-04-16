@@ -4,9 +4,12 @@
 #' Subclass for exhaustive feature selection. Evaluates every possible feature
 #' subset.
 #'
+#' @templateVar id exhaustive
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`max_features`}{`integer(1)`
+#' \item{`max_features`}{`integer(1)`\cr
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
 #' }
 #'
@@ -15,7 +18,6 @@
 #' in each batch.
 #'
 #' @export
-#' @templateVar fs "exhaustive"
 #' @template example
 FSelectExhaustive = R6Class("FSelectExhaustive",
   inherit = FSelect,
@@ -29,31 +31,34 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
       )
 
       super$initialize(
-        param_set = ps
+        param_set = ps, properties = character(0)
       )
     }
   ),
   private = list(
-    select_internal = function(instance) {
-
+    .optimize = function(inst) {
       pars = self$param_set$values
+      feature_names = inst$objective$task$feature_names
+      archive = inst$archive
+
       if (is.null(pars$max_features)) {
-        pars$max_features = length(instance$task$feature_names)
+        pars$max_features = length(feature_names)
       }
 
-      if (instance$n_batch + 1 > pars$max_features) {
-        stop(terminated_error(instance))
+      if (archive$n_batch + 1 > pars$max_features) {
+        stop(terminated_error(inst))
       }
 
-      combinations = combn(length(instance$task$feature_names),
-        instance$n_batch + 1)
-      states = t(sapply(seq_len(ncol(combinations)), function(j) {
-        state = rep(0, length(instance$task$feature_names))
+      combinations = combn(length(feature_names),
+        archive$n_batch + 1)
+      states = map_dtr(seq_len(ncol(combinations)), function(j) {
+        state = rep(0, length(feature_names))
         state[combinations[, j]] = 1
+        state = as.list(as.logical(state))
+        names(state) = feature_names
         state
-      }))
-
-      instance$eval_batch(states)
+      })
+      inst$eval_batch(states)
     }
   )
 )

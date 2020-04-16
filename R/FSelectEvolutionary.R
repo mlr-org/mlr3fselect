@@ -4,6 +4,9 @@
 #' Subclass for evolutionary feature selection. Calls [ecr::ecr()] from package
 #' \CRANpkg{ecr}.
 #'
+#' @templateVar id evolutionary
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
 #' \item{`mu`}{`integer(1)`}
@@ -22,8 +25,22 @@
 #' by the [Terminator] subclasses.
 #'
 #' @export
-#' @templateVar fs "evolutionary", mu = 10, lambda = 5
-#' @template example
+#' @examples
+#' library(mlr3)
+#'
+#' terminator = term("evals", n_evals = 10)
+#' instance = FSelectInstance$new(
+#'   task = tsk("iris"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measures = msr("classif.ce"),
+#'   terminator = terminator
+#' )
+#'
+#' fs = fs("evolutionary", mu = 10, lambda = 5)
+#' fs$optimize(instance)
+#' instance$result
+#' instance$archive$data
 FSelectEvolutionary = R6Class("FSelectEvolutionary",
   inherit = FSelect,
   public = list(
@@ -49,14 +66,13 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       ps$add_dep("n.elite", "survival.strategy", CondEqual$new("comma"))
 
       super$initialize(
-        param_set = ps,
+        param_set = ps, properties = character(0),
         packages = "ecr"
       )
     }
   ),
   private = list(
-    select_internal = function(instance) {
-
+    .optimize = function(inst) {
       pars = self$param_set$values
       pars_mutBitflip =
         pars[which(names(pars) %in% formalArgs(ecr::mutBitflip))]
@@ -84,7 +100,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
 
-      ctrl = ecr::initECRControl(instance$fselect_objective, n.objectives = 1)
+      ctrl = ecr::initECRControl(objective_wrapper, n.objectives = 1)
       ctrl = invoke(ecr::registerECROperator, ctrl, "mutate",
         ecr::mutBitflip, .args = pars_mutBitflip)
       ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
@@ -95,7 +111,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
 
       population = invoke(ecr::initPopulation,
         gen.fun = ecr::genBin,
-        n.dim = length(instance$task$feature_names),
+        n.dim = length(inst$objective$task$feature_names),
         .args = pars_initPopulation)
       population = map_if(population,
         function(x) sum(x) == 0,
@@ -105,12 +121,13 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         }) # Tasks without features cannot be evaluated
 
       withr::with_package("ecr", {
-        fitness = ecr::evaluateFitness(ctrl, population)
+        fitness = ecr::evaluateFitness(ctrl, population, inst)
       })
 
       while (TRUE) {
         offspring = invoke(ecr::generateOffspring, ctrl, population, fitness,
           .args = pars_generateOffspring)
+
         offspring = map_if(offspring,
           function(x) sum(x) == 0,
           function(x) {
@@ -119,7 +136,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
           })
 
         withr::with_package("ecr", {
-          fitness_o = ecr::evaluateFitness(ctrl, offspring)
+          fitness_o = ecr::evaluateFitness(ctrl, offspring, inst)
         })
         if (pars$survival.strategy == "plus") {
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
@@ -138,5 +155,13 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
     }
   )
 )
+
+objective_wrapper = function(x, inst) {
+  x = set_names(as.data.table(as.list(as.logical(x))),
+    inst$objective$task$feature_names)
+
+  res = inst$eval_batch(x)
+  as.numeric(res[, inst$objective$measures[[1]]$id, with = FALSE])
+}
 
 mlr_fselectors$add("evolutionary", FSelectEvolutionary)

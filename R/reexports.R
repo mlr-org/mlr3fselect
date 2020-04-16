@@ -1,72 +1,9 @@
-#' @title Re-export of `Terminator`
+#' @title Re-export of `mlr_terminators`
 #'
-#' See [bbotk::Terminator].
+#' See [bbotk::mlr_terminators].
 #'
-#' @name Terminator
-#' @rdname Terminator
-#' @export
-NULL
-
-#' @title Re-export of `TerminatorClockTime`
-#'
-#' See [bbotk::TerminatorClockTime].
-#'
-#' @name TerminatorClockTime
-#' @rdname TerminatorClockTime
-#' @export
-NULL
-
-#' @title Re-export of `TerminatorCombo`
-#'
-#' See [bbotk::TerminatorCombo].
-#'
-#' @name TerminatorCombo
-#' @rdname TerminatorCombo
-#' @export
-NULL
-
-#' @title Re-export of `TerminatorEvals`
-#'
-#' See [bbotk::TerminatorEvals].
-#'
-#' @name TerminatorEvals
-#' @rdname TerminatorEvals
-#' @export
-NULL
-
-#' @title Re-export of `TerminatorModelTime`
-#'
-#' See [bbotk::TerminatorModelTime].
-#'
-#' @name TerminatorModelTime
-#' @rdname TerminatorModelTime
-#' @export
-NULL
-
-#' @title Re-export of `TerminatorNone`
-#'
-#' See [bbotk::TerminatorNone].
-#'
-#' @name TerminatorNone
-#' @rdname TerminatorNone
-#' @export
-NULL
-
-#' @title Re-export of `TerminatorPerfReached`
-#'
-#' See [bbotk::TerminatorPerfReached].
-#'
-#' @name TerminatorPerfReached
-#' @rdname TerminatorPerfReached
-#' @export
-NULL
-
-#' @title Re-export of `TerminatorStagnation`
-#'
-#' See [bbotk::TerminatorStagnation].
-#'
-#' @name TerminatorStagnation
-#' @rdname TerminatorStagnation
+#' @name mlr_terminators
+#' @rdname mlr_terminators
 #' @export
 NULL
 
@@ -85,5 +22,4 @@ NULL
 #'
 #' @name terms
 #' @rdname terms
-#' @export
 NULL

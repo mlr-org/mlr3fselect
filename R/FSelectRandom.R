@@ -3,13 +3,16 @@
 #' @description
 #' Subclass for random feature selection. Feature sets are randomly drawn.
 #'
+#' @templateVar id random
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`max_features`}{`integer(1)`
+#' \item{`max_features`}{`integer(1)`\cr
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
-#' \item{`batch_size`}{`integer(1)`
+#' \item{`batch_size`}{`integer(1)`\cr
 #' Maximum number of feature sets to try in a batch.}
-#' \item{`prob`}{`double(1)`
+#' \item{`prob`}{`double(1)`\cr
 #' Probability of choosing a feature.}
 #' }
 #'
@@ -19,7 +22,6 @@
 #' of termination criteria.
 #'
 #' @export
-#' @templateVar fs "random"
 #' @template example
 FSelectRandom = R6Class("FSelectRandom",
   inherit = FSelect,
@@ -34,35 +36,33 @@ FSelectRandom = R6Class("FSelectRandom",
         ParamDbl$new("prob", default = 0.5, lower = 0, upper = 1))
       )
 
+      ps$values = list(batch_size = 10L, prob = 0.5)
+
       super$initialize(
-        param_set = ps
+        param_set = ps, properties = character(0)
       )
-      if (is.null(self$param_set$values$batch_size)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(batch_size = 10))
-      }
-      if (is.null(self$param_set$values$prob)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(prob = 0.5))
-      }
     }
   ),
+
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
+      feature_names = inst$objective$task$feature_names
+
       if (is.null(pars$max_features)) {
-        pars$max_features = length(instance$task$feature_names)
+        pars$max_features = length(feature_names)
       }
 
-      states = t(sapply(seq_len(pars$batch_size), function(i) {
-        x = Inf
-        while (sum(x) > pars$max_features | sum(x) == 0) {
-          x = rbinom(length(instance$task$feature_names), 1, pars$prob)
-        }
-        return(x)
-      }))
+      states =
+        map_dtr(seq_len(pars$batch_size), function(i) {
+          x = Inf
+          while (sum(x) > pars$max_features | sum(x) == 0) {
+            x = rbinom(length(feature_names), 1, pars$prob)
+          }
+          set_names(as.list(as.logical(x)), feature_names)
+        })
 
-      instance$eval_batch(states)
+      inst$eval_batch(states)
     }
   )
 )

@@ -1,10 +1,11 @@
-terminated_error = function(instance) {
+terminated_error = function(inst) {
   msg = sprintf(
     fmt = "FSelectInstance (tsk:%s, lrn:%s, term:%s) terminated",
-    instance$task$id,
-    instance$learner$id,
-    format(instance$terminator)
+    inst$objective$task$id,
+    inst$objective$learner$id,
+    format(inst$terminator)
   )
 
-  set_class(list(message = msg, call = NULL), c("terminated_error", "error", "condition"))
+  set_class(list(message = msg, call = NULL),
+    c("terminated_error", "error", "condition"))
 }

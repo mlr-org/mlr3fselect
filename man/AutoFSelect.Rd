@@ -42,11 +42,13 @@ afs$learner
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
+\item{\code{archive}}{FSelectInstance archive}
+
 \item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
 
 \item{\code{fselect_instance}}{\link{FSelectInstance}}
 
-\item{\code{fselect_result}}{\code{list()}
+\item{\code{fselect_result}}{\code{list()}\cr
 Result of the feature selection i.e. the optimal feature set and its
 estimated performances.}
 }
@@ -56,9 +58,6 @@ estimated performances.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{AutoFSelect$new()}}
-\item \href{#method-train_internal}{\code{AutoFSelect$train_internal()}}
-\item \href{#method-predict_internal}{\code{AutoFSelect$predict_internal()}}
-\item \href{#method-archive}{\code{AutoFSelect$archive()}}
 \item \href{#method-clone}{\code{AutoFSelect$clone()}}
 }
 }
@@ -81,14 +80,7 @@ estimated performances.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(
-  learner,
-  resampling,
-  measures,
-  terminator,
-  fselect,
-  bm_args = list()
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(learner, resampling, measures, terminator, fselect)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -103,69 +95,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \item{\code{terminator}}{\link{Terminator}}
 
 \item{\code{fselect}}{\link{FSelect}}
-
-\item{\code{bm_args}}{named \code{list()}
-Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.}
 }
 \if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-train_internal"></a>}}
-\if{latex}{\out{\hypertarget{method-train_internal}{}}}
-\subsection{Method \code{train_internal()}}{
-Selects the optimal feature set, applies the feature set to the task and
-fits the model on the training data. If \code{store_fselect_instance} is
-\code{TRUE}, the \link[mlr3:Learner]{mlr3::Learner} with the \link{FSelectInstance} is returned,
-otherwise just the \link[mlr3:Learner]{mlr3::Learner}. For internal use.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$train_internal(task)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{task}}{\link[mlr3:Task]{mlr3::Task}}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-list(\link[mlr3:Learner]{mlr3::Learner}) or list(\link[mlr3:Learner]{mlr3::Learner}, \link{FSelectInstance})
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-predict_internal"></a>}}
-\if{latex}{\out{\hypertarget{method-predict_internal}{}}}
-\subsection{Method \code{predict_internal()}}{
-Creates a new \link[mlr3:Prediction]{mlr3::Prediction} based on the learner fitted on the
-training data with the optimal feature subset. For internal use.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$predict_internal(task)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{task}}{\link[mlr3:Task]{mlr3::Task}}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\link[mlr3:Prediction]{mlr3::Prediction}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-archive"></a>}}
-\if{latex}{\out{\hypertarget{method-archive}{}}}
-\subsection{Method \code{archive()}}{
-Returns a table of contained resample results with corresponding feature
-sets.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$archive()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}
 }
 }
 \if{html}{\out{<hr>}}

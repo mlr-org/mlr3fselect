@@ -8,16 +8,34 @@
 #' with all features to eliminate the next most unimportant feature in every
 #' iteration.
 #'
+#' @templateVar id rfe
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`min_features`}{`integer(1)`
+#' \item{`min_features`}{`integer(1)`\cr
 #' Minimum number of features. By default, 1.}
 #' \item{`recursive`}{`logical(1)`}
 #' }
 #'
 #' @export
-#' @templateVar fs "rfe"
-#' @template example
+#' @examples
+#' library(mlr3)
+#'
+#' terminator = term("evals", n_evals = 10)
+#' instance = FSelectInstance$new(
+#'   task = tsk("iris"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measures = msr("classif.ce"),
+#'   terminator = terminator,
+#'   store_models = TRUE
+#' )
+#'
+#' fs = fs("rfe")
+#' fs$optimize(instance)
+#' instance$result
+#' instance$archive$data
 FSelectRFE = R6Class("FSelectRFE",
   inherit = FSelect,
   public = list(
@@ -26,69 +44,70 @@ FSelectRFE = R6Class("FSelectRFE",
     importance = NULL,
 
     #' @description
-    #' Create new `FSelectRFE` object.
-    #' @return `FSelectRFE`
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("min_features", lower = 1),
         ParamLgl$new("recursive", default = FALSE))
       )
+      ps$values = list(min_features = 1L, recursive = FALSE)
 
       super$initialize(
-        param_set = ps
+        param_set = ps, properties = character(0)
       )
-      if (is.null(self$param_set$values$min_features)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(min_features = 1))
-      }
-      if (is.null(self$param_set$values$recursive)) {
-        self$param_set$values =
-          insert_named(self$param_set$values, list(recursive = FALSE))
-      }
     }
   ),
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
+      archive = inst$archive
+      feature_names = inst$objective$task$feature_names
 
-      if (instance$n_batch == 0) {
-        instance$bm_args =
-          insert_named(instance$bm_args, list(store_models = TRUE))
-        states = matrix(1, nrow = 1, ncol = length(instance$task$feature_names))
+      if (archive$n_batch == 0L) {
+        states = as.list(rep(TRUE, length(feature_names)))
+        names(states) = feature_names
+        states = as.data.table(states)
       } else {
-        if (length(instance$task$feature_names) - instance$n_batch < pars$min_features) {
-          stop(terminated_error(instance))
+        if (length(feature_names) - archive$n_batch < pars$min_features) {
+          stop(terminated_error(inst))
         }
+
         if (pars$recursive) {
           # Recalculate the variable importance on the reduced feature subset
-          id = instance$bmr$rr_data[batch_nr == instance$n_batch, uhash]
-          feat = instance$bmr$rr_data[uhash == id, feat][[1]]
-          learners = instance$bmr$data[uhash == id, learner]
+          feat = archive$data[batch_nr == archive$n_batch, feature_names,
+            with = FALSE]
+          feat = feature_names[as.logical(feat)]
+
+          rr = archive$data[batch_nr == archive$n_batch, resample_result][[1]]
+          learners = rr$learners
           imp = importance_average(learners, feat)
 
           # Eliminate the most unimportant feature of the feature subset
           states =
-            as.numeric(instance$task$feature_names %in% feat & !instance$task$feature_names %in% names(imp[1]))
-        } else {
-          if (instance$n_batch == 1) {
-            # Calculate the variable importance on the complete feature subset
-            self$importance =
-              importance_average(instance$bmr$data$learner, instance$task$feature_names)
-          }
+            as.list(feature_names %in% feat & !feature_names %in% names(imp[1]))
+          names(states) = feature_names
+          states = as.data.table(states)
 
+        } else {
+          if (archive$n_batch == 1) {
+            # Calculate the variable importance on the complete feature subset
+            rr = archive$data[batch_nr == archive$n_batch, resample_result][[1]]
+            learners = rr$learners
+
+            self$importance = importance_average(learners, feature_names)
+          }
           # Eliminate the most unimportant features
-          states =
-            as.numeric(!instance$task$feature_names %in% names(self$importance[1:instance$n_batch]))
+          states = as.list(!feature_names %in% names(
+            self$importance[1:archive$n_batch]))
+          names(states) = feature_names
+          states = as.data.table(states)
         }
       }
       # Fit the model on the reduced feature subset
-      states = matrix(states, ncol = length(instance$task$feature_names))
-      instance$eval_batch(states)
+      inst$eval_batch(states)
     }
   )
 )
-
-mlr_fselectors$add("rfe", FSelectRFE)
 
 # Calculates the average feature importances on all resample iterations.
 # Returns a numeric vector of average feature importances in ascending order.
@@ -103,3 +122,5 @@ importance_average = function(learners, features) {
   })
   sort(apply(imp, 1, mean))
 }
+
+mlr_fselectors$add("rfe", FSelectRFE)

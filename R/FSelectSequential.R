@@ -7,11 +7,14 @@
 #' (`strategy = fsb`) starts with the complete future set and removes in each
 #' step the feature that decreases the models performance the least.
 #'
+#' @templateVar id sequential
+#' @template section_dictionary_fselectors
+#'
 #' @section Parameters:
 #' \describe{
-#' \item{`max_features`}{`integer(1)`
+#' \item{`max_features`}{`integer(1)`\cr
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
-#' \item{`strategy`}{`character(1)`
+#' \item{`strategy`}{`character(1)`\cr
 #' Search method `sfs` (forward search) or `sbs` (backward search).}
 #' }
 #'
@@ -20,7 +23,6 @@
 #' sequential feature selection.
 #'
 #' @export
-#' @templateVar fs "sequential"
 #' @template example
 FSelectSequential = R6Class("FSelectSequential",
   inherit = FSelect,
@@ -33,46 +35,47 @@ FSelectSequential = R6Class("FSelectSequential",
         ParamInt$new("max_features", lower = 1),
         ParamFct$new("strategy", levels = c("sfs", "sbs"), default = "sfs"))
       )
+      ps$values = list(strategy = "sfs")
 
       super$initialize(
-        param_set = ps
+        param_set = ps, properties = character(0)
       )
-      if (is.null(self$param_set$values$strategy)) {
-        self$param_set$values = insert_named(self$param_set$values,
-          list(strategy = "sfs"))
-      }
     }
   ),
   private = list(
-    select_internal = function(instance) {
+    .optimize = function(inst) {
       pars = self$param_set$values
+      archive = inst$archive
+      feature_names = inst$objective$task$feature_names
+
       if (is.null(pars$max_features)) {
-        pars$max_features = length(instance$task$feature_names)
+        pars$max_features = length(feature_names)
       }
 
       # Initialize states for first batch
-      if (instance$n_batch == 0) {
+      if (archive$n_batch == 0) {
         if (self$param_set$values$strategy == "sfs") {
-          states = diag(1, length(instance$task$feature_names),
-            length(instance$task$feature_names))
+          states = as.data.table(diag(TRUE, length(feature_names),
+            length(feature_names)))
+          names(states) = feature_names
         } else {
-          combinations = combn(length(instance$task$feature_names),
+          combinations = combn(length(feature_names),
             pars$max_features)
-          states = t(sapply(seq_len(ncol(combinations)), function(j) {
-            state = rep(0, length(instance$task$feature_names))
+          states = map_dtr(seq_len(ncol(combinations)), function(j) {
+            state = rep(0, length(feature_names))
             state[combinations[, j]] = 1
+            state = as.list(as.logical(state))
+            names(state) = feature_names
             state
-          }))
+          })
         }
       } else {
-        if (instance$n_batch == pars$max_features) {
-          stop(terminated_error(instance))
+        if (archive$n_batch == pars$max_features) {
+          stop(terminated_error(inst))
         }
 
-        # Query bmr for best feature subset of last batch
-        rr = instance$best(m = instance$n_batch)
-        feat = instance$bmr$rr_data[rr$uhash, on = "uhash"]$feat[[1]]
-        best_state = as.numeric(instance$task$feature_names %in% feat)
+        res = archive$get_best(m = archive$n_batch)
+        best_state = as.numeric(as.matrix(res[1, feature_names, with = FALSE]))
 
         # Generate new states based on best feature set
         x = ifelse(pars$strategy == "sfs", 0, 1)
@@ -83,15 +86,17 @@ FSelectSequential = R6Class("FSelectSequential",
         else {
           as.logical(best_state)
         }
-        states = t(sapply(seq_along(best_state)[z], function(i) {
+        states = map_dtr(seq_along(best_state)[z], function(i) {
           if (best_state[i] == x) {
             new_state = best_state
             new_state[i] = y
+            new_state = as.list(as.logical(new_state))
+            names(new_state) = feature_names
             new_state
           }
-        }))
+        })
       }
-      instance$eval_batch(states)
+      inst$eval_batch(states)
     }
   )
 )

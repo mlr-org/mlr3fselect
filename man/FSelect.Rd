@@ -4,21 +4,23 @@
 \alias{FSelect}
 \title{FSelect}
 \description{
-Abstract \code{FSelect} class that implements the base functionality each \verb{FSelect*} class must provide.
-A \code{FSelect} object describes the feature selection strategy,
-i.e. how to optimize the black-box function
-and its feasible set defined by the \link{FSelectInstance} object.
+Abstract \code{FSelect} class that implements the base functionality each
+\code{FSelect} subclass must provide. A \code{FSelect} object describes the feature
+selection strategy, i.e. how to optimize the black-box function and its
+feasible set defined by the \link{ObjectiveFSelect} object.
 
-A list of measures can be passed to the instance, and they will always be all evaluated.
-However, single-criteria algorithms optimize only the first measure
+A list of measures can be passed to the instance, and they will always be all
+evaluated. However, single-criteria algorithms optimize only the first
+measure
 
-A \code{FSelect} object must write its result to the \verb{$assign_result()} method of the \link{FSelectInstance} at the end in
-order to store the best selected feature subset and its estimated performance vector.
+A \code{FSelect} object must write its result to the \verb{$assign_result()} method of
+the \link{FSelectInstance} at the end in order to store the best selected feature
+subset and its estimated performance vector.
 }
 \examples{
 library(mlr3)
 
-terminator = term("evals", n_evals = 15)
+terminator = term("evals", n_evals = 10)
 instance = FSelectInstance$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
@@ -27,29 +29,29 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs("random") # swap this line to use a different feature selection algorithm
-fs$select(instance) # modifies the instance by reference
-instance$result # returns best configuration and best performance
-instance$archive() # allows access of data.table / benchmark result of full path of all evaluation
+fs = fs("random")
+fs$optimize(instance)
+instance$result
+instance$archive$data
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}}
-
-\item{\code{packages}}{\code{character()}}
-}
-\if{html}{\out{</div>}}
+\section{Super class}{
+\code{\link[bbotk:Optimizer]{bbotk::Optimizer}} -> \code{FSelect}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelect$new()}}
-\item \href{#method-format}{\code{FSelect$format()}}
-\item \href{#method-print}{\code{FSelect$print()}}
-\item \href{#method-select}{\code{FSelect$select()}}
+\item \href{#method-optimize}{\code{FSelect$optimize()}}
 \item \href{#method-clone}{\code{FSelect$clone()}}
 }
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="format">}\href{../../bbotk/html/Optimizer.html#method-format}{\code{bbotk::Optimizer$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="print">}\href{../../bbotk/html/Optimizer.html#method-print}{\code{bbotk::Optimizer$print()}}\out{</span>}
+}
+\out{</details>}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
@@ -57,7 +59,7 @@ instance$archive() # allows access of data.table / benchmark result of full path
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, packages = character())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$new(param_set, properties, packages = character(0))}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -65,51 +67,28 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \describe{
 \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}}
 
-\item{\code{packages}}{\code{character()}
-Set of control parameter for the feature selection.}
+\item{\code{properties}}{\code{character()}}
+
+\item{\code{packages}}{\code{character()}}
+
+\item{\code{param_classes}}{\code{character()}}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-format"></a>}}
-\if{latex}{\out{\hypertarget{method-format}{}}}
-\subsection{Method \code{format()}}{
-Format method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$format()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{character()}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
-\subsection{Method \code{print()}}{
-Print method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$print()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-\code{character()}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-select"></a>}}
-\if{latex}{\out{\hypertarget{method-select}{}}}
-\subsection{Method \code{select()}}{
+\if{html}{\out{<a id="method-optimize"></a>}}
+\if{latex}{\out{\hypertarget{method-optimize}{}}}
+\subsection{Method \code{optimize()}}{
 Performs the feature selection on a \link{FSelectInstance} until termination.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelect$select(instance)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelect$optimize(inst)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{instance}}{\link{FSelectInstance}}
+\item{\code{inst}}{\link{FSelectInstance}}
 }
 \if{html}{\out{</div>}}
 }
