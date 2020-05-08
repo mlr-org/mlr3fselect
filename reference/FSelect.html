@@ -48,9 +48,9 @@ feasible set defined by the ObjectiveFSelect object.
 A list of measures can be passed to the instance, and they will always be all
 evaluated. However, single-criteria algorithms optimize only the first
 measure
-A FSelect object must write its result to the $assign_result() method of
-the FSelectInstance at the end in order to store the best selected feature
-subset and its estimated performance vector." />
+A FSelect object must provide a private method $.assign_result(inst) that writes the result to the FSelectInstance using the $assign_result() method of
+the instance in order to store the best selected feature
+subset and its estimated performance vector at the end of the optimization." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -145,9 +145,9 @@ feasible set defined by the <a href='ObjectiveFSelect.html'>ObjectiveFSelect</a>
 <p>A list of measures can be passed to the instance, and they will always be all
 evaluated. However, single-criteria algorithms optimize only the first
 measure</p>
-<p>A <code>FSelect</code> object must write its result to the <code>$assign_result()</code> method of
-the <a href='FSelectInstance.html'>FSelectInstance</a> at the end in order to store the best selected feature
-subset and its estimated performance vector.</p>
+<p>A <code>FSelect</code> object must provide a private method <code>$.assign_result(inst)</code> that writes the result to the <a href='FSelectInstance.html'>FSelectInstance</a> using the <code>$assign_result()</code> method of
+the instance in order to store the best selected feature
+subset and its estimated performance vector at the end of the optimization.</p>
     </div>
 
 
@@ -243,16 +243,16 @@ subset and its estimated performance vector.</p>
 #&gt;  9:         TRUE       FALSE         TRUE       FALSE       0.10
 #&gt; 10:        FALSE       FALSE         TRUE        TRUE       0.28
 #&gt;      resample_result  opt_x  timestamp batch_nr
-#&gt;  1: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  2: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  3: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  4: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  5: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  6: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  7: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  8: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt;  9: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1
-#&gt; 10: &lt;ResampleResult&gt; &lt;list&gt; 1588915886        1</div></pre>
+#&gt;  1: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  2: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  3: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  4: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  5: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  6: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  7: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  8: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt;  9: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1
+#&gt; 10: &lt;ResampleResult&gt; &lt;list&gt; 1588933165        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
