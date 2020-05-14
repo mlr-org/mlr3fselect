@@ -243,6 +243,60 @@ estimated performances.</p></dd>
 #&gt; 
 #&gt; $fselect_instance
 #&gt; &lt;FSelectInstance&gt;
+#&gt; * Objective: &lt;ObjectiveFSelect:feature_selection&gt;
+#&gt; * Search Space: &lt;ParamSet&gt; Public: add: function (p) add_dep: function
+#&gt;   (id, on, cond) assert: function (xs, .var.name = vname(xs)) check:
+#&gt;   function (xs) class: active binding clone: function (deep = FALSE)
+#&gt;   default: active binding deps: active binding get_values: function
+#&gt;   (class = NULL, is_bounded = NULL, tags = NULL) has_deps: active
+#&gt;   binding has_trafo: active binding ids: function (class = NULL,
+#&gt;   is_bounded = NULL, tags = NULL) initialize: function (params =
+#&gt;   named_list()) is_bounded: active binding is_categ: active binding
+#&gt;   is_empty: active binding is_number: active binding length: active
+#&gt;   binding levels: active binding lower: active binding nlevels: active
+#&gt;   binding params: active binding print: function (..., hide_cols =
+#&gt;   c("nlevels", "is_bounded", "special_vals", set_id: active binding
+#&gt;   special_vals: active binding storage_type: active binding subset:
+#&gt;   function (ids) tags: active binding test: function (xs) trafo: active
+#&gt;   binding upper: active binding values: active binding Private: .deps:
+#&gt;   data.table, data.frame .params: list .set_id: .trafo: NULL .values:
+#&gt;   list deep_clone: function (name, value) get_member_with_idnames:
+#&gt;   function (member, astype)
+#&gt; * Terminator: &lt;TerminatorEvals&gt;
+#&gt; * Terminated: FALSE
+#&gt; &lt;Archive&gt;
+#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt;  1:         TRUE       FALSE        FALSE       FALSE       0.06
+#&gt;  2:        FALSE        TRUE        FALSE       FALSE       0.06
+#&gt;  3:        FALSE       FALSE         TRUE       FALSE       0.50
+#&gt;  4:        FALSE       FALSE        FALSE        TRUE       0.44
+#&gt;  5:         TRUE        TRUE        FALSE       FALSE       0.06
+#&gt;  6:         TRUE       FALSE         TRUE       FALSE       0.06
+#&gt;  7:         TRUE       FALSE        FALSE        TRUE       0.06
+#&gt;  8:        FALSE        TRUE         TRUE       FALSE       0.06
+#&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.06
+#&gt; 10:        FALSE       FALSE         TRUE        TRUE       0.50
+#&gt; 11:         TRUE        TRUE         TRUE       FALSE       0.06
+#&gt; 12:         TRUE        TRUE        FALSE        TRUE       0.06
+#&gt; 13:         TRUE       FALSE         TRUE        TRUE       0.06
+#&gt; 14:        FALSE        TRUE         TRUE        TRUE       0.06
+#&gt; 15:         TRUE        TRUE         TRUE        TRUE       0.06
+#&gt;      resample_result  opt_x  timestamp batch_nr
+#&gt;  1: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        1
+#&gt;  2: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        1
+#&gt;  3: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        1
+#&gt;  4: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        1
+#&gt;  5: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        2
+#&gt;  6: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        2
+#&gt;  7: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        2
+#&gt;  8: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        2
+#&gt;  9: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        2
+#&gt; 10: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        2
+#&gt; 11: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        3
+#&gt; 12: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        3
+#&gt; 13: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        3
+#&gt; 14: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        3
+#&gt; 15: &lt;ResampleResult&gt; &lt;list&gt; 1589431428        4
 #&gt; </div><div class='input'><span class='no'>afs</span>$<span class='no'>learner</span></div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
 #&gt; * Parameters: xval=0
