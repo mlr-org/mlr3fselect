@@ -13,9 +13,9 @@ A list of measures can be passed to the instance, and they will always be all
 evaluated. However, single-criteria algorithms optimize only the first
 measure
 
-A \code{FSelect} object must write its result to the \verb{$assign_result()} method of
-the \link{FSelectInstance} at the end in order to store the best selected feature
-subset and its estimated performance vector.
+A \code{FSelect} object must provide a private method \verb{$.assign_result(inst)} that writes the result to the \link{FSelectInstance} using the \verb{$assign_result()} method of
+the instance in order to store the best selected feature
+subset and its estimated performance vector at the end of the optimization.
 }
 \examples{
 library(mlr3)
