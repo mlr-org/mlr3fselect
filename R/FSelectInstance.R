@@ -50,33 +50,6 @@ FSelectInstance = R6Class("FSelectInstance",
         obj = ObjectiveFSelect$new(task = task, learner = learner,
           resampling = resampling, measures = measures, store_models = store_models)
         super$initialize(obj, obj$domain, terminator)
-    },
-
-    #' @description
-    #' The [FSelect] object writes the best found feature set
-    #' and estimated performance values here. For internal use.
-    #' @param feat `character`\cr
-    #' Must be character vector of feature names existing in `task`
-    #' @param perf `numeric`\cr
-    #' Must be named numeric of performance measures, named with performance
-    #' IDs, regarding all elements in `measures`.
-    assign_result = function(feat, perf) {
-      assert_names(feat, subset.of = self$objective$task$feature_names)
-      assert_numeric(perf)
-      assert_names(names(perf), permutation.of = ids(self$objective$measures))
-      private$.result = list(feat = feat, perf = perf)
     }
-  ),
-  active = list(
-    #' @field result `list()`\cr
-    #' Result of the feature selection i.e. the optimal feature set and its
-    #' estimated performances.
-    result = function() {
-      list(feat = private$.result$feat, perf = private$.result$perf)
-    }
-  ),
-
-  private = list(
-    .result = NULL
   )
 )
