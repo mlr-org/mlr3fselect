@@ -53,21 +53,23 @@ FSelectRFE = R6Class("FSelectRFE",
       ps$values = list(min_features = 1L, recursive = FALSE)
 
       super$initialize(
-        param_set = ps, properties = character(0)
+        param_set = ps, properties = "single-crit"
       )
     }
   ),
   private = list(
     .optimize = function(inst) {
+
       pars = self$param_set$values
       archive = inst$archive
       feature_names = inst$objective$task$feature_names
 
-      if (archive$n_batch == 0L) {
-        states = as.list(rep(TRUE, length(feature_names)))
-        names(states) = feature_names
-        states = as.data.table(states)
-      } else {
+      states = as.list(rep(TRUE, length(feature_names)))
+      names(states) = feature_names
+      states = as.data.table(states)
+      inst$eval_batch(states)
+
+      repeat({
         if (length(feature_names) - archive$n_batch < pars$min_features) {
           stop(terminated_error(inst))
         }
@@ -102,9 +104,10 @@ FSelectRFE = R6Class("FSelectRFE",
           names(states) = feature_names
           states = as.data.table(states)
         }
-      }
-      # Fit the model on the reduced feature subset
-      inst$eval_batch(states)
+
+        # Fit the model on the reduced feature subset
+        inst$eval_batch(states)
+      })
     }
   )
 )

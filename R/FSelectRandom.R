@@ -39,7 +39,7 @@ FSelectRandom = R6Class("FSelectRandom",
       ps$values = list(batch_size = 10L, prob = 0.5)
 
       super$initialize(
-        param_set = ps, properties = character(0)
+        param_set = ps, properties = "single-crit"
       )
     }
   ),
@@ -52,17 +52,18 @@ FSelectRandom = R6Class("FSelectRandom",
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)
       }
+      repeat({
+        states =
+          map_dtr(seq_len(pars$batch_size), function(i) {
+            x = Inf
+            while (sum(x) > pars$max_features | sum(x) == 0) {
+              x = rbinom(length(feature_names), 1, pars$prob)
+            }
+            set_names(as.list(as.logical(x)), feature_names)
+          })
 
-      states =
-        map_dtr(seq_len(pars$batch_size), function(i) {
-          x = Inf
-          while (sum(x) > pars$max_features | sum(x) == 0) {
-            x = rbinom(length(feature_names), 1, pars$prob)
-          }
-          set_names(as.list(as.logical(x)), feature_names)
-        })
-
-      inst$eval_batch(states)
+        inst$eval_batch(states)
+      })
     }
   )
 )

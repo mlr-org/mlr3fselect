@@ -31,7 +31,7 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
       )
 
       super$initialize(
-        param_set = ps, properties = character(0)
+        param_set = ps, properties = "single-crit"
       )
     }
   ),
@@ -45,20 +45,22 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
         pars$max_features = length(feature_names)
       }
 
-      if (archive$n_batch + 1 > pars$max_features) {
-        stop(terminated_error(inst))
-      }
+      repeat({
+        if (archive$n_batch + 1 > pars$max_features) {
+          stop(terminated_error(inst))
+        }
 
-      combinations = combn(length(feature_names),
-        archive$n_batch + 1)
-      states = map_dtr(seq_len(ncol(combinations)), function(j) {
-        state = rep(0, length(feature_names))
-        state[combinations[, j]] = 1
-        state = as.list(as.logical(state))
-        names(state) = feature_names
-        state
+        combinations = combn(length(feature_names),
+          archive$n_batch + 1)
+        states = map_dtr(seq_len(ncol(combinations)), function(j) {
+          state = rep(0, length(feature_names))
+          state[combinations[, j]] = 1
+          state = as.list(as.logical(state))
+          names(state) = feature_names
+          state
+        })
+        inst$eval_batch(states)
       })
-      inst$eval_batch(states)
     }
   )
 )

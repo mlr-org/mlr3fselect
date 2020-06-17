@@ -38,12 +38,13 @@ FSelectSequential = R6Class("FSelectSequential",
       ps$values = list(strategy = "sfs")
 
       super$initialize(
-        param_set = ps, properties = character(0)
+        param_set = ps, properties = "single-crit"
       )
     }
   ),
   private = list(
     .optimize = function(inst) {
+
       pars = self$param_set$values
       archive = inst$archive
       feature_names = inst$objective$task$feature_names
@@ -53,23 +54,25 @@ FSelectSequential = R6Class("FSelectSequential",
       }
 
       # Initialize states for first batch
-      if (archive$n_batch == 0) {
-        if (self$param_set$values$strategy == "sfs") {
-          states = as.data.table(diag(TRUE, length(feature_names),
-            length(feature_names)))
-          names(states) = feature_names
-        } else {
-          combinations = combn(length(feature_names),
-            pars$max_features)
-          states = map_dtr(seq_len(ncol(combinations)), function(j) {
-            state = rep(0, length(feature_names))
-            state[combinations[, j]] = 1
-            state = as.list(as.logical(state))
-            names(state) = feature_names
-            state
-          })
-        }
+      if (self$param_set$values$strategy == "sfs") {
+        states = as.data.table(diag(TRUE, length(feature_names),
+          length(feature_names)))
+        names(states) = feature_names
       } else {
+        combinations = combn(length(feature_names),
+          pars$max_features)
+        states = map_dtr(seq_len(ncol(combinations)), function(j) {
+          state = rep(0, length(feature_names))
+          state[combinations[, j]] = 1
+          state = as.list(as.logical(state))
+          names(state) = feature_names
+          state
+        })
+      }
+
+      inst$eval_batch(states)
+
+      repeat({
         if (archive$n_batch == pars$max_features) {
           stop(terminated_error(inst))
         }
@@ -86,6 +89,7 @@ FSelectSequential = R6Class("FSelectSequential",
         else {
           as.logical(best_state)
         }
+
         states = map_dtr(seq_along(best_state)[z], function(i) {
           if (best_state[i] == x) {
             new_state = best_state
@@ -95,8 +99,9 @@ FSelectSequential = R6Class("FSelectSequential",
             new_state
           }
         })
-      }
-      inst$eval_batch(states)
+
+        inst$eval_batch(states)
+      })
     }
   )
 )

@@ -66,13 +66,14 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       ps$add_dep("n.elite", "survival.strategy", CondEqual$new("comma"))
 
       super$initialize(
-        param_set = ps, properties = character(0),
+        param_set = ps, properties = "single-crit",
         packages = "ecr"
       )
     }
   ),
   private = list(
     .optimize = function(inst) {
+
       pars = self$param_set$values
       pars_mutBitflip =
         pars[which(names(pars) %in% formalArgs(ecr::mutBitflip))]
@@ -124,7 +125,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         fitness = ecr::evaluateFitness(ctrl, population, inst)
       })
 
-      while (TRUE) {
+      repeat({
         offspring = invoke(ecr::generateOffspring, ctrl, population, fitness,
           .args = pars_generateOffspring)
 
@@ -151,7 +152,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
             .args = pars_replaceMuCommaLambda)
         }
         population = selection$population
-      }
+      })
     }
   )
 )

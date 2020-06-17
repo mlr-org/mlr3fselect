@@ -37,16 +37,7 @@ FSelect = R6Class("FSelect",
     #' @param inst [FSelectInstance]
     optimize = function(inst) {
       assert_r6(inst, "OptimInstance")
-      require_namespaces(self$packages)
-
-      tryCatch({
-        repeat {
-          private$.optimize(inst)
-        }
-      }, terminated_error = function(cond) { })
-
-      private$.assign_result(inst)
-      invisible(NULL)
+      super$optimize(inst)
     }
   )
 )
