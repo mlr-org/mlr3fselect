@@ -74,7 +74,7 @@ FSelectSequential = R6Class("FSelectSequential",
           stop(terminated_error(inst))
         }
 
-        res = archive$get_best(m = archive$n_batch)
+        res = archive$best(m = archive$n_batch)
         best_state = as.numeric(as.matrix(res[1, feature_names, with = FALSE]))
 
         # Generate new states based on best feature set

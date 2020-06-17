@@ -74,11 +74,11 @@ FSelectRFE = R6Class("FSelectRFE",
 
         if (pars$recursive) {
           # Recalculate the variable importance on the reduced feature subset
-          feat = archive$data[batch_nr == archive$n_batch, feature_names,
+          feat = archive$data()[batch_nr == archive$n_batch, feature_names,
             with = FALSE]
           feat = feature_names[as.logical(feat)]
 
-          rr = archive$data[batch_nr == archive$n_batch, resample_result][[1]]
+          rr = archive$data()[batch_nr == archive$n_batch, resample_result][[1]]
           learners = rr$learners
           imp = importance_average(learners, feat)
 
@@ -91,7 +91,7 @@ FSelectRFE = R6Class("FSelectRFE",
         } else {
           if (archive$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
-            rr = archive$data[batch_nr == archive$n_batch, resample_result][[1]]
+            rr = archive$data()[batch_nr == archive$n_batch, resample_result][[1]]
             learners = rr$learners
 
             self$importance = importance_average(learners, feature_names)

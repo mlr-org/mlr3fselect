@@ -73,7 +73,9 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       instance = invoke(FSelectInstance$new, .args = ia)
       self$fselect$optimize(instance)
 
-      ia$task$select(instance$result$feat)
+      feat = task$feature_names[as.logical(instance$result_x_seach_space)]
+      ia$task$select(feat)
+
       learner = ia$learner$clone(deep = TRUE)
       learner$train(ia$task)
 

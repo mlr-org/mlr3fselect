@@ -39,28 +39,20 @@ instance = FSelectInstance$new(
 \section{Super class}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{FSelectInstance}
 }
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{result}}{\code{list()}\cr
-Result of the feature selection i.e. the optimal feature set and its
-estimated performances.}
-}
-\if{html}{\out{</div>}}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
-\item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
 }
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="assign_result">}\href{../../bbotk/html/OptimInstance.html#method-assign_result}{\code{bbotk::OptimInstance$assign_result()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch">}\href{../../bbotk/html/OptimInstance.html#method-eval_batch}{\code{bbotk::OptimInstance$eval_batch()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format">}\href{../../bbotk/html/OptimInstance.html#method-format}{\code{bbotk::OptimInstance$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print">}\href{../../bbotk/html/OptimInstance.html#method-print}{\code{bbotk::OptimInstance$print()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -94,29 +86,6 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \item{\code{terminator}}{\link{Terminator}}
 
 \item{\code{store_models}}{\code{logical(1)}}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-assign_result"></a>}}
-\if{latex}{\out{\hypertarget{method-assign_result}{}}}
-\subsection{Method \code{assign_result()}}{
-The \link{FSelect} object writes the best found feature set
-and estimated performance values here. For internal use.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$assign_result(feat, perf)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{feat}}{\code{character}\cr
-Must be character vector of feature names existing in \code{task}}
-
-\item{\code{perf}}{\code{numeric}\cr
-Must be named numeric of performance measures, named with performance
-IDs, regarding all elements in \code{measures}.}
 }
 \if{html}{\out{</div>}}
 }

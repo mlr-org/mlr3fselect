@@ -41,10 +41,10 @@ test_that("Budget", {
   inst = TEST_MAKE_INST(term_evals = 2L)
   fs = fs("random", batch_size = 6)
   fs$optimize(inst)
-  tab = inst$archive$data
+  tab = inst$archive$data()
   expect_data_table(tab, nrows = 6)
 
   fs$optimize(inst)
-  tab = inst$archive$data
+  tab = inst$archive$data()
   expect_data_table(tab, nrows = 6)
 })
