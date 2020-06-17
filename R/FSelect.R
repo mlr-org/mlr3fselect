@@ -10,9 +10,9 @@
 #' evaluated. However, single-criteria algorithms optimize only the first
 #' measure
 #'
-#' A `FSelect` object must write its result to the `$assign_result()` method of
-#' the [FSelectInstance] at the end in order to store the best selected feature
-#' subset and its estimated performance vector.
+#' A `FSelect` object must provide a private method `$.assign_result(inst)` that writes the result to the [FSelectInstance] using the `$assign_result()` method of
+#' the instance in order to store the best selected feature
+#' subset and its estimated performance vector at the end of the optimization.
 #'
 #' @export
 #' @templateVar id random
@@ -40,7 +40,7 @@ FSelect = R6Class("FSelect",
       require_namespaces(self$packages)
 
       tryCatch({
-        while (TRUE) {
+        repeat {
           private$.optimize(inst)
         }
       }, terminated_error = function(cond) { })

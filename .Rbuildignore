@@ -16,3 +16,5 @@
 ^\.ccache$
 ^clang-.*
 man-roxygen
+^\.lintr$
+^\.vscode$
