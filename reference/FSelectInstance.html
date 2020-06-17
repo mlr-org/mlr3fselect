@@ -155,14 +155,6 @@ calling the method <code>instance$assign_result()</code>.</p>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
     <p><code><a href='https://rdrr.io/pkg/bbotk/man/OptimInstance.html'>bbotk::OptimInstance</a></code> -&gt; <code>FSelectInstance</code></p>
-    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
-
-    <p><div class="r6-active-bindings"></p><dl'>
-<dt><code>result</code></dt><dd><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code><br />
-Result of the feature selection i.e. the optimal feature set and its
-estimated performances.</p></dd>
-
-</dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
@@ -170,13 +162,14 @@ estimated performances.</p></dd>
 
 <ul>
 <li><p><a href='#method-new'><code>FSelectInstance$new()</code></a></p></li>
-<li><p><a href='#method-assign_result'><code>FSelectInstance$assign_result()</code></a></p></li>
 <li><p><a href='#method-clone'><code>FSelectInstance$clone()</code></a></p></li>
 </ul>
 <p><details open ><summary>Inherited methods</summary>
 <ul>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="assign_result"><a href='../../bbotk/html/OptimInstance.html#method-assign_result'><code>bbotk::OptimInstance$assign_result()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href='../../bbotk/html/OptimInstance.html#method-eval_batch'><code>bbotk::OptimInstance$eval_batch()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-format'><code>bbotk::OptimInstance$format()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href='../../bbotk/html/OptimInstance.html#method-print'><code>bbotk::OptimInstance$print()</code></a></span></p></li>
 </ul>
 </details>
 
@@ -205,22 +198,6 @@ estimated performances.</p></dd>
 <dt><code>terminator</code></dt><dd><p>Terminator</p></dd>
 
 <dt><code>store_models</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
-
-</dl><p></div></p>
-<p><hr>
-<a id="method-assign_result"></a></p><h3>Method <code>assign_result()</code></h3>
-<p>The <a href='FSelect.html'>FSelect</a> object writes the best found feature set
-and estimated performance values here. For internal use.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>assign_result</span>(<span class='no'>feat</span>, <span class='no'>perf</span>)</pre><p></div></p>
-
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
-<dt><code>feat</code></dt><dd><p><code>character</code><br />
-Must be character vector of feature names existing in <code>task</code></p></dd>
-
-<dt><code>perf</code></dt><dd><p><code>numeric</code><br />
-Must be named numeric of performance measures, named with performance
-IDs, regarding all elements in <code>measures</code>.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
