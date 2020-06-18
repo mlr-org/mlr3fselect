@@ -43,6 +43,7 @@ instance = FSelectInstance$new(
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
+\item \href{#method-objective_function}{\code{FSelectInstance$objective_function()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
 }
@@ -88,6 +89,31 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \item{\code{store_models}}{\code{logical(1)}}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-objective_function"></a>}}
+\if{latex}{\out{\hypertarget{method-objective_function}{}}}
+\subsection{Method \code{objective_function()}}{
+Evaluates a single feature combintion encoded as 0/1, and returns a
+scalar objective value, where the return value is negated if the measure
+is maximized. Internally, \verb{$eval_batch()} is called with a single row.
+This function serves as a objective function for optimizers of binary
+spaces.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$objective_function(x)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{(\code{integer()})\cr
+0/1 encoded feature combination.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Objective value as \code{numeric(1)}.
 }
 }
 \if{html}{\out{<hr>}}

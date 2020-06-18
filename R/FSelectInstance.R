@@ -50,6 +50,29 @@ FSelectInstance = R6Class("FSelectInstance",
         obj = ObjectiveFSelect$new(task = task, learner = learner,
           resampling = resampling, measures = measures, store_models = store_models)
         super$initialize(obj, obj$domain, terminator)
+    },
+
+    #' @description
+    #' Evaluates a single feature combintion encoded as 0/1, and returns a
+    #' scalar objective value, where the return value is negated if the measure
+    #' is maximized. Internally, `$eval_batch()` is called with a single row.
+    #' This function serves as a objective function for optimizers of binary
+    #' spaces.
+    #'
+    #' @param x (`integer()`)\cr
+    #' 0/1 encoded feature combination.
+    #'
+    #' @return Objective value as `numeric(1)`.
+    objective_function = function(x) {
+      assert_subset(x, choices = c(1,0))
+      assert_integer(as.integer(x), len = self$search_space$length,
+        any.missing = FALSE)
+      xs = set_names(as.list(as.logical(x)), self$search_space$ids())
+      self$search_space$assert(xs)
+      xdt = as.data.table(xs)
+      res = self$eval_batch(xdt)
+      y = as.numeric(res[, self$objective$codomain$ids()[1], with=FALSE])
+      if(self$objective$codomain$tags[[1]] == "minimize") y else -y
     }
   )
 )

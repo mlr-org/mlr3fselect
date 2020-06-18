@@ -48,3 +48,9 @@ test_that("Budget", {
   tab = inst$archive$data()
   expect_data_table(tab, nrows = 6)
 })
+
+test_that("objective_function works", {
+  inst = TEST_MAKE_INST(term_evals = 5L)
+  y = inst$objective_function(c(1,1,1,1))
+  expect_equal(y, -3)
+})
