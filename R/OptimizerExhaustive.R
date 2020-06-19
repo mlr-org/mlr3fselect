@@ -1,11 +1,11 @@
-#' FSelectExhaustive Class
+#' @title Feature Selection via Exhaustive Search
 #'
 #' @description
 #' Subclass for exhaustive feature selection. Evaluates every possible feature
 #' subset.
 #'
 #' @templateVar id exhaustive
-#' @template section_dictionary_fselectors
+#' @template section_dictionary_optimizers
 #'
 #' @section Parameters:
 #' \describe{
@@ -19,8 +19,8 @@
 #'
 #' @export
 #' @template example
-FSelectExhaustive = R6Class("FSelectExhaustive",
-  inherit = FSelect,
+OptimizerExhaustive = R6Class("Optimizerxhaustive",
+  inherit = Optimizer,
   public = list(
 
     #' @description
@@ -31,7 +31,7 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
       )
 
       super$initialize(
-        param_set = ps, properties = "single-crit"
+        param_set = ps, properties = "single-crit", param_classes = "ParamLgl"
       )
     }
   ),
@@ -64,5 +64,3 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
     }
   )
 )
-
-mlr_fselectors$add("exhaustive", FSelectExhaustive)

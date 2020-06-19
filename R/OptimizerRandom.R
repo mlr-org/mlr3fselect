@@ -1,10 +1,10 @@
-#' @title FSelectRandom Class
+#' @title Feature Selection via Random Search
 #'
 #' @description
 #' Subclass for random feature selection. Feature sets are randomly drawn.
 #'
 #' @templateVar id random
-#' @template section_dictionary_fselectors
+#' @template section_dictionary_optimizers
 #'
 #' @section Parameters:
 #' \describe{
@@ -23,8 +23,8 @@
 #'
 #' @export
 #' @template example
-FSelectRandom = R6Class("FSelectRandom",
-  inherit = FSelect,
+OptimizerRandom = R6Class("OptimizerRandom",
+  inherit = Optimizer,
   public = list(
 
     #' @description
@@ -39,7 +39,7 @@ FSelectRandom = R6Class("FSelectRandom",
       ps$values = list(batch_size = 10L, prob = 0.5)
 
       super$initialize(
-        param_set = ps, properties = "single-crit"
+        param_set = ps, properties = "single-crit", param_classes = "ParamLgl"
       )
     }
   ),
@@ -68,4 +68,3 @@ FSelectRandom = R6Class("FSelectRandom",
   )
 )
 
-mlr_fselectors$add("random", FSelectRandom)

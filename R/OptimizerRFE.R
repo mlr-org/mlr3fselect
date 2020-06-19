@@ -1,4 +1,4 @@
-#' @title FSelectRFE Class
+#' @title Feature Selection via Recrusive Feature Elimination
 #'
 #' @description
 #' Class for feature selection by recursive feature elimination (RFE). The
@@ -9,7 +9,7 @@
 #' iteration.
 #'
 #' @templateVar id rfe
-#' @template section_dictionary_fselectors
+#' @template section_dictionary_optimizers
 #'
 #' @section Parameters:
 #' \describe{
@@ -36,8 +36,8 @@
 #' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data
-FSelectRFE = R6Class("FSelectRFE",
-  inherit = FSelect,
+OptimizerRFE = R6Class("OptimizerRFE",
+  inherit = Optimizer,
   public = list(
     #' @field importance Stores the feature importance of the model with all
     #'   variables if `recrusive` is set to `FALSE`
@@ -53,7 +53,7 @@ FSelectRFE = R6Class("FSelectRFE",
       ps$values = list(min_features = 1L, recursive = FALSE)
 
       super$initialize(
-        param_set = ps, properties = "single-crit"
+        param_set = ps, properties = "single-crit", param_classes = "ParamLgl"
       )
     }
   ),
@@ -125,5 +125,3 @@ importance_average = function(learners, features) {
   })
   sort(apply(imp, 1, mean))
 }
-
-mlr_fselectors$add("rfe", FSelectRFE)

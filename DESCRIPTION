@@ -5,7 +5,8 @@ Authors@R:
     c(person(given = "Marc",
              family = "Becker",
              role = c("aut", "cre"),
-             email = "marcbecker@posteo.de"),
+             email = "marcbecker@posteo.de",
+             comment = c(ORCID = "0000-0002-8115-0400")),
       person(given = "Patrick",
              family = "Schratz",
              role = "aut",
@@ -42,24 +43,21 @@ Suggests:
     rpart,
     testthat,
     withr
-Remotes:
-    mlr-org/bbotk
+Remotes: 
+    mlr-org/bbotk@optimizer
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Collate: 
     'AutoFSelect.R'
-    'mlr_fselectors.R'
-    'FSelect.R'
-    'FSelectEvolutionary.R'
-    'FSelectExhaustive.R'
+    'OptimizerEvolutionary.R'
+    'OptimizerExhaustive.R'
+    'OptimizerRFE.R'
+    'OptimizerRandom.R'
+    'OptimizerSequential.R'
     'FSelectInstance.R'
-    'FSelectRFE.R'
-    'FSelectRandom.R'
-    'FSelectSequential.R'
     'helper.R'
     'ObjectiveFSelect.R'
     'reexports.R'
-    'sugar.R'
     'zzz.R'

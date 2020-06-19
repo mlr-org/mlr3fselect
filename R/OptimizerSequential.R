@@ -1,4 +1,4 @@
-#' @title FSelectSequential
+#' @title Feature Selection via Sequenital Featue Selection
 #'
 #' @description
 #' Subclass for sequential feature selection. The sequential forward selection
@@ -8,7 +8,7 @@
 #' step the feature that decreases the models performance the least.
 #'
 #' @templateVar id sequential
-#' @template section_dictionary_fselectors
+#' @template section_dictionary_optimizers
 #'
 #' @section Parameters:
 #' \describe{
@@ -24,8 +24,8 @@
 #'
 #' @export
 #' @template example
-FSelectSequential = R6Class("FSelectSequential",
-  inherit = FSelect,
+OptimizerSequential = R6Class("OptimizerSequential",
+  inherit = Optimizer,
   public = list(
 
     #' @description
@@ -38,7 +38,7 @@ FSelectSequential = R6Class("FSelectSequential",
       ps$values = list(strategy = "sfs")
 
       super$initialize(
-        param_set = ps, properties = "single-crit"
+        param_set = ps, properties = "single-crit", param_classes = "ParamLgl"
       )
     }
   ),
@@ -105,5 +105,3 @@ FSelectSequential = R6Class("FSelectSequential",
     }
   )
 )
-
-mlr_fselectors$add("sequential", FSelectSequential)

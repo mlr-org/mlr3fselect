@@ -1,11 +1,11 @@
-#' @title FSelectEvolutionary Class
+#' @title Feature Selection via Evolutionary Search
 #'
 #' @description
 #' Subclass for evolutionary feature selection. Calls [ecr::ecr()] from package
 #' \CRANpkg{ecr}.
 #'
 #' @templateVar id evolutionary
-#' @template section_dictionary_fselectors
+#' @template section_dictionary_optimizers
 #'
 #' @section Parameters:
 #' \describe{
@@ -41,8 +41,8 @@
 #' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data
-FSelectEvolutionary = R6Class("FSelectEvolutionary",
-  inherit = FSelect,
+OptimizerEvolutionary = R6Class("OptimizerEvolutionary",
+  inherit = Optimizer,
   public = list(
 
     #' @description
@@ -66,7 +66,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       ps$add_dep("n.elite", "survival.strategy", CondEqual$new("comma"))
 
       super$initialize(
-        param_set = ps, properties = "single-crit",
+        param_set = ps, properties = "single-crit", param_classes = "ParamLgl",
         packages = "ecr"
       )
     }
@@ -101,7 +101,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
 
-      ctrl = ecr::initECRControl(objective_wrapper, n.objectives = 1)
+      ctrl = ecr::initECRControl(inst$objective_function, n.objectives = 1)
       ctrl = invoke(ecr::registerECROperator, ctrl, "mutate",
         ecr::mutBitflip, .args = pars_mutBitflip)
       ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
@@ -122,7 +122,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         }) # Tasks without features cannot be evaluated
 
       withr::with_package("ecr", {
-        fitness = ecr::evaluateFitness(ctrl, population, inst)
+        fitness = ecr::evaluateFitness(ctrl, population)
       })
 
       repeat({
@@ -137,7 +137,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
           })
 
         withr::with_package("ecr", {
-          fitness_o = ecr::evaluateFitness(ctrl, offspring, inst)
+          fitness_o = ecr::evaluateFitness(ctrl, offspring)
         })
         if (pars$survival.strategy == "plus") {
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
@@ -156,13 +156,3 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
     }
   )
 )
-
-objective_wrapper = function(x, inst) {
-  x = set_names(as.data.table(as.list(as.logical(x))),
-    inst$objective$task$feature_names)
-
-  res = inst$eval_batch(x)
-  as.numeric(res[, inst$objective$measures[[1]]$id, with = FALSE])
-}
-
-mlr_fselectors$add("evolutionary", FSelectEvolutionary)
