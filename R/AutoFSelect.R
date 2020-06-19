@@ -15,7 +15,7 @@
 #' measures = msr("classif.ce")
 #'
 #' terminator = term("evals", n_evals = 15)
-#' fs = fs("exhaustive")
+#' fs = opt("exhaustive")
 #' afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
 #' afs$store_fselect_instance = TRUE
 #'
@@ -49,7 +49,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       ia$measures = assert_measures(as_measures(measures), learner = learner)
       ia$terminator = assert_terminator(terminator)$clone()
       self$instance_args = ia
-      self$fselect = assert_r6(fselect, "FSelect")$clone()
+      self$fselect = assert_r6(fselect, "Optimizer")$clone()
 
       super$initialize(
         id = paste0(learner$id, ".fselect"),
@@ -73,7 +73,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       instance = invoke(FSelectInstance$new, .args = ia)
       self$fselect$optimize(instance)
 
-      feat = task$feature_names[as.logical(instance$result_x_seach_space)]
+      feat = task$feature_names[as.logical(instance$result_x_search_space)]
       ia$task$select(feat)
 
       learner = ia$learner$clone(deep = TRUE)

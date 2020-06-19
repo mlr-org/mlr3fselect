@@ -7,7 +7,7 @@ test_that("FSelectEvolutionary", {
 test_that("FSelectEvolutionary - Initial solution", {
   z = test_fselect("evolutionary", mu = 4, lambda = 8,
     initial.solutions = list(c(1, 1, 1, 0)), term_evals = 12)
-  r = z$inst$result_x_seach_space
+  r = z$inst$result_x_search_space
   expect_equal(r, data.table(x1 = TRUE,
                        x2 = TRUE,
                        x3 = TRUE,

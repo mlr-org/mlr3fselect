@@ -10,7 +10,7 @@ test_that("FSelectExhaustive", {
   expect_features(a[batch_nr == 2, 1:4], n = 2)
   expect_features(a[batch_nr == 3, 1:4], n = 3)
   expect_features(a[batch_nr == 4, 1:4], n = 4)
-  r = z$inst$result_x_seach_space
+  r = z$inst$result_x_search_space
   expect_equal(r, data.table(x1 = TRUE,
                        x2 = TRUE,
                        x3 = TRUE,
@@ -20,7 +20,7 @@ test_that("FSelectExhaustive", {
   a = z$inst$archive$data()
   expect_features(a[, 1:4], n = 2)
   expect_data_table(a, nrows = 10L)
-  r = z$inst$result_x_seach_space
+  r = z$inst$result_x_search_space
   expect_equal(r, data.table(x1 = TRUE,
                        x2 = TRUE,
                        x3 = FALSE,

@@ -68,8 +68,8 @@ test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals,
   store_models = FALSE) {
 
   inst = TEST_MAKE_INST(term_evals = term_evals, store_models = store_models)
-  fselect = fs(key, ...)
-  expect_fselect(fselect)
+  fselect = opt(key, ...)
+  expect_optimizer(fselect)
 
   fselect$optimize(inst)
   data = inst$archive$data()
@@ -85,13 +85,13 @@ test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals,
 }
 
 # Check FSelect subclass
-expect_fselect = function(fselect) {
-  expect_r6(fselect, "FSelect",
+expect_optimizer = function(optimizer) {
+  expect_r6(optimizer, "Optimizer",
     public = c("optimize", "param_set"),
     private = ".optimize"
   )
-  expect_is(fselect$param_set, "ParamSet")
-  expect_function(fselect$optimize, args = "inst")
+  expect_is(optimizer$param_set, "ParamSet")
+  expect_function(optimizer$optimize, args = "inst")
 }
 
 # Check expected feature number
