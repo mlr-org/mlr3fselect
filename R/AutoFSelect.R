@@ -28,7 +28,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @field instance_args `list()`
     instance_args = NULL,
 
-    #' @field fselect [FSelect]
+    #' @field fselect [bbotk::Optimizer]
     fselect = NULL,
 
     #' @field store_fselect_instance `logical(1)`
@@ -40,7 +40,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @param resampling [mlr3::Resampling]
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
-    #' @param fselect [FSelect]
+    #' @param fselect  [bbotk::Optimizer]
     initialize = function(learner, resampling, measures, terminator, fselect) {
       ia = list()
       ia$learner = assert_learner(learner)$clone(deep = TRUE)

@@ -10,7 +10,7 @@
 #'   terminator = terminator
 #' )
 #'
-#' fs = fs("<%= id %>")
+#' fs = opt("<%= id %>")
 #' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data

@@ -41,7 +41,7 @@ instance = FSelectInstance$new(
   store_models = TRUE
 )
 
-fs = fs("rfe")
+fs = opt("rfe")
 fs$optimize(instance)
 instance$result
 instance$archive$data

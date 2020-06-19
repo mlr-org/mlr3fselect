@@ -44,7 +44,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs("sequential")
+fs = opt("sequential")
 fs$optimize(instance)
 instance$result
 instance$archive$data

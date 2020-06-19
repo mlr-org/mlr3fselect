@@ -43,7 +43,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs("random")
+fs = opt("random")
 fs$optimize(instance)
 instance$result
 instance$archive$data

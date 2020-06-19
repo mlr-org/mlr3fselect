@@ -39,7 +39,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = fs("exhaustive")
+fs = opt("exhaustive")
 fs$optimize(instance)
 instance$result
 instance$archive$data

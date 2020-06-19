@@ -14,7 +14,7 @@ evaluations can be performed from this point on.
 A list of measures can be passed to the instance, and they will always be all
 evaluated. However, single-criteria tuners optimize only the first measure.
 
-The \link{FSelect} object is also supposed to store its final result, consisting
+The  \link[bbotk:Optimizer]{bbotk::Optimizer} object is also supposed to store its final result, consisting
 of a selected feature set and associated estimated performance values, by
 calling the method \code{instance$assign_result()}.
 }

@@ -11,7 +11,7 @@
 #' A list of measures can be passed to the instance, and they will always be all
 #' evaluated. However, single-criteria tuners optimize only the first measure.
 #'
-#' The [FSelect] object is also supposed to store its final result, consisting
+#' The  [bbotk::Optimizer] object is also supposed to store its final result, consisting
 #' of a selected feature set and associated estimated performance values, by
 #' calling the method `instance$assign_result()`.
 #'

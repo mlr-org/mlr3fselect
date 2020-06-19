@@ -17,7 +17,7 @@ resampling = rsmp("holdout")
 measures = msr("classif.ce")
 
 terminator = term("evals", n_evals = 15)
-fs = fs("exhaustive")
+fs = opt("exhaustive")
 afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
 afs$store_fselect_instance = TRUE
 
@@ -33,7 +33,7 @@ afs$learner
 \describe{
 \item{\code{instance_args}}{\code{list()}}
 
-\item{\code{fselect}}{\link{FSelect}}
+\item{\code{fselect}}{\link[bbotk:Optimizer]{bbotk::Optimizer}}
 
 \item{\code{store_fselect_instance}}{\code{logical(1)}}
 }
@@ -94,7 +94,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 \item{\code{terminator}}{\link{Terminator}}
 
-\item{\code{fselect}}{\link{FSelect}}
+\item{\code{fselect}}{\link[bbotk:Optimizer]{bbotk::Optimizer}}
 }
 \if{html}{\out{</div>}}
 }

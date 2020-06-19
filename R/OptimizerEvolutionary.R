@@ -37,7 +37,7 @@
 #'   terminator = terminator
 #' )
 #'
-#' fs = fs("evolutionary", mu = 10, lambda = 5)
+#' fs = opt("evolutionary", mu = 10, lambda = 5)
 #' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data
