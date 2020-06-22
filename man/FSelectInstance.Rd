@@ -101,7 +101,7 @@ Measure to optimize.}
 \if{html}{\out{<a id="method-objective_function"></a>}}
 \if{latex}{\out{\hypertarget{method-objective_function}{}}}
 \subsection{Method \code{objective_function()}}{
-Evaluates a single feature combintion encoded as 0/1, and returns a
+Evaluates a single feature set encoded as 0/1, and returns a
 scalar objective value, where the return value is negated if the measure
 is maximized. Internally, \verb{$eval_batch()} is called with a single row.
 This function serves as a objective function for optimizers of binary
@@ -114,7 +114,7 @@ spaces.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{x}}{(\code{integer()})\cr
-0/1 encoded feature combination.}
+0/1 encoded feature set.}
 }
 \if{html}{\out{</div>}}
 }

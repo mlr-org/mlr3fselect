@@ -60,14 +60,14 @@ FSelectInstance = R6Class("FSelectInstance",
     },
 
     #' @description
-    #' Evaluates a single feature combintion encoded as 0/1, and returns a
+    #' Evaluates a single feature set encoded as 0/1, and returns a
     #' scalar objective value, where the return value is negated if the measure
     #' is maximized. Internally, `$eval_batch()` is called with a single row.
     #' This function serves as a objective function for optimizers of binary
     #' spaces.
     #'
     #' @param x (`integer()`)\cr
-    #' 0/1 encoded feature combination.
+    #' 0/1 encoded feature set.
     #'
     #' @return Objective value as `numeric(1)`.
     objective_function = function(x) {
