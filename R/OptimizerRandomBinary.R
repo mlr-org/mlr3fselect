@@ -1,9 +1,10 @@
 #' @title Feature Selection via Random Search
 #'
 #' @description
-#' Subclass for random feature selection. Feature sets are randomly drawn.
+#' `OptimizerRandomBinary` class that implements a random feature selection.
+#' Feature subsets are randomly drawn.
 #'
-#' @templateVar id random
+#' @templateVar id random_binary
 #' @template section_dictionary_optimizers
 #'
 #' @section Parameters:
@@ -23,7 +24,7 @@
 #'
 #' @export
 #' @template example
-OptimizerRandom = R6Class("OptimizerRandom",
+OptimizerRandomBinary = R6Class("OptimizerRandomBinary",
   inherit = Optimizer,
   public = list(
 

@@ -4,8 +4,8 @@
 \alias{OptimizerExhaustive}
 \title{Feature Selection via Exhaustive Search}
 \description{
-Subclass for exhaustive feature selection. Evaluates every possible feature
-subset.
+\code{OptimizerExhaustive} class that implements an exhaustive feature selection.
+Evaluates every possible feature subset.
 }
 \section{Dictionary}{
 

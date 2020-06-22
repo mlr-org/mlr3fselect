@@ -1,12 +1,12 @@
 #' @title Feature Selection via Recrusive Feature Elimination
 #'
 #' @description
-#' Subclass for recursive feature elimination (RFE). The recursive algorithm
-#' (`recursive = TRUE`) recomputes the feature importances on the reduced
-#' feature set in every iteration.  The non-recursive algorithm
-#' (`recursive = FALSE`) only uses the feature importances of the model fitted
-#' with all features to eliminate the next most unimportant feature in every
-#' iteration.
+#' `OptimizerRFE` class that implements recursive feature elimination (RFE).
+#' The recursive algorithm (`recursive = TRUE`) recomputes the feature
+#' importances on the reduced feature set in every iteration.  The non-recursive
+#' algorithm (`recursive = FALSE`) only uses the feature importances of the
+#' model fitted with all features to eliminate the next most unimportant feature
+#' in every iteration.
 #'
 #' @templateVar id rfe
 #' @template section_dictionary_optimizers

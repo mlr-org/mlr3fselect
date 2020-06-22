@@ -39,7 +39,7 @@ test_that("FSelectInstance - Eval batch", {
 
 test_that("Budget", {
   inst = TEST_MAKE_INST(term_evals = 2L)
-  fs = opt("random", batch_size = 6)
+  fs = opt("random_binary", batch_size = 6)
   fs$optimize(inst)
   tab = inst$archive$data()
   expect_data_table(tab, nrows = 6)

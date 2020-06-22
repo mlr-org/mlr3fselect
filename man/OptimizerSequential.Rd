@@ -4,11 +4,12 @@
 \alias{OptimizerSequential}
 \title{Feature Selection via Sequenital Featue Selection}
 \description{
-Subclass for sequential feature selection. The sequential forward selection
-(\code{strategy = fsf}) extends the feature set in each step with the feature that
-increases the models performance the most. The sequential backward selection
-(\code{strategy = fsb}) starts with the complete future set and removes in each
-step the feature that decreases the models performance the least.
+\code{OptimizerSequential} class that implements sequential feature selection. The
+sequential forward selection (\code{strategy = fsf}) extends the feature set in
+each step with the feature that increases the models performance the most.
+The sequential backward selection (\code{strategy = fsb}) starts with the complete
+future set and removes in each step the feature that decreases the models
+performance the least.
 }
 \note{
 Feature sets are evaluated in batches, where each batch is one step in the

@@ -54,7 +54,7 @@ Collate:
     'OptimizerEvolutionary.R'
     'OptimizerExhaustive.R'
     'OptimizerRFE.R'
-    'OptimizerRandom.R'
+    'OptimizerRandomBinary.R'
     'OptimizerSequential.R'
     'FSelectInstance.R'
     'helper.R'

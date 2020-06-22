@@ -1,8 +1,8 @@
 #' @title Feature Selection via Exhaustive Search
 #'
 #' @description
-#' Subclass for exhaustive feature selection. Evaluates every possible feature
-#' subset.
+#' `OptimizerExhaustive` class that implements an exhaustive feature selection.
+#' Evaluates every possible feature subset.
 #'
 #' @templateVar id exhaustive
 #' @template section_dictionary_optimizers

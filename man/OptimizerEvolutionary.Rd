@@ -4,8 +4,8 @@
 \alias{OptimizerEvolutionary}
 \title{Feature Selection via Evolutionary Search}
 \description{
-Subclass for evolutionary feature selection. Calls \code{\link[ecr:ecr]{ecr::ecr()}} from package
-\CRANpkg{ecr}.
+\code{OptimizerEvolutionary} class that implements an evolutionary feature
+selection. Calls \code{\link[ecr:ecr]{ecr::ecr()}} from package \CRANpkg{ecr}.
 }
 \section{Dictionary}{
 

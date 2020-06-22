@@ -1,8 +1,8 @@
 #' @title Feature Selection via Evolutionary Search
 #'
 #' @description
-#' Subclass for evolutionary feature selection. Calls [ecr::ecr()] from package
-#' \CRANpkg{ecr}.
+#' `OptimizerEvolutionary` class that implements an evolutionary feature
+#' selection. Calls [ecr::ecr()] from package \CRANpkg{ecr}.
 #'
 #' @templateVar id evolutionary
 #' @template section_dictionary_optimizers

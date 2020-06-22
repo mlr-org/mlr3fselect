@@ -14,7 +14,7 @@ register_bbotk = function() {
   x$add("exhaustive", OptimizerExhaustive)
   x$add("sequential", OptimizerSequential)
   x$add("rfe", OptimizerRFE)
-  x$add("random", OptimizerRandom)
+  x$add("random_binary", OptimizerRandomBinary)
 }
 
 .onLoad = function(libname, pkgname) {

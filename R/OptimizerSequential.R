@@ -1,11 +1,12 @@
 #' @title Feature Selection via Sequenital Featue Selection
 #'
 #' @description
-#' Subclass for sequential feature selection. The sequential forward selection
-#' (`strategy = fsf`) extends the feature set in each step with the feature that
-#' increases the models performance the most. The sequential backward selection
-#' (`strategy = fsb`) starts with the complete future set and removes in each
-#' step the feature that decreases the models performance the least.
+#' `OptimizerSequential` class that implements sequential feature selection. The
+#' sequential forward selection (`strategy = fsf`) extends the feature set in
+#' each step with the feature that increases the models performance the most.
+#' The sequential backward selection (`strategy = fsb`) starts with the complete
+#' future set and removes in each step the feature that decreases the models
+#' performance the least.
 #'
 #' @templateVar id sequential
 #' @template section_dictionary_optimizers
