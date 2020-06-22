@@ -31,26 +31,30 @@ afs$learner
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{instance_args}}{\code{list()}}
+\item{\code{instance_args}}{(\code{list()})\cr
+All arguments from construction to create the \link{FSelectInstance}.}
 
-\item{\code{fselect}}{\link{FSelect}}
+\item{\code{fselect}}{(\link{FSelect})\cr
+Stores the feature selection algorithm.}
 
-\item{\code{store_fselect_instance}}{\code{logical(1)}}
+\item{\code{store_fselect_instance}}{(\code{logical(1)})}
 }
 \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{archive}}{FSelectInstance archive}
+\item{\code{archive}}{(\link{Archive})\cr
+Returns FSelectInstance archive.}
 
-\item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+Trained learner.}
 
-\item{\code{fselect_instance}}{\link{FSelectInstance}}
+\item{\code{fselect_instance}}{(\link{FSelectInstance})\cr
+Internally created feature selection instance with all intermediate results.}
 
-\item{\code{fselect_result}}{\code{list()}\cr
-Result of the feature selection i.e. the optimal feature set and its
-estimated performances.}
+\item{\code{fselect_result}}{(named \code{list()})\cr
+Short-cut to \verb{$result} from \link{FSelectInstance}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -80,21 +84,32 @@ estimated performances.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(learner, resampling, measures, terminator, fselect)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(learner, resampling, measure, terminator, fselect)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+Learner to optimize the feature subset for, see \link{FSelectInstance}.}
 
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}}
+\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
+Resampling strategy during feature selection, see \link{FSelectInstance}. This
+\link[mlr3:Resampling]{mlr3::Resampling} is meant to be the \strong{inner} resampling, operating
+on the training set of an arbitrary outer resampling. For this reason
+it is not feasible to pass an instantiated \link[mlr3:Resampling]{mlr3::Resampling} here.}
 
-\item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
+\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+Performance measure to optimize.}
 
-\item{\code{terminator}}{\link{Terminator}}
+\item{\code{terminator}}{(\link{Terminator})\cr
+When to stop feature selection, see \link{FSelectInstance}.}
 
-\item{\code{fselect}}{\link{FSelect}}
+\item{\code{FSelect}}{(\link{FSelect})\cr
+Feature selection algorithm to run.}
+
+\item{\code{bm_args}}{(named \code{list()})\cr
+Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, see \link{FSelectInstance}.}
 }
 \if{html}{\out{</div>}}
 }
