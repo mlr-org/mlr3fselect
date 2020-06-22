@@ -5,7 +5,7 @@
 \title{ObjectiveFSelect}
 \description{
 Describes the objective function that estimates the performance of feature
-sets.
+subsets. This class is usually constructed internally by the \link{OptimInstance}.
 }
 \section{Super class}{
 \code{\link[bbotk:Objective]{bbotk::Objective}} -> \code{ObjectiveFSelect}
@@ -79,7 +79,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<a id="method-eval_many"></a>}}
 \if{latex}{\out{\hypertarget{method-eval_many}{}}}
 \subsection{Method \code{eval_many()}}{
-Evaluates multiple feature sets on the objective function
+Evaluates multiple feature subsets on the objective function.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelect$eval_many(xss)}\if{html}{\out{</div>}}
 }
@@ -88,7 +88,7 @@ Evaluates multiple feature sets on the objective function
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{xss}}{\code{list()}\cr
-A list of lists that contains multiple feature sets}
+A list of lists that contains multiple feature subsets.}
 }
 \if{html}{\out{</div>}}
 }

@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Describes the objective function that estimates the performance of feature
-#' sets.
+#' subsets. This class is usually constructed internally by the [OptimInstance].
 #'
 #' @export
 ObjectiveFSelect = R6Class("ObjectiveFSelect",
@@ -59,14 +59,14 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
             tags = ifelse(s$minimize, "minimize", "maximize"))
         }))
 
-      super$initialize(id = "feature_selection", domain = domain,
-        codomain = codomain)
+      super$initialize(id = sprintf("%s_on_%s", self$learner$id, self$task$id),
+        domain = domain, codomain = codomain)
     },
 
     #' @description
-    #' Evaluates multiple feature sets on the objective function
+    #' Evaluates multiple feature subsets on the objective function.
     #' @param xss `list()`\cr
-    #' A list of lists that contains multiple feature sets
+    #' A list of lists that contains multiple feature subsets.
     eval_many = function(xss) {
 
       tasks = map(xss, function(x) {
