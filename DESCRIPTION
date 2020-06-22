@@ -44,7 +44,7 @@ Suggests:
     testthat,
     withr
 Remotes: 
-    mlr-org/bbotk@optimizer
+    mlr-org/bbotk
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
