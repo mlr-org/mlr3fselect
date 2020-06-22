@@ -24,7 +24,7 @@
 #'
 #' # Objects required to define the performance evaluator
 #' task = tsk("iris")
-#' measures = msrs(c("classif.ce"))
+#' measure = msr("classif.ce")
 #' learner = lrn("classif.rpart")
 #' resampling = rsmp("cv")
 #' terminator = term("evals", n_evals = 8)
@@ -33,7 +33,7 @@
 #'   task = task,
 #'   learner = learner,
 #'   resampling = resampling,
-#'   measures = measures,
+#'   measure = measure,
 #'   terminator = terminator
 #' )
 FSelectInstance = R6Class("FSelectInstance",

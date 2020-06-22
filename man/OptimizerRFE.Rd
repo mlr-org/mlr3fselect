@@ -36,7 +36,7 @@ instance = FSelectInstance$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
   resampling = rsmp("holdout"),
-  measures = msr("classif.ce"),
+  measure = msr("classif.ce"),
   terminator = terminator,
   store_models = TRUE
 )
