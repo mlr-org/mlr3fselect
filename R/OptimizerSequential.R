@@ -48,7 +48,7 @@ OptimizerSequential = R6Class("OptimizerSequential",
 
       pars = self$param_set$values
       archive = inst$archive
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$archive$cols_x
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)

@@ -48,7 +48,7 @@ OptimizerRandomBinary = R6Class("OptimizerRandomBinary",
   private = list(
     .optimize = function(inst) {
       pars = self$param_set$values
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$archive$cols_x
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)

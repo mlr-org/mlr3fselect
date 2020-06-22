@@ -38,7 +38,7 @@ OptimizerExhaustive = R6Class("Optimizerxhaustive",
   private = list(
     .optimize = function(inst) {
       pars = self$param_set$values
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$archive$cols_x
       archive = inst$archive
 
       if (is.null(pars$max_features)) {

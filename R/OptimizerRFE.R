@@ -62,7 +62,7 @@ OptimizerRFE = R6Class("OptimizerRFE",
 
       pars = self$param_set$values
       archive = inst$archive
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$archive$cols_x
 
       states = as.list(rep(TRUE, length(feature_names)))
       names(states) = feature_names
