@@ -10,8 +10,8 @@ Feature subsets are randomly drawn.
 \section{Dictionary}{
 
 This \link[bbotk:Optimizer]{bbotk::Optimizer} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_optimizers} or with the associated sugar function \code{\link[=opt]{opt()}}:\preformatted{mlr_optimizers$get("random")
-opt("random")
+\link{mlr_optimizers} or with the associated sugar function \code{\link[=opt]{opt()}}:\preformatted{mlr_optimizers$get("random_binary")
+opt("random_binary")
 }
 }
 
@@ -44,7 +44,7 @@ instance = FSelectInstance$new(
   terminator = terminator
 )
 
-fs = opt("random")
+fs = opt("random_binary")
 fs$optimize(instance)
 instance$result
 instance$archive$data
