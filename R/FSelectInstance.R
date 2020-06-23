@@ -80,6 +80,31 @@ FSelectInstance = R6Class("FSelectInstance",
       res = self$eval_batch(xdt)
       y = as.numeric(res[, self$objective$codomain$ids()[1], with=FALSE])
       if(self$objective$codomain$tags[[1]] == "minimize") y else -y
+    },
+
+    #' @description
+    #' The [bbotk::Optimizer] object writes the best found feature subset
+    #' and estimated performance value here. For internal use.
+    #'
+    #' @param xdt (`data.table`)\cr
+    #'   x values as `data.table` with one row.
+    #'   Contains the value in the *search space* of the [FSelectInstance] object.
+    #'   Can contain additional columns for extra information.
+    #' @param y (`numeric(1)`)\cr
+    #'   Optimal outcome.
+    assign_result = function(xdt, y) {
+      # Add feature names to result for easy task subsetting
+      features = list(self$objective$task$feature_names[as.logical(xdt)])
+      xdt[, features := list(features)]
+      super$assign_result(xdt, y)
+    }
+  ),
+
+  active = list(
+    #' @field result_features (`character()`)\cr
+    #' Character vector of the optimial features.
+    result_features = function() {
+      private$.result$features[[1]]
     }
   )
 )
