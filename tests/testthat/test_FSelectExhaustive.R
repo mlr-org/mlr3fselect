@@ -15,6 +15,7 @@ test_that("FSelectExhaustive", {
                        x2 = TRUE,
                        x3 = TRUE,
                        x4 = FALSE))
+  expect_equal(z$inst$result_features, c("x1", "x2", "x3"))
 
   z = test_fselect("exhaustive", max_features = 2, term_evals = 10)
   a = z$inst$archive$data()
@@ -25,4 +26,5 @@ test_that("FSelectExhaustive", {
                        x2 = TRUE,
                        x3 = FALSE,
                        x4 = FALSE))
+  expect_equal(z$inst$result_features, c("x1", "x2"))
 })

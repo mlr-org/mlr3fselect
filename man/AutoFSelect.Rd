@@ -105,7 +105,7 @@ Performance measure to optimize.}
 \item{\code{terminator}}{(\link{Terminator})\cr
 When to stop feature selection, see \link{FSelectInstance}.}
 
-\item{\code{FSelect}}{(\link{FSelect})\cr
+\item{\code{fselect}}{(\link{FSelect})\cr
 Feature selection algorithm to run.}
 
 \item{\code{bm_args}}{(named \code{list()})\cr

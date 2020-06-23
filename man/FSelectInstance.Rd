@@ -42,17 +42,25 @@ inst = FSelectInstance$new(
 \section{Super class}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{FSelectInstance}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{result_features}}{(\code{character()})\cr
+Character vector of the optimial features.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectInstance$new()}}
+\item \href{#method-assign_result}{\code{FSelectInstance$assign_result()}}
 \item \href{#method-clone}{\code{FSelectInstance$clone()}}
 }
 }
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="assign_result">}\href{../../bbotk/html/OptimInstance.html#method-assign_result}{\code{bbotk::OptimInstance$assign_result()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch">}\href{../../bbotk/html/OptimInstance.html#method-eval_batch}{\code{bbotk::OptimInstance$eval_batch()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format">}\href{../../bbotk/html/OptimInstance.html#method-format}{\code{bbotk::OptimInstance$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print">}\href{../../bbotk/html/OptimInstance.html#method-print}{\code{bbotk::OptimInstance$print()}}\out{</span>}
@@ -92,6 +100,30 @@ Measure to optimize.}
 \item{\code{terminator}}{(\link{Terminator})}
 
 \item{\code{store_models}}{(\code{logical(1)})}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-assign_result"></a>}}
+\if{latex}{\out{\hypertarget{method-assign_result}{}}}
+\subsection{Method \code{assign_result()}}{
+The \link{FSelect} object writes the best found feature subset
+and estimated performance value here. For internal use.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstance$assign_result(xdt, y)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{xdt}}{(\code{data.table})\cr
+x values as \code{data.table} with one row.
+Contains the value in the \emph{search space} of the \link{TuningInstance} object.
+Can contain additional columns for extra information.}
+
+\item{\code{y}}{(\code{numeric(1)})\cr
+Optimal outcome.}
 }
 \if{html}{\out{</div>}}
 }

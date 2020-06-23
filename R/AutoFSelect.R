@@ -54,7 +54,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @param terminator ([Terminator])\cr
     #' When to stop feature selection, see [FSelectInstance].
     #'
-    #' @param FSelect ([FSelect])\cr
+    #' @param fselect ([FSelect])\cr
     #' Feature selection algorithm to run.
     #'
     #' @param bm_args (named `list()`)\cr

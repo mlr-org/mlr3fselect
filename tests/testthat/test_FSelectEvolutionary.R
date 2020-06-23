@@ -12,6 +12,7 @@ test_that("FSelectEvolutionary - Initial solution", {
                        x2 = TRUE,
                        x3 = TRUE,
                        x4 = FALSE))
+  expect_equal(z$inst$result_features, c("x1", "x2", "x3"))
 })
 
 test_that("FSelectEvolutionary - Parent selector", {
