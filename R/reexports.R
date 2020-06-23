@@ -18,7 +18,7 @@ NULL
 
 #' @title Re-export of `terms`
 #'
-#' See [bbotk::terms].
+#' See \code{\link[bbotk:term]{bbotk::terms}}
 #'
 #' @name terms
 #' @rdname terms
@@ -44,7 +44,7 @@ NULL
 
 #' @title Re-export of `opts`
 #'
-#' See [bbotk::opts].
+#' See \code{\link[bbotk:opt]{bbotk::opts}}
 #'
 #' @name opts
 #' @rdname opts

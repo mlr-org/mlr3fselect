@@ -4,9 +4,9 @@
 \alias{opts}
 \title{Re-export of \code{opts}
 
-See \link[bbotk:opts]{bbotk::opts}.}
+See \code{\link[bbotk:opt]{bbotk::opts}}}
 \description{
 Re-export of \code{opts}
 
-See \link[bbotk:opts]{bbotk::opts}.
+See \code{\link[bbotk:opt]{bbotk::opts}}
 }
