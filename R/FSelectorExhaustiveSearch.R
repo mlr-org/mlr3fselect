@@ -1,8 +1,11 @@
-#' FSelectExhaustive Class
+#' @title Feature Selection via Exhaustive Search
 #'
 #' @description
-#' Subclass for exhaustive feature selection. Evaluates every possible feature
-#' subset.
+#' `FSelectorExhaustiveSearch` class that implements an Exhaustive Search.
+#'
+#' In order to support general termination criteria and parallelization, feature
+#' sets are evaluated in batches. The size of the feature sets is increased by 1
+#' in each batch.
 #'
 #' @templateVar id exhaustive
 #' @template section_dictionary_fselectors
@@ -13,14 +16,10 @@
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
 #' }
 #'
-#' In order to support general termination criteria and parallelization, feature
-#' sets are evaluated in batches. The size of the feature sets is increased by 1
-#' in each batch.
-#'
 #' @export
 #' @template example
-FSelectExhaustive = R6Class("FSelectExhaustive",
-  inherit = FSelect,
+FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
+  inherit = FSelector,
   public = list(
 
     #' @description
@@ -30,15 +29,13 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
         ParamInt$new("max_features", lower = 1))
       )
 
-      super$initialize(
-        param_set = ps, properties = "single-crit"
-      )
+      super$initialize(param_set = ps, properties = "single-crit")
     }
   ),
   private = list(
     .optimize = function(inst) {
       pars = self$param_set$values
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$cols_x
       archive = inst$archive
 
       if (is.null(pars$max_features)) {
@@ -65,4 +62,4 @@ FSelectExhaustive = R6Class("FSelectExhaustive",
   )
 )
 
-mlr_fselectors$add("exhaustive", FSelectExhaustive)
+mlr_fselectors$add("exhaustive_search", FSelectorExhaustiveSearch)
