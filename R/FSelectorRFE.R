@@ -62,7 +62,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
 
       pars = self$param_set$values
       archive = inst$archive
-      feature_names = inst$cols_x
+      feature_names = inst$archive$cols_x
 
       states = as.list(rep(TRUE, length(feature_names)))
       names(states) = feature_names

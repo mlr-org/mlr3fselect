@@ -48,7 +48,7 @@ FSelectorSequential = R6Class("FSelectorSequential",
 
       pars = self$param_set$values
       archive = inst$archive
-      feature_names = inst$cols_x
+      feature_names = inst$archive$cols_x
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)

@@ -35,7 +35,7 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
   private = list(
     .optimize = function(inst) {
       pars = self$param_set$values
-      feature_names = inst$cols_x
+      feature_names = inst$archive$cols_x
       archive = inst$archive
 
       if (is.null(pars$max_features)) {
