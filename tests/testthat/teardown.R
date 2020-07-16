@@ -1,1 +1,1 @@
-lg$set_threshold(old_threshold)
+mapply(function(l, threshold) l$set_threshold(threshold), l = loggers, threshold = thresholds)

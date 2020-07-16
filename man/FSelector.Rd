@@ -83,6 +83,19 @@ instance$result
 # evaluations
 instance$archive
 }
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{param_set}}{(\link[paradox:ParamSet]{paradox::ParamSet}).}
+
+\item{\code{param_classes}}{(\code{character()}).}
+
+\item{\code{properties}}{(\code{character()}).}
+
+\item{\code{packages}}{(\code{character()}).}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
