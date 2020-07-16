@@ -22,7 +22,7 @@
 #' @examples
 #' library(mlr3)
 #'
-#' terminator = term("evals", n_evals = 10)
+#' terminator = trm("evals", n_evals = 10)
 #' instance = FSelectInstance$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
@@ -37,7 +37,7 @@
 #' instance$result
 #' instance$archive$data
 FSelectorRFE = R6Class("FSelectorRFE",
-  inherit = FSelect,
+  inherit = FSelector,
   public = list(
     #' @field importance Stores the feature importance of the model with all
     #'   variables if `recrusive` is set to `FALSE`
@@ -126,4 +126,4 @@ importance_average = function(learners, features) {
   sort(apply(imp, 1, mean))
 }
 
-mlr_fselectors$add("rfe", FSelectRFE)
+mlr_fselectors$add("rfe", FSelectorRFE)
