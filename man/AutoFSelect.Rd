@@ -37,7 +37,7 @@ All arguments from construction to create the \link{FSelectInstanceSingleCrit}.}
 \item{\code{fselector}}{(\link{FSelector})\cr
 Stores the feature selection algorithm.}
 
-\item{\code{store_fselector_instance}}{(\code{logical(1)})}
+\item{\code{store_fselector_instance}}{(\code{logical(1)}).}
 }
 \if{html}{\out{</div>}}
 }

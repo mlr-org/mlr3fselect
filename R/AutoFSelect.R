@@ -33,7 +33,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' Stores the feature selection algorithm.
     fselector = NULL,
 
-    #' @field store_fselector_instance (`logical(1)`)
+    #' @field store_fselector_instance (`logical(1)`).
     store_fselector_instance = TRUE,
 
     #' @description
@@ -99,8 +99,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       learner = ia$learner$clone(deep = TRUE)
       learner$train(ia$task)
 
-      result_model = list()
-      result_model$learner = learner
+      result_model = list(learner = learner)
       if (isTRUE(self$store_fselector_instance)) {
         result_model$fselector_instance = instance
       }

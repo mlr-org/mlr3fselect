@@ -52,7 +52,14 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelect$new(task, learner, resampling, measures, store_models = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelect$new(
+  task,
+  learner,
+  resampling,
+  measures,
+  store_models = FALSE,
+  check_values = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
