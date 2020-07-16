@@ -5,7 +5,7 @@
 #' of [mlr3::mlr_sugar].
 #'
 #' @inheritParams mlr3::mlr_sugar
-#' @return [FSelect].
+#' @return [FSelector].
 #' @export
 #' @examples
 #' fs("sequential", max_features = 4)

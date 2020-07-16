@@ -6,7 +6,7 @@ test_that("AutoFSelect - train and predict", {
   resampling = rsmp("holdout")
   measures = msr("dummy.sequential")
   fs = fs("sequential")
-  terminator = term("evals", n_evals = 4L)
+  terminator = trm("evals", n_evals = 4L)
 
   at = AutoFSelect$new(learner, resampling, measures, terminator, fselect = fs)
   expect_learner(at)
@@ -31,7 +31,7 @@ test_that("AutoFSelect - resample", {
   resampling_inner = rsmp("holdout")
   measures = msr("dummy.sequential")
   fs = fs("sequential")
-  terminator = term("evals", n_evals = 10L)
+  terminator = trm("evals", n_evals = 10L)
 
   at = AutoFSelect$new(learner, resampling_inner, measures, terminator,
     fselect = fs)

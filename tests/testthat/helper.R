@@ -21,9 +21,9 @@ TEST_MAKE_INST = function(n_features = 4L, folds = 2L,
   learner = lrn("regr.rpart")
   task = TEST_MAKE_TSK(n_features)
   resampling = rsmp("cv", folds = folds)
-  terminator = term("evals", n_evals = term_evals)
+  terminator = trm("evals", n_evals = term_evals)
 
-  inst = FSelectInstance$new(task, learner, resampling, measures, terminator,
+  inst = FSelectInstanceSingleCrit$new(task, learner, resampling, measures, terminator,
     store_models)
   return(inst)
 }
@@ -86,7 +86,7 @@ test_fselect = function(key, ..., term_evals = 2L, real_evals = term_evals,
 
 # Check FSelect subclass
 expect_fselect = function(fselect) {
-  expect_r6(fselect, "FSelect",
+  expect_r6(fselect, "FSelector",
     public = c("optimize", "param_set"),
     private = ".optimize"
   )
