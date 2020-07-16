@@ -77,15 +77,6 @@ FSelector = R6Class("FSelector",
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    #' @param param_set [paradox::ParamSet]
-    #' @param param_classes `character()`
-    #' @param properties `character()`
-    #' @param packages `character()`
-    #'
-    #'
-
-    #' @description
-    #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
     #' @param param_set [paradox::ParamSet]\cr
     #' Set of control parameters for fselector.
