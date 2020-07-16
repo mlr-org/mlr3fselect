@@ -61,13 +61,16 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
 
       super$initialize(id = sprintf("%s_on_%s", self$learner$id, self$task$id),
         domain = domain, codomain = codomain)
-    },
+    }
+  ),
+
+  private = list(
 
     #' @description
     #' Evaluates multiple feature subsets on the objective function.
     #' @param xss `list()`\cr
     #' A list of lists that contains multiple feature subsets.
-    eval_many = function(xss) {
+    .eval_many = function(xss) {
 
       tasks = map(xss, function(x) {
         state = self$task$feature_names[unlist(x)]
