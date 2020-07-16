@@ -28,7 +28,7 @@
 #' @examples
 #' library(mlr3)
 #'
-#' terminator = term("evals", n_evals = 10)
+#' terminator = trm("evals", n_evals = 10)
 #' instance = FSelectInstance$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
@@ -42,7 +42,7 @@
 #' instance$result
 #' instance$archive$data
 FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
-  inherit = FSelect,
+  inherit = FSelector,
   public = list(
 
     #' @description
@@ -165,4 +165,4 @@ objective_wrapper = function(x, inst) {
   as.numeric(res[, inst$objective$measures[[1]]$id, with = FALSE])
 }
 
-mlr_fselectors$add("evolutionary", FSelectEvolutionary)
+mlr_fselectors$add("evolutionary", FSelectorEvolutionary)
