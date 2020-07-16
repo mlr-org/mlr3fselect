@@ -1,7 +1,7 @@
-#' @title FSelectRFE Class
+#' @title Feature Selection via Recrusive Feature Elimination
 #'
 #' @description
-#' Class for feature selection by recursive feature elimination (RFE). The
+#' `FSelectorRFE` class that implements Recursive Feature Elimination (RFE). The
 #' recursive algorithm (`recursive = TRUE`) recomputes the feature importances
 #' on the reduced feature set in every iteration.  The non-recursive algorithm
 #' (`recursive = FALSE`) only uses the feature importances of the model fitted
@@ -36,7 +36,7 @@
 #' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data
-FSelectRFE = R6Class("FSelectRFE",
+FSelectorRFE = R6Class("FSelectorRFE",
   inherit = FSelect,
   public = list(
     #' @field importance Stores the feature importance of the model with all
@@ -62,7 +62,7 @@ FSelectRFE = R6Class("FSelectRFE",
 
       pars = self$param_set$values
       archive = inst$archive
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$cols_x
 
       states = as.list(rep(TRUE, length(feature_names)))
       names(states) = feature_names
