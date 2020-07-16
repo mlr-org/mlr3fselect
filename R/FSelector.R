@@ -75,6 +75,18 @@
 FSelector = R6Class("FSelector",
   public = list(
 
+    #' @field param_set ([paradox::ParamSet]).
+    param_set = NULL,
+
+    #' @field param_classes (`character()`).
+    param_classes = NULL,
+
+    #' @field properties (`character()`).
+    properties = NULL,
+
+    #' @field packages (`character()`).
+    packages = NULL,
+
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
@@ -90,6 +102,7 @@ FSelector = R6Class("FSelector",
     #' [requireNamespace()], and are not attached.
     initialize = function(param_set, properties, packages = character(0)) {
       self$param_set = assert_param_set(param_set)
+      self$param_classes = "ParamLgl"
       self$properties = assert_subset(properties,
         bbotk_reflections$optimizer_properties,
         empty.ok = FALSE)
