@@ -14,10 +14,10 @@
 #' resampling = rsmp("holdout")
 #' measures = msr("classif.ce")
 #'
-#' terminator = term("evals", n_evals = 15)
+#' terminator = trm("evals", n_evals = 15)
 #' fs = fs("exhaustive")
 #' afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
-#' afs$store_fselect_instance = TRUE
+#' afs$store_fselector_instance = TRUE
 #'
 #' afs$train(task)
 #' afs$model
@@ -26,40 +26,42 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
   public = list(
 
     #' @field instance_args (`list()`)\cr
-    #' All arguments from construction to create the [FSelectInstance].
+    #' All arguments from construction to create the [FSelectInstanceSingleCrit].
     instance_args = NULL,
 
-    #' @field fselect ([FSelect])\cr
+    #' @field fselector ([FSelector])\cr
     #' Stores the feature selection algorithm.
-    fselect = NULL,
+    fselector = NULL,
 
-    #' @field store_fselect_instance (`logical(1)`)
-    store_fselect_instance = TRUE,
+    #' @field store_fselector_instance (`logical(1)`)
+    store_fselector_instance = TRUE,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
     #' @param learner ([mlr3::Learner])\cr
-    #' Learner to optimize the feature subset for, see [FSelectInstance].
+    #' Learner to optimize the feature subset for, see
+    #' [FSelectInstanceSingleCrit].
     #'
     #' @param resampling ([mlr3::Resampling])\cr
-    #' Resampling strategy during feature selection, see [FSelectInstance]. This
-    #' [mlr3::Resampling] is meant to be the **inner** resampling, operating
-    #' on the training set of an arbitrary outer resampling. For this reason
-    #' it is not feasible to pass an instantiated [mlr3::Resampling] here.
+    #' Resampling strategy during feature selection, see
+    #' [FSelectInstanceSingleCrit]. This [mlr3::Resampling] is meant to be the
+    #' **inner** resampling, operating on the training set of an arbitrary outer
+    #' resampling. For this reason it is not feasible to pass an instantiated
+    #' [mlr3::Resampling] here.
     #'
     #' @param measure ([mlr3::Measure])\cr
     #' Performance measure to optimize.
     #'
     #' @param terminator ([Terminator])\cr
-    #' When to stop feature selection, see [FSelectInstance].
+    #' When to stop feature selection, see [FSelectInstanceSingleCrit].
     #'
-    #' @param fselect ([FSelect])\cr
+    #' @param fselector ([FSelector])\cr
     #' Feature selection algorithm to run.
     #'
     #' @param bm_args (named `list()`)\cr
     #' Further arguments for [mlr3::benchmark()], see [FSelectInstance].
-    initialize = function(learner, resampling, measure, terminator, fselect) {
+    initialize = function(learner, resampling, measure, terminator, fselector) {
       ia = list()
       ia$learner = assert_learner(learner)$clone(deep = TRUE)
       ia$resampling = assert_resampling(resampling,
@@ -67,10 +69,10 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       ia$measure = assert_measure(as_measure(measure), learner = learner)
       ia$terminator = assert_terminator(terminator)$clone()
       self$instance_args = ia
-      self$fselect = assert_r6(fselect, "FSelect")$clone()
+      self$fselector = assert_r6(fselector, "FSelector")$clone()
 
       super$initialize(
-        id = paste0(learner$id, ".fselect"),
+        id = paste0(learner$id, ".fselector"),
         task_type = learner$task_type,
         packages = learner$packages,
         feature_types = learner$feature_types,
@@ -88,8 +90,8 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     .train = function(task) {
       ia = self$instance_args
       ia$task = task$clone()
-      instance = invoke(FSelectInstance$new, .args = ia)
-      self$fselect$optimize(instance)
+      instance = invoke(FSelectInstanceSingleCrit$new, .args = ia)
+      self$fselector$optimize(instance)
 
       feat = task$feature_names[as.logical(instance$result_x_search_space)]
       ia$task$select(feat)
@@ -99,8 +101,8 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
 
       result_model = list()
       result_model$learner = learner
-      if (isTRUE(self$store_fselect_instance)) {
-        result_model$fselect_instance = instance
+      if (isTRUE(self$store_fselector_instance)) {
+        result_model$fselector_instance = instance
       }
       return(result_model)
     },
@@ -113,8 +115,8 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
   active = list(
 
     #' @field archive ([Archive])\cr
-    #' Returns FSelectInstance archive.
-    archive = function() self$fselect_instance$archive,
+    #' Returns FSelectInstanceSingleCrit archive.
+    archive = function() self$fselector_instance$archive,
 
     #' @field learner ([mlr3::Learner])\cr
     #' Trained learner.
@@ -126,12 +128,12 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
         self$model$learner
       }
     },
-    #' @field fselect_instance ([FSelectInstance])\cr
+    #' @field fselector_instance ([FSelectInstanceSingleCrit])\cr
     #' Internally created feature selection instance with all intermediate results.
-    fselect_instance = function() self$model$fselect_instance,
+    fselector_instance = function() self$model$fselector_instance,
 
-    #' @field fselect_result (named `list()`)\cr
-    #' Short-cut to `$result` from [FSelectInstance].
-    fselect_result = function() self$fselect_instance$result
+    #' @field fselector_result (named `list()`)\cr
+    #' Short-cut to `$result` from [FSelectInstanceSingleCrit].
+    fselector_result = function() self$fselector_instance$result
   )
 )
