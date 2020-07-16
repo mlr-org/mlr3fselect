@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Abstract `FSelector` class that implements the base functionality each
-#' fselector must provide. A fselector object describes the feature selection
+#' `FSelector` must provide. A `FSelector` object describes the feature selection
 #' strategy, i.e. how to optimize the black-box function and its feasible set
 #' defined by the [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit] object.
 #'
@@ -23,28 +23,28 @@
 #' A subclass is implemented in the following way:
 #'  * Inherit from `FSelector`.
 #'  * Specify the private abstract method `$.optimize()` and use it to call into
-#'  your optimizer.
+#'    your optimizer.
 #'  * You need to call `instance$eval_batch()` to evaluate feature subsets.
 #'  * The batch evaluation is requested at the [FSelectInstanceSingleCrit] /
-#'  [FSelectInstanceMultiCrit] object `instance`, so each batch is possibly
-#'  executed in parallel via [mlr3::benchmark()], and all evaluations are stored
-#'  inside of `instance$archive`.
+#'    [FSelectInstanceMultiCrit] object `instance`, so each batch is possibly
+#'    executed in parallel via [mlr3::benchmark()], and all evaluations are stored
+#'    inside of `instance$archive`.
 #'  * Before the batch evaluation, the [Terminator] is checked, and if it is
-#'  positive, an exception of class `"terminated_error"` is generated. In the
-#'  later case the current batch of evaluations is still stored in `instance`,
-#'  but the numeric scores are not sent back to the handling optimizer as it has
-#'  lost execution control.
+#'    positive, an exception of class `"terminated_error"` is generated. In the
+#'    later case the current batch of evaluations is still stored in `instance`,
+#'    but the numeric scores are not sent back to the handling optimizer as it has
+#'    lost execution control.
 #'  * After such an exception was caught we select the best feature subset from
-#'  `instance$archive` and return it.
+#'    `instance$archive` and return it.
 #'  * Note that therefore more points than specified by the [Terminator] may be
-#'  evaluated, as the Terminator is only checked before a batch evaluation, and
-#'  not in-between evaluation in a batch. How many more depends on the setting
-#'  of the batch size.
+#'    evaluated, as the Terminator is only checked before a batch evaluation, and
+#'    not in-between evaluation in a batch. How many more depends on the setting
+#'    of the batch size.
 #'  * Overwrite the private super-method `.assign_result()` if you want to decide
-#'  yourself how to estimate the final feature subset in the instance and its
-#'  estimated performance. The default behavior is: We pick the best
-#'  resample-experiment, regarding the given measure, then assign its
-#'  feature subset and aggregated performance to the instance.
+#'    yourself how to estimate the final feature subset in the instance and its
+#'    estimated performance. The default behavior is: We pick the best
+#'    resample-experiment, regarding the given measure, then assign its
+#'    feature subset and aggregated performance to the instance.
 #'
 #' @export
 #' @examples
@@ -60,7 +60,7 @@
 #'   terminator = terminator
 #' )
 #'
-#' # swap this line to use a different fselector
+#' # swap this line to use a different FSelector
 #' fs = fs("random_search")
 #'
 #' # modifies the instance by reference
@@ -74,6 +74,10 @@
 #' instance$archive
 FSelector = R6Class("FSelector",
   public = list(
+
+    param_set = NULL,
+    properties = NULL,
+    packages = NULL,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.

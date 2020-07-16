@@ -3,6 +3,9 @@
 \name{FSelectorEvolutionary}
 \alias{FSelectorEvolutionary}
 \title{Feature Selection via Evolutionary Search}
+\source{
+\cite{mlr3fselect}{bossek_2017}
+}
 \description{
 \code{FSelectEvolutionary} class that implements evolutionary search. Calls
 \code{\link[ecr:ecr]{ecr::ecr()}} from package \CRANpkg{ecr}.

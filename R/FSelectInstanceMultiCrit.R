@@ -5,7 +5,7 @@
 #' and archive for feature selection algorithms to act upon. This class stores
 #' an [ObjectiveFSelect] object that encodes the black box objective function
 #' which an [FSelector] has to optimize. It allows the basic operations of
-#' querying the objective at feature subsets (`$eval_batch()`), stroring the
+#' querying the objective at feature subsets (`$eval_batch()`), storing the
 #' evaluations in the internal [Archive] and accessing the final result
 #' (`$result`).
 #'
@@ -15,7 +15,7 @@
 #' budget is exhausted, an exception is raised, and no further evaluations can
 #' be performed from this point on.
 #'
-#' The fselector is also supposed to store its final result, consisting
+#' The [FSelector] is also supposed to store its final result, consisting
 #' of a selected feature subset and associated estimated performance values, by
 #' calling the method `instance$assign_result()`.
 #'
@@ -44,8 +44,8 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
-    #' @param task ([mlr3::Task])
-    #' @param learner ([mlr3::Learner])
+    #' @param task ([mlr3::Task]).
+    #' @param learner ([mlr3::Learner]).
     #' @param resampling ([mlr3::Resampling])\cr
     #' Note that uninstantiated resamplings are instantiated during construction
     #' so that all configurations are evaluated on the same data splits.
@@ -53,9 +53,9 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
     #' @param measures (list of [mlr3::Measure])\cr
     #' Measures to optimize.
     #'
-    #' @param terminator ([Terminator])
-    #' @param store_models (`logical(1)`)
-    #' @param check_values (`logical(1)`).
+    #' @param terminator ([Terminator]).
+    #' @param store_models (`logical(1)`).
+    #' @param check_values (`logical(1)`)\cr
     #' Should feature sets before the evaluation and the results be checked for
     #' validity?
     initialize = function(task, learner, resampling, measures, terminator,

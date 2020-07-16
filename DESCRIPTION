@@ -1,7 +1,7 @@
 Package: mlr3fselect
 Title: Feature selection for mlr3
 Version: 0.1.0-9000
-Authors@R: 
+Authors@R:
     c(person(given = "Marc",
              family = "Becker",
              role = c("aut", "cre"),
@@ -38,17 +38,20 @@ Imports:
     paradox,
     R6
 Suggests:
+    bibtex,
     ecr,
     rpart,
     testthat,
     withr
 Remotes:
     mlr-org/bbotk
+RdMacros:
+    mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Collate: 
+Collate:
     'mlr_fselectors.R'
     'AutoFSelect.R'
     'FSelectInstanceMultiCrit.R'

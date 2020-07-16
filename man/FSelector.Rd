@@ -5,7 +5,7 @@
 \title{FSelector}
 \description{
 Abstract \code{FSelector} class that implements the base functionality each
-fselector must provide. A fselector object describes the feature selection
+\code{FSelector} must provide. A \code{FSelector} object describes the feature selection
 strategy, i.e. how to optimize the black-box function and its feasible set
 defined by the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit} object.
 
@@ -70,7 +70,7 @@ instance = FSelectInstanceSingleCrit$new(
   terminator = terminator
 )
 
-# swap this line to use a different fselector
+# swap this line to use a different FSelector
 fs = fs("random_search")
 
 # modifies the instance by reference

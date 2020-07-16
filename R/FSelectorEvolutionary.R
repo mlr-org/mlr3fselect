@@ -24,6 +24,9 @@
 #' and `lambda` must be set by the user. The `terminators` parameter is replaced
 #' by the [Terminator] subclasses.
 #'
+#' @source
+#' \cite{mlr3fselect}{bossek_2017}
+#'
 #' @export
 #' @examples
 #' library(mlr3)
