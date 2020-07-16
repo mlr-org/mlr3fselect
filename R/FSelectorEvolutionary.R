@@ -1,8 +1,8 @@
-#' @title FSelectEvolutionary Class
+#' @title Feature Selection via Evolutionary Search
 #'
 #' @description
-#' Subclass for evolutionary feature selection. Calls [ecr::ecr()] from package
-#' \CRANpkg{ecr}.
+#' `FSelectEvolutionary` class that implements evolutionary search. Calls
+#' [ecr::ecr()] from package \CRANpkg{ecr}.
 #'
 #' @templateVar id evolutionary
 #' @template section_dictionary_fselectors
@@ -41,7 +41,7 @@
 #' fs$optimize(instance)
 #' instance$result
 #' instance$archive$data
-FSelectEvolutionary = R6Class("FSelectEvolutionary",
+FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
   inherit = FSelect,
   public = list(
 
@@ -49,8 +49,8 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamInt$new("mu"),
-        ParamInt$new("lambda"),
+        ParamInt$new("mu", tags = "required"),
+        ParamInt$new("lambda", tags = "required"),
         ParamDbl$new("p", default = 0.1, lower = 0, upper = 1),
         ParamDbl$new("p.recomb", default = 0.7, lower = 0, upper = 1),
         ParamDbl$new("p.mut", default = 0.1, lower = 0, upper = 1),
