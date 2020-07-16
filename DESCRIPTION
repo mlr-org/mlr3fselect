@@ -47,17 +47,19 @@ Remotes:
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Collate: 
-    'AutoFSelect.R'
     'mlr_fselectors.R'
-    'FSelect.R'
-    'FSelectEvolutionary.R'
-    'FSelectExhaustive.R'
-    'FSelectInstance.R'
-    'FSelectRFE.R'
-    'FSelectRandom.R'
-    'FSelectSequential.R'
+    'AutoFSelect.R'
+    'FSelectInstanceMultiCrit.R'
+    'FSelectInstanceSingleCrit.R'
+    'FSelector.R'
+    'FSelectorEvolutionary.R'
+    'FSelectorExhaustiveSearch.R'
+    'FSelectorFromOptimizer.R'
+    'FSelectorRFE.R'
+    'FSelectorRandomSearch.R'
+    'FSelectorSequential.R'
     'helper.R'
     'ObjectiveFSelect.R'
     'reexports.R'

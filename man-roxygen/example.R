@@ -1,8 +1,8 @@
 #' @examples
 #' library(mlr3)
 #'
-#' terminator = term("evals", n_evals = 10)
-#' instance = FSelectInstance$new(
+#' terminator = trm("evals", n_evals = 10)
+#' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp("holdout"),
