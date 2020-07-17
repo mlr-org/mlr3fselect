@@ -1,11 +1,5 @@
 library(mlr3)
 
-old_opts = options(
-  warnPartialMatchArgs = TRUE,
-  warnPartialMatchAttr = TRUE,
-  warnPartialMatchDollar = TRUE
-)
-
 loggers = list(lgr::get_logger("mlr3"), lgr::get_logger("bbotk"))
 thresholds = mlr3misc::map_int(loggers, "threshold")
 lapply(loggers, function(l) l$set_threshold("warn"))

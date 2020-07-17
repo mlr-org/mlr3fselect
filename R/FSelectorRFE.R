@@ -117,9 +117,9 @@ FSelectorRFE = R6Class("FSelectorRFE",
 # Some learners omit features that are not used at all,
 # thus we have to assign zero to these features
 importance_average = function(learners, features) {
-  imp = sapply(learners, function(x) {
+  imp = map(learners, function(x) {
     imp_r = x$importance()
-    sapply(features, function(y) {
+    map(features, function(y) {
       if (y %in% names(imp_r)) imp_r[[y]] else 0
     })
   })

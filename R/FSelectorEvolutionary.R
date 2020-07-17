@@ -120,7 +120,7 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
       population = map_if(population,
         function(x) sum(x) == 0,
         function(x) {
-          x[sample(1:length(x), 1)] = 1
+          x[sample(seq_len(x), 1)] = 1
           x
         }) # Tasks without features cannot be evaluated
 
@@ -135,7 +135,7 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
         offspring = map_if(offspring,
           function(x) sum(x) == 0,
           function(x) {
-            x[sample(1:length(x), 1)] = 1
+            x[sample(seq_len(x), 1)] = 1
             x
           })
 
