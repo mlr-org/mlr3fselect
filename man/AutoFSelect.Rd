@@ -17,7 +17,7 @@ resampling = rsmp("holdout")
 measures = msr("classif.ce")
 
 terminator = trm("evals", n_evals = 15)
-fs = fs("exhaustive")
+fs = fs("exhaustive_search")
 afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
 afs$store_fselect_instance = TRUE
 

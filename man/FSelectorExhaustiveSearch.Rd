@@ -13,8 +13,8 @@ in each batch.
 \section{Dictionary}{
 
 This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:\preformatted{mlr_fselectors$get("exhaustive")
-fs("exhaustive")
+\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:\preformatted{mlr_fselectors$get("exhaustive_search")
+fs("exhaustive_search")
 }
 }
 
@@ -34,12 +34,12 @@ instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
   resampling = rsmp("holdout"),
-  measures = msr("classif.ce"),
+  measure = msr("classif.ce"),
   terminator = terminator
 )
 
-fs = fs("exhaustive")
-fs$optimize(instance)
+fselector = fs("exhaustive_search")
+fselector$optimize(instance)
 instance$result
 instance$archive$data
 }

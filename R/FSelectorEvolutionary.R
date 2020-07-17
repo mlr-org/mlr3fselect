@@ -32,16 +32,16 @@
 #' library(mlr3)
 #'
 #' terminator = trm("evals", n_evals = 10)
-#' instance = FSelectInstance$new(
+#' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp("holdout"),
-#'   measures = msr("classif.ce"),
+#'   measure = msr("classif.ce"),
 #'   terminator = terminator
 #' )
 #'
-#' fs = fs("evolutionary", mu = 10, lambda = 5)
-#' fs$optimize(instance)
+#' fselector = fs("evolutionary", mu = 10, lambda = 5)
+#' fselector$optimize(instance)
 #' instance$result
 #' instance$archive$data
 FSelectorEvolutionary = R6Class("FSelectorEvolutionary",

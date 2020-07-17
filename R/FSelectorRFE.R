@@ -23,7 +23,7 @@
 #' library(mlr3)
 #'
 #' terminator = trm("evals", n_evals = 10)
-#' instance = FSelectInstance$new(
+#' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp("holdout"),
@@ -32,8 +32,8 @@
 #'   store_models = TRUE
 #' )
 #'
-#' fs = fs("rfe")
-#' fs$optimize(instance)
+#' fselector = fs("rfe")
+#' fselector$optimize(instance)
 #' instance$result
 #' instance$archive$data
 FSelectorRFE = R6Class("FSelectorRFE",

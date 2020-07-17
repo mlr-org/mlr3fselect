@@ -2,7 +2,7 @@
 % Please edit documentation in R/FSelectInstanceMultiCrit.R
 \name{FSelectInstanceMultiCrit}
 \alias{FSelectInstanceMultiCrit}
-\title{Single Criterion Feature Selection Instance}
+\title{Multi Criterion Feature Selection Instance}
 \description{
 Specifies a general feature selection scenario, including objective function
 and archive for feature selection algorithms to act upon. This class stores
@@ -27,12 +27,12 @@ library(mlr3)
 
 # Objects required to define the performance evaluator
 task = tsk("iris")
-measures = msrs(c("classif.ce"))
+measures = msrs(c("classif.ce", "classif.acc"))
 learner = lrn("classif.rpart")
 resampling = rsmp("cv")
 terminator = trm("evals", n_evals = 8)
 
-inst = FSelectInstanceSingleCrit$new(
+inst = FSelectInstanceMultiCrit$new(
   task = task,
   learner = learner,
   resampling = resampling,

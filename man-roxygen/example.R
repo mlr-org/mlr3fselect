@@ -6,12 +6,12 @@
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp("holdout"),
-#'   measures = msr("classif.ce"),
+#'   measure = msr("classif.ce"),
 #'   terminator = terminator
 #' )
 #'
-#' fs = fs("<%= id %>")
-#' fs$optimize(instance)
+#' fselector = fs("<%= id %>")
+#' fselector$optimize(instance)
 #' instance$result
 #' instance$archive$data
 

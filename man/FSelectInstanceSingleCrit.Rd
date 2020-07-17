@@ -27,7 +27,7 @@ library(mlr3)
 
 # Objects required to define the performance evaluator
 task = tsk("iris")
-measures = msrs(c("classif.ce"))
+measure = msr("classif.ce")
 learner = lrn("classif.rpart")
 resampling = rsmp("cv")
 terminator = trm("evals", n_evals = 8)
@@ -36,7 +36,7 @@ inst = FSelectInstanceSingleCrit$new(
   task = task,
   learner = learner,
   resampling = resampling,
-  measures = measures,
+  measure = measure,
   terminator = terminator
 )
 }

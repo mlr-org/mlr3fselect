@@ -42,12 +42,12 @@ instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
   resampling = rsmp("holdout"),
-  measures = msr("classif.ce"),
+  measure = msr("classif.ce"),
   terminator = terminator
 )
 
-fs = fs("random_search")
-fs$optimize(instance)
+fselector = fs("random_search")
+fselector$optimize(instance)
 instance$result
 instance$archive$data
 }

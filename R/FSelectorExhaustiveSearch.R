@@ -7,7 +7,7 @@
 #' sets are evaluated in batches. The size of the feature sets is increased by 1
 #' in each batch.
 #'
-#' @templateVar id exhaustive
+#' @templateVar id exhaustive_search
 #' @template section_dictionary_fselectors
 #'
 #' @section Parameters:

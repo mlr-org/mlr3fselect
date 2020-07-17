@@ -1,4 +1,4 @@
-#' @title Single Criterion Feature Selection Instance
+#' @title Multi Criterion Feature Selection Instance
 #'
 #' @description
 #' Specifies a general feature selection scenario, including objective function
@@ -25,12 +25,12 @@
 #'
 #' # Objects required to define the performance evaluator
 #' task = tsk("iris")
-#' measures = msrs(c("classif.ce"))
+#' measures = msrs(c("classif.ce", "classif.acc"))
 #' learner = lrn("classif.rpart")
 #' resampling = rsmp("cv")
 #' terminator = trm("evals", n_evals = 8)
 #'
-#' inst = FSelectInstanceSingleCrit$new(
+#' inst = FSelectInstanceMultiCrit$new(
 #'   task = task,
 #'   learner = learner,
 #'   resampling = resampling,
