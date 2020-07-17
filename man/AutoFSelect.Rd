@@ -111,9 +111,6 @@ When to stop feature selection, see \link{FSelectInstanceSingleCrit}.}
 
 \item{\code{fselector}}{(\link{FSelector})\cr
 Feature selection algorithm to run.}
-
-\item{\code{bm_args}}{(named \code{list()})\cr
-Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, see \link{FSelectInstance}.}
 }
 \if{html}{\out{</div>}}
 }

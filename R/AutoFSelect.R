@@ -60,9 +60,6 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #'
     #' @param fselector ([FSelector])\cr
     #' Feature selection algorithm to run.
-    #'
-    #' @param bm_args (named `list()`)\cr
-    #' Further arguments for [mlr3::benchmark()], see [FSelectInstance].
     initialize = function(learner, resampling, measure, terminator, fselector) {
       ia = list()
       ia$learner = assert_learner(learner)$clone(deep = TRUE)
