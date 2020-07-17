@@ -118,7 +118,7 @@ and estimated performance values here. For internal use.
 \describe{
 \item{\code{xdt}}{(\code{data.table})\cr
 x values as \code{data.table} with one row. Contains the value in the \emph{search
-space} of the \link{FSelectInstance}. Can contain additional columns for extra
+space} of the \link{FSelectInstanceMultiCrit}. Can contain additional columns for extra
 information.}
 
 \item{\code{y}}{(\code{numeric(1)})\cr

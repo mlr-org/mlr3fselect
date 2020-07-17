@@ -72,7 +72,7 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
     #'
     #' @param xdt (`data.table`)\cr
     #' x values as `data.table` with one row. Contains the value in the *search
-    #' space* of the [FSelectInstance]. Can contain additional columns for extra
+    #' space* of the [FSelectInstanceMultiCrit]. Can contain additional columns for extra
     #' information.
     #' @param y (`numeric(1)`)\cr
     #'   Optimal outcome.
