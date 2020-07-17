@@ -104,7 +104,7 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
 
-      ctrl = ecr::initECRControl(objective_wrapper, n.objectives = 1)
+      ctrl = ecr::initECRControl(fitness.fun = inst$objective_function, n.objectives = 1)
       ctrl = invoke(ecr::registerECROperator, ctrl, "mutate",
         ecr::mutBitflip, .args = pars_mutBitflip)
       ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
@@ -125,7 +125,7 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
         }) # Tasks without features cannot be evaluated
 
       withr::with_package("ecr", {
-        fitness = ecr::evaluateFitness(ctrl, population, inst)
+        fitness = ecr::evaluateFitness(ctrl, population)
       })
 
       repeat({
@@ -140,7 +140,7 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
           })
 
         withr::with_package("ecr", {
-          fitness_o = ecr::evaluateFitness(ctrl, offspring, inst)
+          fitness_o = ecr::evaluateFitness(ctrl, offspring)
         })
         if (pars$survival.strategy == "plus") {
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
@@ -159,13 +159,5 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
     }
   )
 )
-
-objective_wrapper = function(x, inst) {
-  x = set_names(as.data.table(as.list(as.logical(x))),
-    inst$objective$task$feature_names)
-
-  res = inst$eval_batch(x)
-  as.numeric(res[, inst$objective$measures[[1]]$id, with = FALSE])
-}
 
 mlr_fselectors$add("evolutionary", FSelectorEvolutionary)
