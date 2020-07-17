@@ -108,3 +108,13 @@ TEST_MAKE_INST_1D = function(n = 4L, folds = 2L, store_models = FALSE) {
     terminator = trm("evals", n_evals = 10),
     store_models)
 }
+
+TEST_MAKE_INST_2D = function(n = 4L, folds = 2L, store_models = FALSE) {
+  FSelectInstanceMultiCrit$new(
+    task = TEST_MAKE_TSK(n),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = folds),
+    measure = msrs(c("regr.mse", "regr.rmse")),
+    terminator = trm("evals", n_evals = 10),
+    store_models)
+}

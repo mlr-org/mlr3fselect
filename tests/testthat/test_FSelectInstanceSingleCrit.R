@@ -1,6 +1,6 @@
-context("FSelectInstance")
+context("FSelectInstanceSingleCrit")
 
-test_that("empty FSelectInstance works", {
+test_that("empty FSelectInstanceSingleCrit works", {
   inst = TEST_MAKE_INST_1D()
 
   expect_data_table(inst$archive$data(), nrows = 0L)
