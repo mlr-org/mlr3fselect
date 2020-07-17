@@ -81,6 +81,25 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
       features = list(self$objective$task$feature_names[as.logical(xdt)])
       xdt[, features := list(features)]
       super$assign_result(xdt, y)
+    },
+
+    #' @description
+    #' Evaluates a single feature set and returns a numeric scalar. The return
+    #' value is negated if the measure is maximized. Internally, `$eval_batch()`
+    #' is called with a single row. This function serves as a objective function
+    #' for optimizers of binary spaces.
+    #'
+    #' @param x (`numeric()`)\cr
+    #' 0/1 encoded feature set (e.g. `c(1,0,1,0)`)
+    #'
+    #' @return Objective value as `numeric(1)`, negated for maximization problems.
+    objective_function = function(x) {
+      xs = set_names(as.list(as.logical(x)), self$search_space$ids())
+      self$search_space$assert(xs)
+      xdt = as.data.table(xs)
+      res = self$eval_batch(xdt)
+      y = as.numeric(res[, self$objective$codomain$ids(), with = FALSE])
+      ifelse(self$objective$codomain$tags == "minimize", y, -y)
     }
   )
 )
