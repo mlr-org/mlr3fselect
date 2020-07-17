@@ -1,9 +1,14 @@
-#' @title FSelectRandom Class
+#' @title Feature Selection via Random Search
 #'
 #' @description
-#' Subclass for random feature selection. Feature sets are randomly drawn.
+#' `FSelectorRandomSearch` class that implements a simple Random Search.
 #'
-#' @templateVar id random
+#' In order to support general termination criteria and parallelization, we
+#' evaluate feature sets in a batch-fashion of size `batch_size`. Larger batches
+#' mean we can parallelize more, smaller batches imply a more fine-grained
+#' checking of termination criteria.
+#'
+#' @templateVar id random_search
 #' @template section_dictionary_fselectors
 #'
 #' @section Parameters:
@@ -16,15 +21,13 @@
 #' Probability of choosing a feature.}
 #' }
 #'
-#' In order to support general termination criteria and parallelization, feature
-#' sets are evaluated in a batch-fashion of size `batch_size`. Larger batches
-#' mean more is parallelized, smaller batches imply a more fine-grained checking
-#' of termination criteria.
+#' @source
+#' \cite{bbotk}{bergstra_2012}
 #'
 #' @export
 #' @template example
-FSelectRandom = R6Class("FSelectRandom",
-  inherit = FSelect,
+FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
+  inherit = FSelector,
   public = list(
 
     #' @description
@@ -38,16 +41,14 @@ FSelectRandom = R6Class("FSelectRandom",
 
       ps$values = list(batch_size = 10L, prob = 0.5)
 
-      super$initialize(
-        param_set = ps, properties = "single-crit"
-      )
+      super$initialize(param_set = ps, properties = "single-crit")
     }
   ),
 
   private = list(
     .optimize = function(inst) {
       pars = self$param_set$values
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$archive$cols_x
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)
@@ -68,4 +69,4 @@ FSelectRandom = R6Class("FSelectRandom",
   )
 )
 
-mlr_fselectors$add("random", FSelectRandom)
+mlr_fselectors$add("random_search", FSelectorRandomSearch)

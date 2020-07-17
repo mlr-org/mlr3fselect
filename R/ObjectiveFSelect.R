@@ -35,9 +35,11 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param store_models `logical(1)`
+    #' @param check_values (`logical(1)`)\cr
+    #' Should feature sets before the evaluation and the results be checked for
+    #' validity?
     initialize = function(task, learner, resampling, measures,
-      store_models = FALSE) {
-
+      store_models = FALSE, check_values = TRUE) {
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE),
         task = self$task)
@@ -60,14 +62,13 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
         }))
 
       super$initialize(id = sprintf("%s_on_%s", self$learner$id, self$task$id),
-        domain = domain, codomain = codomain)
-    },
+        domain = domain, codomain = codomain, check_values = check_values)
+    }
+  ),
 
-    #' @description
-    #' Evaluates multiple feature subsets on the objective function.
-    #' @param xss `list()`\cr
-    #' A list of lists that contains multiple feature subsets.
-    eval_many = function(xss) {
+  private = list(
+
+    .eval_many = function(xss) {
 
       tasks = map(xss, function(x) {
         state = self$task$feature_names[unlist(x)]

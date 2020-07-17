@@ -7,19 +7,19 @@
 #' @export
 NULL
 
-#' @title Re-export of `term`
+#' @title Re-export of `trm`
 #'
-#' See [bbotk::term].
+#' See [bbotk::trm].
 #'
-#' @name term
-#' @rdname term
+#' @name trm
+#' @rdname trm
 #' @export
 NULL
 
-#' @title Re-export of `terms`
+#' @title Re-export of `trms`
 #'
-#' See [bbotk::terms].
+#' See [bbotk::trms].
 #'
-#' @name terms
-#' @rdname terms
+#' @name trms
+#' @rdname trms
 NULL

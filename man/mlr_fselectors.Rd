@@ -11,6 +11,6 @@ An object of class \code{DictionaryFSelect} (inherits from \code{Dictionary}, \c
 mlr_fselectors
 }
 \description{
-A \link[mlr3misc:Dictionary]{mlr3misc::Dictionary} storing objects of class \link{FSelect}.
+A \link[mlr3misc:Dictionary]{mlr3misc::Dictionary} storing objects of class \link{FSelector}.
 }
 \keyword{datasets}

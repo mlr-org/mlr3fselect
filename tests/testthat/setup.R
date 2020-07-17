@@ -1,7 +1,9 @@
 library(mlr3)
 
-lg = lgr::get_logger("mlr3")
-old_threshold = lg$threshold
-lg$set_threshold("warn")
+loggers = list(lgr::get_logger("mlr3"), lgr::get_logger("bbotk"))
+thresholds = mlr3misc::map_int(loggers, "threshold")
+lapply(loggers, function(l) l$set_threshold("warn"))
+
 
 set.seed(123)
+
