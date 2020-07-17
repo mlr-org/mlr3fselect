@@ -4,9 +4,13 @@
 \name{mlr3fselect-package}
 \alias{mlr3fselect}
 \alias{mlr3fselect-package}
-\title{mlr3fselect: Feature selection for mlr3}
+\title{mlr3fselect: Feature selection for 'mlr3'}
 \description{
-Implements methods for feature selection in mlr3.
+Implements methods for feature selection with
+    'mlr3', e.g.  Random Search, Sequential Selection and Evolutionary
+    Search.  Various termination criteria can be set and combined. The
+    class 'AutoFSelect' provides a convenient way to perform nested
+    resampling in combination with 'mlr3'.
 }
 \seealso{
 Useful links:
@@ -18,7 +22,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Marc Becker \email{marcbecker@posteo.de}
+\strong{Maintainer}: Marc Becker \email{marcbecker@posteo.de} (\href{https://orcid.org/0000-0002-8115-0400}{ORCID})
 
 Authors:
 \itemize{
