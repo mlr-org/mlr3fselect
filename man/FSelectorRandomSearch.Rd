@@ -25,8 +25,12 @@ fs("random_search")
 \section{Parameters}{
 
 \describe{
+\item{\code{max_features}}{\code{integer(1)}\cr
+Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 \item{\code{batch_size}}{\code{integer(1)}\cr
 Maximum number of feature sets to try in a batch.}
+\item{\code{prob}}{\code{double(1)}\cr
+Probability of choosing a feature.}
 }
 }
 
@@ -47,12 +51,23 @@ fs$optimize(instance)
 instance$result
 instance$archive$data
 }
+\section{Super class}{
+\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorRandomSearch}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectorRandomSearch$new()}}
 \item \href{#method-clone}{\code{FSelectorRandomSearch$clone()}}
 }
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format">}\href{../../mlr3fselect/html/FSelector.html#method-format}{\code{mlr3fselect::FSelector$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize">}\href{../../mlr3fselect/html/FSelector.html#method-optimize}{\code{mlr3fselect::FSelector$optimize()}}\out{</span>}
+}
+\out{</details>}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}

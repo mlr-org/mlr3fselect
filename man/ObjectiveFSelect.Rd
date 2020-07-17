@@ -75,6 +75,10 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 \item{\code{store_models}}{\code{logical(1)}}
 
+\item{\code{check_values}}{(\code{logical(1)})\cr
+Should feature sets before the evaluation and the results be checked for
+validity?}
+
 \item{\code{terminator}}{\link{Terminator}}
 }
 \if{html}{\out{</div>}}

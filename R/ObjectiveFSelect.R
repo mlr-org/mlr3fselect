@@ -35,6 +35,9 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
     #' @param measures list of [mlr3::Measure]
     #' @param terminator [Terminator]
     #' @param store_models `logical(1)`
+    #' @param check_values (`logical(1)`)\cr
+    #' Should feature sets before the evaluation and the results be checked for
+    #' validity?
     initialize = function(task, learner, resampling, measures,
       store_models = FALSE, check_values = TRUE) {
       self$task = assert_task(as_task(task, clone = TRUE))
