@@ -29,17 +29,15 @@ subsets. This class is usually constructed internally by the \link{OptimInstance
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{ObjectiveFSelect$new()}}
-\item \href{#method-eval_many}{\code{ObjectiveFSelect$eval_many()}}
 \item \href{#method-clone}{\code{ObjectiveFSelect$clone()}}
 }
 }
 \if{html}{
-\out{<details ><summary>Inherited methods</summary>}
+\out{<details open ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval">}\href{../../bbotk/html/Objective.html#method-eval}{\code{bbotk::Objective$eval()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_checked">}\href{../../bbotk/html/Objective.html#method-eval_checked}{\code{bbotk::Objective$eval_checked()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_dt">}\href{../../bbotk/html/Objective.html#method-eval_dt}{\code{bbotk::Objective$eval_dt()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_many_checked">}\href{../../bbotk/html/Objective.html#method-eval_many_checked}{\code{bbotk::Objective$eval_many_checked()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_many">}\href{../../bbotk/html/Objective.html#method-eval_many}{\code{bbotk::Objective$eval_many()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="format">}\href{../../bbotk/html/Objective.html#method-format}{\code{bbotk::Objective$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="print">}\href{../../bbotk/html/Objective.html#method-print}{\code{bbotk::Objective$print()}}\out{</span>}
 }
@@ -54,7 +52,14 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelect$new(task, learner, resampling, measures, store_models = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelect$new(
+  task,
+  learner,
+  resampling,
+  measures,
+  store_models = FALSE,
+  check_values = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -70,25 +75,11 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 \item{\code{store_models}}{\code{logical(1)}}
 
-\item{\code{terminator}}{\link{Terminator}}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-eval_many"></a>}}
-\if{latex}{\out{\hypertarget{method-eval_many}{}}}
-\subsection{Method \code{eval_many()}}{
-Evaluates multiple feature subsets on the objective function.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelect$eval_many(xss)}\if{html}{\out{</div>}}
-}
+\item{\code{check_values}}{(\code{logical(1)})\cr
+Should feature sets before the evaluation and the results be checked for
+validity?}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{xss}}{\code{list()}\cr
-A list of lists that contains multiple feature subsets.}
+\item{\code{terminator}}{\link{Terminator}}
 }
 \if{html}{\out{</div>}}
 }

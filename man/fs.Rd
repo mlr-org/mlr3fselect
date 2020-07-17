@@ -15,7 +15,7 @@ Named arguments passed to the constructor, to be set as parameters in the \link[
 See \code{\link[mlr3misc:dictionary_sugar_get]{mlr3misc::dictionary_sugar_get()}} for more details.}
 }
 \value{
-\link{FSelect}.
+\link{FSelector}.
 }
 \description{
 This function complements \link{mlr_fselectors} with functions in the spirit

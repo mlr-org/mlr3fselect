@@ -16,8 +16,8 @@ learner = lrn("classif.rpart")
 resampling = rsmp("holdout")
 measures = msr("classif.ce")
 
-terminator = term("evals", n_evals = 15)
-fs = fs("exhaustive")
+terminator = trm("evals", n_evals = 15)
+fs = fs("exhaustive_search")
 afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
 afs$store_fselect_instance = TRUE
 
@@ -32,12 +32,14 @@ afs$learner
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{instance_args}}{(\code{list()})\cr
-All arguments from construction to create the \link{FSelectInstance}.}
+All arguments from construction to create the \link{FSelectInstanceSingleCrit}.}
 
-\item{\code{fselect}}{(\link{FSelect})\cr
+\item{\code{fselector}}{(\link{FSelector})\cr
 Stores the feature selection algorithm.}
 
-\item{\code{store_fselect_instance}}{(\code{logical(1)})}
+\item{\code{store_fselect_instance}}{(\code{logical(1)}).
+If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit}
+with all intermediate results in slot \verb{$fselect_instance}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -45,16 +47,16 @@ Stores the feature selection algorithm.}
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{archive}}{(\link{Archive})\cr
-Returns FSelectInstance archive.}
+Returns FSelectInstanceSingleCrit archive.}
 
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Trained learner.}
 
-\item{\code{fselect_instance}}{(\link{FSelectInstance})\cr
+\item{\code{fselect_instance}}{(\link{FSelectInstanceSingleCrit})\cr
 Internally created feature selection instance with all intermediate results.}
 
 \item{\code{fselect_result}}{(named \code{list()})\cr
-Short-cut to \verb{$result} from \link{FSelectInstance}.}
+Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -84,32 +86,31 @@ Short-cut to \verb{$result} from \link{FSelectInstance}.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(learner, resampling, measure, terminator, fselect)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelect$new(learner, resampling, measure, terminator, fselector)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
-Learner to optimize the feature subset for, see \link{FSelectInstance}.}
+Learner to optimize the feature subset for, see
+\link{FSelectInstanceSingleCrit}.}
 
 \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
-Resampling strategy during feature selection, see \link{FSelectInstance}. This
-\link[mlr3:Resampling]{mlr3::Resampling} is meant to be the \strong{inner} resampling, operating
-on the training set of an arbitrary outer resampling. For this reason
-it is not feasible to pass an instantiated \link[mlr3:Resampling]{mlr3::Resampling} here.}
+Resampling strategy during feature selection, see
+\link{FSelectInstanceSingleCrit}. This \link[mlr3:Resampling]{mlr3::Resampling} is meant to be the
+\strong{inner} resampling, operating on the training set of an arbitrary outer
+resampling. For this reason it is not feasible to pass an instantiated
+\link[mlr3:Resampling]{mlr3::Resampling} here.}
 
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Performance measure to optimize.}
 
 \item{\code{terminator}}{(\link{Terminator})\cr
-When to stop feature selection, see \link{FSelectInstance}.}
+When to stop feature selection, see \link{FSelectInstanceSingleCrit}.}
 
-\item{\code{fselect}}{(\link{FSelect})\cr
+\item{\code{fselector}}{(\link{FSelector})\cr
 Feature selection algorithm to run.}
-
-\item{\code{bm_args}}{(named \code{list()})\cr
-Further arguments for \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, see \link{FSelectInstance}.}
 }
 \if{html}{\out{</div>}}
 }

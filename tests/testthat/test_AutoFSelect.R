@@ -1,14 +1,14 @@
 context("AutoFSelect")
 
-test_that("AutoFSelect - train and predict", {
+test_that("train and predict work", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
-  measures = msr("dummy.sequential")
-  fs = fs("sequential")
-  terminator = term("evals", n_evals = 4L)
+  measures = msr("dummy")
+  fselector = fs("sequential")
+  terminator = trm("evals", n_evals = 4L)
 
-  at = AutoFSelect$new(learner, resampling, measures, terminator, fselect = fs)
+  at = AutoFSelect$new(learner, resampling, measures, terminator, fselector)
   expect_learner(at)
   at$train(task)
   expect_learner(at)
@@ -29,9 +29,9 @@ test_that("AutoFSelect - resample", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling_inner = rsmp("holdout")
-  measures = msr("dummy.sequential")
+  measures = msr("dummy")
   fs = fs("sequential")
-  terminator = term("evals", n_evals = 10L)
+  terminator = trm("evals", n_evals = 10L)
 
   at = AutoFSelect$new(learner, resampling_inner, measures, terminator,
     fselect = fs)
@@ -51,8 +51,8 @@ test_that("AutoFSelect - resample", {
   expect_equal(rr$data$learner[[2]]$fselect_result$x2, TRUE)
   expect_equal(rr$data$learner[[2]]$fselect_result$x3, TRUE)
   expect_equal(rr$data$learner[[2]]$fselect_result$x4, FALSE)
-  expect_numeric(rr$data$learner[[1]]$fselect_result$dummy.sequential, len = 1L)
-  expect_numeric(rr$data$learner[[2]]$fselect_result$dummy.sequential, len = 1L)
+  expect_numeric(rr$data$learner[[1]]$fselect_result$dummy, len = 1L)
+  expect_numeric(rr$data$learner[[2]]$fselect_result$dummy, len = 1L)
   expect_class(rr$data$learner[[1]]$model$learner$model, "rpart")
   expect_class(rr$data$learner[[2]]$model$learner$model, "rpart")
   expect_null(at$archive)

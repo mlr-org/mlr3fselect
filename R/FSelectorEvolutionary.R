@@ -1,8 +1,8 @@
-#' @title FSelectEvolutionary Class
+#' @title Feature Selection via Evolutionary Search
 #'
 #' @description
-#' Subclass for evolutionary feature selection. Calls [ecr::ecr()] from package
-#' \CRANpkg{ecr}.
+#' `FSelectEvolutionary` class that implements evolutionary search. Calls
+#' [ecr::ecr()] from package \CRANpkg{ecr}.
 #'
 #' @templateVar id evolutionary
 #' @template section_dictionary_fselectors
@@ -24,33 +24,36 @@
 #' and `lambda` must be set by the user. The `terminators` parameter is replaced
 #' by the [Terminator] subclasses.
 #'
+#' @source
+#' \cite{mlr3fselect}{bossek_2017}
+#'
 #' @export
 #' @examples
 #' library(mlr3)
 #'
-#' terminator = term("evals", n_evals = 10)
-#' instance = FSelectInstance$new(
+#' terminator = trm("evals", n_evals = 10)
+#' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp("holdout"),
-#'   measures = msr("classif.ce"),
+#'   measure = msr("classif.ce"),
 #'   terminator = terminator
 #' )
 #'
-#' fs = fs("evolutionary", mu = 10, lambda = 5)
-#' fs$optimize(instance)
+#' fselector = fs("evolutionary", mu = 10, lambda = 5)
+#' fselector$optimize(instance)
 #' instance$result
 #' instance$archive$data
-FSelectEvolutionary = R6Class("FSelectEvolutionary",
-  inherit = FSelect,
+FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
+  inherit = FSelector,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamInt$new("mu"),
-        ParamInt$new("lambda"),
+        ParamInt$new("mu", tags = "required"),
+        ParamInt$new("lambda", tags = "required"),
         ParamDbl$new("p", default = 0.1, lower = 0, upper = 1),
         ParamDbl$new("p.recomb", default = 0.7, lower = 0, upper = 1),
         ParamDbl$new("p.mut", default = 0.1, lower = 0, upper = 1),
@@ -101,7 +104,7 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         selNondom = ecr::selNondom,
         selDomHV = ecr::selDomHV)
 
-      ctrl = ecr::initECRControl(objective_wrapper, n.objectives = 1)
+      ctrl = ecr::initECRControl(fitness.fun = inst$objective_function, n.objectives = 1)
       ctrl = invoke(ecr::registerECROperator, ctrl, "mutate",
         ecr::mutBitflip, .args = pars_mutBitflip)
       ctrl = ecr::registerECROperator(ctrl, "recombinde", ecr::recCrossover)
@@ -117,12 +120,12 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
       population = map_if(population,
         function(x) sum(x) == 0,
         function(x) {
-          x[sample(1:length(x), 1)] = 1
+          x[sample(seq_along(x), 1)] = 1
           x
         }) # Tasks without features cannot be evaluated
 
       withr::with_package("ecr", {
-        fitness = ecr::evaluateFitness(ctrl, population, inst)
+        fitness = ecr::evaluateFitness(ctrl, population)
       })
 
       repeat({
@@ -132,12 +135,12 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
         offspring = map_if(offspring,
           function(x) sum(x) == 0,
           function(x) {
-            x[sample(1:length(x), 1)] = 1
+            x[sample(seq_along(x), 1)] = 1
             x
           })
 
         withr::with_package("ecr", {
-          fitness_o = ecr::evaluateFitness(ctrl, offspring, inst)
+          fitness_o = ecr::evaluateFitness(ctrl, offspring)
         })
         if (pars$survival.strategy == "plus") {
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
@@ -157,12 +160,4 @@ FSelectEvolutionary = R6Class("FSelectEvolutionary",
   )
 )
 
-objective_wrapper = function(x, inst) {
-  x = set_names(as.data.table(as.list(as.logical(x))),
-    inst$objective$task$feature_names)
-
-  res = inst$eval_batch(x)
-  as.numeric(res[, inst$objective$measures[[1]]$id, with = FALSE])
-}
-
-mlr_fselectors$add("evolutionary", FSelectEvolutionary)
+mlr_fselectors$add("evolutionary", FSelectorEvolutionary)

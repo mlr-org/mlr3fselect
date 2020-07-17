@@ -4,7 +4,7 @@ test_that("ObjectiveFSelect", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
-  measures = msr("dummy.sequential")
+  measures = msr("dummy")
 
   obj = ObjectiveFSelect$new(task = task, learner = learner,
     resampling = resampling, measures = measures)
@@ -20,11 +20,11 @@ test_that("ObjectiveFSelect", {
   expect_null(z$resample_result[[1]]$learners[[1]]$model)
 })
 
-test_that("ObjectiveFSelect - Multiple measures", {
+test_that("ObjectiveFSelect works with multiple measures", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
-  measures = msrs(c("dummy.sequential", "regr.mse"))
+  measures = msrs(c("regr.mse", "regr.rmse"))
 
   obj = ObjectiveFSelect$new(task = task, learner = learner,
                              resampling = resampling, measures = measures)
@@ -37,11 +37,11 @@ test_that("ObjectiveFSelect - Multiple measures", {
   expect_data_table(z, nrows = 2, ncols = 3)
 })
 
-test_that("ObjectiveFSelect - Store models", {
+test_that("ObjectiveFSelect works with store_models", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
-  measures = msr("dummy.sequential")
+  measures = msr("dummy")
 
   obj = ObjectiveFSelect$new(task = task, learner = learner,
                              resampling = resampling, measures = measures,

@@ -1,7 +1,7 @@
-#' @title FSelectRFE Class
+#' @title Feature Selection via Recrusive Feature Elimination
 #'
 #' @description
-#' Class for feature selection by recursive feature elimination (RFE). The
+#' `FSelectorRFE` class that implements Recursive Feature Elimination (RFE). The
 #' recursive algorithm (`recursive = TRUE`) recomputes the feature importances
 #' on the reduced feature set in every iteration.  The non-recursive algorithm
 #' (`recursive = FALSE`) only uses the feature importances of the model fitted
@@ -22,22 +22,22 @@
 #' @examples
 #' library(mlr3)
 #'
-#' terminator = term("evals", n_evals = 10)
-#' instance = FSelectInstance$new(
+#' terminator = trm("evals", n_evals = 10)
+#' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp("holdout"),
-#'   measures = msr("classif.ce"),
+#'   measure = msr("classif.ce"),
 #'   terminator = terminator,
 #'   store_models = TRUE
 #' )
 #'
-#' fs = fs("rfe")
-#' fs$optimize(instance)
+#' fselector = fs("rfe")
+#' fselector$optimize(instance)
 #' instance$result
 #' instance$archive$data
-FSelectRFE = R6Class("FSelectRFE",
-  inherit = FSelect,
+FSelectorRFE = R6Class("FSelectorRFE",
+  inherit = FSelector,
   public = list(
     #' @field importance Stores the feature importance of the model with all
     #'   variables if `recrusive` is set to `FALSE`
@@ -62,7 +62,7 @@ FSelectRFE = R6Class("FSelectRFE",
 
       pars = self$param_set$values
       archive = inst$archive
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$archive$cols_x
 
       states = as.list(rep(TRUE, length(feature_names)))
       names(states) = feature_names
@@ -126,4 +126,4 @@ importance_average = function(learners, features) {
   sort(apply(imp, 1, mean))
 }
 
-mlr_fselectors$add("rfe", FSelectRFE)
+mlr_fselectors$add("rfe", FSelectorRFE)

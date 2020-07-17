@@ -1,11 +1,12 @@
-#' @title FSelectSequential
+#' @title Feature Selection via Sequential Selection
 #'
 #' @description
-#' Subclass for sequential feature selection. The sequential forward selection
-#' (`strategy = fsf`) extends the feature set in each step with the feature that
-#' increases the models performance the most. The sequential backward selection
-#' (`strategy = fsb`) starts with the complete future set and removes in each
-#' step the feature that decreases the models performance the least.
+#' `FSelectorSequential` class that implements sequential feature selection. The
+#' sequential forward selection (`strategy = fsf`) extends the feature set in
+#' each step with the feature that increases the models performance the most.
+#' The sequential backward selection (`strategy = fsb`) starts with the complete
+#' future set and removes in each step the feature that decreases the models
+#' performance the least.
 #'
 #' @templateVar id sequential
 #' @template section_dictionary_fselectors
@@ -24,8 +25,8 @@
 #'
 #' @export
 #' @template example
-FSelectSequential = R6Class("FSelectSequential",
-  inherit = FSelect,
+FSelectorSequential = R6Class("FSelectorSequential",
+  inherit = FSelector,
   public = list(
 
     #' @description
@@ -47,7 +48,7 @@ FSelectSequential = R6Class("FSelectSequential",
 
       pars = self$param_set$values
       archive = inst$archive
-      feature_names = inst$objective$task$feature_names
+      feature_names = inst$archive$cols_x
 
       if (is.null(pars$max_features)) {
         pars$max_features = length(feature_names)
@@ -106,4 +107,4 @@ FSelectSequential = R6Class("FSelectSequential",
   )
 )
 
-mlr_fselectors$add("sequential", FSelectSequential)
+mlr_fselectors$add("sequential", FSelectorSequential)
