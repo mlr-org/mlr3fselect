@@ -19,7 +19,7 @@ measures = msr("classif.ce")
 terminator = trm("evals", n_evals = 15)
 fs = fs("exhaustive")
 afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
-afs$store_fselector_instance = TRUE
+afs$store_fselect_instance = TRUE
 
 afs$train(task)
 afs$model
@@ -37,7 +37,9 @@ All arguments from construction to create the \link{FSelectInstanceSingleCrit}.}
 \item{\code{fselector}}{(\link{FSelector})\cr
 Stores the feature selection algorithm.}
 
-\item{\code{store_fselector_instance}}{(\code{logical(1)}).}
+\item{\code{store_fselect_instance}}{(\code{logical(1)}).
+If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit}
+with all intermediate results in slot \verb{$fselect_instance}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -50,10 +52,10 @@ Returns FSelectInstanceSingleCrit archive.}
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Trained learner.}
 
-\item{\code{fselector_instance}}{(\link{FSelectInstanceSingleCrit})\cr
+\item{\code{fselect_instance}}{(\link{FSelectInstanceSingleCrit})\cr
 Internally created feature selection instance with all intermediate results.}
 
-\item{\code{fselector_result}}{(named \code{list()})\cr
+\item{\code{fselect_result}}{(named \code{list()})\cr
 Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}
 }
 \if{html}{\out{</div>}}

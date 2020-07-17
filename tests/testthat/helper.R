@@ -1,3 +1,6 @@
+lapply(list.files(system.file("testthat", package = "mlr3"),
+                  pattern = "^helper.*\\.[rR]$", full.names = TRUE), source)
+
 TEST_MAKE_TSK = function(n = 4L) {
   x = set_names(map_dtc(seq(n), function(x) rnorm(100L)),
     paste0("x", seq(n)))

@@ -17,7 +17,7 @@
 #' terminator = trm("evals", n_evals = 15)
 #' fs = fs("exhaustive")
 #' afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
-#' afs$store_fselector_instance = TRUE
+#' afs$store_fselect_instance = TRUE
 #'
 #' afs$train(task)
 #' afs$model
@@ -33,8 +33,10 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' Stores the feature selection algorithm.
     fselector = NULL,
 
-    #' @field store_fselector_instance (`logical(1)`).
-    store_fselector_instance = TRUE,
+    #' @field store_fselect_instance (`logical(1)`).
+    #' If `TRUE` (default), stores the internally created [FSelectInstanceSingleCrit]
+    #' with all intermediate results in slot `$fselect_instance`.
+    store_fselect_instance = TRUE,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
@@ -100,8 +102,8 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
       learner$train(ia$task)
 
       result_model = list(learner = learner)
-      if (isTRUE(self$store_fselector_instance)) {
-        result_model$fselector_instance = instance
+      if (isTRUE(self$store_fselect_instance)) {
+        result_model$fselect_instance = instance
       }
       return(result_model)
     },
@@ -115,7 +117,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
 
     #' @field archive ([Archive])\cr
     #' Returns FSelectInstanceSingleCrit archive.
-    archive = function() self$fselector_instance$archive,
+    archive = function() self$fselect_instance$archive,
 
     #' @field learner ([mlr3::Learner])\cr
     #' Trained learner.
@@ -127,12 +129,12 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
         self$model$learner
       }
     },
-    #' @field fselector_instance ([FSelectInstanceSingleCrit])\cr
+    #' @field fselect_instance ([FSelectInstanceSingleCrit])\cr
     #' Internally created feature selection instance with all intermediate results.
-    fselector_instance = function() self$model$fselector_instance,
+    fselect_instance = function() self$model$fselect_instance,
 
-    #' @field fselector_result (named `list()`)\cr
+    #' @field fselect_result (named `list()`)\cr
     #' Short-cut to `$result` from [FSelectInstanceSingleCrit].
-    fselector_result = function() self$fselector_instance$result
+    fselect_result = function() self$fselect_instance$result
   )
 )
