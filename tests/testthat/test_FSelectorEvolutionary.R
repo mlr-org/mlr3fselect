@@ -35,3 +35,8 @@ test_that("FSelectEvolutionary - Task with no features as inital solution", {
   test_fselector("evolutionary", mu = 4, lambda = 8,
     initial.solutions = list(c(0, 0, 0, 0)), term_evals = 10)
 })
+
+test_that("FSelectEvolutionary flips random bit if feature set is empty", {
+  test_fselector("evolutionary", mu = 4, lambda = 8,
+    initial.solutions = list(c(0, 0, 0, 0)), term_evals = 12)
+})
