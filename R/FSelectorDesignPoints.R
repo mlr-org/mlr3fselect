@@ -13,13 +13,7 @@
 #' @templateVar id design_points
 #' @template section_dictionary_fselectors
 #'
-#' @section Parameters:
-#' \describe{
-#' \item{`batch_size`}{`integer(1)`\cr
-#' Maximum number of configurations to try in a batch.}
-#' \item{`design`}{[data.table::data.table]\cr
-#' Design points to try in search, one per row.}
-#' }
+#' @inheritSection bbotk::OptimizerDesignPoints Parameters
 #'
 #' @export
 #' @examples
