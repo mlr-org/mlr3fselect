@@ -1,8 +1,16 @@
 #' @title ObjectiveFSelect
 #'
 #' @description
-#' Describes the objective function that estimates the performance of feature
-#' subsets. This class is usually constructed internally by the [OptimInstance].
+#' Stores the objective function that estimates the performance of feature
+#' subsets. This class is usually constructed internally by by the
+#' [TuningInstanceSingleCrit] / [TuningInstanceMultiCrit].
+#'
+#' @template param_task
+#' @template param_learner
+#' @template param_resampling
+#' @template param_measures
+#' @template param_store_models
+#' @template param_check_values
 #'
 #' @export
 ObjectiveFSelect = R6Class("ObjectiveFSelect",
@@ -12,32 +20,23 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
   #' Creates a new instance of this [R6][R6::R6Class] class.
   public = list(
 
-    #' @field task [mlr3::Task]
+    #' @field task ([mlr3::Task])
     task = NULL,
 
-    #' @field learner [mlr3::Learner]
+    #' @field learner ([mlr3::Learner])
     learner = NULL,
 
-    #' @field resampling [mlr3::Resampling]
+    #' @field resampling ([mlr3::Resampling])
     resampling = NULL,
 
-    #' @field measures list of [mlr3::Measure]
+    #' @field measures (list of [mlr3::Measure])
     measures = NULL,
 
-    #' @field store_models `logical(1)`
+    #' @field store_models (`logical(1)`).
     store_models = NULL,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    #' @param task [mlr3::Task]
-    #' @param learner [mlr3::Learner]
-    #' @param resampling [mlr3::Resampling]
-    #' @param measures list of [mlr3::Measure]
-    #' @param terminator [Terminator]
-    #' @param store_models `logical(1)`
-    #' @param check_values (`logical(1)`)\cr
-    #' Should feature sets before the evaluation and the results be checked for
-    #' validity?
     initialize = function(task, learner, resampling, measures,
       store_models = FALSE, check_values = TRUE) {
       self$task = assert_task(as_task(task, clone = TRUE))
@@ -55,8 +54,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       domain = ParamSet$new(map(self$task$feature_names,
         function(s) ParamLgl$new(id = s)))
 
-      codomain = ParamSet$new(map(self$measures,
-        function(s) {
+      codomain = ParamSet$new(map(self$measures, function(s) {
           ParamDbl$new(id = s$id,
             tags = ifelse(s$minimize, "minimize", "maximize"))
         }))
@@ -69,7 +67,6 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
   private = list(
 
     .eval_many = function(xss) {
-
       tasks = map(xss, function(x) {
         state = self$task$feature_names[unlist(x)]
         tsk = self$task$clone(deep = TRUE)

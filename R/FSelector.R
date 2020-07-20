@@ -2,11 +2,11 @@
 #'
 #' @description
 #' Abstract `FSelector` class that implements the base functionality each
-#' `FSelector` must provide. A `FSelector` object describes the feature selection
+#' fselector must provide. A `FSelector` object describes the feature selection
 #' strategy, i.e. how to optimize the black-box function and its feasible set
 #' defined by the [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit] object.
 #'
-#' A tuner must write its result into the [FSelectInstanceSingleCrit] /
+#' A fselector must write its result into the [FSelectInstanceSingleCrit] /
 #' [FSelectInstanceMultiCrit] using the `assign_result` method of the
 #' [bbotk::OptimInstance] at the end of its selection in order to store the best
 #' selected feature subset and its estimated performance vector.
@@ -69,8 +69,7 @@
 #' # returns best feature subset and best performance
 #' instance$result
 #'
-#' # allows access of data.table / benchmark result of full path of all
-#' # evaluations
+#' # allows access of data.table / benchmark result of full path of all evaluations
 #' instance$archive
 FSelector = R6Class("FSelector",
   public = list(
@@ -111,8 +110,20 @@ FSelector = R6Class("FSelector",
 
     #' @description
     #' Helper for print outputs.
+    #' @return (`character()`).
     format = function() {
       sprintf("<%s>", class(self)[1L])
+    },
+
+    #' @description
+    #' Print method.
+    #' @return (`character()`).
+    print = function() {
+      catf(format(self))
+      catf(str_indent("* Parameters:", as_short_string(self$param_set$values)))
+      catf(str_indent("* Parameter classes:", self$param_classes))
+      catf(str_indent("* Properties:", self$properties))
+      catf(str_indent("* Packages:", self$packages))
     },
 
     #' @description
@@ -122,6 +133,8 @@ FSelector = R6Class("FSelector",
     #' in the [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
     #'
     #' @param inst ([FSelectInstanceSingleCrit]|[FSelectInstanceMultiCrit]).
+    #'
+    #' @return [data.table::data.table].
     optimize = function(inst) {
       assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))
       optimize_default(inst, self, private)

@@ -37,6 +37,7 @@ Search method \code{sfs} (forward search) or \code{sbs} (backward search).}
 library(mlr3)
 
 terminator = trm("evals", n_evals = 10)
+
 instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
@@ -46,8 +47,14 @@ instance = FSelectInstanceSingleCrit$new(
 )
 
 fselector = fs("sequential")
+
+# Modifies the instance by reference
 fselector$optimize(instance)
+
+# Returns best scoring evaluation
 instance$result
+
+# Allows access of data.table of full path of all evaluations
 instance$archive$data
 }
 \section{Super class}{
@@ -65,6 +72,7 @@ instance$archive$data
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format">}\href{../../mlr3fselect/html/FSelector.html#method-format}{\code{mlr3fselect::FSelector$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize">}\href{../../mlr3fselect/html/FSelector.html#method-optimize}{\code{mlr3fselect::FSelector$optimize()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print">}\href{../../mlr3fselect/html/FSelector.html#method-print}{\code{mlr3fselect::FSelector$print()}}\out{</span>}
 }
 \out{</details>}
 }

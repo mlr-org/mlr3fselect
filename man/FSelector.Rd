@@ -5,11 +5,11 @@
 \title{FSelector}
 \description{
 Abstract \code{FSelector} class that implements the base functionality each
-\code{FSelector} must provide. A \code{FSelector} object describes the feature selection
+fselector must provide. A \code{FSelector} object describes the feature selection
 strategy, i.e. how to optimize the black-box function and its feasible set
 defined by the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit} object.
 
-A tuner must write its result into the \link{FSelectInstanceSingleCrit} /
+A fselector must write its result into the \link{FSelectInstanceSingleCrit} /
 \link{FSelectInstanceMultiCrit} using the \code{assign_result} method of the
 \link[bbotk:OptimInstance]{bbotk::OptimInstance} at the end of its selection in order to store the best
 selected feature subset and its estimated performance vector.
@@ -79,8 +79,7 @@ fs$optimize(instance)
 # returns best feature subset and best performance
 instance$result
 
-# allows access of data.table / benchmark result of full path of all
-# evaluations
+# allows access of data.table / benchmark result of full path of all evaluations
 instance$archive
 }
 \section{Public fields}{
@@ -101,6 +100,7 @@ instance$archive
 \itemize{
 \item \href{#method-new}{\code{FSelector$new()}}
 \item \href{#method-format}{\code{FSelector$format()}}
+\item \href{#method-print}{\code{FSelector$print()}}
 \item \href{#method-optimize}{\code{FSelector$optimize()}}
 \item \href{#method-clone}{\code{FSelector$clone()}}
 }
@@ -140,6 +140,22 @@ Helper for print outputs.
 \if{html}{\out{<div class="r">}}\preformatted{FSelector$format()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+(\code{character()}).
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+Print method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelector$print()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+(\code{character()}).
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-optimize"></a>}}
@@ -159,6 +175,9 @@ in the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
 \item{\code{inst}}{(\link{FSelectInstanceSingleCrit}|\link{FSelectInstanceMultiCrit}).}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\link[data.table:data.table]{data.table::data.table}.
 }
 }
 \if{html}{\out{<hr>}}

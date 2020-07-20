@@ -69,6 +69,7 @@ variables if \code{recrusive} is set to \code{FALSE}}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format">}\href{../../mlr3fselect/html/FSelector.html#method-format}{\code{mlr3fselect::FSelector$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize">}\href{../../mlr3fselect/html/FSelector.html#method-optimize}{\code{mlr3fselect::FSelector$optimize()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print">}\href{../../mlr3fselect/html/FSelector.html#method-print}{\code{mlr3fselect::FSelector$print()}}\out{</span>}
 }
 \out{</details>}
 }

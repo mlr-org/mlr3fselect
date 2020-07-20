@@ -19,6 +19,15 @@
 #' of a selected feature subset and associated estimated performance values, by
 #' calling the method `instance$assign_result()`.
 #'
+#' @template param_task
+#' @template param_learner
+#' @template param_resampling
+#' @template param_measures
+#' @template param_terminator
+#' @template param_store_models
+#' @template param_check_values
+#' @template param_xdt
+#'
 #' @export
 #' @examples
 #' library(mlr3)
@@ -43,21 +52,6 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    #'
-    #' @param task ([mlr3::Task]).
-    #' @param learner ([mlr3::Learner]).
-    #' @param resampling ([mlr3::Resampling])\cr
-    #' Note that uninstantiated resamplings are instantiated during construction
-    #' so that all configurations are evaluated on the same data splits.
-    #'
-    #' @param measures (list of [mlr3::Measure])\cr
-    #' Measures to optimize.
-    #'
-    #' @param terminator ([Terminator]).
-    #' @param store_models (`logical(1)`).
-    #' @param check_values (`logical(1)`)\cr
-    #' Should feature sets before the evaluation and the results be checked for
-    #' validity?
     initialize = function(task, learner, resampling, measures, terminator,
       store_models = FALSE, check_values = TRUE) {
       obj = ObjectiveFSelect$new(task = task, learner = learner,
@@ -70,10 +64,6 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
     #' The [FSelector] object writes the best found feature subsets
     #' and estimated performance values here. For internal use.
     #'
-    #' @param xdt (`data.table`)\cr
-    #' x values as `data.table` with one row. Contains the value in the *search
-    #' space* of the [FSelectInstanceMultiCrit]. Can contain additional columns for extra
-    #' information.
     #' @param y (`numeric(1)`)\cr
     #'   Optimal outcome.
     assign_result = function(xdt, y) {

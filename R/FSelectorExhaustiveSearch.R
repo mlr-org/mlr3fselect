@@ -50,11 +50,9 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
         combinations = combn(length(feature_names),
           archive$n_batch + 1)
         states = map_dtr(seq_len(ncol(combinations)), function(j) {
-          state = rep(0, length(feature_names))
-          state[combinations[, j]] = 1
-          state = as.list(as.logical(state))
-          names(state) = feature_names
-          state
+          state = rep(FALSE, length(feature_names))
+          state[combinations[, j]] = TRUE
+          set_names(as.list(state), feature_names)
         })
         inst$eval_batch(states)
       })

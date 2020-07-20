@@ -24,6 +24,10 @@
 #' and `lambda` must be set by the user. The `terminators` parameter is replaced
 #' by the [Terminator] subclasses.
 #'
+#' @note
+#' We add a random feature to the set if `ecr::ecr()` suggests an empty
+#' feature set.
+#'
 #' @source
 #' \cite{mlr3fselect}{bossek_2017}
 #'
@@ -32,6 +36,7 @@
 #' library(mlr3)
 #'
 #' terminator = trm("evals", n_evals = 10)
+#'
 #' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
@@ -41,8 +46,14 @@
 #' )
 #'
 #' fselector = fs("evolutionary", mu = 10, lambda = 5)
+#'
+#' # Modifies the instance by reference
 #' fselector$optimize(instance)
+#'
+#' # Returns best scoring evaluation
 #' instance$result
+#'
+#' # Allows access of data.table of full path of all evaluations
 #' instance$archive$data
 FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
   inherit = FSelector,
@@ -113,10 +124,8 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
       ctrl = ecr::registerECROperator(ctrl, "selectForSurvival",
         pars$survival.selector)
 
-      population = invoke(ecr::initPopulation,
-        gen.fun = ecr::genBin,
-        n.dim = length(inst$objective$task$feature_names),
-        .args = pars_initPopulation)
+      population = invoke(ecr::initPopulation, gen.fun = ecr::genBin,
+        n.dim = inst$objective$xdim, .args = pars_initPopulation)
       population = map_if(population,
         function(x) sum(x) == 0,
         function(x) {
@@ -132,12 +141,9 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
         offspring = invoke(ecr::generateOffspring, ctrl, population, fitness,
           .args = pars_generateOffspring)
 
-        offspring = map_if(offspring,
-          function(x) sum(x) == 0,
-          function(x) {
+        offspring = map_if(offspring, function(x) sum(x) == 0, function(x) {
             x[sample(seq_along(x), 1)] = 1
-            x
-          })
+            x})
 
         withr::with_package("ecr", {
           fitness_o = ecr::evaluateFitness(ctrl, offspring)
@@ -146,13 +152,8 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
           selection = ecr::replaceMuPlusLambda(ctrl, population, offspring,
             fitness, fitness_o)
         } else {
-          selection = invoke(ecr::replaceMuCommaLambda,
-            ctrl,
-            population,
-            offspring,
-            fitness,
-            fitness_o,
-            .args = pars_replaceMuCommaLambda)
+          selection = invoke(ecr::replaceMuCommaLambda, ctrl, population,
+            offspring, fitness, fitness_o, .args = pars_replaceMuCommaLambda)
         }
         population = selection$population
       })

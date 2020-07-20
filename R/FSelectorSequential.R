@@ -63,11 +63,9 @@ FSelectorSequential = R6Class("FSelectorSequential",
         combinations = combn(length(feature_names),
           pars$max_features)
         states = map_dtr(seq_len(ncol(combinations)), function(j) {
-          state = rep(0, length(feature_names))
-          state[combinations[, j]] = 1
-          state = as.list(as.logical(state))
-          names(state) = feature_names
-          state
+          state = rep(FALSE, length(feature_names))
+          state[combinations[, j]] = TRUE
+          set_names(as.list(state), feature_names)
         })
       }
 
@@ -79,25 +77,18 @@ FSelectorSequential = R6Class("FSelectorSequential",
         }
 
         res = archive$best(m = archive$n_batch)
-        best_state = as.numeric(as.matrix(res[1, feature_names, with = FALSE]))
+        best_state = as.logical(res[, feature_names, with = FALSE])
 
         # Generate new states based on best feature set
-        x = ifelse(pars$strategy == "sfs", 0, 1)
-        y = ifelse(pars$strategy == "sfs", 1, 0)
-        z = if (pars$strategy == "sfs") {
-          !as.logical(best_state)
-        }
-        else {
-          as.logical(best_state)
-        }
+        x = ifelse(pars$strategy == "sfs", FALSE, TRUE)
+        y = ifelse(pars$strategy == "sfs", TRUE, FALSE)
+        z = if (pars$strategy == "sfs") !best_state else best_state
 
         states = map_dtr(seq_along(best_state)[z], function(i) {
           if (best_state[i] == x) {
             new_state = best_state
             new_state[i] = y
-            new_state = as.list(as.logical(new_state))
-            names(new_state) = feature_names
-            new_state
+            set_names(as.list(new_state), feature_names)
           }
         })
 

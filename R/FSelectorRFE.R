@@ -64,8 +64,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
       archive = inst$archive
       feature_names = inst$archive$cols_x
 
-      states = as.list(rep(TRUE, length(feature_names)))
-      names(states) = feature_names
+      states = set_names(as.list(rep(TRUE, length(feature_names))), feature_names)
       states = as.data.table(states)
       inst$eval_batch(states)
 

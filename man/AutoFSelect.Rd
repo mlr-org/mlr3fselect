@@ -4,9 +4,25 @@
 \alias{AutoFSelect}
 \title{AutoFeselect}
 \description{
-The \code{AutoFSelect} is a \link[mlr3:Learner]{mlr3::Learner} which automatically selects the
-optimal feature set and fits the model on the training data with the optimal
-feature set.
+The \code{AutoFSelect} is a \link[mlr3:Learner]{mlr3::Learner} which wraps another \link[mlr3:Learner]{mlr3::Learner}
+and performs the following steps during \verb{$train()}:
+\enumerate{
+\item The wrapped (inner) learner is trained on the feature subsets via
+resampling. The feature selection can be specified by providing a
+\link{FSelector}, a \link[bbotk:Terminator]{bbotk::Terminator}, a \link[mlr3:Resampling]{mlr3::Resampling} and a
+\link[mlr3:Measure]{mlr3::Measure}.
+\item A final model is fit on the complete training data with the best found
+feature subset.
+}
+
+During \verb{$predict()} the \code{AutoFSelect} just calls the predict method of the
+wrapped (inner) learner.
+
+Note that this approach allows to perform nested resampling by passing an
+\link{AutoFSelect} object to \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
+To access the inner resampling results, set \code{store_tuning_instance = TRUE}
+and execute \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}} with
+\code{store_models = TRUE} (see examples).
 }
 \examples{
 library(mlr3)
@@ -24,6 +40,18 @@ afs$store_fselect_instance = TRUE
 afs$train(task)
 afs$model
 afs$learner
+
+afs = AutoFSelect$new(learner, resampling, measure, terminator, fs)
+afs$store_tuning_instance = TRUE
+
+resampling_outer = rsmp("cv", folds = 2)
+rr = resample(task, afs, resampling_outer, store_models = TRUE)
+
+# Aggregate performance of outer results
+rr$aggregate()
+
+# Retrieve inner tuning results.
+rr$data$learner[[1]]$tuning_result
 }
 \section{Super class}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{AutoFSelect}

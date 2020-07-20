@@ -4,8 +4,9 @@
 \alias{ObjectiveFSelect}
 \title{ObjectiveFSelect}
 \description{
-Describes the objective function that estimates the performance of feature
-subsets. This class is usually constructed internally by the \link{OptimInstance}.
+Stores the objective function that estimates the performance of feature
+subsets. This class is usually constructed internally by by the
+\link{TuningInstanceSingleCrit} / \link{TuningInstanceMultiCrit}.
 }
 \section{Super class}{
 \code{\link[bbotk:Objective]{bbotk::Objective}} -> \code{ObjectiveFSelect}
@@ -13,15 +14,15 @@ subsets. This class is usually constructed internally by the \link{OptimInstance
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{task}}{\link[mlr3:Task]{mlr3::Task}}
+\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})}
 
-\item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})}
 
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}}
+\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})}
 
-\item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
+\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})}
 
-\item{\code{store_models}}{\code{logical(1)}}
+\item{\code{store_models}}{(\code{logical(1)}).}
 }
 \if{html}{\out{</div>}}
 }
@@ -65,21 +66,24 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{task}}{\link[mlr3:Task]{mlr3::Task}}
+\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
+Task to operate on.}
 
-\item{\code{learner}}{\link[mlr3:Learner]{mlr3::Learner}}
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner}).}
 
-\item{\code{resampling}}{\link[mlr3:Resampling]{mlr3::Resampling}}
+\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
+Uninstantiated resamplings are instantiated during construction
+so that all configurations are evaluated on the same data splits.}
 
-\item{\code{measures}}{list of \link[mlr3:Measure]{mlr3::Measure}}
+\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
+Measures to optimize.
+If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
 
-\item{\code{store_models}}{\code{logical(1)}}
+\item{\code{store_models}}{(\code{logical(1)}).}
 
 \item{\code{check_values}}{(\code{logical(1)})\cr
-Should feature sets before the evaluation and the results be checked for
+Check the parameters before the evaluation and the results for
 validity?}
-
-\item{\code{terminator}}{\link{Terminator}}
 }
 \if{html}{\out{</div>}}
 }

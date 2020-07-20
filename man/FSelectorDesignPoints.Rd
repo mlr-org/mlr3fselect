@@ -38,6 +38,7 @@ library(mlr3)
 library(data.table)
 
 terminator = trm("evals", n_evals = 10)
+
 instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
@@ -52,8 +53,14 @@ design = data.table(Petal.Length = c(TRUE, FALSE),
   Sepal.Width = c(FALSE, TRUE))
 
 fselector = fs("design_points", design = design)
+
+# Modifies the instance by reference
 fselector$optimize(instance)
+
+# Returns best scoring evaluation
 instance$result
+
+# Allows access of data.table of full path of all evaluations
 instance$archive$data
 }
 \section{Super classes}{
@@ -70,6 +77,7 @@ instance$archive$data
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format">}\href{../../mlr3fselect/html/FSelector.html#method-format}{\code{mlr3fselect::FSelector$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print">}\href{../../mlr3fselect/html/FSelector.html#method-print}{\code{mlr3fselect::FSelector$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorFromOptimizer" data-id="optimize">}\href{../../mlr3fselect/html/FSelectorFromOptimizer.html#method-optimize}{\code{mlr3fselect::FSelectorFromOptimizer$optimize()}}\out{</span>}
 }
 \out{</details>}

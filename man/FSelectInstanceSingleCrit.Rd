@@ -81,12 +81,13 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task}).}
+\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
+Task to operate on.}
 
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner}).}
 
 \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
-Note that uninstantiated resamplings are instantiated during construction
+Uninstantiated resamplings are instantiated during construction
 so that all configurations are evaluated on the same data splits.}
 
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
@@ -97,7 +98,7 @@ Measure to optimize.}
 \item{\code{store_models}}{(\code{logical(1)}).}
 
 \item{\code{check_values}}{(\code{logical(1)})\cr
-Should feature sets before the evaluation and the results be checked for
+Check the parameters before the evaluation and the results for
 validity?}
 }
 \if{html}{\out{</div>}}
@@ -107,7 +108,7 @@ validity?}
 \if{html}{\out{<a id="method-assign_result"></a>}}
 \if{latex}{\out{\hypertarget{method-assign_result}{}}}
 \subsection{Method \code{assign_result()}}{
-The \link{FSelector} object writes the best found feature subset
+The \link{FSelector} writes the best found feature subset
 and estimated performance value here. For internal use.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceSingleCrit$assign_result(xdt, y)}\if{html}{\out{</div>}}
@@ -116,10 +117,10 @@ and estimated performance value here. For internal use.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{xdt}}{(\code{data.table})\cr
-x values as \code{data.table} with one row. Contains the value in the \emph{search
-space} of the \link{FSelectInstanceSingleCrit}. Can contain additional columns for extra
-information.}
+\item{\code{xdt}}{(\code{data.table::data.table()})\cr
+x values as \code{data.table}. Each row is one point. Contains the value in
+the \emph{search space} of the \link{TuningInstanceMultiCrit} object. Can contain
+additional columns for extra information.}
 
 \item{\code{y}}{(\code{numeric(1)})\cr
 Optimal outcome.}
@@ -142,13 +143,13 @@ for optimizers of binary spaces.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{(\code{numeric()})\cr
-0/1 encoded feature set (e.g. \code{c(1,0,1,0)})}
+\item{\code{x}}{(\code{integer() | logical()})\cr
+Encoded feature set (e.g, \code{c(1L, 0L, 1L, 0L)} / \code{c(TRUE, FALSE, TRUE, FALSE)})}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-Objective value as \code{numeric(1)}, negated for maximization problems.
+Objective values as \code{numeric(1)}, negated for maximization problems.
 }
 }
 \if{html}{\out{<hr>}}
