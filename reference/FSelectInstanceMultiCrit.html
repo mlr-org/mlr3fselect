@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FSelectInstance Class — FSelectInstance • mlr3fselect</title>
+<title>Multi Criterion Feature Selection Instance — FSelectInstanceMultiCrit • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,16 +40,21 @@
 
 
 
-<meta property="og:title" content="FSelectInstance Class — FSelectInstance" />
-<meta property="og:description" content="Specifies a general feature selection scenario.
-Evaluations of feature sets are performed in batches. Before and after a
-batch is evaluated, the Terminator is queried for the remaining budget. If
-the available budget is exhausted, an exception is raised, and no further
-evaluations can be performed from this point on.
-A list of measures can be passed to the instance, and they will always be all
-evaluated. However, single-criteria tuners optimize only the first measure.
-The FSelect object is also supposed to store its final result, consisting
-of a selected feature set and associated estimated performance values, by
+<meta property="og:title" content="Multi Criterion Feature Selection Instance — FSelectInstanceMultiCrit" />
+<meta property="og:description" content="Specifies a general feature selection scenario, including objective function
+and archive for feature selection algorithms to act upon. This class stores
+an ObjectiveFSelect object that encodes the black box objective function
+which an FSelector has to optimize. It allows the basic operations of
+querying the objective at feature subsets ($eval_batch()), storing the
+evaluations in the internal Archive and accessing the final result
+($result).
+Evaluations of feature subsets are performed in batches by calling
+mlr3::benchmark() internally. Before a batch is evaluated, the
+bbotk::Terminator is queried for the remaining budget. If the available
+budget is exhausted, an exception is raised, and no further evaluations can
+be performed from this point on.
+The FSelector is also supposed to store its final result, consisting
+of a selected feature subset and associated estimated performance values, by
 calling the method instance$assign_result()." />
 <meta name="twitter:card" content="summary" />
 
@@ -132,41 +137,47 @@ calling the method instance$assign_result()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FSelectInstance Class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelectInstance.R'><code>R/FSelectInstance.R</code></a></small>
-    <div class="hidden name"><code>FSelectInstance.Rd</code></div>
+    <h1>Multi Criterion Feature Selection Instance</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelectInstanceMultiCrit.R'><code>R/FSelectInstanceMultiCrit.R</code></a></small>
+    <div class="hidden name"><code>FSelectInstanceMultiCrit.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Specifies a general feature selection scenario.</p>
-<p>Evaluations of feature sets are performed in batches. Before and after a
-batch is evaluated, the Terminator is queried for the remaining budget. If
-the available budget is exhausted, an exception is raised, and no further
-evaluations can be performed from this point on.</p>
-<p>A list of measures can be passed to the instance, and they will always be all
-evaluated. However, single-criteria tuners optimize only the first measure.</p>
-<p>The <a href='FSelect.html'>FSelect</a> object is also supposed to store its final result, consisting
-of a selected feature set and associated estimated performance values, by
+    <p>Specifies a general feature selection scenario, including objective function
+and archive for feature selection algorithms to act upon. This class stores
+an <a href='ObjectiveFSelect.html'>ObjectiveFSelect</a> object that encodes the black box objective function
+which an <a href='FSelector.html'>FSelector</a> has to optimize. It allows the basic operations of
+querying the objective at feature subsets (<code>$eval_batch()</code>), storing the
+evaluations in the internal Archive and accessing the final result
+(<code>$result</code>).</p>
+<p>Evaluations of feature subsets are performed in batches by calling
+<code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>mlr3::benchmark()</a></code> internally. Before a batch is evaluated, the
+<a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a> is queried for the remaining budget. If the available
+budget is exhausted, an exception is raised, and no further evaluations can
+be performed from this point on.</p>
+<p>The <a href='FSelector.html'>FSelector</a> is also supposed to store its final result, consisting
+of a selected feature subset and associated estimated performance values, by
 calling the method <code>instance$assign_result()</code>.</p>
     </div>
 
 
 
-    <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
+    <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/bbotk/man/OptimInstance.html'>bbotk::OptimInstance</a></code> -&gt; <code>FSelectInstance</code></p>
+    <p><code><a href='https://bbotk.mlr-org.com/reference/OptimInstance.html'>bbotk::OptimInstance</a></code> -&gt; <code><a href='https://bbotk.mlr-org.com/reference/OptimInstanceMultiCrit.html'>bbotk::OptimInstanceMultiCrit</a></code> -&gt; <code>FSelectInstanceMultiCrit</code></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 <h3>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-new'><code>FSelectInstance$new()</code></a></p></li>
-<li><p><a href='#method-clone'><code>FSelectInstance$clone()</code></a></p></li>
+<li><p><a href='#method-new'><code>FSelectInstanceMultiCrit$new()</code></a></p></li>
+<li><p><a href='#method-assign_result'><code>FSelectInstanceMultiCrit$assign_result()</code></a></p></li>
+<li><p><a href='#method-objective_function'><code>FSelectInstanceMultiCrit$objective_function()</code></a></p></li>
+<li><p><a href='#method-clone'><code>FSelectInstanceMultiCrit$clone()</code></a></p></li>
 </ul>
 <p><details open ><summary>Inherited methods</summary>
 <ul>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="assign_result"><a href='../../bbotk/html/OptimInstance.html#method-assign_result'><code>bbotk::OptimInstance$assign_result()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href='../../bbotk/html/OptimInstance.html#method-eval_batch'><code>bbotk::OptimInstance$eval_batch()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-format'><code>bbotk::OptimInstance$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href='../../bbotk/html/OptimInstance.html#method-print'><code>bbotk::OptimInstance$print()</code></a></span></p></li>
@@ -176,34 +187,77 @@ calling the method <code>instance$assign_result()</code>.</p>
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
+<p><div class="r"></p><pre><span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>new</span>(
   <span class='no'>task</span>,
   <span class='no'>learner</span>,
   <span class='no'>resampling</span>,
   <span class='no'>measures</span>,
   <span class='no'>terminator</span>,
-  <span class='kw'>store_models</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>store_models</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>check_values</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
-<dt><code>task</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a></p></dd>
+<dt><code>task</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>)<br />
+Task to operate on.</p></dd>
 
-<dt><code>learner</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></p></dd>
+<dt><code>learner</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>).</p></dd>
 
-<dt><code>resampling</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a></p></dd>
+<dt><code>resampling</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a>)<br />
+Uninstantiated resamplings are instantiated during construction
+so that all configurations are evaluated on the same data splits.</p></dd>
 
-<dt><code>measures</code></dt><dd><p>list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a></p></dd>
+<dt><code>measures</code></dt><dd><p>(list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)<br />
+Measures to optimize.
+If <code>NULL</code>, <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>'s default measure is used.</p></dd>
 
-<dt><code>terminator</code></dt><dd><p>Terminator</p></dd>
+<dt><code>terminator</code></dt><dd><p>(Terminator).</p></dd>
 
-<dt><code>store_models</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
+<dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).</p></dd>
+
+<dt><code>check_values</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+Check the parameters before the evaluation and the results for
+validity?</p></dd>
 
 </dl><p></div></p>
 <p><hr>
+<a id="method-assign_result"></a></p><h3>Method <code>assign_result()</code></h3>
+<p>The <a href='FSelector.html'>FSelector</a> object writes the best found feature subsets
+and estimated performance values here. For internal use.</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>assign_result</span>(<span class='no'>xdt</span>, <span class='no'>y</span>)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl'>
+<dt><code>xdt</code></dt><dd><p>(<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code>)<br />
+x values as <code>data.table</code>. Each row is one point. Contains the value in
+the <em>search space</em> of the FSelectInstanceMultiCrit object. Can contain
+additional columns for extra information.</p></dd>
+
+<dt><code>y</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
+Optimal outcome.</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-objective_function"></a></p><h3>Method <code>objective_function()</code></h3>
+<p>Evaluates a single feature set and returns a numeric vector. The return
+values are negated if the measure is maximized. Internally, <code>$eval_batch()</code>
+is called with a single row. This function serves as a objective function
+for optimizers of binary spaces.</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>objective_function</span>(<span class='no'>x</span>)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl'>
+<dt><code>x</code></dt><dd><p>(<code>integer() | logical()</code>)<br />
+Encoded feature set (e.g, <code><a href='https://rdrr.io/r/base/c.html'>c(1L, 0L, 1L, 0L)</a></code> / <code><a href='https://rdrr.io/r/base/c.html'>c(TRUE, FALSE, TRUE, FALSE)</a></code>)</p></dd>
+
+</dl><p></div></p>
+<h3>Returns</h3>
+<p>Objective value as <code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>, negated for maximization problems.</p>
+<p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstance</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
@@ -218,12 +272,12 @@ calling the method <code>instance$assign_result()</code>.</p>
 
 <span class='co'># Objects required to define the performance evaluator</span>
 <span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>)
-<span class='no'>measures</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msrs</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classif.ce"</span>))
+<span class='no'>measures</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msrs</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classif.ce"</span>, <span class='st'>"classif.acc"</span>))
 <span class='no'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>)
 <span class='no'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>)
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='term.html'>term</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>8</span>)
+<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>8</span>)
 
-<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
+<span class='no'>inst</span> <span class='kw'>=</span> <span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>new</span>(
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='no'>task</span>,
   <span class='kw'>learner</span> <span class='kw'>=</span> <span class='no'>learner</span>,
   <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='no'>resampling</span>,

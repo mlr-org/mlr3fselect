@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FSelectRandom Class — FSelectRandom • mlr3fselect</title>
+<title>Feature Selection via Sequential Selection — FSelectorSequential • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,8 +40,13 @@
 
 
 
-<meta property="og:title" content="FSelectRandom Class — FSelectRandom" />
-<meta property="og:description" content="Subclass for random feature selection. Feature sets are randomly drawn." />
+<meta property="og:title" content="Feature Selection via Sequential Selection — FSelectorSequential" />
+<meta property="og:description" content="FSelectorSequential class that implements sequential feature selection. The
+sequential forward selection (strategy = fsf) extends the feature set in
+each step with the feature that increases the models performance the most.
+The sequential backward selection (strategy = fsb) starts with the complete
+future set and removes in each step the feature that decreases the models
+performance the least." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,24 +128,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FSelectRandom Class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelectRandom.R'><code>R/FSelectRandom.R</code></a></small>
-    <div class="hidden name"><code>FSelectRandom.Rd</code></div>
+    <h1>Feature Selection via Sequential Selection</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelectorSequential.R'><code>R/FSelectorSequential.R</code></a></small>
+    <div class="hidden name"><code>FSelectorSequential.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Subclass for random feature selection. Feature sets are randomly drawn.</p>
+    <p><code>FSelectorSequential</code> class that implements sequential feature selection. The
+sequential forward selection (<code>strategy = fsf</code>) extends the feature set in
+each step with the feature that increases the models performance the most.
+The sequential backward selection (<code>strategy = fsb</code>) starts with the complete
+future set and removes in each step the feature that decreases the models
+performance the least.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Feature sets are evaluated in batches, where each batch is one step in the
+sequential feature selection.</p>
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
     
 
-<p>This <a href='FSelect.html'>FSelect</a> can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a>
-<a href='mlr_fselectors.html'>mlr_fselectors</a> or with the associated sugar function <code><a href='fs.html'>fs()</a></code>:</p><pre><span class='no'>mlr_fselectors</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"random"</span>)
-<span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"random"</span>)</pre>
+<p>This <a href='FSelector.html'>FSelector</a> can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a>
+<a href='mlr_fselectors.html'>mlr_fselectors</a> or with the associated sugar function <code><a href='fs.html'>fs()</a></code>:</p><pre><span class='no'>mlr_fselectors</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"sequential"</span>)
+<span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)</pre>
 
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
 
@@ -149,46 +163,40 @@
 <dl'>
 <dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
 Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
-<dt><code>batch_size</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
-Maximum number of feature sets to try in a batch.</p></dd>
-<dt><code>prob</code></dt><dd><p><code><a href='https://rdrr.io/r/base/double.html'>double(1)</a></code><br />
-Probability of choosing a feature.</p></dd>
+<dt><code>strategy</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code><br />
+Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward search).</p></dd>
 
 </dl>
 
-<p>In order to support general termination criteria and parallelization, feature
-sets are evaluated in a batch-fashion of size <code>batch_size</code>. Larger batches
-mean more is parallelized, smaller batches imply a more fine-grained checking
-of termination criteria.</p>
-    <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
+    <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/bbotk/man/Optimizer.html'>bbotk::Optimizer</a></code> -&gt; <code><a href='FSelect.html'>mlr3fselect::FSelect</a></code> -&gt; <code>FSelectRandom</code></p>
+    <p><code><a href='FSelector.html'>mlr3fselect::FSelector</a></code> -&gt; <code>FSelectorSequential</code></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 <h3>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-new'><code>FSelectRandom$new()</code></a></p></li>
-<li><p><a href='#method-clone'><code>FSelectRandom$clone()</code></a></p></li>
+<li><p><a href='#method-new'><code>FSelectorSequential$new()</code></a></p></li>
+<li><p><a href='#method-clone'><code>FSelectorSequential$clone()</code></a></p></li>
 </ul>
 <p><details open ><summary>Inherited methods</summary>
 <ul>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="format"><a href='../../bbotk/html/Optimizer.html#method-format'><code>bbotk::Optimizer$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="print"><a href='../../bbotk/html/Optimizer.html#method-print'><code>bbotk::Optimizer$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelect" data-id="optimize"><a href='../../mlr3fselect/html/FSelect.html#method-optimize'><code>mlr3fselect::FSelect$optimize()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-format'><code>mlr3fselect::FSelector$format()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize"><a href='../../mlr3fselect/html/FSelector.html#method-optimize'><code>mlr3fselect::FSelector$optimize()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-print'><code>mlr3fselect::FSelector$print()</code></a></span></p></li>
 </ul>
 </details>
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectRandom</span>$<span class='fu'>new</span>()</pre><p></div></p>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.`</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>FSelectorSequential</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectRandom</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectorSequential</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
@@ -201,26 +209,37 @@ of termination criteria.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
 
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='term.html'>term</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
+<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+
+<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstanceSingleCrit</span>$<span class='fu'>new</span>(
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
   <span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
   <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
-  <span class='kw'>measures</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
+  <span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
   <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>
 )
 
-<span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"random"</span>)
-<span class='no'>fs</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)
-<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width x_domain classif.ce
-#&gt; 1:        FALSE        TRUE         TRUE       FALSE   &lt;list&gt;       0.08</div><div class='input'><span class='no'>instance</span>$<span class='no'>archive</span>$<span class='no'>data</span></div><div class='output co'>#&gt; function (unnest = NULL) 
+<span class='no'>fselector</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)
+
+<span class='co'># Modifies the instance by reference</span>
+<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features x_domain
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length   &lt;list&gt;
+#&gt;    classif.ce
+#&gt; 1:       0.04</div><div class='input'>
+<span class='co'># Returns best scoring evaluation</span>
+<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features x_domain
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length   &lt;list&gt;
+#&gt;    classif.ce
+#&gt; 1:       0.04</div><div class='input'>
+<span class='co'># Allows access of data.table of full path of all evaluations</span>
+<span class='no'>instance</span>$<span class='no'>archive</span>$<span class='no'>data</span></div><div class='output co'>#&gt; function (unnest = NULL) 
 #&gt; {
 #&gt;     if (is.null(unnest)) {
 #&gt;         return(copy(private$.data))
 #&gt;     }
 #&gt;     unnest(copy(private$.data), unnest, prefix = "{col}_")
 #&gt; }
-#&gt; &lt;environment: 0x7fcd52bcdc38&gt;</div></pre>
+#&gt; &lt;environment: 0x7ffea5335400&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

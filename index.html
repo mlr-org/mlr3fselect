@@ -13,7 +13,11 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <link href="extra.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Feature selection for mlr3">
-<meta property="og:description" content="Implements methods for feature selection in mlr3.">
+<meta property="og:description" content="Implements methods for feature selection with
+    mlr3, e.g.  Random Search, Sequential Selection and Evolutionary
+    Search.  Various termination criteria can be set and combined. The
+    class AutoFSelect provides a convenient way to perform nested
+    resampling in combination with mlr3.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -84,13 +88,46 @@
 <div id="mlr3fselect" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#mlr3fselect" class="anchor"></a>mlr3fselect</h1></div>
-<p>Wrapper feature selection for {mlr3}.</p>
 <!-- badges: start -->
-<p><a href="https://github.com/mlr-org/mlr3fselect/actions"><img src="https://github.com/mlr-org/mlr3fselect/workflows/R%20CMD%20Check%20via%20%7Btic%7D/badge.svg?branch=master" alt="R CMD Check via {tic}"></a> <a href="https://cran.r-project.org/package=mlr3fselect"><img src="https://www.r-pkg.org/badges/version/mlr3fselect" alt="CRAN"></a> <a href="https://codecov.io/gh/mlr-org/mlr3fselect"><img src="https://codecov.io/gh/mlr-org/mlr3fselect/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a> <!-- badges: end --></p>
+
+<p>This package provides feature selection for mlr3. It offers various feature selection methods e.g. random search, sequential feature selection and evolutionary search and different termination criteria can be set and combined. ‘AutoFSelect’ provides a convenient way to perform nested resampling in combination with ‘mlr3’. The package is build on bbotk which provides a common framework for optimization.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"mlr-org/mlr3fselect"</span>)</pre></div>
+<p>CRAN version</p>
+<pre class="{r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("mlr3tuning")</a></code></pre>
+<p>Development version</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"mlr-org/mlr3fselect"</span>)</pre></div>
+</div>
+<div id="example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h2>
+<pre class="{r}"><code><a href="https://mlr3.mlr-org.com/reference">library("mlr3")
+library("mlr3fselect")
+
+task = tsk("pima")
+learner = lrn("classif.rpart")
+resampling = rsmp("holdout")
+measure = msr("classif.ce")
+
+# Define termination criterion
+terminator = trm("evals", n_evals = 20)
+
+# Create tuning instance
+instance = FSelectInstanceSingleCrit$new(task = task,
+  learner = learner,
+  resampling = resampling,
+  measure = measure,
+  terminator = terminator)
+
+# Load tuner
+fselector = fs("random_search")
+
+# Trigger optimization
+fselector$optimize(instance)
+
+# View results
+instance$result</a></code></pre>
 </div>
 </div>
   </div>
@@ -120,14 +157,23 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Marc Becker <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Marc Becker <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8115-0400" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Patrick Schratz <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0748-6624" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Michel Lang <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9754-0393" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Bernd Bischl <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6002-6980" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/mlr-org/mlr3fselect/actions"><img src="https://github.com/mlr-org/mlr3fselect/workflows/tic/badge.svg?branch=master" alt="tic"></a></li>
+<li><a href="https://cran.r-project.org/package=mlr3fselect"><img src="https://www.r-pkg.org/badges/version/mlr3fselect" alt="CRAN"></a></li>
+<li><a href="https://codecov.io/gh/mlr-org/mlr3fselect"><img src="https://codecov.io/gh/mlr-org/mlr3fselect/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 

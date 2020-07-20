@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FSelect — FSelect • mlr3fselect</title>
+<title>Feature Selection via Exhaustive Search — FSelectorExhaustiveSearch • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,17 +40,11 @@
 
 
 
-<meta property="og:title" content="FSelect — FSelect" />
-<meta property="og:description" content="Abstract FSelect class that implements the base functionality each
-FSelect subclass must provide. A FSelect object describes the feature
-selection strategy, i.e. how to optimize the black-box function and its
-feasible set defined by the ObjectiveFSelect object.
-A list of measures can be passed to the instance, and they will always be all
-evaluated. However, single-criteria algorithms optimize only the first
-measure
-A FSelect object must provide a private method $.assign_result(inst) that writes the result to the FSelectInstance using the $assign_result() method of
-the instance in order to store the best selected feature
-subset and its estimated performance vector at the end of the optimization." />
+<meta property="og:title" content="Feature Selection via Exhaustive Search — FSelectorExhaustiveSearch" />
+<meta property="og:description" content="FSelectorExhaustiveSearch class that implements an Exhaustive Search.
+In order to support general termination criteria and parallelization, feature
+sets are evaluated in batches. The size of the feature sets is increased by 1
+in each batch." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -132,76 +126,67 @@ subset and its estimated performance vector at the end of the optimization." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FSelect</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelect.R'><code>R/FSelect.R</code></a></small>
-    <div class="hidden name"><code>FSelect.Rd</code></div>
+    <h1>Feature Selection via Exhaustive Search</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/FSelectorExhaustiveSearch.R'><code>R/FSelectorExhaustiveSearch.R</code></a></small>
+    <div class="hidden name"><code>FSelectorExhaustiveSearch.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Abstract <code>FSelect</code> class that implements the base functionality each
-<code>FSelect</code> subclass must provide. A <code>FSelect</code> object describes the feature
-selection strategy, i.e. how to optimize the black-box function and its
-feasible set defined by the <a href='ObjectiveFSelect.html'>ObjectiveFSelect</a> object.</p>
-<p>A list of measures can be passed to the instance, and they will always be all
-evaluated. However, single-criteria algorithms optimize only the first
-measure</p>
-<p>A <code>FSelect</code> object must provide a private method <code>$.assign_result(inst)</code> that writes the result to the <a href='FSelectInstance.html'>FSelectInstance</a> using the <code>$assign_result()</code> method of
-the instance in order to store the best selected feature
-subset and its estimated performance vector at the end of the optimization.</p>
+    <p><code>FSelectorExhaustiveSearch</code> class that implements an Exhaustive Search.</p>
+<p>In order to support general termination criteria and parallelization, feature
+sets are evaluated in batches. The size of the feature sets is increased by 1
+in each batch.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
+
+    
+
+<p>This <a href='FSelector.html'>FSelector</a> can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a>
+<a href='mlr_fselectors.html'>mlr_fselectors</a> or with the associated sugar function <code><a href='fs.html'>fs()</a></code>:</p><pre><span class='no'>mlr_fselectors</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"exhaustive_search"</span>)
+<span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"exhaustive_search"</span>)</pre>
+
+    <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
+
+    
+
+<dl'>
+<dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
+Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
+
+</dl>
+
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/bbotk/man/Optimizer.html'>bbotk::Optimizer</a></code> -&gt; <code>FSelect</code></p>
+    <p><code><a href='FSelector.html'>mlr3fselect::FSelector</a></code> -&gt; <code>FSelectorExhaustiveSearch</code></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 <h3>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-new'><code>FSelect$new()</code></a></p></li>
-<li><p><a href='#method-optimize'><code>FSelect$optimize()</code></a></p></li>
-<li><p><a href='#method-clone'><code>FSelect$clone()</code></a></p></li>
+<li><p><a href='#method-new'><code>FSelectorExhaustiveSearch$new()</code></a></p></li>
+<li><p><a href='#method-clone'><code>FSelectorExhaustiveSearch$clone()</code></a></p></li>
 </ul>
 <p><details open ><summary>Inherited methods</summary>
 <ul>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="format"><a href='../../bbotk/html/Optimizer.html#method-format'><code>bbotk::Optimizer$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Optimizer" data-id="print"><a href='../../bbotk/html/Optimizer.html#method-print'><code>bbotk::Optimizer$print()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-format'><code>mlr3fselect::FSelector$format()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize"><a href='../../mlr3fselect/html/FSelector.html#method-optimize'><code>mlr3fselect::FSelector$optimize()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-print'><code>mlr3fselect::FSelector$print()</code></a></span></p></li>
 </ul>
 </details>
 
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelect</span>$<span class='fu'>new</span>(<span class='no'>param_set</span>, <span class='no'>properties</span>, <span class='kw'>packages</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>))</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectorExhaustiveSearch</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
-<dt><code>param_set</code></dt><dd><p><a href='https://paradox.mlr-org.com/reference/ParamSet.html'>paradox::ParamSet</a></p></dd>
-
-<dt><code>properties</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character()</a></code></p></dd>
-
-<dt><code>packages</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character()</a></code></p></dd>
-
-<dt><code>param_classes</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character()</a></code></p></dd>
-
-</dl><p></div></p>
-<p><hr>
-<a id="method-optimize"></a></p><h3>Method <code><a href='https://rdrr.io/r/stats/optimize.html'>optimize()</a></code></h3>
-<p>Performs the feature selection on a <a href='FSelectInstance.html'>FSelectInstance</a> until termination.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelect</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>inst</span>)</pre><p></div></p>
-
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
-<dt><code>inst</code></dt><dd><p><a href='FSelectInstance.html'>FSelectInstance</a></p></dd>
-
-</dl><p></div></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelect</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectorExhaustiveSearch</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
@@ -214,26 +199,37 @@ subset and its estimated performance vector at the end of the optimization.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
 
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='term.html'>term</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstance</span>$<span class='fu'>new</span>(
+<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+
+<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstanceSingleCrit</span>$<span class='fu'>new</span>(
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
   <span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
   <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
-  <span class='kw'>measures</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
+  <span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
   <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>
 )
 
-<span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"random"</span>)
-<span class='no'>fs</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)
-<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width x_domain classif.ce
-#&gt; 1:        FALSE        TRUE         TRUE        TRUE   &lt;list&gt;       0.02</div><div class='input'><span class='no'>instance</span>$<span class='no'>archive</span>$<span class='no'>data</span></div><div class='output co'>#&gt; function (unnest = NULL) 
+<span class='no'>fselector</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"exhaustive_search"</span>)
+
+<span class='co'># Modifies the instance by reference</span>
+<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features x_domain
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length   &lt;list&gt;
+#&gt;    classif.ce
+#&gt; 1:       0.06</div><div class='input'>
+<span class='co'># Returns best scoring evaluation</span>
+<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features x_domain
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length   &lt;list&gt;
+#&gt;    classif.ce
+#&gt; 1:       0.06</div><div class='input'>
+<span class='co'># Allows access of data.table of full path of all evaluations</span>
+<span class='no'>instance</span>$<span class='no'>archive</span>$<span class='no'>data</span></div><div class='output co'>#&gt; function (unnest = NULL) 
 #&gt; {
 #&gt;     if (is.null(unnest)) {
 #&gt;         return(copy(private$.data))
 #&gt;     }
 #&gt;     unnest(copy(private$.data), unnest, prefix = "{col}_")
 #&gt; }
-#&gt; &lt;environment: 0x7fcd541ea4a8&gt;</div></pre>
+#&gt; &lt;environment: 0x7ffebdb13388&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

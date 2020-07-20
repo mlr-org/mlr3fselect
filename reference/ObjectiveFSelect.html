@@ -41,8 +41,9 @@
 
 
 <meta property="og:title" content="ObjectiveFSelect — ObjectiveFSelect" />
-<meta property="og:description" content="Describes the objective function that estimates the performance of feature
-sets." />
+<meta property="og:description" content="Stores the objective function that estimates the performance of feature
+subsets. This class is usually constructed internally by by the
+FSelectInstanceSingleCrit / FSelectInstanceMultiCrit." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,27 +131,28 @@ sets." />
     </div>
 
     <div class="ref-description">
-    <p>Describes the objective function that estimates the performance of feature
-sets.</p>
+    <p>Stores the objective function that estimates the performance of feature
+subsets. This class is usually constructed internally by by the
+<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> / <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a>.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/bbotk/man/Objective.html'>bbotk::Objective</a></code> -&gt; <code>ObjectiveFSelect</code></p>
+    <p><code><a href='https://bbotk.mlr-org.com/reference/Objective.html'>bbotk::Objective</a></code> -&gt; <code>ObjectiveFSelect</code></p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl'>
-<dt><code>task</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a></p></dd>
+<dt><code>task</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>)</p></dd>
 
-<dt><code>learner</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></p></dd>
+<dt><code>learner</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>)</p></dd>
 
-<dt><code>resampling</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a></p></dd>
+<dt><code>resampling</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a>)</p></dd>
 
-<dt><code>measures</code></dt><dd><p>list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a></p></dd>
+<dt><code>measures</code></dt><dd><p>(list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)</p></dd>
 
-<dt><code>store_models</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
+<dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).</p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -160,15 +162,13 @@ sets.</p>
 
 <ul>
 <li><p><a href='#method-new'><code>ObjectiveFSelect$new()</code></a></p></li>
-<li><p><a href='#method-eval_many'><code>ObjectiveFSelect$eval_many()</code></a></p></li>
 <li><p><a href='#method-clone'><code>ObjectiveFSelect$clone()</code></a></p></li>
 </ul>
-<p><details ><summary>Inherited methods</summary>
+<p><details open ><summary>Inherited methods</summary>
 <ul>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval"><a href='../../bbotk/html/Objective.html#method-eval'><code>bbotk::Objective$eval()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_checked"><a href='../../bbotk/html/Objective.html#method-eval_checked'><code>bbotk::Objective$eval_checked()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_dt"><a href='../../bbotk/html/Objective.html#method-eval_dt'><code>bbotk::Objective$eval_dt()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_many_checked"><a href='../../bbotk/html/Objective.html#method-eval_many_checked'><code>bbotk::Objective$eval_many_checked()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="eval_many"><a href='../../bbotk/html/Objective.html#method-eval_many'><code>bbotk::Objective$eval_many()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="format"><a href='../../bbotk/html/Objective.html#method-format'><code>bbotk::Objective$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="print"><a href='../../bbotk/html/Objective.html#method-print'><code>bbotk::Objective$print()</code></a></span></p></li>
 </ul>
@@ -179,32 +179,35 @@ sets.</p>
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p>
 
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>ObjectiveFSelect</span>$<span class='fu'>new</span>(<span class='no'>task</span>, <span class='no'>learner</span>, <span class='no'>resampling</span>, <span class='no'>measures</span>, <span class='kw'>store_models</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>ObjectiveFSelect</span>$<span class='fu'>new</span>(
+  <span class='no'>task</span>,
+  <span class='no'>learner</span>,
+  <span class='no'>resampling</span>,
+  <span class='no'>measures</span>,
+  <span class='kw'>store_models</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>check_values</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
-<dt><code>task</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a></p></dd>
+<dt><code>task</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>)<br />
+Task to operate on.</p></dd>
 
-<dt><code>learner</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></p></dd>
+<dt><code>learner</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>).</p></dd>
 
-<dt><code>resampling</code></dt><dd><p><a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a></p></dd>
+<dt><code>resampling</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a>)<br />
+Uninstantiated resamplings are instantiated during construction
+so that all configurations are evaluated on the same data splits.</p></dd>
 
-<dt><code>measures</code></dt><dd><p>list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a></p></dd>
+<dt><code>measures</code></dt><dd><p>(list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)<br />
+Measures to optimize.
+If <code>NULL</code>, <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>'s default measure is used.</p></dd>
 
-<dt><code>store_models</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
+<dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).</p></dd>
 
-<dt><code>terminator</code></dt><dd><p>Terminator</p></dd>
-
-</dl><p></div></p>
-<p><hr>
-<a id="method-eval_many"></a></p><h3>Method <code>eval_many()</code></h3>
-<p>Evaluates multiple feature sets on the objective function</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>ObjectiveFSelect</span>$<span class='fu'>eval_many</span>(<span class='no'>xss</span>)</pre><p></div></p>
-
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
-<dt><code>xss</code></dt><dd><p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code><br />
-A list of lists that contains multiple feature sets</p></dd>
+<dt><code>check_values</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+Check the parameters before the evaluation and the results for
+validity?</p></dd>
 
 </dl><p></div></p>
 <p><hr>
