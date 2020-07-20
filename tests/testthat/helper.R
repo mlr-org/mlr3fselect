@@ -1,5 +1,5 @@
 lapply(list.files(system.file("testthat", package = "mlr3"),
-                  pattern = "^helper.*\\.[rR]$", full.names = TRUE), source)
+  pattern = "^helper.*\\.[rR]$", full.names = TRUE), source)
 
 TEST_MAKE_TSK = function(n = 4L) {
   x = set_names(map_dtc(seq(n), function(x) rnorm(100L)),
@@ -103,7 +103,7 @@ test_fselector = function(.key, ..., term_evals = 2L, real_evals = term_evals,
 }
 
 test_fselector_2D = function(.key, ..., term_evals = 2L, real_evals = term_evals,
-                          store_models = FALSE) {
+  store_models = FALSE) {
 
   inst = FSelectInstanceMultiCrit$new(
     task = TEST_MAKE_TSK(),
@@ -116,7 +116,7 @@ test_fselector_2D = function(.key, ..., term_evals = 2L, real_evals = term_evals
   fselector = fs(.key, ...)
   expect_fselector(fselector)
   expect_data_table(fselector$optimize(inst), ncols = 8,
-                    any.missing = FALSE)
+    any.missing = FALSE)
   archive = inst$archive
 
   # Archive checks
@@ -142,13 +142,13 @@ test_fselector_2D = function(.key, ..., term_evals = 2L, real_evals = term_evals
     "x3",
     "x4"))
   expect_data_table(inst$result_x_search_space, ncols = 4,
-                    types = "logical")
+    types = "logical")
   expect_named(inst$result_x_search_space, c(
     "x1",
     "x2",
     "x3",
     "x4"))
-  expect_named(inst$result_y, c("regr.rmse",  "regr.mse"))
+  expect_named(inst$result_y, c("regr.rmse", "regr.mse"))
 
   list(fselector = fselector, inst = inst)
 }

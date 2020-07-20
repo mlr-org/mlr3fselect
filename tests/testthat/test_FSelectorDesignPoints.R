@@ -9,7 +9,7 @@ test_that("FSelectorDesignPoints", {
 
   z = test_fselector("design_points", design = design, batch_size = 10, term_evals = 10, real_evals = 2)
   a = z$inst$archive$data()
-  expect_equal(a[,1:4], design)
+  expect_equal(a[, 1:4], design)
 })
 
 test_that("FSelectorDesignPoints works with multi-crit", {
@@ -21,5 +21,5 @@ test_that("FSelectorDesignPoints works with multi-crit", {
 
   z = test_fselector_2D("design_points", design = design, batch_size = 1, term_evals = 10, real_evals = 2)
   a = z$inst$archive$data()
-  expect_equal(a[,1:4], design)
+  expect_equal(a[, 1:4], design)
 })

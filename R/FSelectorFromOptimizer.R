@@ -28,7 +28,7 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
     #'
     #' @return [data.table::data.table].
     optimize = function(inst) {
-      # We check for both classes since there is no TuningInstance super
+      # We check for both classes since there is no FSelectInstance super
       # class anymore and OptimInstance would not ensure that we are in the
       # scope of mlr3tuning
       assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))

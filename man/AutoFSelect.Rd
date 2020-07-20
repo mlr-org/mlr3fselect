@@ -20,7 +20,7 @@ wrapped (inner) learner.
 
 Note that this approach allows to perform nested resampling by passing an
 \link{AutoFSelect} object to \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
-To access the inner resampling results, set \code{store_tuning_instance = TRUE}
+To access the inner resampling results, set \code{store_fselect_instance = TRUE}
 and execute \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}} with
 \code{store_models = TRUE} (see examples).
 }
@@ -30,19 +30,20 @@ library(mlr3)
 task = tsk("iris")
 learner = lrn("classif.rpart")
 resampling = rsmp("holdout")
-measures = msr("classif.ce")
+measure = msr("classif.ce")
 
 terminator = trm("evals", n_evals = 15)
-fs = fs("exhaustive_search")
-afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
+fselector = fs("exhaustive_search")
+afs = AutoFSelect$new(learner, resampling, measure, terminator, fselector)
 afs$store_fselect_instance = TRUE
 
 afs$train(task)
 afs$model
 afs$learner
 
-afs = AutoFSelect$new(learner, resampling, measure, terminator, fs)
-afs$store_tuning_instance = TRUE
+#  Nested resampling
+afs = AutoFSelect$new(learner, resampling, measure, terminator, fselector)
+afs$store_fselect_instance = TRUE
 
 resampling_outer = rsmp("cv", folds = 2)
 rr = resample(task, afs, resampling_outer, store_models = TRUE)

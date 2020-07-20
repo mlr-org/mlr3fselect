@@ -71,10 +71,10 @@ instance = FSelectInstanceSingleCrit$new(
 )
 
 # swap this line to use a different FSelector
-fs = fs("random_search")
+fselector = fs("random_search")
 
 # modifies the instance by reference
-fs$optimize(instance)
+fselector$optimize(instance)
 
 # returns best feature subset and best performance
 instance$result

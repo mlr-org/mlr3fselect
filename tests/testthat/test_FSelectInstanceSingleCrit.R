@@ -39,6 +39,6 @@ test_that("eval_batch works", {
 
 test_that("objective_function works", {
   inst = TEST_MAKE_INST_1D()
-  y = inst$objective_function(c(1,1,0,0))
+  y = inst$objective_function(c(1, 1, 0, 0))
   expect_equal(y, c(dummy = -2))
 })

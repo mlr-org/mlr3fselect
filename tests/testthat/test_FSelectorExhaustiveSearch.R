@@ -12,16 +12,16 @@ test_that("FSelectorExhaustive", {
   expect_feature_number(a[batch_nr == 4, 1:4], n = 4)
   r = z$inst$result_x_search_space
   expect_equal(r, data.table(x1 = TRUE,
-                       x2 = TRUE,
-                       x3 = TRUE,
-                       x4 = FALSE))
+    x2 = TRUE,
+    x3 = TRUE,
+    x4 = FALSE))
 
   z = test_fselector("exhaustive_search", max_features = 2, term_evals = 10)
   a = z$inst$archive$data()
   expect_max_features(a[, 1:4], n = 2)
   r = z$inst$result_x_search_space
   expect_equal(r, data.table(x1 = TRUE,
-                       x2 = TRUE,
-                       x3 = FALSE,
-                       x4 = FALSE))
+    x2 = TRUE,
+    x3 = FALSE,
+    x4 = FALSE))
 })

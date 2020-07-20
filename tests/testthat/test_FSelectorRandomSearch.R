@@ -6,5 +6,5 @@ test_that("FSelectorRandomSearch", {
 
   z = test_fselector("random_search", max_features = 1, term_evals = 10)
   a = z$inst$archive$data()
-  expect_feature_number(a[,1:4], n = 1)
+  expect_feature_number(a[, 1:4], n = 1)
 })

@@ -13,7 +13,7 @@ test_that("eval_batch works", {
   inst = TEST_MAKE_INST_2D()
 
   xdt = data.table(x1 = list(TRUE, FALSE), x2 = list(FALSE, TRUE),
-                   x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
+    x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
 
   z = inst$eval_batch(xdt)
   expect_named(z, c("regr.mse", "regr.rmse", "resample_result"))
@@ -28,6 +28,6 @@ test_that("eval_batch works", {
 
 test_that("objective_function works", {
   inst = TEST_MAKE_INST_2D()
-  y = inst$objective_function(c(1,1,0,0))
+  y = inst$objective_function(c(1, 1, 0, 0))
   expect_named(y, c("regr.mse", "regr.rmse"))
 })

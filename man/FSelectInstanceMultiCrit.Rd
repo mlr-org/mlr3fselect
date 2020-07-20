@@ -120,7 +120,7 @@ and estimated performance values here. For internal use.
 \describe{
 \item{\code{xdt}}{(\code{data.table::data.table()})\cr
 x values as \code{data.table}. Each row is one point. Contains the value in
-the \emph{search space} of the \link{TuningInstanceMultiCrit} object. Can contain
+the \emph{search space} of the \link{FSelectInstanceMultiCrit} object. Can contain
 additional columns for extra information.}
 
 \item{\code{y}}{(\code{numeric(1)})\cr

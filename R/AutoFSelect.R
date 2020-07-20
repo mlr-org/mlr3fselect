@@ -16,7 +16,7 @@
 #'
 #' Note that this approach allows to perform nested resampling by passing an
 #' [AutoFSelect] object to [mlr3::resample()] or [mlr3::benchmark()].
-#' To access the inner resampling results, set `store_tuning_instance = TRUE`
+#' To access the inner resampling results, set `store_fselect_instance = TRUE`
 #' and execute [mlr3::resample()] or [mlr3::benchmark()] with
 #' `store_models = TRUE` (see examples).
 #'
@@ -27,20 +27,20 @@
 #' task = tsk("iris")
 #' learner = lrn("classif.rpart")
 #' resampling = rsmp("holdout")
-#' measures = msr("classif.ce")
+#' measure = msr("classif.ce")
 #'
 #' terminator = trm("evals", n_evals = 15)
-#' fs = fs("exhaustive_search")
-#' afs = AutoFSelect$new(learner, resampling, measures, terminator, fs)
+#' fselector = fs("exhaustive_search")
+#' afs = AutoFSelect$new(learner, resampling, measure, terminator, fselector)
 #' afs$store_fselect_instance = TRUE
 #'
 #' afs$train(task)
 #' afs$model
 #' afs$learner
 #'
-#  Nested resampling
-#' afs = AutoFSelect$new(learner, resampling, measure, terminator, fs)
-#' afs$store_tuning_instance = TRUE
+#' #  Nested resampling
+#' afs = AutoFSelect$new(learner, resampling, measure, terminator, fselector)
+#' afs$store_fselect_instance = TRUE
 #'
 #' resampling_outer = rsmp("cv", folds = 2)
 #' rr = resample(task, afs, resampling_outer, store_models = TRUE)
@@ -89,6 +89,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @param fselector ([FSelector])\cr
     #' Feature selection algorithm to run.
     initialize = function(learner, resampling, measure, terminator, fselector) {
+
       ia = list()
       ia$learner = assert_learner(learner)$clone(deep = TRUE)
       ia$resampling = assert_resampling(resampling,
@@ -115,6 +116,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
   private = list(
 
     .train = function(task) {
+
       ia = self$instance_args
       ia$task = task$clone()
       instance = invoke(FSelectInstanceSingleCrit$new, .args = ia)

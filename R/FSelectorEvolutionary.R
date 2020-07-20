@@ -142,8 +142,9 @@ FSelectorEvolutionary = R6Class("FSelectorEvolutionary",
           .args = pars_generateOffspring)
 
         offspring = map_if(offspring, function(x) sum(x) == 0, function(x) {
-            x[sample(seq_along(x), 1)] = 1
-            x})
+          x[sample(seq_along(x), 1)] = 1
+          x
+        })
 
         withr::with_package("ecr", {
           fitness_o = ecr::evaluateFitness(ctrl, offspring)

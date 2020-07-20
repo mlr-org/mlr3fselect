@@ -9,9 +9,9 @@ test_that("FSelectEvolutionary - Initial solution", {
     initial.solutions = list(c(1, 1, 1, 0)), term_evals = 12)
   r = z$inst$result_x_search_space
   expect_equal(r, data.table(x1 = TRUE,
-                       x2 = TRUE,
-                       x3 = TRUE,
-                       x4 = FALSE))
+    x2 = TRUE,
+    x3 = TRUE,
+    x4 = FALSE))
 })
 
 test_that("FSelectEvolutionary - Parent selector", {

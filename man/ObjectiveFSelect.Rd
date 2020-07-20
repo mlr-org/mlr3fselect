@@ -6,7 +6,7 @@
 \description{
 Stores the objective function that estimates the performance of feature
 subsets. This class is usually constructed internally by by the
-\link{TuningInstanceSingleCrit} / \link{TuningInstanceMultiCrit}.
+\link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
 }
 \section{Super class}{
 \code{\link[bbotk:Objective]{bbotk::Objective}} -> \code{ObjectiveFSelect}

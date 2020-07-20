@@ -6,4 +6,3 @@ lapply(loggers, function(l) l$set_threshold("warn"))
 
 
 set.seed(123)
-

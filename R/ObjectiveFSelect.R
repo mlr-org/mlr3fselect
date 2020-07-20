@@ -3,7 +3,7 @@
 #' @description
 #' Stores the objective function that estimates the performance of feature
 #' subsets. This class is usually constructed internally by by the
-#' [TuningInstanceSingleCrit] / [TuningInstanceMultiCrit].
+#' [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
 #'
 #' @template param_task
 #' @template param_learner
@@ -39,6 +39,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function(task, learner, resampling, measures,
       store_models = FALSE, check_values = TRUE) {
+
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE),
         task = self$task)
@@ -55,9 +56,9 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
         function(s) ParamLgl$new(id = s)))
 
       codomain = ParamSet$new(map(self$measures, function(s) {
-          ParamDbl$new(id = s$id,
-            tags = ifelse(s$minimize, "minimize", "maximize"))
-        }))
+        ParamDbl$new(id = s$id,
+          tags = ifelse(s$minimize, "minimize", "maximize"))
+      }))
 
       super$initialize(id = sprintf("%s_on_%s", self$learner$id, self$task$id),
         domain = domain, codomain = codomain, check_values = check_values)
