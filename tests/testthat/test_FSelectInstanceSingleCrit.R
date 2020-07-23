@@ -42,3 +42,12 @@ test_that("objective_function works", {
   y = inst$objective_function(c(1, 1, 0, 0))
   expect_equal(y, c(dummy = -2))
 })
+
+test_that("store_resample_results flag works", {
+  inst = TEST_MAKE_INST_1D(store_resample_results = FALSE)
+  xdt = data.table(x1 = list(TRUE, FALSE), x2 = list(FALSE, TRUE),
+    x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
+  inst$eval_batch(xdt)
+
+  expect_true("resample_result" %nin% colnames(inst$archive$data()))
+})

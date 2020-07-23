@@ -26,6 +26,7 @@
 #' @template param_terminator
 #' @template param_store_models
 #' @template param_check_values
+#' @template param_store_resample_results
 #' @template param_xdt
 #'
 #' @export
@@ -53,10 +54,11 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function(task, learner, resampling, measures, terminator,
-      store_models = FALSE, check_values = TRUE) {
+      store_models = FALSE, check_values = TRUE, store_resample_results = TRUE) {
       obj = ObjectiveFSelect$new(task = task, learner = learner,
         resampling = resampling, measures = measures,
-        store_models = store_models, check_values = check_values)
+        store_models = store_models, check_values = check_values,
+        store_resample_results = store_resample_results)
       super$initialize(obj, obj$domain, terminator)
     },
 
