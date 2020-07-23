@@ -8,11 +8,10 @@
 <!-- badges: end -->
 
 This package provides feature selection for mlr3. It offers various feature
-selection methods e.g. random search, sequential feature selection and
-evolutionary search and different termination criteria can be set and combined.
-'AutoFSelect' provides a convenient way to perform nested resampling in
-combination with 'mlr3'. The package is build on bbotk which provides a common
-framework for optimization.
+selection methods e.g. random search and sequential feature selection and
+different termination criteria can be set and combined. 'AutoFSelect' provides a
+convenient way to perform nested resampling in combination with 'mlr3'. The
+package is build on bbotk which provides a common framework for optimization.
 
 ## Installation
 

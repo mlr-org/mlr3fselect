@@ -18,3 +18,4 @@
 man-roxygen
 ^\.lintr$
 ^\.vscode$
+^attic$
