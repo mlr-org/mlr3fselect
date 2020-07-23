@@ -236,15 +236,15 @@ Instance optimized with FSelectorSequential.</p></dd>
 <span class='no'>fselector</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)
 
 <span class='co'># Modifies the instance by reference</span>
-<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features x_domain
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length   &lt;list&gt;
+<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features x_domain
+#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width   &lt;list&gt;
 #&gt;    classif.ce
-#&gt; 1:       0.04</div><div class='input'>
+#&gt; 1:       0.02</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
-<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features x_domain
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length   &lt;list&gt;
+<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features x_domain
+#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width   &lt;list&gt;
 #&gt;    classif.ce
-#&gt; 1:       0.04</div><div class='input'>
+#&gt; 1:       0.02</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='no'>instance</span>$<span class='no'>archive</span>$<span class='no'>data</span></div><div class='output co'>#&gt; function (unnest = NULL) 
 #&gt; {
@@ -253,7 +253,7 @@ Instance optimized with FSelectorSequential.</p></dd>
 #&gt;     }
 #&gt;     unnest(copy(private$.data), unnest, prefix = "{col}_")
 #&gt; }
-#&gt; &lt;environment: 0x7f9c85e670b0&gt;</div></pre>
+#&gt; &lt;environment: 0x7fc2e93ad610&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
