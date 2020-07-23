@@ -178,6 +178,7 @@ Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward se
 
 <ul>
 <li><p><a href='#method-new'><code>FSelectorSequential$new()</code></a></p></li>
+<li><p><a href='#method-optimization_path'><code>FSelectorSequential$optimization_path()</code></a></p></li>
 <li><p><a href='#method-clone'><code>FSelectorSequential$clone()</code></a></p></li>
 </ul>
 <p><details open ><summary>Inherited methods</summary>
@@ -193,6 +194,19 @@ Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward se
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.`</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>FSelectorSequential</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
+<p><hr>
+<a id="method-optimization_path"></a></p><h3>Method <code>optimization_path()</code></h3>
+<p>Returns the optimization path.</p><h3>Usage</h3>
+<p><div class="r"></p><pre><span class='no'>FSelectorSequential</span>$<span class='fu'>optimization_path</span>(<span class='no'>inst</span>)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl'>
+<dt><code>inst</code></dt><dd><p>(<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>)<br />
+Instance optimized with FSelectorSequential.</p></dd>
+
+</dl><p></div></p>
+<h3>Returns</h3>
+<p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
@@ -239,7 +253,7 @@ Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward se
 #&gt;     }
 #&gt;     unnest(copy(private$.data), unnest, prefix = "{col}_")
 #&gt; }
-#&gt; &lt;environment: 0x7fb10dc2d468&gt;</div></pre>
+#&gt; &lt;environment: 0x7f9c85e670b0&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
