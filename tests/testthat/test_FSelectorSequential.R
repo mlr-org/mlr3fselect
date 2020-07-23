@@ -27,3 +27,10 @@ test_that("FSelectorSequential", {
   a = z$inst$archive$data()
   expect_max_features(a[, 1:4], n = 2)
 })
+
+test_that("optimization_path method works", {
+  z = test_fselector("sequential", term_evals = 10)
+  op = z$fselector$optimization_path(z$inst)
+  expect_data_table(op, nrows = 4)
+  expect_equal(op$dummy, c(1, 2, 4, 3))
+})

@@ -64,6 +64,7 @@ instance$archive$data
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{FSelectorSequential$new()}}
+\item \href{#method-optimization_path}{\code{FSelectorSequential$optimization_path()}}
 \item \href{#method-clone}{\code{FSelectorSequential$clone()}}
 }
 }
@@ -85,6 +86,27 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.`
 \if{html}{\out{<div class="r">}}\preformatted{FSelectorSequential$new()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-optimization_path"></a>}}
+\if{latex}{\out{\hypertarget{method-optimization_path}{}}}
+\subsection{Method \code{optimization_path()}}{
+Returns the optimization path.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectorSequential$optimization_path(inst)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{inst}}{(\link{FSelectInstanceSingleCrit})\cr
+Instance optimized with \link{FSelectorSequential}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\link[data.table:data.table]{data.table::data.table}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

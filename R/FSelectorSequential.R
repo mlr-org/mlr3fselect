@@ -41,6 +41,20 @@ FSelectorSequential = R6Class("FSelectorSequential",
       super$initialize(
         param_set = ps, properties = "single-crit"
       )
+    },
+
+    #' @description
+    #' Returns the optimization path.
+    #'
+    #' @param inst ([FSelectInstanceSingleCrit])\cr
+    #' Instance optimized with [FSelectorSequential].
+    #'
+    #' @return [data.table::data.table]
+    optimization_path = function(inst) {
+      if (inst$archive$n_batch == 0L) {
+        stop("No results stored in archive")
+      }
+      inst$archive$data()[, head(.SD, 1), by = batch_nr]
     }
   ),
   private = list(
