@@ -291,16 +291,16 @@ Feature selection algorithm to run.</p></dd>
 #&gt; * Objective: &lt;ObjectiveFSelect:classif.rpart_on_iris&gt;
 #&gt; * Search Space:
 #&gt; &lt;ParamSet&gt;
-#&gt;              id    class lower upper      levels     default value
-#&gt; 1: Petal.Length ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault&gt;      
-#&gt; 2:  Petal.Width ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault&gt;      
-#&gt; 3: Sepal.Length ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault&gt;      
-#&gt; 4:  Sepal.Width ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault&gt;      
+#&gt;              id    class lower upper      levels        default value
+#&gt; 1: Petal.Length ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
+#&gt; 2:  Petal.Width ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
+#&gt; 3: Sepal.Length ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
+#&gt; 4:  Sepal.Width ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
 #&gt; * Terminator: &lt;TerminatorEvals&gt;
 #&gt; * Terminated: FALSE
 #&gt; * Result:
-#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features x_domain
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length   &lt;list&gt;
+#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
 #&gt;    classif.ce
 #&gt; 1:       0.06
 #&gt; * Archive:
@@ -321,22 +321,22 @@ Feature selection algorithm to run.</p></dd>
 #&gt; 13:         TRUE       FALSE         TRUE        TRUE       0.06
 #&gt; 14:        FALSE        TRUE         TRUE        TRUE       0.06
 #&gt; 15:         TRUE        TRUE         TRUE        TRUE       0.06
-#&gt;      resample_result x_domain           timestamp batch_nr
-#&gt;  1: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        1
-#&gt;  2: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        1
-#&gt;  3: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        1
-#&gt;  4: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        1
-#&gt;  5: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        2
-#&gt;  6: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        2
-#&gt;  7: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        2
-#&gt;  8: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        2
-#&gt;  9: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        2
-#&gt; 10: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        2
-#&gt; 11: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        3
-#&gt; 12: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        3
-#&gt; 13: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        3
-#&gt; 14: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        3
-#&gt; 15: &lt;ResampleResult&gt;   &lt;list&gt; 2020-07-24 04:35:33        4
+#&gt;          resample_result  x_domain           timestamp batch_nr
+#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:07        1
+#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:07        1
+#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:07        1
+#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:07        1
+#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        2
+#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        2
+#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        2
+#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        2
+#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        2
+#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        2
+#&gt; 11: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        3
+#&gt; 12: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        3
+#&gt; 13: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        3
+#&gt; 14: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        3
+#&gt; 15: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-25 05:10:08        4
 #&gt; </div><div class='input'><span class='no'>afs</span>$<span class='no'>learner</span></div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
 #&gt; * Parameters: xval=0
