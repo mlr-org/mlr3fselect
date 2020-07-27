@@ -69,9 +69,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
       inst$eval_batch(states)
 
       repeat({
-        if (length(feature_names) - archive$n_batch < pars$min_features) {
-          stop(terminated_error(inst))
-        }
+        if (length(feature_names) - archive$n_batch < pars$min_features) break
 
         if (pars$recursive) {
           # Recalculate the variable importance on the reduced feature subset

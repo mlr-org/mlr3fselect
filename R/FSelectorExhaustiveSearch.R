@@ -43,10 +43,6 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
       }
 
       repeat({
-        if (archive$n_batch + 1 > pars$max_features) {
-          stop(terminated_error(inst))
-        }
-
         combinations = combn(length(feature_names),
           archive$n_batch + 1)
         states = map_dtr(seq_len(ncol(combinations)), function(j) {
@@ -55,6 +51,8 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
           set_names(as.list(state), feature_names)
         })
         inst$eval_batch(states)
+
+        if (archive$n_batch == pars$max_features) break
       })
     }
   )
