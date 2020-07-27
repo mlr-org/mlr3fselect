@@ -22,10 +22,11 @@ Authors@R:
              role = "aut",
              email = "bernd_bischl@gmx.net",
              comment = c(ORCID = "0000-0001-6002-6980")))
-Description: Implements methods for feature selection with 'mlr3', e.g.  Random 
-    Search and Sequential Selection.  Various termination criteria can be set 
-    and combined. The class 'AutoFSelect' provides a convenient way to perform 
-    nested resampling in combination with 'mlr3'.
+Description: Implements methods for feature selection with
+    'mlr3', e.g.  Random Search and Sequential Selection.  Various
+    termination criteria can be set and combined. The class 'AutoFSelect'
+    provides a convenient way to perform nested resampling in combination
+    with 'mlr3'.
 License: LGPL-3
 URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
@@ -47,8 +48,6 @@ Suggests:
     testthat
 RdMacros:
     mlr3misc
-Remotes:
-    mlr-org/bbotk
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
