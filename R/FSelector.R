@@ -29,17 +29,17 @@
 #'    [FSelectInstanceMultiCrit] object `instance`, so each batch is possibly
 #'    executed in parallel via [mlr3::benchmark()], and all evaluations are stored
 #'    inside of `instance$archive`.
-#'  * Before the batch evaluation, the [Terminator] is checked, and if it is
+#'  * Before the batch evaluation, the [bbotk::Terminator] is checked, and if it is
 #'    positive, an exception of class `"terminated_error"` is generated. In the
 #'    later case the current batch of evaluations is still stored in `instance`,
 #'    but the numeric scores are not sent back to the handling optimizer as it has
 #'    lost execution control.
 #'  * After such an exception was caught we select the best feature subset from
 #'    `instance$archive` and return it.
-#'  * Note that therefore more points than specified by the [Terminator] may be
-#'    evaluated, as the Terminator is only checked before a batch evaluation, and
-#'    not in-between evaluation in a batch. How many more depends on the setting
-#'    of the batch size.
+#'  * Note that therefore more points than specified by the [bbotk::Terminator]
+#'    may be evaluated, as the Terminator is only checked before a batch
+#'    evaluation, and not in-between evaluation in a batch. How many more depends
+#'    on the setting of the batch size.
 #'  * Overwrite the private super-method `.assign_result()` if you want to decide
 #'    yourself how to estimate the final feature subset in the instance and its
 #'    estimated performance. The default behavior is: We pick the best

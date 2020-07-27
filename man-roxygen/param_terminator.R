@@ -1,1 +1,1 @@
-#' @param terminator ([Terminator]).
+#' @param terminator ([bbotk::Terminator]).

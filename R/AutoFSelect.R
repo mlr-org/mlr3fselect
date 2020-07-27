@@ -83,7 +83,7 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     #' @param measure ([mlr3::Measure])\cr
     #' Performance measure to optimize.
     #'
-    #' @param terminator ([Terminator])\cr
+    #' @param terminator ([bbotk::Terminator])\cr
     #' When to stop feature selection, see [FSelectInstanceSingleCrit].
     #'
     #' @param fselector ([FSelector])\cr

@@ -22,7 +22,7 @@
 #'
 #' For the meaning of the control parameter, see [ecr::ecr()]. Note that `mu`
 #' and `lambda` must be set by the user. The `terminators` parameter is replaced
-#' by the [Terminator] subclasses.
+#' by the [bbotk::Terminator] subclasses.
 #'
 #' @note
 #' We add a random feature to the set if `ecr::ecr()` suggests an empty

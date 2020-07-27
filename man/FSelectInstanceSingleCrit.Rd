@@ -48,7 +48,6 @@ inst = FSelectInstanceSingleCrit$new(
 \itemize{
 \item \href{#method-new}{\code{FSelectInstanceSingleCrit$new()}}
 \item \href{#method-assign_result}{\code{FSelectInstanceSingleCrit$assign_result()}}
-\item \href{#method-objective_function}{\code{FSelectInstanceSingleCrit$objective_function()}}
 \item \href{#method-clone}{\code{FSelectInstanceSingleCrit$clone()}}
 }
 }
@@ -57,6 +56,7 @@ inst = FSelectInstanceSingleCrit$new(
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch">}\href{../../bbotk/html/OptimInstance.html#method-eval_batch}{\code{bbotk::OptimInstance$eval_batch()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format">}\href{../../bbotk/html/OptimInstance.html#method-format}{\code{bbotk::OptimInstance$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="objective_function">}\href{../../bbotk/html/OptimInstance.html#method-objective_function}{\code{bbotk::OptimInstance$objective_function()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print">}\href{../../bbotk/html/OptimInstance.html#method-print}{\code{bbotk::OptimInstance$print()}}\out{</span>}
 }
 \out{</details>}
@@ -94,7 +94,7 @@ so that all configurations are evaluated on the same data splits.}
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Measure to optimize.}
 
-\item{\code{terminator}}{(\link{Terminator}).}
+\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator}).}
 
 \item{\code{store_models}}{(\code{logical(1)}).}
 
@@ -130,30 +130,6 @@ additional columns for extra information.}
 Optimal outcome.}
 }
 \if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-objective_function"></a>}}
-\if{latex}{\out{\hypertarget{method-objective_function}{}}}
-\subsection{Method \code{objective_function()}}{
-Evaluates a single feature set and returns a numeric scalar. The return
-value is negated if the measure is maximized. Internally, \verb{$eval_batch()}
-is called with a single row. This function serves as a objective function
-for optimizers of binary spaces.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceSingleCrit$objective_function(x)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{(\code{integer() | logical()})\cr
-Encoded feature set (e.g, \code{c(1L, 0L, 1L, 0L)} / \code{c(TRUE, FALSE, TRUE, FALSE)})}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Objective values as \code{numeric(1)}, negated for maximization problems.
 }
 }
 \if{html}{\out{<hr>}}

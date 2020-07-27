@@ -9,7 +9,7 @@ feature sets.  We simply search over a set of feature subsets fully specified
 by the user. The feature sets are evaluated in order as given.
 
 In order to support general termination criteria and parallelization, we
-evaluate feature sets  in a batch-fashion of size \code{batch_size}. Larger
+evaluate feature sets in a batch-fashion of size \code{batch_size}. Larger
 batches mean we can parallelize more, smaller batches imply a more
 fine-grained checking of termination criteria.
 }

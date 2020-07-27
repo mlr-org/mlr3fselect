@@ -135,7 +135,7 @@ resampling. For this reason it is not feasible to pass an instantiated
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Performance measure to optimize.}
 
-\item{\code{terminator}}{(\link{Terminator})\cr
+\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 When to stop feature selection, see \link{FSelectInstanceSingleCrit}.}
 
 \item{\code{fselector}}{(\link{FSelector})\cr
