@@ -83,7 +83,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       design = benchmark_grid(tasks, self$learner, self$resampling)
       bmr = benchmark(design, store_models = self$store_models)
       aggr = bmr$aggregate(self$measures)
-      y = map_chr(self$measures, function(s) s$id)
+      y = map_chr(self$measures, "id")
 
       if(self$store_resample_results) {
         rr = map(seq_len(bmr$n_resample_results), function(i) bmr$resample_result(i))
