@@ -174,17 +174,17 @@ your optimizer.</p></li>
 <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a> object <code>instance</code>, so each batch is possibly
 executed in parallel via <code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>mlr3::benchmark()</a></code>, and all evaluations are stored
 inside of <code>instance$archive</code>.</p></li>
-<li><p>Before the batch evaluation, the Terminator is checked, and if it is
+<li><p>Before the batch evaluation, the <a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a> is checked, and if it is
 positive, an exception of class <code>"terminated_error"</code> is generated. In the
 later case the current batch of evaluations is still stored in <code>instance</code>,
 but the numeric scores are not sent back to the handling optimizer as it has
 lost execution control.</p></li>
 <li><p>After such an exception was caught we select the best feature subset from
 <code>instance$archive</code> and return it.</p></li>
-<li><p>Note that therefore more points than specified by the Terminator may be
-evaluated, as the Terminator is only checked before a batch evaluation, and
-not in-between evaluation in a batch. How many more depends on the setting
-of the batch size.</p></li>
+<li><p>Note that therefore more points than specified by the <a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a>
+may be evaluated, as the Terminator is only checked before a batch
+evaluation, and not in-between evaluation in a batch. How many more depends
+on the setting of the batch size.</p></li>
 <li><p>Overwrite the private super-method <code>.assign_result()</code> if you want to decide
 yourself how to estimate the final feature subset in the instance and its
 estimated performance. The default behavior is: We pick the best
@@ -252,9 +252,10 @@ Set of required packages. Note that these packages will be loaded via
 <p><hr>
 <a id="method-optimize"></a></p><h3>Method <code><a href='https://rdrr.io/r/stats/optimize.html'>optimize()</a></code></h3>
 <p>Performs the feature selection on a <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> or
-<a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a> until termination.The single evaluations and
-the final results will be written into the <a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a> that resides
-in the <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> / <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a>.</p><h3>Usage</h3>
+<a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a> until termination.
+The single evaluations will be written into the <a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a> that resides in the
+<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> / <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a>.
+The result will be written into the instance object.</p><h3>Usage</h3>
 <p><div class="r"></p><pre><span class='no'>FSelector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>inst</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
@@ -317,16 +318,16 @@ in the <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> / 
 #&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.04
 #&gt; 10:        FALSE        TRUE        FALSE       FALSE       0.04
 #&gt;          resample_result  x_domain           timestamp batch_nr
-#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1
-#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 07:42:13        1</div></pre>
+#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1
+#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-27 08:20:57        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

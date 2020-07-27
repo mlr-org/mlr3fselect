@@ -173,13 +173,13 @@ calling the method <code>instance$assign_result()</code>.</p>
 <ul>
 <li><p><a href='#method-new'><code>FSelectInstanceMultiCrit$new()</code></a></p></li>
 <li><p><a href='#method-assign_result'><code>FSelectInstanceMultiCrit$assign_result()</code></a></p></li>
-<li><p><a href='#method-objective_function'><code>FSelectInstanceMultiCrit$objective_function()</code></a></p></li>
 <li><p><a href='#method-clone'><code>FSelectInstanceMultiCrit$clone()</code></a></p></li>
 </ul>
 <p><details open ><summary>Inherited methods</summary>
 <ul>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href='../../bbotk/html/OptimInstance.html#method-eval_batch'><code>bbotk::OptimInstance$eval_batch()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-format'><code>bbotk::OptimInstance$format()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="objective_function"><a href='../../bbotk/html/OptimInstance.html#method-objective_function'><code>bbotk::OptimInstance$objective_function()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href='../../bbotk/html/OptimInstance.html#method-print'><code>bbotk::OptimInstance$print()</code></a></span></p></li>
 </ul>
 </details>
@@ -213,7 +213,7 @@ so that all configurations are evaluated on the same data splits.</p></dd>
 Measures to optimize.
 If <code>NULL</code>, <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>'s default measure is used.</p></dd>
 
-<dt><code>terminator</code></dt><dd><p>(Terminator).</p></dd>
+<dt><code>terminator</code></dt><dd><p>(<a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a>).</p></dd>
 
 <dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).</p></dd>
 
@@ -242,22 +242,6 @@ additional columns for extra information.</p></dd>
 Optimal outcome.</p></dd>
 
 </dl><p></div></p>
-<p><hr>
-<a id="method-objective_function"></a></p><h3>Method <code>objective_function()</code></h3>
-<p>Evaluates a single feature set and returns a numeric vector. The return
-values are negated if the measure is maximized. Internally, <code>$eval_batch()</code>
-is called with a single row. This function serves as a objective function
-for optimizers of binary spaces.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>objective_function</span>(<span class='no'>x</span>)</pre><p></div></p>
-
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
-<dt><code>x</code></dt><dd><p>(<code>integer() | logical()</code>)<br />
-Encoded feature set (e.g, <code><a href='https://rdrr.io/r/base/c.html'>c(1L, 0L, 1L, 0L)</a></code> / <code><a href='https://rdrr.io/r/base/c.html'>c(TRUE, FALSE, TRUE, FALSE)</a></code>)</p></dd>
-
-</dl><p></div></p>
-<h3>Returns</h3>
-<p>Objective value as <code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>, negated for maximization problems.</p>
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
