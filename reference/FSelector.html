@@ -295,39 +295,39 @@ The result will be written into the instance object.</p><h3>Usage</h3>
 <span class='no'>fselector</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"random_search"</span>)
 
 <span class='co'># modifies the instance by reference</span>
-<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                features
-#&gt; 1:        FALSE        TRUE        FALSE        TRUE Petal.Width,Sepal.Width
-#&gt;     x_domain classif.ce
-#&gt; 1: &lt;list[4]&gt;       0.04</div><div class='input'>
+<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
+#&gt; 1:         TRUE        TRUE         TRUE       FALSE
+#&gt;                                 features  x_domain classif.ce
+#&gt; 1: Petal.Length,Petal.Width,Sepal.Length &lt;list[4]&gt;       0.04</div><div class='input'>
 <span class='co'># returns best feature subset and best performance</span>
-<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                features
-#&gt; 1:        FALSE        TRUE        FALSE        TRUE Petal.Width,Sepal.Width
-#&gt;     x_domain classif.ce
-#&gt; 1: &lt;list[4]&gt;       0.04</div><div class='input'>
+<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
+#&gt; 1:         TRUE        TRUE         TRUE       FALSE
+#&gt;                                 features  x_domain classif.ce
+#&gt; 1: Petal.Length,Petal.Width,Sepal.Length &lt;list[4]&gt;       0.04</div><div class='input'>
 <span class='co'># allows access of data.table / benchmark result of full path of all evaluations</span>
 <span class='no'>instance</span>$<span class='no'>archive</span></div><div class='output co'>#&gt; &lt;Archive&gt;
 #&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:        FALSE        TRUE        FALSE        TRUE       0.04
-#&gt;  2:        FALSE        TRUE         TRUE       FALSE       0.04
-#&gt;  3:        FALSE        TRUE         TRUE        TRUE       0.04
-#&gt;  4:        FALSE       FALSE         TRUE        TRUE       0.24
-#&gt;  5:        FALSE       FALSE         TRUE        TRUE       0.24
-#&gt;  6:        FALSE        TRUE        FALSE       FALSE       0.04
-#&gt;  7:        FALSE       FALSE         TRUE        TRUE       0.24
-#&gt;  8:         TRUE        TRUE        FALSE        TRUE       0.04
-#&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.04
-#&gt; 10:        FALSE        TRUE        FALSE       FALSE       0.04
+#&gt;  1:         TRUE        TRUE         TRUE       FALSE       0.04
+#&gt;  2:        FALSE        TRUE         TRUE        TRUE       0.04
+#&gt;  3:         TRUE        TRUE         TRUE       FALSE       0.04
+#&gt;  4:         TRUE        TRUE         TRUE        TRUE       0.04
+#&gt;  5:         TRUE        TRUE         TRUE        TRUE       0.04
+#&gt;  6:        FALSE        TRUE         TRUE       FALSE       0.04
+#&gt;  7:        FALSE        TRUE        FALSE       FALSE       0.04
+#&gt;  8:        FALSE       FALSE         TRUE        TRUE       0.24
+#&gt;  9:        FALSE        TRUE         TRUE        TRUE       0.04
+#&gt; 10:        FALSE        TRUE         TRUE       FALSE       0.04
 #&gt;          resample_result  x_domain           timestamp batch_nr
-#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1
-#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 04:56:49        1</div></pre>
+#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1
+#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-07-29 09:22:07        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
