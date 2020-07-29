@@ -17,8 +17,6 @@
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
 #' \item{`batch_size`}{`integer(1)`\cr
 #' Maximum number of feature sets to try in a batch.}
-#' \item{`prob`}{`double(1)`\cr
-#' Probability of choosing a feature.}
 #' }
 #'
 #' @source
@@ -35,11 +33,10 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("max_features", lower = 1),
-        ParamInt$new("batch_size", default = 10, lower = 1),
-        ParamDbl$new("prob", default = 0.5, lower = 0, upper = 1))
+        ParamInt$new("batch_size", default = 10, lower = 1))
       )
 
-      ps$values = list(batch_size = 10L, prob = 0.5)
+      ps$values = list(batch_size = 10L)
 
       super$initialize(param_set = ps, properties = "single-crit")
     }
@@ -54,15 +51,13 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
         pars$max_features = length(feature_names)
       }
       repeat({
-        states =
-          map_dtr(seq_len(pars$batch_size), function(i) {
-            x = Inf
-            while (sum(x) > pars$max_features | sum(x) == 0) {
-              x = rbinom(length(feature_names), 1, pars$prob)
-            }
-            set_names(as.list(as.logical(x)), feature_names)
-          })
-
+        states = map_dtr(seq_len(pars$batch_size), function(i) {
+          n = sample.int(pars$max_features, 1)
+          x = sample.int(length(feature_names), n)
+          state = logical(length(feature_names))
+          state[x] = TRUE
+          set_names(as.list(state), feature_names)
+        })
         inst$eval_batch(states)
       })
     }

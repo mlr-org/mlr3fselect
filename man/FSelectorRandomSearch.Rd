@@ -29,8 +29,6 @@ fs("random_search")
 Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 \item{\code{batch_size}}{\code{integer(1)}\cr
 Maximum number of feature sets to try in a batch.}
-\item{\code{prob}}{\code{double(1)}\cr
-Probability of choosing a feature.}
 }
 }
 
