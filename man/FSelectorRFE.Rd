@@ -2,7 +2,7 @@
 % Please edit documentation in R/FSelectorRFE.R
 \name{FSelectorRFE}
 \alias{FSelectorRFE}
-\title{Feature Selection via Recrusive Feature Elimination}
+\title{Feature Selection via Recursive Feature Elimination}
 \description{
 \code{FSelectorRFE} class that implements Recursive Feature Elimination (RFE). The
 recursive algorithm (\code{recursive = TRUE}) recomputes the feature importance

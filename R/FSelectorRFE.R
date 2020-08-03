@@ -1,4 +1,4 @@
-#' @title Feature Selection via Recrusive Feature Elimination
+#' @title Feature Selection via Recursive Feature Elimination
 #'
 #' @description
 #' `FSelectorRFE` class that implements Recursive Feature Elimination (RFE). The
