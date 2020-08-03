@@ -11,7 +11,8 @@ This package provides feature selection for mlr3. It offers various feature
 selection methods e.g. random search and sequential feature selection and
 different termination criteria can be set and combined. 'AutoFSelect' provides a
 convenient way to perform nested resampling in combination with 'mlr3'. The
-package is build on bbotk which provides a common framework for optimization.
+package is build on [bbotk](https://github.com/mlr-org/bbotk) which provides a
+common framework for optimization.
 
 ## Installation
 
