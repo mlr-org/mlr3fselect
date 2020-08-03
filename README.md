@@ -18,7 +18,7 @@ package is build on bbotk which provides a common framework for optimization.
 CRAN version
 
 ```{r}
-install.packages("mlr3tuning")
+install.packages("mlr3fselect")
 ```
 
 Development version
@@ -41,14 +41,14 @@ measure = msr("classif.ce")
 # Define termination criterion
 terminator = trm("evals", n_evals = 20)
 
-# Create tuning instance
+# Create fselect instance
 instance = FSelectInstanceSingleCrit$new(task = task,
   learner = learner,
   resampling = resampling,
   measure = measure,
   terminator = terminator)
 
-# Load tuner
+# Load fselector
 fselector = fs("random_search")
 
 # Trigger optimization
