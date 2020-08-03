@@ -8,3 +8,7 @@ test_that("FSelectorRandomSearch", {
   a = z$inst$archive$data()
   expect_feature_number(a[, 1:4], n = 1)
 })
+
+test_that("FSelectorRandomSearch works with multi-crit", {
+  test_fselector_2D("random_search", batch_size = 4, term_evals = 4, real_evals = 4)
+})

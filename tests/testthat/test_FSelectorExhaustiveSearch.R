@@ -25,3 +25,7 @@ test_that("FSelectorExhaustive", {
     x3 = FALSE,
     x4 = FALSE))
 })
+
+test_that("FSelectorExhaustive works with multi-crit", {
+  test_fselector_2D("exhaustive_search", term_evals = 4, real_evals = 4)
+})

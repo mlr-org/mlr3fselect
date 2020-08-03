@@ -29,7 +29,8 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
         ParamInt$new("max_features", lower = 1))
       )
 
-      super$initialize(param_set = ps, properties = "single-crit")
+      super$initialize(param_set = ps, properties = c("single-crit",
+        "multi-crit"))
     }
   ),
   private = list(
