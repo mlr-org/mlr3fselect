@@ -19,7 +19,7 @@ budget is exhausted, an exception is raised, and no further evaluations can
 be performed from this point on.
 
 The \link{FSelector} is also supposed to store its final result, consisting
-of a selected feature subset and associated estimated performance values, by
+of the selected feature subsets and associated estimated performance values, by
 calling the method \code{instance$assign_result()}.
 }
 \examples{

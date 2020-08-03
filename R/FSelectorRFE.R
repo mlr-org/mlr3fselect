@@ -2,9 +2,9 @@
 #'
 #' @description
 #' `FSelectorRFE` class that implements Recursive Feature Elimination (RFE). The
-#' recursive algorithm (`recursive = TRUE`) recomputes the feature importances
+#' recursive algorithm (`recursive = TRUE`) recomputes the feature importance
 #' on the reduced feature set in every iteration.  The non-recursive algorithm
-#' (`recursive = FALSE`) only uses the feature importances of the model fitted
+#' (`recursive = FALSE`) only uses the feature importance of the model fitted
 #' with all features to eliminate the next most unimportant feature in every
 #' iteration.
 #'
@@ -109,8 +109,8 @@ FSelectorRFE = R6Class("FSelectorRFE",
   )
 )
 
-# Calculates the average feature importances on all resample iterations.
-# Returns a numeric vector of average feature importances in ascending order.
+# Calculates the average feature importance on all resample iterations.
+# Returns a numeric vector of average feature importance in ascending order.
 # Some learners omit features that are not used at all,
 # thus we have to assign zero to these features
 importance_average = function(learners, features) {

@@ -16,7 +16,7 @@
 #' be performed from this point on.
 #'
 #' The [FSelector] is also supposed to store its final result, consisting
-#' of a selected feature subset and associated estimated performance values, by
+#' of the selected feature subsets and associated estimated performance values, by
 #' calling the method `instance$assign_result()`.
 #'
 #' @template param_task

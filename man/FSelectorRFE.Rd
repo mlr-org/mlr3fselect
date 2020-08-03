@@ -5,9 +5,9 @@
 \title{Feature Selection via Recrusive Feature Elimination}
 \description{
 \code{FSelectorRFE} class that implements Recursive Feature Elimination (RFE). The
-recursive algorithm (\code{recursive = TRUE}) recomputes the feature importances
+recursive algorithm (\code{recursive = TRUE}) recomputes the feature importance
 on the reduced feature set in every iteration.  The non-recursive algorithm
-(\code{recursive = FALSE}) only uses the feature importances of the model fitted
+(\code{recursive = FALSE}) only uses the feature importance of the model fitted
 with all features to eliminate the next most unimportant feature in every
 iteration.
 }

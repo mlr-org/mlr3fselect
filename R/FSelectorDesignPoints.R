@@ -59,5 +59,4 @@ FSelectorDesignPoints = R6Class("FSelectorDesignPoints",
   )
 )
 
-
 mlr_fselectors$add("design_points", FSelectorDesignPoints)
