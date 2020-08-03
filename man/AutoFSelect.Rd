@@ -2,7 +2,7 @@
 % Please edit documentation in R/AutoFSelect.R
 \name{AutoFSelect}
 \alias{AutoFSelect}
-\title{AutoFeselect}
+\title{AutoFSelect}
 \description{
 The \code{AutoFSelect} is a \link[mlr3:Learner]{mlr3::Learner} which wraps another \link[mlr3:Learner]{mlr3::Learner}
 and performs the following steps during \verb{$train()}:
@@ -61,28 +61,31 @@ rr$data$learner[[1]]$tuning_result
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{instance_args}}{(\code{list()})\cr
-All arguments from construction to create the \link{FSelectInstanceSingleCrit}.}
+All arguments from construction to create the
+\link{FSelectInstanceSingleCrit}.}
 
 \item{\code{fselector}}{(\link{FSelector})\cr
 Stores the feature selection algorithm.}
 
 \item{\code{store_fselect_instance}}{(\code{logical(1)}).
-If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit}
-with all intermediate results in slot \verb{$fselect_instance}.}
+If \code{TRUE} (default), stores the internally created
+\link{FSelectInstanceSingleCrit} with all intermediate results in slot
+\verb{$fselect_instance}.}
 }
 \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{archive}}{(\link{Archive})\cr
-Returns FSelectInstanceSingleCrit archive.}
+\item{\code{archive}}{(\link[bbotk:Archive]{bbotk::Archive})\cr
+Returns \link{FSelectInstanceSingleCrit} archive.}
 
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Trained learner.}
 
 \item{\code{fselect_instance}}{(\link{FSelectInstanceSingleCrit})\cr
-Internally created feature selection instance with all intermediate results.}
+Internally created feature selection instance with all intermediate
+results.}
 
 \item{\code{fselect_result}}{(named \code{list()})\cr
 Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}

@@ -9,7 +9,7 @@ and archive for feature selection algorithms to act upon. This class stores
 an \link{ObjectiveFSelect} object that encodes the black box objective function
 which an \link{FSelector} has to optimize. It allows the basic operations of
 querying the objective at feature subsets (\verb{$eval_batch()}), storing the
-evaluations in the internal \link{Archive} and accessing the final result
+evaluations in the internal \link[bbotk:Archive]{bbotk::Archive} and accessing the final result
 (\verb{$result}).
 
 Evaluations of feature subsets are performed in batches by calling
@@ -24,14 +24,16 @@ calling the method \code{instance$assign_result()}.
 }
 \examples{
 library(mlr3)
+library(data.table)
 
-# Objects required to define the performance evaluator
+# Objects required to define the objective function
 task = tsk("iris")
 measure = msr("classif.ce")
 learner = lrn("classif.rpart")
 resampling = rsmp("cv")
-terminator = trm("evals", n_evals = 8)
 
+# Create instance
+terminator = trm("evals", n_evals = 8)
 inst = FSelectInstanceSingleCrit$new(
   task = task,
   learner = learner,
@@ -39,9 +41,30 @@ inst = FSelectInstanceSingleCrit$new(
   measure = measure,
   terminator = terminator
 )
+
+# Try some feature subsets
+xdt = data.table(
+  Petal.Length = c(TRUE, FALSE),
+  Petal.Width = c(FALSE, TRUE),
+  Sepal.Length = c(TRUE, FALSE),
+  Sepal.Width = c(FALSE, TRUE)
+)
+
+inst$eval_batch(xdt)
+
+# Get archive data
+inst$archive$data()
 }
 \section{Super classes}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceSingleCrit]{bbotk::OptimInstanceSingleCrit}} -> \code{FSelectInstanceSingleCrit}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{result_feature_set}}{(\code{character()})\cr
+Feature set for task subsetting.}
+}
+\if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{

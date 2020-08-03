@@ -9,7 +9,7 @@ and archive for feature selection algorithms to act upon. This class stores
 an \link{ObjectiveFSelect} object that encodes the black box objective function
 which an \link{FSelector} has to optimize. It allows the basic operations of
 querying the objective at feature subsets (\verb{$eval_batch()}), storing the
-evaluations in the internal \link{Archive} and accessing the final result
+evaluations in the internal \link[bbotk:Archive]{bbotk::Archive} and accessing the final result
 (\verb{$result}).
 
 Evaluations of feature subsets are performed in batches by calling
@@ -24,6 +24,7 @@ calling the method \code{instance$assign_result()}.
 }
 \examples{
 library(mlr3)
+library(data.table)
 
 # Objects required to define the performance evaluator
 task = tsk("iris")
@@ -39,9 +40,30 @@ inst = FSelectInstanceMultiCrit$new(
   measures = measures,
   terminator = terminator
 )
+
+# Try some feature subsets
+xdt = data.table(
+  Petal.Length = c(TRUE, FALSE),
+  Petal.Width = c(FALSE, TRUE),
+  Sepal.Length = c(TRUE, FALSE),
+  Sepal.Width = c(FALSE, TRUE)
+)
+
+inst$eval_batch(xdt)
+
+# Get archive data
+inst$archive$data()
 }
 \section{Super classes}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceMultiCrit]{bbotk::OptimInstanceMultiCrit}} -> \code{FSelectInstanceMultiCrit}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{result_feature_set}}{(\code{list()} of \code{character()})\cr
+Feature sets for task subsetting.}
+}
+\if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -116,7 +138,7 @@ Store resample results in archive?}
 The \link{FSelector} object writes the best found feature subsets
 and estimated performance values here. For internal use.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceMultiCrit$assign_result(xdt, y)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceMultiCrit$assign_result(xdt, ydt)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -127,8 +149,8 @@ x values as \code{data.table}. Each row is one point. Contains the value in
 the \emph{search space} of the \link{FSelectInstanceMultiCrit} object. Can contain
 additional columns for extra information.}
 
-\item{\code{y}}{(\code{numeric(1)})\cr
-Optimal outcome.}
+\item{\code{ydt}}{(\code{data.table::data.table()})\cr
+Optimal outcomes, e.g. the Pareto front.}
 }
 \if{html}{\out{</div>}}
 }

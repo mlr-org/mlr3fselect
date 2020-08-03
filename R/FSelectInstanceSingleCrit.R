@@ -6,7 +6,7 @@
 #' an [ObjectiveFSelect] object that encodes the black box objective function
 #' which an [FSelector] has to optimize. It allows the basic operations of
 #' querying the objective at feature subsets (`$eval_batch()`), storing the
-#' evaluations in the internal [Archive] and accessing the final result
+#' evaluations in the internal [bbotk::Archive] and accessing the final result
 #' (`$result`).
 #'
 #' Evaluations of feature subsets are performed in batches by calling
@@ -32,14 +32,16 @@
 #' @export
 #' @examples
 #' library(mlr3)
+#' library(data.table)
 #'
-#' # Objects required to define the performance evaluator
+#' # Objects required to define the objective function
 #' task = tsk("iris")
 #' measure = msr("classif.ce")
 #' learner = lrn("classif.rpart")
 #' resampling = rsmp("cv")
-#' terminator = trm("evals", n_evals = 8)
 #'
+#' # Create instance
+#' terminator = trm("evals", n_evals = 8)
 #' inst = FSelectInstanceSingleCrit$new(
 #'   task = task,
 #'   learner = learner,
@@ -47,6 +49,19 @@
 #'   measure = measure,
 #'   terminator = terminator
 #' )
+#'
+#' # Try some feature subsets
+#' xdt = data.table(
+#'   Petal.Length = c(TRUE, FALSE),
+#'   Petal.Width = c(FALSE, TRUE),
+#'   Sepal.Length = c(TRUE, FALSE),
+#'   Sepal.Width = c(FALSE, TRUE)
+#' )
+#'
+#' inst$eval_batch(xdt)
+#'
+#' # Get archive data
+#' inst$archive$data()
 FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
   inherit = OptimInstanceSingleCrit,
   public = list(
@@ -70,12 +85,20 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
     #' The [FSelector] writes the best found feature subset
     #' and estimated performance value here. For internal use.
     #' @param y (`numeric(1)`)\cr
-    #'   Optimal outcome.
+    #' Optimal outcome.
     assign_result = function(xdt, y) {
       # Add feature names to result for easy task subsetting
       features = list(self$objective$task$feature_names[as.logical(xdt)])
       xdt[, features := list(features)]
       super$assign_result(xdt, y)
+    }
+  ),
+
+  active = list(
+    #' @field result_feature_set (`character()`)\cr
+    #' Feature set for task subsetting.
+    result_feature_set = function() {
+      unlist(self$result$features)
     }
   )
 )

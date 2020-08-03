@@ -6,7 +6,7 @@
 #' an [ObjectiveFSelect] object that encodes the black box objective function
 #' which an [FSelector] has to optimize. It allows the basic operations of
 #' querying the objective at feature subsets (`$eval_batch()`), storing the
-#' evaluations in the internal [Archive] and accessing the final result
+#' evaluations in the internal [bbotk::Archive] and accessing the final result
 #' (`$result`).
 #'
 #' Evaluations of feature subsets are performed in batches by calling
@@ -32,6 +32,7 @@
 #' @export
 #' @examples
 #' library(mlr3)
+#' library(data.table)
 #'
 #' # Objects required to define the performance evaluator
 #' task = tsk("iris")
@@ -47,6 +48,19 @@
 #'   measures = measures,
 #'   terminator = terminator
 #' )
+#'
+#' # Try some feature subsets
+#' xdt = data.table(
+#'   Petal.Length = c(TRUE, FALSE),
+#'   Petal.Width = c(FALSE, TRUE),
+#'   Sepal.Length = c(TRUE, FALSE),
+#'   Sepal.Width = c(FALSE, TRUE)
+#' )
+#'
+#' inst$eval_batch(xdt)
+#'
+#' # Get archive data
+#' inst$archive$data()
 FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
   inherit = OptimInstanceMultiCrit,
   public = list(
@@ -70,13 +84,25 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
     #' The [FSelector] object writes the best found feature subsets
     #' and estimated performance values here. For internal use.
     #'
-    #' @param y (`numeric(1)`)\cr
-    #'   Optimal outcome.
-    assign_result = function(xdt, y) {
+    #' @param ydt (`data.table::data.table()`)\cr
+    #' Optimal outcomes, e.g. the Pareto front.
+    assign_result = function(xdt, ydt) {
       # Add feature names to result for easy task subsetting
-      features = list(self$objective$task$feature_names[as.logical(xdt)])
+      features = map(transpose_list(xdt), function(x) {
+        self$objective$task$feature_names[as.logical(x)]
+      })
       xdt[, features := list(features)]
-      super$assign_result(xdt, y)
+      super$assign_result(xdt, ydt)
+    }
+  ),
+
+  active = list(
+    #' @field result_feature_set (`list()` of `character()`)\cr
+    #' Feature sets for task subsetting.
+    result_feature_set = function() {
+      map(self$result$features, function(x) {
+        unlist(x)
+      })
     }
   )
 )

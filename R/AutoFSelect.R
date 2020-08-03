@@ -1,4 +1,4 @@
-#' @title AutoFeselect
+#' @title AutoFSelect
 #'
 #' @description
 #' The `AutoFSelect` is a [mlr3::Learner] which wraps another [mlr3::Learner]
@@ -50,11 +50,13 @@
 #'
 #' # Retrieve inner tuning results.
 #' rr$data$learner[[1]]$tuning_result
-AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
+AutoFSelect = R6Class("AutoFSelect",
+  inherit = Learner,
   public = list(
 
     #' @field instance_args (`list()`)\cr
-    #' All arguments from construction to create the [FSelectInstanceSingleCrit].
+    #' All arguments from construction to create the
+    #' [FSelectInstanceSingleCrit].
     instance_args = NULL,
 
     #' @field fselector ([FSelector])\cr
@@ -62,8 +64,9 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
     fselector = NULL,
 
     #' @field store_fselect_instance (`logical(1)`).
-    #' If `TRUE` (default), stores the internally created [FSelectInstanceSingleCrit]
-    #' with all intermediate results in slot `$fselect_instance`.
+    #' If `TRUE` (default), stores the internally created
+    #' [FSelectInstanceSingleCrit] with all intermediate results in slot
+    #' `$fselect_instance`.
     store_fselect_instance = TRUE,
 
     #' @description
@@ -142,8 +145,8 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
 
   active = list(
 
-    #' @field archive ([Archive])\cr
-    #' Returns FSelectInstanceSingleCrit archive.
+    #' @field archive ([bbotk::Archive])\cr
+    #' Returns [FSelectInstanceSingleCrit] archive.
     archive = function() self$fselect_instance$archive,
 
     #' @field learner ([mlr3::Learner])\cr
@@ -156,8 +159,10 @@ AutoFSelect = R6Class("AutoFSelect", inherit = Learner,
         self$model$learner
       }
     },
+
     #' @field fselect_instance ([FSelectInstanceSingleCrit])\cr
-    #' Internally created feature selection instance with all intermediate results.
+    #' Internally created feature selection instance with all intermediate
+    #' results.
     fselect_instance = function() self$model$fselect_instance,
 
     #' @field fselect_result (named `list()`)\cr
