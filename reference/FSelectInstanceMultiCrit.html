@@ -46,7 +46,7 @@ and archive for feature selection algorithms to act upon. This class stores
 an ObjectiveFSelect object that encodes the black box objective function
 which an FSelector has to optimize. It allows the basic operations of
 querying the objective at feature subsets ($eval_batch()), storing the
-evaluations in the internal Archive and accessing the final result
+evaluations in the internal bbotk::Archive and accessing the final result
 ($result).
 Evaluations of feature subsets are performed in batches by calling
 mlr3::benchmark() internally. Before a batch is evaluated, the
@@ -148,7 +148,7 @@ and archive for feature selection algorithms to act upon. This class stores
 an <a href='ObjectiveFSelect.html'>ObjectiveFSelect</a> object that encodes the black box objective function
 which an <a href='FSelector.html'>FSelector</a> has to optimize. It allows the basic operations of
 querying the objective at feature subsets (<code>$eval_batch()</code>), storing the
-evaluations in the internal Archive and accessing the final result
+evaluations in the internal <a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a> and accessing the final result
 (<code>$result</code>).</p>
 <p>Evaluations of feature subsets are performed in batches by calling
 <code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>mlr3::benchmark()</a></code> internally. Before a batch is evaluated, the
@@ -165,6 +165,13 @@ calling the method <code>instance$assign_result()</code>.</p>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
     <p><code><a href='https://bbotk.mlr-org.com/reference/OptimInstance.html'>bbotk::OptimInstance</a></code> -&gt; <code><a href='https://bbotk.mlr-org.com/reference/OptimInstanceMultiCrit.html'>bbotk::OptimInstanceMultiCrit</a></code> -&gt; <code>FSelectInstanceMultiCrit</code></p>
+    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
+
+    <p><div class="r6-active-bindings"></p><dl'>
+<dt><code>result_feature_set</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> of <code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
+Feature sets for task subsetting.</p></dd>
+
+</dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
@@ -229,7 +236,7 @@ Store resample results in archive?</p></dd>
 <a id="method-assign_result"></a></p><h3>Method <code>assign_result()</code></h3>
 <p>The <a href='FSelector.html'>FSelector</a> object writes the best found feature subsets
 and estimated performance values here. For internal use.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>assign_result</span>(<span class='no'>xdt</span>, <span class='no'>y</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>FSelectInstanceMultiCrit</span>$<span class='fu'>assign_result</span>(<span class='no'>xdt</span>, <span class='no'>ydt</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl'>
@@ -238,8 +245,8 @@ x values as <code>data.table</code>. Each row is one point. Contains the value i
 the <em>search space</em> of the FSelectInstanceMultiCrit object. Can contain
 additional columns for extra information.</p></dd>
 
-<dt><code>y</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
-Optimal outcome.</p></dd>
+<dt><code>ydt</code></dt><dd><p>(<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code>)<br />
+Optimal outcomes, e.g. the Pareto front.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
@@ -257,6 +264,7 @@ Optimal outcome.</p></dd>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>data.table</span>)
 
 <span class='co'># Objects required to define the performance evaluator</span>
 <span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>)
@@ -271,7 +279,25 @@ Optimal outcome.</p></dd>
   <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='no'>resampling</span>,
   <span class='kw'>measures</span> <span class='kw'>=</span> <span class='no'>measures</span>,
   <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>
-)</div></pre>
+)
+
+<span class='co'># Try some feature subsets</span>
+<span class='no'>xdt</span> <span class='kw'>=</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
+  <span class='kw'>Petal.Length</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>Petal.Width</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>),
+  <span class='kw'>Sepal.Length</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>),
+  <span class='kw'>Sepal.Width</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>)
+)
+
+<span class='no'>inst</span>$<span class='fu'>eval_batch</span>(<span class='no'>xdt</span>)
+
+<span class='co'># Get archive data</span>
+<span class='no'>inst</span>$<span class='no'>archive</span>$<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>()</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce classif.acc
+#&gt; 1:         TRUE       FALSE         TRUE       FALSE 0.06666667   0.9333333
+#&gt; 2:        FALSE        TRUE        FALSE        TRUE 0.04666667   0.9533333
+#&gt;         resample_result  x_domain           timestamp batch_nr
+#&gt; 1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:46        1
+#&gt; 2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:46        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

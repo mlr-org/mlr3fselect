@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AutoFeselect — AutoFSelect • mlr3fselect</title>
+<title>AutoFSelect — AutoFSelect • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,7 +40,7 @@
 
 
 
-<meta property="og:title" content="AutoFeselect — AutoFSelect" />
+<meta property="og:title" content="AutoFSelect — AutoFSelect" />
 <meta property="og:description" content="The AutoFSelect is a mlr3::Learner which wraps another mlr3::Learner
 and performs the following steps during $train():
 The wrapped (inner) learner is trained on the feature subsets via
@@ -139,7 +139,7 @@ store_models = TRUE (see examples)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>AutoFeselect</h1>
+    <h1>AutoFSelect</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/AutoFSelect.R'><code>R/AutoFSelect.R</code></a></small>
     <div class="hidden name"><code>AutoFSelect.Rd</code></div>
     </div>
@@ -173,27 +173,30 @@ and execute <code><a href='https://mlr3.mlr-org.com/reference/resample.html'>mlr
 
     <p><div class="r6-fields"></p><dl'>
 <dt><code>instance_args</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>)<br />
-All arguments from construction to create the <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>.</p></dd>
+All arguments from construction to create the
+<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>.</p></dd>
 
 <dt><code>fselector</code></dt><dd><p>(<a href='FSelector.html'>FSelector</a>)<br />
 Stores the feature selection algorithm.</p></dd>
 
 <dt><code>store_fselect_instance</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).
-If <code>TRUE</code> (default), stores the internally created <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>
-with all intermediate results in slot <code>$fselect_instance</code>.</p></dd>
+If <code>TRUE</code> (default), stores the internally created
+<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> with all intermediate results in slot
+<code>$fselect_instance</code>.</p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
 
     <p><div class="r6-active-bindings"></p><dl'>
-<dt><code>archive</code></dt><dd><p>(Archive)<br />
-Returns FSelectInstanceSingleCrit archive.</p></dd>
+<dt><code>archive</code></dt><dd><p>(<a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a>)<br />
+Returns <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> archive.</p></dd>
 
 <dt><code>learner</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>)<br />
 Trained learner.</p></dd>
 
 <dt><code>fselect_instance</code></dt><dd><p>(<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>)<br />
-Internally created feature selection instance with all intermediate results.</p></dd>
+Internally created feature selection instance with all intermediate
+results.</p></dd>
 
 <dt><code>fselect_result</code></dt><dd><p>(named <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>)<br />
 Short-cut to <code>$result</code> from <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>.</p></dd>
@@ -322,21 +325,21 @@ Feature selection algorithm to run.</p></dd>
 #&gt; 14:        FALSE        TRUE         TRUE        TRUE       0.06
 #&gt; 15:         TRUE        TRUE         TRUE        TRUE       0.06
 #&gt;          resample_result  x_domain           timestamp batch_nr
-#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        1
-#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        1
-#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        1
-#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        1
-#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        2
-#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        2
-#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        2
-#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        2
-#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        2
-#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:05        2
-#&gt; 11: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:06        3
-#&gt; 12: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:06        3
-#&gt; 13: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:06        3
-#&gt; 14: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:06        3
-#&gt; 15: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 04:14:06        4
+#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        1
+#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        1
+#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        1
+#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        1
+#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        2
+#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        2
+#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        2
+#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        2
+#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        2
+#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        2
+#&gt; 11: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        3
+#&gt; 12: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        3
+#&gt; 13: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        3
+#&gt; 14: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        3
+#&gt; 15: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-08-03 07:37:43        4
 #&gt; </div><div class='input'><span class='no'>afs</span>$<span class='no'>learner</span></div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
 #&gt; * Parameters: xval=0
