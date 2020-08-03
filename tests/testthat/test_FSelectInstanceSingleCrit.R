@@ -52,10 +52,10 @@ test_that("store_resample_results flag works", {
   expect_true("resample_result" %nin% colnames(inst$archive$data()))
 })
 
-test_that("result$features works",{
+test_that("result$features works", {
   inst = TEST_MAKE_INST_1D(store_resample_results = FALSE)
   xdt = data.table(x1 = list(TRUE), x2 = list(FALSE),
-                   x3 = list(TRUE), x4 = list(TRUE))
+    x3 = list(TRUE), x4 = list(TRUE))
   y = c(dummy = 2)
 
   inst$assign_result(xdt, y)

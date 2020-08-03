@@ -85,7 +85,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       aggr = bmr$aggregate(self$measures)
       y = map_chr(self$measures, "id")
 
-      if(self$store_resample_results) {
+      if (self$store_resample_results) {
         rr = map(seq_len(bmr$n_resample_results), function(i) bmr$resample_result(i))
         cbind(aggr[, y, with = FALSE], resample_result = rr)
       } else {
