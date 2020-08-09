@@ -7,12 +7,14 @@
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 <!-- badges: end -->
 
-This package provides feature selection for mlr3. It offers various feature
-selection methods e.g. random search and sequential feature selection and
+This package provides feature selection for [mlr3](https://mlr3.mlr-org.com).
+It offers various feature selection wrappers, e.g. random search and sequential feature selection and
 different termination criteria can be set and combined. 'AutoFSelect' provides a
 convenient way to perform nested resampling in combination with 'mlr3'. The
 package is build on [bbotk](https://github.com/mlr-org/bbotk) which provides a
 common framework for optimization.
+
+For feature filters and embedded methods, see [mlr3filters](https://mlr3filters.mlr-org.com)
 
 ## Installation
 

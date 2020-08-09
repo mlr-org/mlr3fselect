@@ -47,20 +47,17 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
     .optimize = function(inst) {
       pars = self$param_set$values
       feature_names = inst$archive$cols_x
+      max_features = pars$max_features %??% length(feature_names)
 
-      if (is.null(pars$max_features)) {
-        pars$max_features = length(feature_names)
-      }
-      repeat({
-        states = map_dtr(seq_len(pars$batch_size), function(i) {
-          n = sample.int(pars$max_features, 1)
+      repeat {
+        X = t(replicate(pars$batch_size, {
+          n = sample.int(max_features, 1L)
           x = sample.int(length(feature_names), n)
-          state = logical(length(feature_names))
-          state[x] = TRUE
-          set_names(as.list(state), feature_names)
-        })
-        inst$eval_batch(states)
-      })
+          replace(logical(length(feature_names)), x, TRUE)
+        }))
+        colnames(X) = feature_names
+        inst$eval_batch(as.data.table(X))
+      }
     }
   )
 )
