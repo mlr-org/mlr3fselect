@@ -23,7 +23,7 @@ Authors@R:
              email = "bernd_bischl@gmx.net",
              comment = c(ORCID = "0000-0001-6002-6980")))
 Description: Implements methods for feature selection with
-    'mlr3', e.g.  Random Search and Sequential Selection.  Various
+    'mlr3', e.g.  random search and sequential selection. Various
     termination criteria can be set and combined. The class 'AutoFSelect'
     provides a convenient way to perform nested resampling in combination
     with 'mlr3'.
