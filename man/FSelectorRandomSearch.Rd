@@ -4,7 +4,7 @@
 \alias{FSelectorRandomSearch}
 \title{Feature Selection via Random Search}
 \source{
-\cite{bbotk}{bergstra_2012}
+\cite{mlr3fselect}{bergstra_2012}
 }
 \description{
 \code{FSelectorRandomSearch} class that implements a simple Random Search.

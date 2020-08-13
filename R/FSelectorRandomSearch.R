@@ -20,7 +20,7 @@
 #' }
 #'
 #' @source
-#' \cite{bbotk}{bergstra_2012}
+#' \cite{mlr3fselect}{bergstra_2012}
 #'
 #' @export
 #' @template example
