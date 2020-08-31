@@ -5,7 +5,7 @@
 #' recursive algorithm (`recursive = TRUE`) recomputes the feature importance
 #' on the reduced feature set in every iteration.  The non-recursive algorithm
 #' (`recursive = FALSE`) only uses the feature importance of the model fitted
-#' with all features to eliminate the next most unimportant feature in every
+#' with all features to eliminate the next most unimportant features in every
 #' iteration.
 #'
 #' @templateVar id rfe
@@ -13,8 +13,8 @@
 #'
 #' @section Parameters:
 #' \describe{
-#' \item{`min_features`}{`integer(1)`\cr
-#' Minimum number of features. By default, 1.}
+#' \item{`subset_size`}{`integer()`\cr
+#' Number of features to retain in each iteration.}
 #' \item{`recursive`}{`logical(1)`}
 #' }
 #'
@@ -40,17 +40,17 @@ FSelectorRFE = R6Class("FSelectorRFE",
   inherit = FSelector,
   public = list(
     #' @field importance Stores the feature importance of the model with all
-    #'   variables if `recrusive` is set to `FALSE`
+    #' variables if `recrusive` is set to `FALSE`
     importance = NULL,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamInt$new("min_features", lower = 1),
+        ParamUty$new("subset_sizes"),
         ParamLgl$new("recursive", default = FALSE))
       )
-      ps$values = list(min_features = 1L, recursive = FALSE)
+      ps$values = list(recursive = FALSE)
 
       super$initialize(
         param_set = ps, properties = "single-crit"
@@ -63,15 +63,19 @@ FSelectorRFE = R6Class("FSelectorRFE",
       pars = self$param_set$values
       archive = inst$archive
       feature_names = inst$archive$cols_x
+      if(is.null(pars$subset_sizes)) {
+        pars$subset_sizes = rev(seq(length(feature_names)-1))
+      }
+      pars$subset_sizes = assert_integerish(pars$subset_sizes,
+        any.missing = FALSE, upper = length(feature_names)-1)
 
       states = set_names(as.list(rep(TRUE, length(feature_names))), feature_names)
       states = as.data.table(states)
       inst$eval_batch(states)
 
-      repeat({
-        if (length(feature_names) - archive$n_batch < pars$min_features) break
-
+      for(i in pars$subset_sizes) {
         if (pars$recursive) {
+
           # Recalculate the variable importance on the reduced feature subset
           feat = archive$data()[batch_nr == archive$n_batch, feature_names,
             with = FALSE]
@@ -83,7 +87,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
 
           # Eliminate the most unimportant feature of the feature subset
           states =
-            as.list(feature_names %in% feat & !feature_names %in% names(imp[1]))
+            as.list(feature_names %in% feat & feature_names %in% names(imp[seq(i)]))
           names(states) = feature_names
           states = as.data.table(states)
 
@@ -96,21 +100,19 @@ FSelectorRFE = R6Class("FSelectorRFE",
             self$importance = importance_average(learners, feature_names)
           }
           # Eliminate the most unimportant features
-          states = as.list(!feature_names %in% names(
-            self$importance[1:archive$n_batch]))
+          states = as.list(feature_names %in% names(self$importance[seq(i)]))
           names(states) = feature_names
           states = as.data.table(states)
         }
-
         # Fit the model on the reduced feature subset
         inst$eval_batch(states)
-      })
+      }
     }
   )
 )
 
 # Calculates the average feature importance on all resample iterations.
-# Returns a numeric vector of average feature importance in ascending order.
+# Returns a numeric vector of average feature importance in decreasing order.
 # Some learners omit features that are not used at all,
 # thus we have to assign zero to these features
 importance_average = function(learners, features) {
@@ -120,7 +122,7 @@ importance_average = function(learners, features) {
       if (y %in% names(imp_r)) imp_r[[y]] else 0
     })
   })
-  sort(apply(imp, 1, mean))
+  sort(apply(imp, 1, mean), decreasing = TRUE)
 }
 
 mlr_fselectors$add("rfe", FSelectorRFE)
