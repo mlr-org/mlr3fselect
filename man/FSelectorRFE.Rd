@@ -8,7 +8,7 @@
 recursive algorithm (\code{recursive = TRUE}) recomputes the feature importance
 on the reduced feature set in every iteration.  The non-recursive algorithm
 (\code{recursive = FALSE}) only uses the feature importance of the model fitted
-with all features to eliminate the next most unimportant feature in every
+with all features to eliminate the next most unimportant features in every
 iteration.
 }
 \section{Dictionary}{
@@ -22,8 +22,8 @@ fs("rfe")
 \section{Parameters}{
 
 \describe{
-\item{\code{min_features}}{\code{integer(1)}\cr
-Minimum number of features. By default, 1.}
+\item{\code{subset_size}}{\code{integer()}\cr
+Number of features to retain in each iteration.}
 \item{\code{recursive}}{\code{logical(1)}}
 }
 }
