@@ -13,8 +13,9 @@
 #'
 #' @section Parameters:
 #' \describe{
-#' \item{`subset_size`}{`integer()`\cr
-#' Number of features to retain in each iteration.}
+#' \item{`subset_sizes`}{`integer()`\cr
+#' Number of features to retain in each iteration. Must be sorted in decreasing
+#' order.}
 #' \item{`recursive`}{`logical(1)`}
 #' }
 #'

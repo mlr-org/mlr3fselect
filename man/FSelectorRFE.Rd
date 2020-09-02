@@ -22,8 +22,9 @@ fs("rfe")
 \section{Parameters}{
 
 \describe{
-\item{\code{subset_size}}{\code{integer()}\cr
-Number of features to retain in each iteration.}
+\item{\code{subset_sizes}}{\code{integer()}\cr
+Number of features to retain in each iteration. Must be sorted in decreasing
+order.}
 \item{\code{recursive}}{\code{logical(1)}}
 }
 }
