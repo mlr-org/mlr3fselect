@@ -19,6 +19,9 @@
 #' \item{`recursive`}{`logical(1)`}
 #' }
 #'
+#' The parameter `feature_number`, `feature_fraction` and `subset_sizes` are mutually
+#' exclusive.
+#'
 #' @export
 #' @examples
 #' library(mlr3)
@@ -48,10 +51,13 @@ FSelectorRFE = R6Class("FSelectorRFE",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
+        ParamInt$new("min_features", lower = 1, default = 1),
+        ParamInt$new("feature_number", lower = 1),
+        ParamDbl$new("feature_fraction", lower = 0, upper = 1),
         ParamUty$new("subset_sizes"),
         ParamLgl$new("recursive", default = FALSE))
       )
-      ps$values = list(recursive = FALSE)
+      ps$values = list(recursive = FALSE, min_features = 1, feature_fraction = 0.5)
 
       super$initialize(
         param_set = ps, properties = "single-crit"
@@ -64,13 +70,26 @@ FSelectorRFE = R6Class("FSelectorRFE",
       pars = self$param_set$values
       archive = inst$archive
       feature_names = inst$archive$cols_x
-      if (is.null(pars$subset_sizes)) {
-        pars$subset_sizes = rev(seq(length(feature_names) - 1))
-      }
-      assert_integerish(rev(pars$subset_sizes), any.missing = FALSE,
-        lower = 1, upper = length(feature_names) - 1, sorted = TRUE)
+      n = length(feature_names)
+      feature_fraction = pars$feature_fraction
+      feature_number = pars$feature_number
+      min_features = pars$min_features
 
-      states = set_names(as.list(rep(TRUE, length(feature_names))), feature_names)
+      subsets =  if(!is.null(pars$feature_number)) {
+        seq(from = n-feature_number, to = min_features, by = -feature_number)
+      } else if(!is.null(pars$subset_sizes)) {
+        pars$subset_sizes
+      } else if(!is.null(pars$feature_fraction)) {
+        unique(floor(cumprod(c((n), rep(feature_fraction,
+          log(min_features/(n))/log(feature_fraction))))))[-1]
+      }
+
+      browser()
+
+      assert_integerish(rev(subsets), any.missing = FALSE,
+        lower = 1, upper = n - 1, sorted = TRUE)
+
+      states = set_names(as.list(rep(TRUE, n)), feature_names)
       states = as.data.table(states)
       inst$eval_batch(states)
 
