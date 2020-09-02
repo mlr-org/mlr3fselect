@@ -33,7 +33,7 @@ test_that("FSelectorRFE", {
   expect_error(test_fselector("rfe", subset_sizes = c(2.5, 1L), term_evals = 3L),
     regexp = "Must be of type 'integerish'", fixed = TRUE)
 
-  expect_error(test_fselector("rfe", subset_sizes = c(40L, 1L), term_evals = 3L),
+  expect_error(test_fselector("rfe", subset_sizes = c(40L), term_evals = 3L),
     regexp = "Element 1 is not <= 3", fixed = TRUE)
 
   expect_error(test_fselector("rfe", subset_sizes = c(3L, 1L, 2L), term_evals = 3L),
@@ -43,5 +43,5 @@ test_that("FSelectorRFE", {
                regexp = "Must be sorted", fixed = TRUE)
 
   expect_error(test_fselector("rfe", subset_sizes = c(0L), term_evals = 3L),
-               regexp = "Must be sorted", fixed = TRUE)
+               regexp = "Element 1 is not >= 1", fixed = TRUE)
 })
