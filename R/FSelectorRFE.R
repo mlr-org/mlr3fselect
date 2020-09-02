@@ -63,17 +63,17 @@ FSelectorRFE = R6Class("FSelectorRFE",
       pars = self$param_set$values
       archive = inst$archive
       feature_names = inst$archive$cols_x
-      if(is.null(pars$subset_sizes)) {
-        pars$subset_sizes = rev(seq(length(feature_names)-1))
+      if (is.null(pars$subset_sizes)) {
+        pars$subset_sizes = rev(seq(length(feature_names) - 1))
       }
       assert_integerish(rev(pars$subset_sizes), any.missing = FALSE,
-      lower = 1, upper = length(feature_names)-1, sorted = TRUE)
+        lower = 1, upper = length(feature_names) - 1, sorted = TRUE)
 
       states = set_names(as.list(rep(TRUE, length(feature_names))), feature_names)
       states = as.data.table(states)
       inst$eval_batch(states)
 
-      for(i in pars$subset_sizes) {
+      for (i in pars$subset_sizes) {
         if (pars$recursive) {
 
           # Recalculate the variable importance on the reduced feature subset
