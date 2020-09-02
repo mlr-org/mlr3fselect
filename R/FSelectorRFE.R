@@ -66,8 +66,8 @@ FSelectorRFE = R6Class("FSelectorRFE",
       if(is.null(pars$subset_sizes)) {
         pars$subset_sizes = rev(seq(length(feature_names)-1))
       }
-      pars$subset_sizes = assert_integerish(pars$subset_sizes,
-        any.missing = FALSE, upper = length(feature_names)-1)
+      assert_integerish(rev(pars$subset_sizes), any.missing = FALSE,
+      lower = 1, upper = length(feature_names)-1, sorted = TRUE)
 
       states = set_names(as.list(rep(TRUE, length(feature_names))), feature_names)
       states = as.data.table(states)
