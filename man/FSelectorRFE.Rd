@@ -22,11 +22,20 @@ fs("rfe")
 \section{Parameters}{
 
 \describe{
+\item{\code{min_features}}{\code{integer(1)}\cr
+The minimum number of features to select.}
+\item{\code{feature_number}}{\code{integer(1)}\cr
+Number of features to remove in each iteration.}
+\item{\code{feature_fraction}}{\code{double(1)}\cr
+Fraction of features to retain in each iteration.}
 \item{\code{subset_sizes}}{\code{integer()}\cr
-Number of features to retain in each iteration. Must be sorted in decreasing
-order.}
-\item{\code{recursive}}{\code{logical(1)}}
+Vector of number of features to retain in each iteration. Must be sorted in
+decreasing order.}
+\item{\code{recursive}}{\code{logical(1)}\cr
+Use the recursive version?}
 }
+The parameter \code{feature_number}, \code{feature_fraction} and \code{subset_sizes} are mutually
+exclusive.
 }
 
 \examples{

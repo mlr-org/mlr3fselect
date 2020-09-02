@@ -13,12 +13,18 @@
 #'
 #' @section Parameters:
 #' \describe{
+#' \item{`min_features`}{`integer(1)`\cr
+#' The minimum number of features to select.}
+#' \item{`feature_number`}{`integer(1)`\cr
+#' Number of features to remove in each iteration.}
+#' \item{`feature_fraction`}{`double(1)`\cr
+#' Fraction of features to retain in each iteration.}
 #' \item{`subset_sizes`}{`integer()`\cr
-#' Number of features to retain in each iteration. Must be sorted in decreasing
-#' order.}
-#' \item{`recursive`}{`logical(1)`}
+#' Vector of number of features to retain in each iteration. Must be sorted in
+#' decreasing order.}
+#' \item{`recursive`}{`logical(1)`\cr
+#' Use the recursive version?}
 #' }
-#'
 #' The parameter `feature_number`, `feature_fraction` and `subset_sizes` are mutually
 #' exclusive.
 #'
@@ -84,8 +90,6 @@ FSelectorRFE = R6Class("FSelectorRFE",
           log(min_features/(n))/log(feature_fraction))))))[-1]
       }
 
-      browser()
-
       assert_integerish(rev(subsets), any.missing = FALSE,
         lower = 1, upper = n - 1, sorted = TRUE)
 
@@ -93,7 +97,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
       states = as.data.table(states)
       inst$eval_batch(states)
 
-      for (i in pars$subset_sizes) {
+      for (i in subsets) {
         if (pars$recursive) {
 
           # Recalculate the variable importance on the reduced feature subset
