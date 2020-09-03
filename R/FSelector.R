@@ -106,6 +106,8 @@ FSelector = R6Class("FSelector",
         bbotk_reflections$optimizer_properties,
         empty.ok = FALSE)
       self$packages = assert_set(packages)
+
+      check_packages_installed(self$packages, msg = sprintf("Package '%%s' required but not installed for FSelector '%s'", format(self)))
     },
 
     #' @description
