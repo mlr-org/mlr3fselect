@@ -14,19 +14,20 @@
 #' @section Parameters:
 #' \describe{
 #' \item{`min_features`}{`integer(1)`\cr
-#' The minimum number of features to select.}
+#' The minimum number of features to select, default is `1L`.}
+#' \item{`feature_fraction`}{`double(1)`\cr
+#' Fraction of features to retain in each iteration, default is `0.5`.}
 #' \item{`feature_number`}{`integer(1)`\cr
 #' Number of features to remove in each iteration.}
-#' \item{`feature_fraction`}{`double(1)`\cr
-#' Fraction of features to retain in each iteration.}
 #' \item{`subset_sizes`}{`integer()`\cr
 #' Vector of number of features to retain in each iteration. Must be sorted in
 #' decreasing order.}
 #' \item{`recursive`}{`logical(1)`\cr
-#' Use the recursive version?}
+#' Use the recursive version? Default is `FALSE`.}
 #' }
-#' The parameter `feature_number`, `feature_fraction` and `subset_sizes` are mutually
-#' exclusive.
+#'
+#' The parameter `feature_fraction`, `feature_number` and `subset_sizes` are
+#' mutually exclusive.
 #'
 #' @export
 #' @examples
@@ -49,8 +50,9 @@
 FSelectorRFE = R6Class("FSelectorRFE",
   inherit = FSelector,
   public = list(
-    #' @field importance Stores the feature importance of the model with all
-    #' variables if `recrusive` is set to `FALSE`
+    #' @field importance `numeric()`\cr
+    #' Stores the feature importance of the model with all variables if
+    #' `recrusive` is set to `FALSE`
     importance = NULL,
 
     #' @description
@@ -58,8 +60,8 @@ FSelectorRFE = R6Class("FSelectorRFE",
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("min_features", lower = 1, default = 1),
+        ParamDbl$new("feature_fraction", lower = 0, upper = 1, default = 0.5),
         ParamInt$new("feature_number", lower = 1),
-        ParamDbl$new("feature_fraction", lower = 0, upper = 1),
         ParamUty$new("subset_sizes"),
         ParamLgl$new("recursive", default = FALSE))
       )
@@ -77,17 +79,21 @@ FSelectorRFE = R6Class("FSelectorRFE",
       archive = inst$archive
       feature_names = inst$archive$cols_x
       n = length(feature_names)
+      min_features = pars$min_features
       feature_fraction = pars$feature_fraction
       feature_number = pars$feature_number
-      min_features = pars$min_features
+      subset_sizes = pars$subset_sizes
 
-      subsets =  if(!is.null(pars$feature_number)) {
-        seq(from = n-feature_number, to = min_features, by = -feature_number)
-      } else if(!is.null(pars$subset_sizes)) {
-        pars$subset_sizes
-      } else if(!is.null(pars$feature_fraction)) {
+      subsets = if (!is.null(feature_number)) {
+        seq(from = n - feature_number, to = min_features, by = -feature_number)
+      } else if (!is.null(subset_sizes)) {
+        subset_sizes
+      } else if (!is.null(feature_fraction)) {
+        if (feature_fraction == 0 || feature_fraction == 1) {
+          stop("Fraction of features to retain in each iteration must be > 0 and < 1")
+        }
         unique(floor(cumprod(c((n), rep(feature_fraction,
-          log(min_features/(n))/log(feature_fraction))))))[-1]
+          log(min_features / (n)) / log(feature_fraction))))))[-1]
       }
 
       assert_integerish(rev(subsets), any.missing = FALSE,

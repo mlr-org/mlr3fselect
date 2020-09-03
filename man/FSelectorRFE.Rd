@@ -23,19 +23,20 @@ fs("rfe")
 
 \describe{
 \item{\code{min_features}}{\code{integer(1)}\cr
-The minimum number of features to select.}
+The minimum number of features to select, default is \code{1L}.}
+\item{\code{feature_fraction}}{\code{double(1)}\cr
+Fraction of features to retain in each iteration, default is \code{0.5}.}
 \item{\code{feature_number}}{\code{integer(1)}\cr
 Number of features to remove in each iteration.}
-\item{\code{feature_fraction}}{\code{double(1)}\cr
-Fraction of features to retain in each iteration.}
 \item{\code{subset_sizes}}{\code{integer()}\cr
 Vector of number of features to retain in each iteration. Must be sorted in
 decreasing order.}
 \item{\code{recursive}}{\code{logical(1)}\cr
-Use the recursive version?}
+Use the recursive version? Default is \code{FALSE}.}
 }
-The parameter \code{feature_number}, \code{feature_fraction} and \code{subset_sizes} are mutually
-exclusive.
+
+The parameter \code{feature_fraction}, \code{feature_number} and \code{subset_sizes} are
+mutually exclusive.
 }
 
 \examples{
@@ -62,8 +63,9 @@ instance$archive$data
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{importance}}{Stores the feature importance of the model with all
-variables if \code{recrusive} is set to \code{FALSE}}
+\item{\code{importance}}{\code{numeric()}\cr
+Stores the feature importance of the model with all variables if
+\code{recrusive} is set to \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
