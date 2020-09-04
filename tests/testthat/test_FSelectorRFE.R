@@ -79,10 +79,4 @@ test_that("FSelectorRFE", {
 
   expect_error(test_fselector("rfe", subset_sizes = 0L, term_evals = 3L),
                regexp = "Element 1 is not >= 1", fixed = TRUE)
-
-  expect_error(test_fselector("rfe", feature_fraction = 0, term_evals = 3L),
-               regexp = "Fraction of features to retain", fixed = TRUE)
-
-  expect_error(test_fselector("rfe", feature_fraction = 1, term_evals = 3L),
-               regexp = "Fraction of features to retain", fixed = TRUE)
 })
