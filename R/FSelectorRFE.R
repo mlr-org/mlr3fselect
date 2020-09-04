@@ -60,7 +60,8 @@ FSelectorRFE = R6Class("FSelectorRFE",
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("min_features", lower = 1, default = 1),
-        ParamDbl$new("feature_fraction", lower = 0, upper = 1, default = 0.5),
+        ParamDbl$new("feature_fraction", lower = 0,
+          upper = 1 - .Machine$double.neg.eps, default = 0.5),
         ParamInt$new("feature_number", lower = 1),
         ParamUty$new("subset_sizes"),
         ParamLgl$new("recursive", default = FALSE))
@@ -89,9 +90,6 @@ FSelectorRFE = R6Class("FSelectorRFE",
       } else if (!is.null(subset_sizes)) {
         subset_sizes
       } else if (!is.null(feature_fraction)) {
-        if (feature_fraction == 0 || feature_fraction == 1) {
-          stop("Fraction of features to retain in each iteration must be > 0 and < 1")
-        }
         unique(floor(cumprod(c((n), rep(feature_fraction,
           log(min_features / (n)) / log(feature_fraction))))))[-1]
       }
