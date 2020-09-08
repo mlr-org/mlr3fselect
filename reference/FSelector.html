@@ -194,7 +194,7 @@ feature subset and aggregated performance to the instance.</p></li>
 
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
-    <p><div class="r6-fields"></p><dl'>
+    <p><div class="r6-fields"></p><dl>
 <dt><code>param_set</code></dt><dd><p>(<a href='https://paradox.mlr-org.com/reference/ParamSet.html'>paradox::ParamSet</a>).</p></dd>
 
 <dt><code>param_classes</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>).</p></dd>
@@ -207,7 +207,7 @@ feature subset and aggregated performance to the instance.</p></li>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<h3>Public methods</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
 <li><p><a href='#method-new'><code>FSelector$new()</code></a></p></li>
@@ -217,12 +217,12 @@ feature subset and aggregated performance to the instance.</p></li>
 <li><p><a href='#method-clone'><code>FSelector$clone()</code></a></p></li>
 </ul>
 <p><hr>
-<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelector</span>$<span class='fu'>new</span>(<span class='no'>param_set</span>, <span class='no'>properties</span>, <span class='kw'>packages</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>))</pre><p></div></p>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>param_set</span>, <span class='kw'>properties</span>, packages = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>))</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>param_set</code></dt><dd><p><a href='https://paradox.mlr-org.com/reference/ParamSet.html'>paradox::ParamSet</a><br />
 Set of control parameters for fselector.</p></dd>
 
@@ -236,42 +236,42 @@ Set of required packages. Note that these packages will be loaded via
 
 </dl><p></div></p>
 <p><hr>
-<a id="method-format"></a></p><h3>Method <code><a href='https://rdrr.io/r/base/format.html'>format()</a></code></h3>
-<p>Helper for print outputs.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelector</span>$<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>()</pre><p></div></p>
+<a id="method-format"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/format.html'>format()</a></code></h3>
+<p>Helper for print outputs.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelector</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>()</pre><p></div></p>
 
-<h3>Returns</h3>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>).</p>
 <p><hr>
-<a id="method-print"></a></p><h3>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
-<p>Print method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelector</span>$<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>()</pre><p></div></p>
+<a id="method-print"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+<p>Print method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelector</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>()</pre><p></div></p>
 
-<h3>Returns</h3>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>).</p>
 <p><hr>
-<a id="method-optimize"></a></p><h3>Method <code><a href='https://rdrr.io/r/stats/optimize.html'>optimize()</a></code></h3>
+<a id="method-optimize"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/stats/optimize.html'>optimize()</a></code></h3>
 <p>Performs the feature selection on a <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> or
 <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a> until termination.
 The single evaluations will be written into the <a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a> that resides in the
 <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> / <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a>.
-The result will be written into the instance object.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>inst</span>)</pre><p></div></p>
+The result will be written into the instance object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelector</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='kw'>inst</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>inst</code></dt><dd><p>(<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>|<a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a>).</p></dd>
 
 </dl><p></div></p>
-<h3>Returns</h3>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a>.</p>
 <p><hr>
-<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelector</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelector</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
@@ -279,33 +279,36 @@ The result will be written into the instance object.</p><h3>Usage</h3>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://mlr3.mlr-org.com'>mlr3</a></span>)
 
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='kw'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, n_evals = <span class='fl'>3</span>)
 
-<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstanceSingleCrit</span>$<span class='fu'>new</span>(
-  <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
-  <span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
-  <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
-  <span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
-  <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>
+<span class='kw'>instance</span> <span class='op'>=</span> <span class='kw'>FSelectInstanceSingleCrit</span><span class='op'>$</span><span class='fu'>new</span>(
+  task = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
+  learner = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
+  resampling = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
+  measure = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
+  terminator = <span class='kw'>terminator</span>
 )
 
 <span class='co'># swap this line to use a different FSelector</span>
-<span class='no'>fselector</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"random_search"</span>)
+<span class='kw'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"random_search"</span>)
 
 <span class='co'># modifies the instance by reference</span>
-<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
+<span class='kw'>fselector</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='kw'>instance</span>)
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
 #&gt; 1:         TRUE        TRUE         TRUE       FALSE
 #&gt;                                 features  x_domain classif.ce
 #&gt; 1: Petal.Length,Petal.Width,Sepal.Length &lt;list[4]&gt;       0.04</div><div class='input'>
 <span class='co'># returns best feature subset and best performance</span>
-<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
+<span class='kw'>instance</span><span class='op'>$</span><span class='kw'>result</span>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
 #&gt; 1:         TRUE        TRUE         TRUE       FALSE
 #&gt;                                 features  x_domain classif.ce
 #&gt; 1: Petal.Length,Petal.Width,Sepal.Length &lt;list[4]&gt;       0.04</div><div class='input'>
 <span class='co'># allows access of data.table / benchmark result of full path of all evaluations</span>
-<span class='no'>instance</span>$<span class='no'>archive</span></div><div class='output co'>#&gt; &lt;Archive&gt;
+<span class='kw'>instance</span><span class='op'>$</span><span class='kw'>archive</span>
+</div><div class='output co'>#&gt; &lt;Archive&gt;
 #&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt;  1:         TRUE        TRUE         TRUE       FALSE       0.04
 #&gt;  2:        FALSE        TRUE         TRUE        TRUE       0.04
@@ -318,16 +321,16 @@ The result will be written into the instance object.</p><h3>Usage</h3>
 #&gt;  9:        FALSE        TRUE         TRUE        TRUE       0.04
 #&gt; 10:        FALSE        TRUE         TRUE       FALSE       0.04
 #&gt;          resample_result  x_domain           timestamp batch_nr
-#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1
-#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-07 04:20:20        1</div></pre>
+#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1
+#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-08 04:21:50        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -343,7 +346,7 @@ The result will be written into the instance object.</p><h3>Usage</h3>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

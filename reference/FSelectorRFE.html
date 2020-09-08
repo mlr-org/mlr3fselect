@@ -149,14 +149,15 @@ iteration.</p>
     
 
 <p>This <a href='FSelector.html'>FSelector</a> can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a>
-<a href='mlr_fselectors.html'>mlr_fselectors</a> or with the associated sugar function <code><a href='fs.html'>fs()</a></code>:</p><pre><span class='no'>mlr_fselectors</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"rfe"</span>)
-<span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"rfe"</span>)</pre>
+<a href='mlr_fselectors.html'>mlr_fselectors</a> or with the associated sugar function <code><a href='fs.html'>fs()</a></code>:</p><pre><span class='kw'>mlr_fselectors</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"rfe"</span>)
+<span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"rfe"</span>)
+</pre>
 
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
 
     
 
-<dl'>
+<dl>
 <dt><code>min_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
 Minimum number of features. By default, 1.</p></dd>
 <dt><code>recursive</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
@@ -168,7 +169,7 @@ Minimum number of features. By default, 1.</p></dd>
     <p><code><a href='FSelector.html'>mlr3fselect::FSelector</a></code> -&gt; <code>FSelectorRFE</code></p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
-    <p><div class="r6-fields"></p><dl'>
+    <p><div class="r6-fields"></p><dl>
 <dt><code>importance</code></dt><dd><p>Stores the feature importance of the model with all
 variables if <code>recrusive</code> is set to <code>FALSE</code></p></dd>
 
@@ -176,7 +177,7 @@ variables if <code>recrusive</code> is set to <code>FALSE</code></p></dd>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<h3>Public methods</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
 <li><p><a href='#method-new'><code>FSelectorRFE$new()</code></a></p></li>
@@ -191,17 +192,17 @@ variables if <code>recrusive</code> is set to <code>FALSE</code></p></dd>
 </details>
 
 <hr>
-<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectorRFE</span>$<span class='fu'>new</span>()</pre><p></div></p>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelectorRFE</span><span class='op'>$</span><span class='fu'>new</span>()</pre><p></div></p>
 
 <p><hr>
-<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectorRFE</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelectorRFE</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
@@ -209,29 +210,32 @@ variables if <code>recrusive</code> is set to <code>FALSE</code></p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://mlr3.mlr-org.com'>mlr3</a></span>)
 
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstanceSingleCrit</span>$<span class='fu'>new</span>(
-  <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
-  <span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
-  <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
-  <span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
-  <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>,
-  <span class='kw'>store_models</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+<span class='kw'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, n_evals = <span class='fl'>10</span>)
+<span class='kw'>instance</span> <span class='op'>=</span> <span class='kw'>FSelectInstanceSingleCrit</span><span class='op'>$</span><span class='fu'>new</span>(
+  task = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
+  learner = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
+  resampling = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
+  measure = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
+  terminator = <span class='kw'>terminator</span>,
+  store_models = <span class='fl'>TRUE</span>
 )
 
-<span class='no'>fselector</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"rfe"</span>)
-<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
+<span class='kw'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"rfe"</span>)
+<span class='kw'>fselector</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='kw'>instance</span>)
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
 #&gt; 1:         TRUE        TRUE         TRUE        TRUE
 #&gt;                                             features  x_domain classif.ce
-#&gt; 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width &lt;list[4]&gt;        0.1</div><div class='input'><span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
+#&gt; 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width &lt;list[4]&gt;        0.1</div><div class='input'><span class='kw'>instance</span><span class='op'>$</span><span class='kw'>result</span>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
 #&gt; 1:         TRUE        TRUE         TRUE        TRUE
 #&gt;                                             features  x_domain classif.ce
-#&gt; 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width &lt;list[4]&gt;        0.1</div><div class='input'><span class='no'>instance</span>$<span class='no'>archive</span>$<span class='no'>data</span></div><div class='output co'>#&gt; function (unnest = NULL) 
+#&gt; 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width &lt;list[4]&gt;        0.1</div><div class='input'><span class='kw'>instance</span><span class='op'>$</span><span class='kw'>archive</span><span class='op'>$</span><span class='kw'>data</span>
+</div><div class='output co'>#&gt; function (unnest = NULL) 
 #&gt; .__Archive__data(self = self, private = private, super = super, 
 #&gt;     unnest = unnest)
-#&gt; &lt;environment: 0x562734e8a550&gt;</div></pre>
+#&gt; &lt;environment: 0x561d226292d0&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -247,7 +251,7 @@ variables if <code>recrusive</code> is set to <code>FALSE</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

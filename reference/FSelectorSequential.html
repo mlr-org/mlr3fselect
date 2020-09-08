@@ -153,14 +153,15 @@ sequential feature selection.</p>
     
 
 <p>This <a href='FSelector.html'>FSelector</a> can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a>
-<a href='mlr_fselectors.html'>mlr_fselectors</a> or with the associated sugar function <code><a href='fs.html'>fs()</a></code>:</p><pre><span class='no'>mlr_fselectors</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"sequential"</span>)
-<span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)</pre>
+<a href='mlr_fselectors.html'>mlr_fselectors</a> or with the associated sugar function <code><a href='fs.html'>fs()</a></code>:</p><pre><span class='kw'>mlr_fselectors</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"sequential"</span>)
+<span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)
+</pre>
 
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
 
     
 
-<dl'>
+<dl>
 <dt><code>max_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
 Maximum number of features. By default, number of features in <a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>.</p></dd>
 <dt><code>strategy</code></dt><dd><p><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code><br />
@@ -174,7 +175,7 @@ Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward se
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<h3>Public methods</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
 <li><p><a href='#method-new'><code>FSelectorSequential$new()</code></a></p></li>
@@ -190,30 +191,30 @@ Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward se
 </details>
 
 <hr>
-<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.`</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectorSequential</span>$<span class='fu'>new</span>()</pre><p></div></p>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.`</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelectorSequential</span><span class='op'>$</span><span class='fu'>new</span>()</pre><p></div></p>
 
 <p><hr>
-<a id="method-optimization_path"></a></p><h3>Method <code>optimization_path()</code></h3>
-<p>Returns the optimization path.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectorSequential</span>$<span class='fu'>optimization_path</span>(<span class='no'>inst</span>)</pre><p></div></p>
+<a id="method-optimization_path"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>optimization_path()</code></h3>
+<p>Returns the optimization path.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelectorSequential</span><span class='op'>$</span><span class='fu'>optimization_path</span>(<span class='kw'>inst</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>inst</code></dt><dd><p>(<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>)<br />
 Instance optimized with FSelectorSequential.</p></dd>
 
 </dl><p></div></p>
-<h3>Returns</h3>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p>
 <p><hr>
-<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre><span class='no'>FSelectorSequential</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='kw'>FSelectorSequential</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
 
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl'>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
@@ -221,35 +222,38 @@ Instance optimized with FSelectorSequential.</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://mlr3.mlr-org.com'>mlr3</a></span>)
 
-<span class='no'>terminator</span> <span class='kw'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, <span class='kw'>n_evals</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='kw'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, n_evals = <span class='fl'>10</span>)
 
-<span class='no'>instance</span> <span class='kw'>=</span> <span class='no'>FSelectInstanceSingleCrit</span>$<span class='fu'>new</span>(
-  <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
-  <span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
-  <span class='kw'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
-  <span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
-  <span class='kw'>terminator</span> <span class='kw'>=</span> <span class='no'>terminator</span>
+<span class='kw'>instance</span> <span class='op'>=</span> <span class='kw'>FSelectInstanceSingleCrit</span><span class='op'>$</span><span class='fu'>new</span>(
+  task = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>),
+  learner = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>),
+  resampling = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>),
+  measure = <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>),
+  terminator = <span class='kw'>terminator</span>
 )
 
-<span class='no'>fselector</span> <span class='kw'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)
+<span class='kw'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"sequential"</span>)
 
 <span class='co'># Modifies the instance by reference</span>
-<span class='no'>fselector</span>$<span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='no'>instance</span>)</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
+<span class='kw'>fselector</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='kw'>instance</span>)
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
 #&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width &lt;list[4]&gt;
 #&gt;    classif.ce
 #&gt; 1:       0.06</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
-<span class='no'>instance</span>$<span class='no'>result</span></div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
+<span class='kw'>instance</span><span class='op'>$</span><span class='kw'>result</span>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
 #&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width &lt;list[4]&gt;
 #&gt;    classif.ce
 #&gt; 1:       0.06</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='no'>instance</span>$<span class='no'>archive</span>$<span class='no'>data</span></div><div class='output co'>#&gt; function (unnest = NULL) 
+<span class='kw'>instance</span><span class='op'>$</span><span class='kw'>archive</span><span class='op'>$</span><span class='kw'>data</span>
+</div><div class='output co'>#&gt; function (unnest = NULL) 
 #&gt; .__Archive__data(self = self, private = private, super = super, 
 #&gt;     unnest = unnest)
-#&gt; &lt;environment: 0x562735239970&gt;</div></pre>
+#&gt; &lt;environment: 0x561d278bc7b0&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,7 +269,7 @@ Instance optimized with FSelectorSequential.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
