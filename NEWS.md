@@ -1,4 +1,4 @@
-# mlr3fselect 0.2.1.9000
+# mlr3fselect 0.3.0
 
 * `Archive` is `ArchiveFSelect` now which stores the benchmark result in
   `$benchmark_result`. This change removed the resample results from the archive
