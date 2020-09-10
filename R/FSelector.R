@@ -131,7 +131,7 @@ FSelector = R6Class("FSelector",
     #' @description
     #' Performs the feature selection on a [FSelectInstanceSingleCrit] or
     #' [FSelectInstanceMultiCrit] until termination.
-    #' The single evaluations will be written into the [bbotk::Archive] that resides in the
+    #' The single evaluations will be written into the [ArchiveFSelect] that resides in the
     #' [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
     #' The result will be written into the instance object.
     #'

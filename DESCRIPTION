@@ -54,6 +54,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Collate:
     'AutoFSelect.R'
+    'ArchiveFSelect.R'
     'ObjectiveFSelect.R'
     'mlr_fselectors.R'
     'FSelector.R'

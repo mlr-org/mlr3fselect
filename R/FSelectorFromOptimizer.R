@@ -22,7 +22,7 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
 
     #' @description
     #' Performs the tuning on a [FSelectInstanceSingleCrit] /
-    #' [FSelectInstanceMultiCrit]until termination.
+    #' [FSelectInstanceMultiCrit] until termination.
     #'
     #' @param inst ([FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit]).
     #'

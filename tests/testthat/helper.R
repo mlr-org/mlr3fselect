@@ -154,7 +154,7 @@ test_fselector_2D = function(.key, ..., term_evals = 2L, real_evals = term_evals
 }
 
 TEST_MAKE_INST_1D = function(n = 4L, folds = 2L, store_models = FALSE,
-  store_resample_results = TRUE) {
+  store_benchmark_result = TRUE) {
   FSelectInstanceSingleCrit$new(
     task = TEST_MAKE_TSK(n),
     learner = lrn("regr.rpart"),
@@ -162,11 +162,11 @@ TEST_MAKE_INST_1D = function(n = 4L, folds = 2L, store_models = FALSE,
     measure = msr("dummy"),
     terminator = trm("evals", n_evals = 10),
     store_models,
-    store_resample_results = store_resample_results)
+    store_benchmark_result = store_benchmark_result)
 }
 
 TEST_MAKE_INST_2D = function(n = 4L, folds = 2L, store_models = FALSE,
-  store_resample_results = TRUE) {
+  store_benchmark_result = TRUE) {
   FSelectInstanceMultiCrit$new(
     task = TEST_MAKE_TSK(n),
     learner = lrn("regr.rpart"),
@@ -174,5 +174,5 @@ TEST_MAKE_INST_2D = function(n = 4L, folds = 2L, store_models = FALSE,
     measure = msrs(c("regr.mse", "regr.rmse")),
     terminator = trm("evals", n_evals = 10),
     store_models,
-    store_resample_results = store_resample_results)
+    store_benchmark_result = store_benchmark_result)
 }

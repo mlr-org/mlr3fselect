@@ -48,7 +48,7 @@
 #' # Aggregate performance of outer results
 #' rr$aggregate()
 #'
-#' # Retrieve inner feature selection results.
+#' # Retrieve inner feature selection results
 #' as.data.table(rr)$learner[[1]]$fselect_result
 AutoFSelect = R6Class("AutoFSelect",
   inherit = Learner,
@@ -145,7 +145,7 @@ AutoFSelect = R6Class("AutoFSelect",
 
   active = list(
 
-    #' @field archive ([bbotk::Archive])\cr
+    #' @field archive ([ArchiveFSelect)\cr
     #' Returns [FSelectInstanceSingleCrit] archive.
     archive = function() self$fselect_instance$archive,
 
