@@ -1,6 +1,6 @@
 Package: mlr3fselect
 Title: Feature Selection for 'mlr3'
-Version: 0.2.1
+Version: 0.3.0
 Authors@R:
     c(person(given = "Marc",
              family = "Becker",
