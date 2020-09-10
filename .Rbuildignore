@@ -19,3 +19,5 @@ man-roxygen
 ^\.lintr$
 ^\.vscode$
 ^attic$
+^cran-comments\.md$
+^CRAN-RELEASE$
