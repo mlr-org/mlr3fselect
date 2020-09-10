@@ -253,7 +253,7 @@ Set of required packages. Note that these packages will be loaded via
 <a id="method-optimize"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/stats/optimize.html'>optimize()</a></code></h3>
 <p>Performs the feature selection on a <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> or
 <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a> until termination.
-The single evaluations will be written into the <a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a> that resides in the
+The single evaluations will be written into the <a href='ArchiveFSelect.html'>ArchiveFSelect</a> that resides in the
 <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> / <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a>.
 The result will be written into the instance object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='kw'>FSelector</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/optimize.html'>optimize</a></span>(<span class='kw'>inst</span>)</pre><p></div></p>
@@ -308,7 +308,7 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 #&gt; 1: Petal.Length,Petal.Width,Sepal.Length &lt;list[4]&gt;       0.04</div><div class='input'>
 <span class='co'># allows access of data.table / benchmark result of full path of all evaluations</span>
 <span class='kw'>instance</span><span class='op'>$</span><span class='kw'>archive</span>
-</div><div class='output co'>#&gt; &lt;Archive&gt;
+</div><div class='output co'>#&gt; &lt;ArchiveFSelect&gt;
 #&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt;  1:         TRUE        TRUE         TRUE       FALSE       0.04
 #&gt;  2:        FALSE        TRUE         TRUE        TRUE       0.04
@@ -320,17 +320,17 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 #&gt;  8:        FALSE       FALSE         TRUE        TRUE       0.24
 #&gt;  9:        FALSE        TRUE         TRUE        TRUE       0.04
 #&gt; 10:        FALSE        TRUE         TRUE       FALSE       0.04
-#&gt;          resample_result  x_domain           timestamp batch_nr
-#&gt;  1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  3: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  4: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  5: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  6: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  7: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  8: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt;  9: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt; 10: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1</div></pre>
+#&gt;                                    uhash  x_domain           timestamp batch_nr
+#&gt;  1: 23b74835-1468-48e0-a9dc-85f3fd6ea44e &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  2: 2ac271a4-b008-423a-8e74-3721d93a39d2 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  3: 59dd888e-4ca5-49fb-b878-f118aa52d082 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  4: b53b45c0-b666-4fc7-bbd0-fc49917c9518 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  5: a548d5a4-1cfb-4463-b89c-12d75366dc67 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  6: dd09e990-d998-4f77-917e-b73a88671c99 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  7: f274ee2f-8757-44b1-bcad-868bc39993a3 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  8: 64e0d916-41d6-41c2-9899-ac02207c1971 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt;  9: db4a2db8-77f0-45e8-948b-3bc7413519b9 &lt;list[4]&gt; 2020-09-10 19:41:30        1
+#&gt; 10: 92f41031-743b-4ca9-af1c-7ef372f85ed2 &lt;list[4]&gt; 2020-09-10 19:41:30        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

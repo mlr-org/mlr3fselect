@@ -202,7 +202,7 @@ Feature set for task subsetting.</p></dd>
   <span class='kw'>terminator</span>,
   store_models = <span class='fl'>FALSE</span>,
   check_values = <span class='fl'>TRUE</span>,
-  store_resample_results = <span class='fl'>TRUE</span>
+  store_benchmark_result = <span class='fl'>TRUE</span>
 )</pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
@@ -221,14 +221,15 @@ Measure to optimize.</p></dd>
 
 <dt><code>terminator</code></dt><dd><p>(<a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a>).</p></dd>
 
-<dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).</p></dd>
+<dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).
+Store models in benchmark result?</p></dd>
 
 <dt><code>check_values</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
 Check the parameters before the evaluation and the results for
 validity?</p></dd>
 
-<dt><code>store_resample_results</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
-Store resample results in archive?</p></dd>
+<dt><code>store_benchmark_result</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+Store benchmark result in archive?</p></dd>
 
 </dl><p></div></p>
 <p><hr>
@@ -296,9 +297,9 @@ Optimal outcome.</p></dd>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt; 1:         TRUE       FALSE         TRUE       FALSE       0.06
 #&gt; 2:        FALSE        TRUE        FALSE        TRUE       0.04
-#&gt;         resample_result  x_domain           timestamp batch_nr
-#&gt; 1: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1
-#&gt; 2: &lt;ResampleResult[18]&gt; &lt;list[4]&gt; 2020-09-10 08:11:08        1</div></pre>
+#&gt;                                   uhash  x_domain           timestamp batch_nr
+#&gt; 1: fd017027-f20e-452b-8509-ba4d4d3df937 &lt;list[4]&gt; 2020-09-10 19:41:29        1
+#&gt; 2: b8de9246-7c53-4d0a-b8cb-c59f35146a8d &lt;list[4]&gt; 2020-09-10 19:41:29        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
