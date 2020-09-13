@@ -15,3 +15,5 @@
     lg$set_threshold("warn")
   }
 } # nocov end
+
+leanify_package()
