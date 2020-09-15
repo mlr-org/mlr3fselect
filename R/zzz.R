@@ -5,6 +5,7 @@
 #' @import mlr3
 #' @import bbotk
 #' @importFrom R6 R6Class
+#' @importFrom utils combn head
 "_PACKAGE"
 
 .onLoad = function(libname, pkgname) {
