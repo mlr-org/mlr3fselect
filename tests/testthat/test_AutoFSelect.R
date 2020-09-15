@@ -1,4 +1,4 @@
-context("AutoFSelect")
+context("AutoFSelector")
 
 test_that("train and predict work", {
   task = TEST_MAKE_TSK()
@@ -8,7 +8,7 @@ test_that("train and predict work", {
   fselector = fs("sequential")
   terminator = trm("evals", n_evals = 4L)
 
-  at = AutoFSelect$new(learner, resampling, measures, terminator, fselector)
+  at = AutoFSelector$new(learner, resampling, measures, terminator, fselector)
   expect_learner(at)
   at$train(task)
   expect_learner(at)
@@ -25,7 +25,7 @@ test_that("train and predict work", {
   expect_is(at$learner$model, "rpart")
 })
 
-test_that("AutoFSelect - resample", {
+test_that("AutoFSelector - resample", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling_inner = rsmp("holdout")
@@ -33,7 +33,7 @@ test_that("AutoFSelect - resample", {
   fselector = fs("sequential")
   terminator = trm("evals", n_evals = 10L)
 
-  at = AutoFSelect$new(learner, resampling_inner, measures, terminator,
+  at = AutoFSelector$new(learner, resampling_inner, measures, terminator,
     fselector = fselector)
   expect_null(at$fselect_instance)
 
