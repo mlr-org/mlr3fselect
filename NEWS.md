@@ -1,3 +1,8 @@
+# mlr3fselector 0.3.0.9000
+
+* Compact in-memory representation of R6 objects to save space when saving mlr3
+  objects via saveRDS(), serialize() etc.
+
 # mlr3fselect 0.3.0
 
 * `Archive` is `ArchiveFSelect` now which stores the benchmark result in
