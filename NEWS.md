@@ -2,6 +2,10 @@
 
 * Compact in-memory representation of R6 objects to save space when saving mlr3
   objects via saveRDS(), serialize() etc.
+* `FSelectorRFE` supports fraction of features to retain in each iteration
+  (`feature_fraction`), number of features to remove in each iteration
+  (`feature_number`) and vector of number of features to retain in each 
+  iteration (`subset_sizes`).
 
 # mlr3fselect 0.3.0
 
