@@ -16,22 +16,22 @@ test_that("eval_batch works", {
     x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
 
   z = inst$eval_batch(xdt)
-  expect_equal(inst$archive$data()$resample_result[[1]]$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(1)$task$feature_names,
     c("x1", "x3", "x4"))
-  expect_equal(inst$archive$data()$resample_result[[2]]$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(2)$task$feature_names,
     c("x2", "x3", "x4"))
   expect_identical(inst$archive$n_evals, 2L)
   expect_data_table(z, nrows = 2L)
-  expect_named(z, c("dummy", "resample_result"))
+  expect_named(z, c("dummy", "uhash"))
 
   z = inst$eval_batch(xdt)
-  expect_equal(inst$archive$data()$resample_result[[3]]$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(3)$task$feature_names,
     c("x1", "x3", "x4"))
-  expect_equal(inst$archive$data()$resample_result[[4]]$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(4)$task$feature_names,
     c("x2", "x3", "x4"))
   expect_identical(inst$archive$n_evals, 4L)
   expect_data_table(z, nrows = 2L)
-  expect_named(z, c("dummy", "resample_result"))
+  expect_named(z, c("dummy", "uhash"))
 
   a = inst$archive$data()
   expect_data_table(a, nrows = 4L)
@@ -43,17 +43,24 @@ test_that("objective_function works", {
   expect_equal(y, c(dummy = -2))
 })
 
-test_that("store_resample_results flag works", {
-  inst = TEST_MAKE_INST_1D(store_resample_results = FALSE)
+test_that("store_benchmark_result flag works", {
+  inst = TEST_MAKE_INST_1D(store_benchmark_result = FALSE)
   xdt = data.table(x1 = list(TRUE, FALSE), x2 = list(FALSE, TRUE),
     x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
   inst$eval_batch(xdt)
 
-  expect_true("resample_result" %nin% colnames(inst$archive$data()))
+  expect_true("uhashes" %nin% colnames(inst$archive$data()))
+
+  inst = TEST_MAKE_INST_1D(store_benchmark_result = TRUE)
+  xdt = data.table(x1 = list(TRUE, FALSE), x2 = list(FALSE, TRUE),
+                   x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
+  inst$eval_batch(xdt)
+
+  expect_r6(inst$archive$benchmark_result, "BenchmarkResult")
 })
 
 test_that("result$features works", {
-  inst = TEST_MAKE_INST_1D(store_resample_results = FALSE)
+  inst = TEST_MAKE_INST_1D(store_benchmark_result = FALSE)
   xdt = data.table(x1 = list(TRUE), x2 = list(FALSE),
     x3 = list(TRUE), x4 = list(TRUE))
   y = c(dummy = 2)

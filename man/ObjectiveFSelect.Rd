@@ -24,7 +24,9 @@ subsets. This class is usually constructed internally by by the
 
 \item{\code{store_models}}{(\code{logical(1)}).}
 
-\item{\code{store_resample_results}}{(\code{logical(1)}).}
+\item{\code{store_benchmark_result}}{(\code{logical(1)}).}
+
+\item{\code{archive}}{(\link{ArchiveFSelect}).}
 }
 \if{html}{\out{</div>}}
 }
@@ -60,9 +62,9 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   learner,
   resampling,
   measures,
-  store_models = FALSE,
   check_values = TRUE,
-  store_resample_results = TRUE
+  store_benchmark_result = TRUE,
+  store_models = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -82,14 +84,15 @@ so that all configurations are evaluated on the same data splits.}
 Measures to optimize.
 If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
 
-\item{\code{store_models}}{(\code{logical(1)}).}
-
 \item{\code{check_values}}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
 
-\item{\code{store_resample_results}}{(\code{logical(1)})\cr
-Store resample results in archive?}
+\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+Store benchmark result in archive?}
+
+\item{\code{store_models}}{(\code{logical(1)}).
+Store models in benchmark result?}
 }
 \if{html}{\out{</div>}}
 }

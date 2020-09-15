@@ -26,7 +26,7 @@
 #' @template param_terminator
 #' @template param_store_models
 #' @template param_check_values
-#' @template param_store_resample_results
+#' @template param_store_benchmark_result
 #' @template param_xdt
 #'
 #' @export
@@ -69,12 +69,16 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function(task, learner, resampling, measure, terminator,
-      store_models = FALSE, check_values = TRUE, store_resample_results = TRUE) {
+      store_models = FALSE, check_values = TRUE, store_benchmark_result = TRUE) {
       obj = ObjectiveFSelect$new(task = task, learner = learner,
         resampling = resampling, measures = measure,
-        store_models = store_models, check_values = check_values,
-        store_resample_results = store_resample_results)
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models, check_values = check_values)
       super$initialize(obj, obj$domain, terminator)
+
+      self$archive = ArchiveFSelect$new(search_space = self$objective$domain,
+        codomain = self$objective$codomain)
+      self$objective$archive = self$archive
 
       private$.objective_function = objective_function
       private$.objective_multiplicator =

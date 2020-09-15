@@ -109,7 +109,8 @@ FSelectorRFE = R6Class("FSelectorRFE",
             with = FALSE]
           feat = feature_names[as.logical(feat)]
 
-          rr = archive$data()[batch_nr == archive$n_batch, resample_result][[1]]
+          uhash = archive$data()[batch_nr == archive$n_batch, uhash]
+          rr = archive$benchmark_result$resample_result(uhash = uhash)
           learners = rr$learners
           imp = importance_average(learners, feat)
 
@@ -122,7 +123,8 @@ FSelectorRFE = R6Class("FSelectorRFE",
         } else {
           if (archive$n_batch == 1) {
             # Calculate the variable importance on the complete feature subset
-            rr = archive$data()[batch_nr == archive$n_batch, resample_result][[1]]
+            uhash = archive$data()[batch_nr == 1, uhash]
+            rr = archive$benchmark_result$resample_result(uhash = uhash)
             learners = rr$learners
 
             self$importance = importance_average(learners, feature_names)

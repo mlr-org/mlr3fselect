@@ -51,8 +51,8 @@ rr = resample(task, afs, resampling_outer, store_models = TRUE)
 # Aggregate performance of outer results
 rr$aggregate()
 
-# Retrieve inner tuning results.
-rr$data$learner[[1]]$tuning_result
+# Retrieve inner feature selection results
+as.data.table(rr)$learner[[1]]$fselect_result
 }
 \section{Super class}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{AutoFSelect}
@@ -77,7 +77,7 @@ If \code{TRUE} (default), stores the internally created
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{archive}}{(\link[bbotk:Archive]{bbotk::Archive})\cr
+\item{\code{archive}}{([ArchiveFSelect)\cr
 Returns \link{FSelectInstanceSingleCrit} archive.}
 
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr

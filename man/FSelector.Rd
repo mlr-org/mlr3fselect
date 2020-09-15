@@ -163,7 +163,7 @@ Print method.
 \subsection{Method \code{optimize()}}{
 Performs the feature selection on a \link{FSelectInstanceSingleCrit} or
 \link{FSelectInstanceMultiCrit} until termination.
-The single evaluations will be written into the \link[bbotk:Archive]{bbotk::Archive} that resides in the
+The single evaluations will be written into the \link{ArchiveFSelect} that resides in the
 \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
 The result will be written into the instance object.
 \subsection{Usage}{

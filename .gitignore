@@ -30,3 +30,4 @@ cran-comments.md
 .vscode/
 docs/
 .vscode
+.Rprofile
