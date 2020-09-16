@@ -20,6 +20,10 @@
 #' and execute [mlr3::resample()] or [mlr3::benchmark()] with
 #' `store_models = TRUE` (see examples).
 #'
+#' @template param_store_models
+#' @template param_check_values
+#' @template param_store_benchmark_result
+#'
 #' @export
 #' @examples
 #' library(mlr3)
@@ -31,16 +35,16 @@
 #'
 #' terminator = trm("evals", n_evals = 15)
 #' fselector = fs("exhaustive_search")
-#' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector)
-#' afs$store_fselect_instance = TRUE
+#' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
+#'   store_fselect_instance = TRUE)
 #'
 #' afs$train(task)
 #' afs$model
 #' afs$learner
 #'
 #' #  Nested resampling
-#' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector)
-#' afs$store_fselect_instance = TRUE
+#' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
+#'   store_fselect_instance = TRUE)
 #'
 #' resampling_outer = rsmp("cv", folds = 2)
 #' rr = resample(task, afs, resampling_outer, store_models = TRUE)
@@ -62,12 +66,6 @@ AutoFSelector = R6Class("AutoFSelector",
     #' @field fselector ([FSelector])\cr
     #' Stores the feature selection algorithm.
     fselector = NULL,
-
-    #' @field store_fselect_instance (`logical(1)`).
-    #' If `TRUE` (default), stores the internally created
-    #' [FSelectInstanceSingleCrit] with all intermediate results in slot
-    #' `$fselect_instance`.
-    store_fselect_instance = TRUE,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
@@ -91,14 +89,32 @@ AutoFSelector = R6Class("AutoFSelector",
     #'
     #' @param fselector ([FSelector])\cr
     #' Feature selection algorithm to run.
-    initialize = function(learner, resampling, measure, terminator, fselector) {
-
+    #'
+    #' @param store_fselect_instance (`logical(1)`)\cr
+    #' If `TRUE` (default), stores the internally created
+    #' [FSelectInstanceSingleCrit] with all intermediate results in slot
+    #' `$fselect_instance`.
+    initialize = function(learner, resampling, measure, terminator, fselector,
+      store_fselect_instance = TRUE, store_benchmark_result = TRUE,
+      store_models = FALSE, check_values = FALSE) {
       ia = list()
       ia$learner = assert_learner(learner)$clone(deep = TRUE)
       ia$resampling = assert_resampling(resampling,
         instantiated = FALSE)$clone()
       ia$measure = assert_measure(as_measure(measure), learner = learner)
       ia$terminator = assert_terminator(terminator)$clone()
+      private$.store_fselect_instance = assert_flag(store_fselect_instance)
+      ia$store_benchmark_result = assert_flag(store_benchmark_result)
+      ia$store_models = assert_flag(store_models)
+
+      if (!private$.store_fselect_instance && ia$store_benchmark_result) {
+        stop("Benchmark results can only be stored if store_fselect_instance is set to TRUE")
+      }
+      if (ia$store_models && !ia$store_benchmark_result) {
+        stop("Models can only be stored if store_benchmark_result is set to TRUE")
+      }
+
+      ia$check_values = assert_flag(check_values)
       self$instance_args = ia
       self$fselector = assert_r6(fselector, "FSelector")$clone()
 
@@ -132,7 +148,7 @@ AutoFSelector = R6Class("AutoFSelector",
       learner$train(ia$task)
 
       result_model = list(learner = learner)
-      if (isTRUE(self$store_fselect_instance)) {
+      if (isTRUE(private$.store_fselect_instance)) {
         result_model$fselect_instance = instance
       }
       return(result_model)
@@ -140,7 +156,9 @@ AutoFSelector = R6Class("AutoFSelector",
 
     .predict = function(task) {
       self$model$learner$predict(task)
-    }
+    },
+
+    .store_fselect_instance = NULL
   ),
 
   active = list(

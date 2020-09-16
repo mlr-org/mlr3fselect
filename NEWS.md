@@ -2,9 +2,12 @@
 
 * Compact in-memory representation of R6 objects to save space when saving mlr3
   objects via saveRDS(), serialize() etc.
-* `AutoFSelect` is `AutoFSelector` now.
+* `AutoFSelect` is renamed to `AutoFSelector`.
 * To retrieve the inner feature selection results in nested resampling,
   as.data.table(rr)$learner[[1]]$fselect_result must be used now.
+* Option to control `store_benchmark_result`, `store_models` and `check_values`
+  in `AutoFSelector`. `store_fselect_instance` must be set as a parameter during 
+  initialization.
 
 
 # mlr3fselect 0.3.0

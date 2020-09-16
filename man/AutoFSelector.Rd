@@ -34,16 +34,16 @@ measure = msr("classif.ce")
 
 terminator = trm("evals", n_evals = 15)
 fselector = fs("exhaustive_search")
-afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector)
-afs$store_fselect_instance = TRUE
+afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
+  store_fselect_instance = TRUE)
 
 afs$train(task)
 afs$model
 afs$learner
 
 #  Nested resampling
-afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector)
-afs$store_fselect_instance = TRUE
+afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
+  store_fselect_instance = TRUE)
 
 resampling_outer = rsmp("cv", folds = 2)
 rr = resample(task, afs, resampling_outer, store_models = TRUE)
@@ -66,11 +66,6 @@ All arguments from construction to create the
 
 \item{\code{fselector}}{(\link{FSelector})\cr
 Stores the feature selection algorithm.}
-
-\item{\code{store_fselect_instance}}{(\code{logical(1)}).
-If \code{TRUE} (default), stores the internally created
-\link{FSelectInstanceSingleCrit} with all intermediate results in slot
-\verb{$fselect_instance}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -118,7 +113,17 @@ Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$new(learner, resampling, measure, terminator, fselector)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$new(
+  learner,
+  resampling,
+  measure,
+  terminator,
+  fselector,
+  store_fselect_instance = TRUE,
+  store_benchmark_result = TRUE,
+  store_models = FALSE,
+  check_values = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -143,6 +148,21 @@ When to stop feature selection, see \link{FSelectInstanceSingleCrit}.}
 
 \item{\code{fselector}}{(\link{FSelector})\cr
 Feature selection algorithm to run.}
+
+\item{\code{store_fselect_instance}}{(\code{logical(1)})\cr
+If \code{TRUE} (default), stores the internally created
+\link{FSelectInstanceSingleCrit} with all intermediate results in slot
+\verb{$fselect_instance}.}
+
+\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+Store benchmark result in archive?}
+
+\item{\code{store_models}}{(\code{logical(1)}).
+Store models in benchmark result?}
+
+\item{\code{check_values}}{(\code{logical(1)})\cr
+Check the parameters before the evaluation and the results for
+validity?}
 }
 \if{html}{\out{</div>}}
 }
