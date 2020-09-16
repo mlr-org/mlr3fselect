@@ -9,7 +9,6 @@
   in `AutoFSelector`. `store_fselect_instance` must be set as a parameter during 
   initialization.
 
-
 # mlr3fselect 0.3.0
 
 * `Archive` is `ArchiveFSelect` now which stores the benchmark result in
