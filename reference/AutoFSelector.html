@@ -179,11 +179,6 @@ All arguments from construction to create the
 <dt><code>fselector</code></dt><dd><p>(<a href='FSelector.html'>FSelector</a>)<br />
 Stores the feature selection algorithm.</p></dd>
 
-<dt><code>store_fselect_instance</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).
-If <code>TRUE</code> (default), stores the internally created
-<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> with all intermediate results in slot
-<code>$fselect_instance</code>.</p></dd>
-
 </dl><p></div></p>
     <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
 
@@ -226,7 +221,17 @@ Short-cut to <code>$result</code> from <a href='FSelectInstanceSingleCrit.html'>
 <hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>learner</span>, <span class='kw'>resampling</span>, <span class='kw'>measure</span>, <span class='kw'>terminator</span>, <span class='kw'>fselector</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(
+  <span class='kw'>learner</span>,
+  <span class='kw'>resampling</span>,
+  <span class='kw'>measure</span>,
+  <span class='kw'>terminator</span>,
+  <span class='kw'>fselector</span>,
+  store_fselect_instance = <span class='fl'>TRUE</span>,
+  store_benchmark_result = <span class='fl'>TRUE</span>,
+  store_models = <span class='fl'>FALSE</span>,
+  check_values = <span class='fl'>FALSE</span>
+)</pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -249,6 +254,21 @@ When to stop feature selection, see <a href='FSelectInstanceSingleCrit.html'>FSe
 
 <dt><code>fselector</code></dt><dd><p>(<a href='FSelector.html'>FSelector</a>)<br />
 Feature selection algorithm to run.</p></dd>
+
+<dt><code>store_fselect_instance</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+If <code>TRUE</code> (default), stores the internally created
+<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> with all intermediate results in slot
+<code>$fselect_instance</code>.</p></dd>
+
+<dt><code>store_benchmark_result</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+Store benchmark result in archive?</p></dd>
+
+<dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).
+Store models in benchmark result?</p></dd>
+
+<dt><code>check_values</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+Check the parameters before the evaluation and the results for
+validity?</p></dd>
 
 </dl><p></div></p>
 <p><hr>
@@ -274,8 +294,8 @@ Feature selection algorithm to run.</p></dd>
 
 <span class='kw'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, n_evals = <span class='fl'>15</span>)
 <span class='kw'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"exhaustive_search"</span>)
-<span class='kw'>afs</span> <span class='op'>=</span> <span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>learner</span>, <span class='kw'>resampling</span>, <span class='kw'>measure</span>, <span class='kw'>terminator</span>, <span class='kw'>fselector</span>)
-<span class='kw'>afs</span><span class='op'>$</span><span class='kw'>store_fselect_instance</span> <span class='op'>=</span> <span class='fl'>TRUE</span>
+<span class='kw'>afs</span> <span class='op'>=</span> <span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>learner</span>, <span class='kw'>resampling</span>, <span class='kw'>measure</span>, <span class='kw'>terminator</span>, <span class='kw'>fselector</span>,
+  store_fselect_instance = <span class='fl'>TRUE</span>)
 
 <span class='kw'>afs</span><span class='op'>$</span><span class='fu'>train</span>(<span class='kw'>task</span>)
 <span class='kw'>afs</span><span class='op'>$</span><span class='kw'>model</span>
@@ -326,21 +346,21 @@ Feature selection algorithm to run.</p></dd>
 #&gt; 14:        FALSE        TRUE         TRUE        TRUE       0.06
 #&gt; 15:         TRUE        TRUE         TRUE        TRUE       0.06
 #&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: b5059b3b-a4dd-439a-8622-b34b3a640110 &lt;list[4]&gt; 2020-09-16 13:13:11        1
-#&gt;  2: 9c326987-1264-4ff7-949d-a479324fdebe &lt;list[4]&gt; 2020-09-16 13:13:11        1
-#&gt;  3: bc13fa05-5b13-44bf-88b3-826cc19e97d2 &lt;list[4]&gt; 2020-09-16 13:13:11        1
-#&gt;  4: baa37350-336e-4cf4-876c-4422e8f591a7 &lt;list[4]&gt; 2020-09-16 13:13:11        1
-#&gt;  5: edb68cc6-bcc1-4e2e-b2ea-09f6af5c1e9a &lt;list[4]&gt; 2020-09-16 13:13:11        2
-#&gt;  6: 04793367-853f-4736-a965-147b73ea6f64 &lt;list[4]&gt; 2020-09-16 13:13:11        2
-#&gt;  7: 55b5bb16-6cc7-4cec-a95e-53eb56e491a5 &lt;list[4]&gt; 2020-09-16 13:13:11        2
-#&gt;  8: 3ac4081c-3128-4dff-9ddf-0e95b049f54d &lt;list[4]&gt; 2020-09-16 13:13:11        2
-#&gt;  9: bee95085-2a60-4c92-9461-15f8cbaaf973 &lt;list[4]&gt; 2020-09-16 13:13:11        2
-#&gt; 10: 7d53f890-9174-4ae3-ba47-8395000a2edd &lt;list[4]&gt; 2020-09-16 13:13:11        2
-#&gt; 11: b81de404-bbf5-4264-a5dc-3806cd4221d9 &lt;list[4]&gt; 2020-09-16 13:13:11        3
-#&gt; 12: fcb66e28-c5e1-41f7-a67e-b375d99d28f5 &lt;list[4]&gt; 2020-09-16 13:13:11        3
-#&gt; 13: b0683f61-da2b-4a50-878c-2b3794369dd3 &lt;list[4]&gt; 2020-09-16 13:13:11        3
-#&gt; 14: cfa73c52-1927-4c41-8025-654fcf0d4bbc &lt;list[4]&gt; 2020-09-16 13:13:11        3
-#&gt; 15: 664fd0d7-f8b0-4f24-9e58-f1a8ce957760 &lt;list[4]&gt; 2020-09-16 13:13:11        4
+#&gt;  1: a1f73808-53db-4198-b9ba-e565233c6db8 &lt;list[4]&gt; 2020-09-16 13:22:38        1
+#&gt;  2: edbc8d4e-fe27-4581-9372-dd715f8ae1ec &lt;list[4]&gt; 2020-09-16 13:22:38        1
+#&gt;  3: 893d0441-652a-41ab-aac3-10cb655f2690 &lt;list[4]&gt; 2020-09-16 13:22:38        1
+#&gt;  4: 4ee90eca-f57f-4baa-b06c-1a1d2be6fcc7 &lt;list[4]&gt; 2020-09-16 13:22:38        1
+#&gt;  5: ba31aabb-06df-4c31-a5f4-9e1c1497acd6 &lt;list[4]&gt; 2020-09-16 13:22:38        2
+#&gt;  6: 81f8a0ac-3a52-4a11-9e8e-f1f8f0526518 &lt;list[4]&gt; 2020-09-16 13:22:38        2
+#&gt;  7: 3f03daba-725b-4be3-94c0-a919086212ad &lt;list[4]&gt; 2020-09-16 13:22:38        2
+#&gt;  8: bbf93881-55cc-4923-a1ce-2c70605b60fd &lt;list[4]&gt; 2020-09-16 13:22:38        2
+#&gt;  9: a2a11d10-5f84-4953-8480-7883f0476529 &lt;list[4]&gt; 2020-09-16 13:22:38        2
+#&gt; 10: 2f902f22-6c81-4880-8950-98f8712572b9 &lt;list[4]&gt; 2020-09-16 13:22:38        2
+#&gt; 11: b3858118-91d6-4489-876a-0d1fd6db1d99 &lt;list[4]&gt; 2020-09-16 13:22:38        3
+#&gt; 12: a3051420-9e56-4765-91d6-5e39316b3ac8 &lt;list[4]&gt; 2020-09-16 13:22:38        3
+#&gt; 13: 49e4e8bd-a61b-4e08-9928-9e803913c74f &lt;list[4]&gt; 2020-09-16 13:22:38        3
+#&gt; 14: e3d1d211-0c10-4860-a897-9427e0aeb3c8 &lt;list[4]&gt; 2020-09-16 13:22:38        3
+#&gt; 15: c486909d-5e7e-4c3d-99b8-af212b8c4cd6 &lt;list[4]&gt; 2020-09-16 13:22:38        4
 #&gt; </div><div class='input'><span class='kw'>afs</span><span class='op'>$</span><span class='kw'>learner</span>
 </div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
@@ -351,8 +371,8 @@ Feature selection algorithm to run.</p></dd>
 #&gt; * Properties: importance, missings, multiclass, selected_features,
 #&gt;   twoclass, weights</div><div class='input'>
 <span class='co'>#  Nested resampling</span>
-<span class='kw'>afs</span> <span class='op'>=</span> <span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>learner</span>, <span class='kw'>resampling</span>, <span class='kw'>measure</span>, <span class='kw'>terminator</span>, <span class='kw'>fselector</span>)
-<span class='kw'>afs</span><span class='op'>$</span><span class='kw'>store_fselect_instance</span> <span class='op'>=</span> <span class='fl'>TRUE</span>
+<span class='kw'>afs</span> <span class='op'>=</span> <span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>learner</span>, <span class='kw'>resampling</span>, <span class='kw'>measure</span>, <span class='kw'>terminator</span>, <span class='kw'>fselector</span>,
+  store_fselect_instance = <span class='fl'>TRUE</span>)
 
 <span class='kw'>resampling_outer</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, folds = <span class='fl'>2</span>)
 <span class='kw'>rr</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='kw'>task</span>, <span class='kw'>afs</span>, <span class='kw'>resampling_outer</span>, store_models = <span class='fl'>TRUE</span>)
