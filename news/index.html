@@ -133,7 +133,7 @@
 <li>Compact in-memory representation of R6 objects to save space when saving mlr3 objects via saveRDS(), serialize() etc.</li>
 <li>
 <code>AutoFSelect</code> is renamed to <code>AutoFSelector</code>.</li>
-<li>To retrieve the inner feature selection results in nested resampling, as.data.table(rr)<span class="math inline"><em>l</em><em>e</em><em>a</em><em>r</em><em>n</em><em>e</em><em>r</em>[[1]]</span>fselect_result must be used now.</li>
+<li>To retrieve the inner feature selection results in nested resampling, <code>as.data.table(rr)$learner[[1]]$fselect_result</code> must be used now.</li>
 <li>Option to control <code>store_benchmark_result</code>, <code>store_models</code> and <code>check_values</code> in <code>AutoFSelector</code>. <code>store_fselect_instance</code> must be set as a parameter during initialization.</li>
 </ul>
 </div>
