@@ -1,7 +1,7 @@
-#' @title AutoFSelect
+#' @title AutoFSelector
 #'
 #' @description
-#' The `AutoFSelect` is a [mlr3::Learner] which wraps another [mlr3::Learner]
+#' The `AutoFSelector` is a [mlr3::Learner] which wraps another [mlr3::Learner]
 #' and performs the following steps during `$train()`:
 #'
 #' 1. The wrapped (inner) learner is trained on the feature subsets via
@@ -11,11 +11,11 @@
 #' 2. A final model is fit on the complete training data with the best found
 #'    feature subset.
 #'
-#' During `$predict()` the `AutoFSelect` just calls the predict method of the
+#' During `$predict()` the `AutoFSelector` just calls the predict method of the
 #' wrapped (inner) learner.
 #'
 #' Note that this approach allows to perform nested resampling by passing an
-#' [AutoFSelect] object to [mlr3::resample()] or [mlr3::benchmark()].
+#' [AutoFSelector] object to [mlr3::resample()] or [mlr3::benchmark()].
 #' To access the inner resampling results, set `store_fselect_instance = TRUE`
 #' and execute [mlr3::resample()] or [mlr3::benchmark()] with
 #' `store_models = TRUE` (see examples).
@@ -31,7 +31,7 @@
 #'
 #' terminator = trm("evals", n_evals = 15)
 #' fselector = fs("exhaustive_search")
-#' afs = AutoFSelect$new(learner, resampling, measure, terminator, fselector)
+#' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector)
 #' afs$store_fselect_instance = TRUE
 #'
 #' afs$train(task)
@@ -39,7 +39,7 @@
 #' afs$learner
 #'
 #' #  Nested resampling
-#' afs = AutoFSelect$new(learner, resampling, measure, terminator, fselector)
+#' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector)
 #' afs$store_fselect_instance = TRUE
 #'
 #' resampling_outer = rsmp("cv", folds = 2)
@@ -50,7 +50,7 @@
 #'
 #' # Retrieve inner feature selection results
 #' as.data.table(rr)$learner[[1]]$fselect_result
-AutoFSelect = R6Class("AutoFSelect",
+AutoFSelector = R6Class("AutoFSelector",
   inherit = Learner,
   public = list(
 
