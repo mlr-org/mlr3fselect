@@ -37,7 +37,7 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
         ParamInt$new("zeroToOneRatio", lower = 1, default = 10L)
       ))
 
-      super$initialize(param_set = ps, properties = c("single-crit"))
+      super$initialize(param_set = ps, properties = "single-crit")
     }
   ),
   private = list(
