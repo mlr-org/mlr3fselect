@@ -47,8 +47,6 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
       if (is.null(pars$elitism)) pars$elitism = NA
       n = inst$objective$domain$length
 
-      # FIXME: iters = .Machine$integer.max crashes since genalg
-      # generates a vector of 1:iters
       mlr3misc::invoke(genalg::rbga.bin, size = n, iters = 100000,
         evalFunc = inst$objective_function, .args = pars)
     }
