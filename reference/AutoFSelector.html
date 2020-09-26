@@ -220,18 +220,18 @@ Short-cut to <code>$result</code> from <a href='FSelectInstanceSingleCrit.html'>
 
 <hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
-<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(
-  <span class='kw'>learner</span>,
-  <span class='kw'>resampling</span>,
-  <span class='kw'>measure</span>,
-  <span class='kw'>terminator</span>,
-  <span class='kw'>fselector</span>,
-  store_fselect_instance = <span class='fl'>TRUE</span>,
-  store_benchmark_result = <span class='fl'>TRUE</span>,
-  store_models = <span class='fl'>FALSE</span>,
-  check_values = <span class='fl'>FALSE</span>
-)</pre><p></div></p>
+<p>Creates a new instance of this <a href='https://r6.r-lib.org/reference/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+  <span class='va'>learner</span>,
+  <span class='va'>resampling</span>,
+  <span class='va'>measure</span>,
+  <span class='va'>terminator</span>,
+  <span class='va'>fselector</span>,
+  store_fselect_instance <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  store_benchmark_result <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  store_models <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_values <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -274,7 +274,7 @@ validity?</p></dd>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -285,20 +285,20 @@ validity?</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://mlr3.mlr-org.com'>mlr3</a></span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
 
-<span class='kw'>task</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"iris"</span>)
-<span class='kw'>learner</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.rpart"</span>)
-<span class='kw'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"holdout"</span>)
-<span class='kw'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span>(<span class='st'>"classif.ce"</span>)
+<span class='va'>task</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>
+<span class='va'>learner</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>
+<span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>
+<span class='va'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>
 
-<span class='kw'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span>(<span class='st'>"evals"</span>, n_evals = <span class='fl'>15</span>)
-<span class='kw'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span>(<span class='st'>"exhaustive_search"</span>)
-<span class='kw'>afs</span> <span class='op'>=</span> <span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>learner</span>, <span class='kw'>resampling</span>, <span class='kw'>measure</span>, <span class='kw'>terminator</span>, <span class='kw'>fselector</span>,
-  store_fselect_instance = <span class='fl'>TRUE</span>)
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
+<span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"exhaustive_search"</span><span class='op'>)</span>
+<span class='va'>afs</span> <span class='op'>=</span> <span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>learner</span>, <span class='va'>resampling</span>, <span class='va'>measure</span>, <span class='va'>terminator</span>, <span class='va'>fselector</span>,
+  store_fselect_instance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='kw'>afs</span><span class='op'>$</span><span class='fu'>train</span>(<span class='kw'>task</span>)
-<span class='kw'>afs</span><span class='op'>$</span><span class='kw'>model</span>
+<span class='va'>afs</span><span class='op'>$</span><span class='fu'>train</span><span class='op'>(</span><span class='va'>task</span><span class='op'>)</span>
+<span class='va'>afs</span><span class='op'>$</span><span class='va'>model</span>
 </div><div class='output co'>#&gt; $learner
 #&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
@@ -346,22 +346,22 @@ validity?</p></dd>
 #&gt; 14:        FALSE        TRUE         TRUE        TRUE       0.06
 #&gt; 15:         TRUE        TRUE         TRUE        TRUE       0.06
 #&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: dc3ad995-bae6-447d-ae03-e656939177d9 &lt;list[4]&gt; 2020-09-25 04:30:34        1
-#&gt;  2: f1829436-b157-4982-8c7d-f3de4bc50358 &lt;list[4]&gt; 2020-09-25 04:30:34        1
-#&gt;  3: ebfce7a1-42ee-4825-955a-dba205cfe1e9 &lt;list[4]&gt; 2020-09-25 04:30:34        1
-#&gt;  4: fa0d3f91-e740-4156-ba66-a6387382c64c &lt;list[4]&gt; 2020-09-25 04:30:34        1
-#&gt;  5: 9f0b1a52-cc5f-4d18-aa16-391fefb01a35 &lt;list[4]&gt; 2020-09-25 04:30:34        2
-#&gt;  6: 0e040270-7726-4fe0-a857-8601b5de35be &lt;list[4]&gt; 2020-09-25 04:30:34        2
-#&gt;  7: 5d62d381-8d5a-4d95-8b43-49e5e9730999 &lt;list[4]&gt; 2020-09-25 04:30:34        2
-#&gt;  8: 18720767-0fad-4c5c-9ea1-a8fc077ea611 &lt;list[4]&gt; 2020-09-25 04:30:34        2
-#&gt;  9: 508d304f-af62-46c2-9d2d-9562cc0f1933 &lt;list[4]&gt; 2020-09-25 04:30:34        2
-#&gt; 10: 8f4d9265-1aac-496d-831a-a7a3b34f5126 &lt;list[4]&gt; 2020-09-25 04:30:34        2
-#&gt; 11: e437a01e-2853-49dd-93d5-c0f4f74c7d9c &lt;list[4]&gt; 2020-09-25 04:30:34        3
-#&gt; 12: 757db7f0-1b25-4ab9-a6e9-fb524fb7dfe5 &lt;list[4]&gt; 2020-09-25 04:30:34        3
-#&gt; 13: c1beecee-fc0d-42b4-afcb-4bde259559f7 &lt;list[4]&gt; 2020-09-25 04:30:34        3
-#&gt; 14: ddb983c7-2ee8-42f0-8464-d5f630ca833b &lt;list[4]&gt; 2020-09-25 04:30:34        3
-#&gt; 15: 279af903-0725-4ddb-96f0-c562288d8ff8 &lt;list[4]&gt; 2020-09-25 04:30:34        4
-#&gt; </div><div class='input'><span class='kw'>afs</span><span class='op'>$</span><span class='kw'>learner</span>
+#&gt;  1: e82bdf54-052e-44d2-8ea4-ccb2517d2391 &lt;list[4]&gt; 2020-09-26 04:28:54        1
+#&gt;  2: 74c8bf17-54f9-4232-b813-f9f54635bfc0 &lt;list[4]&gt; 2020-09-26 04:28:54        1
+#&gt;  3: 61970a91-3597-4b18-8f89-f21a7171345a &lt;list[4]&gt; 2020-09-26 04:28:54        1
+#&gt;  4: 0eecd2d1-1af4-4b27-90f9-5f122202602a &lt;list[4]&gt; 2020-09-26 04:28:54        1
+#&gt;  5: 6b0ef12a-8ace-4ec7-aaa2-db77335e4ab4 &lt;list[4]&gt; 2020-09-26 04:28:54        2
+#&gt;  6: 056f4ad2-7e2a-4d29-8ab3-e33cd6e102dc &lt;list[4]&gt; 2020-09-26 04:28:54        2
+#&gt;  7: 59b6ae20-7a28-4ee8-a93f-fdd55613f309 &lt;list[4]&gt; 2020-09-26 04:28:54        2
+#&gt;  8: e346b128-91f4-456e-9826-827582507dad &lt;list[4]&gt; 2020-09-26 04:28:54        2
+#&gt;  9: 8c34d5d0-8d9d-48e6-a9b6-9dc258ab7c81 &lt;list[4]&gt; 2020-09-26 04:28:54        2
+#&gt; 10: 2da1c824-c4ae-4cf8-bc9e-d10803527891 &lt;list[4]&gt; 2020-09-26 04:28:54        2
+#&gt; 11: ab7ee5e7-1815-47db-854c-f395a7dfd32c &lt;list[4]&gt; 2020-09-26 04:28:54        3
+#&gt; 12: e7a7b0f8-b14a-4d92-a06d-86207a652c05 &lt;list[4]&gt; 2020-09-26 04:28:54        3
+#&gt; 13: 2a8da4b5-d542-418a-a608-c9fcc78f4868 &lt;list[4]&gt; 2020-09-26 04:28:54        3
+#&gt; 14: 6972c6de-a2fc-4ea0-9c05-a0e0a415acd9 &lt;list[4]&gt; 2020-09-26 04:28:54        3
+#&gt; 15: 6ce80a33-92c7-485a-a047-ec0796ea6cba &lt;list[4]&gt; 2020-09-26 04:28:54        4
+#&gt; </div><div class='input'><span class='va'>afs</span><span class='op'>$</span><span class='va'>learner</span>
 </div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
 #&gt; * Parameters: xval=0
@@ -371,18 +371,18 @@ validity?</p></dd>
 #&gt; * Properties: importance, missings, multiclass, selected_features,
 #&gt;   twoclass, weights</div><div class='input'>
 <span class='co'>#  Nested resampling</span>
-<span class='kw'>afs</span> <span class='op'>=</span> <span class='kw'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>learner</span>, <span class='kw'>resampling</span>, <span class='kw'>measure</span>, <span class='kw'>terminator</span>, <span class='kw'>fselector</span>,
-  store_fselect_instance = <span class='fl'>TRUE</span>)
+<span class='va'>afs</span> <span class='op'>=</span> <span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>learner</span>, <span class='va'>resampling</span>, <span class='va'>measure</span>, <span class='va'>terminator</span>, <span class='va'>fselector</span>,
+  store_fselect_instance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='kw'>resampling_outer</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, folds = <span class='fl'>2</span>)
-<span class='kw'>rr</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='kw'>task</span>, <span class='kw'>afs</span>, <span class='kw'>resampling_outer</span>, store_models = <span class='fl'>TRUE</span>)
+<span class='va'>resampling_outer</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"cv"</span>, folds <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>rr</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span><span class='op'>(</span><span class='va'>task</span>, <span class='va'>afs</span>, <span class='va'>resampling_outer</span>, store_models <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># Aggregate performance of outer results</span>
-<span class='kw'>rr</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/stats/aggregate.html'>aggregate</a></span>()
+<span class='va'>rr</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; classif.ce 
 #&gt; 0.04666667 </div><div class='input'>
 <span class='co'># Retrieve inner feature selection results</span>
-<span class='fu'><a href='https://mlr3.mlr-org.com/reference/as.data.table.html'>as.data.table</a></span>(<span class='kw'>rr</span>)<span class='op'>$</span><span class='kw'>learner</span>[[<span class='fl'>1</span>]]<span class='op'>$</span><span class='kw'>fselect_result</span>
+<span class='fu'><a href='https://mlr3.mlr-org.com/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>rr</span><span class='op'>)</span><span class='op'>$</span><span class='va'>learner</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>fselect_result</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
 #&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
 #&gt;    classif.ce
