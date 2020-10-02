@@ -4,7 +4,10 @@
 \alias{FSelectorRandomSearch}
 \title{Feature Selection via Random Search}
 \source{
-\cite{mlr3fselect}{bergstra_2012}
+Bergstra J, Bengio Y (2012).
+\dQuote{Random Search for Hyper-Parameter Optimization.}
+\emph{Journal of Machine Learning Research}, \bold{13}(10), 281--305.
+\url{https://jmlr.csail.mit.edu/papers/v13/bergstra12a.html}.
 }
 \description{
 \code{FSelectorRandomSearch} class that implements a simple Random Search.
