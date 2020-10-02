@@ -40,6 +40,7 @@ Imports:
     lgr,
     mlr3,
     mlr3misc,
+    mlr3pipelines,
     paradox (>= 0.3.0),
     R6
 Suggests:

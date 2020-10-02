@@ -4,6 +4,7 @@
 #' @import mlr3misc
 #' @import mlr3
 #' @import bbotk
+#' @import mlr3pipelines
 #' @importFrom R6 R6Class
 #' @importFrom utils combn head
 "_PACKAGE"
