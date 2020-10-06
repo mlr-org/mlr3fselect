@@ -1,25 +1,11 @@
-#' @title Re-export of `mlr_terminators`
-#'
-#' See [bbotk::mlr_terminators].
-#'
-#' @name mlr_terminators
-#' @rdname mlr_terminators
+#' @importFrom bbotk mlr_terminators
 #' @export
-NULL
+bbotk::mlr_terminators
 
-#' @title Re-export of `trm`
-#'
-#' See [bbotk::trm].
-#'
-#' @name trm
-#' @rdname trm
+#' @importFrom bbotk trm
 #' @export
-NULL
+bbotk::trm
 
-#' @title Re-export of `trms`
-#'
-#' See [bbotk::trms].
-#'
-#' @name trms
-#' @rdname trms
-NULL
+#' @importFrom bbotk trms
+#' @export
+bbotk::trms
