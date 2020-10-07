@@ -49,12 +49,6 @@
     <loc>https://mlr3fswrap.mlr-org.com/reference/mlr_fselectors.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/mlr_terminators.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/trm.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fswrap.mlr-org.com/reference/trms.html</loc>
+    <loc>https://mlr3fswrap.mlr-org.com/reference/reexports.html</loc>
   </url>
 </urlset>

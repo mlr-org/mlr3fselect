@@ -281,7 +281,7 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
 
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
 <span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
@@ -297,40 +297,40 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 <span class='co'># modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
-#&gt; 1:         TRUE        TRUE         TRUE       FALSE
-#&gt;                                 features  x_domain classif.ce
-#&gt; 1: Petal.Length,Petal.Width,Sepal.Length &lt;list[4]&gt;       0.04</div><div class='input'>
+#&gt; 1:        FALSE        TRUE         TRUE        TRUE
+#&gt;                                features  x_domain classif.ce
+#&gt; 1: Petal.Width,Sepal.Length,Sepal.Width &lt;list[4]&gt;          0</div><div class='input'>
 <span class='co'># returns best feature subset and best performance</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
-#&gt; 1:         TRUE        TRUE         TRUE       FALSE
-#&gt;                                 features  x_domain classif.ce
-#&gt; 1: Petal.Length,Petal.Width,Sepal.Length &lt;list[4]&gt;       0.04</div><div class='input'>
+#&gt; 1:        FALSE        TRUE         TRUE        TRUE
+#&gt;                                features  x_domain classif.ce
+#&gt; 1: Petal.Width,Sepal.Length,Sepal.Width &lt;list[4]&gt;          0</div><div class='input'>
 <span class='co'># allows access of data.table / benchmark result of full path of all evaluations</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span>
 </div><div class='output co'>#&gt; &lt;ArchiveFSelect&gt;
 #&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:         TRUE        TRUE         TRUE       FALSE       0.04
-#&gt;  2:        FALSE        TRUE         TRUE        TRUE       0.04
-#&gt;  3:         TRUE        TRUE         TRUE       FALSE       0.04
-#&gt;  4:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;  5:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;  6:        FALSE        TRUE         TRUE       FALSE       0.04
-#&gt;  7:        FALSE        TRUE        FALSE       FALSE       0.04
-#&gt;  8:        FALSE       FALSE         TRUE        TRUE       0.24
-#&gt;  9:        FALSE        TRUE         TRUE        TRUE       0.04
-#&gt; 10:        FALSE        TRUE         TRUE       FALSE       0.04
+#&gt;  1:        FALSE        TRUE         TRUE        TRUE       0.00
+#&gt;  2:         TRUE        TRUE         TRUE        TRUE       0.06
+#&gt;  3:        FALSE        TRUE         TRUE        TRUE       0.00
+#&gt;  4:        FALSE       FALSE         TRUE        TRUE       0.30
+#&gt;  5:         TRUE       FALSE        FALSE       FALSE       0.06
+#&gt;  6:        FALSE        TRUE        FALSE       FALSE       0.00
+#&gt;  7:         TRUE        TRUE         TRUE        TRUE       0.06
+#&gt;  8:         TRUE       FALSE        FALSE       FALSE       0.06
+#&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.00
+#&gt; 10:         TRUE       FALSE         TRUE       FALSE       0.06
 #&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: a2660226-56ef-4e5f-a19d-2509c1f47ce7 &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  2: fdf689de-65e7-4825-931b-2bc0e38c5bd1 &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  3: 3fd50a92-b39c-4593-b676-63615a1e41cf &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  4: 433365d8-2d5d-40b6-8949-61d450c3b908 &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  5: 89ff1f5e-6f30-41b6-a89a-71b2822a1715 &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  6: ac5e3ae2-48a7-42eb-9844-0faa6eab0fc6 &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  7: 70412d40-b00c-4113-a589-5a46d822bb0c &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  8: cde2fb93-fc17-4c3e-a4c2-f0f5a83361b8 &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt;  9: ca646586-9b0a-4acb-b8b7-06c49db112a4 &lt;list[4]&gt; 2020-10-05 04:29:06        1
-#&gt; 10: e1e42d14-2ef4-4323-94ae-f1d7a9dced0c &lt;list[4]&gt; 2020-10-05 04:29:06        1</div></pre>
+#&gt;  1: 69956823-d793-40b9-870f-80e30de36768 &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  2: c0617ade-e637-4841-b355-9107b4cf556d &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  3: 7314544c-cfd7-4686-9327-4d3af1e21d11 &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  4: 404ab9ae-b13d-4fca-a73d-2b47d5420646 &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  5: 5120a7db-b322-4ab7-97f1-5c1afeb24744 &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  6: ffbdf2f0-a3af-4a70-a6a3-9c4a16eb6c98 &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  7: d485e04e-660a-40cd-841f-a90237936d51 &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  8: 2368a96d-9bb8-45a8-abd2-b70ef89972a3 &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt;  9: 11f88e77-4319-45e6-8f14-d3352654c09f &lt;list[4]&gt; 2020-10-07 13:06:31        1
+#&gt; 10: 7f283b1e-7ff2-4880-ab60-01b70d3fad5a &lt;list[4]&gt; 2020-10-07 13:06:31        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -273,7 +273,7 @@ Optimal outcome.</p></dd>
 <span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"cv"</span><span class='op'>)</span>
 
 <span class='co'># Create instance</span>
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
 <span class='va'>inst</span> <span class='op'>=</span> <span class='va'>FSelectInstanceSingleCrit</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   task <span class='op'>=</span> <span class='va'>task</span>,
   learner <span class='op'>=</span> <span class='va'>learner</span>,
@@ -295,11 +295,11 @@ Optimal outcome.</p></dd>
 <span class='co'># Get archive data</span>
 <span class='va'>inst</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt; 1:         TRUE       FALSE         TRUE       FALSE       0.06
-#&gt; 2:        FALSE        TRUE        FALSE        TRUE       0.04
+#&gt; 1:         TRUE       FALSE         TRUE       FALSE 0.05333333
+#&gt; 2:        FALSE        TRUE        FALSE        TRUE 0.04666667
 #&gt;                                   uhash  x_domain           timestamp batch_nr
-#&gt; 1: 0eaf4e3b-6e32-418e-ad6a-04215e4f0d31 &lt;list[4]&gt; 2020-10-05 04:29:05        1
-#&gt; 2: ab79143c-20a2-4a69-ae6d-82bc8a9cc7cc &lt;list[4]&gt; 2020-10-05 04:29:05        1</div></pre>
+#&gt; 1: f94d2ef6-1395-47ff-ad0c-bed30c58b69a &lt;list[4]&gt; 2020-10-07 13:06:30        1
+#&gt; 2: 53610b10-8cf6-4103-9879-120391596541 &lt;list[4]&gt; 2020-10-07 13:06:30        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

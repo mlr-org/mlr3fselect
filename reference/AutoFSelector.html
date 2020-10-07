@@ -292,7 +292,7 @@ validity?</p></dd>
 <span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>
 <span class='va'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>
 
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
 <span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"exhaustive_search"</span><span class='op'>)</span>
 <span class='va'>afs</span> <span class='op'>=</span> <span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>learner</span>, <span class='va'>resampling</span>, <span class='va'>measure</span>, <span class='va'>terminator</span>, <span class='va'>fselector</span>,
   store_fselect_instance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
@@ -346,21 +346,21 @@ validity?</p></dd>
 #&gt; 14:        FALSE        TRUE         TRUE        TRUE       0.06
 #&gt; 15:         TRUE        TRUE         TRUE        TRUE       0.06
 #&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: 4af6455a-13fd-4878-a7bc-986c7ccc9591 &lt;list[4]&gt; 2020-10-05 04:29:02        1
-#&gt;  2: 5b76f185-68f0-4732-80dd-fde1ec4d44cd &lt;list[4]&gt; 2020-10-05 04:29:02        1
-#&gt;  3: 5ec18165-ba43-46c9-b322-893443bcf903 &lt;list[4]&gt; 2020-10-05 04:29:02        1
-#&gt;  4: 7f9aca23-32ac-4b8f-824e-2840dbfa6936 &lt;list[4]&gt; 2020-10-05 04:29:02        1
-#&gt;  5: 26a39eaf-1ece-4c8e-9123-aba37b3de715 &lt;list[4]&gt; 2020-10-05 04:29:02        2
-#&gt;  6: 2617a733-adb9-4a61-9125-bb3295bb8951 &lt;list[4]&gt; 2020-10-05 04:29:02        2
-#&gt;  7: e534257e-b094-42dc-ae1e-33f39892e6ab &lt;list[4]&gt; 2020-10-05 04:29:02        2
-#&gt;  8: 9c706110-dd48-4f75-a2ae-29f40ad2714d &lt;list[4]&gt; 2020-10-05 04:29:02        2
-#&gt;  9: a6954530-666d-448c-b398-b3e06795a5de &lt;list[4]&gt; 2020-10-05 04:29:02        2
-#&gt; 10: ebfa6826-1527-4cb0-b253-17e7fbcb499a &lt;list[4]&gt; 2020-10-05 04:29:02        2
-#&gt; 11: b713ce70-152c-4ebc-8243-f92273c0366f &lt;list[4]&gt; 2020-10-05 04:29:02        3
-#&gt; 12: 8c1cdc95-8274-40d3-acf9-3822f5c8d330 &lt;list[4]&gt; 2020-10-05 04:29:02        3
-#&gt; 13: 37fb4a75-04f9-409d-9f8e-1f1603b537ec &lt;list[4]&gt; 2020-10-05 04:29:02        3
-#&gt; 14: 2534b330-6f23-4c1e-bab3-73008356c80f &lt;list[4]&gt; 2020-10-05 04:29:02        3
-#&gt; 15: 583a8e2a-b28d-49fa-893e-ea82bf62a9b5 &lt;list[4]&gt; 2020-10-05 04:29:02        4
+#&gt;  1: ddbb1dc6-0f60-46e1-ac60-48fa3531cfae &lt;list[4]&gt; 2020-10-07 13:06:25        1
+#&gt;  2: ff77280d-c223-42f0-9633-2d7fe16397f1 &lt;list[4]&gt; 2020-10-07 13:06:25        1
+#&gt;  3: b1ef0f35-053f-4f86-b38e-ca79afca0d4f &lt;list[4]&gt; 2020-10-07 13:06:25        1
+#&gt;  4: a34ce11a-5baa-4708-819f-297e3a392d05 &lt;list[4]&gt; 2020-10-07 13:06:25        1
+#&gt;  5: ec5be12a-4fde-47e8-9035-32deca0154a2 &lt;list[4]&gt; 2020-10-07 13:06:25        2
+#&gt;  6: c393d68d-70cf-409c-83d4-0fcc2957614f &lt;list[4]&gt; 2020-10-07 13:06:25        2
+#&gt;  7: afd4f169-6551-491d-9859-8fa5ae943886 &lt;list[4]&gt; 2020-10-07 13:06:25        2
+#&gt;  8: 3f4019d1-23a8-45f1-abb7-02b07eed8c80 &lt;list[4]&gt; 2020-10-07 13:06:25        2
+#&gt;  9: 04aec435-a4cd-47a1-9981-63b0ede8e534 &lt;list[4]&gt; 2020-10-07 13:06:25        2
+#&gt; 10: e75c71bc-58df-43ec-9d89-76820253036e &lt;list[4]&gt; 2020-10-07 13:06:25        2
+#&gt; 11: 5bf75361-9a96-42d8-a67e-3d96171305be &lt;list[4]&gt; 2020-10-07 13:06:26        3
+#&gt; 12: 03dd9477-9b6e-480f-867e-602de769582a &lt;list[4]&gt; 2020-10-07 13:06:26        3
+#&gt; 13: 2d16e696-dc65-4efa-a546-6a3a4277f1bf &lt;list[4]&gt; 2020-10-07 13:06:26        3
+#&gt; 14: 05c7f7de-1d75-447f-bc40-c4c02f6c2bc3 &lt;list[4]&gt; 2020-10-07 13:06:26        3
+#&gt; 15: 4544c649-9442-42f9-8c31-26f7e3eb7ebc &lt;list[4]&gt; 2020-10-07 13:06:26        4
 #&gt; </div><div class='input'><span class='va'>afs</span><span class='op'>$</span><span class='va'>learner</span>
 </div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
@@ -380,13 +380,13 @@ validity?</p></dd>
 <span class='co'># Aggregate performance of outer results</span>
 <span class='va'>rr</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; classif.ce 
-#&gt; 0.04666667 </div><div class='input'>
+#&gt;       0.06 </div><div class='input'>
 <span class='co'># Retrieve inner feature selection results</span>
-<span class='fu'><a href='https://mlr3.mlr-org.com/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>rr</span><span class='op'>)</span><span class='op'>$</span><span class='va'>learner</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>fselect_result</span>
+<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>rr</span><span class='op'>)</span><span class='op'>$</span><span class='va'>learner</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>fselect_result</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
 #&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
 #&gt;    classif.ce
-#&gt; 1:          0</div></pre>
+#&gt; 1:       0.04</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
