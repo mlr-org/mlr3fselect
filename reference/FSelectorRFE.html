@@ -45,7 +45,7 @@
 recursive algorithm (recursive = TRUE) recomputes the feature importance
 on the reduced feature set in every iteration.  The non-recursive algorithm
 (recursive = FALSE) only uses the feature importance of the model fitted
-with all features to eliminate the next most unimportant feature in every
+with all features to eliminate the next most unimportant features in every
 iteration." />
 <meta name="twitter:card" content="summary" />
 
@@ -138,7 +138,7 @@ iteration." />
 recursive algorithm (<code>recursive = TRUE</code>) recomputes the feature importance
 on the reduced feature set in every iteration.  The non-recursive algorithm
 (<code>recursive = FALSE</code>) only uses the feature importance of the model fitted
-with all features to eliminate the next most unimportant feature in every
+with all features to eliminate the next most unimportant features in every
 iteration.</p>
     </div>
 
@@ -159,19 +159,30 @@ iteration.</p>
 
 <dl>
 <dt><code>min_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
-Minimum number of features. By default, 1.</p></dd>
-<dt><code>recursive</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></p></dd>
+The minimum number of features to select, default is <code>1L</code>.</p></dd>
+<dt><code>feature_fraction</code></dt><dd><p><code><a href='https://rdrr.io/r/base/double.html'>double(1)</a></code><br />
+Fraction of features to retain in each iteration, default is <code>0.5</code>.</p></dd>
+<dt><code>feature_number</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
+Number of features to remove in each iteration.</p></dd>
+<dt><code>subset_sizes</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code><br />
+Vector of number of features to retain in each iteration. Must be sorted in
+decreasing order.</p></dd>
+<dt><code>recursive</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code><br />
+Use the recursive version? Default is <code>FALSE</code>.</p></dd>
 
 </dl>
 
+<p>The parameter <code>feature_fraction</code>, <code>feature_number</code> and <code>subset_sizes</code> are
+mutually exclusive.</p>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
     <p><code><a href='FSelector.html'>mlr3fselect::FSelector</a></code> -&gt; <code>FSelectorRFE</code></p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>
-<dt><code>importance</code></dt><dd><p>Stores the feature importance of the model with all
-variables if <code>recrusive</code> is set to <code>FALSE</code></p></dd>
+<dt><code>importance</code></dt><dd><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
+Stores the feature importance of the model with all variables if
+<code>recrusive</code> is set to <code>FALSE</code></p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -235,7 +246,7 @@ variables if <code>recrusive</code> is set to <code>FALSE</code></p></dd>
 </div><div class='output co'>#&gt; function (unnest = NULL) 
 #&gt; .__Archive__data(self = self, private = private, super = super, 
 #&gt;     unnest = unnest)
-#&gt; &lt;environment: 0x55e77a4aa240&gt;</div></pre>
+#&gt; &lt;environment: 0x560ec44cebd0&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
