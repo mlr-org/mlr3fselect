@@ -44,11 +44,8 @@ Imports:
     paradox (>= 0.3.0),
     R6
 Suggests:
-    bibtex,
     rpart,
     testthat
-RdMacros:
-    mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
@@ -69,4 +66,5 @@ Collate:
     'FSelectInstanceSingleCrit.R'
     'reexports.R'
     'sugar.R'
+    'bibentries.R'
     'zzz.R'
