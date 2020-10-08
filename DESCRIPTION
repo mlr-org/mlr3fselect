@@ -24,7 +24,7 @@ Authors@R:
              comment = c(ORCID = "0000-0001-6002-6980")))
 Description: Implements methods for feature selection with
     'mlr3', e.g.  random search and sequential selection. Various
-    termination criteria can be set and combined. The class 'AutoFSelect'
+    termination criteria can be set and combined. The class 'AutoFSelector'
     provides a convenient way to perform nested resampling in combination
     with 'mlr3'.
 License: LGPL-3
@@ -43,17 +43,14 @@ Imports:
     paradox (>= 0.3.0),
     R6
 Suggests:
-    bibtex,
     rpart,
     testthat
-RdMacros:
-    mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Collate:
-    'AutoFSelect.R'
+    'AutoFSelector.R'
     'ArchiveFSelect.R'
     'ObjectiveFSelect.R'
     'mlr_fselectors.R'
@@ -68,4 +65,5 @@ Collate:
     'FSelectInstanceSingleCrit.R'
     'reexports.R'
     'sugar.R'
+    'bibentries.R'
     'zzz.R'
