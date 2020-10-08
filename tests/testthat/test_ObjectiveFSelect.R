@@ -7,7 +7,7 @@ test_that("ObjectiveFSelect", {
   measures = msr("dummy")
 
   obj = ObjectiveFSelect$new(task = task, learner = learner,
-    resampling = resampling, measures = measures)
+    resampling = resampling, measures = measures, store_models = TRUE)
 
   xss = list(
     list("x1" = TRUE, "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
@@ -27,7 +27,7 @@ test_that("ObjectiveFSelect works with multiple measures", {
   measures = msrs(c("regr.mse", "regr.rmse"))
 
   obj = ObjectiveFSelect$new(task = task, learner = learner,
-    resampling = resampling, measures = measures)
+    resampling = resampling, measures = measures, store_models = TRUE)
 
   xss = list(
     list("x1" = TRUE, "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
