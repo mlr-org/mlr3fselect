@@ -44,9 +44,15 @@
 #' )
 #'
 #' fselector = fs("rfe")
+#' 
+#' # Modifies the instance by reference
 #' fselector$optimize(instance)
+#' 
+#' # Returns best scoring evaluation
 #' instance$result
-#' instance$archive$data
+#' 
+#' # Allows access of data.table of full path of all evaluations
+#' instance$archive$data()
 FSelectorRFE = R6Class("FSelectorRFE",
   inherit = FSelector,
   public = list(
