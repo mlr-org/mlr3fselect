@@ -249,11 +249,29 @@ Instance optimized with FSelectorSequential.</p></dd>
 #&gt;    classif.ce
 #&gt; 1:       0.06</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='va'>data</span>
-</div><div class='output co'>#&gt; function (unnest = NULL) 
-#&gt; .__Archive__data(self = self, private = private, super = super, 
-#&gt;     unnest = unnest)
-#&gt; &lt;environment: 0x563ff5dd6930&gt;</div></pre>
+<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt;  1:         TRUE       FALSE        FALSE       FALSE       0.06
+#&gt;  2:        FALSE        TRUE        FALSE       FALSE       0.06
+#&gt;  3:        FALSE       FALSE         TRUE       FALSE       0.32
+#&gt;  4:        FALSE       FALSE        FALSE        TRUE       0.48
+#&gt;  5:         TRUE        TRUE        FALSE       FALSE       0.06
+#&gt;  6:         TRUE       FALSE         TRUE       FALSE       0.06
+#&gt;  7:         TRUE       FALSE        FALSE        TRUE       0.06
+#&gt;  8:         TRUE        TRUE         TRUE       FALSE       0.06
+#&gt;  9:         TRUE        TRUE        FALSE        TRUE       0.06
+#&gt; 10:         TRUE        TRUE         TRUE        TRUE       0.06
+#&gt;                                    uhash  x_domain           timestamp batch_nr
+#&gt;  1: e4dd522f-6199-4ecd-98ed-446c9c2bcfb0 &lt;list[4]&gt; 2020-10-22 20:12:35        1
+#&gt;  2: f80d2e94-989d-420a-a9f3-787c061a098f &lt;list[4]&gt; 2020-10-22 20:12:35        1
+#&gt;  3: 19b8ea04-7e80-4a12-88de-f395cdbc3a7e &lt;list[4]&gt; 2020-10-22 20:12:35        1
+#&gt;  4: e6ed548c-739d-48ce-b15b-37c248274258 &lt;list[4]&gt; 2020-10-22 20:12:35        1
+#&gt;  5: 6df8e1d5-f272-49c3-b838-abfc87901d08 &lt;list[4]&gt; 2020-10-22 20:12:36        2
+#&gt;  6: 48a311ec-1e0c-43d8-957b-b1ddd1e846a2 &lt;list[4]&gt; 2020-10-22 20:12:36        2
+#&gt;  7: 7ae2c06e-1d63-4dc7-9263-5c8c633431d1 &lt;list[4]&gt; 2020-10-22 20:12:36        2
+#&gt;  8: b90a7512-4052-4974-9d3e-d7e9fd9d0258 &lt;list[4]&gt; 2020-10-22 20:12:37        3
+#&gt;  9: 887083cc-a892-4f7a-9626-9c2c23771e00 &lt;list[4]&gt; 2020-10-22 20:12:37        3
+#&gt; 10: 1a70851b-4f23-4fef-8cf8-d0c647120804 &lt;list[4]&gt; 2020-10-22 20:12:37        4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
