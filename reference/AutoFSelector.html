@@ -91,7 +91,7 @@ store_models = TRUE (see examples)." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.3.0.9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.4.0</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -292,7 +292,7 @@ validity?</p></dd>
 <span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>
 <span class='va'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>
 
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 <span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"exhaustive_search"</span><span class='op'>)</span>
 <span class='va'>afs</span> <span class='op'>=</span> <span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>learner</span>, <span class='va'>resampling</span>, <span class='va'>measure</span>, <span class='va'>terminator</span>, <span class='va'>fselector</span>,
   store_fselect_instance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
@@ -329,28 +329,16 @@ validity?</p></dd>
 #&gt; 1:       0.06
 #&gt; * Archive:
 #&gt; &lt;ArchiveFSelect&gt;
-#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:         TRUE       FALSE        FALSE       FALSE       0.06
-#&gt;  2:        FALSE        TRUE        FALSE       FALSE       0.06
-#&gt;  3:        FALSE       FALSE         TRUE       FALSE       0.50
-#&gt;  4:        FALSE       FALSE        FALSE        TRUE       0.44
-#&gt;  5:         TRUE        TRUE        FALSE       FALSE       0.06
-#&gt;  6:         TRUE       FALSE         TRUE       FALSE       0.06
-#&gt;  7:         TRUE       FALSE        FALSE        TRUE       0.06
-#&gt;  8:        FALSE        TRUE         TRUE       FALSE       0.06
-#&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.06
-#&gt; 10:        FALSE       FALSE         TRUE        TRUE       0.50
-#&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: 6a4820d8-0db2-4f51-94d5-1b5c1c797546 &lt;list[4]&gt; 2020-10-22 18:09:18        1
-#&gt;  2: 062ef4c9-d8bf-41b9-9092-73ebd27bf5e2 &lt;list[4]&gt; 2020-10-22 18:09:18        1
-#&gt;  3: 4dec9494-74b4-4e34-8d2d-2c9dba04e089 &lt;list[4]&gt; 2020-10-22 18:09:18        1
-#&gt;  4: 578eb650-8aa4-4bc2-8d98-312aaf863b92 &lt;list[4]&gt; 2020-10-22 18:09:18        1
-#&gt;  5: 476da775-62e3-416d-96b7-27e9f0504f53 &lt;list[4]&gt; 2020-10-22 18:09:20        2
-#&gt;  6: 288be009-bac7-4065-bbae-8795356a6ccb &lt;list[4]&gt; 2020-10-22 18:09:20        2
-#&gt;  7: ec1ac78f-a1da-4026-b4a2-6cb2985a8a71 &lt;list[4]&gt; 2020-10-22 18:09:20        2
-#&gt;  8: 541e5a49-11fe-49dc-b238-8cf0907612ad &lt;list[4]&gt; 2020-10-22 18:09:20        2
-#&gt;  9: 5c9ef75c-b530-4a4d-89a8-a0584f6b68c0 &lt;list[4]&gt; 2020-10-22 18:09:20        2
-#&gt; 10: f9d74f00-34fe-4694-8487-7e2e5bb7e4cd &lt;list[4]&gt; 2020-10-22 18:09:20        2
+#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE       0.06
+#&gt; 2:        FALSE        TRUE        FALSE       FALSE       0.06
+#&gt; 3:        FALSE       FALSE         TRUE       FALSE       0.50
+#&gt; 4:        FALSE       FALSE        FALSE        TRUE       0.44
+#&gt;                                   uhash  x_domain           timestamp batch_nr
+#&gt; 1: 3e3341a8-c8b4-4476-a4ab-820264666abe &lt;list[4]&gt; 2020-10-22 18:47:38        1
+#&gt; 2: 002f9c87-28c9-4143-baf3-c57c65abfd37 &lt;list[4]&gt; 2020-10-22 18:47:38        1
+#&gt; 3: 66e17991-5a54-4899-9069-de299971137d &lt;list[4]&gt; 2020-10-22 18:47:38        1
+#&gt; 4: 4d835b43-1c57-4ace-af1c-0d4758706e93 &lt;list[4]&gt; 2020-10-22 18:47:38        1
 #&gt; </div><div class='input'><span class='va'>afs</span><span class='op'>$</span><span class='va'>learner</span>
 </div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
@@ -370,13 +358,13 @@ validity?</p></dd>
 <span class='co'># Aggregate performance of outer results</span>
 <span class='va'>rr</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; classif.ce 
-#&gt; 0.06666667 </div><div class='input'>
+#&gt; 0.04666667 </div><div class='input'>
 <span class='co'># Retrieve inner feature selection results</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>rr</span><span class='op'>)</span><span class='op'>$</span><span class='va'>learner</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>fselect_result</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
 #&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
 #&gt;    classif.ce
-#&gt; 1:       0.04</div></pre>
+#&gt; 1:          0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
