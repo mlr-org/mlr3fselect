@@ -23,7 +23,29 @@
 #' iterations are needed, set `ìters` to a higher value in the parameter set.
 #'
 #' @export
-#' @template example
+#' @examples 
+#' library(mlr3)
+#'
+#' terminator = trm("evals", n_evals = 10)
+#'
+#' instance = FSelectInstanceSingleCrit$new(
+#'   task = tsk("iris"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measure = msr("classif.ce"),
+#'   terminator = terminator
+#' )
+#'
+#' fselector = fs("genetic_search", popSize = 10L)
+#'
+#' # Modifies the instance by reference
+#' fselector$optimize(instance)
+#'
+#' # Returns best scoring evaluation
+#' instance$result
+#'
+#' # Allows access of data.table of full path of all evaluations
+#' instance$archive$data()
 FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
   inherit = FSelector,
   public = list(

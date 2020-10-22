@@ -22,7 +22,7 @@ Note that this approach allows to perform nested resampling by passing an
 \link{AutoFSelector} object to \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
 To access the inner resampling results, set \code{store_fselect_instance = TRUE}
 and execute \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}} with
-\code{store_models = TRUE} (see examples).
+\code{store_models = TRUE}.
 }
 \examples{
 library(mlr3)
@@ -40,19 +40,6 @@ afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
 afs$train(task)
 afs$model
 afs$learner
-
-#  Nested resampling
-afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
-  store_fselect_instance = TRUE)
-
-resampling_outer = rsmp("cv", folds = 2)
-rr = resample(task, afs, resampling_outer, store_models = TRUE)
-
-# Aggregate performance of outer results
-rr$aggregate()
-
-# Retrieve inner feature selection results
-as.data.table(rr)$learner[[1]]$fselect_result
 }
 \section{Super class}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{AutoFSelector}

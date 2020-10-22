@@ -18,7 +18,7 @@
 #' [AutoFSelector] object to [mlr3::resample()] or [mlr3::benchmark()].
 #' To access the inner resampling results, set `store_fselect_instance = TRUE`
 #' and execute [mlr3::resample()] or [mlr3::benchmark()] with
-#' `store_models = TRUE` (see examples).
+#' `store_models = TRUE`.
 #'
 #' @template param_store_models
 #' @template param_check_values
@@ -41,19 +41,6 @@
 #' afs$train(task)
 #' afs$model
 #' afs$learner
-#'
-#' #  Nested resampling
-#' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
-#'   store_fselect_instance = TRUE)
-#'
-#' resampling_outer = rsmp("cv", folds = 2)
-#' rr = resample(task, afs, resampling_outer, store_models = TRUE)
-#'
-#' # Aggregate performance of outer results
-#' rr$aggregate()
-#'
-#' # Retrieve inner feature selection results
-#' as.data.table(rr)$learner[[1]]$fselect_result
 AutoFSelector = R6Class("AutoFSelector",
   inherit = Learner,
   public = list(
