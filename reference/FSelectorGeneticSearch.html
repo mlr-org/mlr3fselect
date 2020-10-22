@@ -204,7 +204,7 @@ iterations are needed, set <code>ìters</code> to a higher value in the paramete
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
 
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 
 <span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
@@ -230,28 +230,18 @@ iterations are needed, set <code>ìters</code> to a higher value in the paramete
 #&gt; 1: &lt;list[4]&gt;       0.08</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:         TRUE        TRUE        FALSE       FALSE       0.08
-#&gt;  2:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt;  3:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt;  4:        FALSE       FALSE         TRUE       FALSE       0.22
-#&gt;  5:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt;  6:         TRUE       FALSE        FALSE       FALSE       0.14
-#&gt;  7:         TRUE       FALSE        FALSE       FALSE       0.14
-#&gt;  8:        FALSE       FALSE         TRUE       FALSE       0.22
-#&gt;  9:         TRUE       FALSE        FALSE       FALSE       0.14
-#&gt; 10:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: f7842fd3-444d-4fd6-aee1-e3efa8254307 &lt;list[4]&gt; 2020-10-22 20:19:27        1
-#&gt;  2: 9fa0a395-8ada-4fbd-9ab7-1c56dd597bb2 &lt;list[4]&gt; 2020-10-22 20:19:27        2
-#&gt;  3: 217ac58c-2c5a-462d-a467-ea3fe7b29c32 &lt;list[4]&gt; 2020-10-22 20:19:27        3
-#&gt;  4: 43d908fc-a598-41ee-9e6f-edb2cfdcbb58 &lt;list[4]&gt; 2020-10-22 20:19:28        4
-#&gt;  5: 6cd2c1fb-5c6b-417c-aaf8-9b7e68d1757d &lt;list[4]&gt; 2020-10-22 20:19:28        5
-#&gt;  6: 9d4cbd2c-74ab-44c5-9151-01d1fd76241b &lt;list[4]&gt; 2020-10-22 20:19:28        6
-#&gt;  7: 36fdfad6-b20f-4f46-8d29-f639e929bb56 &lt;list[4]&gt; 2020-10-22 20:19:28        7
-#&gt;  8: 14a78390-512f-421a-87d9-bcabc7289499 &lt;list[4]&gt; 2020-10-22 20:19:29        8
-#&gt;  9: ffc12ec9-1db5-489a-a2b7-85d8738eb3f0 &lt;list[4]&gt; 2020-10-22 20:19:29        9
-#&gt; 10: c6d0972c-1db0-4207-9b9d-ba845b663e3d &lt;list[4]&gt; 2020-10-22 20:19:29       10</div></pre>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt; 1:         TRUE        TRUE        FALSE       FALSE       0.08
+#&gt; 2:        FALSE        TRUE        FALSE       FALSE       0.08
+#&gt; 3:        FALSE        TRUE        FALSE       FALSE       0.08
+#&gt; 4:        FALSE       FALSE         TRUE       FALSE       0.22
+#&gt; 5:        FALSE        TRUE        FALSE       FALSE       0.08
+#&gt;                                   uhash  x_domain           timestamp batch_nr
+#&gt; 1: 0f0f09c7-0499-48e0-8384-e9c71c6c77d1 &lt;list[4]&gt; 2020-10-22 20:59:18        1
+#&gt; 2: 2e46b2d4-48cc-4e5e-ad2f-1710b70a760f &lt;list[4]&gt; 2020-10-22 20:59:18        2
+#&gt; 3: 98576e91-b216-46a9-885d-9fac502e2151 &lt;list[4]&gt; 2020-10-22 20:59:19        3
+#&gt; 4: 0cf29bb5-b88c-4cb0-b161-706228b061d4 &lt;list[4]&gt; 2020-10-22 20:59:19        4
+#&gt; 5: ffe09a82-8629-43cd-8e46-38c036fee41c &lt;list[4]&gt; 2020-10-22 20:59:19        5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
