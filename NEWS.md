@@ -2,6 +2,10 @@
 
 * Compact in-memory representation of R6 objects to save space when saving mlr3
   objects via saveRDS(), serialize() etc.
+* `FSelectorRFE` supports fraction of features to retain in each iteration
+  (`feature_fraction`), number of features to remove in each iteration
+  (`feature_number`) and vector of number of features to retain in each 
+  iteration (`subset_sizes`).
 * `AutoFSelect` is renamed to `AutoFSelector`.
 * To retrieve the inner feature selection results in nested resampling,
   `as.data.table(rr)$learner[[1]]$fselect_result` must be used now.
@@ -9,6 +13,10 @@
   in `AutoFSelector`. `store_fselect_instance` must be set as a parameter during 
   initialization.
 * Adds `FSelectorGeneticSearch`.
+* Fixes `check_values` flag in `FSelectInstanceSingleCrit` and
+  `FSelectInstanceMultiCrit`.
+* Removed dependency on orphaned package `bibtex`.
+* `PipeOpSelect` is internally used for task subsetting.
 
 # mlr3fselect 0.3.0
 

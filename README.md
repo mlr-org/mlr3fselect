@@ -2,9 +2,9 @@
 
 <!-- badges: start -->
 [![tic](https://github.com/mlr-org/mlr3fselect/workflows/tic/badge.svg?branch=master)](https://github.com/mlr-org/mlr3fselect/actions)
-[![CRAN](https://www.r-pkg.org/badges/version/mlr3fselect)](https://cran.r-project.org/package=mlr3fselect)
-[![codecov](https://codecov.io/gh/mlr-org/mlr3fselect/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3fselect)
+[![CRAN Status](https://www.r-pkg.org/badges/version/mlr3fselect)](https://cran.r-project.org/package=mlr3fselect)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
+[![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 <!-- badges: end -->
 
 This package provides feature selection for [mlr3](https://mlr3.mlr-org.com).

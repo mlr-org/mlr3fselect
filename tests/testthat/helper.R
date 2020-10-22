@@ -28,21 +28,22 @@ MeasureDummy =
   R6Class("MeasureDummy", inherit = MeasureRegr,
     public = list(
       initialize = function() {
-        super$initialize(id = "dummy", range = c(0, 4), minimize = FALSE)
+        super$initialize(id = "dummy", range = c(0, 4), minimize = FALSE,
+          properties = "requires_learner")
       }
     ),
     private = list(
 
-      .score = function(prediction, learner, task, ...) {
-        if (test_names(task$feature_names, permutation.of = "x1")) {
+      .score = function(prediction, learner, ...) {
+        if (test_names(learner$model$select$selection, permutation.of = "x1")) {
           return(1)
-        } else if (test_names(task$feature_names,
+        } else if (test_names(learner$model$select$selection,
           permutation.of = c("x1", "x2"))) {
           return(2)
-        } else if (test_names(task$feature_names,
+        } else if (test_names(learner$model$select$selection,
           permutation.of = c("x1", "x2", "x3"))) {
           return(4)
-        } else if (test_names(task$feature_names,
+        } else if (test_names(learner$model$select$selection,
           permutation.of = c("x1", "x2", "x3", "x4"))) {
           return(3)
         } else {
