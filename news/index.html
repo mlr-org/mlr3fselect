@@ -137,6 +137,10 @@
 <code>AutoFSelect</code> is renamed to <code>AutoFSelector</code>.</li>
 <li>To retrieve the inner feature selection results in nested resampling, <code>as.data.table(rr)$learner[[1]]$fselect_result</code> must be used now.</li>
 <li>Option to control <code>store_benchmark_result</code>, <code>store_models</code> and <code>check_values</code> in <code>AutoFSelector</code>. <code>store_fselect_instance</code> must be set as a parameter during initialization.</li>
+<li>Fixes <code>check_values</code> flag in <code>FSelectInstanceSingleCrit</code> and <code>FSelectInstanceMultiCrit</code>.</li>
+<li>Removed dependency on orphaned package <code>bibtex</code>.</li>
+<li>
+<code>PipeOpSelect</code> is internally used for task subsetting.</li>
 </ul>
 </div>
     <div id="mlr3fselect-030" class="section level1">
