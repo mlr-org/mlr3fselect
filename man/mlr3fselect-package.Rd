@@ -8,9 +8,9 @@
 \description{
 Implements methods for feature selection with
     'mlr3', e.g.  random search and sequential selection. Various
-    termination criteria can be set and combined. The class 'AutoFSelector'
-    provides a convenient way to perform nested resampling in combination
-    with 'mlr3'.
+    termination criteria can be set and combined. The class
+    'AutoFSelector' provides a convenient way to perform nested resampling
+    in combination with 'mlr3'.
 }
 \seealso{
 Useful links:

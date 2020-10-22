@@ -12,6 +12,7 @@
 * Option to control `store_benchmark_result`, `store_models` and `check_values`
   in `AutoFSelector`. `store_fselect_instance` must be set as a parameter during 
   initialization.
+* Adds `FSelectorGeneticSearch`.
 * Fixes `check_values` flag in `FSelectInstanceSingleCrit` and
   `FSelectInstanceMultiCrit`.
 * Removed dependency on orphaned package `bibtex`.
