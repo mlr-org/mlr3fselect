@@ -14,11 +14,13 @@
 #' \item{`mutationChance`}{`numeric(1)`}
 #' \item{`elitism`}{`integer(1)`}
 #' \item{`zeroToOneRatio`}{`integer(1)`}
+#' \item{`iters`}{`integer(1)`}
 #' }
 #'
-#' For the meaning of the control parameters, see [genalg::rbga.bin()]. Note
-#' that we have removed all control parameters which refer to the termination of
-#' the algorithm and where our terminators allow to obtain the same behavior.
+#' For the meaning of the control parameters, see [genalg::rbga.bin()].
+#' [genalg::rbga.bin()] internally terminates after `iters` iteration. We set
+#' `ìters = 100000`  to allow the termination via our terminators. If more
+#' iterations are needed, set `ìters` to a higher value in the parameter set.
 #'
 #' @export
 #' @template example
@@ -34,8 +36,10 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
         ParamInt$new("popSize", lower = 5L, default = 200L),
         ParamDbl$new("mutationChance", lower = 0, upper = 1),
         ParamInt$new("elitism", lower = 1L),
-        ParamInt$new("zeroToOneRatio", lower = 1, default = 10L)
+        ParamInt$new("zeroToOneRatio", lower = 1, default = 10L),
+        ParamInt$new("iters", lower = 1, default = 100000L)
       ))
+      ps$values$iters = 100000L
 
       super$initialize(param_set = ps, properties = "single-crit")
     }
@@ -47,7 +51,7 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
       if (is.null(pars$elitism)) pars$elitism = NA
       n = inst$objective$domain$length
 
-      mlr3misc::invoke(genalg::rbga.bin, size = n, iters = 100000,
+      mlr3misc::invoke(genalg::rbga.bin, size = n,
         evalFunc = inst$objective_function, .args = pars)
     }
   )

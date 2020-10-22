@@ -23,11 +23,13 @@ fs("genetic_search")
 \item{\code{mutationChance}}{\code{numeric(1)}}
 \item{\code{elitism}}{\code{integer(1)}}
 \item{\code{zeroToOneRatio}}{\code{integer(1)}}
+\item{\code{iters}}{\code{integer(1)}}
 }
 
-For the meaning of the control parameters, see \code{\link[genalg:rbga.bin]{genalg::rbga.bin()}}. Note
-that we have removed all control parameters which refer to the termination of
-the algorithm and where our terminators allow to obtain the same behavior.
+For the meaning of the control parameters, see \code{\link[genalg:rbga.bin]{genalg::rbga.bin()}}.
+\code{\link[genalg:rbga.bin]{genalg::rbga.bin()}} internally terminates after \code{iters} iteration. We set
+\code{ìters = 100000}  to allow the termination via our terminators. If more
+iterations are needed, set \code{ìters} to a higher value in the parameter set.
 }
 
 \examples{
