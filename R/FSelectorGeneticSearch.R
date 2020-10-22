@@ -26,7 +26,7 @@
 #' @examples 
 #' library(mlr3)
 #'
-#' terminator = trm("evals", n_evals = 10)
+#' terminator = trm("evals", n_evals = 5)
 #'
 #' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
