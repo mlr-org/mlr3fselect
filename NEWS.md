@@ -15,6 +15,7 @@
 * Fixes `check_values` flag in `FSelectInstanceSingleCrit` and
   `FSelectInstanceMultiCrit`.
 * Removed dependency on orphaned package `bibtex`.
+* `PipeOpSelect` is internally used for task subsetting.
 
 # mlr3fselect 0.3.0
 
