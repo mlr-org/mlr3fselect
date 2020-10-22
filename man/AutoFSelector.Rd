@@ -32,7 +32,7 @@ learner = lrn("classif.rpart")
 resampling = rsmp("holdout")
 measure = msr("classif.ce")
 
-terminator = trm("evals", n_evals = 5)
+terminator = trm("evals", n_evals = 3)
 fselector = fs("exhaustive_search")
 afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
   store_fselect_instance = TRUE)
