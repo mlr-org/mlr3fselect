@@ -77,14 +77,14 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
   private = list(
 
     .eval_many = function(xss) {
-      tasks = map(xss, function(x) {
+      learners = map(xss, function(x) {
         state = self$task$feature_names[unlist(x)]
-        tsk = self$task$clone(deep = TRUE)
-        tsk$select(state)
-        return(tsk)
+        graph = po("select", selector = selector_name(state)) %>>%
+          po("learner", self$learner)
+        GraphLearner$new(graph)
       })
 
-      design = benchmark_grid(tasks, self$learner, self$resampling)
+      design = benchmark_grid(self$task, learners, self$resampling)
       bmr = benchmark(design, store_models = self$store_models)
       aggr = bmr$aggregate(self$measures)
       y = map_chr(self$measures, "id")

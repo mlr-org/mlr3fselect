@@ -111,7 +111,8 @@ FSelectorRFE = R6Class("FSelectorRFE",
 
           uhash = archive$data()[get("batch_nr") == archive$n_batch, uhash]
           rr = archive$benchmark_result$resample_result(uhash = uhash)
-          learners = rr$learners
+          learners = extract_learner(rr$learners)
+
           imp = importance_average(learners, feat)
 
           # Eliminate the most unimportant feature of the feature subset
@@ -125,7 +126,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
             # Calculate the variable importance on the complete feature subset
             uhash = archive$data()[get("batch_nr") == 1, uhash]
             rr = archive$benchmark_result$resample_result(uhash = uhash)
-            learners = rr$learners
+            learners = extract_learner(rr$learners)
 
             self$importance = importance_average(learners, feature_names)
           }
@@ -156,3 +157,12 @@ importance_average = function(learners, features) {
 }
 
 mlr_fselectors$add("rfe", FSelectorRFE)
+
+# Extract trained Learners from a list of GraphLeaners
+extract_learner = function(graph_learners) {
+  map(graph_learners, function(learner) {
+    graph = learner$graph
+    graph$state = learner$model
+    graph$pipeops[[tail(learner$graph$ids(sorted = TRUE), 1)]]$learner_model
+  })
+}

@@ -29,7 +29,7 @@ test_that("FSelectorSequential", {
 })
 
 test_that("optimization_path method works", {
-  z = test_fselector("sequential", term_evals = 10)
+  z = test_fselector("sequential", term_evals = 10, store_models = TRUE)
   op = z$fselector$optimization_path(z$inst)
   expect_data_table(op, nrows = 4)
   expect_equal(op$dummy, c(1, 2, 4, 3))

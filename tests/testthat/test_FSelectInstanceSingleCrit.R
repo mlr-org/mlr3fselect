@@ -10,24 +10,24 @@ test_that("empty FSelectInstanceSingleCrit works", {
 })
 
 test_that("eval_batch works", {
-  inst = TEST_MAKE_INST_1D()
+  inst = TEST_MAKE_INST_1D(store_models = TRUE)
 
   xdt = data.table(x1 = list(TRUE, FALSE), x2 = list(FALSE, TRUE),
     x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
 
   z = inst$eval_batch(xdt)
-  expect_equal(inst$archive$benchmark_result$resample_result(1)$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(1)$learners[[1]]$model$select$selection,
     c("x1", "x3", "x4"))
-  expect_equal(inst$archive$benchmark_result$resample_result(2)$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(2)$learners[[1]]$model$select$selection,
     c("x2", "x3", "x4"))
   expect_identical(inst$archive$n_evals, 2L)
   expect_data_table(z, nrows = 2L)
   expect_named(z, c("dummy", "uhash"))
 
   z = inst$eval_batch(xdt)
-  expect_equal(inst$archive$benchmark_result$resample_result(3)$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(3)$learners[[1]]$model$select$selection,
     c("x1", "x3", "x4"))
-  expect_equal(inst$archive$benchmark_result$resample_result(4)$task$feature_names,
+  expect_equal(inst$archive$benchmark_result$resample_result(4)$learners[[1]]$model$select$selection,
     c("x2", "x3", "x4"))
   expect_identical(inst$archive$n_evals, 4L)
   expect_data_table(z, nrows = 2L)
@@ -38,7 +38,7 @@ test_that("eval_batch works", {
 })
 
 test_that("objective_function works", {
-  inst = TEST_MAKE_INST_1D()
+  inst = TEST_MAKE_INST_1D(store_models = TRUE)
   y = inst$objective_function(c(1, 1, 0, 0))
   expect_equal(y, c(dummy = -2))
 })
