@@ -20,7 +20,7 @@
 #' }
 #'
 #' @source
-#' \cite{mlr3fselect}{bergstra_2012}
+#' `r tools::toRd(bibentries["bergstra_2012"])`
 #'
 #' @export
 #' @template example

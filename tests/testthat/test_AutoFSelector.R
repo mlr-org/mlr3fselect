@@ -34,7 +34,7 @@ test_that("nested resampling works", {
   terminator = trm("evals", n_evals = 10L)
 
   at = AutoFSelector$new(learner, resampling_inner, measures, terminator,
-    fselector = fselector)
+    fselector = fselector, store_models = TRUE)
   expect_null(at$fselect_instance)
 
   resampling_outer = rsmp("cv", folds = 2)
@@ -72,7 +72,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
 
   assert_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
   assert_benchmark_result(at$fselect_instance$archive$benchmark_result)
-  assert_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
+  assert_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model$classif.rpart$model, "rpart")
 
   at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
     fselector = fselector, store_fselect_instance = TRUE, store_benchmark_result = TRUE,

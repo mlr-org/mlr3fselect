@@ -33,7 +33,7 @@
 #' resampling = rsmp("holdout")
 #' measure = msr("classif.ce")
 #'
-#' terminator = trm("evals", n_evals = 15)
+#' terminator = trm("evals", n_evals = 5)
 #' fselector = fs("exhaustive_search")
 #' afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
 #'   store_fselect_instance = TRUE)
