@@ -238,22 +238,22 @@ Instance optimized with FSelectorSequential.</p></dd>
 
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
-#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width &lt;list[4]&gt;
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
 #&gt;    classif.ce
-#&gt; 1:          0</div><div class='input'>
+#&gt; 1:       0.06</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
-#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width &lt;list[4]&gt;
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
 #&gt;    classif.ce
-#&gt; 1:          0</div><div class='input'>
+#&gt; 1:       0.06</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='va'>data</span>
 </div><div class='output co'>#&gt; function (unnest = NULL) 
 #&gt; .__Archive__data(self = self, private = private, super = super, 
 #&gt;     unnest = unnest)
-#&gt; &lt;environment: 0x564ab3579c30&gt;</div></pre>
+#&gt; &lt;environment: 0x563ff5dd6930&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
