@@ -48,7 +48,7 @@ fselector$optimize(instance)
 instance$result
 
 # Allows access of data.table of full path of all evaluations
-instance$archive$data
+instance$archive$data()
 }
 \section{Super class}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorExhaustiveSearch}
