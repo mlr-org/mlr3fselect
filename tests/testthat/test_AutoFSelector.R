@@ -22,7 +22,7 @@ test_that("train and predict work", {
   expect_equal(r$x4, FALSE)
   prd = at$predict(task)
   expect_prediction(prd)
-  expect_is(at$learner$model, "rpart")
+  expect_is(at$learner$model$regr.rpart$model, "rpart")
 })
 
 test_that("nested resampling works", {
@@ -54,8 +54,8 @@ test_that("nested resampling works", {
   expect_equal(tab$learner[[2]]$fselect_result$x4, FALSE)
   expect_numeric(tab$learner[[1]]$fselect_result$dummy, len = 1L)
   expect_numeric(tab$learner[[2]]$fselect_result$dummy, len = 1L)
-  expect_class(tab$learner[[1]]$model$learner$model, "rpart")
-  expect_class(tab$learner[[2]]$model$learner$model, "rpart")
+  expect_class(tab$learner[[1]]$model$learner$model$regr.rpart$model, "rpart")
+  expect_class(tab$learner[[2]]$model$learner$model$regr.rpart$model, "rpart")
   expect_null(at$archive)
 })
 
