@@ -122,16 +122,14 @@ AutoFSelector = R6Class("AutoFSelector",
   private = list(
 
     .train = function(task) {
-
       ia = self$instance_args
       ia$task = task$clone()
       instance = invoke(FSelectInstanceSingleCrit$new, .args = ia)
       self$fselector$optimize(instance)
 
-      feat = task$feature_names[as.logical(instance$result_x_search_space)]
-      ia$task$select(feat)
-
-      learner = ia$learner$clone(deep = TRUE)
+      hash = instance$archive$best()$uhash
+      bmr = as.data.table(instance$archive$benchmark_result)
+      learner = bmr[uhash == hash, learner][[1]]$clone(deep = TRUE)
       learner$train(ia$task)
 
       result_model = list(learner = learner)
