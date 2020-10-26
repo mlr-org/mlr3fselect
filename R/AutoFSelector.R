@@ -129,6 +129,7 @@ AutoFSelector = R6Class("AutoFSelector",
 
       hash = instance$archive$best()$uhash
       bmr = as.data.table(instance$archive$benchmark_result)
+      uhash = NULL
       learner = bmr[uhash == hash, learner][[1]]$clone(deep = TRUE)
       learner$train(ia$task)
 
