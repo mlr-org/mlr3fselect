@@ -116,3 +116,31 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
   regexp = "Models can only be stored if store_benchmark_result is set to TRUE",
   fixed = TRUE)
 })
+
+test_that("AutoFSelector works with GraphLearner", {
+  task = TEST_MAKE_TSK()
+  graph =  po("imputemedian") %>>% lrn("regr.rpart")
+  learner = GraphLearner$new(graph)
+  resampling = rsmp("holdout")
+  measures = msr("dummy")
+  fselector = fs("sequential")
+  terminator = trm("evals", n_evals = 4L)
+
+  at = AutoFSelector$new(learner, resampling, measures, terminator, fselector)
+  expect_learner(at)
+  at$train(task)
+  expect_learner(at)
+  inst = at$fselect_instance
+  a = inst$archive$data()
+  expect_data_table(a, nrows = 4L)
+  r = at$fselect_result
+  expect_equal(r$x1, TRUE)
+  expect_equal(r$x2, FALSE)
+  expect_equal(r$x3, FALSE)
+  expect_equal(r$x4, FALSE)
+  prd = at$predict(task)
+  expect_prediction(prd)
+  expect_equal(at$model$features, "x1")
+  # Check for clone
+  expect_equal(task$feature_names, c("x1", "x2", "x3" ,"x4"))
+})

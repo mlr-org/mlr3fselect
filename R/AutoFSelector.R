@@ -134,7 +134,7 @@ AutoFSelector = R6Class("AutoFSelector",
       learner = ia$learner$clone(deep = TRUE)
       learner$train(ia$task)
 
-      result_model = list(learner = learner)
+      result_model = list(learner = learner, features = feat)
       if (isTRUE(private$.store_fselect_instance)) {
         result_model$fselect_instance = instance
       }
@@ -142,6 +142,8 @@ AutoFSelector = R6Class("AutoFSelector",
     },
 
     .predict = function(task) {
+      task = task$clone(deep = TRUE)
+      task$select(self$model$features)
       self$model$learner$predict(task)
     },
 
