@@ -36,7 +36,7 @@ Search method \code{sfs} (forward search) or \code{sbs} (backward search).}
 \examples{
 library(mlr3)
 
-terminator = trm("evals", n_evals = 3)
+terminator = trm("evals", n_evals = 1)
 
 instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
