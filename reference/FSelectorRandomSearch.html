@@ -210,7 +210,7 @@ Maximum number of feature sets to try in a batch.</p></dd>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
 
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
 <span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
@@ -248,16 +248,16 @@ Maximum number of feature sets to try in a batch.</p></dd>
 #&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.04
 #&gt; 10:         TRUE        TRUE         TRUE        TRUE       0.04
 #&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: f7efa7cb-ad00-4823-a8e5-899212321b79 &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  2: 96746bb1-c212-45cc-b775-38a57023ab39 &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  3: 75904ba4-e7a2-44c1-97d7-fbcb38c3cd40 &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  4: d392f46c-7c7c-4acb-948d-981b95d48360 &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  5: 371b26b6-a8e7-454f-9ec0-6882f207735b &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  6: 67a67b97-b46a-49e9-940d-0edf413b287b &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  7: d8c754b9-f1ed-4e6a-a059-54539ff3ee10 &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  8: 4f8db165-2280-4ef0-8ad1-80ed561069bb &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt;  9: b981fb2f-64f4-4aff-bb69-b267c5764fbd &lt;list[4]&gt; 2020-10-27 14:45:01        1
-#&gt; 10: 91ac232b-61c1-41fb-94f8-23b1fda065b7 &lt;list[4]&gt; 2020-10-27 14:45:01        1</div></pre>
+#&gt;  1: 1261fb7b-53f1-4582-9230-2f6c8e87b4cf &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  2: 514543af-4233-460c-95d5-e8feab99601f &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  3: 6dcd2e0b-6595-427c-9aee-bf2e55fc3668 &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  4: 9b638039-793e-4b0b-9938-880ca31e2ca4 &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  5: 4510419d-6374-4d16-8ea6-38f4355029aa &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  6: 14c39ca5-0b8a-4e6f-af7d-8608eb3b7625 &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  7: 8ba5144f-05aa-48f6-a7e5-c6a1784ecbed &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  8: 81e37b07-ec3b-436e-abdc-f0f8ea610560 &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt;  9: ba822847-b0a9-41a0-b4b1-461480e14f45 &lt;list[4]&gt; 2020-10-27 15:48:15        1
+#&gt; 10: 64af5237-0a6b-4f2a-bba0-e58572d59c1e &lt;list[4]&gt; 2020-10-27 15:48:15        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
