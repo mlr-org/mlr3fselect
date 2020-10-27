@@ -38,7 +38,7 @@ Maximum number of feature sets to try in a batch.}
 \examples{
 library(mlr3)
 
-terminator = trm("evals", n_evals = 10)
+terminator = trm("evals", n_evals = 3)
 
 instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
