@@ -1,3 +1,7 @@
+# mlr3fselector 0.4.1
+
+* Fix bug in `AutoFSelector$predict()`
+
 # mlr3fselector 0.4.0
 
 * Compact in-memory representation of R6 objects to save space when saving mlr3
