@@ -44,7 +44,7 @@
 #' )
 #'
 #' fselector = fs("rfe")
-#' 
+#' \donttest{
 #' # Modifies the instance by reference
 #' fselector$optimize(instance)
 #' 
@@ -52,7 +52,7 @@
 #' instance$result
 #' 
 #' # Allows access of data.table of full path of all evaluations
-#' instance$archive$data()
+#' instance$archive$data()}
 FSelectorRFE = R6Class("FSelectorRFE",
   inherit = FSelector,
   public = list(

@@ -72,7 +72,7 @@ instance = FSelectInstanceSingleCrit$new(
 
 # swap this line to use a different FSelector
 fselector = fs("random_search")
-
+\donttest{
 # modifies the instance by reference
 fselector$optimize(instance)
 
@@ -80,7 +80,7 @@ fselector$optimize(instance)
 instance$result
 
 # allows access of data.table / benchmark result of full path of all evaluations
-instance$archive
+instance$archive}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

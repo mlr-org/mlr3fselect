@@ -1,7 +1,7 @@
 #' @examples
 #' library(mlr3)
 #'
-#' terminator = trm("evals", n_evals = 1)
+#' terminator = trm("evals", n_evals = 5)
 #'
 #' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
@@ -12,7 +12,7 @@
 #' )
 #'
 #' fselector = fs("<%= id %>")
-#'
+#' \donttest{
 #' # Modifies the instance by reference
 #' fselector$optimize(instance)
 #'
@@ -20,4 +20,4 @@
 #' instance$result
 #'
 #' # Allows access of data.table of full path of all evaluations
-#' instance$archive$data()
+#' instance$archive$data()}

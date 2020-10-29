@@ -37,7 +37,7 @@
 #' )
 #'
 #' fselector = fs("genetic_search", popSize = 10L)
-#'
+#' \donttest{
 #' # Modifies the instance by reference
 #' fselector$optimize(instance)
 #'
@@ -45,7 +45,7 @@
 #' instance$result
 #'
 #' # Allows access of data.table of full path of all evaluations
-#' instance$archive$data()
+#' instance$archive$data()}
 FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
   inherit = FSelector,
   public = list(

@@ -53,7 +53,7 @@ design = data.table(Petal.Length = c(TRUE, FALSE),
   Sepal.Width = c(FALSE, TRUE))
 
 fselector = fs("design_points", design = design)
-
+\donttest{
 # Modifies the instance by reference
 fselector$optimize(instance)
 
@@ -61,7 +61,7 @@ fselector$optimize(instance)
 instance$result
 
 # Allows access of data.table of full path of all evaluations
-instance$archive$data()
+instance$archive$data()}
 }
 \section{Super classes}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorFromOptimizer]{mlr3fselect::FSelectorFromOptimizer}} -> \code{FSelectorDesignPoints}

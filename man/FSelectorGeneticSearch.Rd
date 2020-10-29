@@ -46,7 +46,7 @@ instance = FSelectInstanceSingleCrit$new(
 )
 
 fselector = fs("genetic_search", popSize = 10L)
-
+\donttest{
 # Modifies the instance by reference
 fselector$optimize(instance)
 
@@ -54,7 +54,7 @@ fselector$optimize(instance)
 instance$result
 
 # Allows access of data.table of full path of all evaluations
-instance$archive$data()
+instance$archive$data()}
 }
 \section{Super class}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorGeneticSearch}
