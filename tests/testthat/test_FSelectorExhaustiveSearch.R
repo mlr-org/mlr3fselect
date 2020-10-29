@@ -1,6 +1,8 @@
 context("FSelectorExhaustive")
 
 test_that("FSelectorExhaustive", {
+  skip_on_cran()
+
   test_fselector("exhaustive_search", term_evals = 2, real_evals = 4)
   test_fselector("exhaustive_search", term_evals = 4, real_evals = 4)
 
@@ -28,5 +30,7 @@ test_that("FSelectorExhaustive", {
 })
 
 test_that("FSelectorExhaustive works with multi-crit", {
+  skip_on_cran()
+
   test_fselector_2D("exhaustive_search", term_evals = 4, real_evals = 4)
 })

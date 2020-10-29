@@ -1,6 +1,7 @@
 context("FSelectorRFE")
 
 test_that("FSelectorRFE", {
+  skip_on_cran()
 
   z = test_fselector("rfe", term_evals = 3L, store_models = TRUE)
   a = z$inst$archive$data()

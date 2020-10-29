@@ -1,6 +1,8 @@
 context("FSelectorSequential")
 
 test_that("FSelectorSequential", {
+  skip_on_cran()
+
   test_fselector("sequential", term_evals = 2, real_evals = 4)
   test_fselector("sequential", term_evals = 10, real_evals = 10)
 
@@ -29,6 +31,8 @@ test_that("FSelectorSequential", {
 })
 
 test_that("optimization_path method works", {
+  skip_on_cran()
+
   z = test_fselector("sequential", term_evals = 10, store_models = TRUE)
   op = z$fselector$optimization_path(z$inst)
   expect_data_table(op, nrows = 4)

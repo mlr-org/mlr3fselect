@@ -1,6 +1,8 @@
 context("AutoFSelector")
 
 test_that("train and predict work", {
+  skip_on_cran()
+
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
@@ -26,6 +28,8 @@ test_that("train and predict work", {
 })
 
 test_that("nested resampling works", {
+  skip_on_cran()
+
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling_inner = rsmp("holdout")
@@ -60,6 +64,8 @@ test_that("nested resampling works", {
 })
 
 test_that("store_fselect_instance, store_benchmark_result and store_models flags work", {
+  skip_on_cran()
+
   te = trm("evals", n_evals = 10)
   task = tsk("iris")
   ms = msr("classif.ce")
