@@ -293,7 +293,7 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 
 <span class='co'># swap this line to use a different FSelector</span>
 <span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"random_search"</span><span class='op'>)</span>
-
+<span class='co'># \donttest{</span>
 <span class='co'># modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                  features
@@ -307,7 +307,7 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 #&gt;     x_domain classif.ce
 #&gt; 1: &lt;list[4]&gt;       0.02</div><div class='input'>
 <span class='co'># allows access of data.table / benchmark result of full path of all evaluations</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span>
+<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='co'># }</span>
 </div><div class='output co'>#&gt; &lt;ArchiveFSelect&gt;
 #&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt;  1:         TRUE       FALSE         TRUE       FALSE       0.02
@@ -321,16 +321,16 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 #&gt;  9:         TRUE       FALSE        FALSE       FALSE       0.02
 #&gt; 10:         TRUE        TRUE         TRUE       FALSE       0.02
 #&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: 255b7de4-59d9-47d3-9657-7431e08090d4 &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  2: cf6fc83f-ccff-4c4b-a365-8c02a10ff43f &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  3: 26aaef14-6a92-40c4-9c2f-978fea5daec7 &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  4: 4892da00-8ba7-44e7-b977-838fe258cf29 &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  5: 635e2553-b985-4516-ad47-dc91c9e0d9e8 &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  6: 40b2f781-3eeb-4645-ba05-a2ded5d2694e &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  7: ab9ea276-0609-454d-9446-606c29a36548 &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  8: 7cfeff0f-6f53-4679-8d86-e539e52dd933 &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt;  9: 929bab75-941d-4cb6-9308-31a6aadfea2b &lt;list[4]&gt; 2020-10-29 04:29:54        1
-#&gt; 10: 4d63134d-c52d-4cab-ac46-a80432cd1f29 &lt;list[4]&gt; 2020-10-29 04:29:54        1</div></pre>
+#&gt;  1: 3d569b1b-5b55-4e90-90d0-b3f0c34f5a6e &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  2: e18f5e76-472b-4fd9-8af0-84cd7bf67cfa &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  3: 30c86024-1c7d-4b97-a621-9a8a23aac8ce &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  4: 500bdaad-2262-4f89-b1f2-efcc889a42b0 &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  5: 49fc57c9-4649-495a-a19c-f8b82a91ba7f &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  6: 6daad2da-4d07-4585-968d-8808659846f4 &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  7: 6db06325-8ea4-4e75-af99-83d5b507907a &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  8: 3c5509d3-17b0-4d68-aa7b-9684ac5db4c7 &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt;  9: d46328ca-5959-4f21-8be9-10a32ac74383 &lt;list[4]&gt; 2020-10-29 22:28:27        1
+#&gt; 10: 9f4e2f93-6522-430d-a220-71a055c85907 &lt;list[4]&gt; 2020-10-29 22:28:27        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

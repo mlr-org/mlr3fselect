@@ -234,7 +234,7 @@ Stores the feature importance of the model with all variables if
 <span class='op'>)</span>
 
 <span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"rfe"</span><span class='op'>)</span>
-
+<span class='co'># \donttest{</span>
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
@@ -248,15 +248,15 @@ Stores the feature importance of the model with all variables if
 #&gt;                                             features  x_domain classif.ce
 #&gt; 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width &lt;list[4]&gt;       0.06</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt; 1:         TRUE        TRUE         TRUE        TRUE       0.06
 #&gt; 2:         TRUE        TRUE        FALSE       FALSE       0.06
 #&gt; 3:        FALSE        TRUE        FALSE       FALSE       0.06
 #&gt;                                   uhash  x_domain           timestamp batch_nr
-#&gt; 1: a8ebe243-73af-4017-9858-441052101e01 &lt;list[4]&gt; 2020-10-29 04:30:00        1
-#&gt; 2: 65466f2f-1b47-4afb-8c4f-3b81f172d63f &lt;list[4]&gt; 2020-10-29 04:30:00        2
-#&gt; 3: b39be78d-f144-4deb-afe2-7be4fd3de4f3 &lt;list[4]&gt; 2020-10-29 04:30:00        3</div></pre>
+#&gt; 1: 256b93ff-1d9f-4b75-a24e-6154acc4c786 &lt;list[4]&gt; 2020-10-29 22:28:33        1
+#&gt; 2: 01f8dbfa-64d7-4765-972e-183b5f9f9529 &lt;list[4]&gt; 2020-10-29 22:28:33        2
+#&gt; 3: 28f307bf-d83d-4632-8e76-48989456c2ff &lt;list[4]&gt; 2020-10-29 22:28:34        3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -210,7 +210,7 @@ Maximum number of feature sets to try in a batch.</p></dd>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
 
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 
 <span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
@@ -221,7 +221,7 @@ Maximum number of feature sets to try in a batch.</p></dd>
 <span class='op'>)</span>
 
 <span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"random_search"</span><span class='op'>)</span>
-
+<span class='co'># \donttest{</span>
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
@@ -235,7 +235,7 @@ Maximum number of feature sets to try in a batch.</p></dd>
 #&gt;     x_domain classif.ce
 #&gt; 1: &lt;list[4]&gt;       0.04</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt;  1:        FALSE       FALSE        FALSE        TRUE       0.46
 #&gt;  2:        FALSE       FALSE        FALSE        TRUE       0.46
@@ -248,16 +248,16 @@ Maximum number of feature sets to try in a batch.</p></dd>
 #&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.04
 #&gt; 10:         TRUE        TRUE         TRUE        TRUE       0.04
 #&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: 91b2252d-0b1b-4ba2-80fe-ed71184261ce &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  2: 4f44fe73-e5a4-4cfa-8505-89a2e26b7a2a &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  3: d3613385-0737-4469-b213-08e1cf31c79c &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  4: bc3a8382-3250-4fa4-b382-7b8726b2cde6 &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  5: c2796724-0e0a-4925-879c-c121a4e466ba &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  6: 80eec791-b5a1-4ac6-9780-ce7170879462 &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  7: dd03b83f-9c8a-4392-8b2f-284d0defc3d9 &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  8: 588718a9-0c53-413e-b7be-014fb80fcccb &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt;  9: 350f3d2e-24df-401d-b317-497102d23030 &lt;list[4]&gt; 2020-10-29 04:30:03        1
-#&gt; 10: 0b81bba1-be32-46d6-b977-1e7f4d7a37c8 &lt;list[4]&gt; 2020-10-29 04:30:03        1</div></pre>
+#&gt;  1: f7c14fa0-f508-4e22-9d77-d0189653ca07 &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  2: 26a5f13c-23c0-4698-bbfd-88171c1e5187 &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  3: add95c4e-40b8-480e-8135-8aff722f3992 &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  4: 5fd68ab0-9810-4f85-855b-2aca2dda1dff &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  5: ec405859-9727-46b3-98c3-c4539e89b8b9 &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  6: 59413b0f-6458-409a-b66c-1bad6768959e &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  7: 91c91c6d-e7d7-490f-9340-f8951c571fca &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  8: c9694fe9-6b2a-4a2a-97b4-668b28b22db3 &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt;  9: eee391da-4950-40d7-96d1-59b75dbda5ec &lt;list[4]&gt; 2020-10-29 22:28:36        1
+#&gt; 10: 5d1f88b1-fd14-41e3-9b61-a9b923d87a30 &lt;list[4]&gt; 2020-10-29 22:28:36        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

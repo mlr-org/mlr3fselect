@@ -215,7 +215,7 @@ iterations are needed, set <code>ìters</code> to a higher value in the paramete
 <span class='op'>)</span>
 
 <span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"genetic_search"</span>, popSize <span class='op'>=</span> <span class='fl'>10L</span><span class='op'>)</span>
-
+<span class='co'># \donttest{</span>
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
@@ -229,7 +229,7 @@ iterations are needed, set <code>ìters</code> to a higher value in the paramete
 #&gt;     x_domain classif.ce
 #&gt; 1: &lt;list[4]&gt;       0.08</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt; 1:         TRUE        TRUE        FALSE       FALSE       0.08
 #&gt; 2:        FALSE        TRUE        FALSE       FALSE       0.08
@@ -237,11 +237,11 @@ iterations are needed, set <code>ìters</code> to a higher value in the paramete
 #&gt; 4:        FALSE       FALSE         TRUE       FALSE       0.22
 #&gt; 5:        FALSE        TRUE        FALSE       FALSE       0.08
 #&gt;                                   uhash  x_domain           timestamp batch_nr
-#&gt; 1: 0f39a675-a4c8-4d5a-b154-382d85c77167 &lt;list[4]&gt; 2020-10-29 04:29:58        1
-#&gt; 2: 8139e544-d376-4f78-aee8-944aa4bdd0fe &lt;list[4]&gt; 2020-10-29 04:29:58        2
-#&gt; 3: ec79cfb4-813f-49de-a6cd-f3011eb63bce &lt;list[4]&gt; 2020-10-29 04:29:59        3
-#&gt; 4: 97f02d50-724b-4188-8117-3cdfa4275abb &lt;list[4]&gt; 2020-10-29 04:29:59        4
-#&gt; 5: 6d3b7ff7-1201-4441-a425-5286c343a34a &lt;list[4]&gt; 2020-10-29 04:29:59        5</div></pre>
+#&gt; 1: c4641ffb-d948-4fec-87c9-6aaf4bdf828a &lt;list[4]&gt; 2020-10-29 22:28:31        1
+#&gt; 2: fb6cb8c3-d699-4206-9c69-eaaf8d27adb1 &lt;list[4]&gt; 2020-10-29 22:28:32        2
+#&gt; 3: 3d4f9bbf-6a7f-4b8c-8037-f5de48eb3884 &lt;list[4]&gt; 2020-10-29 22:28:32        3
+#&gt; 4: 224977f3-89db-46bb-a237-26fac9644e6a &lt;list[4]&gt; 2020-10-29 22:28:32        4
+#&gt; 5: 954ada96-22d8-41ce-af73-37328cc4c29a &lt;list[4]&gt; 2020-10-29 22:28:32        5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
