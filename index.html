@@ -96,7 +96,8 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>CRAN version</p>
-<pre class="{r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("mlr3fselect")</a></code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mlr3fselect"</span><span class="op">)</span></code></pre></div>
 <p>Development version</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3fselect"</span><span class="op">)</span></code></pre></div>
@@ -104,32 +105,33 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<pre class="{r}"><code><a href="https://mlr3.mlr-org.com">library("mlr3")
-library("mlr3fselect")
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://mlr3.mlr-org.com">"mlr3"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://mlr3fselect.mlr-org.com">"mlr3fselect"</a></span><span class="op">)</span>
 
-task = tsk("pima")
-learner = lrn("classif.rpart")
-resampling = rsmp("holdout")
-measure = msr("classif.ce")
+<span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">tsk</a></span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span>
+<span class="va">learner</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>
+<span class="va">resampling</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>
+<span class="va">measure</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>
 
-# Define termination criterion
-terminator = trm("evals", n_evals = 20)
+<span class="co"># Define termination criterion</span>
+<span class="va">terminator</span> <span class="op">=</span> <span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
 
-# Create fselect instance
-instance = FSelectInstanceSingleCrit$new(task = task,
-  learner = learner,
-  resampling = resampling,
-  measure = measure,
-  terminator = terminator)
+<span class="co"># Create fselect instance</span>
+<span class="va">instance</span> <span class="op">=</span> <span class="va"><a href="reference/FSelectInstanceSingleCrit.html">FSelectInstanceSingleCrit</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>task <span class="op">=</span> <span class="va">task</span>,
+  learner <span class="op">=</span> <span class="va">learner</span>,
+  resampling <span class="op">=</span> <span class="va">resampling</span>,
+  measure <span class="op">=</span> <span class="va">measure</span>,
+  terminator <span class="op">=</span> <span class="va">terminator</span><span class="op">)</span>
 
-# Load fselector
-fselector = fs("random_search")
+<span class="co"># Load fselector</span>
+<span class="va">fselector</span> <span class="op">=</span> <span class="fu"><a href="reference/fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>
 
-# Trigger optimization
-fselector$optimize(instance)
+<span class="co"># Trigger optimization</span>
+<span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span>
 
-# View results
-instance$result</a></code></pre>
+<span class="co"># View results</span>
+<span class="va">instance</span><span class="op">$</span><span class="va">result</span></code></pre></div>
 </div>
 </div>
   </div>
