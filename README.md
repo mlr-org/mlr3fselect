@@ -21,19 +21,19 @@ For feature filters and embedded methods, see [mlr3filters](https://mlr3filters.
 
 CRAN version
 
-```{r}
+```r
 install.packages("mlr3fselect")
 ```
 
 Development version
 
-``` r
+```r
 remotes::install_github("mlr-org/mlr3fselect")
 ```
 
 ## Example
 
-```{r}
+```r
 library("mlr3")
 library("mlr3fselect")
 
