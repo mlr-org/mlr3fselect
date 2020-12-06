@@ -1,5 +1,3 @@
-context("FSelectorExhaustive")
-
 test_that("FSelectorExhaustive", {
   skip_on_cran()
 

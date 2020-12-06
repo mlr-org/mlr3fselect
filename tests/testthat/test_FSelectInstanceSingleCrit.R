@@ -1,5 +1,3 @@
-context("FSelectInstanceSingleCrit")
-
 test_that("empty FSelectInstanceSingleCrit works", {
   inst = TEST_MAKE_INST_1D()
 

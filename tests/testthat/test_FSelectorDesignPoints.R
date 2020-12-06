@@ -1,5 +1,3 @@
-context("FSelectorDesignPoints")
-
 test_that("FSelectorDesignPoints", {
   design = data.table(
     x1 = c(TRUE, FALSE),
