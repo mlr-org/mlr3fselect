@@ -53,7 +53,7 @@ xdt = data.table(
 inst$eval_batch(xdt)
 
 # Get archive data
-inst$archive$data()
+as.data.table(inst$archive)
 }
 \section{Super classes}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceSingleCrit]{bbotk::OptimInstanceSingleCrit}} -> \code{FSelectInstanceSingleCrit}

@@ -15,7 +15,7 @@ test_that("train and predict work", {
   at$train(task)
   expect_learner(at)
   inst = at$fselect_instance
-  a = inst$archive$data()
+  a = inst$archive$data
   expect_data_table(a, nrows = 4L)
   r = at$fselect_result
   expect_equal(r$x1, TRUE)
@@ -46,8 +46,8 @@ test_that("nested resampling works", {
   tab = as.data.table(rr)
 
   expect_data_table(tab, nrows = 2)
-  expect_data_table(tab$learner[[1]]$archive$data(), nrows = 10)
-  expect_data_table(tab$learner[[2]]$archive$data(), nrows = 10)
+  expect_data_table(tab$learner[[1]]$archive$data, nrows = 10)
+  expect_data_table(tab$learner[[2]]$archive$data, nrows = 10)
   expect_equal(tab$learner[[1]]$fselect_result$x1, TRUE)
   expect_equal(tab$learner[[1]]$fselect_result$x2, TRUE)
   expect_equal(tab$learner[[1]]$fselect_result$x3, TRUE)
@@ -137,7 +137,7 @@ test_that("AutoFSelector works with GraphLearner", {
   at$train(task)
   expect_learner(at)
   inst = at$fselect_instance
-  a = inst$archive$data()
+  a = inst$archive$data
   expect_data_table(a, nrows = 4L)
   r = at$fselect_result
   expect_equal(r$x1, TRUE)

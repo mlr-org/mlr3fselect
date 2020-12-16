@@ -54,7 +54,7 @@ FSelectorSequential = R6Class("FSelectorSequential",
       if (inst$archive$n_batch == 0L) {
         stop("No results stored in archive")
       }
-      inst$archive$data()[, head(.SD, 1), by = get("batch_nr")]
+      inst$archive$data[, head(.SD, 1), by = get("batch_nr")]
     }
   ),
   private = list(

@@ -60,7 +60,7 @@
 #' inst$eval_batch(xdt)
 #'
 #' # Get archive data
-#' inst$archive$data()
+#' as.data.table(inst$archive)
 FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
   inherit = OptimInstanceMultiCrit,
   public = list(

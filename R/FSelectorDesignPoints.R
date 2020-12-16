@@ -44,7 +44,7 @@
 #' instance$result
 #'
 #' # Allows access of data.table of full path of all evaluations
-#' instance$archive$data()}
+#' as.data.table(instance$archive)}
 FSelectorDesignPoints = R6Class("FSelectorDesignPoints",
   inherit = FSelectorFromOptimizer,
   public = list(

@@ -61,7 +61,7 @@
 #' inst$eval_batch(xdt)
 #'
 #' # Get archive data
-#' inst$archive$data()
+#' as.data.table(inst$archive)
 FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
   inherit = OptimInstanceSingleCrit,
   public = list(

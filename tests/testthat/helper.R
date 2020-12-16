@@ -72,7 +72,7 @@ test_fselector = function(.key, ..., term_evals = 2L, real_evals = term_evals,
   archive = inst$archive
 
   # Archive checks
-  expect_data_table(archive$data(), nrows = real_evals)
+  expect_data_table(archive$data, nrows = real_evals)
   expect_equal(inst$archive$n_evals, real_evals)
 
   # Result checks
@@ -121,7 +121,7 @@ test_fselector_2D = function(.key, ..., term_evals = 2L, real_evals = term_evals
   archive = inst$archive
 
   # Archive checks
-  expect_data_table(archive$data(), nrows = real_evals)
+  expect_data_table(archive$data, nrows = real_evals)
   expect_equal(inst$archive$n_evals, real_evals)
 
   # Result checks

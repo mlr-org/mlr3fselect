@@ -9,15 +9,6 @@
 #' [mlr3::BenchmarkResult] is connected to the [data.table::data.table] via the
 #' `uhash` column.
 #'
-#' @section Technical details:
-#'
-#' The data is stored in a private `.data` field that contains a
-#' [data.table::data.table] which logs all performed function calls of the
-#' [ObjectiveFSelect]. This [data.table::data.table] is accessed with the public
-#' `$data()` method. New values can be added with the `$add_evals()` method.
-#' This however is usually done through the evaluation of the
-#' [FSelectInstanceSingleCrit] or [FSelectInstanceMultiCrit] by the [FSelector].
-#'
 #' @export
 ArchiveFSelect = R6Class("ArchiveFSelect",
   inherit = Archive,

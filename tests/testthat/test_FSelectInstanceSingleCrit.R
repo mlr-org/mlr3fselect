@@ -3,7 +3,7 @@ context("FSelectInstanceSingleCrit")
 test_that("empty FSelectInstanceSingleCrit works", {
   inst = TEST_MAKE_INST_1D()
 
-  expect_data_table(inst$archive$data(), nrows = 0L)
+  expect_data_table(inst$archive$data, nrows = 0L)
   expect_identical(inst$archive$n_evals, 0L)
   expect_identical(inst$archive$n_batch, 0L)
   expect_null(inst$result)
@@ -33,7 +33,7 @@ test_that("eval_batch works", {
   expect_data_table(z, nrows = 2L)
   expect_named(z, c("dummy", "uhash"))
 
-  a = inst$archive$data()
+  a = inst$archive$data
   expect_data_table(a, nrows = 4L)
 })
 
@@ -49,7 +49,7 @@ test_that("store_benchmark_result flag works", {
     x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
   inst$eval_batch(xdt)
 
-  expect_true("uhashes" %nin% colnames(inst$archive$data()))
+  expect_true("uhashes" %nin% colnames(inst$archive$data))
 
   inst = TEST_MAKE_INST_1D(store_benchmark_result = TRUE)
   xdt = data.table(x1 = list(TRUE, FALSE), x2 = list(FALSE, TRUE),
