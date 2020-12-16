@@ -144,17 +144,6 @@ function calls of the Objective and the associated <a href='https://mlr3.mlr-org
 
 
 
-    <h2 class="hasAnchor" id="technical-details"><a class="anchor" href="#technical-details"></a>Technical details</h2>
-
-    
-
-
-<p>The data is stored in a private <code>.data</code> field that contains a
-<a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a> which logs all performed function calls of the
-<a href='ObjectiveFSelect.html'>ObjectiveFSelect</a>. This <a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a> is accessed with the public
-<code>$data()</code> method. New values can be added with the <code>$add_evals()</code> method.
-This however is usually done through the evaluation of the
-<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> or <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a> by the <a href='FSelector.html'>FSelector</a>.</p>
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
     <p><code><a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a></code> -&gt; <code>ArchiveFSelect</code></p>
@@ -178,7 +167,6 @@ Stores benchmark result.</p></dd>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href='../../bbotk/html/Archive.html#method-add_evals'><code>bbotk::Archive$add_evals()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href='../../bbotk/html/Archive.html#method-best'><code>bbotk::Archive$best()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href='../../bbotk/html/Archive.html#method-clear'><code>bbotk::Archive$clear()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="data"><a href='../../bbotk/html/Archive.html#method-data'><code>bbotk::Archive$data()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-format'><code>bbotk::Archive$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize"><a href='../../bbotk/html/Archive.html#method-initialize'><code>bbotk::Archive$initialize()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="print"><a href='../../bbotk/html/Archive.html#method-print'><code>bbotk::Archive$print()</code></a></span></p></li>

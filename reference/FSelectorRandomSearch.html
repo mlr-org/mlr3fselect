@@ -207,57 +207,6 @@ Maximum number of feature sets to try in a batch.</p></dd>
 
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
-
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-
-<span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
-  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
-  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
-  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
-  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
-  terminator <span class='op'>=</span> <span class='va'>terminator</span>
-<span class='op'>)</span>
-
-<span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"random_search"</span><span class='op'>)</span>
-<span class='co'># \donttest{</span>
-<span class='co'># Modifies the instance by reference</span>
-<span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE Petal.Length,Petal.Width
-#&gt;     x_domain classif.ce
-#&gt; 1: &lt;list[4]&gt;       0.04</div><div class='input'>
-<span class='co'># Returns best scoring evaluation</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE Petal.Length,Petal.Width
-#&gt;     x_domain classif.ce
-#&gt; 1: &lt;list[4]&gt;       0.04</div><div class='input'>
-<span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>$</span><span class='fu'>data</span><span class='op'>(</span><span class='op'>)</span><span class='co'># }</span>
-</div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:        FALSE       FALSE        FALSE        TRUE       0.46
-#&gt;  2:        FALSE       FALSE        FALSE        TRUE       0.46
-#&gt;  3:         TRUE       FALSE        FALSE       FALSE       0.08
-#&gt;  4:         TRUE        TRUE        FALSE       FALSE       0.04
-#&gt;  5:         TRUE       FALSE        FALSE        TRUE       0.08
-#&gt;  6:        FALSE        TRUE         TRUE       FALSE       0.04
-#&gt;  7:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;  8:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.04
-#&gt; 10:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;                                    uhash  x_domain           timestamp batch_nr
-#&gt;  1: 2a59476f-4ac3-477e-8128-e8b26e545a4e &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  2: ea0e2fdc-cf56-4d69-a462-e2d2349c1d77 &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  3: 2ef80d86-d328-4d89-b596-2574fcc9f38e &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  4: e6df68d4-d87f-4c54-91ec-23d44ddad010 &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  5: 594f338d-24ff-4952-a076-7567fa63c269 &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  6: 236a8636-4cf1-4e6d-b3f1-1e471685908f &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  7: 4ce31db6-8e53-43c3-83fa-90ac004a2d0f &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  8: 369e801b-7f82-4243-adb0-c278b27652f9 &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt;  9: a0a1f3b4-2604-49d4-8357-5a7e44174cad &lt;list[4]&gt; 2020-12-16 04:31:30        1
-#&gt; 10: a846e087-ab04-4c08-b99f-9773918f73b9 &lt;list[4]&gt; 2020-12-16 04:31:30        1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
