@@ -1,6 +1,6 @@
 Package: mlr3fselect
 Title: Feature Selection for 'mlr3'
-Version: 0.4.1
+Version: 0.4.1.9000
 Authors@R:
     c(person(given = "Marc",
              family = "Becker",
@@ -46,9 +46,11 @@ Imports:
 Suggests:
     genalg,
     rpart,
-    testthat
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 NeedsCompilation: no
+Config/testthat/edition: 3
+Config/testthat/parallel: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Collate:

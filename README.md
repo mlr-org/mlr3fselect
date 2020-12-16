@@ -5,6 +5,7 @@
 [![CRAN Status](https://www.r-pkg.org/badges/version/mlr3fselect)](https://cran.r-project.org/package=mlr3fselect)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 [![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
+[![CodeFactor](https://www.codefactor.io/repository/github/mlr-org/mlr3fselect/badge)](https://www.codefactor.io/repository/github/mlr-org/mlr3fselect)
 <!-- badges: end -->
 
 This package provides feature selection for [mlr3](https://mlr3.mlr-org.com).
@@ -20,19 +21,19 @@ For feature filters and embedded methods, see [mlr3filters](https://mlr3filters.
 
 CRAN version
 
-```{r}
+```r
 install.packages("mlr3fselect")
 ```
 
 Development version
 
-``` r
+```r
 remotes::install_github("mlr-org/mlr3fselect")
 ```
 
 ## Example
 
-```{r}
+```r
 library("mlr3")
 library("mlr3fselect")
 

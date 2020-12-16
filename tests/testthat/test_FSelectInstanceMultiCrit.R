@@ -1,5 +1,3 @@
-context("FSelectInstanceMultiCrit")
-
 test_that("empty FSelectInstanceMultiCrit works", {
   inst = TEST_MAKE_INST_2D()
 

@@ -1,5 +1,3 @@
-context("FSelectorSequential")
-
 test_that("FSelectorSequential", {
   skip_on_cran()
 

@@ -1,5 +1,3 @@
-context("FSelectorRFE")
-
 test_that("FSelectorRFE", {
   skip_on_cran()
 

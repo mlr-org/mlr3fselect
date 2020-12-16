@@ -1,5 +1,3 @@
-context("AutoFSelector")
-
 test_that("train and predict work", {
   skip_on_cran()
 
@@ -24,7 +22,7 @@ test_that("train and predict work", {
   expect_equal(r$x4, FALSE)
   prd = at$predict(task)
   expect_prediction(prd)
-  expect_is(at$learner$model, "rpart")
+  expect_s3_class(at$learner$model, "rpart")
 })
 
 test_that("nested resampling works", {

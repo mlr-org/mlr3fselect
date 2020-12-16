@@ -1,5 +1,3 @@
-context("ObjectiveFSelect")
-
 test_that("ObjectiveFSelect", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
