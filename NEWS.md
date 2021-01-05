@@ -1,6 +1,7 @@
 # mlr3fselect 0.4.1.9000
 
-- Internal changes only.
+- `FSelectorRFE` stores importance values of each evaluated feature set in 
+  archive.
 
 # mlr3fselector 0.4.1
 
