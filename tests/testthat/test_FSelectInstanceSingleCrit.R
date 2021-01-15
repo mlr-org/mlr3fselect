@@ -20,7 +20,7 @@ test_that("eval_batch works", {
     c("x2", "x3", "x4"))
   expect_identical(inst$archive$n_evals, 2L)
   expect_data_table(z, nrows = 2L)
-  expect_named(z, c("dummy", "uhash"))
+  expect_named(z, "dummy")
 
   z = inst$eval_batch(xdt)
   expect_equal(inst$archive$benchmark_result$resample_result(3)$learners[[1]]$model$select$selection,
@@ -29,7 +29,7 @@ test_that("eval_batch works", {
     c("x2", "x3", "x4"))
   expect_identical(inst$archive$n_evals, 4L)
   expect_data_table(z, nrows = 2L)
-  expect_named(z, c("dummy", "uhash"))
+  expect_named(z, "dummy")
 
   a = inst$archive$data
   expect_data_table(a, nrows = 4L)

@@ -14,12 +14,12 @@ test_that("eval_batch works", {
     x3 = list(TRUE, TRUE), x4 = list(TRUE, TRUE))
 
   z = inst$eval_batch(xdt)
-  expect_named(z, c("regr.mse", "regr.rmse", "uhash"))
+  expect_named(z, c("regr.mse", "regr.rmse"))
   expect_identical(inst$archive$n_evals, 2L)
   expect_data_table(z, nrows = 2L)
 
   z = inst$eval_batch(xdt)
-  expect_named(z, c("regr.mse", "regr.rmse", "uhash"))
+  expect_named(z, c("regr.mse", "regr.rmse"))
   expect_identical(inst$archive$n_evals, 4L)
   expect_data_table(z, nrows = 2L)
 })
