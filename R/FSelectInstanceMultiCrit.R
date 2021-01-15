@@ -80,8 +80,6 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
       self$objective$archive = self$archive
 
       private$.objective_function = objective_function
-      private$.objective_multiplicator =
-        ifelse(self$objective$codomain$tags == "minimize", 1, -1)
     },
 
     #' @description
@@ -116,6 +114,6 @@ objective_function = function(x, inst, multiplicator) {
   inst$search_space$assert(xs)
   xdt = as.data.table(xs)
   res = inst$eval_batch(xdt)
-  y = as.numeric(res[, inst$objective$codomain$ids(), with = FALSE])
+  y = as.numeric(res[, inst$archive$cols_y, with = FALSE])
   y * multiplicator
 }
