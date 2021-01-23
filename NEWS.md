@@ -1,7 +1,8 @@
-# mlr3fselect 0.4.1.9000
+# mlr3fselect 0.5.0
 
 - `FSelectorRFE` stores importance values of each evaluated feature set in 
   archive.
+- `ArchiveFSelect$data` is a public field now.
 
 # mlr3fselector 0.4.1
 
