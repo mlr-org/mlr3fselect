@@ -20,4 +20,4 @@
 #' instance$result
 #'
 #' # Allows access of data.table of full path of all evaluations
-#' as.data.table(instance$archive)
+#' as.data.table(instance$archive)}

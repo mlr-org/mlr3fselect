@@ -96,53 +96,58 @@ FSelectorRFE = R6Class("FSelectorRFE",
       } else if (!is.null(subset_sizes)) {
         subset_sizes
       } else if (!is.null(feature_fraction)) {
-        unique(floor(cumprod(c((n), rep(feature_fraction,
-          log(min_features / (n)) / log(feature_fraction))))))[-1]
+        unique(floor(cumprod(c(n, rep(feature_fraction, log(min_features / n) / log(feature_fraction))))))[-1]
       }
 
-      assert_integerish(rev(subsets), any.missing = FALSE,
-        lower = 1, upper = n - 1, sorted = TRUE)
+      assert_integerish(rev(subsets), any.missing = FALSE, lower = 1, upper = n - 1, sorted = TRUE)
 
+      # Create full feature set
       states = set_names(as.list(rep(TRUE, n)), feature_names)
       states = as.data.table(states)
       inst$eval_batch(states)
 
+      # Calculate the variable importance on the full feature set
+      uhash = archive$data[get("batch_nr") == 1, uhash]
+      rr = archive$benchmark_result$resample_result(uhash = uhash)
+      learners = extract_learner(rr$learners)
+      imp = importance_average(learners, feature_names)
+
+      # Log importance to archive
+      set(archive$data, archive$n_evals, "importance", list(imp))
+
       for (i in subsets) {
         if (pars$recursive) {
 
-          # Recalculate the variable importance on the reduced feature subset
-          feat = archive$data[get("batch_nr") == archive$n_batch, feature_names,
-            with = FALSE]
+          # Eliminate the most unimportant features
+          feat = archive$data[get("batch_nr") == archive$n_batch, feature_names, with = FALSE]
           feat = feature_names[as.logical(feat)]
+          states = set_names(as.list(feature_names %in% feat & feature_names %in% names(imp[seq(i)])), feature_names)
+          states = as.data.table(states)
 
+          # Fit model on the reduced feature subset
+          inst$eval_batch(states)
+
+          # Recalculate the variable importance on the reduced feature subset
           uhash = archive$data[get("batch_nr") == archive$n_batch, uhash]
           rr = archive$benchmark_result$resample_result(uhash = uhash)
           learners = extract_learner(rr$learners)
-
+          feat = feature_names[as.logical(states)]
           imp = importance_average(learners, feat)
-
-          # Eliminate the most unimportant feature of the feature subset
-          states =
-            as.list(feature_names %in% feat & feature_names %in% names(imp[seq(i)]))
-          names(states) = feature_names
-          states = as.data.table(states)
+          
+          # Log importance to archive
+          set(archive$data, archive$n_evals, "importance", list(imp))
 
         } else {
-          if (archive$n_batch == 1) {
-            # Calculate the variable importance on the complete feature subset
-            uhash = archive$data[get("batch_nr") == 1, uhash]
-            rr = archive$benchmark_result$resample_result(uhash = uhash)
-            learners = extract_learner(rr$learners)
-
-            self$importance = importance_average(learners, feature_names)
-          }
           # Eliminate the most unimportant features
-          states = as.list(feature_names %in% names(self$importance[seq(i)]))
-          names(states) = feature_names
+          states = set_names(as.list(feature_names %in% names(imp[seq(i)])), feature_names)
           states = as.data.table(states)
+
+          # Fit model on the reduced feature subset
+          inst$eval_batch(states)
+
+          # Log importance to archive
+          set(archive$data, archive$n_evals, "importance", list(imp[seq(i)]))
         }
-        # Fit the model on the reduced feature subset
-        inst$eval_batch(states)
       }
     }
   )
@@ -153,13 +158,14 @@ FSelectorRFE = R6Class("FSelectorRFE",
 # Some learners omit features that are not used at all,
 # thus we have to assign zero to these features
 importance_average = function(learners, features) {
-  imp = sapply(learners, function(x) {
-    imp_r = x$importance()
-    sapply(features, function(y) {
-      if (y %in% names(imp_r)) imp_r[[y]] else 0
-    })
+  x = map(learners, function(learner) {
+    importance = learner$importance()
+    set_names(map_dbl(features, function(feature) {
+      if (feature %in% names(importance)) importance[[feature]] else 0
+    }), features)
   })
-  sort(apply(imp, 1, mean), decreasing = TRUE)
+
+  sort(set_names(pmap_dbl(x, function(...) mean(c(...))), names(x[[1]])), decreasing = TRUE)
 }
 
 mlr_fselectors$add("rfe", FSelectorRFE)
@@ -172,3 +178,6 @@ extract_learner = function(graph_learners) {
     graph$pipeops[[tail(learner$graph$ids(sorted = TRUE), 1)]]$learner_model
   })
 }
+
+
+
