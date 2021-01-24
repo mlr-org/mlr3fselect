@@ -1,3 +1,7 @@
+# mlr3fselect 0.5.0.9000
+
+- Remove `x_domain` column from archive.
+
 # mlr3fselect 0.5.0
 
 - `FSelectorRFE` stores importance values of each evaluated feature set in 
