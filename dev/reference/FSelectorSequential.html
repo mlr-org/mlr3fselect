@@ -249,16 +249,12 @@ Instance optimized with FSelectorSequential.</p></dd>
 <span class='co'># \donttest{</span>
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
-#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width &lt;list[4]&gt;
-#&gt;    classif.ce
-#&gt; 1:       0.02</div><div class='input'>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce
+#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.02</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features  x_domain
-#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width &lt;list[4]&gt;
-#&gt;    classif.ce
-#&gt; 1:       0.02</div><div class='input'>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce
+#&gt; 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.02</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
@@ -270,13 +266,13 @@ Instance optimized with FSelectorSequential.</p></dd>
 #&gt; 6:        FALSE        TRUE         TRUE       FALSE       0.02
 #&gt; 7:        FALSE        TRUE        FALSE        TRUE       0.02
 #&gt;                                   uhash           timestamp batch_nr
-#&gt; 1: 4e818ff4-3775-4a90-b8b9-5d3c0bf3f1d8 2021-03-09 04:28:34        1
-#&gt; 2: 808117cc-8ac8-4b38-9dc3-6bb37b7f7ad7 2021-03-09 04:28:34        1
-#&gt; 3: 1151d908-47bd-420c-99cb-ff27def06138 2021-03-09 04:28:34        1
-#&gt; 4: 466ac7bc-67ef-47a3-8f97-ca8d173aa362 2021-03-09 04:28:34        1
-#&gt; 5: cee60209-9ff9-4b3b-86fa-eb11b5ed268d 2021-03-09 04:28:35        2
-#&gt; 6: 3848c9ba-3525-4182-9e67-b66dd3c352e3 2021-03-09 04:28:35        2
-#&gt; 7: 484b8d41-aea3-4112-999b-ecb77140490b 2021-03-09 04:28:35        2</div></pre>
+#&gt; 1: 5463f901-438e-4307-adb5-36ecd4f0081e 2021-03-09 09:46:53        1
+#&gt; 2: 5961b9b2-72d6-447d-833f-91135df68fe7 2021-03-09 09:46:53        1
+#&gt; 3: 2d2f557d-051e-40e0-a4f6-f9950b7fc617 2021-03-09 09:46:53        1
+#&gt; 4: 89efa951-c450-405a-8010-e649f4d66172 2021-03-09 09:46:53        1
+#&gt; 5: 2201b2d0-d46a-4604-b1d6-fcae835228ed 2021-03-09 09:46:53        2
+#&gt; 6: b2e3d965-51a1-4010-9393-c81d8f8a1ca4 2021-03-09 09:46:53        2
+#&gt; 7: afd50a28-e71b-490e-b9b9-a3c9553ec5f6 2021-03-09 09:46:53        2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

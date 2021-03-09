@@ -221,11 +221,14 @@ Short-cut to <code>$result</code> from <a href='FSelectInstanceSingleCrit.html'>
 <ul>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-format'><code>mlr3::Learner$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-help'><code>mlr3::Learner$help()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="is_retrainable"><a href='../../mlr3/html/Learner.html#method-is_retrainable'><code>mlr3::Learner$is_retrainable()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-predict'><code>mlr3::Learner$predict()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-print'><code>mlr3::Learner$print()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-reset'><code>mlr3::Learner$reset()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="retrain"><a href='../../mlr3/html/Learner.html#method-retrain'><code>mlr3::Learner$retrain()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-train'><code>mlr3::Learner$train()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="update"><a href='../../mlr3/html/Learner.html#method-update'><code>mlr3::Learner$update()</code></a></span></p></li>
 </ul>
 </details>
 
@@ -337,10 +340,8 @@ validity?</p></dd>
 #&gt; * Terminator: &lt;TerminatorEvals&gt;
 #&gt; * Terminated: TRUE
 #&gt; * Result:
-#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
-#&gt;    classif.ce
-#&gt; 1:       0.06
+#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06
 #&gt; * Archive:
 #&gt; &lt;ArchiveFSelect&gt;
 #&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
@@ -349,10 +350,10 @@ validity?</p></dd>
 #&gt; 3:        FALSE       FALSE         TRUE       FALSE       0.50
 #&gt; 4:        FALSE       FALSE        FALSE        TRUE       0.44
 #&gt;                                   uhash           timestamp batch_nr
-#&gt; 1: 7c6cf2f4-e83d-442d-8791-0def1e0778cc 2021-03-09 04:28:20        1
-#&gt; 2: 18c80cd3-0df5-49c7-87e0-2e9cfe56f5b1 2021-03-09 04:28:20        1
-#&gt; 3: 993c7e0d-a2cf-4bd9-bbb7-3d63a4dbe2b9 2021-03-09 04:28:20        1
-#&gt; 4: 2036ddd8-7bd6-413a-b72b-992856be8d5f 2021-03-09 04:28:20        1
+#&gt; 1: 064735e7-a966-406a-b31c-5c9beb4fd371 2021-03-09 09:46:39        1
+#&gt; 2: 7e97b366-9560-4c4d-aeb4-b78b54f6cc5b 2021-03-09 09:46:39        1
+#&gt; 3: 3fadfdd7-20a5-426d-85f1-c7dcae302b0a 2021-03-09 09:46:39        1
+#&gt; 4: bcd871c1-35e4-424b-8fc4-715884d522f0 2021-03-09 09:46:39        1
 #&gt; </div><div class='input'><span class='va'>afs</span><span class='op'>$</span><span class='va'>learner</span>
 </div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart

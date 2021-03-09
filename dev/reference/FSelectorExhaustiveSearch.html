@@ -225,16 +225,12 @@ Maximum number of features. By default, number of features in <a href='https://m
 <span class='co'># \donttest{</span>
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
-#&gt;    classif.ce
-#&gt; 1:       0.06</div><div class='input'>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
-#&gt;    classif.ce
-#&gt; 1:       0.06</div><div class='input'>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
@@ -249,16 +245,16 @@ Maximum number of features. By default, number of features in <a href='https://m
 #&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.06
 #&gt; 10:        FALSE       FALSE         TRUE        TRUE       0.26
 #&gt;                                    uhash           timestamp batch_nr
-#&gt;  1: e8e70b86-f2ad-4460-a899-b909cd48498b 2021-03-09 04:28:28        1
-#&gt;  2: a4d8af8b-1d3f-4339-88c6-dd6729b62d48 2021-03-09 04:28:28        1
-#&gt;  3: 0d39ec1f-1e23-4033-a07b-53fa05a0928c 2021-03-09 04:28:28        1
-#&gt;  4: 9c22f306-7c1f-4366-b8d3-5885950219f6 2021-03-09 04:28:28        1
-#&gt;  5: 3af47956-ea1e-40e3-a2d3-29d4c75abab2 2021-03-09 04:28:29        2
-#&gt;  6: 5bc55ac4-bac7-4c9d-a737-31d6d02b1916 2021-03-09 04:28:29        2
-#&gt;  7: 9261c285-cec6-4e84-83c8-5d574f471fdc 2021-03-09 04:28:29        2
-#&gt;  8: 61e95ea2-e8cc-4eee-aaf1-ae302b89104a 2021-03-09 04:28:29        2
-#&gt;  9: b57889db-502f-4a8c-b6fa-dfb0046fc32c 2021-03-09 04:28:29        2
-#&gt; 10: efc58c8e-54cc-45da-93d5-4603c3f48b49 2021-03-09 04:28:29        2</div></pre>
+#&gt;  1: 06a98f57-eed3-4b78-bca0-84fce0b4cc78 2021-03-09 09:46:47        1
+#&gt;  2: 3e99eeba-3d40-4e14-a8e6-d9d8f165713b 2021-03-09 09:46:47        1
+#&gt;  3: 1770f215-238b-402d-bd7f-f0e5901b66f3 2021-03-09 09:46:47        1
+#&gt;  4: 205a2955-90c3-4763-9341-7c13a2d43bec 2021-03-09 09:46:47        1
+#&gt;  5: 9bc6a8e3-2ae4-4dc5-bf77-71a9f9e485ea 2021-03-09 09:46:48        2
+#&gt;  6: 8af91963-ac30-49d3-92d2-b46556f51e47 2021-03-09 09:46:48        2
+#&gt;  7: f56b71d2-7bb2-4d9e-8527-2636893a5926 2021-03-09 09:46:48        2
+#&gt;  8: 844789b1-739f-4474-bef4-7ccef8571218 2021-03-09 09:46:48        2
+#&gt;  9: 3f8cdc6f-cbef-4174-a366-d350cfcd02cf 2021-03-09 09:46:48        2
+#&gt; 10: 87cca876-a6c7-49ba-9db0-26507cc6b56e 2021-03-09 09:46:48        2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
