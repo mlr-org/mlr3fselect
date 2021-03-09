@@ -1,4 +1,4 @@
-# mlr3fselect 0.5.0.9000
+# mlr3fselect 0.5.1
 
 - Remove `x_domain` column from archive.
 
