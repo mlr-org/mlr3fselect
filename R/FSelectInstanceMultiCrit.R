@@ -95,7 +95,11 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
         self$objective$task$feature_names[as.logical(x)]
       })
       xdt[, features := list(features)]
-      super$assign_result(xdt, ydt)
+      assert_data_table(xdt)
+      assert_names(names(xdt), must.include = self$search_space$ids())
+      assert_data_table(ydt)
+      assert_names(names(ydt), permutation.of = self$objective$codomain$ids())
+      private$.result = cbind(xdt, ydt)
     }
   ),
 

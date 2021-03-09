@@ -67,7 +67,7 @@ test_fselector = function(.key, ..., term_evals = 2L, real_evals = term_evals,
 
   fselector = fs(.key, ...)
   expect_fselector(fselector)
-  expect_data_table(fselector$optimize(inst), nrows = 1, ncols = 7,
+  expect_data_table(fselector$optimize(inst), nrows = 1, ncols = 6,
     any.missing = FALSE)
   archive = inst$archive
 
@@ -76,21 +76,15 @@ test_fselector = function(.key, ..., term_evals = 2L, real_evals = term_evals,
   expect_equal(inst$archive$n_evals, real_evals)
 
   # Result checks
-  expect_data_table(inst$result, nrows = 1, ncols = 7)
+  expect_data_table(inst$result, nrows = 1, ncols = 6)
   expect_named(inst$result, c(
     "x1",
     "x2",
     "x3",
     "x4",
     "features",
-    "x_domain",
     "dummy"))
   expect_character(inst$result$features[[1]])
-  expect_named(inst$result_x_domain, c(
-    "x1",
-    "x2",
-    "x3",
-    "x4"))
   expect_data_table(inst$result_x_search_space, nrows = 1, ncols = 4,
     types = "logical")
   expect_named(inst$result_x_search_space, c(
@@ -116,7 +110,7 @@ test_fselector_2D = function(.key, ..., term_evals = 2L, real_evals = term_evals
 
   fselector = fs(.key, ...)
   expect_fselector(fselector)
-  expect_data_table(fselector$optimize(inst), ncols = 8,
+  expect_data_table(fselector$optimize(inst), ncols = 7,
     any.missing = FALSE)
   archive = inst$archive
 
@@ -125,23 +119,16 @@ test_fselector_2D = function(.key, ..., term_evals = 2L, real_evals = term_evals
   expect_equal(inst$archive$n_evals, real_evals)
 
   # Result checks
-  expect_data_table(inst$result, ncols = 8)
+  expect_data_table(inst$result, ncols = 7)
   expect_named(inst$result, c(
     "x1",
     "x2",
     "x3",
     "x4",
     "features",
-    "x_domain",
     "regr.rmse",
     "regr.mse"))
   expect_character(inst$result$features[[1]])
-
-  expect_named(inst$result_x_domain[[1]], c(
-    "x1",
-    "x2",
-    "x3",
-    "x4"))
   expect_data_table(inst$result_x_search_space, ncols = 4,
     types = "logical")
   expect_named(inst$result_x_search_space, c(

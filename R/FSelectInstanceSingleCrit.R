@@ -93,7 +93,11 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
       # Add feature names to result for easy task subsetting
       features = list(self$objective$task$feature_names[as.logical(xdt)])
       xdt[, features := list(features)]
-      super$assign_result(xdt, y)
+      assert_data_table(xdt, nrows = 1L)
+      assert_names(names(xdt), must.include = self$search_space$ids())
+      assert_number(y)
+      assert_names(names(y), permutation.of = self$objective$codomain$ids())
+      private$.result = cbind(xdt, t(y)) # t(y) so the name of y stays
     }
   ),
 
