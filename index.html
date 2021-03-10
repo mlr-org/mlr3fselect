@@ -38,7 +38,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org"></a>
-        <a class="navbar-brand" href="index.html">mlr3fselect <small>v0.5.0</small></a>
+        <a class="navbar-brand" href="index.html">mlr3fselect <small>v0.5.1</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -101,16 +101,26 @@
 <a href="#mlr3fselect" class="anchor"></a>mlr3fselect</h1></div>
 <p>Package website: <a href="https://mlr3fselect.mlr-org.com/">release</a> | <a href="https://mlr3fselect.mlr-org.com/dev/">dev</a></p>
 <!-- badges: start -->
-<p><a href="https://github.com/mlr-org/mlr3fselect/actions"><img src="https://github.com/mlr-org/mlr3fselect/workflows/tic/badge.svg?branch=master" alt="tic"></a> <a href="https://cran.r-project.org/package=mlr3fselect"><img src="https://www.r-pkg.org/badges/version/mlr3fselect" alt="CRAN Status"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a> <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/"><img src="https://img.shields.io/badge/chat-mattermost-orange.svg" alt="Mattermost"></a> <a href="https://www.codefactor.io/repository/github/mlr-org/mlr3fselect"><img src="https://www.codefactor.io/repository/github/mlr-org/mlr3fselect/badge" alt="CodeFactor"></a> <!-- badges: end --></p>
-<p>This package provides feature selection for <a href="https://mlr3.mlr-org.com">mlr3</a>. It offers various feature selection wrappers, e.g. random search and sequential feature selection and different termination criteria can be set and combined. ‘AutoFSelect’ provides a convenient way to perform nested resampling in combination with ‘mlr3’. The package is build on <a href="https://github.com/mlr-org/bbotk">bbotk</a> which provides a common framework for optimization.</p>
-<p>For feature filters and embedded methods, see <a href="https://mlr3filters.mlr-org.com">mlr3filters</a></p>
+<p><a href="https://github.com/mlr-org/mlr3fselect/actions"><img src="https://github.com/mlr-org/mlr3fselect/workflows/tic/badge.svg?branch=main" alt="tic"></a> <a href="https://cran.r-project.org/package=mlr3fselect"><img src="https://www.r-pkg.org/badges/version/mlr3fselect" alt="CRAN Status"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a> <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/"><img src="https://img.shields.io/badge/chat-mattermost-orange.svg" alt="Mattermost"></a> <a href="https://www.codefactor.io/repository/github/mlr-org/mlr3fselect"><img src="https://www.codefactor.io/repository/github/mlr-org/mlr3fselect/badge" alt="CodeFactor"></a> <!-- badges: end --></p>
+<p>This package provides feature selection for <a href="https://mlr3.mlr-org.com">mlr3</a>. It offers various feature selection wrappers, e.g. random search and sequential feature selection and different termination criteria can be set and combined.’AutoFSelect’ provides a convenient way to perform nested resampling in combination with ‘mlr3’. The package is build on <a href="https://github.com/mlr-org/bbotk">bbotk</a> which provides a common framework for optimization. For feature filters and embedded methods, see <a href="https://mlr3filters.mlr-org.com">mlr3filters</a></p>
+<div id="resources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#resources" class="anchor"></a>Resources</h2>
+<ul>
+<li>mlr3book <a href="https://mlr3book.mlr-org.com/fs.html">chapter</a>
+</li>
+<li>mlr3gallery <a href="https://mlr3gallery.mlr-org.com/posts/2020-09-14-mlr3fselect-basic/">post</a>
+</li>
+<li><a href="https://cheatsheets.mlr-org.com/mlr3fselect.pdf">cheatsheet</a></li>
+</ul>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>CRAN version</p>
+<p>Install the last release from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mlr3fselect"</span><span class="op">)</span></code></pre></div>
-<p>Development version</p>
+<p>Install the development version from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3fselect"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -126,24 +136,26 @@
 <span class="va">resampling</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>
 <span class="va">measure</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>
 
-<span class="co"># Define termination criterion</span>
+<span class="co"># define termination criterion</span>
 <span class="va">terminator</span> <span class="op">=</span> <span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
 
-<span class="co"># Create fselect instance</span>
-<span class="va">instance</span> <span class="op">=</span> <span class="va"><a href="reference/FSelectInstanceSingleCrit.html">FSelectInstanceSingleCrit</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>task <span class="op">=</span> <span class="va">task</span>,
+<span class="co"># create fselect instance</span>
+<span class="va">instance</span> <span class="op">=</span> <span class="va"><a href="reference/FSelectInstanceSingleCrit.html">FSelectInstanceSingleCrit</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
+  task <span class="op">=</span> <span class="va">task</span>,
   learner <span class="op">=</span> <span class="va">learner</span>,
   resampling <span class="op">=</span> <span class="va">resampling</span>,
   measure <span class="op">=</span> <span class="va">measure</span>,
   terminator <span class="op">=</span> <span class="va">terminator</span><span class="op">)</span>
 
-<span class="co"># Load fselector</span>
+<span class="co"># load fselector</span>
 <span class="va">fselector</span> <span class="op">=</span> <span class="fu"><a href="reference/fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>
 
-<span class="co"># Trigger optimization</span>
-<span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span>
-
-<span class="co"># View results</span>
-<span class="va">instance</span><span class="op">$</span><span class="va">result</span></code></pre></div>
+<span class="co"># trigger optimization</span>
+<span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">##     age glucose insulin mass pedigree pregnant pressure triceps</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## 1: TRUE    TRUE    TRUE TRUE     TRUE    FALSE    FALSE    TRUE</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##                                     features classif.ce</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">## 1: age,glucose,insulin,mass,pedigree,triceps  0.1757812</span></span></code></pre></div>
 </div>
 </div>
   </div>

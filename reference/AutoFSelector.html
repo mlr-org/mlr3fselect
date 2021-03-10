@@ -91,7 +91,7 @@ store_models = TRUE." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.5.0</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.5.1</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -221,11 +221,14 @@ Short-cut to <code>$result</code> from <a href='FSelectInstanceSingleCrit.html'>
 <ul>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-format'><code>mlr3::Learner$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-help'><code>mlr3::Learner$help()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="is_retrainable"><a href='../../mlr3/html/Learner.html#method-is_retrainable'><code>mlr3::Learner$is_retrainable()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-predict'><code>mlr3::Learner$predict()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-print'><code>mlr3::Learner$print()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-reset'><code>mlr3::Learner$reset()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="retrain"><a href='../../mlr3/html/Learner.html#method-retrain'><code>mlr3::Learner$retrain()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-train'><code>mlr3::Learner$train()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="update"><a href='../../mlr3/html/Learner.html#method-update'><code>mlr3::Learner$update()</code></a></span></p></li>
 </ul>
 </details>
 
@@ -329,18 +332,16 @@ validity?</p></dd>
 #&gt; * Objective: &lt;ObjectiveFSelect:classif.rpart_on_iris&gt;
 #&gt; * Search Space:
 #&gt; &lt;ParamSet&gt;
-#&gt;              id    class lower upper      levels        default value
-#&gt; 1: Petal.Length ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
-#&gt; 2:  Petal.Width ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
-#&gt; 3: Sepal.Length ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
-#&gt; 4:  Sepal.Width ParamLgl    NA    NA  TRUE,FALSE &lt;NoDefault[3]&gt;      
+#&gt;              id    class lower upper nlevels        default value
+#&gt; 1: Petal.Length ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
+#&gt; 2:  Petal.Width ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
+#&gt; 3: Sepal.Length ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
+#&gt; 4:  Sepal.Width ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
 #&gt; * Terminator: &lt;TerminatorEvals&gt;
 #&gt; * Terminated: TRUE
 #&gt; * Result:
-#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features  x_domain
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length &lt;list[4]&gt;
-#&gt;    classif.ce
-#&gt; 1:       0.06
+#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06
 #&gt; * Archive:
 #&gt; &lt;ArchiveFSelect&gt;
 #&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
@@ -348,11 +349,11 @@ validity?</p></dd>
 #&gt; 2:        FALSE        TRUE        FALSE       FALSE       0.06
 #&gt; 3:        FALSE       FALSE         TRUE       FALSE       0.50
 #&gt; 4:        FALSE       FALSE        FALSE        TRUE       0.44
-#&gt;                                   uhash  x_domain           timestamp batch_nr
-#&gt; 1: e9782f68-c447-4e35-a693-159d3e298a4e &lt;list[4]&gt; 2021-01-24 15:33:28        1
-#&gt; 2: 87b31efc-85ab-41ff-9c20-d341ab3ea7f4 &lt;list[4]&gt; 2021-01-24 15:33:28        1
-#&gt; 3: 57a3f2da-5252-4bec-9989-5ba9f3f3b4db &lt;list[4]&gt; 2021-01-24 15:33:28        1
-#&gt; 4: 4c95dbeb-2945-4293-85ae-5d7d4c718023 &lt;list[4]&gt; 2021-01-24 15:33:28        1
+#&gt;                                   uhash           timestamp batch_nr
+#&gt; 1: 5eb4e740-87a9-4483-92d4-21fa764f5752 2021-03-10 04:30:31        1
+#&gt; 2: ecb67951-fb4c-4371-a4db-73f4677a7dcd 2021-03-10 04:30:31        1
+#&gt; 3: eb5c985b-1893-4bd7-971c-d1c00fb6693c 2021-03-10 04:30:31        1
+#&gt; 4: 38bfcb0e-df8d-49d6-b335-bf1583c6cdb9 2021-03-10 04:30:31        1
 #&gt; </div><div class='input'><span class='va'>afs</span><span class='op'>$</span><span class='va'>learner</span>
 </div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
 #&gt; * Model: rpart
