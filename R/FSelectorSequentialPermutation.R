@@ -48,15 +48,19 @@ FSelectorSequentialPermutation = R6Class("FSelectorSequentialPermutation ",
   ),
   private = list(
     .optimize = function(inst) {
-      # add shadow variables
+      
+      # save initial state
       task = inst$objective$task
+      private$.feature_names = task$feature_names
+      private$.domain = inst$objective$domain$clone()
+
+       # add shadow variables to task
       data = map_dtc(task$data(cols = task$feature_names), shuffle)
       shadow_variables = sprintf("permuted__%s", colnames(data))
       setnames(data, shadow_variables)
       task$cbind(data)
 
       # add shadow variables to domain
-      old_domain = inst$objective$domain$clone()
       inst$objective$domain = ParamSet$new(map(inst$objective$task$feature_names, function(s) ParamLgl$new(id = s)))
       
       # add shadow variables to search_space
@@ -77,7 +81,16 @@ FSelectorSequentialPermutation = R6Class("FSelectorSequentialPermutation ",
         res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
 
         # check if any shadow variable was selected
-        if (any(as.logical(res[, shadow_variables, with = FALSE]))) break
+        if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
+
+          # stop if the first selected feature is a shadow variable
+          if (archive$n_batch == 1) stop("The first selected feature is a shadow variable.")
+          
+          # remove last batch with selected shadow variable from archive
+          archive = inst$archive
+          archive$data = archive$data[get("batch_nr") != archive$n_batch, ]
+          break
+        }
 
         best_state = as.logical(res)
         states = map_dtr(seq_along(best_state)[!best_state], function(i) {
@@ -87,28 +100,23 @@ FSelectorSequentialPermutation = R6Class("FSelectorSequentialPermutation ",
             set_names(as.list(new_state), feature_names)
           }
         })
-
         inst$eval_batch(states)
       })
-
-      # restore task and domain without shadow variables
-      task$select(setdiff(task$feature_names, shadow_variables))
-      inst$objective$domain = old_domain
-      inst$archive$search_space =  old_domain
-      inst$search_space =  old_domain
     },
 
     .assign_result = function(inst) {
-      archive = inst$archive
-      # exclude result of last batch since it contains a shadow variables
-      if (archive$n_batch == 1) {
-        stopf("%s selected a shadow variable in the first iteration.", format(self))
-      }
-      best = archive$best(seq(archive$n_batch - 1))
-      xdt = best[, archive$cols_x, with = FALSE]
-      y = unlist(best[, archive$cols_y, with = FALSE])
-      inst$assign_result(xdt, y)
-    }
+      # restore task and domain without shadow variables
+      inst$objective$task$select(private$.feature_names)
+      inst$objective$domain = private$.domain
+      inst$archive$search_space = private$.domain
+      inst$search_space = private$.domain
+
+      assign_result_default(inst)
+    },
+
+    .feature_names = NULL,
+
+    .domain = NULL
   )
 )
 
