@@ -64,7 +64,7 @@ Collate:
     'FSelectorRFE.R'
     'FSelectorRandomSearch.R'
     'FSelectorSequential.R'
-    'FSelectorSequentialPermutation.R'
+    'FSelectorShadowVariableSearch.R'
     'FSelectorDesignPoints.R'
     'FSelectorGeneticSearch.R'
     'FSelectInstanceMultiCrit.R'

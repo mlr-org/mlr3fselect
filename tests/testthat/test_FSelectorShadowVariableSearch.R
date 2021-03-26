@@ -1,5 +1,5 @@
-test_that("FSelectorSequentialPermutation", {
-  z = test_fselector("sequential_permutation", term_evals = 26, store_models = TRUE)
+test_that("FSelectorShadowVariableSearch", {
+  z = test_fselector("shadow_variable_search", term_evals = 26, store_models = TRUE)
   a = z$inst$archive$data
   expect_feature_number(a[batch_nr == 1, 1:8], n = 1)
   expect_feature_number(a[batch_nr == 2, 1:8], n = 2)

@@ -1,22 +1,41 @@
-#' @title Feature Selection via Sequential Selection with Shadow Features
+#' @title Feature Selection via Sequential Search with Shadow Variables
 #'
 #' @description
-#' `FSelectorSequentialPermutation` class that implements a sequential feature selection with permutated shadow features. 
+#' `FSelectorShadowVariableSearch` class that implements a sequential search with shadow variables.  
 #'
-#' @templateVar id sequential_permutation
+#' @templateVar id shadow_variable_search
 #' @template section_dictionary_fselectors
 #'
 #' @note
-#' Feature sets are evaluated in batches, where each batch is one step in the
-#' sequential feature selection.
+#' `FSelectorShadowVariableSearch` terminates itself and should be used with [TerminatorNone].
 #' 
 #' @source
 #' `r format_bib("thomas2017")`
 #' `r format_bib("wu2007")`
 #'
 #' @export
-#' @template example
-FSelectorSequentialPermutation = R6Class("FSelectorSequentialPermutation ",
+#' @examples
+#' library(mlr3)
+#' 
+#' instance = FSelectInstanceSingleCrit$new(
+#'   task = tsk("iris"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measure = msr("classif.ce"),
+#'   terminator = trm("none")
+#' )
+#'
+#' fselector = fs("shadow_variable_search")
+#' \donttest{
+#' # Modifies the instance by reference
+#' fselector$optimize(instance)
+#'
+#' # Returns best scoring evaluation
+#' instance$result
+#'
+#' # Allows access of data.table of full path of all evaluations
+#' as.data.table(instance$archive)}
+FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
   inherit = FSelector,
   public = list(
 
@@ -120,4 +139,4 @@ FSelectorSequentialPermutation = R6Class("FSelectorSequentialPermutation ",
   )
 )
 
-mlr_fselectors$add("sequential_permutation", FSelectorSequentialPermutation)
+mlr_fselectors$add("shadow_variable_search", FSelectorShadowVariableSearch)
