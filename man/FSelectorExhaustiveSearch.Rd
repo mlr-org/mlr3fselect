@@ -29,7 +29,7 @@ Maximum number of features. By default, number of features in \link[mlr3:Task]{m
 \examples{
 library(mlr3)
 
-terminator = trm("evals", n_evals = 5)
+terminator = trm("evals", n_evals = 10)
 
 instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
