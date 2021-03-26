@@ -91,8 +91,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
       feature_names = inst$archive$cols_x
 
       # initialize states for first batch
-      states = as.data.table(diag(TRUE, length(feature_names), length(feature_names)))
-      names(states) = feature_names
+      states = set_names(as.data.table(diag(TRUE, length(feature_names), length(feature_names))), feature_names)
       
       inst$eval_batch(states) 
 
