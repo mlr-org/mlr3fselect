@@ -28,6 +28,8 @@ fs("shadow_variable_search")
 }
 
 \examples{
+library(mlr3)
+
 instance = FSelectInstanceSingleCrit$new(
   task = tsk("iris"),
   learner = lrn("classif.rpart"),
