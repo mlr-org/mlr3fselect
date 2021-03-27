@@ -70,7 +70,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
       
       # save initial state
       task = inst$objective$task
-      private$.feature_names = task$feature_names
+      private$.task = task$clone()
       private$.domain = inst$objective$domain$clone()
 
        # add shadow variables to task
@@ -124,7 +124,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
 
     .assign_result = function(inst) {
       # restore task and domain without shadow variables
-      inst$objective$task$select(private$.feature_names)
+      inst$objective$task = private$.task
       inst$objective$domain = private$.domain
       inst$archive$search_space = private$.domain
       inst$search_space = private$.domain
@@ -132,7 +132,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
       assign_result_default(inst)
     },
 
-    .feature_names = NULL,
+    .task = NULL,
 
     .domain = NULL
   )
