@@ -13,7 +13,24 @@ test_that("FSelectorShadowVariableSearch", {
   expect_best_features(instance$archive$best(batch = 3)[, 1:8], c("x1", "x2", "x3"))
   expect_best_features(instance$archive$best(batch = 4)[, 1:8], c("x1", "x2", "x3", "x4"))
 
+  # task is permuted 
+  instance = TEST_MAKE_INST_1D(terminator = trm("none"))
+  task = instance$objective$task$clone()
+  fselector = fs("shadow_variable_search")
+  fselector$optimize(instance)
 
+  task_permuted = instance$archive$benchmark_result$tasks$task[[1]]
+  expect_set_equal(task_permuted$feature_names, c("x1", "x2", "x3", "x4", 
+    "permuted__x1", "permuted__x2", "permuted__x3", "permuted__x4"))
+  expect_equal(task_permuted$data()[, 1:5], task$data())
+  expect_false(isTRUE(all.equal(task_permuted$data()[, 6:9], task$data()[, 2:5])))
+  expect_set_equal(task_permuted$data()[[1]], task$data()[[1]], ordered = TRUE)
+  expect_set_equal(task_permuted$data()[[6]], task$data()[[2]])
+  expect_set_equal(task_permuted$data()[[7]], task$data()[[3]])
+  expect_set_equal(task_permuted$data()[[8]], task$data()[[4]])
+  expect_set_equal(task_permuted$data()[[9]], task$data()[[5]])
+  
+  
   # first selected feature is a shadow variable
   score_design = data.table(score = 1, features = "permuted__x1")
   instance = TEST_MAKE_INST_1D(measure = msr("dummy", score_design = score_design), terminator = trm("none"))
