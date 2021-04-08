@@ -92,7 +92,7 @@ Returns the optimization path.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{inst}}{(\link{FSelectInstanceSingleCrit})\cr
-Instance optimized with \link{FSelectorSequential}.}
+Instance optimized with \link{FSelectorShadowVariableSearch}.}
 }
 \if{html}{\out{</div>}}
 }

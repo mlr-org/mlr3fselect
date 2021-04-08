@@ -51,7 +51,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
     #' Returns the optimization path.
     #'
     #' @param inst ([FSelectInstanceSingleCrit])\cr
-    #' Instance optimized with [FSelectorSequential].
+    #' Instance optimized with [FSelectorShadowVariableSearch].
     #'
     #' @return [data.table::data.table]
     optimization_path = function(inst) {
