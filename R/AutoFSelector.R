@@ -85,7 +85,7 @@ AutoFSelector = R6Class("AutoFSelector",
       store_fselect_instance = TRUE, store_benchmark_result = TRUE,
       store_models = FALSE, check_values = FALSE) {
       ia = list()
-      ia$learner = assert_learner(learner)$clone(deep = TRUE)
+      ia$learner = assert_learner(as_learner(learner, clone = TRUE))
       ia$resampling = assert_resampling(resampling,
         instantiated = FALSE)$clone()
       ia$measure = assert_measure(as_measure(measure), learner = learner)
