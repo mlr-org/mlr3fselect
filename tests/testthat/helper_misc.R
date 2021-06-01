@@ -20,7 +20,7 @@ TEST_MAKE_INST_2D = function(n = 4L, folds = 2L, store_models = FALSE, store_ben
     task = TEST_MAKE_TSK(n),
     learner = lrn("regr.rpart"),
     resampling = rsmp("cv", folds = folds),
-    measure = msrs(c("regr.mse", "regr.rmse")),
+    measures = msrs(c("regr.mse", "regr.rmse")),
     terminator = trm("evals", n_evals = 10),
     store_models,
     store_benchmark_result = store_benchmark_result)

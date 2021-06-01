@@ -2,9 +2,12 @@
 % Please edit documentation in R/sugar.R
 \name{fs}
 \alias{fs}
+\alias{fss}
 \title{Syntactic Sugar for FSelect Construction}
 \usage{
 fs(.key, ...)
+
+fss(.keys, ...)
 }
 \arguments{
 \item{.key}{(\code{character(1)})\cr
@@ -13,6 +16,9 @@ Key passed to the respective \link[mlr3misc:Dictionary]{dictionary} to retrieve 
 \item{...}{(named \code{list()})\cr
 Named arguments passed to the constructor, to be set as parameters in the \link[paradox:ParamSet]{paradox::ParamSet}, or to be set as public field.
 See \code{\link[mlr3misc:dictionary_sugar_get]{mlr3misc::dictionary_sugar_get()}} for more details.}
+
+\item{.keys}{(\code{character()})\cr
+Keys passed to the respective \link[mlr3misc:Dictionary]{dictionary} to retrieve multiple objects.}
 }
 \value{
 \link{FSelector}.
