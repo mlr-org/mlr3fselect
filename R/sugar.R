@@ -153,7 +153,7 @@ fselect_nested = function(method, task, learner, inner_resampling, outer_resampl
   assert_resampling(inner_resampling)
   assert_resampling(outer_resampling)
 
-  afs = auto_fselector(method, learner, inner_resampling, measure, search_space, term_evals, term_time, ...)
+  afs = auto_fselector(method, learner, inner_resampling, measure, term_evals, term_time, ...)
   resample(task, afs, outer_resampling, store_models = TRUE)
 }
 
