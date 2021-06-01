@@ -1,7 +1,6 @@
 # mlr3fselect 0.5.1.9000
 
-- Same as previous version.
-
+- Adds `fselect()`, `auto_fselector()` and `fselect_nested()` sugar functions.
 
 # mlr3fselect 0.5.1
 

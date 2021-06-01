@@ -3,5 +3,5 @@ if (requireNamespace("testthat", quietly = TRUE)) {
   library(checkmate)
   library(mlr3fselect)
   
-  test_check("mlr3tuning")
+  test_check("mlr3fselect")
 }
