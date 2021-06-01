@@ -2,16 +2,76 @@
 % Please edit documentation in R/ArchiveFSelect.R
 \name{ArchiveFSelect}
 \alias{ArchiveFSelect}
-\title{Logging object for objective function evaluations}
+\title{Logging Object for Evaluated Feature Sets}
 \description{
-Container around a \link[data.table:data.table]{data.table::data.table} which stores all performed
-function calls of the Objective and the associated \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
-
-\verb{$benchmark_result} stores a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} which contains the
-\link[mlr3:ResampleResult]{mlr3::ResampleResult} of all performed function calls. The
-\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} is connected to the \link[data.table:data.table]{data.table::data.table} via the
-\code{uhash} column.
+Container around a \code{\link[data.table:data.table]{data.table::data.table()}} which stores all evaluated
+feature sets and performance scores.
 }
+\section{Data structure}{
+
+
+The table (\verb{$data}) has the following columns:
+\itemize{
+\item One column for each feature of the task (\verb{$search_space}).
+\item One column for each performance measure (\verb{$codomain}).
+\item \code{runtime} (\code{numeric(1)})\cr
+Sum of all training and predict times logged per evaluation.
+\item \code{timestamp} (\code{POSIXct})\cr
+Time stamp when the evaluation was logged into the archive.
+\item \code{batch_nr} (\code{integer(1)})\cr
+Feature sets are evaluated in batches. Each batch has a unique batch
+number.
+\item \code{uhash} (\code{character(1)})\cr
+Connects each feature set to the resampling experiment
+stored in the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
+}
+
+Each row corresponds to a single evaluation of a feature set.
+
+The archive stores additionally a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}
+(\verb{$benchmark_result}) that records the resampling experiments. Each
+experiment corresponds to to a single evaluation of a feature set. The table
+(\verb{$data}) and the benchmark result (\verb{$benchmark_result}) are linked by the
+\code{uhash} column. If the results are viewed with \code{as.data.table()}, both are
+joined automatically.
+}
+
+\section{Analysis}{
+
+
+For analyzing the feature selection results, it is recommended to pass the archive to
+\code{as.data.table()}. The returned data table is joined with the benchmark result
+which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature set.
+
+The archive provides various getters (e.g. \verb{$learners()}) to ease the access.
+All getters extract by position (\code{i}) or unique hash (\code{uhash}). For a
+complete list of all getters see the methods section.
+
+The benchmark result (\verb{$benchmark_result}) allows to score the feature sets
+again on a different measure. Alternatively, measures can be supplied to
+\code{as.data.table()}.
+}
+
+\section{S3 Methods}{
+
+\itemize{
+\item \code{as.data.table.ArchiveFSelect(x, unnest = NULL, exclude_columns = "uhash", measures = NULL)}\cr
+Returns a tabular view of all evaluated feature sets.\cr
+\link{ArchiveFSelect} -> \code{\link[data.table:data.table]{data.table::data.table()}}\cr
+\itemize{
+\item \code{x} (\link{ArchiveTuning})
+\item \code{unnest} (\code{character()})\cr
+Transforms list columns to separate columns. Set to \code{NULL} if no column
+should be unnested.
+\item \code{exclude_columns} (\code{character()})\cr
+Exclude columns from table. Set to \code{NULL} if no column should be
+excluded.
+\item \code{measures} (list of \link[mlr3:Measure]{mlr3::Measure})\cr
+Score feature sets on additional measures.
+}
+}
+}
+
 \section{Super class}{
 \code{\link[bbotk:Archive]{bbotk::Archive}} -> \code{ArchiveFSelect}
 }

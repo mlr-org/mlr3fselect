@@ -15,10 +15,10 @@
 #' * `timestamp` (`POSIXct`)\cr
 #'   Time stamp when the evaluation was logged into the archive.
 #' * `batch_nr` (`integer(1)`)\cr
-#'   Hyperparameters are evaluated in batches. Each batch has a unique batch
+#'   Feature sets are evaluated in batches. Each batch has a unique batch
 #'   number.
 #' * `uhash` (`character(1)`)\cr
-#'   Connects each hyperparameter configuration to the resampling experiment
+#'   Connects each feature set to the resampling experiment
 #'   stored in the [mlr3::BenchmarkResult].
 #'
 #' Each row corresponds to a single evaluation of a feature set.
@@ -130,7 +130,7 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #' @param ... (ignored).
     print = function() {
       catf(format(self))
-      print(self$data[, setdiff(names(self$data), c("x_domain", "uhash")), with = FALSE], digits=2)
+      print(self$data[, setdiff(names(self$data), "uhash"), with = FALSE], digits=2)
     }
   )
 )
