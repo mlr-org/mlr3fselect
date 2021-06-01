@@ -1,6 +1,7 @@
 # mlr3fselect 0.5.1.9000
 
-- Same as previous version.
+- Adds `AutoFSelector$base_learner()` method to extract the base learner from 
+  nested learner objects.
 
 
 # mlr3fselect 0.5.1
