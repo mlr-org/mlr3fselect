@@ -43,7 +43,16 @@
     <loc>https://mlr3fselect.mlr-org.com/reference/ObjectiveFSelect.html</loc>
   </url>
   <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/auto_fselector.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/fs.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/fselect.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/fselect_nested.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/mlr3fselect-package.html</loc>

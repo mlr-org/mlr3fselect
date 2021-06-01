@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • mlr3fselect</title>
+<title>Syntactic Sugar for Automatic Feature Selection — auto_fselector • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,7 +40,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Syntactic Sugar for Automatic Feature Selection — auto_fselector" />
+<meta property="og:description" content="Function to create an AutoFSelector object." />
+<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -59,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -132,98 +134,86 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Syntactic Sugar for Automatic Feature Selection</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/sugar.R'><code>R/sugar.R</code></a></small>
+    <div class="hidden name"><code>auto_fselector.Rd</code></div>
     </div>
 
-    <div id="mlr3fselect-0519000" class="section level1">
-<h1 class="page-header" data-toc-text="0.5.1.9000">
-<a href="#mlr3fselect-0519000" class="anchor"></a>mlr3fselect 0.5.1.9000<small> Unreleased </small>
-</h1>
-<ul>
-<li>Adds <code><a href="../reference/fselect.html">fselect()</a></code>, <code><a href="../reference/auto_fselector.html">auto_fselector()</a></code> and <code><a href="../reference/fselect_nested.html">fselect_nested()</a></code> sugar functions.</li>
-</ul>
-</div>
-    <div id="mlr3fselect-051" class="section level1">
-<h1 class="page-header" data-toc-text="0.5.1">
-<a href="#mlr3fselect-051" class="anchor"></a>mlr3fselect 0.5.1<small> 2021-03-09 </small>
-</h1>
-<ul>
-<li>Remove <code>x_domain</code> column from archive.</li>
-</ul>
-</div>
-    <div id="mlr3fselect-050" class="section level1">
-<h1 class="page-header" data-toc-text="0.5.0">
-<a href="#mlr3fselect-050" class="anchor"></a>mlr3fselect 0.5.0<small> 2021-01-24 </small>
-</h1>
-<ul>
-<li>
-<code>FSelectorRFE</code> stores importance values of each evaluated feature set in archive.</li>
-<li>
-<code>ArchiveFSelect$data</code> is a public field now.</li>
-</ul>
-</div>
-    <div id="mlr3fselect-041" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.1">
-<a href="#mlr3fselect-041" class="anchor"></a>mlr3fselect 0.4.1<small> 2020-10-30 </small>
-</h1>
-<ul>
-<li>Fix bug in <code>AutoFSelector$predict()</code>
-</li>
-</ul>
-</div>
-    <div id="mlr3fselect-040" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.0">
-<a href="#mlr3fselect-040" class="anchor"></a>mlr3fselect 0.4.0<small> 2020-10-22 </small>
-</h1>
-<ul>
-<li>Compact in-memory representation of R6 objects to save space when saving mlr3 objects via saveRDS(), serialize() etc.</li>
-<li>
-<code>FSelectorRFE</code> supports fraction of features to retain in each iteration (<code>feature_fraction</code>), number of features to remove in each iteration (<code>feature_number</code>) and vector of number of features to retain in each iteration (<code>subset_sizes</code>).</li>
-<li>
-<code>AutoFSelect</code> is renamed to <code>AutoFSelector</code>.</li>
-<li>To retrieve the inner feature selection results in nested resampling, <code>as.data.table(rr)$learner[[1]]$fselect_result</code> must be used now.</li>
-<li>Option to control <code>store_benchmark_result</code>, <code>store_models</code> and <code>check_values</code> in <code>AutoFSelector</code>. <code>store_fselect_instance</code> must be set as a parameter during initialization.</li>
-<li>Adds <code>FSelectorGeneticSearch</code>.</li>
-<li>Fixes <code>check_values</code> flag in <code>FSelectInstanceSingleCrit</code> and <code>FSelectInstanceMultiCrit</code>.</li>
-<li>Removed dependency on orphaned package <code>bibtex</code>.</li>
-<li>
-<code>PipeOpSelect</code> is internally used for task subsetting.</li>
-</ul>
-</div>
-    <div id="mlr3fselect-030" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.0">
-<a href="#mlr3fselect-030" class="anchor"></a>mlr3fselect 0.3.0<small> 2020-09-22 </small>
-</h1>
-<ul>
-<li>
-<code>Archive</code> is <code>ArchiveFSelect</code> now which stores the benchmark result in <code>$benchmark_result</code>. This change removed the resample results from the archive but they can be still accessed via the benchmark result.</li>
-</ul>
-</div>
-    <div id="mlr3fselect-021" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.1">
-<a href="#mlr3fselect-021" class="anchor"></a>mlr3fselect 0.2.1<small> 2020-09-10 </small>
-</h1>
-<ul>
-<li>Warning message if external package for feature selection is not installed.</li>
-</ul>
-</div>
-    <div id="mlr3fselect-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#mlr3fselect-020" class="anchor"></a>mlr3fselect 0.2.0<small> 2020-08-23 </small>
-</h1>
-<ul>
-<li>Initial CRAN release.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Function to create an <a href='AutoFSelector.html'>AutoFSelector</a> object.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>auto_fselector</span><span class='op'>(</span>
+  <span class='va'>method</span>,
+  <span class='va'>learner</span>,
+  <span class='va'>resampling</span>,
+  <span class='va'>measure</span>,
+  term_evals <span class='op'>=</span> <span class='cn'>NULL</span>,
+  term_time <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>method</th>
+      <td><p>(<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>)<br />
+Key to retrieve fselector from <a href='mlr_fselectors.html'>mlr_fselectors</a> dictionary.</p></td>
+    </tr>
+    <tr>
+      <th>learner</th>
+      <td><p>(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>).</p></td>
+    </tr>
+    <tr>
+      <th>resampling</th>
+      <td><p>(<a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a>)<br />
+Uninstantiated resamplings are instantiated during construction
+so that all configurations are evaluated on the same data splits.</p></td>
+    </tr>
+    <tr>
+      <th>measure</th>
+      <td><p>(<a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)<br />
+Measure to optimize.</p></td>
+    </tr>
+    <tr>
+      <th>term_evals</th>
+      <td><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+Number of allowed evaluations.</p></td>
+    </tr>
+    <tr>
+      <th>term_time</th>
+      <td><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+Maximum allowed time in seconds.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>(named <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>)<br />
+Named arguments to be set as parameters of the fselector.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><a href='AutoFSelector.html'>AutoFSelector</a></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>at</span> <span class='op'>=</span> <span class='fu'>auto_fselector</span><span class='op'>(</span>
+  method <span class='op'>=</span> <span class='st'>"random_search"</span>,
+  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
+  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span> <span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
+  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
+  term_evals <span class='op'>=</span> <span class='fl'>50</span>,
+  batch_size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+
+<span class='va'>at</span><span class='op'>$</span><span class='fu'>train</span><span class='op'>(</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"pima"</span><span class='op'>)</span><span class='op'>)</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
