@@ -26,20 +26,133 @@ Stores benchmark result.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-learner}{\code{ArchiveFSelect$learner()}}
+\item \href{#method-learners}{\code{ArchiveFSelect$learners()}}
+\item \href{#method-predictions}{\code{ArchiveFSelect$predictions()}}
+\item \href{#method-resample_result}{\code{ArchiveFSelect$resample_result()}}
+\item \href{#method-print}{\code{ArchiveFSelect$print()}}
 \item \href{#method-clone}{\code{ArchiveFSelect$clone()}}
 }
 }
 \if{html}{
-\out{<details ><summary>Inherited methods</summary>}
+\out{<details open ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals">}\href{../../bbotk/html/Archive.html#method-add_evals}{\code{bbotk::Archive$add_evals()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best">}\href{../../bbotk/html/Archive.html#method-best}{\code{bbotk::Archive$best()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear">}\href{../../bbotk/html/Archive.html#method-clear}{\code{bbotk::Archive$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format">}\href{../../bbotk/html/Archive.html#method-format}{\code{bbotk::Archive$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize">}\href{../../bbotk/html/Archive.html#method-initialize}{\code{bbotk::Archive$initialize()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="print">}\href{../../bbotk/html/Archive.html#method-print}{\code{bbotk::Archive$print()}}\out{</span>}
 }
 \out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-learner"></a>}}
+\if{latex}{\out{\hypertarget{method-learner}{}}}
+\subsection{Method \code{learner()}}{
+Retrieve \link[mlr3:Learner]{mlr3::Learner} of the i-th evaluation, by position
+or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually exclusive.
+Learner does not contain a model. Use \verb{$learners()} to get learners with
+models.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$learner(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{i}}{(\code{integer(1)})\cr
+The iteration value to filter for.}
+
+\item{\code{uhash}}{(\code{logical(1)})\cr
+The \code{uhash} value to filter for.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-learners"></a>}}
+\if{latex}{\out{\hypertarget{method-learners}{}}}
+\subsection{Method \code{learners()}}{
+Retrieve list of trained \link[mlr3:Learner]{mlr3::Learner} objects of the i-th evaluation,
+by position or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually
+exclusive.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$learners(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{i}}{(\code{integer(1)})\cr
+The iteration value to filter for.}
+
+\item{\code{uhash}}{(\code{logical(1)})\cr
+The \code{uhash} value to filter for.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-predictions"></a>}}
+\if{latex}{\out{\hypertarget{method-predictions}{}}}
+\subsection{Method \code{predictions()}}{
+Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by
+position or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually
+exclusive.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$predictions(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{i}}{(\code{integer(1)})\cr
+The iteration value to filter for.}
+
+\item{\code{uhash}}{(\code{logical(1)})\cr
+The \code{uhash} value to filter for.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-resample_result"></a>}}
+\if{latex}{\out{\hypertarget{method-resample_result}{}}}
+\subsection{Method \code{resample_result()}}{
+Retrieve \link[mlr3:ResampleResult]{mlr3::ResampleResult} of the i-th evaluation, by position
+or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually exclusive.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$resample_result(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{i}}{(\code{integer(1)})\cr
+The iteration value to filter for.}
+
+\item{\code{uhash}}{(\code{logical(1)})\cr
+The \code{uhash} value to filter for.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+Printer.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$print()}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
