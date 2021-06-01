@@ -4,6 +4,10 @@ expect_fselector = function(fselector) {
     private = c(".optimize", ".assign_result"))
 }
 
+expect_best_features = function(res, features) {
+  expect_set_equal(names(res)[as.logical(res)], features)
+}
+
 expect_feature_number = function(features, n) {
   res = rowSums(features)
   expect_set_equal(res, n)
