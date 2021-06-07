@@ -69,6 +69,7 @@ Collate:
     'FSelectorGeneticSearch.R'
     'FSelectInstanceMultiCrit.R'
     'FSelectInstanceSingleCrit.R'
+    'nested_resampling.R'
     'reexports.R'
     'sugar.R'
     'bibentries.R'
