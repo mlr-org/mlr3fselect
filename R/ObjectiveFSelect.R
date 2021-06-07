@@ -93,7 +93,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       time = map_dbl(bmr$resample_results$resample_result, function(rr) {
         sum(map_dbl(rr$learners, function(l) sum(l$timings)))
       })
-      aggr[, "runtime" := time]
+      aggr[, "runtime_learners" := time]
 
       if (self$store_benchmark_result) {
         self$archive$benchmark_result =
@@ -102,9 +102,9 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
           } else {
             self$archive$benchmark_result$combine(bmr)
           }
-        cbind(aggr[, c(y, "runtime"), with = FALSE], uhash = bmr$uhashes)
+        cbind(aggr[, c(y, "runtime_learners"), with = FALSE], uhash = bmr$uhashes)
       } else {
-        aggr[, c(y, "runtime"), with = FALSE]
+        aggr[, c(y, "runtime_learners"), with = FALSE]
       }
     }
   )
