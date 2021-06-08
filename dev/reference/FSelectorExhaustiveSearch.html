@@ -226,35 +226,35 @@ Maximum number of features. By default, number of features in <a href='https://m
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</div><div class='input'>
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.02</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</div><div class='input'>
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.02</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:         TRUE       FALSE        FALSE       FALSE       0.06
-#&gt;  2:        FALSE        TRUE        FALSE       FALSE       0.06
-#&gt;  3:        FALSE       FALSE         TRUE       FALSE       0.26
-#&gt;  4:        FALSE       FALSE        FALSE        TRUE       0.48
-#&gt;  5:         TRUE        TRUE        FALSE       FALSE       0.06
-#&gt;  6:         TRUE       FALSE         TRUE       FALSE       0.06
-#&gt;  7:         TRUE       FALSE        FALSE        TRUE       0.06
-#&gt;  8:        FALSE        TRUE         TRUE       FALSE       0.06
-#&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.06
-#&gt; 10:        FALSE       FALSE         TRUE        TRUE       0.26
-#&gt;                                    uhash           timestamp batch_nr
-#&gt;  1: 74cd2bc8-0090-4920-9854-2739dce6cf59 2021-06-08 05:05:06        1
-#&gt;  2: fd2bc2f3-9f2c-469f-be33-986ce5f925ad 2021-06-08 05:05:06        1
-#&gt;  3: 430fb503-2148-4262-a3b9-345764ce26ab 2021-06-08 05:05:06        1
-#&gt;  4: 4d5106ae-1aa3-4b35-9c2a-2b09a54e17fe 2021-06-08 05:05:06        1
-#&gt;  5: a7a84c99-9393-425d-b761-5922364e9963 2021-06-08 05:05:07        2
-#&gt;  6: 7c59df9e-0342-4996-b0a6-cf2f83c4bfac 2021-06-08 05:05:07        2
-#&gt;  7: b88c09a8-0cc9-49db-a1ac-2d9108bb9c8d 2021-06-08 05:05:07        2
-#&gt;  8: d4d1f793-31c5-4fee-a151-3074c45fa1e1 2021-06-08 05:05:07        2
-#&gt;  9: cd04bc37-a405-4679-97a4-ad5076f97ec4 2021-06-08 05:05:07        2
-#&gt; 10: 3a8402f0-51eb-4849-9640-a1a1e43804d5 2021-06-08 05:05:07        2</div></pre>
+#&gt;  1:         TRUE       FALSE        FALSE        TRUE       0.02
+#&gt;  2:        FALSE        TRUE        FALSE        TRUE       0.04
+#&gt;  3:        FALSE       FALSE        FALSE        TRUE       0.44
+#&gt;  4:        FALSE        TRUE        FALSE       FALSE       0.04
+#&gt;  5:         TRUE       FALSE        FALSE       FALSE       0.02
+#&gt;  6:        FALSE       FALSE         TRUE        TRUE       0.22
+#&gt;  7:        FALSE        TRUE         TRUE       FALSE       0.04
+#&gt;  8:         TRUE       FALSE         TRUE       FALSE       0.02
+#&gt;  9:        FALSE       FALSE         TRUE       FALSE       0.22
+#&gt; 10:         TRUE        TRUE        FALSE       FALSE       0.04
+#&gt;     runtime_learners           timestamp batch_nr      resample_result
+#&gt;  1:            0.078 2021-06-08 11:31:48        2 &lt;ResampleResult[21]&gt;
+#&gt;  2:            0.082 2021-06-08 11:31:48        2 &lt;ResampleResult[21]&gt;
+#&gt;  3:            0.090 2021-06-08 11:31:46        1 &lt;ResampleResult[21]&gt;
+#&gt;  4:            0.078 2021-06-08 11:31:46        1 &lt;ResampleResult[21]&gt;
+#&gt;  5:            0.079 2021-06-08 11:31:46        1 &lt;ResampleResult[21]&gt;
+#&gt;  6:            0.089 2021-06-08 11:31:48        2 &lt;ResampleResult[21]&gt;
+#&gt;  7:            0.079 2021-06-08 11:31:48        2 &lt;ResampleResult[21]&gt;
+#&gt;  8:            0.097 2021-06-08 11:31:48        2 &lt;ResampleResult[21]&gt;
+#&gt;  9:            0.085 2021-06-08 11:31:46        1 &lt;ResampleResult[21]&gt;
+#&gt; 10:            0.079 2021-06-08 11:31:48        2 &lt;ResampleResult[21]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

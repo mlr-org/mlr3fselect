@@ -135,7 +135,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Function for Feature Selection</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/sugar.R'><code>R/sugar.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/fselect.R'><code>R/fselect.R</code></a></small>
     <div class="hidden name"><code>fselect.Rd</code></div>
     </div>
 
@@ -212,8 +212,7 @@ Named arguments to be set as parameters of the fselector.</p></td>
   learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
   resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span> <span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
   measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
-  term_evals <span class='op'>=</span> <span class='fl'>50</span>,
-  batch_size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+  term_evals <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
 
 <span class='co'># subset task to optimized feature set</span>
 <span class='va'>task</span><span class='op'>$</span><span class='fu'>select</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>result_feature_set</span><span class='op'>)</span>

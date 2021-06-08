@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Logging object for objective function evaluations — ArchiveFSelect • mlr3fselect</title>
+<title>Logging Object for Evaluated Feature Sets — ArchiveFSelect • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,13 +40,9 @@
 
 
 
-<meta property="og:title" content="Logging object for objective function evaluations — ArchiveFSelect" />
-<meta property="og:description" content="Container around a data.table::data.table which stores all performed
-function calls of the Objective and the associated mlr3::BenchmarkResult.
-$benchmark_result stores a mlr3::BenchmarkResult which contains the
-mlr3::ResampleResult of all performed function calls. The
-mlr3::BenchmarkResult is connected to the data.table::data.table via the
-uhash column." />
+<meta property="og:title" content="Logging Object for Evaluated Feature Sets — ArchiveFSelect" />
+<meta property="og:description" content="Container around a data.table::data.table() which stores all evaluated
+feature sets and performance scores." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,21 +135,80 @@ uhash column." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Logging object for objective function evaluations</h1>
+    <h1>Logging Object for Evaluated Feature Sets</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/ArchiveFSelect.R'><code>R/ArchiveFSelect.R</code></a></small>
     <div class="hidden name"><code>ArchiveFSelect.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Container around a <a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a> which stores all performed
-function calls of the Objective and the associated <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>.</p>
-<p><code>$benchmark_result</code> stores a <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a> which contains the
-<a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> of all performed function calls. The
-<a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a> is connected to the <a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a> via the
-<code>uhash</code> column.</p>
+    <p>Container around a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code> which stores all evaluated
+feature sets and performance scores.</p>
     </div>
 
 
+
+    <h2 class="hasAnchor" id="data-structure"><a class="anchor" href="#data-structure"></a>Data structure</h2>
+
+    
+
+
+<p>The table (<code>$data</code>) has the following columns:</p><ul>
+<li><p>One column for each feature of the task (<code>$search_space</code>).</p></li>
+<li><p>One column for each performance measure (<code>$codomain</code>).</p></li>
+<li><p><code>runtime_learners</code> (<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
+Sum of training and predict times logged in learners per
+<a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> / evaluation. This does not include potential
+overhead time.</p></li>
+<li><p><code>timestamp</code> (<code>POSIXct</code>)<br />
+Time stamp when the evaluation was logged into the archive.</p></li>
+<li><p><code>batch_nr</code> (<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+Feature sets are evaluated in batches. Each batch has a unique batch
+number.</p></li>
+<li><p><code>uhash</code> (<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>)<br />
+Connects each feature set to the resampling experiment
+stored in the <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>.</p></li>
+</ul>
+
+<p>Each row corresponds to a single evaluation of a feature set.</p>
+<p>The archive stores additionally a <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>
+(<code>$benchmark_result</code>) that records the resampling experiments. Each
+experiment corresponds to to a single evaluation of a feature set. The table
+(<code>$data</code>) and the benchmark result (<code>$benchmark_result</code>) are linked by the
+<code>uhash</code> column. If the results are viewed with <code><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table()</a></code>, both are
+joined automatically.</p>
+    <h2 class="hasAnchor" id="analysis"><a class="anchor" href="#analysis"></a>Analysis</h2>
+
+    
+
+
+<p>For analyzing the feature selection results, it is recommended to pass the archive to
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table()</a></code>. The returned data table is joined with the benchmark result
+which adds the <a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> for each feature set.</p>
+<p>The archive provides various getters (e.g. <code>$learners()</code>) to ease the access.
+All getters extract by position (<code>i</code>) or unique hash (<code>uhash</code>). For a
+complete list of all getters see the methods section.</p>
+<p>The benchmark result (<code>$benchmark_result</code>) allows to score the feature sets
+again on a different measure. Alternatively, measures can be supplied to
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table()</a></code>.</p>
+    <h2 class="hasAnchor" id="s-methods"><a class="anchor" href="#s-methods"></a>S3 Methods</h2>
+
+    
+
+<ul>
+<li><p><code>as.data.table.ArchiveFSelect(x, unnest = NULL, exclude_columns = "uhash", measures = NULL)</code><br />
+Returns a tabular view of all evaluated feature sets.<br />
+ArchiveFSelect -&gt; <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code><br /></p><ul>
+<li><p><code>x</code> (ArchiveFSelect)</p></li>
+<li><p><code>unnest</code> (<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
+Transforms list columns to separate columns. Set to <code>NULL</code> if no column
+should be unnested.</p></li>
+<li><p><code>exclude_columns</code> (<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
+Exclude columns from table. Set to <code>NULL</code> if no column should be
+excluded.</p></li>
+<li><p><code>measures</code> (list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)<br />
+Score feature sets on additional measures.</p></li>
+</ul></li>
+</ul>
 
     <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
 
@@ -171,20 +226,98 @@ Stores benchmark result.</p></dd>
 <h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
+<li><p><a href='#method-learner'><code>ArchiveFSelect$learner()</code></a></p></li>
+<li><p><a href='#method-learners'><code>ArchiveFSelect$learners()</code></a></p></li>
+<li><p><a href='#method-predictions'><code>ArchiveFSelect$predictions()</code></a></p></li>
+<li><p><a href='#method-resample_result'><code>ArchiveFSelect$resample_result()</code></a></p></li>
+<li><p><a href='#method-print'><code>ArchiveFSelect$print()</code></a></p></li>
 <li><p><a href='#method-clone'><code>ArchiveFSelect$clone()</code></a></p></li>
 </ul>
-<p><details ><summary>Inherited methods</summary>
+<p><details open ><summary>Inherited methods</summary>
 <ul>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href='../../bbotk/html/Archive.html#method-add_evals'><code>bbotk::Archive$add_evals()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href='../../bbotk/html/Archive.html#method-best'><code>bbotk::Archive$best()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href='../../bbotk/html/Archive.html#method-clear'><code>bbotk::Archive$clear()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-format'><code>bbotk::Archive$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize"><a href='../../bbotk/html/Archive.html#method-initialize'><code>bbotk::Archive$initialize()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="print"><a href='../../bbotk/html/Archive.html#method-print'><code>bbotk::Archive$print()</code></a></span></p></li>
 </ul>
 </details>
 
 <hr>
+<a id="method-learner"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>learner()</code></h3>
+<p>Retrieve <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> of the i-th evaluation, by position
+or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.
+Learner does not contain a model. Use <code>$learners()</code> to get learners with
+models.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>learner</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span>, uhash <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>i</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+The iteration value to filter for.</p></dd>
+
+<dt><code>uhash</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+The <code>uhash</code> value to filter for.</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-learners"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>learners()</code></h3>
+<p>Retrieve list of trained <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> objects of the i-th evaluation,
+by position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
+exclusive.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>learners</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span>, uhash <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>i</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+The iteration value to filter for.</p></dd>
+
+<dt><code>uhash</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+The <code>uhash</code> value to filter for.</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-predictions"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>predictions()</code></h3>
+<p>Retrieve list of <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a> objects of the i-th evaluation, by
+position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
+exclusive.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>predictions</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span>, uhash <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>i</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+The iteration value to filter for.</p></dd>
+
+<dt><code>uhash</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+The <code>uhash</code> value to filter for.</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-resample_result"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>resample_result()</code></h3>
+<p>Retrieve <a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> of the i-th evaluation, by position
+or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>resample_result</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span>, uhash <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>i</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+The iteration value to filter for.</p></dd>
+
+<dt><code>uhash</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+The <code>uhash</code> value to filter for.</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-print"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+<p>Printer.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>...</code></dt><dd><p>(ignored).</p></dd>
+
+</dl><p></div></p>
+<p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>

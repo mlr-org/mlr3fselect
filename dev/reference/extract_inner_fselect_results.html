@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function for Nested Resampling — fselect_nested • mlr3fselect</title>
+<title>Extract Inner Feature Selection Results — extract_inner_fselect_results • mlr3fselect</title>
 
 
 <!-- jquery -->
@@ -40,8 +40,13 @@
 
 
 
-<meta property="og:title" content="Function for Nested Resampling — fselect_nested" />
-<meta property="og:description" content="Function to conduct nested resampling." />
+<meta property="og:title" content="Extract Inner Feature Selection Results — extract_inner_fselect_results" />
+<meta property="og:description" content="Extract inner feature selection results of nested resampling. Implemented for
+mlr3::ResampleResult and mlr3::BenchmarkResult. The function iterates
+over the AutoFSelector objects and binds the feature selection results to a
+data.table::data.table(). AutoFSelector must be initialized with
+store_fselect_instance = TRUE and resample() or benchmark() must be
+called with store_models = TRUE." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -134,105 +139,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Function for Nested Resampling</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/fselect_nested.R'><code>R/fselect_nested.R</code></a></small>
-    <div class="hidden name"><code>fselect_nested.Rd</code></div>
+    <h1>Extract Inner Feature Selection Results</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3fselect/blob/master/R/extract_inner_fselect_results.R'><code>R/extract_inner_fselect_results.R</code></a></small>
+    <div class="hidden name"><code>extract_inner_fselect_results.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to conduct nested resampling.</p>
+    <p>Extract inner feature selection results of nested resampling. Implemented for
+<a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> and <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>. The function iterates
+over the <a href='AutoFSelector.html'>AutoFSelector</a> objects and binds the feature selection results to a
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code>. <a href='AutoFSelector.html'>AutoFSelector</a> must be initialized with
+<code>store_fselect_instance = TRUE</code> and <code><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample()</a></code> or <code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>benchmark()</a></code> must be
+called with <code>store_models = TRUE</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fselect_nested</span><span class='op'>(</span>
-  <span class='va'>method</span>,
-  <span class='va'>task</span>,
-  <span class='va'>learner</span>,
-  <span class='va'>inner_resampling</span>,
-  <span class='va'>outer_resampling</span>,
-  <span class='va'>measure</span>,
-  term_evals <span class='op'>=</span> <span class='cn'>NULL</span>,
-  term_time <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>extract_inner_fselect_results</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>method</th>
-      <td><p>(<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>)<br />
-Key to retrieve fselector from <a href='mlr_fselectors.html'>mlr_fselectors</a> dictionary.</p></td>
-    </tr>
-    <tr>
-      <th>task</th>
-      <td><p>(<a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>)<br />
-Task to operate on.</p></td>
-    </tr>
-    <tr>
-      <th>learner</th>
-      <td><p>(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>).</p></td>
-    </tr>
-    <tr>
-      <th>inner_resampling</th>
-      <td><p>(<a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a>)<br />
-Resampling used for the inner loop.</p></td>
-    </tr>
-    <tr>
-      <th>outer_resampling</th>
-      <td><p><a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a>)<br />
-Resampling used for the outer loop.</p></td>
-    </tr>
-    <tr>
-      <th>measure</th>
-      <td><p>(<a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)<br />
-Measure to optimize.</p></td>
-    </tr>
-    <tr>
-      <th>term_evals</th>
-      <td><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
-Number of allowed evaluations.</p></td>
-    </tr>
-    <tr>
-      <th>term_time</th>
-      <td><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
-Maximum allowed time in seconds.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>(named <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>)<br />
-Named arguments to be set as parameters of the fselector.</p></td>
+      <th>x</th>
+      <td><p>(<a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> | <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a></p>
+    <p><code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code>.</p>
+    <h2 class="hasAnchor" id="data-structure"><a class="anchor" href="#data-structure"></a>Data structure</h2>
+
+    
+
+
+<p>The returned data table has the following columns:</p><ul>
+<li><p><code>experiment</code> (integer(1))<br />
+Index, giving the according row number in the original benchmark grid.</p></li>
+<li><p><code>iteration</code> (integer(1))<br />
+Iteration of the outer resampling.</p></li>
+<li><p>One column for each feature of the task.</p></li>
+<li><p>One column for each performance measure.</p></li>
+<li><p><code>features</code> (character())<br />
+Vector of selected feature set.</p></li>
+<li><p><code>task_id</code> (<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>).</p></li>
+<li><p><code>learner_id</code> (<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>).</p></li>
+<li><p><code>resampling_id</code> (<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>).</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>rr</span> <span class='op'>=</span> <span class='fu'>fselect_nested</span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='va'>at</span> <span class='op'>=</span> <span class='fu'><a href='auto_fselector.html'>auto_fselector</a></span><span class='op'>(</span>
   method <span class='op'>=</span> <span class='st'>"random_search"</span>,
-  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"pima"</span><span class='op'>)</span>,
   learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
-  inner_resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span> <span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
-  outer_resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"cv"</span>, folds <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,
+  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span> <span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
   measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
   term_evals <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
 
-<span class='co'># performance scores estimated on the outer resampling</span>
-<span class='va'>rr</span><span class='op'>$</span><span class='fu'>score</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                 task task_id             learner              learner_id
-#&gt; 1: &lt;TaskClassif[46]&gt;    pima &lt;AutoFSelector[38]&gt; classif.rpart.fselector
-#&gt; 2: &lt;TaskClassif[46]&gt;    pima &lt;AutoFSelector[38]&gt; classif.rpart.fselector
-#&gt;            resampling resampling_id iteration              prediction
-#&gt; 1: &lt;ResamplingCV[19]&gt;            cv         1 &lt;PredictionClassif[19]&gt;
-#&gt; 2: &lt;ResamplingCV[19]&gt;            cv         2 &lt;PredictionClassif[19]&gt;
-#&gt;    classif.ce
-#&gt; 1:  0.2343750
-#&gt; 2:  0.2552083</div><div class='input'>
-<span class='co'># unbiased performance of the final model trained on the full data set</span>
-<span class='va'>rr</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; classif.ce 
-#&gt;  0.2447917 </div></pre>
+<span class='va'>resampling_outer</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"cv"</span>, folds <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>rr</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span><span class='op'>(</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>, <span class='va'>at</span>, <span class='va'>resampling_outer</span>, store_models <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'>extract_inner_fselect_results</span><span class='op'>(</span><span class='va'>rr</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt; 1:         1         TRUE       FALSE         TRUE        TRUE       0.08
+#&gt; 2:         2         TRUE       FALSE        FALSE        TRUE       0.04
+#&gt;                                 features task_id              learner_id
+#&gt; 1: Petal.Length,Sepal.Length,Sepal.Width    iris classif.rpart.fselector
+#&gt; 2:              Petal.Length,Sepal.Width    iris classif.rpart.fselector
+#&gt;    resampling_id
+#&gt; 1:            cv
+#&gt; 2:            cv</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

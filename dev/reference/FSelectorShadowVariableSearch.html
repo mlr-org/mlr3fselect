@@ -237,125 +237,125 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</div><div class='input'>
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</div><div class='input'>
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
-</div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width permuted__Petal.Length
-#&gt;  1:         TRUE       FALSE        FALSE       FALSE                  FALSE
-#&gt;  2:        FALSE        TRUE        FALSE       FALSE                  FALSE
-#&gt;  3:        FALSE       FALSE         TRUE       FALSE                  FALSE
-#&gt;  4:        FALSE       FALSE        FALSE        TRUE                  FALSE
-#&gt;  5:        FALSE       FALSE        FALSE       FALSE                   TRUE
-#&gt;  6:        FALSE       FALSE        FALSE       FALSE                  FALSE
-#&gt;  7:        FALSE       FALSE        FALSE       FALSE                  FALSE
-#&gt;  8:        FALSE       FALSE        FALSE       FALSE                  FALSE
-#&gt;  9:         TRUE        TRUE        FALSE       FALSE                  FALSE
-#&gt; 10:         TRUE       FALSE         TRUE       FALSE                  FALSE
-#&gt; 11:         TRUE       FALSE        FALSE        TRUE                  FALSE
-#&gt; 12:         TRUE       FALSE        FALSE       FALSE                   TRUE
-#&gt; 13:         TRUE       FALSE        FALSE       FALSE                  FALSE
-#&gt; 14:         TRUE       FALSE        FALSE       FALSE                  FALSE
-#&gt; 15:         TRUE       FALSE        FALSE       FALSE                  FALSE
-#&gt; 16:         TRUE        TRUE         TRUE       FALSE                  FALSE
-#&gt; 17:         TRUE        TRUE        FALSE        TRUE                  FALSE
-#&gt; 18:         TRUE        TRUE        FALSE       FALSE                   TRUE
-#&gt; 19:         TRUE        TRUE        FALSE       FALSE                  FALSE
-#&gt; 20:         TRUE        TRUE        FALSE       FALSE                  FALSE
-#&gt; 21:         TRUE        TRUE        FALSE       FALSE                  FALSE
-#&gt; 22:         TRUE        TRUE         TRUE        TRUE                  FALSE
-#&gt; 23:         TRUE        TRUE         TRUE       FALSE                   TRUE
-#&gt; 24:         TRUE        TRUE         TRUE       FALSE                  FALSE
-#&gt; 25:         TRUE        TRUE         TRUE       FALSE                  FALSE
-#&gt; 26:         TRUE        TRUE         TRUE       FALSE                  FALSE
-#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width permuted__Petal.Length
+</div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt;  1:         TRUE        TRUE         TRUE       FALSE       0.08
+#&gt;  2:         TRUE       FALSE        FALSE       FALSE       0.08
+#&gt;  3:         TRUE        TRUE         TRUE       FALSE       0.08
+#&gt;  4:         TRUE       FALSE        FALSE       FALSE       0.08
+#&gt;  5:         TRUE       FALSE         TRUE       FALSE       0.08
+#&gt;  6:         TRUE       FALSE        FALSE       FALSE       0.08
+#&gt;  7:         TRUE       FALSE        FALSE       FALSE       0.08
+#&gt;  8:         TRUE        TRUE        FALSE       FALSE       0.08
+#&gt;  9:         TRUE        TRUE         TRUE       FALSE       0.08
+#&gt; 10:         TRUE       FALSE        FALSE        TRUE       0.08
+#&gt; 11:        FALSE       FALSE        FALSE        TRUE       0.54
+#&gt; 12:         TRUE        TRUE        FALSE       FALSE       0.08
+#&gt; 13:        FALSE       FALSE        FALSE       FALSE       0.78
+#&gt; 14:        FALSE       FALSE        FALSE       FALSE       0.78
+#&gt; 15:        FALSE       FALSE        FALSE       FALSE       0.72
+#&gt; 16:         TRUE        TRUE         TRUE       FALSE       0.08
+#&gt; 17:         TRUE        TRUE        FALSE       FALSE       0.08
+#&gt; 18:         TRUE        TRUE         TRUE        TRUE       0.08
+#&gt; 19:         TRUE       FALSE        FALSE       FALSE       0.08
+#&gt; 20:         TRUE        TRUE        FALSE       FALSE       0.08
+#&gt; 21:        FALSE       FALSE         TRUE       FALSE       0.36
+#&gt; 22:        FALSE       FALSE        FALSE       FALSE       0.70
+#&gt; 23:        FALSE        TRUE        FALSE       FALSE       0.08
+#&gt; 24:         TRUE        TRUE        FALSE       FALSE       0.08
+#&gt; 25:         TRUE        TRUE         TRUE       FALSE       0.08
+#&gt; 26:         TRUE        TRUE        FALSE        TRUE       0.08
+#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt;     runtime_learners           timestamp batch_nr permuted__Petal.Length
+#&gt;  1:            0.125 2021-06-08 11:32:03        4                  FALSE
+#&gt;  2:            0.091 2021-06-08 11:32:00        2                  FALSE
+#&gt;  3:            0.102 2021-06-08 11:32:03        4                  FALSE
+#&gt;  4:            0.126 2021-06-08 11:32:00        2                   TRUE
+#&gt;  5:            0.110 2021-06-08 11:32:00        2                  FALSE
+#&gt;  6:            0.110 2021-06-08 11:32:00        2                  FALSE
+#&gt;  7:            0.094 2021-06-08 11:32:00        2                  FALSE
+#&gt;  8:            0.097 2021-06-08 11:32:00        2                  FALSE
+#&gt;  9:            0.130 2021-06-08 11:32:02        3                  FALSE
+#&gt; 10:            0.104 2021-06-08 11:32:00        2                  FALSE
+#&gt; 11:            0.109 2021-06-08 11:31:58        1                  FALSE
+#&gt; 12:            0.107 2021-06-08 11:32:02        3                  FALSE
+#&gt; 13:            0.102 2021-06-08 11:31:58        1                   TRUE
+#&gt; 14:            0.138 2021-06-08 11:31:58        1                  FALSE
+#&gt; 15:            0.103 2021-06-08 11:31:58        1                  FALSE
+#&gt; 16:            0.135 2021-06-08 11:32:03        4                   TRUE
+#&gt; 17:            0.119 2021-06-08 11:32:02        3                   TRUE
+#&gt; 18:            0.130 2021-06-08 11:32:03        4                  FALSE
+#&gt; 19:            0.104 2021-06-08 11:31:58        1                  FALSE
+#&gt; 20:            0.103 2021-06-08 11:32:02        3                  FALSE
+#&gt; 21:            0.107 2021-06-08 11:31:58        1                  FALSE
+#&gt; 22:            0.094 2021-06-08 11:31:58        1                  FALSE
+#&gt; 23:            0.107 2021-06-08 11:31:58        1                  FALSE
+#&gt; 24:            0.114 2021-06-08 11:32:02        3                  FALSE
+#&gt; 25:            0.115 2021-06-08 11:32:03        4                  FALSE
+#&gt; 26:            0.102 2021-06-08 11:32:02        3                  FALSE
+#&gt;     runtime_learners           timestamp batch_nr permuted__Petal.Length
 #&gt;     permuted__Petal.Width permuted__Sepal.Length permuted__Sepal.Width
-#&gt;  1:                 FALSE                  FALSE                 FALSE
-#&gt;  2:                 FALSE                  FALSE                 FALSE
-#&gt;  3:                 FALSE                  FALSE                 FALSE
+#&gt;  1:                  TRUE                  FALSE                 FALSE
+#&gt;  2:                  TRUE                  FALSE                 FALSE
+#&gt;  3:                 FALSE                   TRUE                 FALSE
 #&gt;  4:                 FALSE                  FALSE                 FALSE
 #&gt;  5:                 FALSE                  FALSE                 FALSE
-#&gt;  6:                  TRUE                  FALSE                 FALSE
-#&gt;  7:                 FALSE                   TRUE                 FALSE
-#&gt;  8:                 FALSE                  FALSE                  TRUE
+#&gt;  6:                 FALSE                   TRUE                 FALSE
+#&gt;  7:                 FALSE                  FALSE                  TRUE
+#&gt;  8:                 FALSE                  FALSE                 FALSE
 #&gt;  9:                 FALSE                  FALSE                 FALSE
 #&gt; 10:                 FALSE                  FALSE                 FALSE
 #&gt; 11:                 FALSE                  FALSE                 FALSE
-#&gt; 12:                 FALSE                  FALSE                 FALSE
-#&gt; 13:                  TRUE                  FALSE                 FALSE
-#&gt; 14:                 FALSE                   TRUE                 FALSE
-#&gt; 15:                 FALSE                  FALSE                  TRUE
+#&gt; 12:                 FALSE                  FALSE                  TRUE
+#&gt; 13:                 FALSE                  FALSE                 FALSE
+#&gt; 14:                 FALSE                  FALSE                  TRUE
+#&gt; 15:                  TRUE                  FALSE                 FALSE
 #&gt; 16:                 FALSE                  FALSE                 FALSE
 #&gt; 17:                 FALSE                  FALSE                 FALSE
 #&gt; 18:                 FALSE                  FALSE                 FALSE
-#&gt; 19:                  TRUE                  FALSE                 FALSE
-#&gt; 20:                 FALSE                   TRUE                 FALSE
-#&gt; 21:                 FALSE                  FALSE                  TRUE
-#&gt; 22:                 FALSE                  FALSE                 FALSE
+#&gt; 19:                 FALSE                  FALSE                 FALSE
+#&gt; 20:                  TRUE                  FALSE                 FALSE
+#&gt; 21:                 FALSE                  FALSE                 FALSE
+#&gt; 22:                 FALSE                   TRUE                 FALSE
 #&gt; 23:                 FALSE                  FALSE                 FALSE
-#&gt; 24:                  TRUE                  FALSE                 FALSE
-#&gt; 25:                 FALSE                   TRUE                 FALSE
-#&gt; 26:                 FALSE                  FALSE                  TRUE
+#&gt; 24:                 FALSE                   TRUE                 FALSE
+#&gt; 25:                 FALSE                  FALSE                  TRUE
+#&gt; 26:                 FALSE                  FALSE                 FALSE
 #&gt;     permuted__Petal.Width permuted__Sepal.Length permuted__Sepal.Width
-#&gt;     classif.ce                                uhash           timestamp
-#&gt;  1:       0.06 8ea95558-e940-4cd4-85cf-11884bee6f5e 2021-06-08 05:05:16
-#&gt;  2:       0.06 97dbde1a-8211-4575-9c4f-a03d115a2acc 2021-06-08 05:05:16
-#&gt;  3:       0.34 fb801fb4-5391-4cba-b1f4-857959f1b9af 2021-06-08 05:05:16
-#&gt;  4:       0.50 63734b38-9b40-4713-96df-7ffcf1c49766 2021-06-08 05:05:16
-#&gt;  5:       0.70 268fa2af-ec3c-450e-ab30-d0f8bb41e226 2021-06-08 05:05:16
-#&gt;  6:       0.62 d64411d9-b427-442c-bc7b-c710bdba039d 2021-06-08 05:05:16
-#&gt;  7:       0.76 f480e058-590c-4708-80f2-1aa2a483b75f 2021-06-08 05:05:16
-#&gt;  8:       0.64 dd64adf2-f1a0-44d7-bd0f-e59fe90bb4d3 2021-06-08 05:05:16
-#&gt;  9:       0.06 3442af94-c5f1-404e-9386-4e81473d740b 2021-06-08 05:05:17
-#&gt; 10:       0.06 80b400a1-bd1e-4991-942a-986ec59c3029 2021-06-08 05:05:17
-#&gt; 11:       0.06 774bc346-158b-4a6d-b10f-213c2352821c 2021-06-08 05:05:17
-#&gt; 12:       0.06 de709d76-c97e-455f-a7ad-14e6ec77107d 2021-06-08 05:05:17
-#&gt; 13:       0.06 d2bc126b-741e-415b-896d-bcd544b98acd 2021-06-08 05:05:17
-#&gt; 14:       0.06 a2fae3e1-fffe-4bb9-8452-67333b0907b7 2021-06-08 05:05:17
-#&gt; 15:       0.06 89d10574-32d3-4d08-99ac-cf236fbc3283 2021-06-08 05:05:17
-#&gt; 16:       0.06 3be5cd7a-99e4-4eba-a881-2435992c3804 2021-06-08 05:05:18
-#&gt; 17:       0.06 104d5e3d-d095-4d6e-8f1a-7d3e2c8df09b 2021-06-08 05:05:18
-#&gt; 18:       0.06 51673b63-3b44-4cba-9175-9448fc1f0de7 2021-06-08 05:05:18
-#&gt; 19:       0.06 41798817-c573-4997-bbc1-7ad1fb2ac383 2021-06-08 05:05:18
-#&gt; 20:       0.06 ff6a9be1-0249-48e9-a397-2215e6abc522 2021-06-08 05:05:18
-#&gt; 21:       0.06 0ce3c43f-7efb-4ab3-b40c-ef67d9a846ea 2021-06-08 05:05:18
-#&gt; 22:       0.06 74103ce7-f563-4952-9d6e-445afcc1a920 2021-06-08 05:05:20
-#&gt; 23:       0.06 64e7dcc0-c488-48fa-a469-14e1e471b579 2021-06-08 05:05:20
-#&gt; 24:       0.06 2f0f5d56-476b-4614-b51c-2532401f2ddb 2021-06-08 05:05:20
-#&gt; 25:       0.06 febf1112-4e7e-4884-975d-ddc69b177b3a 2021-06-08 05:05:20
-#&gt; 26:       0.06 7463228f-7604-44b2-821e-6798bcacb0e7 2021-06-08 05:05:20
-#&gt;     classif.ce                                uhash           timestamp
-#&gt;     batch_nr
-#&gt;  1:        1
-#&gt;  2:        1
-#&gt;  3:        1
-#&gt;  4:        1
-#&gt;  5:        1
-#&gt;  6:        1
-#&gt;  7:        1
-#&gt;  8:        1
-#&gt;  9:        2
-#&gt; 10:        2
-#&gt; 11:        2
-#&gt; 12:        2
-#&gt; 13:        2
-#&gt; 14:        2
-#&gt; 15:        2
-#&gt; 16:        3
-#&gt; 17:        3
-#&gt; 18:        3
-#&gt; 19:        3
-#&gt; 20:        3
-#&gt; 21:        3
-#&gt; 22:        4
-#&gt; 23:        4
-#&gt; 24:        4
-#&gt; 25:        4
-#&gt; 26:        4
-#&gt;     batch_nr</div></pre>
+#&gt;          resample_result
+#&gt;  1: &lt;ResampleResult[21]&gt;
+#&gt;  2: &lt;ResampleResult[21]&gt;
+#&gt;  3: &lt;ResampleResult[21]&gt;
+#&gt;  4: &lt;ResampleResult[21]&gt;
+#&gt;  5: &lt;ResampleResult[21]&gt;
+#&gt;  6: &lt;ResampleResult[21]&gt;
+#&gt;  7: &lt;ResampleResult[21]&gt;
+#&gt;  8: &lt;ResampleResult[21]&gt;
+#&gt;  9: &lt;ResampleResult[21]&gt;
+#&gt; 10: &lt;ResampleResult[21]&gt;
+#&gt; 11: &lt;ResampleResult[21]&gt;
+#&gt; 12: &lt;ResampleResult[21]&gt;
+#&gt; 13: &lt;ResampleResult[21]&gt;
+#&gt; 14: &lt;ResampleResult[21]&gt;
+#&gt; 15: &lt;ResampleResult[21]&gt;
+#&gt; 16: &lt;ResampleResult[21]&gt;
+#&gt; 17: &lt;ResampleResult[21]&gt;
+#&gt; 18: &lt;ResampleResult[21]&gt;
+#&gt; 19: &lt;ResampleResult[21]&gt;
+#&gt; 20: &lt;ResampleResult[21]&gt;
+#&gt; 21: &lt;ResampleResult[21]&gt;
+#&gt; 22: &lt;ResampleResult[21]&gt;
+#&gt; 23: &lt;ResampleResult[21]&gt;
+#&gt; 24: &lt;ResampleResult[21]&gt;
+#&gt; 25: &lt;ResampleResult[21]&gt;
+#&gt; 26: &lt;ResampleResult[21]&gt;
+#&gt;          resample_result</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -235,40 +235,30 @@ Maximum number of feature sets to try in a batch.</p></dd>
 <span class='co'># \donttest{</span>
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE Petal.Length,Petal.Width
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                  features
+#&gt; 1:         TRUE       FALSE         TRUE       FALSE Petal.Length,Sepal.Length
 #&gt;    classif.ce
 #&gt; 1:       0.04</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE Petal.Length,Petal.Width
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                  features
+#&gt; 1:         TRUE       FALSE         TRUE       FALSE Petal.Length,Sepal.Length
 #&gt;    classif.ce
 #&gt; 1:       0.04</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
-</div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:        FALSE       FALSE        FALSE        TRUE       0.46
-#&gt;  2:        FALSE       FALSE        FALSE        TRUE       0.46
-#&gt;  3:         TRUE       FALSE        FALSE       FALSE       0.08
-#&gt;  4:         TRUE        TRUE        FALSE       FALSE       0.04
-#&gt;  5:         TRUE       FALSE        FALSE        TRUE       0.08
-#&gt;  6:        FALSE        TRUE         TRUE       FALSE       0.04
-#&gt;  7:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;  8:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;  9:        FALSE        TRUE        FALSE        TRUE       0.04
-#&gt; 10:         TRUE        TRUE         TRUE        TRUE       0.04
-#&gt;                                    uhash           timestamp batch_nr
-#&gt;  1: ed78c17b-bca5-4a3e-a238-6e890774ebfe 2021-06-08 05:05:12        1
-#&gt;  2: b97c8209-3dcd-49c5-b058-9d838591de30 2021-06-08 05:05:12        1
-#&gt;  3: bfcfd5f4-ca7a-4303-9abe-c8c2430e33fe 2021-06-08 05:05:12        1
-#&gt;  4: 2157e18c-2379-4666-9008-09abd684325d 2021-06-08 05:05:12        1
-#&gt;  5: d637961a-cd0b-417f-801a-ac086746592a 2021-06-08 05:05:12        1
-#&gt;  6: 51a97840-55ef-47d6-a945-c2da009d2e35 2021-06-08 05:05:12        1
-#&gt;  7: d71766ce-890f-447e-bb6b-a87276228618 2021-06-08 05:05:12        1
-#&gt;  8: d3a14e48-645d-41c6-80cf-fbfd561e49a9 2021-06-08 05:05:12        1
-#&gt;  9: c249b0df-b41c-4087-b3dc-8612a5383b0e 2021-06-08 05:05:12        1
-#&gt; 10: db8d71b3-87d9-4df0-8bfa-efea13950598 2021-06-08 05:05:12        1</div></pre>
+</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
+#&gt; 1:        FALSE       FALSE        FALSE        TRUE       0.40
+#&gt; 2:         TRUE       FALSE         TRUE       FALSE       0.04
+#&gt; 3:         TRUE       FALSE         TRUE        TRUE       0.04
+#&gt; 4:        FALSE        TRUE         TRUE        TRUE       0.06
+#&gt; 5:        FALSE       FALSE        FALSE        TRUE       0.40
+#&gt;    runtime_learners           timestamp batch_nr      resample_result
+#&gt; 1:            0.081 2021-06-08 11:31:53        5 &lt;ResampleResult[21]&gt;
+#&gt; 2:            0.082 2021-06-08 11:31:53        3 &lt;ResampleResult[21]&gt;
+#&gt; 3:            0.106 2021-06-08 11:31:53        4 &lt;ResampleResult[21]&gt;
+#&gt; 4:            0.080 2021-06-08 11:31:52        1 &lt;ResampleResult[21]&gt;
+#&gt; 5:            0.079 2021-06-08 11:31:52        2 &lt;ResampleResult[21]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

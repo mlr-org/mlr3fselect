@@ -230,29 +230,29 @@ iterations are needed, set <code>ìters</code> to a higher value in the paramete
 <span class='co'># Modifies the instance by reference</span>
 <span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE Petal.Length,Petal.Width
+#&gt; 1:        FALSE        TRUE         TRUE       FALSE Petal.Width,Sepal.Length
 #&gt;    classif.ce
-#&gt; 1:       0.08</div><div class='input'>
+#&gt; 1:       0.04</div><div class='input'>
 <span class='co'># Returns best scoring evaluation</span>
 <span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE Petal.Length,Petal.Width
+#&gt; 1:        FALSE        TRUE         TRUE       FALSE Petal.Width,Sepal.Length
 #&gt;    classif.ce
-#&gt; 1:       0.08</div><div class='input'>
+#&gt; 1:       0.04</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE       0.08
-#&gt; 2:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt; 3:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt; 4:        FALSE       FALSE         TRUE       FALSE       0.22
-#&gt; 5:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt;                                   uhash           timestamp batch_nr
-#&gt; 1: 9040ce06-2563-46c5-85b3-8e03c9e584bb 2021-06-08 05:05:08        1
-#&gt; 2: cb39cb8c-bfb4-48ce-bd1d-4852bc419f6e 2021-06-08 05:05:08        2
-#&gt; 3: 3028496f-20c6-48f2-9f59-8c9b1586366e 2021-06-08 05:05:09        3
-#&gt; 4: 69c6be0d-5a73-451d-8028-bfe3415251d0 2021-06-08 05:05:09        4
-#&gt; 5: 920845c3-d7fb-49d9-8809-16e912854fac 2021-06-08 05:05:09        5</div></pre>
+#&gt; 1:        FALSE        TRUE         TRUE       FALSE       0.04
+#&gt; 2:        FALSE       FALSE         TRUE       FALSE       0.28
+#&gt; 3:        FALSE       FALSE        FALSE        TRUE       0.54
+#&gt; 4:        FALSE       FALSE         TRUE        TRUE       0.28
+#&gt; 5:         TRUE       FALSE        FALSE       FALSE       0.08
+#&gt;    runtime_learners           timestamp batch_nr      resample_result
+#&gt; 1:            0.079 2021-06-08 11:31:50        4 &lt;ResampleResult[21]&gt;
+#&gt; 2:            0.081 2021-06-08 11:31:50        5 &lt;ResampleResult[21]&gt;
+#&gt; 3:            0.085 2021-06-08 11:31:49        2 &lt;ResampleResult[21]&gt;
+#&gt; 4:            0.076 2021-06-08 11:31:49        1 &lt;ResampleResult[21]&gt;
+#&gt; 5:            0.100 2021-06-08 11:31:50        3 &lt;ResampleResult[21]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
