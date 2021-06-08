@@ -48,7 +48,7 @@ Optimizer that is called.}
 \if{html}{\out{<a id="method-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-optimize}{}}}
 \subsection{Method \code{optimize()}}{
-Performs the tuning on a \link{FSelectInstanceSingleCrit} /
+Performs the feature selection on a \link{FSelectInstanceSingleCrit} /
 \link{FSelectInstanceMultiCrit} until termination.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectorFromOptimizer$optimize(inst)}\if{html}{\out{</div>}}
