@@ -25,8 +25,7 @@
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("holdout"),
 #'   measure = msr("classif.ce"),
-#'   term_evals = 50,
-#'   batch_size = 10)
+#'   term_evals = 4)
 #'
 #' at$train(tsk("pima"))
 auto_fselector = function(method, learner, resampling, measure, term_evals = NULL, term_time = NULL, ...) {

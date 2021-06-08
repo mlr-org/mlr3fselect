@@ -44,17 +44,15 @@
 #'
 #' @export
 #' @examples
-#' task = tsk("iris")
-#' 
 #' at = auto_fselector(
 #'   method = "random_search",
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("holdout"),
 #'   measure = msr("classif.ce"),
-#'   term_evals = 10)
+#'   term_evals = 4)
 #'
-#' resampling_outer = rsmp("cv", folds = 3)
-#' rr = resample(task, at, resampling_outer, store_models = TRUE)
+#' resampling_outer = rsmp("cv", folds = 2)
+#' rr = resample(tsk("iris"), at, resampling_outer, store_models = TRUE)
 #'
 #' extract_inner_fselect_archives(rr)
 extract_inner_fselect_archives = function (x, unnest = NULL, exclude_columns = "uhash") {

@@ -57,8 +57,7 @@ rr = fselect_nested(
   inner_resampling = rsmp ("holdout"),
   outer_resampling = rsmp("cv", folds = 2),
   measure = msr("classif.ce"),
-  term_evals = 2,
-  batch_size = 2)
+  term_evals = 4)
 
 # performance scores estimated on the outer resampling
 rr$score()
