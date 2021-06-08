@@ -50,7 +50,7 @@
 #' * `as.data.table.ArchiveFSelect(x, unnest = NULL, exclude_columns = "uhash", measures = NULL)`\cr
 #' Returns a tabular view of all evaluated feature sets.\cr
 #' [ArchiveFSelect] -> [data.table::data.table()]\cr
-#'     * `x` ([ArchiveTuning])
+#'     * `x` ([ArchiveFSelect])
 #'     * `unnest` (`character()`)\cr
 #'       Transforms list columns to separate columns. Set to `NULL` if no column
 #'       should be unnested.

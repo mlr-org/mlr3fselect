@@ -33,10 +33,10 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("max_features", lower = 1),
-        ParamInt$new("batch_size", default = 10, lower = 1))
+        ParamInt$new("batch_size", default = 1, lower = 1))
       )
 
-      ps$values = list(batch_size = 10L)
+      ps$values = list(batch_size = 1L)
 
       super$initialize(param_set = ps, properties = c("single-crit",
         "multi-crit"))

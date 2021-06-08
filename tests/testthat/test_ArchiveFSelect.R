@@ -48,7 +48,7 @@ test_that("ArchiveFSelect access methods work", {
   })
 })
 
-test_that("ArchiveTuning as.data.table function works", {
+test_that("ArchiveFSelect as.data.table function works", {
   instance = fselect(
     method = "random_search",
     task = tsk("pima"),

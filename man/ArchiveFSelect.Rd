@@ -61,7 +61,7 @@ again on a different measure. Alternatively, measures can be supplied to
 Returns a tabular view of all evaluated feature sets.\cr
 \link{ArchiveFSelect} -> \code{\link[data.table:data.table]{data.table::data.table()}}\cr
 \itemize{
-\item \code{x} (\link{ArchiveTuning})
+\item \code{x} (\link{ArchiveFSelect})
 \item \code{unnest} (\code{character()})\cr
 Transforms list columns to separate columns. Set to \code{NULL} if no column
 should be unnested.
