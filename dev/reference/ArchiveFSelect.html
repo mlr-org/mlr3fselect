@@ -174,7 +174,7 @@ stored in the <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>
 (<code>$benchmark_result</code>) that records the resampling experiments. Each
 experiment corresponds to to a single evaluation of a feature set. The table
 (<code>$data</code>) and the benchmark result (<code>$benchmark_result</code>) are linked by the
-<code>uhash</code> column. If the results are viewed with <code><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table()</a></code>, both are
+<code>uhash</code> column. If the results are viewed with <code>as.data.table()</code>, both are
 joined automatically.</p>
     <h2 class="hasAnchor" id="analysis"><a class="anchor" href="#analysis"></a>Analysis</h2>
 
@@ -182,14 +182,14 @@ joined automatically.</p>
 
 
 <p>For analyzing the feature selection results, it is recommended to pass the archive to
-<code><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table()</a></code>. The returned data table is joined with the benchmark result
+<code>as.data.table()</code>. The returned data table is joined with the benchmark result
 which adds the <a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> for each feature set.</p>
 <p>The archive provides various getters (e.g. <code>$learners()</code>) to ease the access.
 All getters extract by position (<code>i</code>) or unique hash (<code>uhash</code>). For a
 complete list of all getters see the methods section.</p>
 <p>The benchmark result (<code>$benchmark_result</code>) allows to score the feature sets
 again on a different measure. Alternatively, measures can be supplied to
-<code><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table()</a></code>.</p>
+<code>as.data.table()</code>.</p>
     <h2 class="hasAnchor" id="s-methods"><a class="anchor" href="#s-methods"></a>S3 Methods</h2>
 
     
