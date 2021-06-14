@@ -47,14 +47,19 @@ FSelectorSequential = R6Class("FSelectorSequential",
     #' Returns the optimization path.
     #'
     #' @param inst ([FSelectInstanceSingleCrit])\cr
-    #' Instance optimized with [FSelectorSequential].
+    #'   Instance optimized with [FSelectorSequential].
+    #' @param include_uhash (`logical(1)`)\cr
+    #'   Include `uhash` column?
     #'
-    #' @return [data.table::data.table]
-    optimization_path = function(inst) {
-      if (inst$archive$n_batch == 0L) {
+    #' @return [data.table::data.table()]
+    optimization_path = function(inst, include_uhash = FALSE) {
+      archive = inst$archive
+      if (archive$n_batch == 0L) {
         stop("No results stored in archive")
       }
-      inst$archive$data[, head(.SD, 1), by = get("batch_nr")]
+      uhash = if (include_uhash) "uhash" else NULL
+      res = archive$data[, head(.SD, 1), by = get("batch_nr")]
+      res[, c(archive$cols_x, archive$cols_y, "batch_nr", uhash), with = FALSE]
     }
   ),
   private = list(

@@ -93,7 +93,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.`
 \subsection{Method \code{optimization_path()}}{
 Returns the optimization path.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorSequential$optimization_path(inst)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectorSequential$optimization_path(inst, include_uhash = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -101,11 +101,14 @@ Returns the optimization path.
 \describe{
 \item{\code{inst}}{(\link{FSelectInstanceSingleCrit})\cr
 Instance optimized with \link{FSelectorSequential}.}
+
+\item{\code{include_uhash}}{(\code{logical(1)})\cr
+Include \code{uhash} column?}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}
+\code{\link[data.table:data.table]{data.table::data.table()}}
 }
 }
 \if{html}{\out{<hr>}}
