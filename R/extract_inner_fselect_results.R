@@ -51,7 +51,7 @@ extract_inner_fselect_results.ResampleResult = function(x) {
     return(data.table())
   }
   tab = imap_dtr(rr$learners, function(learner, i) {
-    data = learner$fselect_result
+    data = setalloccol(learner$fselect_result)
     set(data, j = "iteration", value = i)
   })
   tab[, "task_id" := rr$task$id]
