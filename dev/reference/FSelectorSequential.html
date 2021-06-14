@@ -209,16 +209,19 @@ Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward se
 <p><hr>
 <a id="method-optimization_path"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>optimization_path()</code></h3>
 <p>Returns the optimization path.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>FSelectorSequential</span><span class='op'>$</span><span class='fu'>optimization_path</span><span class='op'>(</span><span class='va'>inst</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>FSelectorSequential</span><span class='op'>$</span><span class='fu'>optimization_path</span><span class='op'>(</span><span class='va'>inst</span>, include_uhash <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>inst</code></dt><dd><p>(<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>)<br />
 Instance optimized with FSelectorSequential.</p></dd>
 
+<dt><code>include_uhash</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+Include <code>uhash</code> column?</p></dd>
+
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p>
+<p><code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code></p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -258,21 +261,21 @@ Instance optimized with FSelectorSequential.</p></dd>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt; 1:         TRUE        TRUE        FALSE       FALSE       0.04
+#&gt; 1:        FALSE        TRUE        FALSE        TRUE       0.02
 #&gt; 2:         TRUE       FALSE        FALSE       FALSE       0.04
-#&gt; 3:        FALSE       FALSE        FALSE        TRUE       0.60
-#&gt; 4:        FALSE        TRUE        FALSE       FALSE       0.02
-#&gt; 5:        FALSE        TRUE         TRUE       FALSE       0.02
-#&gt; 6:        FALSE        TRUE        FALSE        TRUE       0.02
-#&gt; 7:        FALSE       FALSE         TRUE       FALSE       0.32
+#&gt; 3:        FALSE       FALSE         TRUE       FALSE       0.32
+#&gt; 4:         TRUE        TRUE        FALSE       FALSE       0.04
+#&gt; 5:        FALSE        TRUE        FALSE       FALSE       0.02
+#&gt; 6:        FALSE       FALSE        FALSE        TRUE       0.60
+#&gt; 7:        FALSE        TRUE         TRUE       FALSE       0.02
 #&gt;    runtime_learners           timestamp batch_nr      resample_result
-#&gt; 1:            0.084 2021-06-14 09:46:13        2 &lt;ResampleResult[21]&gt;
-#&gt; 2:            0.070 2021-06-14 09:46:13        1 &lt;ResampleResult[21]&gt;
-#&gt; 3:            0.072 2021-06-14 09:46:13        1 &lt;ResampleResult[21]&gt;
-#&gt; 4:            0.076 2021-06-14 09:46:13        1 &lt;ResampleResult[21]&gt;
-#&gt; 5:            0.069 2021-06-14 09:46:13        2 &lt;ResampleResult[21]&gt;
-#&gt; 6:            0.076 2021-06-14 09:46:13        2 &lt;ResampleResult[21]&gt;
-#&gt; 7:            0.076 2021-06-14 09:46:13        1 &lt;ResampleResult[21]&gt;</div></pre>
+#&gt; 1:            0.073 2021-06-14 10:16:33        2 &lt;ResampleResult[21]&gt;
+#&gt; 2:            0.073 2021-06-14 10:16:32        1 &lt;ResampleResult[21]&gt;
+#&gt; 3:            0.084 2021-06-14 10:16:32        1 &lt;ResampleResult[21]&gt;
+#&gt; 4:            0.084 2021-06-14 10:16:33        2 &lt;ResampleResult[21]&gt;
+#&gt; 5:            0.073 2021-06-14 10:16:32        1 &lt;ResampleResult[21]&gt;
+#&gt; 6:            0.073 2021-06-14 10:16:32        1 &lt;ResampleResult[21]&gt;
+#&gt; 7:            0.073 2021-06-14 10:16:33        2 &lt;ResampleResult[21]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
