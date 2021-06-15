@@ -38,7 +38,7 @@ Imports:
     checkmate (>= 2.0.0),
     data.table,
     lgr,
-    mlr3 (>= 0.7.0),
+    mlr3 (>= 0.11.0-9000),
     mlr3misc (>= 0.7.0),
     mlr3pipelines (>= 0.3.0),
     paradox (>= 0.7.0),
@@ -46,7 +46,9 @@ Imports:
 Suggests:
     genalg,
     rpart,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+Remotes:
+    mlr-org/mlr3
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
