@@ -6,7 +6,7 @@ output: github_document
 lgr::get_logger("mlr3")$set_threshold("warn")
 lgr::get_logger("bbotk")$set_threshold("warn")
 set.seed(1)
-options(datatable.print.class = FALSE, datatable.print.keys = FALSE)
+options(datatable.print.class = FALSE, datatable.print.keys = FALSE, width = 200)
 ```
 
 # mlr3fselect
@@ -49,30 +49,24 @@ remotes::install_github("mlr-org/mlr3fselect")
 ## Example
 
 ```{r}
-library("mlr3")
 library("mlr3fselect")
 
-task = tsk("pima")
-learner = lrn("classif.rpart")
-resampling = rsmp("holdout")
-measure = msr("classif.ce")
+# feature selection on the pima indians diabetes data set
+instance = fselect(
+  method = "random_search",
+  task =  tsk("pima"),
+  learner = lrn("classif.rpart"),
+  resampling = rsmp("holdout"),
+  measure = msr("classif.ce"),
+  term_evals = 10,
+  batch_size = 5
+)
 
-# define termination criterion
-terminator = trm("evals", n_evals = 20)
+# best performing feature set
+instance$result
 
-# create fselect instance
-instance = FSelectInstanceSingleCrit$new(
-  task = task,
-  learner = learner,
-  resampling = resampling,
-  measure = measure,
-  terminator = terminator)
-
-# load fselector
-fselector = fs("random_search")
-
-# trigger optimization
-fselector$optimize(instance)
+# all evaluated feature sets
+as.data.table(instance$archive)
 ```
 
 

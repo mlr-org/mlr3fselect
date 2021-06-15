@@ -48,33 +48,39 @@ remotes::install_github("mlr-org/mlr3fselect")
 ## Example
 
 ``` r
-library("mlr3")
 library("mlr3fselect")
 
-task = tsk("pima")
-learner = lrn("classif.rpart")
-resampling = rsmp("holdout")
-measure = msr("classif.ce")
+# feature selection on the pima indians diabetes data set
+instance = fselect(
+  method = "random_search",
+  task =  tsk("pima"),
+  learner = lrn("classif.rpart"),
+  resampling = rsmp("holdout"),
+  measure = msr("classif.ce"),
+  term_evals = 10,
+  batch_size = 5
+)
 
-# define termination criterion
-terminator = trm("evals", n_evals = 20)
-
-# create fselect instance
-instance = FSelectInstanceSingleCrit$new(
-  task = task,
-  learner = learner,
-  resampling = resampling,
-  measure = measure,
-  terminator = terminator)
-
-# load fselector
-fselector = fs("random_search")
-
-# trigger optimization
-fselector$optimize(instance)
+# best performing feature set
+instance$result
 ```
 
-    ##     age glucose insulin mass pedigree pregnant pressure triceps
-    ## 1: TRUE    TRUE    TRUE TRUE     TRUE    FALSE    FALSE    TRUE
-    ##                                     features classif.ce
-    ## 1: age,glucose,insulin,mass,pedigree,triceps  0.1757812
+    ##     age glucose insulin mass pedigree pregnant pressure triceps                                  features classif.ce
+    ## 1: TRUE    TRUE    TRUE TRUE     TRUE    FALSE    FALSE    TRUE age,glucose,insulin,mass,pedigree,triceps  0.1757812
+
+``` r
+# all evaluated feature sets
+as.data.table(instance$archive)
+```
+
+    ##       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result
+    ##  1:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE     TRUE   FALSE  0.2031250            0.077 2021-06-08 13:34:44        1 <ResampleResult[20]>
+    ##  2:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2968750            0.071 2021-06-08 13:34:44        1 <ResampleResult[20]>
+    ##  3: FALSE   FALSE    TRUE FALSE    FALSE     TRUE     TRUE   FALSE  0.2578125            0.080 2021-06-08 13:34:44        1 <ResampleResult[20]>
+    ##  4:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.053 2021-06-08 13:34:45        2 <ResampleResult[20]>
+    ##  5:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.055 2021-06-08 13:34:45        2 <ResampleResult[20]>
+    ##  6: FALSE    TRUE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.2031250            0.051 2021-06-08 13:34:45        2 <ResampleResult[20]>
+    ##  7:  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE    TRUE  0.1757812            0.059 2021-06-08 13:34:45        2 <ResampleResult[20]>
+    ##  8:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE    FALSE   FALSE  0.2031250            0.068 2021-06-08 13:34:44        1 <ResampleResult[20]>
+    ##  9:  TRUE    TRUE    TRUE FALSE     TRUE     TRUE    FALSE   FALSE  0.2070312            0.077 2021-06-08 13:34:44        1 <ResampleResult[20]>
+    ## 10:  TRUE   FALSE   FALSE FALSE     TRUE     TRUE     TRUE    TRUE  0.3203125            0.050 2021-06-08 13:34:45        2 <ResampleResult[20]>

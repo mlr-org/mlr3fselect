@@ -21,7 +21,7 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
     },
 
     #' @description
-    #' Performs the tuning on a [FSelectInstanceSingleCrit] /
+    #' Performs the feature selection on a [FSelectInstanceSingleCrit] /
     #' [FSelectInstanceMultiCrit] until termination.
     #'
     #' @param inst ([FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit]).
@@ -30,7 +30,7 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
     optimize = function(inst) {
       # We check for both classes since there is no FSelectInstance super
       # class anymore and OptimInstance would not ensure that we are in the
-      # scope of mlr3tuning
+      # scope of mlr3fselect
       assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))
       private$.optimizer$optimize(inst)
     }

@@ -12,3 +12,9 @@
 fs = function(.key, ...) {
   dictionary_sugar(mlr_fselectors, .key, ...)
 }
+
+#' @rdname fs
+#' @export
+fss = function(.keys, ...) {
+  dictionary_sugar_mget(mlr_fselectors, .keys, ...)
+}

@@ -31,8 +31,14 @@ test_that("FSelectorSequential", {
 test_that("optimization_path method works", {
   skip_on_cran()
 
+  # default
   z = test_fselector("sequential", term_evals = 10, store_models = TRUE)
   op = z$fselector$optimization_path(z$inst)
-  expect_data_table(op, nrows = 4)
+  expect_data_table(op, nrows = 4, ncols = 6)
+  expect_equal(op$dummy, c(1, 2, 4, 3))
+
+  # uhash
+  op = z$fselector$optimization_path(z$inst, include_uhash = TRUE)
+  expect_data_table(op, nrows = 4, ncols = 7)
   expect_equal(op$dummy, c(1, 2, 4, 3))
 })
