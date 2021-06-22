@@ -32,7 +32,7 @@ URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
 BugReports: https://github.com/mlr-org/mlr3fselect/issues
 Depends:
-    mlr3 (>= 0.11.0),
+    mlr3 (>= 0.11.0-9000),
     R (>= 3.1.0)
 Imports:
     bbotk (>= 0.3.0),
@@ -46,7 +46,9 @@ Imports:
 Suggests:
     genalg,
     rpart,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+Remotes:
+    mlr-org/mlr3
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
