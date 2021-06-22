@@ -48,6 +48,8 @@ remotes::install_github("mlr-org/mlr3fselect")
 
 ## Example
 
+### Basic feature selection
+
 ```{r}
 library("mlr3fselect")
 
@@ -70,3 +72,63 @@ as.data.table(instance$archive)
 ```
 
 
+### Automatic feature selection
+
+```{r}
+# task
+task = tsk("pima")
+
+# construct auto tuner
+afs = auto_fselector(
+  method = "random_search",
+  learner = lrn("classif.rpart"),
+  resampling = rsmp("holdout"),
+  measure = msr("classif.ce"),
+  term_evals = 10,
+  batch_size = 5
+)
+
+# train/test split
+train_set = sample(task$nrow, 0.8 * task$nrow)
+test_set = setdiff(seq_len(task$nrow), train_set)
+
+# select features set and fit final model on the complete data set in one go
+afs$train(task, row_ids = train_set)
+
+# best performing feature set
+afs$fselect_result
+
+# all evaluated feature sets
+as.data.table(afs$archive)
+
+# predict new data
+afs$predict(task, row_ids = test_set)
+```
+
+### Nested resampling
+
+```{r}
+# nested resampling
+rr = fselect_nested(
+  method = "random_search",
+  task =  tsk("pima"),
+  learner = lrn("classif.rpart"),
+  inner_resampling = rsmp("holdout"),
+  outer_resampling = rsmp("cv", folds = 3),
+  measure = msr("classif.ce"),
+  term_evals = 10,
+  batch_size = 5
+)
+
+# aggregated performance of all outer resampling iterations
+rr$aggregate()
+
+# performance scores of the outer resampling
+rr$score()
+
+# inner resampling results
+extract_inner_fselect_results(rr)
+
+# inner resampling archives
+extract_inner_fselect_archives(rr)
+```
