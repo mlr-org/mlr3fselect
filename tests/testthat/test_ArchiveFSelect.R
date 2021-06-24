@@ -125,4 +125,17 @@ test_that("ArchiveFSelect as.data.table function works", {
     terminator = trm("evals", n_evals = 4))
 
   expect_data_table(as.data.table(instance$archive), nrows = 0, ncols = 0)
+
+  # row order
+  instance = fselect(
+    method = "random_search",
+    task = tsk("pima"),
+    learner = lrn("classif.rpart"), 
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 10,
+    batch_size = 1)
+
+  tab = as.data.table(instance$archive)
+  expect_equal(tab$batch_nr, 1:10)
 })
