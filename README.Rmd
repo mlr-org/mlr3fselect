@@ -48,6 +48,11 @@ remotes::install_github("mlr-org/mlr3fselect")
 
 ## Example
 
+```{r, include = FALSE}
+# mute load messages
+library("mlr3fselect")
+```
+
 ### Basic feature selection
 
 ```{r}
