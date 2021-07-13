@@ -175,6 +175,14 @@ AutoFSelector = R6Class("AutoFSelector",
 
     #' @field fselect_result (named `list()`)\cr
     #' Short-cut to `$result` from [FSelectInstanceSingleCrit].
-    fselect_result = function() self$fselect_instance$result
+    fselect_result = function() self$fselect_instance$result,
+
+    #' @field hash (`character(1)`)\cr
+    #' Hash (unique identifier) for this object.
+    hash = function(rhs) {
+      assert_ro_binding(rhs)
+      calculate_hash(class(self), self$id, self$param_set$values, private$.predict_type, self$fallback$hash, self$instance_args,
+        private$.store_fselect_instance)
+    }
   )
 )

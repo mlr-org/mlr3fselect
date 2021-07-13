@@ -71,6 +71,9 @@ results.}
 
 \item{\code{fselect_result}}{(named \code{list()})\cr
 Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}
+
+\item{\code{hash}}{(\code{character(1)})\cr
+Hash (unique identifier) for this object.}
 }
 \if{html}{\out{</div>}}
 }
