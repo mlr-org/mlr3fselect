@@ -26,7 +26,8 @@ see [mlr3filters](https://mlr3filters.mlr-org.com)
 
 ## Resources
 
-  - mlr3book [chapter](https://mlr3book.mlr-org.com/fs.html)
+  - mlr3book
+    [chapter](https://mlr3book.mlr-org.com/optimization.html#fs)
   - mlr3gallery
     [post](https://mlr3gallery.mlr-org.com/posts/2020-09-14-mlr3fselect-basic/)
   - [cheatsheet](https://cheatsheets.mlr-org.com/mlr3fselect.pdf)
@@ -76,16 +77,16 @@ as.data.table(instance$archive)
 ```
 
     ##       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result
-    ##  1:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE     TRUE   FALSE  0.2031250            0.067 2021-07-07 13:42:12        1 <ResampleResult[20]>
-    ##  2: FALSE   FALSE    TRUE FALSE    FALSE     TRUE     TRUE   FALSE  0.2578125            0.087 2021-07-07 13:42:12        1 <ResampleResult[20]>
-    ##  3:  TRUE    TRUE    TRUE FALSE     TRUE     TRUE    FALSE   FALSE  0.2070312            0.067 2021-07-07 13:42:12        1 <ResampleResult[20]>
-    ##  4:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE    FALSE   FALSE  0.2031250            0.065 2021-07-07 13:42:12        1 <ResampleResult[20]>
-    ##  5:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2968750            0.071 2021-07-07 13:42:12        1 <ResampleResult[20]>
-    ##  6: FALSE    TRUE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.2031250            0.064 2021-07-07 13:42:13        2 <ResampleResult[20]>
-    ##  7:  TRUE   FALSE   FALSE FALSE     TRUE     TRUE     TRUE    TRUE  0.3203125            0.066 2021-07-07 13:42:13        2 <ResampleResult[20]>
-    ##  8:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.066 2021-07-07 13:42:13        2 <ResampleResult[20]>
-    ##  9:  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE    TRUE  0.1757812            0.071 2021-07-07 13:42:13        2 <ResampleResult[20]>
-    ## 10:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.066 2021-07-07 13:42:13        2 <ResampleResult[20]>
+    ##  1:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE     TRUE   FALSE  0.2031250            0.051 2021-09-02 13:52:48        1 <ResampleResult[20]>
+    ##  2: FALSE   FALSE    TRUE FALSE    FALSE     TRUE     TRUE   FALSE  0.2578125            0.066 2021-09-02 13:52:48        1 <ResampleResult[20]>
+    ##  3:  TRUE    TRUE    TRUE FALSE     TRUE     TRUE    FALSE   FALSE  0.2070312            0.049 2021-09-02 13:52:48        1 <ResampleResult[20]>
+    ##  4:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE    FALSE   FALSE  0.2031250            0.050 2021-09-02 13:52:48        1 <ResampleResult[20]>
+    ##  5:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2968750            0.054 2021-09-02 13:52:48        1 <ResampleResult[20]>
+    ##  6: FALSE    TRUE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.2031250            0.050 2021-09-02 13:52:49        2 <ResampleResult[20]>
+    ##  7:  TRUE   FALSE   FALSE FALSE     TRUE     TRUE     TRUE    TRUE  0.3203125            0.050 2021-09-02 13:52:49        2 <ResampleResult[20]>
+    ##  8:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.054 2021-09-02 13:52:49        2 <ResampleResult[20]>
+    ##  9:  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE    TRUE  0.1757812            0.051 2021-09-02 13:52:49        2 <ResampleResult[20]>
+    ## 10:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.053 2021-09-02 13:52:49        2 <ResampleResult[20]>
 
 ### Automatic feature selection
 
@@ -123,16 +124,16 @@ as.data.table(afs$archive)
 ```
 
     ##       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result
-    ##  1:  TRUE    TRUE    TRUE  TRUE    FALSE     TRUE    FALSE    TRUE  0.2878049            0.067 2021-07-07 13:42:14        1 <ResampleResult[20]>
-    ##  2: FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2829268            0.064 2021-07-07 13:42:14        1 <ResampleResult[20]>
-    ##  3:  TRUE   FALSE    TRUE FALSE     TRUE    FALSE    FALSE    TRUE  0.3073171            0.067 2021-07-07 13:42:14        1 <ResampleResult[20]>
-    ##  4: FALSE    TRUE    TRUE  TRUE    FALSE    FALSE     TRUE   FALSE  0.2829268            0.090 2021-07-07 13:42:14        1 <ResampleResult[20]>
-    ##  5:  TRUE    TRUE    TRUE  TRUE    FALSE     TRUE     TRUE    TRUE  0.2878049            0.068 2021-07-07 13:42:14        1 <ResampleResult[20]>
-    ##  6: FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2829268            0.065 2021-07-07 13:42:15        2 <ResampleResult[20]>
-    ##  7: FALSE   FALSE    TRUE FALSE    FALSE    FALSE     TRUE   FALSE  0.3658537            0.075 2021-07-07 13:42:15        2 <ResampleResult[20]>
-    ##  8: FALSE   FALSE    TRUE  TRUE     TRUE    FALSE    FALSE   FALSE  0.2926829            0.073 2021-07-07 13:42:15        2 <ResampleResult[20]>
-    ##  9: FALSE   FALSE   FALSE FALSE    FALSE     TRUE     TRUE   FALSE  0.3658537            0.062 2021-07-07 13:42:15        2 <ResampleResult[20]>
-    ## 10: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3268293            0.061 2021-07-07 13:42:15        2 <ResampleResult[20]>
+    ##  1:  TRUE    TRUE    TRUE  TRUE    FALSE     TRUE    FALSE    TRUE  0.2878049            0.050 2021-09-02 13:52:50        1 <ResampleResult[20]>
+    ##  2: FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2829268            0.050 2021-09-02 13:52:50        1 <ResampleResult[20]>
+    ##  3:  TRUE   FALSE    TRUE FALSE     TRUE    FALSE    FALSE    TRUE  0.3073171            0.083 2021-09-02 13:52:50        1 <ResampleResult[20]>
+    ##  4: FALSE    TRUE    TRUE  TRUE    FALSE    FALSE     TRUE   FALSE  0.2829268            0.050 2021-09-02 13:52:50        1 <ResampleResult[20]>
+    ##  5:  TRUE    TRUE    TRUE  TRUE    FALSE     TRUE     TRUE    TRUE  0.2878049            0.054 2021-09-02 13:52:50        1 <ResampleResult[20]>
+    ##  6: FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2829268            0.051 2021-09-02 13:52:51        2 <ResampleResult[20]>
+    ##  7: FALSE   FALSE    TRUE FALSE    FALSE    FALSE     TRUE   FALSE  0.3658537            0.049 2021-09-02 13:52:51        2 <ResampleResult[20]>
+    ##  8: FALSE   FALSE    TRUE  TRUE     TRUE    FALSE    FALSE   FALSE  0.2926829            0.049 2021-09-02 13:52:51        2 <ResampleResult[20]>
+    ##  9: FALSE   FALSE   FALSE FALSE    FALSE     TRUE     TRUE   FALSE  0.3658537            0.050 2021-09-02 13:52:51        2 <ResampleResult[20]>
+    ## 10: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3268293            0.048 2021-09-02 13:52:51        2 <ResampleResult[20]>
 
 ``` r
 # predict new data
@@ -177,9 +178,9 @@ rr$score()
 ```
 
     ##                 task task_id             learner              learner_id         resampling resampling_id iteration              prediction classif.ce
-    ## 1: <TaskClassif[47]>    pima <AutoFSelector[39]> classif.rpart.fselector <ResamplingCV[19]>            cv         1 <PredictionClassif[19]>  0.2265625
-    ## 2: <TaskClassif[47]>    pima <AutoFSelector[39]> classif.rpart.fselector <ResamplingCV[19]>            cv         2 <PredictionClassif[19]>  0.2617188
-    ## 3: <TaskClassif[47]>    pima <AutoFSelector[39]> classif.rpart.fselector <ResamplingCV[19]>            cv         3 <PredictionClassif[19]>  0.2968750
+    ## 1: <TaskClassif[47]>    pima <AutoFSelector[40]> classif.rpart.fselector <ResamplingCV[19]>            cv         1 <PredictionClassif[19]>  0.2265625
+    ## 2: <TaskClassif[47]>    pima <AutoFSelector[40]> classif.rpart.fselector <ResamplingCV[19]>            cv         2 <PredictionClassif[19]>  0.2617188
+    ## 3: <TaskClassif[47]>    pima <AutoFSelector[40]> classif.rpart.fselector <ResamplingCV[19]>            cv         3 <PredictionClassif[19]>  0.2968750
 
 ``` r
 # inner resampling results
@@ -197,36 +198,36 @@ extract_inner_fselect_archives(rr)
 ```
 
     ##     iteration   age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result task_id              learner_id
-    ##  1:         1  TRUE    TRUE   FALSE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2807018            0.064 2021-07-07 13:42:17        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  2:         1 FALSE    TRUE   FALSE FALSE     TRUE     TRUE     TRUE    TRUE  0.3216374            0.064 2021-07-07 13:42:17        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  3:         1  TRUE   FALSE    TRUE FALSE     TRUE     TRUE     TRUE    TRUE  0.3976608            0.073 2021-07-07 13:42:17        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  4:         1  TRUE   FALSE   FALSE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3450292            0.075 2021-07-07 13:42:17        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  5:         1  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2865497            0.066 2021-07-07 13:42:17        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  6:         1 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3567251            0.063 2021-07-07 13:42:18        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  7:         1 FALSE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE   FALSE  0.3918129            0.073 2021-07-07 13:42:18        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  8:         1  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3742690            0.066 2021-07-07 13:42:18        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ##  9:         1  TRUE    TRUE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2748538            0.066 2021-07-07 13:42:18        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 10:         1 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3567251            0.071 2021-07-07 13:42:18        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 11:         2  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2456140            0.069 2021-07-07 13:42:19        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 12:         2  TRUE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3274854            0.072 2021-07-07 13:42:19        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 13:         2  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3274854            0.064 2021-07-07 13:42:19        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 14:         2 FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2514620            0.071 2021-07-07 13:42:19        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 15:         2 FALSE   FALSE   FALSE FALSE     TRUE     TRUE    FALSE    TRUE  0.4152047            0.100 2021-07-07 13:42:19        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 16:         2  TRUE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3391813            0.079 2021-07-07 13:42:20        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 17:         2 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3508772            0.075 2021-07-07 13:42:20        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 18:         2  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE     TRUE    TRUE  0.2397661            0.068 2021-07-07 13:42:20        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 19:         2 FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3742690            0.065 2021-07-07 13:42:20        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 20:         2  TRUE   FALSE    TRUE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2807018            0.082 2021-07-07 13:42:20        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 21:         3 FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2222222            0.079 2021-07-07 13:42:22        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 22:         3  TRUE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE   FALSE  0.3157895            0.064 2021-07-07 13:42:22        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 23:         3  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2456140            0.071 2021-07-07 13:42:22        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 24:         3 FALSE   FALSE   FALSE FALSE     TRUE     TRUE    FALSE   FALSE  0.3040936            0.064 2021-07-07 13:42:22        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 25:         3  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE    TRUE  0.2339181            0.070 2021-07-07 13:42:22        1 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 26:         3  TRUE    TRUE    TRUE FALSE     TRUE     TRUE     TRUE    TRUE  0.3274854            0.080 2021-07-07 13:42:23        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 27:         3  TRUE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE    TRUE  0.3391813            0.065 2021-07-07 13:42:23        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 28:         3 FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2982456            0.066 2021-07-07 13:42:23        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 29:         3 FALSE    TRUE    TRUE FALSE    FALSE    FALSE     TRUE   FALSE  0.2222222            0.079 2021-07-07 13:42:23        2 <ResampleResult[20]>    pima classif.rpart.fselector
-    ## 30:         3 FALSE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE   FALSE  0.2397661            0.064 2021-07-07 13:42:23        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  1:         1  TRUE    TRUE   FALSE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2807018            0.050 2021-09-02 13:52:52        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  2:         1 FALSE    TRUE   FALSE FALSE     TRUE     TRUE     TRUE    TRUE  0.3216374            0.050 2021-09-02 13:52:52        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  3:         1  TRUE   FALSE    TRUE FALSE     TRUE     TRUE     TRUE    TRUE  0.3976608            0.050 2021-09-02 13:52:52        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  4:         1  TRUE   FALSE   FALSE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3450292            0.049 2021-09-02 13:52:52        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  5:         1  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2865497            0.053 2021-09-02 13:52:52        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  6:         1 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3567251            0.056 2021-09-02 13:52:53        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  7:         1 FALSE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE   FALSE  0.3918129            0.050 2021-09-02 13:52:53        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  8:         1  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3742690            0.052 2021-09-02 13:52:53        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ##  9:         1  TRUE    TRUE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2748538            0.052 2021-09-02 13:52:53        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 10:         1 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3567251            0.050 2021-09-02 13:52:53        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 11:         2  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2456140            0.058 2021-09-02 13:52:54        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 12:         2  TRUE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3274854            0.050 2021-09-02 13:52:54        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 13:         2  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3274854            0.075 2021-09-02 13:52:54        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 14:         2 FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2514620            0.051 2021-09-02 13:52:54        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 15:         2 FALSE   FALSE   FALSE FALSE     TRUE     TRUE    FALSE    TRUE  0.4152047            0.049 2021-09-02 13:52:54        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 16:         2  TRUE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3391813            0.051 2021-09-02 13:52:55        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 17:         2 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3508772            0.049 2021-09-02 13:52:55        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 18:         2  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE     TRUE    TRUE  0.2397661            0.064 2021-09-02 13:52:55        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 19:         2 FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3742690            0.051 2021-09-02 13:52:55        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 20:         2  TRUE   FALSE    TRUE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2807018            0.050 2021-09-02 13:52:55        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 21:         3 FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2222222            0.071 2021-09-02 13:52:56        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 22:         3  TRUE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE   FALSE  0.3157895            0.078 2021-09-02 13:52:56        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 23:         3  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2456140            0.068 2021-09-02 13:52:56        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 24:         3 FALSE   FALSE   FALSE FALSE     TRUE     TRUE    FALSE   FALSE  0.3040936            0.069 2021-09-02 13:52:56        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 25:         3  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE    TRUE  0.2339181            0.085 2021-09-02 13:52:56        1 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 26:         3  TRUE    TRUE    TRUE FALSE     TRUE     TRUE     TRUE    TRUE  0.3274854            0.062 2021-09-02 13:52:57        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 27:         3  TRUE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE    TRUE  0.3391813            0.050 2021-09-02 13:52:57        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 28:         3 FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2982456            0.050 2021-09-02 13:52:57        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 29:         3 FALSE    TRUE    TRUE FALSE    FALSE    FALSE     TRUE   FALSE  0.2222222            0.061 2021-09-02 13:52:57        2 <ResampleResult[20]>    pima classif.rpart.fselector
+    ## 30:         3 FALSE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE   FALSE  0.2397661            0.051 2021-09-02 13:52:57        2 <ResampleResult[20]>    pima classif.rpart.fselector
     ##     iteration   age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result task_id              learner_id
     ##     resampling_id
     ##  1:            cv

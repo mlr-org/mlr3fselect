@@ -28,7 +28,7 @@ For feature filters and embedded methods, see [mlr3filters](https://mlr3filters.
 
 ## Resources
 
-* mlr3book [chapter](https://mlr3book.mlr-org.com/fs.html)
+* mlr3book [chapter](https://mlr3book.mlr-org.com/optimization.html#fs)
 * mlr3gallery [post](https://mlr3gallery.mlr-org.com/posts/2020-09-14-mlr3fselect-basic/)
 * [cheatsheet](https://cheatsheets.mlr-org.com/mlr3fselect.pdf) 
 
