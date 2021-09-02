@@ -177,7 +177,7 @@ AutoFSelector = R6Class("AutoFSelector",
     #' results.
     fselect_instance = function() self$model$fselect_instance,
 
-    #' @field fselect_result (named `list()`)\cr
+    #' @field fselect_result ([data.table::data.table])\cr
     #' Short-cut to `$result` from [FSelectInstanceSingleCrit].
     fselect_result = function() self$fselect_instance$result,
 
