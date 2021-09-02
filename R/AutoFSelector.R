@@ -148,6 +148,10 @@ AutoFSelector = R6Class("AutoFSelector",
       self$model$learner$predict(task)
     },
 
+    .base_learner = function(recursive = Inf) {
+      if (recursive == 0L) self$learner else self$learner$base_learner(recursive - 1L)
+    },
+
     .store_fselect_instance = NULL
   ),
 
