@@ -80,14 +80,14 @@ performance the least." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.5.1</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3fselect <small>v0.6.0</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+    <span class="fa fa-file-alt"></span>
      
     Reference
   </a>
@@ -97,7 +97,7 @@ performance the least." />
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
-    <span class="fa fa fa fa-link"></span>
+    <span class="fa fa-link"></span>
      
     mlr3book
   </a>
@@ -110,19 +110,19 @@ performance the least." />
 </li>
 <li>
   <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">
-    <span class="fa fa fa fa-comments"></span>
+    <span class="fa fa-comments"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://stackoverflow.com/questions/tagged/mlr">
+  <a href="https://stackoverflow.com/questions/tagged/mlr3">
     <span class="fab fa-stack-overflow"></span>
      
   </a>
 </li>
 <li>
   <a href="https://mlr-org.com/">
-    <span class="fas fa-rss"></span>
+    <span class="fa fa-rss"></span>
      
   </a>
 </li>
@@ -209,16 +209,19 @@ Search method <code>sfs</code> (forward search) or <code>sbs</code> (backward se
 <p><hr>
 <a id="method-optimization_path"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>optimization_path()</code></h3>
 <p>Returns the optimization path.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>FSelectorSequential</span><span class='op'>$</span><span class='fu'>optimization_path</span><span class='op'>(</span><span class='va'>inst</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>FSelectorSequential</span><span class='op'>$</span><span class='fu'>optimization_path</span><span class='op'>(</span><span class='va'>inst</span>, include_uhash <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>inst</code></dt><dd><p>(<a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>)<br />
 Instance optimized with FSelectorSequential.</p></dd>
 
+<dt><code>include_uhash</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+Include <code>uhash</code> column?</p></dd>
+
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p>
+<p><code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code></p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -258,21 +261,21 @@ Instance optimized with FSelectorSequential.</p></dd>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE       0.06
+#&gt; 1:         TRUE       FALSE        FALSE       FALSE       0.04
 #&gt; 2:        FALSE        TRUE        FALSE       FALSE       0.02
-#&gt; 3:        FALSE       FALSE         TRUE       FALSE       0.26
-#&gt; 4:        FALSE       FALSE        FALSE        TRUE       0.42
-#&gt; 5:         TRUE        TRUE        FALSE       FALSE       0.06
+#&gt; 3:        FALSE       FALSE         TRUE       FALSE       0.32
+#&gt; 4:        FALSE       FALSE        FALSE        TRUE       0.60
+#&gt; 5:         TRUE        TRUE        FALSE       FALSE       0.04
 #&gt; 6:        FALSE        TRUE         TRUE       FALSE       0.02
 #&gt; 7:        FALSE        TRUE        FALSE        TRUE       0.02
-#&gt;                                   uhash           timestamp batch_nr
-#&gt; 1: e1fab8f1-9eaf-4477-bda2-5dcb035c2439 2021-03-21 04:30:42        1
-#&gt; 2: 8663c02f-3d9b-4234-8d21-0b7f5037edb5 2021-03-21 04:30:42        1
-#&gt; 3: ca0050d5-8efc-4ba3-948c-00cebddfb310 2021-03-21 04:30:42        1
-#&gt; 4: 2344cccf-ec65-415c-ba99-8bf98aaef42d 2021-03-21 04:30:42        1
-#&gt; 5: b0171f32-f8eb-4a35-90ce-9ae01bce49b1 2021-03-21 04:30:43        2
-#&gt; 6: 69cdaa8a-6549-4308-ad49-44ce4a7ea14a 2021-03-21 04:30:43        2
-#&gt; 7: 9de4e76a-783f-4ce8-a825-aed181d95ff1 2021-03-21 04:30:43        2</div></pre>
+#&gt;    runtime_learners           timestamp batch_nr      resample_result
+#&gt; 1:            0.077 2021-09-13 17:14:48        1 &lt;ResampleResult[20]&gt;
+#&gt; 2:            0.097 2021-09-13 17:14:48        1 &lt;ResampleResult[20]&gt;
+#&gt; 3:            0.074 2021-09-13 17:14:48        1 &lt;ResampleResult[20]&gt;
+#&gt; 4:            0.072 2021-09-13 17:14:48        1 &lt;ResampleResult[20]&gt;
+#&gt; 5:            0.074 2021-09-13 17:14:49        2 &lt;ResampleResult[20]&gt;
+#&gt; 6:            0.074 2021-09-13 17:14:49        2 &lt;ResampleResult[20]&gt;
+#&gt; 7:            0.082 2021-09-13 17:14:49        2 &lt;ResampleResult[20]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

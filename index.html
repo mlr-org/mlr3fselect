@@ -38,14 +38,14 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org"></a>
-        <a class="navbar-brand" href="index.html">mlr3fselect <small>v0.5.1</small></a>
+        <a class="navbar-brand" href="index.html">mlr3fselect <small>v0.6.0</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+    <span class="fa fa-file-alt"></span>
      
     Reference
   </a>
@@ -55,7 +55,7 @@
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
-    <span class="fa fa fa fa-link"></span>
+    <span class="fa fa-link"></span>
      
     mlr3book
   </a>
@@ -68,19 +68,19 @@
 </li>
 <li>
   <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">
-    <span class="fa fa fa fa-comments"></span>
+    <span class="fa fa-comments"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://stackoverflow.com/questions/tagged/mlr">
+  <a href="https://stackoverflow.com/questions/tagged/mlr3">
     <span class="fab fa-stack-overflow"></span>
      
   </a>
 </li>
 <li>
   <a href="https://mlr-org.com/">
-    <span class="fas fa-rss"></span>
+    <span class="fa fa-rss"></span>
      
   </a>
 </li>
@@ -107,7 +107,7 @@
 <h2 class="hasAnchor">
 <a href="#resources" class="anchor"></a>Resources</h2>
 <ul>
-<li>mlr3book <a href="https://mlr3book.mlr-org.com/fs.html">chapter</a>
+<li>mlr3book <a href="https://mlr3book.mlr-org.com/optimization.html#fs">chapter</a>
 </li>
 <li>mlr3gallery <a href="https://mlr3gallery.mlr-org.com/posts/2020-09-14-mlr3fselect-basic/">post</a>
 </li>
@@ -127,35 +127,199 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
+<div id="basic-feature-selection" class="section level3">
+<h3 class="hasAnchor">
+<a href="#basic-feature-selection" class="anchor"></a>Basic feature selection</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://mlr3.mlr-org.com">"mlr3"</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://mlr3fselect.mlr-org.com">"mlr3fselect"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://mlr3fselect.mlr-org.com">"mlr3fselect"</a></span><span class="op">)</span>
 
-<span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">tsk</a></span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span>
-<span class="va">learner</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>
-<span class="va">resampling</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>
-<span class="va">measure</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>
+<span class="co"># feature selection on the pima indians diabetes data set</span>
+<span class="va">instance</span> <span class="op">=</span> <span class="fu"><a href="reference/fselect.html">fselect</a></span><span class="op">(</span>
+  method <span class="op">=</span> <span class="st">"random_search"</span>,
+  task <span class="op">=</span>  <span class="fu">tsk</span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span>,
+  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,
+  resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,
+  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,
+  term_evals <span class="op">=</span> <span class="fl">10</span>,
+  batch_size <span class="op">=</span> <span class="fl">5</span>
+<span class="op">)</span>
 
-<span class="co"># define termination criterion</span>
-<span class="va">terminator</span> <span class="op">=</span> <span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="co"># best performing feature set</span>
+<span class="va">instance</span><span class="op">$</span><span class="va">result</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">##     age glucose insulin mass pedigree pregnant pressure triceps                                  features classif.ce</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## 1: TRUE    TRUE    TRUE TRUE     TRUE    FALSE    FALSE    TRUE age,glucose,insulin,mass,pedigree,triceps  0.1757812</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># all evaluated feature sets</span>
+<span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">##       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">##  1:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE     TRUE   FALSE  0.2031250            0.051 2021-09-02 13:52:48        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">##  2: FALSE   FALSE    TRUE FALSE    FALSE     TRUE     TRUE   FALSE  0.2578125            0.066 2021-09-02 13:52:48        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">##  3:  TRUE    TRUE    TRUE FALSE     TRUE     TRUE    FALSE   FALSE  0.2070312            0.049 2021-09-02 13:52:48        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">##  4:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE    FALSE   FALSE  0.2031250            0.050 2021-09-02 13:52:48        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">##  5:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2968750            0.054 2021-09-02 13:52:48        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">##  6: FALSE    TRUE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.2031250            0.050 2021-09-02 13:52:49        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">##  7:  TRUE   FALSE   FALSE FALSE     TRUE     TRUE     TRUE    TRUE  0.3203125            0.050 2021-09-02 13:52:49        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">##  8:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.054 2021-09-02 13:52:49        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">##  9:  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE    TRUE  0.1757812            0.051 2021-09-02 13:52:49        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">## 10:  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2578125            0.053 2021-09-02 13:52:49        2 &lt;ResampleResult[20]&gt;</span></span></code></pre></div>
+</div>
+<div id="automatic-feature-selection" class="section level3">
+<h3 class="hasAnchor">
+<a href="#automatic-feature-selection" class="anchor"></a>Automatic feature selection</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># task</span>
+<span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span>
 
-<span class="co"># create fselect instance</span>
-<span class="va">instance</span> <span class="op">=</span> <span class="va"><a href="reference/FSelectInstanceSingleCrit.html">FSelectInstanceSingleCrit</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
-  task <span class="op">=</span> <span class="va">task</span>,
-  learner <span class="op">=</span> <span class="va">learner</span>,
-  resampling <span class="op">=</span> <span class="va">resampling</span>,
-  measure <span class="op">=</span> <span class="va">measure</span>,
-  terminator <span class="op">=</span> <span class="va">terminator</span><span class="op">)</span>
+<span class="co"># construct auto tuner</span>
+<span class="va">afs</span> <span class="op">=</span> <span class="fu"><a href="reference/auto_fselector.html">auto_fselector</a></span><span class="op">(</span>
+  method <span class="op">=</span> <span class="st">"random_search"</span>,
+  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,
+  resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,
+  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,
+  term_evals <span class="op">=</span> <span class="fl">10</span>,
+  batch_size <span class="op">=</span> <span class="fl">5</span>
+<span class="op">)</span>
 
-<span class="co"># load fselector</span>
-<span class="va">fselector</span> <span class="op">=</span> <span class="fu"><a href="reference/fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>
+<span class="co"># train/test split</span>
+<span class="va">train_set</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">task</span><span class="op">$</span><span class="va">nrow</span>, <span class="fl">0.8</span> <span class="op">*</span> <span class="va">task</span><span class="op">$</span><span class="va">nrow</span><span class="op">)</span>
+<span class="va">test_set</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">task</span><span class="op">$</span><span class="va">nrow</span><span class="op">)</span>, <span class="va">train_set</span><span class="op">)</span>
 
-<span class="co"># trigger optimization</span>
-<span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">##     age glucose insulin mass pedigree pregnant pressure triceps</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## 1: TRUE    TRUE    TRUE TRUE     TRUE    FALSE    FALSE    TRUE</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##                                     features classif.ce</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">## 1: age,glucose,insulin,mass,pedigree,triceps  0.1757812</span></span></code></pre></div>
+<span class="co"># select features set and fit final model on the complete data set in one go</span>
+<span class="va">afs</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">train_set</span><span class="op">)</span>
+
+<span class="co"># best performing feature set</span>
+<span class="va">afs</span><span class="op">$</span><span class="va">fselect_result</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">##      age glucose insulin mass pedigree pregnant pressure triceps                                            features classif.ce</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">## 1: FALSE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE glucose,insulin,mass,pedigree,pregnant,pressure,...  0.2829268</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># all evaluated feature sets</span>
+<span class="fu">as.data.table</span><span class="op">(</span><span class="va">afs</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">##       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">##  1:  TRUE    TRUE    TRUE  TRUE    FALSE     TRUE    FALSE    TRUE  0.2878049            0.050 2021-09-02 13:52:50        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">##  2: FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2829268            0.050 2021-09-02 13:52:50        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">##  3:  TRUE   FALSE    TRUE FALSE     TRUE    FALSE    FALSE    TRUE  0.3073171            0.083 2021-09-02 13:52:50        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">##  4: FALSE    TRUE    TRUE  TRUE    FALSE    FALSE     TRUE   FALSE  0.2829268            0.050 2021-09-02 13:52:50        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">##  5:  TRUE    TRUE    TRUE  TRUE    FALSE     TRUE     TRUE    TRUE  0.2878049            0.054 2021-09-02 13:52:50        1 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">##  6: FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2829268            0.051 2021-09-02 13:52:51        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">##  7: FALSE   FALSE    TRUE FALSE    FALSE    FALSE     TRUE   FALSE  0.3658537            0.049 2021-09-02 13:52:51        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">##  8: FALSE   FALSE    TRUE  TRUE     TRUE    FALSE    FALSE   FALSE  0.2926829            0.049 2021-09-02 13:52:51        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">##  9: FALSE   FALSE   FALSE FALSE    FALSE     TRUE     TRUE   FALSE  0.3658537            0.050 2021-09-02 13:52:51        2 &lt;ResampleResult[20]&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">## 10: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3268293            0.048 2021-09-02 13:52:51        2 &lt;ResampleResult[20]&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># predict new data</span>
+<span class="va">afs</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">test_set</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## &lt;PredictionClassif&gt; for 154 observations:</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">##     row_ids truth response</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">##           2   neg      neg</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">##          12   pos      pos</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">##          16   pos      neg</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">## ---                       </span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">##         748   neg      neg</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">##         751   pos      pos</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">##         766   neg      neg</span></span></code></pre></div>
+</div>
+<div id="nested-resampling" class="section level3">
+<h3 class="hasAnchor">
+<a href="#nested-resampling" class="anchor"></a>Nested resampling</h3>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># nested resampling</span>
+<span class="va">rr</span> <span class="op">=</span> <span class="fu"><a href="reference/fselect_nested.html">fselect_nested</a></span><span class="op">(</span>
+  method <span class="op">=</span> <span class="st">"random_search"</span>,
+  task <span class="op">=</span>  <span class="fu">tsk</span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span>,
+  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,
+  inner_resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,
+  outer_resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,
+  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,
+  term_evals <span class="op">=</span> <span class="fl">10</span>,
+  batch_size <span class="op">=</span> <span class="fl">5</span>
+<span class="op">)</span>
+
+<span class="co"># aggregated performance of all outer resampling iterations</span>
+<span class="va">rr</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">## classif.ce </span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">##  0.2617188</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># performance scores of the outer resampling</span>
+<span class="va">rr</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">##                 task task_id             learner              learner_id         resampling resampling_id iteration              prediction classif.ce</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co">## 1: &lt;TaskClassif[47]&gt;    pima &lt;AutoFSelector[40]&gt; classif.rpart.fselector &lt;ResamplingCV[19]&gt;            cv         1 &lt;PredictionClassif[19]&gt;  0.2265625</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co">## 2: &lt;TaskClassif[47]&gt;    pima &lt;AutoFSelector[40]&gt; classif.rpart.fselector &lt;ResamplingCV[19]&gt;            cv         2 &lt;PredictionClassif[19]&gt;  0.2617188</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co">## 3: &lt;TaskClassif[47]&gt;    pima &lt;AutoFSelector[40]&gt; classif.rpart.fselector &lt;ResamplingCV[19]&gt;            cv         3 &lt;PredictionClassif[19]&gt;  0.2968750</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># inner resampling results</span>
+<span class="fu"><a href="reference/extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">##    iteration   age glucose insulin  mass pedigree pregnant pressure triceps classif.ce                                       features task_id              learner_id resampling_id</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co">## 1:         1  TRUE    TRUE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2748538                               age,glucose,mass    pima classif.rpart.fselector            cv</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">## 2:         2  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE     TRUE    TRUE  0.2397661 age,glucose,insulin,mass,pedigree,pressure,...    pima classif.rpart.fselector            cv</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">## 3:         3 FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2222222                                        glucose    pima classif.rpart.fselector            cv</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># inner resampling archives</span>
+<span class="fu"><a href="reference/extract_inner_fselect_archives.html">extract_inner_fselect_archives</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">##     iteration   age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result task_id              learner_id</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co">##  1:         1  TRUE    TRUE   FALSE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2807018            0.050 2021-09-02 13:52:52        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">##  2:         1 FALSE    TRUE   FALSE FALSE     TRUE     TRUE     TRUE    TRUE  0.3216374            0.050 2021-09-02 13:52:52        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">##  3:         1  TRUE   FALSE    TRUE FALSE     TRUE     TRUE     TRUE    TRUE  0.3976608            0.050 2021-09-02 13:52:52        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">##  4:         1  TRUE   FALSE   FALSE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3450292            0.049 2021-09-02 13:52:52        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">##  5:         1  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2865497            0.053 2021-09-02 13:52:52        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">##  6:         1 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3567251            0.056 2021-09-02 13:52:53        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">##  7:         1 FALSE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE   FALSE  0.3918129            0.050 2021-09-02 13:52:53        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co">##  8:         1  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3742690            0.052 2021-09-02 13:52:53        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co">##  9:         1  TRUE    TRUE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2748538            0.052 2021-09-02 13:52:53        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="co">## 10:         1 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3567251            0.050 2021-09-02 13:52:53        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="co">## 11:         2  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2456140            0.058 2021-09-02 13:52:54        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="co">## 12:         2  TRUE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3274854            0.050 2021-09-02 13:52:54        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="co">## 13:         2  TRUE   FALSE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3274854            0.075 2021-09-02 13:52:54        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="co">## 14:         2 FALSE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2514620            0.051 2021-09-02 13:52:54        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="co">## 15:         2 FALSE   FALSE   FALSE FALSE     TRUE     TRUE    FALSE    TRUE  0.4152047            0.049 2021-09-02 13:52:54        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="co">## 16:         2  TRUE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3391813            0.051 2021-09-02 13:52:55        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="co">## 17:         2 FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3508772            0.049 2021-09-02 13:52:55        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="co">## 18:         2  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE     TRUE    TRUE  0.2397661            0.064 2021-09-02 13:52:55        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a><span class="co">## 19:         2 FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3742690            0.051 2021-09-02 13:52:55        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a><span class="co">## 20:         2  TRUE   FALSE    TRUE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2807018            0.050 2021-09-02 13:52:55        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a><span class="co">## 21:         3 FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2222222            0.071 2021-09-02 13:52:56        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a><span class="co">## 22:         3  TRUE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE   FALSE  0.3157895            0.078 2021-09-02 13:52:56        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-24"><a href="#cb20-24"></a><span class="co">## 23:         3  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2456140            0.068 2021-09-02 13:52:56        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a><span class="co">## 24:         3 FALSE   FALSE   FALSE FALSE     TRUE     TRUE    FALSE   FALSE  0.3040936            0.069 2021-09-02 13:52:56        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="co">## 25:         3  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE    TRUE  0.2339181            0.085 2021-09-02 13:52:56        1 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a><span class="co">## 26:         3  TRUE    TRUE    TRUE FALSE     TRUE     TRUE     TRUE    TRUE  0.3274854            0.062 2021-09-02 13:52:57        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a><span class="co">## 27:         3  TRUE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE    TRUE  0.3391813            0.050 2021-09-02 13:52:57        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-29"><a href="#cb20-29"></a><span class="co">## 28:         3 FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2982456            0.050 2021-09-02 13:52:57        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a><span class="co">## 29:         3 FALSE    TRUE    TRUE FALSE    FALSE    FALSE     TRUE   FALSE  0.2222222            0.061 2021-09-02 13:52:57        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-31"><a href="#cb20-31"></a><span class="co">## 30:         3 FALSE    TRUE    TRUE  TRUE     TRUE    FALSE    FALSE   FALSE  0.2397661            0.051 2021-09-02 13:52:57        2 &lt;ResampleResult[20]&gt;    pima classif.rpart.fselector</span></span>
+<span id="cb20-32"><a href="#cb20-32"></a><span class="co">##     iteration   age glucose insulin  mass pedigree pregnant pressure triceps classif.ce runtime_learners           timestamp batch_nr      resample_result task_id              learner_id</span></span>
+<span id="cb20-33"><a href="#cb20-33"></a><span class="co">##     resampling_id</span></span>
+<span id="cb20-34"><a href="#cb20-34"></a><span class="co">##  1:            cv</span></span>
+<span id="cb20-35"><a href="#cb20-35"></a><span class="co">##  2:            cv</span></span>
+<span id="cb20-36"><a href="#cb20-36"></a><span class="co">##  3:            cv</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a><span class="co">##  4:            cv</span></span>
+<span id="cb20-38"><a href="#cb20-38"></a><span class="co">##  5:            cv</span></span>
+<span id="cb20-39"><a href="#cb20-39"></a><span class="co">##  6:            cv</span></span>
+<span id="cb20-40"><a href="#cb20-40"></a><span class="co">##  7:            cv</span></span>
+<span id="cb20-41"><a href="#cb20-41"></a><span class="co">##  8:            cv</span></span>
+<span id="cb20-42"><a href="#cb20-42"></a><span class="co">##  9:            cv</span></span>
+<span id="cb20-43"><a href="#cb20-43"></a><span class="co">## 10:            cv</span></span>
+<span id="cb20-44"><a href="#cb20-44"></a><span class="co">## 11:            cv</span></span>
+<span id="cb20-45"><a href="#cb20-45"></a><span class="co">## 12:            cv</span></span>
+<span id="cb20-46"><a href="#cb20-46"></a><span class="co">## 13:            cv</span></span>
+<span id="cb20-47"><a href="#cb20-47"></a><span class="co">## 14:            cv</span></span>
+<span id="cb20-48"><a href="#cb20-48"></a><span class="co">## 15:            cv</span></span>
+<span id="cb20-49"><a href="#cb20-49"></a><span class="co">## 16:            cv</span></span>
+<span id="cb20-50"><a href="#cb20-50"></a><span class="co">## 17:            cv</span></span>
+<span id="cb20-51"><a href="#cb20-51"></a><span class="co">## 18:            cv</span></span>
+<span id="cb20-52"><a href="#cb20-52"></a><span class="co">## 19:            cv</span></span>
+<span id="cb20-53"><a href="#cb20-53"></a><span class="co">## 20:            cv</span></span>
+<span id="cb20-54"><a href="#cb20-54"></a><span class="co">## 21:            cv</span></span>
+<span id="cb20-55"><a href="#cb20-55"></a><span class="co">## 22:            cv</span></span>
+<span id="cb20-56"><a href="#cb20-56"></a><span class="co">## 23:            cv</span></span>
+<span id="cb20-57"><a href="#cb20-57"></a><span class="co">## 24:            cv</span></span>
+<span id="cb20-58"><a href="#cb20-58"></a><span class="co">## 25:            cv</span></span>
+<span id="cb20-59"><a href="#cb20-59"></a><span class="co">## 26:            cv</span></span>
+<span id="cb20-60"><a href="#cb20-60"></a><span class="co">## 27:            cv</span></span>
+<span id="cb20-61"><a href="#cb20-61"></a><span class="co">## 28:            cv</span></span>
+<span id="cb20-62"><a href="#cb20-62"></a><span class="co">## 29:            cv</span></span>
+<span id="cb20-63"><a href="#cb20-63"></a><span class="co">## 30:            cv</span></span>
+<span id="cb20-64"><a href="#cb20-64"></a><span class="co">##     resampling_id</span></span></code></pre></div>
+</div>
 </div>
 </div>
   </div>
