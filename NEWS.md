@@ -1,5 +1,7 @@
 # mlr3fselect 0.5.1.9000
 
+- Adds `AutoFSelector$base_learner()` method to extract the base learner from 
+  nested learner objects.
 - Adds `fselect()`, `auto_fselector()` and `fselect_nested()` sugar functions.
 - Adds `extract_inner_fselect_results()` and `extract_inner_fselect_archives()`  
   helper function to extract inner feature selection results and archives.
