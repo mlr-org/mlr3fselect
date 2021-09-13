@@ -157,7 +157,7 @@ as.data.table.ArchiveFSelect = function(x, ..., unnest = NULL, exclude_columns =
       tab = cbind(tab, x$benchmark_result$aggregate(measures)[, cols_y_extra, with = FALSE])
     }
     # add resample results
-    tab = merge(tab, x$benchmark_result$resample_results[, c("uhash", "resample_result"), with = FALSE], by = "uhash")
+    tab = merge(tab, x$benchmark_result$resample_results[, c("uhash", "resample_result"), with = FALSE], by = "uhash", sort = FALSE)
   }
   setcolorder(tab, c(x$cols_x, x$cols_y, cols_y_extra, "runtime_learners", "timestamp", "batch_nr"))
   assert_subset(exclude_columns, names(tab))

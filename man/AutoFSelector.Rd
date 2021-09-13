@@ -69,8 +69,11 @@ Trained learner.}
 Internally created feature selection instance with all intermediate
 results.}
 
-\item{\code{fselect_result}}{(named \code{list()})\cr
+\item{\code{fselect_result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}
+
+\item{\code{hash}}{(\code{character(1)})\cr
+Hash (unique identifier) for this object.}
 }
 \if{html}{\out{</div>}}
 }

@@ -180,4 +180,26 @@ test_that("AutoFSelector get_base_learner method works", {
   expect_equal(afs$base_learner(recursive = 0)$id, "graphlearner.classif.rpart")
   # expect_learner(afs$base_learner())
   # expect_equal(afs$base_learner()$id, "classif.rpart")
+test_that("AutoFSelector hash works #647 in mlr3", {
+  afs_1 = AutoFSelector$new(
+    learner = lrn("classif.rpart"), 
+    resampling = rsmp("holdout"), 
+    measure = msr("classif.ce"), 
+    terminator = trm("evals", n_evals = 4), 
+    fselector = fs("random_search"),
+    store_benchmark_result = FALSE)
+
+  afs_2 = AutoFSelector$new(
+    learner = lrn("classif.rpart"), 
+    resampling = rsmp("holdout"), 
+    measure = msr("classif.ce"), 
+    terminator = trm("evals", n_evals = 4), 
+    fselector = fs("random_search"),
+    store_benchmark_result = TRUE)
+
+  resampling_outer = rsmp("holdout")
+  grid = benchmark_grid(tsk("iris"), list(afs_1, afs_2), resampling_outer)
+  bmr = benchmark(grid, store_models = TRUE)
+
+  expect_data_table(bmr$learners, nrows = 2)
 })

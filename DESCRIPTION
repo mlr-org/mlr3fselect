@@ -1,6 +1,6 @@
 Package: mlr3fselect
 Title: Feature Selection for 'mlr3'
-Version: 0.5.1.9000
+Version: 0.6.0
 Authors@R:
     c(person(given = "Marc",
              family = "Becker",
@@ -32,29 +32,27 @@ URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
 BugReports: https://github.com/mlr-org/mlr3fselect/issues
 Depends:
-    mlr3 (>= 0.11.0-9000),
+    mlr3 (>= 0.12.0),
     R (>= 3.1.0)
 Imports:
-    bbotk (>= 0.3.0),
+    bbotk (>= 0.4.0),
     checkmate (>= 2.0.0),
     data.table,
     lgr,
-    mlr3misc (>= 0.7.0),
+    mlr3misc (>= 0.9.4),
     mlr3pipelines (>= 0.3.0),
     paradox (>= 0.7.0),
     R6
 Suggests:
     genalg,
     rpart,
-    testthat (>= 3.0.0),
-Remotes:
-    mlr-org/mlr3
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Collate:
     'AutoFSelector.R'
     'ArchiveFSelect.R'

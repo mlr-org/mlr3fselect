@@ -161,6 +161,10 @@ AutoFSelector = R6Class("AutoFSelector",
       self$model$learner$predict(task)
     },
 
+    .base_learner = function(recursive = Inf) {
+      if (recursive == 0L) self$learner else self$learner$base_learner(recursive - 1L)
+    },
+
     .store_fselect_instance = NULL
   ),
 
@@ -186,8 +190,16 @@ AutoFSelector = R6Class("AutoFSelector",
     #' results.
     fselect_instance = function() self$model$fselect_instance,
 
-    #' @field fselect_result (named `list()`)\cr
+    #' @field fselect_result ([data.table::data.table])\cr
     #' Short-cut to `$result` from [FSelectInstanceSingleCrit].
-    fselect_result = function() self$fselect_instance$result
+    fselect_result = function() self$fselect_instance$result,
+
+    #' @field hash (`character(1)`)\cr
+    #' Hash (unique identifier) for this object.
+    hash = function(rhs) {
+      assert_ro_binding(rhs)
+      calculate_hash(class(self), self$id, self$param_set$values, private$.predict_type, self$fallback$hash, self$instance_args,
+        private$.store_fselect_instance)
+    }
   )
 )
