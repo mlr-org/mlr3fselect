@@ -157,7 +157,7 @@ feature sets and performance scores.</p>
 <li><p>One column for each performance measure (<code>$codomain</code>).</p></li>
 <li><p><code>runtime_learners</code> (<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
 Sum of training and predict times logged in learners per
-<a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> / evaluation. This does not include potential
+<a href='https://rdrr.io/pkg/mlr3/man/ResampleResult.html'>mlr3::ResampleResult</a> / evaluation. This does not include potential
 overhead time.</p></li>
 <li><p><code>timestamp</code> (<code>POSIXct</code>)<br />
 Time stamp when the evaluation was logged into the archive.</p></li>
@@ -166,11 +166,11 @@ Feature sets are evaluated in batches. Each batch has a unique batch
 number.</p></li>
 <li><p><code>uhash</code> (<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>)<br />
 Connects each feature set to the resampling experiment
-stored in the <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>.</p></li>
+stored in the <a href='https://rdrr.io/pkg/mlr3/man/BenchmarkResult.html'>mlr3::BenchmarkResult</a>.</p></li>
 </ul>
 
 <p>Each row corresponds to a single evaluation of a feature set.</p>
-<p>The archive stores additionally a <a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>
+<p>The archive stores additionally a <a href='https://rdrr.io/pkg/mlr3/man/BenchmarkResult.html'>mlr3::BenchmarkResult</a>
 (<code>$benchmark_result</code>) that records the resampling experiments. Each
 experiment corresponds to to a single evaluation of a feature set. The table
 (<code>$data</code>) and the benchmark result (<code>$benchmark_result</code>) are linked by the
@@ -183,7 +183,7 @@ joined automatically.</p>
 
 <p>For analyzing the feature selection results, it is recommended to pass the archive to
 <code>as.data.table()</code>. The returned data table is joined with the benchmark result
-which adds the <a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> for each feature set.</p>
+which adds the <a href='https://rdrr.io/pkg/mlr3/man/ResampleResult.html'>mlr3::ResampleResult</a> for each feature set.</p>
 <p>The archive provides various getters (e.g. <code>$learners()</code>) to ease the access.
 All getters extract by position (<code>i</code>) or unique hash (<code>uhash</code>). For a
 complete list of all getters see the methods section.</p>
@@ -205,7 +205,7 @@ should be unnested.</p></li>
 <li><p><code>exclude_columns</code> (<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
 Exclude columns from table. Set to <code>NULL</code> if no column should be
 excluded.</p></li>
-<li><p><code>measures</code> (list of <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)<br />
+<li><p><code>measures</code> (list of <a href='https://rdrr.io/pkg/mlr3/man/Measure.html'>mlr3::Measure</a>)<br />
 Score feature sets on additional measures.</p></li>
 </ul></li>
 </ul>
@@ -216,7 +216,7 @@ Score feature sets on additional measures.</p></li>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>
-<dt><code>benchmark_result</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/BenchmarkResult.html'>mlr3::BenchmarkResult</a>)<br />
+<dt><code>benchmark_result</code></dt><dd><p>(<a href='https://rdrr.io/pkg/mlr3/man/BenchmarkResult.html'>mlr3::BenchmarkResult</a>)<br />
 Stores benchmark result.</p></dd>
 
 </dl><p></div></p>
@@ -245,7 +245,7 @@ Stores benchmark result.</p></dd>
 
 <hr>
 <a id="method-learner"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>learner()</code></h3>
-<p>Retrieve <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> of the i-th evaluation, by position
+<p>Retrieve <a href='https://rdrr.io/pkg/mlr3/man/Learner.html'>mlr3::Learner</a> of the i-th evaluation, by position
 or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.
 Learner does not contain a model. Use <code>$learners()</code> to get learners with
 models.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -262,7 +262,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></div></p>
 <p><hr>
 <a id="method-learners"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>learners()</code></h3>
-<p>Retrieve list of trained <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> objects of the i-th evaluation,
+<p>Retrieve list of trained <a href='https://rdrr.io/pkg/mlr3/man/Learner.html'>mlr3::Learner</a> objects of the i-th evaluation,
 by position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
 exclusive.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>learners</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span>, uhash <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
@@ -278,7 +278,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></div></p>
 <p><hr>
 <a id="method-predictions"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>predictions()</code></h3>
-<p>Retrieve list of <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a> objects of the i-th evaluation, by
+<p>Retrieve list of <a href='https://rdrr.io/pkg/mlr3/man/Prediction.html'>mlr3::Prediction</a> objects of the i-th evaluation, by
 position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
 exclusive.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>predictions</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span>, uhash <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
@@ -294,7 +294,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></div></p>
 <p><hr>
 <a id="method-resample_result"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>resample_result()</code></h3>
-<p>Retrieve <a href='https://mlr3.mlr-org.com/reference/ResampleResult.html'>mlr3::ResampleResult</a> of the i-th evaluation, by position
+<p>Retrieve <a href='https://rdrr.io/pkg/mlr3/man/ResampleResult.html'>mlr3::ResampleResult</a> of the i-th evaluation, by position
 or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>ArchiveFSelect</span><span class='op'>$</span><span class='fu'>resample_result</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span>, uhash <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 

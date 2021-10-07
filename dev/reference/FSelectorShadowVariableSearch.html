@@ -225,10 +225,10 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
 
 <span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
-  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
-  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
-  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
-  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
+  task <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
+  learner <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
+  resampling <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
+  measure <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
   terminator <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"none"</span><span class='op'>)</span>
 <span class='op'>)</span>
 
@@ -273,32 +273,32 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 #&gt; 26:         TRUE        TRUE         TRUE       FALSE       0.08
 #&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt;     runtime_learners           timestamp batch_nr permuted__Petal.Length
-#&gt;  1:            0.078 2021-10-07 04:17:53        1                  FALSE
-#&gt;  2:            0.093 2021-10-07 04:17:53        1                  FALSE
-#&gt;  3:            0.090 2021-10-07 04:17:53        1                  FALSE
-#&gt;  4:            0.097 2021-10-07 04:17:53        1                  FALSE
-#&gt;  5:            0.079 2021-10-07 04:17:53        1                   TRUE
-#&gt;  6:            0.088 2021-10-07 04:17:53        1                  FALSE
-#&gt;  7:            0.079 2021-10-07 04:17:53        1                  FALSE
-#&gt;  8:            0.074 2021-10-07 04:17:53        1                  FALSE
-#&gt;  9:            0.090 2021-10-07 04:17:54        2                  FALSE
-#&gt; 10:            0.084 2021-10-07 04:17:54        2                  FALSE
-#&gt; 11:            0.097 2021-10-07 04:17:54        2                  FALSE
-#&gt; 12:            0.083 2021-10-07 04:17:54        2                   TRUE
-#&gt; 13:            0.083 2021-10-07 04:17:54        2                  FALSE
-#&gt; 14:            0.091 2021-10-07 04:17:54        2                  FALSE
-#&gt; 15:            0.092 2021-10-07 04:17:54        2                  FALSE
-#&gt; 16:            0.090 2021-10-07 04:17:56        3                  FALSE
-#&gt; 17:            0.098 2021-10-07 04:17:56        3                  FALSE
-#&gt; 18:            0.093 2021-10-07 04:17:56        3                   TRUE
-#&gt; 19:            0.096 2021-10-07 04:17:56        3                  FALSE
-#&gt; 20:            0.090 2021-10-07 04:17:56        3                  FALSE
-#&gt; 21:            0.097 2021-10-07 04:17:56        3                  FALSE
-#&gt; 22:            0.094 2021-10-07 04:17:57        4                  FALSE
-#&gt; 23:            0.086 2021-10-07 04:17:57        4                   TRUE
-#&gt; 24:            0.098 2021-10-07 04:17:57        4                  FALSE
-#&gt; 25:            0.103 2021-10-07 04:17:57        4                  FALSE
-#&gt; 26:            0.081 2021-10-07 04:17:57        4                  FALSE
+#&gt;  1:            0.086 2021-10-07 07:54:40        1                  FALSE
+#&gt;  2:            0.086 2021-10-07 07:54:40        1                  FALSE
+#&gt;  3:            0.078 2021-10-07 07:54:40        1                  FALSE
+#&gt;  4:            0.090 2021-10-07 07:54:40        1                  FALSE
+#&gt;  5:            0.085 2021-10-07 07:54:40        1                   TRUE
+#&gt;  6:            0.081 2021-10-07 07:54:40        1                  FALSE
+#&gt;  7:            0.077 2021-10-07 07:54:40        1                  FALSE
+#&gt;  8:            0.081 2021-10-07 07:54:40        1                  FALSE
+#&gt;  9:            0.094 2021-10-07 07:54:41        2                  FALSE
+#&gt; 10:            0.079 2021-10-07 07:54:41        2                  FALSE
+#&gt; 11:            0.080 2021-10-07 07:54:41        2                  FALSE
+#&gt; 12:            0.080 2021-10-07 07:54:41        2                   TRUE
+#&gt; 13:            0.095 2021-10-07 07:54:41        2                  FALSE
+#&gt; 14:            0.080 2021-10-07 07:54:41        2                  FALSE
+#&gt; 15:            0.095 2021-10-07 07:54:41        2                  FALSE
+#&gt; 16:            0.078 2021-10-07 07:54:43        3                  FALSE
+#&gt; 17:            0.102 2021-10-07 07:54:43        3                  FALSE
+#&gt; 18:            0.078 2021-10-07 07:54:43        3                   TRUE
+#&gt; 19:            0.102 2021-10-07 07:54:43        3                  FALSE
+#&gt; 20:            0.079 2021-10-07 07:54:43        3                  FALSE
+#&gt; 21:            0.102 2021-10-07 07:54:43        3                  FALSE
+#&gt; 22:            0.080 2021-10-07 07:54:44        4                  FALSE
+#&gt; 23:            0.101 2021-10-07 07:54:44        4                   TRUE
+#&gt; 24:            0.086 2021-10-07 07:54:44        4                  FALSE
+#&gt; 25:            0.090 2021-10-07 07:54:44        4                  FALSE
+#&gt; 26:            0.094 2021-10-07 07:54:44        4                  FALSE
 #&gt;     runtime_learners           timestamp batch_nr permuted__Petal.Length
 #&gt;     permuted__Petal.Width permuted__Sepal.Length permuted__Sepal.Width
 #&gt;  1:                 FALSE                  FALSE                 FALSE
