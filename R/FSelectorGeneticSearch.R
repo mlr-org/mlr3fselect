@@ -23,7 +23,7 @@
 #' iterations are needed, set `ìters` to a higher value in the parameter set.
 #'
 #' @export
-#' @examples 
+#' @examples
 #' library(mlr3)
 #'
 #' terminator = trm("evals", n_evals = 5)
@@ -53,14 +53,14 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamUty$new("suggestions"),
-        ParamInt$new("popSize", lower = 5L, default = 200L),
-        ParamDbl$new("mutationChance", lower = 0, upper = 1),
-        ParamInt$new("elitism", lower = 1L),
-        ParamInt$new("zeroToOneRatio", lower = 1, default = 10L),
-        ParamInt$new("iters", lower = 1, default = 100000L)
-      ))
+      ps = ps(
+        suggestion     = p_uty(),
+        popSize        = p_int(lower = 5L, default = 200L),
+        mutationChance = p_dbl(lower = 0, upper = 1),
+        elitism        = p_int(lower = 1L),
+        zeroToOneRatio = p_int(lower = 1, default = 10L),
+        iters          = p_int(lower = 1, default = 100000L)
+      )
       ps$values$iters = 100000L
 
       super$initialize(param_set = ps, properties = "single-crit")
