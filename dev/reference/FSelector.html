@@ -183,7 +183,7 @@ your optimizer.</p></li>
 <li><p>You need to call <code>instance$eval_batch()</code> to evaluate feature subsets.</p></li>
 <li><p>The batch evaluation is requested at the <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> /
 <a href='FSelectInstanceMultiCrit.html'>FSelectInstanceMultiCrit</a> object <code>instance</code>, so each batch is possibly
-executed in parallel via <code><a href='https://rdrr.io/pkg/mlr3/man/benchmark.html'>mlr3::benchmark()</a></code>, and all evaluations are stored
+executed in parallel via <code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>mlr3::benchmark()</a></code>, and all evaluations are stored
 inside of <code>instance$archive</code>.</p></li>
 <li><p>Before the batch evaluation, the <a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a> is checked, and if it is
 positive, an exception of class <code>"terminated_error"</code> is generated. In the
@@ -239,7 +239,7 @@ Set of control parameters for fselector.</p></dd>
 
 <dt><code>properties</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
 Set of properties of the fselector. Must be a subset of
-<code><a href='https://rdrr.io/pkg/mlr3/man/mlr_reflections.html'>mlr_reflections$fselect_properties</a></code>.</p></dd>
+<code><a href='https://mlr3.mlr-org.com/reference/mlr_reflections.html'>mlr_reflections$fselect_properties</a></code>.</p></dd>
 
 <dt><code>packages</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
 Set of required packages. Note that these packages will be loaded via
@@ -295,10 +295,10 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 <span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
 <span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
-  task <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
-  learner <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
-  resampling <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
-  measure <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
+  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
+  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
+  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
+  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
   terminator <span class='op'>=</span> <span class='va'>terminator</span>
 <span class='op'>)</span>
 
@@ -325,9 +325,9 @@ The result will be written into the instance object.</p><h4 class='hasAnchor' id
 #&gt; 2:        FALSE        TRUE         TRUE        TRUE       0.02
 #&gt; 3:         TRUE       FALSE        FALSE       FALSE       0.02
 #&gt;    runtime_learners           timestamp batch_nr
-#&gt; 1:            0.075 2021-10-07 07:54:26        1
-#&gt; 2:            0.065 2021-10-07 07:54:27        2
-#&gt; 3:            0.066 2021-10-07 07:54:27        3</div></pre>
+#&gt; 1:            0.087 2021-10-08 04:18:30        1
+#&gt; 2:            0.078 2021-10-08 04:18:31        2
+#&gt; 3:            0.083 2021-10-08 04:18:31        3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

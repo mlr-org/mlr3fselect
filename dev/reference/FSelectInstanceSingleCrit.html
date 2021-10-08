@@ -162,7 +162,7 @@ querying the objective at feature subsets (<code>$eval_batch()</code>), storing 
 evaluations in the internal <a href='https://bbotk.mlr-org.com/reference/Archive.html'>bbotk::Archive</a> and accessing the final result
 (<code>$result</code>).</p>
 <p>Evaluations of feature subsets are performed in batches by calling
-<code><a href='https://rdrr.io/pkg/mlr3/man/benchmark.html'>mlr3::benchmark()</a></code> internally. Before a batch is evaluated, the
+<code><a href='https://mlr3.mlr-org.com/reference/benchmark.html'>mlr3::benchmark()</a></code> internally. Before a batch is evaluated, the
 <a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a> is queried for the remaining budget. If the available
 budget is exhausted, an exception is raised, and no further evaluations can
 be performed from this point on.</p>
@@ -219,16 +219,16 @@ Feature set for task subsetting.</p></dd>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>task</code></dt><dd><p>(<a href='https://rdrr.io/pkg/mlr3/man/Task.html'>mlr3::Task</a>)<br />
+<dt><code>task</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Task.html'>mlr3::Task</a>)<br />
 Task to operate on.</p></dd>
 
-<dt><code>learner</code></dt><dd><p>(<a href='https://rdrr.io/pkg/mlr3/man/Learner.html'>mlr3::Learner</a>).</p></dd>
+<dt><code>learner</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>).</p></dd>
 
-<dt><code>resampling</code></dt><dd><p>(<a href='https://rdrr.io/pkg/mlr3/man/Resampling.html'>mlr3::Resampling</a>)<br />
+<dt><code>resampling</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Resampling.html'>mlr3::Resampling</a>)<br />
 Uninstantiated resamplings are instantiated during construction
 so that all configurations are evaluated on the same data splits.</p></dd>
 
-<dt><code>measure</code></dt><dd><p>(<a href='https://rdrr.io/pkg/mlr3/man/Measure.html'>mlr3::Measure</a>)<br />
+<dt><code>measure</code></dt><dd><p>(<a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>)<br />
 Measure to optimize.</p></dd>
 
 <dt><code>terminator</code></dt><dd><p>(<a href='https://bbotk.mlr-org.com/reference/Terminator.html'>bbotk::Terminator</a>).</p></dd>
@@ -279,10 +279,10 @@ Optimal outcome.</p></dd>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span>
 
 <span class='co'># Objects required to define the objective function</span>
-<span class='va'>task</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>
-<span class='va'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>
-<span class='va'>learner</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>
-<span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/mlr3/man/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"cv"</span><span class='op'>)</span>
+<span class='va'>task</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>
+<span class='va'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>
+<span class='va'>learner</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>
+<span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"cv"</span><span class='op'>)</span>
 
 <span class='co'># Create instance</span>
 <span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
@@ -310,8 +310,8 @@ Optimal outcome.</p></dd>
 #&gt; 1:         TRUE       FALSE         TRUE       FALSE 0.06666667
 #&gt; 2:        FALSE        TRUE        FALSE        TRUE 0.04666667
 #&gt;    runtime_learners           timestamp batch_nr      resample_result
-#&gt; 1:            0.678 2021-10-07 07:54:26        1 &lt;ResampleResult[20]&gt;
-#&gt; 2:            0.677 2021-10-07 07:54:26        1 &lt;ResampleResult[20]&gt;</div></pre>
+#&gt; 1:            0.848 2021-10-08 04:18:29        1 &lt;ResampleResult[20]&gt;
+#&gt; 2:            0.892 2021-10-08 04:18:29        1 &lt;ResampleResult[20]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
