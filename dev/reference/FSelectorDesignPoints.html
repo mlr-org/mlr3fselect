@@ -174,7 +174,7 @@ fine-grained checking of termination criteria.</p>
 <dl>
 <dt><code>batch_size</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
 Maximum number of configurations to try in a batch.</p></dd>
-<dt><code>design</code></dt><dd><p><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a><br />
+<dt><code>design</code></dt><dd><p><a href='https://rdrr.io/pkg/data.table/man/data.table.html'>data.table::data.table</a><br />
 Design points to try in search, one per row.</p></dd>
 
 </dl>
@@ -232,7 +232,7 @@ Design points to try in search, one per row.</p></dd>
   terminator <span class='op'>=</span> <span class='va'>terminator</span>
 <span class='op'>)</span>
 
-<span class='va'>design</span> <span class='op'>=</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>Petal.Length <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+<span class='va'>design</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/data.table/man/data.table.html'>data.table</a></span><span class='op'>(</span>Petal.Length <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
   Petal.Width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
   Sepal.Length <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
   Sepal.Width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
@@ -252,13 +252,13 @@ Design points to try in search, one per row.</p></dd>
 #&gt;    classif.ce
 #&gt; 1:       0.08</div><div class='input'>
 <span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
+<span class='fu'><a href='https://rdrr.io/pkg/data.table/man/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
 </div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #&gt; 1:         TRUE        TRUE        FALSE       FALSE       0.08
 #&gt; 2:        FALSE       FALSE         TRUE        TRUE       0.24
 #&gt;    runtime_learners           timestamp batch_nr      resample_result
-#&gt; 1:            0.097 2021-10-09 04:18:50        1 &lt;ResampleResult[20]&gt;
-#&gt; 2:            0.077 2021-10-09 04:18:51        2 &lt;ResampleResult[20]&gt;</div></pre>
+#&gt; 1:            0.073 2021-10-10 04:18:17        1 &lt;ResampleResult[20]&gt;
+#&gt; 2:            0.064 2021-10-10 04:18:18        2 &lt;ResampleResult[20]&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
