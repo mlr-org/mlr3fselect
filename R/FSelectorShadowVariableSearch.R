@@ -1,22 +1,21 @@
 #' @title Feature Selection via Sequential Search with Shadow Variables
 #'
 #' @description
-#' `FSelectorShadowVariableSearch` class that implements a sequential search with shadow variables.  
+#' `FSelectorShadowVariableSearch` class that implements a sequential search with shadow variables.
 #'
 #' @templateVar id shadow_variable_search
 #' @template section_dictionary_fselectors
 #'
 #' @note
 #' `FSelectorShadowVariableSearch` terminates itself and should be used with [TerminatorNone].
-#' 
+#'
 #' @source
-#' `r format_bib("thomas2017")`
-#' `r format_bib("wu2007")`
+#' `r format_bib("thomas2017", "wu2007")`
 #'
 #' @export
 #' @examples
 #' library(mlr3)
-#' 
+#'
 #' instance = FSelectInstanceSingleCrit$new(
 #'   task = tsk("iris"),
 #'   learner = lrn("classif.rpart"),
@@ -67,7 +66,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
   ),
   private = list(
     .optimize = function(inst) {
-      
+
       # save initial state
       task = inst$objective$task
       private$.task = task$clone()
@@ -81,7 +80,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
 
       # add shadow variables to domain
       inst$objective$domain = ParamSet$new(map(inst$objective$task$feature_names, function(s) ParamLgl$new(id = s)))
-      
+
       # add shadow variables to search_space
       inst$archive$search_space =  inst$objective$domain
       inst$search_space =  inst$objective$domain
@@ -92,8 +91,8 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
 
       # initialize states for first batch
       states = set_names(as.data.table(diag(TRUE, length(feature_names), length(feature_names))), feature_names)
-      
-      inst$eval_batch(states) 
+
+      inst$eval_batch(states)
 
       repeat({
         res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
@@ -103,7 +102,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
 
           # stop if the first selected feature is a shadow variable
           if (archive$n_batch == 1) stop("The first selected feature is a shadow variable.")
-          
+
           # remove last batch with selected shadow variable from archive
           archive = inst$archive
           archive$data = archive$data[get("batch_nr") != archive$n_batch, ]

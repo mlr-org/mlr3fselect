@@ -8,6 +8,7 @@ Thomas J, Hepp T, Mayr A, Bischl B (2017).
 \dQuote{Probing for Sparse and Fast Variable Selection with Model-Based Boosting.}
 \emph{Computational and Mathematical Methods in Medicine}, \bold{2017}, 1--8.
 \doi{10.1155/2017/1421409}.
+
 Wu Y, Boos DD, Stefanski LA (2007).
 \dQuote{Controlling Variable Selection by the Addition of Pseudovariables.}
 \emph{Journal of the American Statistical Association}, \bold{102}(477), 235--243.
