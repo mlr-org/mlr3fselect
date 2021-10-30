@@ -222,140 +222,143 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
-
-<span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
-  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
-  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
-  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
-  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
-  terminator <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"none"</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"shadow_variable_search"</span><span class='op'>)</span>
-<span class='co'># \donttest{</span>
-<span class='co'># Modifies the instance by reference</span>
-<span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</div><div class='input'>
-<span class='co'># Returns best scoring evaluation</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</div><div class='input'>
-<span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
-</div><div class='output co'>#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;  1:         TRUE       FALSE        FALSE       FALSE       0.08
-#&gt;  2:        FALSE        TRUE        FALSE       FALSE       0.08
-#&gt;  3:        FALSE       FALSE         TRUE       FALSE       0.36
-#&gt;  4:        FALSE       FALSE        FALSE        TRUE       0.54
-#&gt;  5:        FALSE       FALSE        FALSE       FALSE       0.78
-#&gt;  6:        FALSE       FALSE        FALSE       FALSE       0.72
-#&gt;  7:        FALSE       FALSE        FALSE       FALSE       0.70
-#&gt;  8:        FALSE       FALSE        FALSE       FALSE       0.78
-#&gt;  9:         TRUE        TRUE        FALSE       FALSE       0.08
-#&gt; 10:         TRUE       FALSE         TRUE       FALSE       0.08
-#&gt; 11:         TRUE       FALSE        FALSE        TRUE       0.08
-#&gt; 12:         TRUE       FALSE        FALSE       FALSE       0.08
-#&gt; 13:         TRUE       FALSE        FALSE       FALSE       0.08
-#&gt; 14:         TRUE       FALSE        FALSE       FALSE       0.08
-#&gt; 15:         TRUE       FALSE        FALSE       FALSE       0.08
-#&gt; 16:         TRUE        TRUE         TRUE       FALSE       0.08
-#&gt; 17:         TRUE        TRUE        FALSE        TRUE       0.08
-#&gt; 18:         TRUE        TRUE        FALSE       FALSE       0.08
-#&gt; 19:         TRUE        TRUE        FALSE       FALSE       0.08
-#&gt; 20:         TRUE        TRUE        FALSE       FALSE       0.08
-#&gt; 21:         TRUE        TRUE        FALSE       FALSE       0.08
-#&gt; 22:         TRUE        TRUE         TRUE        TRUE       0.08
-#&gt; 23:         TRUE        TRUE         TRUE       FALSE       0.08
-#&gt; 24:         TRUE        TRUE         TRUE       FALSE       0.08
-#&gt; 25:         TRUE        TRUE         TRUE       FALSE       0.08
-#&gt; 26:         TRUE        TRUE         TRUE       FALSE       0.08
-#&gt;     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt;     runtime_learners           timestamp batch_nr permuted__Petal.Length
-#&gt;  1:            0.072 2021-10-29 04:16:59        1                  FALSE
-#&gt;  2:            0.084 2021-10-29 04:16:59        1                  FALSE
-#&gt;  3:            0.080 2021-10-29 04:16:59        1                  FALSE
-#&gt;  4:            0.085 2021-10-29 04:16:59        1                  FALSE
-#&gt;  5:            0.070 2021-10-29 04:16:59        1                   TRUE
-#&gt;  6:            0.079 2021-10-29 04:16:59        1                  FALSE
-#&gt;  7:            0.076 2021-10-29 04:16:59        1                  FALSE
-#&gt;  8:            0.077 2021-10-29 04:16:59        1                  FALSE
-#&gt;  9:            0.075 2021-10-29 04:17:00        2                  FALSE
-#&gt; 10:            0.079 2021-10-29 04:17:00        2                  FALSE
-#&gt; 11:            0.086 2021-10-29 04:17:00        2                  FALSE
-#&gt; 12:            0.081 2021-10-29 04:17:00        2                   TRUE
-#&gt; 13:            0.073 2021-10-29 04:17:00        2                  FALSE
-#&gt; 14:            0.080 2021-10-29 04:17:00        2                  FALSE
-#&gt; 15:            0.091 2021-10-29 04:17:00        2                  FALSE
-#&gt; 16:            0.092 2021-10-29 04:17:02        3                  FALSE
-#&gt; 17:            0.087 2021-10-29 04:17:02        3                  FALSE
-#&gt; 18:            0.082 2021-10-29 04:17:02        3                   TRUE
-#&gt; 19:            0.095 2021-10-29 04:17:02        3                  FALSE
-#&gt; 20:            0.085 2021-10-29 04:17:02        3                  FALSE
-#&gt; 21:            0.082 2021-10-29 04:17:02        3                  FALSE
-#&gt; 22:            0.086 2021-10-29 04:17:03        4                  FALSE
-#&gt; 23:            0.077 2021-10-29 04:17:03        4                   TRUE
-#&gt; 24:            0.089 2021-10-29 04:17:03        4                  FALSE
-#&gt; 25:            0.089 2021-10-29 04:17:03        4                  FALSE
-#&gt; 26:            0.075 2021-10-29 04:17:03        4                  FALSE
-#&gt;     runtime_learners           timestamp batch_nr permuted__Petal.Length
-#&gt;     permuted__Petal.Width permuted__Sepal.Length permuted__Sepal.Width
-#&gt;  1:                 FALSE                  FALSE                 FALSE
-#&gt;  2:                 FALSE                  FALSE                 FALSE
-#&gt;  3:                 FALSE                  FALSE                 FALSE
-#&gt;  4:                 FALSE                  FALSE                 FALSE
-#&gt;  5:                 FALSE                  FALSE                 FALSE
-#&gt;  6:                  TRUE                  FALSE                 FALSE
-#&gt;  7:                 FALSE                   TRUE                 FALSE
-#&gt;  8:                 FALSE                  FALSE                  TRUE
-#&gt;  9:                 FALSE                  FALSE                 FALSE
-#&gt; 10:                 FALSE                  FALSE                 FALSE
-#&gt; 11:                 FALSE                  FALSE                 FALSE
-#&gt; 12:                 FALSE                  FALSE                 FALSE
-#&gt; 13:                  TRUE                  FALSE                 FALSE
-#&gt; 14:                 FALSE                   TRUE                 FALSE
-#&gt; 15:                 FALSE                  FALSE                  TRUE
-#&gt; 16:                 FALSE                  FALSE                 FALSE
-#&gt; 17:                 FALSE                  FALSE                 FALSE
-#&gt; 18:                 FALSE                  FALSE                 FALSE
-#&gt; 19:                  TRUE                  FALSE                 FALSE
-#&gt; 20:                 FALSE                   TRUE                 FALSE
-#&gt; 21:                 FALSE                  FALSE                  TRUE
-#&gt; 22:                 FALSE                  FALSE                 FALSE
-#&gt; 23:                 FALSE                  FALSE                 FALSE
-#&gt; 24:                  TRUE                  FALSE                 FALSE
-#&gt; 25:                 FALSE                   TRUE                 FALSE
-#&gt; 26:                 FALSE                  FALSE                  TRUE
-#&gt;     permuted__Petal.Width permuted__Sepal.Length permuted__Sepal.Width
-#&gt;          resample_result
-#&gt;  1: &lt;ResampleResult[20]&gt;
-#&gt;  2: &lt;ResampleResult[20]&gt;
-#&gt;  3: &lt;ResampleResult[20]&gt;
-#&gt;  4: &lt;ResampleResult[20]&gt;
-#&gt;  5: &lt;ResampleResult[20]&gt;
-#&gt;  6: &lt;ResampleResult[20]&gt;
-#&gt;  7: &lt;ResampleResult[20]&gt;
-#&gt;  8: &lt;ResampleResult[20]&gt;
-#&gt;  9: &lt;ResampleResult[20]&gt;
-#&gt; 10: &lt;ResampleResult[20]&gt;
-#&gt; 11: &lt;ResampleResult[20]&gt;
-#&gt; 12: &lt;ResampleResult[20]&gt;
-#&gt; 13: &lt;ResampleResult[20]&gt;
-#&gt; 14: &lt;ResampleResult[20]&gt;
-#&gt; 15: &lt;ResampleResult[20]&gt;
-#&gt; 16: &lt;ResampleResult[20]&gt;
-#&gt; 17: &lt;ResampleResult[20]&gt;
-#&gt; 18: &lt;ResampleResult[20]&gt;
-#&gt; 19: &lt;ResampleResult[20]&gt;
-#&gt; 20: &lt;ResampleResult[20]&gt;
-#&gt; 21: &lt;ResampleResult[20]&gt;
-#&gt; 22: &lt;ResampleResult[20]&gt;
-#&gt; 23: &lt;ResampleResult[20]&gt;
-#&gt; 24: &lt;ResampleResult[20]&gt;
-#&gt; 25: &lt;ResampleResult[20]&gt;
-#&gt; 26: &lt;ResampleResult[20]&gt;
-#&gt;          resample_result</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span></span>
+<span class='r-in'>  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  terminator <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"none"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"shadow_variable_search"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># Modifies the instance by reference</span></span>
+<span class='r-in'><span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Returns best scoring evaluation</span></span>
+<span class='r-in'><span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Allows access of data.table of full path of all evaluations</span></span>
+<span class='r-in'><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2:        FALSE        TRUE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3:        FALSE       FALSE         TRUE       FALSE       0.36</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  4:        FALSE       FALSE        FALSE        TRUE       0.54</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  5:        FALSE       FALSE        FALSE       FALSE       0.78</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6:        FALSE       FALSE        FALSE       FALSE       0.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  7:        FALSE       FALSE        FALSE       FALSE       0.70</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  8:        FALSE       FALSE        FALSE       FALSE       0.78</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  9:         TRUE        TRUE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10:         TRUE       FALSE         TRUE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11:         TRUE       FALSE        FALSE        TRUE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16:         TRUE        TRUE         TRUE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17:         TRUE        TRUE        FALSE        TRUE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18:         TRUE        TRUE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19:         TRUE        TRUE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20:         TRUE        TRUE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21:         TRUE        TRUE        FALSE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22:         TRUE        TRUE         TRUE        TRUE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23:         TRUE        TRUE         TRUE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24:         TRUE        TRUE         TRUE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25:         TRUE        TRUE         TRUE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26:         TRUE        TRUE         TRUE       FALSE       0.08</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     runtime_learners           timestamp batch_nr permuted__Petal.Length</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1:            0.100 2021-10-30 04:17:27        1                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2:            0.094 2021-10-30 04:17:27        1                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3:            0.104 2021-10-30 04:17:27        1                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  4:            0.092 2021-10-30 04:17:27        1                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  5:            0.089 2021-10-30 04:17:27        1                   TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6:            0.088 2021-10-30 04:17:27        1                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  7:            0.107 2021-10-30 04:17:27        1                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  8:            0.104 2021-10-30 04:17:27        1                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  9:            0.086 2021-10-30 04:17:29        2                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10:            0.111 2021-10-30 04:17:29        2                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11:            0.115 2021-10-30 04:17:29        2                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12:            0.107 2021-10-30 04:17:29        2                   TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13:            0.094 2021-10-30 04:17:29        2                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14:            0.113 2021-10-30 04:17:29        2                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15:            0.092 2021-10-30 04:17:29        2                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16:            0.099 2021-10-30 04:17:30        3                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17:            0.102 2021-10-30 04:17:30        3                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18:            0.094 2021-10-30 04:17:30        3                   TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19:            0.104 2021-10-30 04:17:30        3                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20:            0.105 2021-10-30 04:17:30        3                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21:            0.117 2021-10-30 04:17:30        3                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22:            0.096 2021-10-30 04:17:32        4                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23:            0.116 2021-10-30 04:17:32        4                   TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24:            0.097 2021-10-30 04:17:32        4                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25:            0.097 2021-10-30 04:17:32        4                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26:            0.118 2021-10-30 04:17:32        4                  FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     runtime_learners           timestamp batch_nr permuted__Petal.Length</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     permuted__Petal.Width permuted__Sepal.Length permuted__Sepal.Width</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  4:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  5:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6:                  TRUE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  7:                 FALSE                   TRUE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  8:                 FALSE                  FALSE                  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  9:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13:                  TRUE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14:                 FALSE                   TRUE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15:                 FALSE                  FALSE                  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19:                  TRUE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20:                 FALSE                   TRUE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21:                 FALSE                  FALSE                  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23:                 FALSE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24:                  TRUE                  FALSE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25:                 FALSE                   TRUE                 FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26:                 FALSE                  FALSE                  TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     permuted__Petal.Width permuted__Sepal.Length permuted__Sepal.Width</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          resample_result</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  4: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  5: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  7: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  8: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  9: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26: &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          resample_result</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

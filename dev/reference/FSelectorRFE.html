@@ -169,16 +169,16 @@ iteration.</p>
     
 
 <dl>
-<dt><code>min_features</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
+<dt><code>min_features</code></dt><dd><p><code>integer(1)</code><br />
 The minimum number of features to select, default is <code>1L</code>.</p></dd>
-<dt><code>feature_fraction</code></dt><dd><p><code><a href='https://rdrr.io/r/base/double.html'>double(1)</a></code><br />
+<dt><code>feature_fraction</code></dt><dd><p><code>double(1)</code><br />
 Fraction of features to retain in each iteration, default is <code>0.5</code>.</p></dd>
-<dt><code>feature_number</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code><br />
+<dt><code>feature_number</code></dt><dd><p><code>integer(1)</code><br />
 Number of features to remove in each iteration.</p></dd>
 <dt><code>subset_sizes</code></dt><dd><p><code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code><br />
 Vector of number of features to retain in each iteration. Must be sorted in
 decreasing order.</p></dd>
-<dt><code>recursive</code></dt><dd><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code><br />
+<dt><code>recursive</code></dt><dd><p><code>logical(1)</code><br />
 Use the recursive version? Default is <code>FALSE</code>.</p></dd>
 
 </dl>
@@ -232,46 +232,49 @@ Stores the feature importance of the model with all variables if
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
-
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
-  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,
-  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,
-  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,
-  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,
-  terminator <span class='op'>=</span> <span class='va'>terminator</span>,
-  store_models <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"rfe"</span><span class='op'>)</span>
-<span class='co'># \donttest{</span>
-<span class='co'># Modifies the instance by reference</span>
-<span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
-#&gt; 1:         TRUE        TRUE         TRUE        TRUE
-#&gt;                                             features classif.ce
-#&gt; 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width        0.1</div><div class='input'>
-<span class='co'># Returns best scoring evaluation</span>
-<span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width
-#&gt; 1:         TRUE        TRUE         TRUE        TRUE
-#&gt;                                             features classif.ce
-#&gt; 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width        0.1</div><div class='input'>
-<span class='co'># Allows access of data.table of full path of all evaluations</span>
-<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span>
-</div><div class='output co'>#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt; 1:         TRUE        TRUE         TRUE        TRUE        0.1
-#&gt; 2:         TRUE        TRUE        FALSE       FALSE        0.1
-#&gt; 3:        FALSE        TRUE        FALSE       FALSE        0.1
-#&gt;    runtime_learners           timestamp batch_nr
-#&gt; 1:            0.063 2021-10-29 04:16:53        1
-#&gt; 2:            0.058 2021-10-29 04:16:53        2
-#&gt; 3:            0.058 2021-10-29 04:16:54        3
-#&gt;                             importance      resample_result
-#&gt; 1: 64.07556,61.31460,37.69358,20.01587 &lt;ResampleResult[20]&gt;
-#&gt; 2:                   64.07556,61.31460 &lt;ResampleResult[20]&gt;
-#&gt; 3:                            64.07556 &lt;ResampleResult[20]&gt;</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>instance</span> <span class='op'>=</span> <span class='va'><a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span></span>
+<span class='r-in'>  task <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  learner <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  resampling <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  measure <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>,</span>
+<span class='r-in'>  terminator <span class='op'>=</span> <span class='va'>terminator</span>,</span>
+<span class='r-in'>  store_models <span class='op'>=</span> <span class='cn'>TRUE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"rfe"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># Modifies the instance by reference</span></span>
+<span class='r-in'><span class='va'>fselector</span><span class='op'>$</span><span class='fu'>optimize</span><span class='op'>(</span><span class='va'>instance</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                             features classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width        0.1</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Returns best scoring evaluation</span></span>
+<span class='r-in'><span class='va'>instance</span><span class='op'>$</span><span class='va'>result</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                             features classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width        0.1</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Allows access of data.table of full path of all evaluations</span></span>
+<span class='r-in'><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>as.data.table</a></span><span class='op'>(</span><span class='va'>instance</span><span class='op'>$</span><span class='va'>archive</span><span class='op'>)</span><span class='co'># }</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE        0.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2:         TRUE        TRUE        FALSE       FALSE        0.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3:        FALSE        TRUE        FALSE       FALSE        0.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    runtime_learners           timestamp batch_nr</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:            0.075 2021-10-30 04:17:20        1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2:            0.087 2021-10-30 04:17:20        2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3:            0.074 2021-10-30 04:17:20        3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                             importance      resample_result</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1: 64.07556,61.31460,37.69358,20.01587 &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2:                   64.07556,61.31460 &lt;ResampleResult[20]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3:                            64.07556 &lt;ResampleResult[20]&gt;</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

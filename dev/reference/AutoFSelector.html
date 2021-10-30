@@ -207,7 +207,7 @@ results.</p></dd>
 <dt><code>fselect_result</code></dt><dd><p>(<a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a>)<br />
 Short-cut to <code>$result</code> from <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a>.</p></dd>
 
-<dt><code>hash</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code>)<br />
+<dt><code>hash</code></dt><dd><p>(<code>character(1)</code>)<br />
 Hash (unique identifier) for this object.</p></dd>
 
 </dl><p></div></p>
@@ -270,18 +270,18 @@ When to stop feature selection, see <a href='FSelectInstanceSingleCrit.html'>FSe
 <dt><code>fselector</code></dt><dd><p>(<a href='FSelector.html'>FSelector</a>)<br />
 Feature selection algorithm to run.</p></dd>
 
-<dt><code>store_fselect_instance</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+<dt><code>store_fselect_instance</code></dt><dd><p>(<code>logical(1)</code>)<br />
 If <code>TRUE</code> (default), stores the internally created
 <a href='FSelectInstanceSingleCrit.html'>FSelectInstanceSingleCrit</a> with all intermediate results in slot
 <code>$fselect_instance</code>.</p></dd>
 
-<dt><code>store_benchmark_result</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+<dt><code>store_benchmark_result</code></dt><dd><p>(<code>logical(1)</code>)<br />
 Store benchmark result in archive?</p></dd>
 
-<dt><code>store_models</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>).
+<dt><code>store_models</code></dt><dd><p>(<code>logical(1)</code>).
 Store models in benchmark result?</p></dd>
 
-<dt><code>check_values</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
+<dt><code>check_values</code></dt><dd><p>(<code>logical(1)</code>)<br />
 Check the parameters before the evaluation and the results for
 validity?</p></dd>
 
@@ -295,7 +295,7 @@ learner is returned.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' h
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>recursive</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)<br />
+<dt><code>recursive</code></dt><dd><p>(<code>integer(1)</code>)<br />
 Depth of recursion for multiple nested objects.</p></dd>
 
 </dl><p></div></p>
@@ -315,70 +315,72 @@ Depth of recursion for multiple nested objects.</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span>
-
-<span class='va'>task</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span>
-<span class='va'>learner</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span>
-<span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span>
-<span class='va'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span>
-
-<span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"exhaustive_search"</span><span class='op'>)</span>
-<span class='va'>afs</span> <span class='op'>=</span> <span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>learner</span>, <span class='va'>resampling</span>, <span class='va'>measure</span>, <span class='va'>terminator</span>, <span class='va'>fselector</span>,
-  store_fselect_instance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='va'>afs</span><span class='op'>$</span><span class='fu'>train</span><span class='op'>(</span><span class='va'>task</span><span class='op'>)</span>
-<span class='va'>afs</span><span class='op'>$</span><span class='va'>model</span>
-</div><div class='output co'>#&gt; $learner
-#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
-#&gt; * Model: rpart
-#&gt; * Parameters: xval=0
-#&gt; * Packages: rpart
-#&gt; * Predict Type: response
-#&gt; * Feature types: logical, integer, numeric, factor, ordered
-#&gt; * Properties: importance, missings, multiclass, selected_features,
-#&gt;   twoclass, weights
-#&gt; 
-#&gt; $features
-#&gt; [1] "Petal.Length"
-#&gt; 
-#&gt; $fselect_instance
-#&gt; &lt;FSelectInstanceSingleCrit&gt;
-#&gt; * State:  Optimized
-#&gt; * Objective: &lt;ObjectiveFSelect:classif.rpart_on_iris&gt;
-#&gt; * Search Space:
-#&gt; &lt;ParamSet&gt;
-#&gt;              id    class lower upper nlevels        default value
-#&gt; 1: Petal.Length ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
-#&gt; 2:  Petal.Width ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
-#&gt; 3: Sepal.Length ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
-#&gt; 4:  Sepal.Width ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      
-#&gt; * Terminator: &lt;TerminatorEvals&gt;
-#&gt; * Terminated: TRUE
-#&gt; * Result:
-#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06
-#&gt; * Archive:
-#&gt; &lt;ArchiveFSelect&gt;
-#&gt;    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
-#&gt; 1:         TRUE       FALSE        FALSE       FALSE       0.06
-#&gt; 2:        FALSE        TRUE        FALSE       FALSE       0.06
-#&gt; 3:        FALSE       FALSE         TRUE       FALSE       0.50
-#&gt; 4:        FALSE       FALSE        FALSE        TRUE       0.44
-#&gt;    runtime_learners           timestamp batch_nr
-#&gt; 1:            0.067 2021-10-29 04:16:41        1
-#&gt; 2:            0.061 2021-10-29 04:16:41        1
-#&gt; 3:            0.081 2021-10-29 04:16:41        1
-#&gt; 4:            0.068 2021-10-29 04:16:41        1
-#&gt; </div><div class='input'><span class='va'>afs</span><span class='op'>$</span><span class='va'>learner</span>
-</div><div class='output co'>#&gt; &lt;LearnerClassifRpart:classif.rpart&gt;
-#&gt; * Model: rpart
-#&gt; * Parameters: xval=0
-#&gt; * Packages: rpart
-#&gt; * Predict Type: response
-#&gt; * Feature types: logical, integer, numeric, factor, ordered
-#&gt; * Properties: importance, missings, multiclass, selected_features,
-#&gt;   twoclass, weights</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mlr3.mlr-org.com'>mlr3</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>task</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span><span class='op'>(</span><span class='st'>"iris"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>learner</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.rpart"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>resampling</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span><span class='op'>(</span><span class='st'>"holdout"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>measure</span> <span class='op'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr</a></span><span class='op'>(</span><span class='st'>"classif.ce"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>terminator</span> <span class='op'>=</span> <span class='fu'><a href='https://bbotk.mlr-org.com/reference/trm.html'>trm</a></span><span class='op'>(</span><span class='st'>"evals"</span>, n_evals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fselector</span> <span class='op'>=</span> <span class='fu'><a href='fs.html'>fs</a></span><span class='op'>(</span><span class='st'>"exhaustive_search"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>afs</span> <span class='op'>=</span> <span class='va'>AutoFSelector</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>learner</span>, <span class='va'>resampling</span>, <span class='va'>measure</span>, <span class='va'>terminator</span>, <span class='va'>fselector</span>,</span>
+<span class='r-in'>  store_fselect_instance <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>afs</span><span class='op'>$</span><span class='fu'>train</span><span class='op'>(</span><span class='va'>task</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>afs</span><span class='op'>$</span><span class='va'>model</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $learner</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;LearnerClassifRpart:classif.rpart&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Model: rpart</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Parameters: xval=0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Packages: rpart</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Predict Type: response</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Feature types: logical, integer, numeric, factor, ordered</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Properties: importance, missings, multiclass, selected_features,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   twoclass, weights</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $features</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Petal.Length"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $fselect_instance</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;FSelectInstanceSingleCrit&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * State:  Optimized</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Objective: &lt;ObjectiveFSelect:classif.rpart_on_iris&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Search Space:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;ParamSet&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              id    class lower upper nlevels        default value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1: Petal.Length ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2:  Petal.Width ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3: Sepal.Length ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4:  Sepal.Width ParamLgl    NA    NA       2 &lt;NoDefault[3]&gt;      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Terminator: &lt;TerminatorEvals&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Terminated: TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Result:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Archive:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;ArchiveFSelect&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2:        FALSE        TRUE        FALSE       FALSE       0.06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3:        FALSE       FALSE         TRUE       FALSE       0.50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4:        FALSE       FALSE        FALSE        TRUE       0.44</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    runtime_learners           timestamp batch_nr</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1:            0.078 2021-10-30 04:17:05        1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2:            0.070 2021-10-30 04:17:05        1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3:            0.091 2021-10-30 04:17:05        1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4:            0.081 2021-10-30 04:17:05        1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='va'>afs</span><span class='op'>$</span><span class='va'>learner</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;LearnerClassifRpart:classif.rpart&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Model: rpart</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Parameters: xval=0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Packages: rpart</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Predict Type: response</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Feature types: logical, integer, numeric, factor, ordered</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Properties: importance, missings, multiclass, selected_features,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   twoclass, weights</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
