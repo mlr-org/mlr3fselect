@@ -108,7 +108,7 @@ AutoFSelector = R6Class("AutoFSelector",
       super$initialize(
         id = paste0(learner$id, ".fselector"),
         task_type = learner$task_type,
-        packages = learner$packages,
+        packages = c("mlr3fselect", learner$packages),
         feature_types = learner$feature_types,
         predict_types = learner$predict_types,
         param_set = learner$param_set,

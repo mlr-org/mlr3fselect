@@ -99,13 +99,13 @@ FSelector = R6Class("FSelector",
     #' @param packages (`character()`)\cr
     #' Set of required packages. Note that these packages will be loaded via
     #' [requireNamespace()], and are not attached.
-    initialize = function(param_set, properties, packages = character(0)) {
+    initialize = function(param_set, properties, packages = character()) {
       self$param_set = assert_param_set(param_set)
       self$param_classes = "ParamLgl"
       self$properties = assert_subset(properties,
         bbotk_reflections$optimizer_properties,
         empty.ok = FALSE)
-      self$packages = assert_set(packages)
+      self$packages = union("mlr3fselect", assert_character(packages, any.missing = FALSE, min.chars = 1L))
 
       check_packages_installed(self$packages, msg = sprintf("Package '%%s' required but not installed for FSelector '%s'", format(self)))
     },
