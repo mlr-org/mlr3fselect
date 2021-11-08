@@ -13,7 +13,7 @@
 #' * `runtime_learners` (`numeric(1)`)\cr
 #'   Sum of training and predict times logged in learners per
 #'   [mlr3::ResampleResult] / evaluation. This does not include potential
-#'   overhead time. 
+#'   overhead time.
 #' * `timestamp` (`POSIXct`)\cr
 #'   Time stamp when the evaluation was logged into the archive.
 #' * `batch_nr` (`integer(1)`)\cr
@@ -31,7 +31,7 @@
 #' (`$data`) and the benchmark result (`$benchmark_result`) are linked by the
 #' `uhash` column. If the results are viewed with `as.data.table()`, both are
 #' joined automatically.
-#' 
+#'
 #' @section Analysis:
 #'
 #' For analyzing the feature selection results, it is recommended to pass the archive to
@@ -45,7 +45,7 @@
 #' The benchmark result (`$benchmark_result`) allows to score the feature sets
 #' again on a different measure. Alternatively, measures can be supplied to
 #' `as.data.table()`.
-#' 
+#'
 #' @section S3 Methods:
 #' * `as.data.table.ArchiveFSelect(x, unnest = NULL, exclude_columns = "uhash", measures = NULL)`\cr
 #' Returns a tabular view of all evaluated feature sets.\cr
@@ -140,12 +140,14 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
 #' @export
 as.data.table.ArchiveFSelect = function(x, ..., unnest = NULL, exclude_columns = "uhash", measures = NULL) {
   if (nrow(x$data) == 0) return(data.table())
+  # always ignore x_domain column
+  exclude_columns = c("x_domain", exclude_columns)
   # default value for exclude_columns might be not present in archive
   if (is.null(x$benchmark_result)) exclude_columns = exclude_columns[exclude_columns %nin% "uhash"]
- 
+
   assert_subset(unnest, names(x$data))
   cols_y_extra = NULL
-  
+
   # unnest data
   tab = unnest(copy(x$data), unnest, prefix = "{col}_")
 

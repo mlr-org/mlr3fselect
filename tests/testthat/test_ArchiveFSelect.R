@@ -2,7 +2,7 @@ test_that("ArchiveFSelect access methods work", {
   instance = fselect(
     method = "random_search",
     task = tsk("iris"),
-    learner = lrn("classif.rpart"), 
+    learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     term_evals = 4)
@@ -52,7 +52,7 @@ test_that("ArchiveFSelect as.data.table function works", {
   instance = fselect(
     method = "random_search",
     task = tsk("pima"),
-    learner = lrn("classif.rpart"), 
+    learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     term_evals = 4,
@@ -103,7 +103,7 @@ test_that("ArchiveFSelect as.data.table function works", {
   # without benchmark result
   instance = FSelectInstanceSingleCrit$new(
     task = tsk("pima"),
-    learner = lrn("classif.rpart"), 
+    learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 4),
@@ -119,7 +119,7 @@ test_that("ArchiveFSelect as.data.table function works", {
   # empty archive
   instance = FSelectInstanceSingleCrit$new(
     task = tsk("pima"),
-    learner = lrn("classif.rpart"), 
+    learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 4))
@@ -130,7 +130,7 @@ test_that("ArchiveFSelect as.data.table function works", {
   instance = fselect(
     method = "random_search",
     task = tsk("pima"),
-    learner = lrn("classif.rpart"), 
+    learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     term_evals = 10,
