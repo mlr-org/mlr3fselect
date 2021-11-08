@@ -25,8 +25,8 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamInt$new("max_features", lower = 1))
+      ps = ps(
+        max_features = p_int(lower = 1)
       )
 
       super$initialize(param_set = ps, properties = c("single-crit",

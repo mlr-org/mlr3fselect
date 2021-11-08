@@ -47,10 +47,10 @@
 #' \donttest{
 #' # Modifies the instance by reference
 #' fselector$optimize(instance)
-#' 
+#'
 #' # Returns best scoring evaluation
 #' instance$result
-#' 
+#'
 #' # Allows access of data.table of full path of all evaluations
 #' as.data.table(instance$archive)}
 FSelectorRFE = R6Class("FSelectorRFE",
@@ -64,13 +64,12 @@ FSelectorRFE = R6Class("FSelectorRFE",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamInt$new("min_features", lower = 1, default = 1),
-        ParamDbl$new("feature_fraction", lower = 0,
-          upper = 1 - .Machine$double.neg.eps, default = 0.5),
-        ParamInt$new("feature_number", lower = 1),
-        ParamUty$new("subset_sizes"),
-        ParamLgl$new("recursive", default = FALSE))
+      ps = ps(
+        min_features     = p_int(lower = 1, default = 1),
+        feature_fraction = p_dbl(lower = 0, upper = 1 - .Machine$double.neg.eps, default = 0.5),
+        feature_number   = p_int(lower = 1),
+        subset_sizes     = p_uty(),
+        recursive        = p_lgl(default = FALSE)
       )
       ps$values = list(recursive = FALSE, min_features = 1, feature_fraction = 0.5)
 
@@ -133,7 +132,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
           learners = extract_learner(rr$learners)
           feat = feature_names[as.logical(states)]
           imp = importance_average(learners, feat)
-          
+
           # Log importance to archive
           set(archive$data, archive$n_evals, "importance", list(imp))
 

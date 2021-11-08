@@ -32,10 +32,11 @@ FSelectorSequential = R6Class("FSelectorSequential",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.`
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamInt$new("max_features", lower = 1),
-        ParamFct$new("strategy", levels = c("sfs", "sbs"), default = "sfs"))
+      ps = ps(
+        max_features = p_int(lower = 1),
+        strategy = p_fct(levels = c("sfs", "sbs"), default = "sfs")
       )
+
       ps$values = list(strategy = "sfs")
 
       super$initialize(
