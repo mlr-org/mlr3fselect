@@ -76,9 +76,8 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
         store_models = store_models, check_values = check_values)
       super$initialize(obj, obj$domain, terminator)
 
-      self$archive = ArchiveFSelect$new(search_space = self$objective$domain,
-        codomain = self$objective$codomain, check_values = check_values,
-        store_x_domain = FALSE)
+      self$archive = ArchiveFSelect$new(search_space = self$objective$domain, codomain = self$objective$codomain,
+        check_values = check_values)
       self$objective$archive = self$archive
 
       private$.objective_function = objective_function
