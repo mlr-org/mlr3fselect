@@ -12,17 +12,18 @@
 #' @param ... (named `list()`)\cr
 #'  Named arguments to be set as parameters of the fselector.
 #'
-#' @return `FSelectInstanceSingleCrit`
+#' @return `FSelectInstanceSingleCrit` | `FSelectInstanceMultiCrit`
 #'
 #' @template param_task
 #' @template param_learner
 #' @template param_resampling
-#' @template param_measure
+#' @template param_measures
+#' @template param_store_models
 #'
 #' @export
 #' @examples
 #' task = tsk("pima")
-#' 
+#'
 #' instance = fselect(
 #'   method = "random_search",
 #'   task = task,
@@ -33,12 +34,17 @@
 #'
 #' # subset task to optimized feature set
 #' task$select(instance$result_feature_set)
-fselect = function(method, task, learner, resampling, measure, term_evals = NULL, term_time = NULL, ...) {
+fselect = function(method, task, learner, resampling, measures, term_evals = NULL, term_time = NULL,
+  store_models = FALSE, ...) {
   assert_choice(method, mlr_fselectors$keys())
   fselector = fs(method, ...)
   terminator = terminator_selection(term_evals, term_time)
 
-  instance = FSelectInstanceSingleCrit$new(task, learner, resampling, measure, terminator)
+  instance = if (!is.list(measures)) {
+    FSelectInstanceSingleCrit$new(task, learner, resampling, measures, terminator, store_models)
+  } else {
+    FSelectInstanceMultiCrit$new(task, learner, resampling, measures, terminator, store_models)
+  }
 
   fselector$optimize(instance)
   instance
