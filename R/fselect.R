@@ -29,7 +29,7 @@
 #'   task = task,
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("holdout"),
-#'   measure = msr("classif.ce"),
+#'   measured = msr("classif.ce"),
 #'   term_evals = 4)
 #'
 #' # subset task to optimized feature set
