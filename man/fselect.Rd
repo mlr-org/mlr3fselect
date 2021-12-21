@@ -59,7 +59,7 @@ instance = fselect(
   task = task,
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
-  measured = msr("classif.ce"),
+  measures = msr("classif.ce"),
   term_evals = 4)
 
 # subset task to optimized feature set
