@@ -287,29 +287,25 @@ The result will be written into the instance object.</p><div class="section">
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># modifies the instance by reference</span></span>
 <span class="r-in"><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE        TRUE Petal.Length,Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.06</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># returns best feature subset and best performance</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width                 features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE        TRUE Petal.Length,Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.06</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># allows access of data.table / benchmark result of full path of all evaluations</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="co"># }</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ArchiveFSelect&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE        TRUE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE        TRUE         TRUE        TRUE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         TRUE       FALSE         TRUE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE        TRUE        FALSE       FALSE       0.12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE       FALSE         TRUE       FALSE       0.38</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners  x_domain           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.074 &lt;list[4]&gt; 2021-12-27 04:19:45        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.073 &lt;list[4]&gt; 2021-12-27 04:19:46        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.087 &lt;list[4]&gt; 2021-12-27 04:19:46        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.062 &lt;list[4]&gt; 2021-12-28 04:16:15        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.057 &lt;list[4]&gt; 2021-12-28 04:16:15        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.076 &lt;list[4]&gt; 2021-12-28 04:16:15        3</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
