@@ -206,29 +206,29 @@ Stores the feature importance of the model with all variables if
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.06</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Returns best scoring evaluation</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.06</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Allows access of data.table of full path of all evaluations</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span><span class="co"># }</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE       0.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE        TRUE        FALSE       FALSE       0.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE        TRUE        FALSE       FALSE       0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE        TRUE        FALSE       FALSE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         TRUE       FALSE        FALSE       FALSE       0.06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.077 2022-01-07 04:19:12        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.076 2022-01-07 04:19:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.070 2022-01-07 04:19:13        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.067 2022-01-08 04:17:36        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.059 2022-01-08 04:17:37        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.060 2022-01-08 04:17:37        3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             importance      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 57.47014,52.81451,34.82840,30.44129 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                   57.47014,52.81451 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                            57.47014 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 58.85613,53.54604,37.59019,24.49726 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                   58.85613,53.54604 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                            58.85613 &lt;ResampleResult[22]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
