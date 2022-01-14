@@ -25,7 +25,7 @@ checking of termination criteria."><meta name="robots" content="noindex"><!-- ma
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">
     <span class="fa fa fa fa-file-alt"></span>
@@ -182,28 +182,32 @@ Maximum number of feature sets to try in a batch.</p></dd>
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># Modifies the instance by reference</span></span>
 <span class="r-in"><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.06</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Returns best scoring evaluation</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.06</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Allows access of data.table of full path of all evaluations</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span><span class="co"># }</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE        TRUE         TRUE        TRUE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         TRUE        TRUE         TRUE        TRUE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         TRUE        TRUE        FALSE        TRUE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         TRUE        TRUE         TRUE        TRUE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE       FALSE        FALSE       FALSE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE       FALSE        FALSE        TRUE       0.54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         TRUE        TRUE         TRUE        TRUE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         TRUE        TRUE         TRUE        TRUE       0.06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.087 2022-01-13 04:21:25        1 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.085 2022-01-13 04:21:26        2 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.080 2022-01-13 04:21:26        3 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.078 2022-01-13 04:21:26        4 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:            0.087 2022-01-13 04:21:26        5 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.064 2022-01-14 04:18:48        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.063 2022-01-14 04:18:48        2 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.063 2022-01-14 04:18:49        3 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.062 2022-01-14 04:18:49        4 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:            0.071 2022-01-14 04:18:49        5 &lt;ResampleResult[22]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -215,7 +219,7 @@ Maximum number of feature sets to try in a batch.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>

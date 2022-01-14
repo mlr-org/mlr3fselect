@@ -31,7 +31,7 @@ selected feature subset and its estimated performance vector."><meta name="robot
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">
     <span class="fa fa fa fa-file-alt"></span>
@@ -287,29 +287,29 @@ The result will be written into the instance object.</p><div class="section">
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># modifies the instance by reference</span></span>
 <span class="r-in"><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width                  features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE Petal.Length,Sepal.Length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       0.02</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># returns best feature subset and best performance</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width                  features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE Petal.Length,Sepal.Length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       0.02</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># allows access of data.table / benchmark result of full path of all evaluations</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="co"># }</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ArchiveFSelect&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE        TRUE       0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE       FALSE        FALSE       FALSE       0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         TRUE        TRUE         TRUE        TRUE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE        TRUE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE       FALSE         TRUE       FALSE       0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         TRUE        TRUE         TRUE        TRUE       0.04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners  x_domain           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.097 &lt;list[4]&gt; 2022-01-13 04:21:16        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.086 &lt;list[4]&gt; 2022-01-13 04:21:16        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.097 &lt;list[4]&gt; 2022-01-13 04:21:17        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.067 &lt;list[4]&gt; 2022-01-14 04:18:40        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.078 &lt;list[4]&gt; 2022-01-14 04:18:40        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.081 &lt;list[4]&gt; 2022-01-14 04:18:41        3</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -321,7 +321,7 @@ The result will be written into the instance object.</p><div class="section">
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>
