@@ -210,32 +210,32 @@ Include <code>uhash</code> column?</p></dd>
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># Modifies the instance by reference</span></span>
 <span class="r-in"><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.08</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Returns best scoring evaluation</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.08</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Allows access of data.table of full path of all evaluations</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span><span class="co"># }</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE        TRUE        FALSE       FALSE       0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE       FALSE         TRUE       FALSE       0.28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:        FALSE       FALSE        FALSE        TRUE       0.58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         TRUE        TRUE        FALSE       FALSE       0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:         TRUE       FALSE         TRUE       FALSE       0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:         TRUE       FALSE        FALSE        TRUE       0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE        TRUE        FALSE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE       FALSE         TRUE       FALSE       0.38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:        FALSE       FALSE        FALSE        TRUE       0.54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         TRUE        TRUE        FALSE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:        FALSE        TRUE         TRUE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7:        FALSE        TRUE        FALSE        TRUE       0.08</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.063 2022-01-17 04:17:14        1 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.052 2022-01-17 04:17:14        1 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.053 2022-01-17 04:17:14        1 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.057 2022-01-17 04:17:14        1 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:            0.053 2022-01-17 04:17:14        2 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:            0.055 2022-01-17 04:17:14        2 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:            0.054 2022-01-17 04:17:14        2 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.073 2022-01-18 04:20:06        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.083 2022-01-18 04:20:06        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.095 2022-01-18 04:20:06        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.102 2022-01-18 04:20:06        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:            0.076 2022-01-18 04:20:07        2 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:            0.084 2022-01-18 04:20:07        2 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7:            0.080 2022-01-18 04:20:07        2 &lt;ResampleResult[22]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
