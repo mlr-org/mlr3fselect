@@ -1,11 +1,14 @@
 # mlr3fselect 0.6.0.9000
 
+- Add `store_models` flag to `fselect()`.
+- Remove `store_x_domain` flag.
+
 # mlr3fselect 0.6.0
 
-- Adds `AutoFSelector$base_learner()` method to extract the base learner from 
+- Adds `AutoFSelector$base_learner()` method to extract the base learner from
   nested learner objects.
 - Adds `fselect()`, `auto_fselector()` and `fselect_nested()` sugar functions.
-- Adds `extract_inner_fselect_results()` and `extract_inner_fselect_archives()`  
+- Adds `extract_inner_fselect_results()` and `extract_inner_fselect_archives()`
   helper function to extract inner feature selection results and archives.
 
 # mlr3fselect 0.5.1
@@ -14,7 +17,7 @@
 
 # mlr3fselect 0.5.0
 
-- `FSelectorRFE` stores importance values of each evaluated feature set in 
+- `FSelectorRFE` stores importance values of each evaluated feature set in
   archive.
 - `ArchiveFSelect$data` is a public field now.
 
