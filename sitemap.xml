@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://mlr3fselect.mlr-org.com/404.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/ISSUE_TEMPLATE.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/authors.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3fselect.mlr-org.com/index.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/news/index.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/ArchiveFSelect.html</loc>
@@ -62,6 +80,9 @@
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/fselect_nested.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/index.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/mlr3fselect-package.html</loc>
