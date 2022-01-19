@@ -1,4 +1,4 @@
-# mlr3fselect 0.6.0.9000
+# mlr3fselect 0.6.1
 
 - Add `store_models` flag to `fselect()`.
 - Remove `store_x_domain` flag.
