@@ -20,7 +20,7 @@ called with store_models = TRUE."><meta name="robots" content="noindex"><!-- mat
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,11 +139,11 @@ Vector of selected feature set.</p></li>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">extract_inner_fselect_results</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE        TRUE        FALSE        TRUE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2        FALSE        TRUE        FALSE        TRUE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE        TRUE        FALSE        TRUE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2        FALSE        TRUE         TRUE        TRUE       0.00</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                features task_id              learner_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Width    iris classif.rpart.fselector</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:              Petal.Width,Sepal.Width    iris classif.rpart.fselector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Width,Sepal.Length,Sepal.Width    iris classif.rpart.fselector</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:            cv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:            cv</span>

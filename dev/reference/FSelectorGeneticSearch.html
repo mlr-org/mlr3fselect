@@ -12,7 +12,7 @@ genalg::rbga.bin() from package genalg."><meta name="robots" content="noindex"><
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.6.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -180,32 +180,28 @@ iterations are needed, set <code>ìters</code> to a higher value in the paramete
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># Modifies the instance by reference</span></span>
 <span class="r-in"><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE       FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.04</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Returns best scoring evaluation</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE       FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width    features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE Petal.Width       0.04</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Allows access of data.table of full path of all evaluations</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span><span class="co"># }</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE       FALSE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         TRUE       FALSE        FALSE       FALSE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         TRUE       FALSE        FALSE       FALSE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:        FALSE       FALSE        FALSE        TRUE       0.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE       FALSE         TRUE       FALSE       0.32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE       FALSE        FALSE        TRUE       0.48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:        FALSE        TRUE        FALSE       FALSE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         TRUE       FALSE        FALSE       FALSE       0.04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.063 2022-01-19 18:06:53        1 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.065 2022-01-19 18:06:53        2 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.064 2022-01-19 18:06:54        3 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.062 2022-01-19 18:06:54        4 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:            0.066 2022-01-19 18:06:54        5 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.064 2022-01-20 18:59:38        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.059 2022-01-20 18:59:38        2 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.060 2022-01-20 18:59:39        3 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.059 2022-01-20 18:59:39        4 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:            0.061 2022-01-20 18:59:39        5 &lt;ResampleResult[22]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
