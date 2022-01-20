@@ -4,7 +4,7 @@ test_that("ArchiveFSelect access methods work", {
     task = tsk("iris"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
-    measure = msr("classif.ce"),
+    measures = msr("classif.ce"),
     term_evals = 4)
 
   # learner
@@ -54,7 +54,7 @@ test_that("ArchiveFSelect as.data.table function works", {
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
-    measure = msr("classif.ce"),
+    measures = msr("classif.ce"),
     term_evals = 4,
     batch_size = 4)
 
@@ -132,7 +132,7 @@ test_that("ArchiveFSelect as.data.table function works", {
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
-    measure = msr("classif.ce"),
+    measures = msr("classif.ce"),
     term_evals = 10,
     batch_size = 1)
 
