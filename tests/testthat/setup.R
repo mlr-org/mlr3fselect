@@ -1,5 +1,5 @@
 library(mlr3)
-attachNamespace("checkmate")
+if (!"package:checkmate" %in% search()) attachNamespace("checkmate")
 
 old_opts = options(
   warnPartialMatchArgs = TRUE,
