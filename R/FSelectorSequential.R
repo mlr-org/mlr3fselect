@@ -13,6 +13,8 @@
 #'
 #' @section Parameters:
 #' \describe{
+#' \item{`min_features`}{`integer(1)`\cr
+#' Minimum number of features. By default, 1.}
 #' \item{`max_features`}{`integer(1)`\cr
 #' Maximum number of features. By default, number of features in [mlr3::Task].}
 #' \item{`strategy`}{`character(1)`\cr
@@ -33,11 +35,12 @@ FSelectorSequential = R6Class("FSelectorSequential",
     #' Creates a new instance of this [R6][R6::R6Class] class.`
     initialize = function() {
       ps = ps(
+        min_features = p_int(lower = 1, default = 1),
         max_features = p_int(lower = 1),
         strategy = p_fct(levels = c("sfs", "sbs"), default = "sfs")
       )
 
-      ps$values = list(strategy = "sfs")
+      ps$values = list(strategy = "sfs", min_features = 1)
 
       super$initialize(
         param_set = ps, properties = "single-crit"
@@ -75,24 +78,18 @@ FSelectorSequential = R6Class("FSelectorSequential",
       }
 
       # Initialize states for first batch
-      if (self$param_set$values$strategy == "sfs") {
-        states = as.data.table(diag(TRUE, length(feature_names),
-          length(feature_names)))
-        names(states) = feature_names
-      } else {
-        combinations = combn(length(feature_names),
-          pars$max_features)
-        states = map_dtr(seq_len(ncol(combinations)), function(j) {
-          state = rep(FALSE, length(feature_names))
-          state[combinations[, j]] = TRUE
-          set_names(as.list(state), feature_names)
-        })
-      }
+      m  = if (self$param_set$values$strategy == "sfs") pars$min_features else pars$max_features
+      combinations = combn(length(feature_names), m)
+      states = map_dtr(seq_len(ncol(combinations)), function(j) {
+        state = rep(FALSE, length(feature_names))
+        state[combinations[, j]] = TRUE
+        set_names(as.list(state), feature_names)
+      })
 
       inst$eval_batch(states)
 
       repeat({
-        if (archive$n_batch == pars$max_features) break
+        if (archive$n_batch == pars$max_features - pars$min_features) break
 
         res = archive$best(batch = archive$n_batch)
         best_state = as.logical(res[, feature_names, with = FALSE])
