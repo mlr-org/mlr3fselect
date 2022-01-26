@@ -26,6 +26,8 @@ fs("sequential")
 \section{Parameters}{
 
 \describe{
+\item{\code{min_features}}{\code{integer(1)}\cr
+Minimum number of features. By default, 1.}
 \item{\code{max_features}}{\code{integer(1)}\cr
 Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 \item{\code{strategy}}{\code{character(1)}\cr
