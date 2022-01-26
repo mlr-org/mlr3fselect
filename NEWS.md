@@ -1,3 +1,7 @@
+# mlr3fselect 0.6.1.9000
+
+- feat: Add `min_features` parameter to `FSelectorSequential`.
+
 # mlr3fselect 0.6.1
 
 - Add `store_models` flag to `fselect()`.
