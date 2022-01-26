@@ -89,7 +89,7 @@ FSelectorSequential = R6Class("FSelectorSequential",
       inst$eval_batch(states)
 
       repeat({
-        if (archive$n_batch == pars$max_features - pars$min_features) break
+        if (archive$n_batch == pars$max_features - pars$min_features + 1) break
 
         res = archive$best(batch = archive$n_batch)
         best_state = as.logical(res[, feature_names, with = FALSE])
