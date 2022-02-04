@@ -287,29 +287,25 @@ The result will be written into the instance object.</p><div class="section">
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># modifies the instance by reference</span></span>
 <span class="r-in"><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE       FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length       0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># returns best feature subset and best performance</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE       FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length       0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width     features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE Petal.Length       0.08</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># allows access of data.table / benchmark result of full path of all evaluations</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="co"># }</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ArchiveFSelect&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE        TRUE         TRUE       FALSE       0.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE       FALSE         TRUE        TRUE       0.34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE        TRUE        FALSE        TRUE       0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE       FALSE        FALSE        TRUE       0.54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         TRUE        TRUE        FALSE       FALSE       0.08</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners  x_domain           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.068 &lt;list[4]&gt; 2022-02-03 04:15:34        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.054 &lt;list[4]&gt; 2022-02-03 04:15:34        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.065 &lt;list[4]&gt; 2022-02-03 04:15:34        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.060 &lt;list[4]&gt; 2022-02-04 04:18:24        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.059 &lt;list[4]&gt; 2022-02-04 04:18:24        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.059 &lt;list[4]&gt; 2022-02-04 04:18:25        3</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
