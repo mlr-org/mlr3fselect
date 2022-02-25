@@ -10,7 +10,7 @@
 #' @examples
 #' fs("sequential", max_features = 4)
 fs = function(.key, ...) {
-  dictionary_sugar(mlr_fselectors, .key, ...)
+  dictionary_sugar_get(mlr_fselectors, .key, ...)
 }
 
 #' @rdname fs
