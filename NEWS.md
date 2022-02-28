@@ -4,7 +4,7 @@
 * docs: New examples with `fselect()` function.
 * feat: `$help()` method which opens manual page of a `FSelector`.
 * feat: Added a `as.data.table.DictionaryFSelector` function.
-* feat: Add `min_features` parameter to `FSelectorSequential`.
+* feat: Added `min_features` parameter to `FSelectorSequential`.
 
 
 # mlr3fselect 0.6.1
