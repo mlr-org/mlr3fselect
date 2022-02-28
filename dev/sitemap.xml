@@ -28,28 +28,7 @@
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorDesignPoints.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorExhaustiveSearch.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorFromOptimizer.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorGeneticSearch.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorRFE.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorRandomSearch.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorSequential.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorShadowVariableSearch.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.html</loc>
@@ -80,6 +59,27 @@
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_design_points.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_exhaustive_search.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_genetic_search.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_random_search.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_rfe.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_sequential.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_shadow_variable_search.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/reexports.html</loc>

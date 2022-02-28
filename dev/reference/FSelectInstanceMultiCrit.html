@@ -143,13 +143,11 @@ Feature sets for task subsetting.</p></dd>
 <ul><li><p><a href="#method-new"><code>FSelectInstanceMultiCrit$new()</code></a></p></li>
 <li><p><a href="#method-assign_result"><code>FSelectInstanceMultiCrit$assign_result()</code></a></p></li>
 <li><p><a href="#method-clone"><code>FSelectInstanceMultiCrit$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear"><code>bbotk::OptimInstance$clear()</code></a></span></p></li>
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear"><code>bbotk::OptimInstance$clear()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-eval_batch"><code>bbotk::OptimInstance$eval_batch()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_proposed"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-eval_proposed"><code>bbotk::OptimInstance$eval_proposed()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-format"><code>bbotk::OptimInstance$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="objective_function"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-objective_function"><code>bbotk::OptimInstance$objective_function()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-print"><code>bbotk::OptimInstance$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="resolve_promise"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-resolve_promise"><code>bbotk::OptimInstance$resolve_promise()</code></a></span></p></li>
 </ul></details></p><hr><a id="method-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
@@ -290,11 +288,11 @@ Optimal outcomes, e.g. the Pareto front.</p></dd>
 <span class="r-in"><span class="co"># Get archive data</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">inst</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce classif.acc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE 0.06000000   0.9400000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE 0.06666667   0.9333333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE        TRUE        FALSE        TRUE 0.04666667   0.9533333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.791 2022-02-28 04:16:40        1 &lt;ResampleResult[22]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.832 2022-02-28 04:16:40        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.707 2022-02-28 13:58:51        1 &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.708 2022-02-28 13:58:51        1 &lt;ResampleResult[22]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
