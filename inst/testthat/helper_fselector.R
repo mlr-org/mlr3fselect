@@ -45,7 +45,7 @@ test_fselector_2D = function(.key, ..., term_evals = NULL, store_models = FALSE)
   # result checks
   expect_names(names(inst$result), identical.to = c("x1", "x2", "x3", "x4", "features", "regr.rmse", "regr.mse"))
   expect_subset(inst$result$features[[1]], c("x1", "x2", "x3", "x4"))
-  expect_data_table(inst$result_x_search_space, nrows = 1, types = "logical")
+  expect_data_table(inst$result_x_search_space, types = "logical")
   expect_names(names(inst$result_x_search_space), identical.to = c("x1", "x2", "x3", "x4"))
   expect_names(names(inst$result_y), identical.to = c("regr.rmse", "regr.mse"))
 

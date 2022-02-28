@@ -3,6 +3,8 @@
 #' @description
 #' Internally used to transform [bbotk::Optimizer] to [FSelector].
 #'
+#' @template param_man
+#'
 #' @keywords internal
 #' @export
 FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
@@ -14,9 +16,18 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
     #'
     #' @param optimizer [bbotk::Optimizer]\cr
     #' Optimizer that is called.
-    initialize = function(optimizer) {
+    initialize = function(optimizer, man = NA_character_) {
       private$.optimizer = assert_optimizer(optimizer)
-      super$initialize(param_set = optimizer$param_set, properties = optimizer$properties)
+      packages = union("mlr3fselect", optimizer$packages)
+      assert_string(man, na.ok = TRUE)
+
+      super$initialize(
+        param_set = optimizer$param_set,
+        properties = optimizer$properties,
+        packages = packages,
+        label = optimizer$label,
+        man = man
+       )
     },
 
     #' @description

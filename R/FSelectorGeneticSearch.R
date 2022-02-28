@@ -44,7 +44,11 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
       )
       ps$values$iters = 100000L
 
-      super$initialize(param_set = ps, properties = "single-crit")
+      super$initialize(
+        param_set = ps,
+        properties = "single-crit",
+        man = "mlr3fselect::mlr_fselectors_genetic_search"
+      )
     }
   ),
   private = list(

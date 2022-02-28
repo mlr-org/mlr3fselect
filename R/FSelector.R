@@ -46,6 +46,8 @@
 #'    resample-experiment, regarding the given measure, then assign its
 #'    feature subset and aggregated performance to the instance.
 #'
+#' @template param_man
+#'
 #' @export
 FSelector = R6Class("FSelector",
   public = list(
@@ -54,7 +56,7 @@ FSelector = R6Class("FSelector",
     #'   Creates a new instance of this [R6][R6::R6Class] class.
     #'
     #' @param param_set [paradox::ParamSet]\cr
-    #'   Set of control parameters for fselector.
+    #'   Set of control parameters.
     #'
     #' @param properties (`character()`)\cr
     #'   Set of properties of the fselector.
@@ -64,14 +66,14 @@ FSelector = R6Class("FSelector",
     #'   Set of required packages.
     #'   Note that these packages will be loaded via [requireNamespace()], and are not attached.
     #'
-    #' @param man (`character(1)`)\cr
-    #'   String in the format `[pkg]::[topic]` pointing to a manual page for this object.
-    #'   The referenced help package can be opened via method `$help()`.
-    initialize = function(param_set, properties, packages = character(), man = NA_character_) {
+    #' @param label (`character(1)`)\cr
+    #'   Label for this object.
+    #'   Can be used in tables, plot and text output instead of the ID.
+    initialize = function(param_set, properties, packages = character(), label = NA_character_, man = NA_character_) {
       private$.param_set = assert_param_set(param_set)
-      private$.param_classes = "ParamLgl"
       private$.properties = assert_subset(properties, bbotk_reflections$optimizer_properties, empty.ok = FALSE)
       private$.packages = union("mlr3fselect", assert_character(packages, any.missing = FALSE, min.chars = 1L))
+      private$.label = assert_string(label, na.ok = TRUE)
       private$.man = assert_string(man, na.ok = TRUE)
 
       check_packages_installed(self$packages, msg = sprintf("Package '%%s' required but not installed for FSelector '%s'", format(self)))
@@ -88,9 +90,8 @@ FSelector = R6Class("FSelector",
     #' Print method.
     #' @return (`character()`).
     print = function() {
-      catf(format(self))
+      catn(format(self), if (is.na(self$label)) "" else paste0(": ", self$label))
       catf(str_indent("* Parameters:", as_short_string(self$param_set$values)))
-      catf(str_indent("* Parameter classes:", self$param_classes))
       catf(str_indent("* Properties:", self$properties))
       catf(str_indent("* Packages:", self$packages))
     },
@@ -120,7 +121,8 @@ FSelector = R6Class("FSelector",
 
   active = list(
 
-    #' @field param_set ([paradox::ParamSet]).
+    #' @field param_set [paradox::ParamSet]\cr
+    #'   Set of control parameters.
     param_set = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.param_set)) {
         stop("$param_set is read-only.")
@@ -128,15 +130,9 @@ FSelector = R6Class("FSelector",
       private$.param_set
     },
 
-    #' @field param_classes (`character()`).
-    param_classes = function(rhs) {
-      if (!missing(rhs) && !identical(rhs, private$.param_classes)) {
-        stop("$param_classes is read-only.")
-      }
-      private$.param_classes
-    },
-
-    #' @field properties (`character()`).
+    #' @field properties (`character()`)\cr
+    #'   Set of properties of the fselector.
+    #'   Must be a subset of [`mlr_reflections$fselect_properties`][mlr3::mlr_reflections].
     properties = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.properties)) {
         stop("$properties is read-only.")
@@ -144,7 +140,9 @@ FSelector = R6Class("FSelector",
       private$.properties
     },
 
-    #' @field packages (`character()`).
+    #' @field packages (`character()`)\cr
+    #'   Set of required packages.
+    #'   Note that these packages will be loaded via [requireNamespace()], and are not attached.
     packages = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.packages)) {
         stop("$packages is read-only.")
@@ -152,7 +150,19 @@ FSelector = R6Class("FSelector",
       private$.packages
     },
 
-    #' @field man (`character()`).
+    #' @field label (`character(1)`)\cr
+    #'   Label for this object.
+    #'   Can be used in tables, plot and text output instead of the ID.
+    label = function(rhs) {
+      if (!missing(rhs) && !identical(rhs, private$.param_set)) {
+        stop("$label is read-only.")
+      }
+      private$.label
+    },
+
+    #' @field man (`character(1)`)\cr
+    #'   String in the format `[pkg]::[topic]` pointing to a manual page for this object.
+    #'   The referenced help package can be opened via method `$help()`.
     man = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.man)) {
         stop("$man is read-only.")
@@ -170,9 +180,10 @@ FSelector = R6Class("FSelector",
     },
 
     .param_set = NULL,
-    .param_classes = NULL,
+    .param_classes = "ParamLgl", # keeps compatibility to bbotk
     .properties = NULL,
     .packages = NULL,
+    .label = NULL,
     .man = NULL
   )
 )

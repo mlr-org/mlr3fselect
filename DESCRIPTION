@@ -35,7 +35,7 @@ Depends:
     mlr3 (>= 0.12.0),
     R (>= 3.1.0)
 Imports:
-    bbotk (>= 0.5.0),
+    bbotk (>= 0.5.1.9000),
     checkmate (>= 2.0.0),
     data.table,
     lgr,
@@ -47,6 +47,8 @@ Suggests:
     genalg,
     rpart,
     testthat (>= 3.0.0)
+Remotes:
+    mlr-org/bbotk
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
@@ -57,6 +59,7 @@ Collate:
     'AutoFSelector.R'
     'ArchiveFSelect.R'
     'ObjectiveFSelect.R'
+    'helper.R'
     'mlr_fselectors.R'
     'auto_fselector.R'
     'extract_inner_fselect_archives.R'

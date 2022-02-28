@@ -65,8 +65,11 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
 
       ps$values = list(batch_size = 1L)
 
-      super$initialize(param_set = ps, properties = c("single-crit",
-        "multi-crit"))
+      super$initialize(
+        param_set = ps,
+        properties = c("single-crit", "multi-crit"),
+        man = "mlr3fselect::mlr_fselectors_random_search"
+      )
     }
   ),
 

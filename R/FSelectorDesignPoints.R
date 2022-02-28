@@ -62,9 +62,9 @@ FSelectorDesignPoints = R6Class("FSelectorDesignPoints",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       super$initialize(
-        optimizer = OptimizerDesignPoints$new()
+        optimizer = OptimizerDesignPoints$new(),
+        man = "mlr3fselect::mlr_fselectors_design_points"
       )
-      private$.man = "mlr3fselect::mlr_fselectors_design_points"
     }
   )
 )
