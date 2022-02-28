@@ -1,5 +1,6 @@
 # mlr3fselect 0.6.1.9000
 
+* feat: Added `$label` to `Tuner`s.
 * docs: New examples with `fselect()` function.
 * feat: `$help()` method which opens manual page of a `FSelector`.
 * feat: Added a `as.data.table.DictionaryFSelector` function.
