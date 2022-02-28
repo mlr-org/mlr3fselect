@@ -1,80 +1,91 @@
 #' @title Feature Selection via Recursive Feature Elimination
 #'
+#' @name mlr_fselectors_rfe
+#'
 #' @description
-#' `FSelectorRFE` class that implements Recursive Feature Elimination (RFE). The
-#' recursive algorithm (`recursive = TRUE`) recomputes the feature importance
-#' on the reduced feature set in every iteration.  The non-recursive algorithm
-#' (`recursive = FALSE`) only uses the feature importance of the model fitted
-#' with all features to eliminate the next most unimportant features in every
-#' iteration.
+#' Recursive feature elimination iteratively removes features with a low importance score.
+#'
+#' The learner is trained on all features at the start and importance scores are calculated for each feature (see section on optional extractors in [Learner]).
+#' Then the least important feature is removed and the learner is trained on the reduced feature set.
+#' The importance scores are calculated again and the procedure is repeated until the desired number of features is reached.
+#' The non-recursive option (`recursive = FALSE`) only uses the importance scores calculated in the first iteration.
+#'
+#' The feature selection terminates itself when `n_features` is reached.
+#' It is not necessary to set a termination criterion.
 #'
 #' @templateVar id rfe
 #' @template section_dictionary_fselectors
 #'
 #' @section Parameters:
 #' \describe{
-#' \item{`min_features`}{`integer(1)`\cr
-#' The minimum number of features to select, default is `1L`.}
+#' \item{`n_features`}{`integer(1)`\cr
+#'   The number of features to select. By default half of the features are selected.}
 #' \item{`feature_fraction`}{`double(1)`\cr
-#' Fraction of features to retain in each iteration, default is `0.5`.}
+#'   Fraction of features to retain in each iteration, The default 0.5 retrains half of the features.}
 #' \item{`feature_number`}{`integer(1)`\cr
-#' Number of features to remove in each iteration.}
+#'   Number of features to remove in each iteration.}
 #' \item{`subset_sizes`}{`integer()`\cr
-#' Vector of number of features to retain in each iteration. Must be sorted in
-#' decreasing order.}
+#'   Vector of number of features to retain in each iteration.
+#'   Must be sorted in decreasing order.}
 #' \item{`recursive`}{`logical(1)`\cr
-#' Use the recursive version? Default is `FALSE`.}
+#'   If `TRUE` (default), the feature importance is calculated in each iteration.}
 #' }
 #'
-#' The parameter `feature_fraction`, `feature_number` and `subset_sizes` are
-#' mutually exclusive.
+#' The parameter `feature_fraction`, `feature_number` and `subset_sizes` are mutually exclusive.
 #'
 #' @export
 #' @examples
-#' library(mlr3)
+#' # retrieve task
+#' task = tsk("pima")
 #'
-#' terminator = trm("evals", n_evals = 10)
-#' instance = FSelectInstanceSingleCrit$new(
-#'   task = tsk("iris"),
-#'   learner = lrn("classif.rpart"),
+#' # load learner
+#' learner = lrn("classif.rpart")
+#'
+#' \donttest{
+#' # feature selection on the pima indians diabetes data set
+#' instance = fselect(
+#'   method = "rfe",
+#'   task = task,
+#'   learner = learner,
 #'   resampling = rsmp("holdout"),
 #'   measure = msr("classif.ce"),
-#'   terminator = terminator,
 #'   store_models = TRUE
 #' )
 #'
-#' fselector = fs("rfe")
-#' \donttest{
-#' # Modifies the instance by reference
-#' fselector$optimize(instance)
-#'
-#' # Returns best scoring evaluation
+#' # best performing feature subset
 #' instance$result
 #'
-#' # Allows access of data.table of full path of all evaluations
-#' as.data.table(instance$archive)}
+#' # all evaluated feature subsets
+#' as.data.table(instance$archive)
+#'
+#' # subset the task and fit the final model
+#' task$select(instance$result_feature_set)
+#' learner$train(task)
+#' }
 FSelectorRFE = R6Class("FSelectorRFE",
   inherit = FSelector,
   public = list(
+
     #' @field importance `numeric()`\cr
-    #' Stores the feature importance of the model with all variables if
-    #' `recrusive` is set to `FALSE`
+    #' Stores the feature importance of the model with all variables if `recursive` is set to `FALSE`
     importance = NULL,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        min_features     = p_int(lower = 1, default = 1),
-        feature_fraction = p_dbl(lower = 0, upper = 1 - .Machine$double.neg.eps, default = 0.5),
+        n_features       = p_int(lower = 1),
+        feature_fraction = p_dbl(lower = 0, upper = 1 - 1e-6, default = 0.5),
         feature_number   = p_int(lower = 1),
         subset_sizes     = p_uty(),
-        recursive        = p_lgl(default = FALSE)
+        recursive        = p_lgl(default = TRUE)
       )
-      ps$values = list(recursive = FALSE, min_features = 1, feature_fraction = 0.5)
+      ps$values = list(recursive = TRUE, feature_fraction = 0.5)
 
       super$initialize(
-        param_set = ps, properties = "single-crit"
+        param_set = ps,
+        properties = "single-crit",
+        man = "mlr3fselect::mlr_fselectors_rfe"
       )
     }
   ),
@@ -85,17 +96,19 @@ FSelectorRFE = R6Class("FSelectorRFE",
       archive = inst$archive
       feature_names = inst$archive$cols_x
       n = length(feature_names)
-      min_features = pars$min_features
+      n_features = pars$n_features
       feature_fraction = pars$feature_fraction
       feature_number = pars$feature_number
       subset_sizes = pars$subset_sizes
 
+      if (is.null(n_features)) n_features = floor(n / 2)
+
       subsets = if (!is.null(feature_number)) {
-        seq(from = n - feature_number, to = min_features, by = -feature_number)
+        seq(from = n - feature_number, to = n_features, by = -feature_number)
       } else if (!is.null(subset_sizes)) {
         subset_sizes
       } else if (!is.null(feature_fraction)) {
-        unique(floor(cumprod(c(n, rep(feature_fraction, log(min_features / n) / log(feature_fraction))))))[-1]
+        unique(floor(cumprod(c(n, rep(feature_fraction, log(n_features / n) / log(feature_fraction))))))[-1]
       }
 
       assert_integerish(rev(subsets), any.missing = FALSE, lower = 1, upper = n - 1, sorted = TRUE)
@@ -177,6 +190,3 @@ extract_learner = function(graph_learners) {
     graph$pipeops[[tail(learner$graph$ids(sorted = TRUE), 1)]]$learner_model
   })
 }
-
-
-

@@ -1,27 +1,20 @@
-test_that("FSelectorShadowVariableSearch", {
-  test_fselector("shadow_variable_search", term_evals = 26, store_models = TRUE)
+test_that("default parameters work", {
+  z = test_fselector("shadow_variable_search", store_models = TRUE)
 
-  # forward selection works
-  instance = TEST_MAKE_INST_1D(terminator = trm("none"))
-  task = instance$objective$task$clone()
-  domain = instance$objective$domain$clone()
-  fselector = fs("shadow_variable_search")
-  fselector$optimize(instance)
+  expect_best_features(z$inst$archive$best(batch = 1)[, 1:8], "x1")
+  expect_best_features(z$inst$archive$best(batch = 2)[, 1:8], c("x1", "x2"))
+  expect_best_features(z$inst$archive$best(batch = 3)[, 1:8], c("x1", "x2", "x3"))
+  expect_best_features(z$inst$archive$best(batch = 4)[, 1:8], c("x1", "x2", "x3", "x4"))
+})
 
-  expect_best_features(instance$archive$best(batch = 1)[, 1:8], "x1")
-  expect_best_features(instance$archive$best(batch = 2)[, 1:8], c("x1", "x2"))
-  expect_best_features(instance$archive$best(batch = 3)[, 1:8], c("x1", "x2", "x3"))
-  expect_best_features(instance$archive$best(batch = 4)[, 1:8], c("x1", "x2", "x3", "x4"))
-
-  # task is permuted 
+test_that("task is permuted", {
   instance = TEST_MAKE_INST_1D(terminator = trm("none"))
   task = instance$objective$task$clone()
   fselector = fs("shadow_variable_search")
   fselector$optimize(instance)
 
   task_permuted = instance$archive$benchmark_result$tasks$task[[1]]
-  expect_set_equal(task_permuted$feature_names, c("x1", "x2", "x3", "x4", 
-    "permuted__x1", "permuted__x2", "permuted__x3", "permuted__x4"))
+  expect_set_equal(task_permuted$feature_names, c("x1", "x2", "x3", "x4", "permuted__x1", "permuted__x2", "permuted__x3", "permuted__x4"))
   expect_equal(task_permuted$data()[, 1:5], task$data())
   expect_false(isTRUE(all.equal(task_permuted$data()[, 6:9], task$data()[, 2:5])))
   expect_set_equal(task_permuted$data()[[1]], task$data()[[1]], ordered = TRUE)
@@ -29,17 +22,16 @@ test_that("FSelectorShadowVariableSearch", {
   expect_set_equal(task_permuted$data()[[7]], task$data()[[3]])
   expect_set_equal(task_permuted$data()[[8]], task$data()[[4]])
   expect_set_equal(task_permuted$data()[[9]], task$data()[[5]])
-  
-  
-  # first selected feature is a shadow variable
+})
+
+test_that("first selected feature is a shadow variable works", {
   score_design = data.table(score = 1, features = "permuted__x1")
   instance = TEST_MAKE_INST_1D(measure = msr("dummy", score_design = score_design), terminator = trm("none"))
   fselector = fs("shadow_variable_search")
-  expect_error(fselector$optimize(instance),
-    regexp = "The first selected feature is a shadow variable.")
+  expect_error(fselector$optimize(instance), regexp = "The first selected feature is a shadow variable.")
+})
 
-
-  # second selected feature is a shadow variable
+test_that("second selected feature is a shadow variable works", {
   score_design = data.table(score = c(1, 2), features = list("x1", c("x1", "permuted__x1")))
   instance = TEST_MAKE_INST_1D(measure = msr("dummy", score_design = score_design), terminator = trm("none"))
   task = instance$objective$task$clone()
@@ -57,9 +49,9 @@ test_that("FSelectorShadowVariableSearch", {
   expect_equal(instance$objective$domain, domain)
   # check that task is restored
   expect_equal(instance$objective$task, task)
+})
 
-
-  # search is terminated by terminator
+test_that("search is terminated by terminator works", {
   instance = TEST_MAKE_INST_1D(terminator = trm("evals", n_evals = 15))
   task = instance$objective$task$clone()
   domain = instance$objective$domain$clone()

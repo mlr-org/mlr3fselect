@@ -1,14 +1,13 @@
 #' @title Feature Selection via Design Points
 #'
-#' @description
-#' `FSelectorDesignPoints` class that implements feature selection w.r.t. fixed
-#' feature sets.  We simply search over a set of feature subsets fully specified
-#' by the user. The feature sets are evaluated in order as given.
+#' @name mlr_fselectors_design_points
 #'
-#' In order to support general termination criteria and parallelization, we
-#' evaluate feature sets in a batch-fashion of size `batch_size`. Larger
-#' batches mean we can parallelize more, smaller batches imply a more
-#' fine-grained checking of termination criteria.
+#' @description
+#' Design points uses feature sets specified by the user.
+#'
+#' The feature sets are evaluated in order as given.
+#' The feature selection terminates itself when all feature sets are evaluated.
+#' It is not necessary to set a termination criterion.
 #'
 #' @templateVar id design_points
 #' @template section_dictionary_fselectors
@@ -17,34 +16,44 @@
 #'
 #' @export
 #' @examples
-#' library(mlr3)
-#' library(data.table)
+#' library(mlr3misc)
 #'
-#' terminator = trm("evals", n_evals = 10)
+#' # retrieve task
+#' task = tsk("pima")
 #'
-#' instance = FSelectInstanceSingleCrit$new(
-#'   task = tsk("iris"),
-#'   learner = lrn("classif.rpart"),
-#'   resampling = rsmp("holdout"),
-#'   measure = msr("classif.ce"),
-#'   terminator = terminator
+#' # load learner
+#' learner = lrn("classif.rpart")
+#'
+#' # create design
+#' design = rowwise_table(
+#'   ~age, ~glucose, ~insulin, ~mass, ~pedigree, ~pregnant, ~pressure, ~triceps,
+#'   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       FALSE,    TRUE,
+#'   TRUE, TRUE,     FALSE,    TRUE,  FALSE,     TRUE,       FALSE,    FALSE,
+#'   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       FALSE,    FALSE,
+#'   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 #' )
 #'
-#' design = data.table(Petal.Length = c(TRUE, FALSE),
-#'   Petal.Width = c(TRUE, FALSE),
-#'   Sepal.Length = c(FALSE, TRUE),
-#'   Sepal.Width = c(FALSE, TRUE))
-#'
-#' fselector = fs("design_points", design = design)
 #' \donttest{
-#' # Modifies the instance by reference
-#' fselector$optimize(instance)
+#' # feature selection on the pima indians diabetes data set
+#' instance = fselect(
+#'   method = "design_points",
+#'   task = task,
+#'   learner = learner,
+#'   resampling = rsmp("cv", folds = 3),
+#'   measure = msr("classif.ce"),
+#'   design = design
+#' )
 #'
-#' # Returns best scoring evaluation
+#' # best performing feature subset
 #' instance$result
 #'
-#' # Allows access of data.table of full path of all evaluations
-#' as.data.table(instance$archive)}
+#' # all evaluated feature subsets
+#' as.data.table(instance$archive)
+#'
+#' # subset the task and fit the final model
+#' task$select(instance$result_feature_set)
+#' learner$train(task)
+#' }
 FSelectorDesignPoints = R6Class("FSelectorDesignPoints",
   inherit = FSelectorFromOptimizer,
   public = list(
@@ -55,6 +64,7 @@ FSelectorDesignPoints = R6Class("FSelectorDesignPoints",
       super$initialize(
         optimizer = OptimizerDesignPoints$new()
       )
+      private$.man = "mlr3fselect::mlr_fselectors_design_points"
     }
   )
 )

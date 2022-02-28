@@ -57,33 +57,8 @@ feature subset and aggregated performance to the instance.
 }
 }
 
-\examples{
-library(mlr3)
-
-terminator = trm("evals", n_evals = 3)
-
-instance = FSelectInstanceSingleCrit$new(
-  task = tsk("iris"),
-  learner = lrn("classif.rpart"),
-  resampling = rsmp("holdout"),
-  measure = msr("classif.ce"),
-  terminator = terminator
-)
-
-# swap this line to use a different FSelector
-fselector = fs("random_search")
-\donttest{
-# modifies the instance by reference
-fselector$optimize(instance)
-
-# returns best feature subset and best performance
-instance$result
-
-# allows access of data.table / benchmark result of full path of all evaluations
-instance$archive}
-}
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{param_set}}{(\link[paradox:ParamSet]{paradox::ParamSet}).}
 
@@ -92,6 +67,8 @@ instance$archive}
 \item{\code{properties}}{(\code{character()}).}
 
 \item{\code{packages}}{(\code{character()}).}
+
+\item{\code{man}}{(\code{character()}).}
 }
 \if{html}{\out{</div>}}
 }
@@ -101,6 +78,7 @@ instance$archive}
 \item \href{#method-new}{\code{FSelector$new()}}
 \item \href{#method-format}{\code{FSelector$format()}}
 \item \href{#method-print}{\code{FSelector$print()}}
+\item \href{#method-help}{\code{FSelector$help()}}
 \item \href{#method-optimize}{\code{FSelector$optimize()}}
 \item \href{#method-clone}{\code{FSelector$clone()}}
 }
@@ -111,7 +89,12 @@ instance$archive}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$new(param_set, properties, packages = character())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelector$new(
+  param_set,
+  properties,
+  packages = character(),
+  man = NA_character_
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -121,12 +104,16 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 Set of control parameters for fselector.}
 
 \item{\code{properties}}{(\code{character()})\cr
-Set of properties of the fselector. Must be a subset of
-\code{\link[mlr3:mlr_reflections]{mlr_reflections$fselect_properties}}.}
+Set of properties of the fselector.
+Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$fselect_properties}}.}
 
 \item{\code{packages}}{(\code{character()})\cr
-Set of required packages. Note that these packages will be loaded via
-\code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.}
+Set of required packages.
+Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.}
+
+\item{\code{man}}{(\code{character(1)})\cr
+String in the format \verb{[pkg]::[topic]} pointing to a manual page for this object.
+The referenced help package can be opened via method \verb{$help()}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -156,6 +143,16 @@ Print method.
 \subsection{Returns}{
 (\code{character()}).
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-help"></a>}}
+\if{latex}{\out{\hypertarget{method-help}{}}}
+\subsection{Method \code{help()}}{
+Opens the corresponding help page referenced by field \verb{$man}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelector$help()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-optimize"></a>}}

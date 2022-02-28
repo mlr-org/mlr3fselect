@@ -1,23 +1,28 @@
 #' @examples
-#' library(mlr3)
+#' # retrieve task
+#' task = tsk("pima")
 #'
-#' terminator = trm("evals", n_evals = 5)
+#' # load learner
+#' learner = lrn("classif.rpart")
 #'
-#' instance = FSelectInstanceSingleCrit$new(
-#'   task = tsk("iris"),
-#'   learner = lrn("classif.rpart"),
+#' \donttest{
+#' # feature selection on the pima indians diabetes data set
+#' instance = fselect(
+#'   method = "<%= id %>",
+#'   task = task,
+#'   learner = learner,
 #'   resampling = rsmp("holdout"),
 #'   measure = msr("classif.ce"),
-#'   terminator = terminator
+#'   term_evals = 10
 #' )
 #'
-#' fselector = fs("<%= id %>")
-#' \donttest{
-#' # Modifies the instance by reference
-#' fselector$optimize(instance)
-#'
-#' # Returns best scoring evaluation
+#' # best performing feature subset
 #' instance$result
 #'
-#' # Allows access of data.table of full path of all evaluations
-#' as.data.table(instance$archive)}
+#' # all evaluated feature subsets
+#' as.data.table(instance$archive)
+#'
+#' # subset the task and fit the final model
+#' task$select(instance$result_feature_set)
+#' learner$train(task)
+#' }

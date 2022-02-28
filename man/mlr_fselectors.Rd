@@ -3,14 +3,38 @@
 \docType{data}
 \name{mlr_fselectors}
 \alias{mlr_fselectors}
-\title{mlr_fselectors}
+\title{Dictionary of FSelectors}
 \format{
-An object of class \code{DictionaryFSelect} (inherits from \code{Dictionary}, \code{R6}) of length 13.
-}
-\usage{
-mlr_fselectors
+\link[R6:R6Class]{R6::R6Class} object inheriting from \link[mlr3misc:Dictionary]{mlr3misc::Dictionary}.
 }
 \description{
 A \link[mlr3misc:Dictionary]{mlr3misc::Dictionary} storing objects of class \link{FSelector}.
+Each fselector has an associated help page, see \code{mlr_fselectors_[id]}.
+
+For a more convenient way to retrieve and construct fselectors, see \code{\link[=fs]{fs()}}/\code{\link[=fss]{fss()}}.
 }
+\section{Methods}{
+
+See \link[mlr3misc:Dictionary]{mlr3misc::Dictionary}.
+}
+
+\section{S3 methods}{
+
+\itemize{
+\item \code{as.data.table(dict)}\cr
+\link[mlr3misc:Dictionary]{mlr3misc::Dictionary} -> \code{\link[data.table:data.table]{data.table::data.table()}}\cr
+Returns a \code{\link[data.table:data.table]{data.table::data.table()}} with fields "key", "properties", "packages" and "man" as columns.
+}
+}
+
+\examples{
+as.data.table(mlr_fselectors)
+mlr_fselectors$get("random_search")
+fs("random_search")
+}
+\seealso{
+Sugar functions: \code{\link[=fs]{fs()}}, \code{\link[=fss]{fss()}}
+}
+\concept{Dictionary}
+\concept{FSelector}
 \keyword{datasets}

@@ -1,8 +1,11 @@
 #' @title Feature Selection via Genetic Search
 #'
+#' @name mlr_fselectors_genetic_search
+#'
 #' @description
-#' `FSelectorGeneticSearch` class that implements an Genetic Search. Calls
-#' [genalg::rbga.bin()] from package \CRANpkg{genalg}.
+#' Genetic search imitates the process of natural selection to generate feature sets.
+#'
+#' Calls [genalg::rbga.bin()] from package \CRANpkg{genalg}.
 #'
 #' @templateVar id genetic_search
 #' @template section_dictionary_fselectors
@@ -18,34 +21,12 @@
 #' }
 #'
 #' For the meaning of the control parameters, see [genalg::rbga.bin()].
-#' [genalg::rbga.bin()] internally terminates after `iters` iteration. We set
-#' `ìters = 100000`  to allow the termination via our terminators. If more
-#' iterations are needed, set `ìters` to a higher value in the parameter set.
+#' [genalg::rbga.bin()] internally terminates after `iters` iteration.
+#' We set `ìters = 100000`  to allow the termination via our terminators.
+#' If more iterations are needed, set `ìters` to a higher value in the parameter set.
 #'
 #' @export
-#' @examples
-#' library(mlr3)
-#'
-#' terminator = trm("evals", n_evals = 5)
-#'
-#' instance = FSelectInstanceSingleCrit$new(
-#'   task = tsk("iris"),
-#'   learner = lrn("classif.rpart"),
-#'   resampling = rsmp("holdout"),
-#'   measure = msr("classif.ce"),
-#'   terminator = terminator
-#' )
-#'
-#' fselector = fs("genetic_search", popSize = 10L)
-#' \donttest{
-#' # Modifies the instance by reference
-#' fselector$optimize(instance)
-#'
-#' # Returns best scoring evaluation
-#' instance$result
-#'
-#' # Allows access of data.table of full path of all evaluations
-#' as.data.table(instance$archive)}
+#' @template example
 FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
   inherit = FSelector,
   public = list(
@@ -73,8 +54,7 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
       if (is.null(pars$elitism)) pars$elitism = NA
       n = inst$objective$domain$length
 
-      mlr3misc::invoke(genalg::rbga.bin, size = n,
-        evalFunc = inst$objective_function, .args = pars)
+      mlr3misc::invoke(genalg::rbga.bin, size = n, evalFunc = inst$objective_function, .args = pars)
     }
   )
 )
