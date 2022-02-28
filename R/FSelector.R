@@ -46,6 +46,8 @@
 #'    resample-experiment, regarding the given measure, then assign its
 #'    feature subset and aggregated performance to the instance.
 #'
+#' @template param_man
+#'
 #' @export
 FSelector = R6Class("FSelector",
   public = list(
@@ -67,10 +69,6 @@ FSelector = R6Class("FSelector",
     #' @param label (`character(1)`)\cr
     #'   Label for this object.
     #'   Can be used in tables, plot and text output instead of the ID.
-    #'
-    #' @param man (`character(1)`)\cr
-    #'   String in the format `[pkg]::[topic]` pointing to a manual page for this object.
-    #'   The referenced help package can be opened via method `$help()`.
     initialize = function(param_set, properties, packages = character(), label = NA_character_, man = NA_character_) {
       private$.param_set = assert_param_set(param_set)
       private$.properties = assert_subset(properties, bbotk_reflections$optimizer_properties, empty.ok = FALSE)
