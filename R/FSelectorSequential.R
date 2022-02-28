@@ -1,12 +1,15 @@
-#' @title Feature Selection via Sequential Selection
+#' @title Feature Selection via Sequential Search
+#'
+#' @name mlr_fselectors_sequential
 #'
 #' @description
-#' `FSelectorSequential` class that implements sequential feature selection. The
-#' sequential forward selection (`strategy = fsf`) extends the feature set in
-#' each step with the feature that increases the models performance the most.
-#' The sequential backward selection (`strategy = fsb`) starts with the complete
-#' future set and removes in each step the feature that decreases the models
-#' performance the least.
+#' Sequential search iteratively adds features to the set.
+#'
+#' Sequential forward selection (`strategy = fsf`) extends the feature set in each iteration with the feature that increases the models performance the most.
+#' Sequential backward selection (`strategy = fsb`) follows the same idea but starts with all features and removes features from the set.
+#'
+#' The feature selection terminates itself when `min_features` or `max_features` is reached.
+#' It is not necessary to set a termination criterion.
 #'
 #' @templateVar id sequential
 #' @template section_dictionary_fselectors
@@ -20,10 +23,6 @@
 #' \item{`strategy`}{`character(1)`\cr
 #' Search method `sfs` (forward search) or `sbs` (backward search).}
 #' }
-#'
-#' @note
-#' Feature sets are evaluated in batches, where each batch is one step in the
-#' sequential feature selection.
 #'
 #' @export
 #' @template example
@@ -39,11 +38,12 @@ FSelectorSequential = R6Class("FSelectorSequential",
         max_features = p_int(lower = 1),
         strategy = p_fct(levels = c("sfs", "sbs"), default = "sfs")
       )
-
       ps$values = list(strategy = "sfs", min_features = 1)
 
       super$initialize(
-        param_set = ps, properties = "single-crit"
+        param_set = ps,
+        properties = "single-crit",
+        man = "mlr3fselect::mlr_fselectors_sequential"
       )
     },
 

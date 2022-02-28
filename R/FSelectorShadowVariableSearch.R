@@ -1,39 +1,47 @@
-#' @title Feature Selection via Sequential Search with Shadow Variables
+#' @title Feature Selection via Shadow Variable Search
+#'
+#' @name mlr_fselectors_shadow_variable_search
 #'
 #' @description
-#' `FSelectorShadowVariableSearch` class that implements a sequential search with shadow variables.
+#' Shadow variable search creates for each feature a permutated copy and stops when one of them is selected.
+#'
+#' The feature selection terminates itself when the first shadow variable is selected.
+#' It is not necessary to set a termination criterion.
 #'
 #' @templateVar id shadow_variable_search
 #' @template section_dictionary_fselectors
-#'
-#' @note
-#' `FSelectorShadowVariableSearch` terminates itself and should be used with [TerminatorNone].
 #'
 #' @source
 #' `r format_bib("thomas2017", "wu2007")`
 #'
 #' @export
 #' @examples
-#' library(mlr3)
+#' # retrieve task
+#' task = tsk("pima")
 #'
-#' instance = FSelectInstanceSingleCrit$new(
-#'   task = tsk("iris"),
-#'   learner = lrn("classif.rpart"),
+#' # load learner
+#' learner = lrn("classif.rpart")
+#'
+#' \donttest{
+#' # feature selection on the pima indians diabetes data set
+#' instance = fselect(
+#'   method = "shadow_variable_search",
+#'   task = task,
+#'   learner = learner,
 #'   resampling = rsmp("holdout"),
 #'   measure = msr("classif.ce"),
-#'   terminator = trm("none")
 #' )
 #'
-#' fselector = fs("shadow_variable_search")
-#' \donttest{
-#' # Modifies the instance by reference
-#' fselector$optimize(instance)
-#'
-#' # Returns best scoring evaluation
+#' # best performing feature subset
 #' instance$result
 #'
-#' # Allows access of data.table of full path of all evaluations
-#' as.data.table(instance$archive)}
+#' # all evaluated feature subsets
+#' as.data.table(instance$archive)
+#'
+#' # subset the task and fit the final model
+#' task$select(instance$result_feature_set)
+#' learner$train(task)
+#' }
 FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
   inherit = FSelector,
   public = list(
@@ -42,8 +50,10 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
     #' Creates a new instance of this [R6][R6::R6Class] class.`
     initialize = function() {
     super$initialize(
-        param_set = ps(), properties = "single-crit"
-      )
+      param_set = ps(),
+      properties = "single-crit",
+      man = "mlr3fselect::mlr_fselectors_shadow_variable_search"
+    )
     },
 
     #' @description
@@ -64,6 +74,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
       })
     }
   ),
+
   private = list(
     .optimize = function(inst) {
 

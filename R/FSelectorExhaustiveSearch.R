@@ -1,11 +1,12 @@
 #' @title Feature Selection via Exhaustive Search
 #'
-#' @description
-#' `FSelectorExhaustiveSearch` class that implements an Exhaustive Search.
+#' @name mlr_fselectors_exhaustive_search
 #'
-#' In order to support general termination criteria and parallelization, feature
-#' sets are evaluated in batches. The size of the feature sets is increased by 1
-#' in each batch.
+#' @description
+#' Exhaustive search generates all possible feature sets.
+#'
+#' The feature selection terminates itself when all feature sets are evaluated.
+#' It is not necessary to set a termination criterion.
 #'
 #' @templateVar id exhaustive_search
 #' @template section_dictionary_fselectors
@@ -29,8 +30,10 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
         max_features = p_int(lower = 1)
       )
 
-      super$initialize(param_set = ps, properties = c("single-crit",
-        "multi-crit"))
+      super$initialize(
+        param_set = ps,
+        properties = c("single-crit", "multi-crit"),
+        man = "mlr3fselect::mlr_fselectors_exhaustive_search")
     }
   ),
   private = list(

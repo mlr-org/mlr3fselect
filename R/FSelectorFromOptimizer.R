@@ -16,8 +16,7 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
     #' Optimizer that is called.
     initialize = function(optimizer) {
       private$.optimizer = assert_optimizer(optimizer)
-      super$initialize(param_set = optimizer$param_set,
-        properties = optimizer$properties)
+      super$initialize(param_set = optimizer$param_set, properties = optimizer$properties)
     },
 
     #' @description

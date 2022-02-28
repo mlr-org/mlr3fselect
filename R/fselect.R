@@ -40,11 +40,8 @@ fselect = function(method, task, learner, resampling, measures, term_evals = NUL
   fselector = fs(method, ...)
   terminator = terminator_selection(term_evals, term_time)
 
-  instance = if (!is.list(measures)) {
-    FSelectInstanceSingleCrit$new(task, learner, resampling, measures, terminator, store_models)
-  } else {
-    FSelectInstanceMultiCrit$new(task, learner, resampling, measures, terminator, store_models)
-  }
+  FSelectInstance = if (!is.list(measures)) FSelectInstanceSingleCrit else FSelectInstanceMultiCrit
+  instance = FSelectInstance$new(task, learner, resampling, measures, terminator, store_models = store_models)
 
   fselector$optimize(instance)
   instance

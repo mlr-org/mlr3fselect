@@ -1,12 +1,12 @@
 #' @title Feature Selection via Random Search
 #'
-#' @description
-#' `FSelectorRandomSearch` class that implements a simple Random Search.
+#' @name mlr_fselectors_random_search
 #'
-#' In order to support general termination criteria and parallelization, we
-#' evaluate feature sets in a batch-fashion of size `batch_size`. Larger batches
-#' mean we can parallelize more, smaller batches imply a more fine-grained
-#' checking of termination criteria.
+#' @description
+#' Random search randomly draws feature sets.
+#'
+#' Feature sets are evaluated in batches of size `batch_size`.
+#' Larger batches mean we can parallelize more, smaller batches imply a more fine-grained checking of termination criteria.
 #'
 #' @templateVar id random_search
 #' @template section_dictionary_fselectors
@@ -23,7 +23,34 @@
 #' `r format_bib("bergstra_2012")`
 #'
 #' @export
-#' @template example
+#' @examples
+#' # retrieve task
+#' task = tsk("pima")
+#'
+#' # load learner
+#' learner = lrn("classif.rpart")
+#'
+#' \donttest{
+#' # feature selection on the pima indians diabetes data set
+#' instance = fselect(
+#'   method = "random_search",
+#'   task = task,
+#'   learner = learner,
+#'   resampling = rsmp("holdout"),
+#'   measure = msr("classif.ce"),
+#'   term_evals = 100
+#' )
+#'
+#' # best performing feature subset
+#' instance$result
+#'
+#' # all evaluated feature subsets
+#' as.data.table(instance$archive)
+#'
+#' # subset the task and fit the final model
+#' task$select(instance$result_feature_set)
+#' learner$train(task)
+#' }
 FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
   inherit = FSelector,
   public = list(
