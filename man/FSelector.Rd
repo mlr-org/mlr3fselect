@@ -60,15 +60,24 @@ feature subset and aggregated performance to the instance.
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{param_set}}{(\link[paradox:ParamSet]{paradox::ParamSet}).}
+\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
+Set of control parameters.}
 
-\item{\code{param_classes}}{(\code{character()}).}
+\item{\code{properties}}{(\code{character()})\cr
+Set of properties of the fselector.
+Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$fselect_properties}}.}
 
-\item{\code{properties}}{(\code{character()}).}
+\item{\code{packages}}{(\code{character()})\cr
+Set of required packages.
+Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.}
 
-\item{\code{packages}}{(\code{character()}).}
+\item{\code{label}}{(\code{character(1)})\cr
+Label for this object.
+Can be used in tables, plot and text output instead of the ID.}
 
-\item{\code{man}}{(\code{character()}).}
+\item{\code{man}}{(\code{character(1)})\cr
+String in the format \verb{[pkg]::[topic]} pointing to a manual page for this object.
+The referenced help package can be opened via method \verb{$help()}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -93,6 +102,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   param_set,
   properties,
   packages = character(),
+  label = NA_character_,
   man = NA_character_
 )}\if{html}{\out{</div>}}
 }
@@ -101,7 +111,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
-Set of control parameters for fselector.}
+Set of control parameters.}
 
 \item{\code{properties}}{(\code{character()})\cr
 Set of properties of the fselector.
@@ -110,6 +120,10 @@ Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$fselect_pr
 \item{\code{packages}}{(\code{character()})\cr
 Set of required packages.
 Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.}
+
+\item{\code{label}}{(\code{character(1)})\cr
+Label for this object.
+Can be used in tables, plot and text output instead of the ID.}
 
 \item{\code{man}}{(\code{character(1)})\cr
 String in the format \verb{[pkg]::[topic]} pointing to a manual page for this object.

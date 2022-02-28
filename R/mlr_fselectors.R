@@ -15,7 +15,7 @@
 #' @section S3 methods:
 #' * `as.data.table(dict)`\cr
 #'   [mlr3misc::Dictionary] -> [data.table::data.table()]\cr
-#'   Returns a [data.table::data.table()] with fields "key", "properties", "packages" and "man" as columns.
+#'   Returns a [data.table::data.table()] with fields "key", "properties" and "packages" as columns.
 #'
 #' @family Dictionary
 #' @family FSelector
@@ -33,7 +33,9 @@ mlr_fselectors = R6Class("DictionaryFSelector",
 )$new()
 
 #' @export
-as.data.table.DictionaryFSelector = function(x, ...) {
+as.data.table.DictionaryFSelector = function(x, ..., extra_cols = character()) {
+  assert_character(extra_cols, any.missing = FALSE)
+
   setkeyv(map_dtr(x$keys(), function(key) {
     t = tryCatch(x$get(key),
       missingDefaultError = function(e) NULL)
@@ -41,11 +43,9 @@ as.data.table.DictionaryFSelector = function(x, ...) {
       return(list(key = key))
     }
 
-    list(
-      key = key,
-      properties = list(t$properties),
-      packages = list(t$packages),
-      man = t$man
-    )
+  c(
+    list(key = key, properties = list(t$properties), packages = list(t$packages)),
+    mget(extra_cols, envir = t)
+  )
   }, .fill = TRUE), "key")[]
 }
