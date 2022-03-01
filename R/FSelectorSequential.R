@@ -43,6 +43,7 @@ FSelectorSequential = R6Class("FSelectorSequential",
       super$initialize(
         param_set = ps,
         properties = "single-crit",
+        label = "Sequential Search",
         man = "mlr3fselect::mlr_fselectors_sequential"
       )
     },

@@ -52,6 +52,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
     super$initialize(
       param_set = ps(),
       properties = "single-crit",
+      label = "Shadow Variable Search",
       man = "mlr3fselect::mlr_fselectors_shadow_variable_search"
     )
     },

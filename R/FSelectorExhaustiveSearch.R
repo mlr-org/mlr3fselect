@@ -33,6 +33,7 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
       super$initialize(
         param_set = ps,
         properties = c("single-crit", "multi-crit"),
+        label = "Exhaustive Search",
         man = "mlr3fselect::mlr_fselectors_exhaustive_search")
     }
   ),
