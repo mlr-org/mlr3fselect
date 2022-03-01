@@ -47,6 +47,7 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
       super$initialize(
         param_set = ps,
         properties = "single-crit",
+        label = "Genetic Search",
         man = "mlr3fselect::mlr_fselectors_genetic_search"
       )
     }

@@ -85,6 +85,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
       super$initialize(
         param_set = ps,
         properties = "single-crit",
+        label = "Recursive Feature Elimination",
         man = "mlr3fselect::mlr_fselectors_rfe"
       )
     }
