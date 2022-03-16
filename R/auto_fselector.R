@@ -3,8 +3,8 @@
 #' @description
 #' Function to create an [AutoFSelector] object.
 #'
-#' @param method (`character(1)`)\cr
-#'  Key to retrieve fselector from [mlr_fselectors] dictionary.
+#' @param method (`character(1)` | [FSelector])\cr
+#'  Key to retrieve fselector from [mlr_fselectors] dictionary or [FSelector] object.
 #' @param term_evals (`integer(1)`)\cr
 #'  Number of allowed evaluations.
 #' @param term_time (`integer(1)`)\cr
@@ -29,8 +29,12 @@
 #'
 #' at$train(tsk("pima"))
 auto_fselector = function(method, learner, resampling, measure, term_evals = NULL, term_time = NULL, ...) {
-  assert_choice(method, mlr_fselectors$keys())
-  fselector = fs(method, ...)
+  fselector = if (is.character(method)) {
+    assert_choice(method, mlr_fselectors$keys())
+    fs(method, ...)
+  } else {
+    assert_fselector(method)
+  }
   terminator = terminator_selection(term_evals, term_time)
 
   AutoFSelector$new(learner, resampling, measure, terminator, fselector)

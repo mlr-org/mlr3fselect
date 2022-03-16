@@ -1,6 +1,7 @@
 # mlr3fselect 0.6.1.9000
 
-* feat: Added `$label` to `Tuner`s.
+* feat: Allow to pass `FSelector` objects as `method` in `fselect()` and `auto_fselector()`.
+* feat: Added `$label` to `FSelector`s.
 * docs: New examples with `fselect()` function.
 * feat: `$help()` method which opens manual page of a `FSelector`.
 * feat: Added a `as.data.table.DictionaryFSelector` function.

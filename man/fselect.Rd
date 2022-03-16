@@ -17,8 +17,8 @@ fselect(
 )
 }
 \arguments{
-\item{method}{(\code{character(1)})\cr
-Key to retrieve fselector from \link{mlr_fselectors} dictionary.}
+\item{method}{(\code{character(1)} | \link{FSelector})\cr
+Key to retrieve fselector from \link{mlr_fselectors} dictionary or \link{FSelector} object.}
 
 \item{task}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}

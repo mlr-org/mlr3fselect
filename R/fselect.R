@@ -3,8 +3,8 @@
 #' @description
 #' Function to optimize the feature set of a [mlr3::Learner].
 #'
-#' @param method (`character(1)`)\cr
-#'  Key to retrieve fselector from [mlr_fselectors] dictionary.
+#' @param method (`character(1)` | [FSelector])\cr
+#'  Key to retrieve fselector from [mlr_fselectors] dictionary or [FSelector] object.
 #' @param term_evals (`integer(1)`)\cr
 #'  Number of allowed evaluations.
 #' @param term_time (`integer(1)`)\cr
@@ -34,10 +34,13 @@
 #'
 #' # subset task to optimized feature set
 #' task$select(instance$result_feature_set)
-fselect = function(method, task, learner, resampling, measures, term_evals = NULL, term_time = NULL,
-  store_models = FALSE, ...) {
-  assert_choice(method, mlr_fselectors$keys())
-  fselector = fs(method, ...)
+fselect = function(method, task, learner, resampling, measures, term_evals = NULL, term_time = NULL, store_models = FALSE, ...) {
+  fselector = if (is.character(method)) {
+    assert_choice(method, mlr_fselectors$keys())
+    fs(method, ...)
+  } else {
+    assert_fselector(method)
+  }
   terminator = terminator_selection(term_evals, term_time)
 
   FSelectInstance = if (!is.list(measures)) FSelectInstanceSingleCrit else FSelectInstanceMultiCrit
