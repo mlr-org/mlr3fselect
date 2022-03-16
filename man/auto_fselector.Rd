@@ -15,8 +15,8 @@ auto_fselector(
 )
 }
 \arguments{
-\item{method}{(\code{character(1)})\cr
-Key to retrieve fselector from \link{mlr_fselectors} dictionary.}
+\item{method}{(\code{character(1)} | \link{FSelector})\cr
+Key to retrieve fselector from \link{mlr_fselectors} dictionary or \link{FSelector} object.}
 
 \item{learner}{(\link[mlr3:Learner]{mlr3::Learner}).}
 
