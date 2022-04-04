@@ -4,12 +4,6 @@
     <loc>https://mlr3fselect.mlr-org.com/404.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/ISSUE_TEMPLATE.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3fselect.mlr-org.com/LICENSE-text.html</loc>
   </url>
   <url>
@@ -37,28 +31,7 @@
     <loc>https://mlr3fselect.mlr-org.com/reference/FSelector.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorDesignPoints.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorExhaustiveSearch.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorFromOptimizer.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorGeneticSearch.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorRFE.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorRandomSearch.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorSequential.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/reference/FSelectorShadowVariableSearch.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/ObjectiveFSelect.html</loc>
@@ -89,6 +62,27 @@
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_design_points.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_exhaustive_search.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_genetic_search.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_random_search.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_rfe.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_sequential.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_shadow_variable_search.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/reference/reexports.html</loc>
