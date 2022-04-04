@@ -11,6 +11,7 @@ FSelector
 FSelectorFromOptimizer
 FSelectorSequential
 FSelectorShadowVariableSearch
+FSelectors
 Hepp
 Mattermost
 Mayr
@@ -18,12 +19,10 @@ ORCID
 ObjectiveFSelect
 ParamSet
 Pseudovariables
-RFE
 ResampleResult
 StackOverflow
 Stefanski
 Subclasses
-TerminatorNone
 Uninstantiated
 bbotk
 cheatsheet
@@ -33,9 +32,10 @@ fselect
 fselector
 fselectors
 getters
+iteratively
 mlr
-parallelization
 parallelize
+permutated
 saveRDS
 th
 unnested
