@@ -1,4 +1,4 @@
-# mlr3fselect 0.6.1.9000
+# mlr3fselect 0.7.0
 
 * feat: Allow to pass `FSelector` objects as `method` in `fselect()` and `auto_fselector()`.
 * feat: Added `$label` to `FSelector`s.
@@ -6,7 +6,6 @@
 * feat: `$help()` method which opens manual page of a `FSelector`.
 * feat: Added a `as.data.table.DictionaryFSelector` function.
 * feat: Added `min_features` parameter to `FSelectorSequential`.
-
 
 # mlr3fselect 0.6.1
 
