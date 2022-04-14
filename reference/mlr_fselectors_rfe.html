@@ -209,21 +209,21 @@ Stores the feature importance of the model with all variables if <code>recursive
 <span class="r-in"><span class="co"># best performing feature subset</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,insulin,mass,pedigree,pregnant,...  0.2382812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE   FALSE TRUE     TRUE    FALSE    FALSE   FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pedigree  0.2382812</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># all evaluated feature subsets</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE  0.2382812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE  0.2656250</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE     TRUE    FALSE    FALSE   FALSE  0.2382812</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.067 2022-04-13 04:16:43        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.076 2022-04-13 04:16:43        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.079 2022-04-14 04:15:45        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.081 2022-04-14 04:15:46        2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 55.875997,33.212740,16.099427,11.414547, 6.810412, 4.360082,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                             57.71617,34.59801,16.92857,11.79885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 67.467089,24.988302,13.109639,11.214022, 7.970944, 7.103567,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                             60.63760,24.92249,19.28003,11.33013</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[22]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[22]&gt;</span>
