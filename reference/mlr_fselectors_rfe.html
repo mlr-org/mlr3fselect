@@ -208,22 +208,22 @@ Stores the feature importance of the model with all variables if <code>recursive
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># best performing feature subset</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE   FALSE TRUE     TRUE    FALSE    FALSE   FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pedigree  0.2539062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin  mass pedigree pregnant pressure triceps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE   FALSE FALSE     TRUE     TRUE    FALSE   FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,pedigree,pregnant  0.2578125</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># all evaluated feature subsets</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE  0.2656250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE     TRUE    FALSE    FALSE   FALSE  0.2539062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE FALSE     TRUE     TRUE    FALSE   FALSE  0.2578125</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.070 2022-04-26 04:21:56        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.068 2022-04-26 04:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 55.345840,23.369795,17.826702,16.469044,13.793999, 4.665392,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                             53.84011,22.54921,17.43077,15.93668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.102 2022-04-27 04:33:32        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.101 2022-04-27 04:33:32        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   importance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 50.02733,18.56817,16.08272,14.27786,13.43546,10.54848,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                       53.71406,23.59705,15.36283,15.34035</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[22]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[22]&gt;</span>
