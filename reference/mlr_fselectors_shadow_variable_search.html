@@ -190,19 +190,319 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class="r-in">  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span>
 <span class="r-in">  measure <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .__FSelectorShadowVariableSearch__.optimize(self = self, private = private,     super = super, inst = inst):</span> The first selected feature is a shadow variable.</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># best performing feature subset</span></span>
 <span class="r-in"><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'instance' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant  0.2226562</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># all evaluated feature subsets</span></span>
 <span class="r-in"><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in as.data.table(instance$archive):</span> object 'instance' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: FALSE   FALSE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3554688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.3867188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3203125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3867188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3867188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2500000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: FALSE    TRUE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: FALSE    TRUE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2617188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: FALSE    TRUE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.2773438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: FALSE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: FALSE    TRUE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.2968750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2929688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2851562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32:  TRUE    TRUE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33:  TRUE    TRUE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2617188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34:  TRUE    TRUE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.2460938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2382812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.2500000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2695312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2695312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2773438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2812500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2617188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:  TRUE    TRUE    TRUE FALSE    FALSE     TRUE    FALSE   FALSE  0.2617188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE    FALSE   FALSE  0.2226562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:  TRUE    TRUE   FALSE FALSE     TRUE     TRUE    FALSE   FALSE  0.2460938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE     TRUE   FALSE  0.2500000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE    TRUE  0.2343750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2695312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2460938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2382812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2695312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58:  TRUE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr permuted__age</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.096 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.098 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.079 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.090 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.090 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.097 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.092 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.078 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.089 2022-05-01 04:26:52        1          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.077 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:            0.089 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:            0.100 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:            0.098 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:            0.077 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:            0.090 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:            0.075 2022-05-01 04:26:52        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:            0.089 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:            0.097 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:            0.093 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:            0.100 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:            0.085 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:            0.079 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:            0.109 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:            0.099 2022-05-01 04:26:55        2          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:            0.090 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:            0.080 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:            0.083 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:            0.106 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:            0.098 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:            0.094 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:            0.080 2022-05-01 04:26:55        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32:            0.082 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33:            0.096 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34:            0.100 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35:            0.081 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36:            0.094 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37:            0.105 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38:            0.081 2022-05-01 04:26:58        3          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39:            0.088 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:            0.099 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:            0.113 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:            0.109 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:            0.084 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:            0.080 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:            0.083 2022-05-01 04:26:58        3         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:            0.085 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:            0.082 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:            0.077 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:            0.260 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:            0.084 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51:            0.080 2022-05-01 04:27:00        4          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52:            0.095 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53:            0.109 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54:            0.078 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55:            0.100 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56:            0.083 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57:            0.077 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58:            0.111 2022-05-01 04:27:00        4         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr permuted__age</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__glucose permuted__insulin permuted__mass permuted__pedigree</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:              TRUE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:             FALSE              TRUE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:             FALSE             FALSE           TRUE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:             FALSE             FALSE          FALSE               TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:              TRUE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:             FALSE              TRUE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:             FALSE             FALSE           TRUE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:             FALSE             FALSE          FALSE               TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39:              TRUE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:             FALSE              TRUE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:             FALSE             FALSE           TRUE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:             FALSE             FALSE          FALSE               TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52:              TRUE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53:             FALSE              TRUE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54:             FALSE             FALSE           TRUE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55:             FALSE             FALSE          FALSE               TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__glucose permuted__insulin permuted__mass permuted__pedigree</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__pregnant permuted__pressure permuted__triceps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:               TRUE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:              FALSE               TRUE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:              FALSE              FALSE              TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:               TRUE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:              FALSE               TRUE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:              FALSE              FALSE              TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:               TRUE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:              FALSE               TRUE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:              FALSE              FALSE              TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56:               TRUE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57:              FALSE               TRUE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58:              FALSE              FALSE              TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__pregnant permuted__pressure permuted__triceps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58: &lt;ResampleResult[22]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># subset the task and fit the final model</span></span>
 <span class="r-in"><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in checkSubset(x, choices, empty.ok, fmatch):</span> object 'instance' not found</span>
 <span class="r-in"><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
