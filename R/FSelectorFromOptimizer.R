@@ -22,6 +22,7 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
       assert_string(man, na.ok = TRUE)
 
       super$initialize(
+        id = if ("id" %in% names(optimizer)) optimizer$id else "optimizer",
         param_set = optimizer$param_set,
         properties = optimizer$properties,
         packages = packages,

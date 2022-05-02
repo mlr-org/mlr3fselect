@@ -45,6 +45,7 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
       ps$values$iters = 100000L
 
       super$initialize(
+        id = "genetic_search",
         param_set = ps,
         properties = "single-crit",
         label = "Genetic Search",

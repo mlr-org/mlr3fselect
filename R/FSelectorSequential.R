@@ -41,6 +41,7 @@ FSelectorSequential = R6Class("FSelectorSequential",
       ps$values = list(strategy = "sfs", min_features = 1)
 
       super$initialize(
+        id = "sequential",
         param_set = ps,
         properties = "single-crit",
         label = "Sequential Search",

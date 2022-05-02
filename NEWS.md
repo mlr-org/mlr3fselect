@@ -1,3 +1,7 @@
+# mlr3fselect 0.7.0.9000
+
+* feat: `FSelector` objects have the field `$id` now.
+
 # mlr3fselect 0.7.0
 
 * feat: Allow to pass `FSelector` objects as `method` in `fselect()` and `auto_fselector()`.

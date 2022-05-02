@@ -51,9 +51,16 @@
 #' @export
 FSelector = R6Class("FSelector",
   public = list(
+    #' @field id (`character(1)`)\cr
+    #'   Identifier of the object.
+    #'   Used in tables, plot and text output.
+    id = NULL,
 
     #' @description
     #'   Creates a new instance of this [R6][R6::R6Class] class.
+    #'
+    #' @param id (`character(1)`)\cr
+    #'   Identifier for the new instance.
     #'
     #' @param param_set [paradox::ParamSet]\cr
     #'   Set of control parameters.
@@ -69,7 +76,8 @@ FSelector = R6Class("FSelector",
     #' @param label (`character(1)`)\cr
     #'   Label for this object.
     #'   Can be used in tables, plot and text output instead of the ID.
-    initialize = function(param_set, properties, packages = character(), label = NA_character_, man = NA_character_) {
+    initialize = function(id = "fselector", param_set, properties, packages = character(), label = NA_character_, man = NA_character_) {
+      self$id = assert_string(id, min.chars = 1L)
       private$.param_set = assert_param_set(param_set)
       private$.properties = assert_subset(properties, bbotk_reflections$optimizer_properties, empty.ok = FALSE)
       private$.packages = union("mlr3fselect", assert_character(packages, any.missing = FALSE, min.chars = 1L))
