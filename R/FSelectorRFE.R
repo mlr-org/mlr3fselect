@@ -83,6 +83,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
       ps$values = list(recursive = TRUE, feature_fraction = 0.5)
 
       super$initialize(
+        id = "rfe",
         param_set = ps,
         properties = "single-crit",
         label = "Recursive Feature Elimination",

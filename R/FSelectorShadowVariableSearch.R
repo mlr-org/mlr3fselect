@@ -50,6 +50,7 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
     #' Creates a new instance of this [R6][R6::R6Class] class.`
     initialize = function() {
     super$initialize(
+      id = "shadow_variable_search",
       param_set = ps(),
       properties = "single-crit",
       label = "Shadow Variable Search",

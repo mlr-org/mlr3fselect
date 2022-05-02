@@ -66,6 +66,7 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
       ps$values = list(batch_size = 1L)
 
       super$initialize(
+        id = "random_search",
         param_set = ps,
         properties = c("single-crit", "multi-crit"),
         label = "Random Search",
