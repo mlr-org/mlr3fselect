@@ -76,7 +76,7 @@ FSelector = R6Class("FSelector",
     #' @param label (`character(1)`)\cr
     #'   Label for this object.
     #'   Can be used in tables, plot and text output instead of the ID.
-    initialize = function(id, param_set, properties, packages = character(), label = NA_character_, man = NA_character_) {
+    initialize = function(id = "fselector", param_set, properties, packages = character(), label = NA_character_, man = NA_character_) {
       self$id = assert_string(id, min.chars = 1L)
       private$.param_set = assert_param_set(param_set)
       private$.properties = assert_subset(properties, bbotk_reflections$optimizer_properties, empty.ok = FALSE)
