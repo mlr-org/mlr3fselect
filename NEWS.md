@@ -1,4 +1,4 @@
-# mlr3fselect 0.7.0.9000
+# mlr3fselect 0.7.1
 
 * feat: `FSelector` objects have the field `$id` now.
 
