@@ -139,11 +139,14 @@ Vector of selected feature set.</p></li>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">extract_inner_fselect_results</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1        FALSE        TRUE        FALSE        TRUE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2        FALSE        TRUE         TRUE       FALSE       0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    features task_id              learner_id resampling_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  Petal.Width,Sepal.Width    iris classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Width,Sepal.Length    iris classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE        TRUE        FALSE       FALSE       0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2         TRUE        TRUE         TRUE       FALSE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 features task_id              learner_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:              Petal.Length,Petal.Width    iris classif.rpart.fselector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Length,Petal.Width,Sepal.Length    iris classif.rpart.fselector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    resampling_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            cv</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
