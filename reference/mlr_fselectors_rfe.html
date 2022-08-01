@@ -208,22 +208,22 @@ Stores the feature importance of the model with all variables if <code>recursive
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># best performing feature subset</span></span></span>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,insulin,mass,pedigree,pregnant,...   0.265625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      age glucose insulin mass pedigree pregnant pressure triceps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: FALSE    TRUE   FALSE TRUE     TRUE     TRUE    FALSE   FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: glucose,mass,pedigree,pregnant  0.2773438</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE  0.2656250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE     TRUE    FALSE    FALSE   FALSE  0.2773438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE  0.3007812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: FALSE    TRUE   FALSE TRUE     TRUE     TRUE    FALSE   FALSE  0.2773438</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.061 2022-07-31 04:25:34        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.062 2022-07-31 04:25:34        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.073 2022-08-01 04:43:07        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.068 2022-08-01 04:43:07        2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 54.806407,27.326878,23.952687, 9.339872, 8.543097, 7.371260,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                             55.43394,25.12810,21.93311, 6.78844</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 71.499126,21.309092,17.845909,17.816111,15.613924, 5.558797,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                             65.26298,19.68610,18.31662,14.50687</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
