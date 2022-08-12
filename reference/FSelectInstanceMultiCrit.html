@@ -140,15 +140,15 @@ Feature sets for task subsetting.</p></dd>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>FSelectInstanceMultiCrit$new()</code></a></p></li>
-<li><p><a href="#method-assign_result"><code>FSelectInstanceMultiCrit$assign_result()</code></a></p></li>
-<li><p><a href="#method-clone"><code>FSelectInstanceMultiCrit$clone()</code></a></p></li>
-</ul></div><p><details open><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear"><code>bbotk::OptimInstance$clear()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-eval_batch"><code>bbotk::OptimInstance$eval_batch()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-format"><code>bbotk::OptimInstance$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="objective_function"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-objective_function"><code>bbotk::OptimInstance$objective_function()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-print"><code>bbotk::OptimInstance$print()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-FSelectInstanceMultiCrit-new"><code>FSelectInstanceMultiCrit$new()</code></a></p></li>
+<li><p><a href="#method-FSelectInstanceMultiCrit-assign_result"><code>FSelectInstanceMultiCrit$assign_result()</code></a></p></li>
+<li><p><a href="#method-FSelectInstanceMultiCrit-clone"><code>FSelectInstanceMultiCrit$clone()</code></a></p></li>
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear"><code>bbotk::OptimInstance$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-eval_batch"><code>bbotk::OptimInstance$eval_batch()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-format"><code>bbotk::OptimInstance$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="objective_function"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-objective_function"><code>bbotk::OptimInstance$objective_function()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-print"><code>bbotk::OptimInstance$print()</code></a></span></li>
+</ul></details></p><hr><a id="method-FSelectInstanceMultiCrit-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -210,7 +210,7 @@ Store benchmark result in archive?</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-assign_result"></a><div class="section">
+</div><p></p><hr><a id="method-FSelectInstanceMultiCrit-assign_result"></a><div class="section">
 <h3 id="method-assign-result-">Method <code>assign_result()</code><a class="anchor" aria-label="anchor" href="#method-assign-result-"></a></h3>
 <p>The <a href="FSelector.html">FSelector</a> object writes the best found feature subsets
 and estimated performance values here. For internal use.</p><div class="section">
@@ -235,7 +235,7 @@ Optimal outcomes, e.g. the Pareto front.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-FSelectInstanceMultiCrit-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
@@ -288,11 +288,11 @@ Optimal outcomes, e.g. the Pareto front.</p></dd>
 <span class="r-in"><span><span class="co"># Get archive data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">inst</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce classif.acc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE 0.06666667   0.9333333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE 0.07333333   0.9266667</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE        TRUE        FALSE        TRUE 0.04666667   0.9533333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.921 2022-08-12 04:27:34        1 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.990 2022-08-12 04:27:34        1 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.659 2022-08-12 11:07:25        1 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.633 2022-08-12 11:07:25        1 &lt;ResampleResult[21]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

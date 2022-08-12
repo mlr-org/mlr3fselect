@@ -103,9 +103,9 @@ It is not necessary to set a termination criterion.</p>
     
 
 <p>This <a href="FSelector.html">FSelector</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a>
-<a href="mlr_fselectors.html">mlr_fselectors</a> or with the associated sugar function <code><a href="fs.html">fs()</a></code>:</p><div class="sourceCode"><pre><code><span><span class="va">mlr_fselectors</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"shadow_variable_search"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/fs.html">fs</a></span><span class="op">(</span><span class="st">"shadow_variable_search"</span><span class="op">)</span></span></code></pre></div>
-
+<a href="mlr_fselectors.html">mlr_fselectors</a> or with the associated sugar function <code><a href="fs.html">fs()</a></code>:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_fselectors<span class="sc">$</span><span class="fu">get</span>(<span class="st">"shadow_variable_search"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fs</span>(<span class="st">"shadow_variable_search"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
@@ -117,14 +117,14 @@ It is not necessary to set a termination criterion.</p>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>FSelectorShadowVariableSearch$new()</code></a></p></li>
-<li><p><a href="#method-optimization_path"><code>FSelectorShadowVariableSearch$optimization_path()</code></a></p></li>
-<li><p><a href="#method-clone"><code>FSelectorShadowVariableSearch$clone()</code></a></p></li>
-</ul></div><p><details open><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>mlr3fselect::FSelector$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>mlr3fselect::FSelector$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize"><a href="FSelector.html#method-optimize"><code>mlr3fselect::FSelector$optimize()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>mlr3fselect::FSelector$print()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-FSelectorShadowVariableSearch-new"><code>FSelectorShadowVariableSearch$new()</code></a></p></li>
+<li><p><a href="#method-FSelectorShadowVariableSearch-optimization_path"><code>FSelectorShadowVariableSearch$optimization_path()</code></a></p></li>
+<li><p><a href="#method-FSelectorShadowVariableSearch-clone"><code>FSelectorShadowVariableSearch$clone()</code></a></p></li>
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>mlr3fselect::FSelector$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>mlr3fselect::FSelector$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize"><a href="FSelector.html#method-optimize"><code>mlr3fselect::FSelector$optimize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>mlr3fselect::FSelector$print()</code></a></span></li>
+</ul></details></p><hr><a id="method-FSelectorShadowVariableSearch-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.`</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -132,7 +132,7 @@ It is not necessary to set a termination criterion.</p>
 </div>
 
 
-</div><p></p><hr><a id="method-optimization_path"></a><div class="section">
+</div><p></p><hr><a id="method-FSelectorShadowVariableSearch-optimization_path"></a><div class="section">
 <h3 id="method-optimization-path-">Method <code>optimization_path()</code><a class="anchor" aria-label="anchor" href="#method-optimization-path-"></a></h3>
 <p>Returns the optimization path.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
@@ -153,7 +153,7 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <p><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></p>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-FSelectorShadowVariableSearch-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
@@ -193,47 +193,79 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># best performing feature subset</span></span></span>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      age glucose insulin  mass pedigree pregnant pressure triceps features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  glucose</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      age glucose insulin mass pedigree pregnant pressure triceps     features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: FALSE    TRUE   FALSE TRUE    FALSE    FALSE    FALSE   FALSE glucose,mass</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:    0.21875</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3437500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: FALSE   FALSE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.4609375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.3632812</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3164062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3789062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3789062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3945312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3867188</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3320312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2929688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: FALSE   FALSE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.3320312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3125000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.3828125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3281250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3828125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3984375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3828125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:  TRUE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2695312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: FALSE    TRUE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.2656250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: FALSE    TRUE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2187500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: FALSE    TRUE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.2812500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: FALSE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: FALSE    TRUE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.2929688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.2304688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2929688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3046875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2382812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2929688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: FALSE    TRUE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.2968750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr permuted__age</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.117 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.146 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.135 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.133 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.173 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.116 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.142 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.164 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.136 2022-08-12 04:28:57        1          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.143 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11:            0.122 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12:            0.145 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13:            0.122 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14:            0.137 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15:            0.150 2022-08-12 04:28:57        1         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16:            0.119 2022-08-12 04:28:57        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.086 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.112 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.082 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.106 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.084 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.103 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.091 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.093 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.098 2022-08-12 11:08:21        1          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.080 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:            0.247 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:            0.077 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:            0.085 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:            0.078 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:            0.077 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:            0.078 2022-08-12 11:08:21        1         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:            0.088 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:            0.079 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:            0.081 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:            0.087 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:            0.079 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:            0.090 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:            0.079 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:            0.082 2022-08-12 11:08:23        2          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:            0.080 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:            0.080 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:            0.087 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:            0.081 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:            0.087 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:            0.081 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:            0.082 2022-08-12 11:08:23        2         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr permuted__age</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__glucose permuted__insulin permuted__mass permuted__pedigree</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:             FALSE             FALSE          FALSE              FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2:             FALSE             FALSE          FALSE              FALSE</span>
@@ -251,6 +283,22 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14:             FALSE             FALSE          FALSE              FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15:             FALSE             FALSE          FALSE              FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:              TRUE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:             FALSE              TRUE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:             FALSE             FALSE           TRUE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:             FALSE             FALSE          FALSE               TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:             FALSE             FALSE          FALSE              FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__glucose permuted__insulin permuted__mass permuted__pedigree</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__pregnant permuted__pressure permuted__triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:              FALSE              FALSE             FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2:              FALSE              FALSE             FALSE</span>
@@ -268,6 +316,22 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14:               TRUE              FALSE             FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15:              FALSE               TRUE             FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16:              FALSE              FALSE              TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:              FALSE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:               TRUE              FALSE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:              FALSE               TRUE             FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:              FALSE              FALSE              TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__pregnant permuted__pressure permuted__triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult[21]&gt;</span>
@@ -285,6 +349,22 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subset the task and fit the final model</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>

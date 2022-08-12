@@ -160,19 +160,19 @@ Stores benchmark result.</p></dd>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-learner"><code>ArchiveFSelect$learner()</code></a></p></li>
-<li><p><a href="#method-learners"><code>ArchiveFSelect$learners()</code></a></p></li>
-<li><p><a href="#method-predictions"><code>ArchiveFSelect$predictions()</code></a></p></li>
-<li><p><a href="#method-resample_result"><code>ArchiveFSelect$resample_result()</code></a></p></li>
-<li><p><a href="#method-print"><code>ArchiveFSelect$print()</code></a></p></li>
-<li><p><a href="#method-clone"><code>ArchiveFSelect$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-add_evals"><code>bbotk::Archive$add_evals()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-best"><code>bbotk::Archive$best()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-clear"><code>bbotk::Archive$clear()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-format"><code>bbotk::Archive$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-initialize"><code>bbotk::Archive$initialize()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="nds_selection"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-nds_selection"><code>bbotk::Archive$nds_selection()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-learner"></a><div class="section">
+<ul><li><p><a href="#method-ArchiveFSelect-learner"><code>ArchiveFSelect$learner()</code></a></p></li>
+<li><p><a href="#method-ArchiveFSelect-learners"><code>ArchiveFSelect$learners()</code></a></p></li>
+<li><p><a href="#method-ArchiveFSelect-predictions"><code>ArchiveFSelect$predictions()</code></a></p></li>
+<li><p><a href="#method-ArchiveFSelect-resample_result"><code>ArchiveFSelect$resample_result()</code></a></p></li>
+<li><p><a href="#method-ArchiveFSelect-print"><code>ArchiveFSelect$print()</code></a></p></li>
+<li><p><a href="#method-ArchiveFSelect-clone"><code>ArchiveFSelect$clone()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-add_evals"><code>bbotk::Archive$add_evals()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-best"><code>bbotk::Archive$best()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-clear"><code>bbotk::Archive$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-format"><code>bbotk::Archive$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-initialize"><code>bbotk::Archive$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="nds_selection"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-nds_selection"><code>bbotk::Archive$nds_selection()</code></a></span></li>
+</ul></details></p><hr><a id="method-ArchiveFSelect-learner"></a><div class="section">
 <h3 id="method-learner-">Method <code>learner()</code><a class="anchor" aria-label="anchor" href="#method-learner-"></a></h3>
 <p>Retrieve <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> of the i-th evaluation, by position
 or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.
@@ -197,7 +197,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-learners"></a><div class="section">
+</div><p></p><hr><a id="method-ArchiveFSelect-learners"></a><div class="section">
 <h3 id="method-learners-">Method <code>learners()</code><a class="anchor" aria-label="anchor" href="#method-learners-"></a></h3>
 <p>Retrieve list of trained <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> objects of the i-th evaluation,
 by position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
@@ -221,7 +221,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-predictions"></a><div class="section">
+</div><p></p><hr><a id="method-ArchiveFSelect-predictions"></a><div class="section">
 <h3 id="method-predictions-">Method <code>predictions()</code><a class="anchor" aria-label="anchor" href="#method-predictions-"></a></h3>
 <p>Retrieve list of <a href="https://mlr3.mlr-org.com/reference/Prediction.html" class="external-link">mlr3::Prediction</a> objects of the i-th evaluation, by
 position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
@@ -245,7 +245,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-resample_result"></a><div class="section">
+</div><p></p><hr><a id="method-ArchiveFSelect-resample_result"></a><div class="section">
 <h3 id="method-resample-result-">Method <code>resample_result()</code><a class="anchor" aria-label="anchor" href="#method-resample-result-"></a></h3>
 <p>Retrieve <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> of the i-th evaluation, by position
 or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.</p><div class="section">
@@ -268,7 +268,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-print"></a><div class="section">
+</div><p></p><hr><a id="method-ArchiveFSelect-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Printer.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
@@ -284,7 +284,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-ArchiveFSelect-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>

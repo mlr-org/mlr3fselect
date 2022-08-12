@@ -102,9 +102,9 @@ It is not necessary to set a termination criterion.</p>
     
 
 <p>This <a href="FSelector.html">FSelector</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a>
-<a href="mlr_fselectors.html">mlr_fselectors</a> or with the associated sugar function <code><a href="fs.html">fs()</a></code>:</p><div class="sourceCode"><pre><code><span><span class="va">mlr_fselectors</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"rfe"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/fs.html">fs</a></span><span class="op">(</span><span class="st">"rfe"</span><span class="op">)</span></span></code></pre></div>
-
+<a href="mlr_fselectors.html">mlr_fselectors</a> or with the associated sugar function <code><a href="fs.html">fs()</a></code>:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_fselectors<span class="sc">$</span><span class="fu">get</span>(<span class="st">"rfe"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fs</span>(<span class="st">"rfe"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
@@ -153,13 +153,13 @@ Stores the feature importance of the model with all variables if <code>recursive
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>FSelectorRFE$new()</code></a></p></li>
-<li><p><a href="#method-clone"><code>FSelectorRFE$clone()</code></a></p></li>
-</ul></div><p><details open><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>mlr3fselect::FSelector$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>mlr3fselect::FSelector$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize"><a href="FSelector.html#method-optimize"><code>mlr3fselect::FSelector$optimize()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>mlr3fselect::FSelector$print()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-FSelectorRFE-new"><code>FSelectorRFE$new()</code></a></p></li>
+<li><p><a href="#method-FSelectorRFE-clone"><code>FSelectorRFE$clone()</code></a></p></li>
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>mlr3fselect::FSelector$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>mlr3fselect::FSelector$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize"><a href="FSelector.html#method-optimize"><code>mlr3fselect::FSelector$optimize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>mlr3fselect::FSelector$print()</code></a></span></li>
+</ul></details></p><hr><a id="method-FSelectorRFE-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -167,7 +167,7 @@ Stores the feature importance of the model with all variables if <code>recursive
 </div>
 
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-FSelectorRFE-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
@@ -211,19 +211,19 @@ Stores the feature importance of the model with all variables if <code>recursive
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,insulin,mass,pedigree,pregnant,...  0.2460938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,insulin,mass,pedigree,pregnant,...  0.2539062</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE  0.2460938</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2539062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE    TRUE TRUE     TRUE     TRUE     TRUE    TRUE  0.2539062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2656250</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.122 2022-08-12 04:28:46        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.110 2022-08-12 04:28:46        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.074 2022-08-12 11:08:13        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.066 2022-08-12 11:08:13        2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 60.056130,22.158055,22.136729,16.771243,11.029919, 6.923105,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                             58.77632,22.86359,19.80279,15.14991</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 61.138653,21.585107,15.197493, 6.336788, 5.655917, 4.750696,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                             69.86467,24.96690,23.93221,10.03976</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>

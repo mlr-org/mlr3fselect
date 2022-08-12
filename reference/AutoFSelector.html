@@ -179,17 +179,17 @@ Hash (unique identifier) for this object.</p></dd>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>AutoFSelector$new()</code></a></p></li>
-<li><p><a href="#method-base_learner"><code>AutoFSelector$base_learner()</code></a></p></li>
-<li><p><a href="#method-clone"><code>AutoFSelector$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-AutoFSelector-new"><code>AutoFSelector$new()</code></a></p></li>
+<li><p><a href="#method-AutoFSelector-base_learner"><code>AutoFSelector$base_learner()</code></a></p></li>
+<li><p><a href="#method-AutoFSelector-clone"><code>AutoFSelector$clone()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+</ul></details></p><hr><a id="method-AutoFSelector-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -264,7 +264,7 @@ validity?</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-base_learner"></a><div class="section">
+</div><p></p><hr><a id="method-AutoFSelector-base_learner"></a><div class="section">
 <h3 id="method-base-learner-">Method <code>base_learner()</code><a class="anchor" aria-label="anchor" href="#method-base-learner-"></a></h3>
 <p>Extracts the base learner from nested learner objects like
 <code>GraphLearner</code> in <a href="https://CRAN.R-project.org/package=mlr3pipelines" class="external-link"><span class="pkg">mlr3pipelines</span></a>. If <code>recursive = 0</code>, the (tuned)
@@ -287,7 +287,7 @@ Depth of recursion for multiple nested objects.</p></dd>
 <p><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learner</a>.</p>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-AutoFSelector-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
@@ -334,7 +334,7 @@ Depth of recursion for multiple nested objects.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   twoclass, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Petal.Length"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Petal.Width"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fselect_instance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;FSelectInstanceSingleCrit&gt;</span>
@@ -349,13 +349,13 @@ Depth of recursion for multiple nested objects.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Terminator: &lt;TerminatorEvals&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:        FALSE        TRUE        FALSE       FALSE       0.04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE        TRUE        FALSE       FALSE       0.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE       FALSE         TRUE       FALSE       0.30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:        FALSE       FALSE        FALSE        TRUE       0.46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE        TRUE        FALSE       FALSE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:        FALSE       FALSE         TRUE       FALSE       0.36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:        FALSE       FALSE        FALSE        TRUE       0.48</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">learner</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifRpart:classif.rpart&gt;: Classification Tree</span>
