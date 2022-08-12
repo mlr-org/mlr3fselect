@@ -100,3 +100,5 @@ rsconnect/
 cran-comments.md
 CRAN-RELEASE
 CRAN-SUBMISSION
+
+.DS_Store
