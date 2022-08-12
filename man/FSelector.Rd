@@ -93,22 +93,22 @@ The referenced help package can be opened via method \verb{$help()}.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{FSelector$new()}}
-\item \href{#method-format}{\code{FSelector$format()}}
-\item \href{#method-print}{\code{FSelector$print()}}
-\item \href{#method-help}{\code{FSelector$help()}}
-\item \href{#method-optimize}{\code{FSelector$optimize()}}
-\item \href{#method-clone}{\code{FSelector$clone()}}
+\item \href{#method-FSelector-new}{\code{FSelector$new()}}
+\item \href{#method-FSelector-format}{\code{FSelector$format()}}
+\item \href{#method-FSelector-print}{\code{FSelector$print()}}
+\item \href{#method-FSelector-help}{\code{FSelector$help()}}
+\item \href{#method-FSelector-optimize}{\code{FSelector$optimize()}}
+\item \href{#method-FSelector-clone}{\code{FSelector$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-FSelector-new"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelector-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelector$new(
-  id,
+  id = "fselector",
   param_set,
   properties,
   packages = character(),
@@ -146,8 +146,8 @@ The referenced help package can be opened via method \verb{$help()}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-format"></a>}}
-\if{latex}{\out{\hypertarget{method-format}{}}}
+\if{html}{\out{<a id="method-FSelector-format"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelector-format}{}}}
 \subsection{Method \code{format()}}{
 Helper for print outputs.
 \subsection{Usage}{
@@ -159,8 +159,8 @@ Helper for print outputs.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-FSelector-print"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelector-print}{}}}
 \subsection{Method \code{print()}}{
 Print method.
 \subsection{Usage}{
@@ -172,8 +172,8 @@ Print method.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-help"></a>}}
-\if{latex}{\out{\hypertarget{method-help}{}}}
+\if{html}{\out{<a id="method-FSelector-help"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelector-help}{}}}
 \subsection{Method \code{help()}}{
 Opens the corresponding help page referenced by field \verb{$man}.
 \subsection{Usage}{
@@ -182,8 +182,8 @@ Opens the corresponding help page referenced by field \verb{$man}.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-optimize"></a>}}
-\if{latex}{\out{\hypertarget{method-optimize}{}}}
+\if{html}{\out{<a id="method-FSelector-optimize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelector-optimize}{}}}
 \subsection{Method \code{optimize()}}{
 Performs the feature selection on a \link{FSelectInstanceSingleCrit} or
 \link{FSelectInstanceMultiCrit} until termination.
@@ -206,8 +206,8 @@ The result will be written into the instance object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-FSelector-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelector-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

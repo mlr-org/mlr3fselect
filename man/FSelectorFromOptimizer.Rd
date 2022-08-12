@@ -13,23 +13,23 @@ Internally used to transform \link[bbotk:Optimizer]{bbotk::Optimizer} to \link{F
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{FSelectorFromOptimizer$new()}}
-\item \href{#method-optimize}{\code{FSelectorFromOptimizer$optimize()}}
-\item \href{#method-clone}{\code{FSelectorFromOptimizer$clone()}}
+\item \href{#method-FSelectorFromOptimizer-new}{\code{FSelectorFromOptimizer$new()}}
+\item \href{#method-FSelectorFromOptimizer-optimize}{\code{FSelectorFromOptimizer$optimize()}}
+\item \href{#method-FSelectorFromOptimizer-clone}{\code{FSelectorFromOptimizer$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format">}\href{../../mlr3fselect/html/FSelector.html#method-format}{\code{mlr3fselect::FSelector$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help">}\href{../../mlr3fselect/html/FSelector.html#method-help}{\code{mlr3fselect::FSelector$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print">}\href{../../mlr3fselect/html/FSelector.html#method-print}{\code{mlr3fselect::FSelector$print()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-FSelectorFromOptimizer-new"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorFromOptimizer-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -50,8 +50,8 @@ The referenced help package can be opened via method \verb{$help()}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-optimize"></a>}}
-\if{latex}{\out{\hypertarget{method-optimize}{}}}
+\if{html}{\out{<a id="method-FSelectorFromOptimizer-optimize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorFromOptimizer-optimize}{}}}
 \subsection{Method \code{optimize()}}{
 Performs the feature selection on a \link{FSelectInstanceSingleCrit} /
 \link{FSelectInstanceMultiCrit} until termination.
@@ -71,8 +71,8 @@ Performs the feature selection on a \link{FSelectInstanceSingleCrit} /
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-FSelectorFromOptimizer-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorFromOptimizer-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

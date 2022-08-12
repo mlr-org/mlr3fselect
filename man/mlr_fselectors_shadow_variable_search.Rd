@@ -24,9 +24,11 @@ It is not necessary to set a termination criterion.
 \section{Dictionary}{
 
 This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:\preformatted{mlr_fselectors$get("shadow_variable_search")
+\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_fselectors$get("shadow_variable_search")
 fs("shadow_variable_search")
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{
@@ -63,24 +65,24 @@ learner$train(task)
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{FSelectorShadowVariableSearch$new()}}
-\item \href{#method-optimization_path}{\code{FSelectorShadowVariableSearch$optimization_path()}}
-\item \href{#method-clone}{\code{FSelectorShadowVariableSearch$clone()}}
+\item \href{#method-FSelectorShadowVariableSearch-new}{\code{FSelectorShadowVariableSearch$new()}}
+\item \href{#method-FSelectorShadowVariableSearch-optimization_path}{\code{FSelectorShadowVariableSearch$optimization_path()}}
+\item \href{#method-FSelectorShadowVariableSearch-clone}{\code{FSelectorShadowVariableSearch$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format">}\href{../../mlr3fselect/html/FSelector.html#method-format}{\code{mlr3fselect::FSelector$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help">}\href{../../mlr3fselect/html/FSelector.html#method-help}{\code{mlr3fselect::FSelector$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize">}\href{../../mlr3fselect/html/FSelector.html#method-optimize}{\code{mlr3fselect::FSelector$optimize()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print">}\href{../../mlr3fselect/html/FSelector.html#method-print}{\code{mlr3fselect::FSelector$print()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="optimize"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-optimize'><code>mlr3fselect::FSelector$optimize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-FSelectorShadowVariableSearch-new"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorShadowVariableSearch-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.`
 \subsection{Usage}{
@@ -89,8 +91,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.`
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-optimization_path"></a>}}
-\if{latex}{\out{\hypertarget{method-optimization_path}{}}}
+\if{html}{\out{<a id="method-FSelectorShadowVariableSearch-optimization_path"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorShadowVariableSearch-optimization_path}{}}}
 \subsection{Method \code{optimization_path()}}{
 Returns the optimization path.
 \subsection{Usage}{
@@ -110,8 +112,8 @@ Instance optimized with \link{FSelectorShadowVariableSearch}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-FSelectorShadowVariableSearch-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorShadowVariableSearch-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -88,29 +88,29 @@ Stores benchmark result.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-learner}{\code{ArchiveFSelect$learner()}}
-\item \href{#method-learners}{\code{ArchiveFSelect$learners()}}
-\item \href{#method-predictions}{\code{ArchiveFSelect$predictions()}}
-\item \href{#method-resample_result}{\code{ArchiveFSelect$resample_result()}}
-\item \href{#method-print}{\code{ArchiveFSelect$print()}}
-\item \href{#method-clone}{\code{ArchiveFSelect$clone()}}
+\item \href{#method-ArchiveFSelect-learner}{\code{ArchiveFSelect$learner()}}
+\item \href{#method-ArchiveFSelect-learners}{\code{ArchiveFSelect$learners()}}
+\item \href{#method-ArchiveFSelect-predictions}{\code{ArchiveFSelect$predictions()}}
+\item \href{#method-ArchiveFSelect-resample_result}{\code{ArchiveFSelect$resample_result()}}
+\item \href{#method-ArchiveFSelect-print}{\code{ArchiveFSelect$print()}}
+\item \href{#method-ArchiveFSelect-clone}{\code{ArchiveFSelect$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals">}\href{../../bbotk/html/Archive.html#method-add_evals}{\code{bbotk::Archive$add_evals()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best">}\href{../../bbotk/html/Archive.html#method-best}{\code{bbotk::Archive$best()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear">}\href{../../bbotk/html/Archive.html#method-clear}{\code{bbotk::Archive$clear()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format">}\href{../../bbotk/html/Archive.html#method-format}{\code{bbotk::Archive$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize">}\href{../../bbotk/html/Archive.html#method-initialize}{\code{bbotk::Archive$initialize()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="nds_selection">}\href{../../bbotk/html/Archive.html#method-nds_selection}{\code{bbotk::Archive$nds_selection()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href='../../bbotk/html/Archive.html#method-Archive-add_evals'><code>bbotk::Archive$add_evals()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href='../../bbotk/html/Archive.html#method-Archive-best'><code>bbotk::Archive$best()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href='../../bbotk/html/Archive.html#method-Archive-clear'><code>bbotk::Archive$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize"><a href='../../bbotk/html/Archive.html#method-Archive-initialize'><code>bbotk::Archive$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="nds_selection"><a href='../../bbotk/html/Archive.html#method-Archive-nds_selection'><code>bbotk::Archive$nds_selection()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-learner"></a>}}
-\if{latex}{\out{\hypertarget{method-learner}{}}}
+\if{html}{\out{<a id="method-ArchiveFSelect-learner"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-learner}{}}}
 \subsection{Method \code{learner()}}{
 Retrieve \link[mlr3:Learner]{mlr3::Learner} of the i-th evaluation, by position
 or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually exclusive.
@@ -133,8 +133,8 @@ The \code{uhash} value to filter for.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-learners"></a>}}
-\if{latex}{\out{\hypertarget{method-learners}{}}}
+\if{html}{\out{<a id="method-ArchiveFSelect-learners"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-learners}{}}}
 \subsection{Method \code{learners()}}{
 Retrieve list of trained \link[mlr3:Learner]{mlr3::Learner} objects of the i-th evaluation,
 by position or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually
@@ -156,8 +156,8 @@ The \code{uhash} value to filter for.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-predictions"></a>}}
-\if{latex}{\out{\hypertarget{method-predictions}{}}}
+\if{html}{\out{<a id="method-ArchiveFSelect-predictions"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-predictions}{}}}
 \subsection{Method \code{predictions()}}{
 Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by
 position or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually
@@ -179,8 +179,8 @@ The \code{uhash} value to filter for.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-resample_result"></a>}}
-\if{latex}{\out{\hypertarget{method-resample_result}{}}}
+\if{html}{\out{<a id="method-ArchiveFSelect-resample_result"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-resample_result}{}}}
 \subsection{Method \code{resample_result()}}{
 Retrieve \link[mlr3:ResampleResult]{mlr3::ResampleResult} of the i-th evaluation, by position
 or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually exclusive.
@@ -201,8 +201,8 @@ The \code{uhash} value to filter for.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-ArchiveFSelect-print"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-print}{}}}
 \subsection{Method \code{print()}}{
 Printer.
 \subsection{Usage}{
@@ -218,8 +218,8 @@ Printer.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-ArchiveFSelect-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
