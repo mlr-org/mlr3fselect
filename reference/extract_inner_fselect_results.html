@@ -20,7 +20,7 @@ called with store_models = TRUE."><!-- mathjax --><script src="https://cdnjs.clo
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.1</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,11 +142,14 @@ Vector of selected feature set.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">extract_inner_fselect_results</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1        FALSE        TRUE        FALSE        TRUE       0.04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2         TRUE        TRUE        FALSE       FALSE       0.04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    features task_id              learner_id resampling_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  Petal.Width,Sepal.Width    iris classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Length,Petal.Width    iris classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE        TRUE         TRUE        TRUE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2        FALSE        TRUE         TRUE        TRUE       0.12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features task_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width    iris</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:              Petal.Width,Sepal.Length,Sepal.Width    iris</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: classif.rpart.fselector            cv</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
