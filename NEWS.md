@@ -1,3 +1,7 @@
+# mlr3fselect 0.7.2
+
+* docs: Re-generate rd files with valid html.
+
 # mlr3fselect 0.7.1
 
 * feat: `FSelector` objects have the field `$id` now.
