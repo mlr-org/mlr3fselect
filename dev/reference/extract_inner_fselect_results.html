@@ -142,14 +142,11 @@ Vector of selected feature set.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">extract_inner_fselect_results</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE        TRUE         TRUE        TRUE       0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2         TRUE        TRUE         TRUE        TRUE       0.12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features task_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width    iris</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Length,Petal.Width,Sepal.Length,Sepal.Width    iris</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE       FALSE        FALSE        TRUE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2        FALSE        TRUE        FALSE       FALSE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    features task_id              learner_id resampling_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Sepal.Width    iris classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:              Petal.Width    iris classif.rpart.fselector            cv</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
