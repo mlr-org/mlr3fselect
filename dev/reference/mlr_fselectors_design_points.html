@@ -191,20 +191,20 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant  0.2460938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant       0.25</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE    TRUE  0.2968750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2460938</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE   FALSE  0.2942708</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: TRUE   FALSE    TRUE TRUE    FALSE     TRUE     TRUE    TRUE  0.3046875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE    TRUE  0.3398438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2500000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE   FALSE  0.3307292</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: TRUE   FALSE    TRUE TRUE    FALSE     TRUE     TRUE    TRUE  0.3411458</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.257 2022-09-05 04:44:22        1 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.258 2022-09-05 04:44:23        2 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.258 2022-09-05 04:44:23        3 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.268 2022-09-05 04:44:24        4 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.209 2022-09-06 04:44:49        1 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.209 2022-09-06 04:44:50        2 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.214 2022-09-06 04:44:50        3 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.218 2022-09-06 04:44:51        4 &lt;ResampleResult[21]&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subset the task and fit the final model</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
