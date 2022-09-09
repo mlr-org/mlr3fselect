@@ -184,35 +184,35 @@ If more iterations are needed, set <code>ìters</code> to a higher value in the 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># best performing feature subset</span></span></span>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      age glucose insulin  mass pedigree pregnant pressure triceps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE    TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: pedigree,triceps  0.3164062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      age glucose insulin  mass pedigree pregnant pressure triceps features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE pregnant</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  0.3476562</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3437500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3437500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE    TRUE  0.3164062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3437500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: FALSE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE    TRUE  0.3437500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: FALSE   FALSE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.3437500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.3203125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: FALSE   FALSE   FALSE FALSE    FALSE     TRUE     TRUE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3632812</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FALSE   FALSE    TRUE FALSE    FALSE    FALSE    FALSE   FALSE  0.3437500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3750000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3750000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: FALSE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3750000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3476562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3476562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE    TRUE  0.3476562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3750000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3476562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE   FALSE  0.3750000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.065 2022-09-08 04:38:22        1 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.062 2022-09-08 04:38:23        2 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.068 2022-09-08 04:38:23        3 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.073 2022-09-08 04:38:23        4 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.079 2022-09-08 04:38:23        5 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.085 2022-09-08 04:38:23        6 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.075 2022-09-08 04:38:24        7 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.066 2022-09-08 04:38:24        8 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.061 2022-09-08 04:38:24        9 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.062 2022-09-08 04:38:24       10 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.093 2022-09-09 04:39:23        1 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.087 2022-09-09 04:39:24        2 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.084 2022-09-09 04:39:24        3 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.076 2022-09-09 04:39:24        4 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.078 2022-09-09 04:39:25        5 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.081 2022-09-09 04:39:25        6 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.094 2022-09-09 04:39:25        7 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.098 2022-09-09 04:39:25        8 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.113 2022-09-09 04:39:26        9 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.089 2022-09-09 04:39:26       10 &lt;ResampleResult[21]&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subset the task and fit the final model</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
