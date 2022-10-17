@@ -4,8 +4,10 @@
 #'
 #' @description
 #' Recursive feature elimination iteratively removes features with a low importance score.
+#' Only works with [Learner]s that can calculate importance scores (see section on optional extractors in [Learner]).
 #'
-#' The learner is trained on all features at the start and importance scores are calculated for each feature (see section on optional extractors in [Learner]).
+#' @details
+#' The learner is trained on all features at the start and importance scores are calculated for each feature .
 #' Then the least important feature is removed and the learner is trained on the reduced feature set.
 #' The importance scores are calculated again and the procedure is repeated until the desired number of features is reached.
 #' The non-recursive option (`recursive = FALSE`) only uses the importance scores calculated in the first iteration.
@@ -93,6 +95,10 @@ FSelectorRFE = R6Class("FSelectorRFE",
   ),
   private = list(
     .optimize = function(inst) {
+
+      if ("importance" %nin% inst$objective$learner$properties) {
+        stopf("%s does not work with %s. Only learners that can calculate importance scores are supported.", format(self), format(inst$objective$learner))
+      }
 
       pars = self$param_set$values
       archive = inst$archive

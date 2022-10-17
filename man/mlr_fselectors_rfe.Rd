@@ -6,8 +6,10 @@
 \title{Feature Selection via Recursive Feature Elimination}
 \description{
 Recursive feature elimination iteratively removes features with a low importance score.
-
-The learner is trained on all features at the start and importance scores are calculated for each feature (see section on optional extractors in \link{Learner}).
+Only works with \link{Learner}s that can calculate importance scores (see section on optional extractors in \link{Learner}).
+}
+\details{
+The learner is trained on all features at the start and importance scores are calculated for each feature .
 Then the least important feature is removed and the learner is trained on the reduced feature set.
 The importance scores are calculated again and the procedure is repeated until the desired number of features is reached.
 The non-recursive option (\code{recursive = FALSE}) only uses the importance scores calculated in the first iteration.
