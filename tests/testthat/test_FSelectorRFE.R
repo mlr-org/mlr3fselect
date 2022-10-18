@@ -73,3 +73,17 @@ test_that("subset_size parameter works", {
   expect_error(test_fselector("rfe", subset_sizes = c(1L, 2L, 3L)), regexp = "Must be sorted")
   expect_error(test_fselector("rfe", subset_sizes = 0L), regexp = "Element 1 is not >= 1")
 })
+
+test_that("learner without importance method throw an error", {
+  learner = lrn("classif.rpart")
+  learner$properties = setdiff(learner$properties, "importance")
+
+  expect_error(fselect(
+    method = "rfe",
+    task = tsk("pima"),
+    learner = learner,
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    store_models = TRUE
+  ), "does not work with")
+})

@@ -1,5 +1,6 @@
 
 ^README\.Rmd$
+^README\.html$
 ^LICENSE$
 ^\.github$
 ^codecov\.yml$
