@@ -120,6 +120,14 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{search_space}}{(\link[paradox:ParamSet]{paradox::ParamSet})\cr
+Search space.
+Internally created from provided \link[mlr3:Task]{mlr3::Task}.}
+
+\item{\code{codomain}}{(\link[bbotk:Codomain]{bbotk::Codomain})\cr
+Specifies codomain of objective function i.e. a set of performance measures.
+Internally created from provided \link[mlr3:Measure]{mlr3::Measure}s.}
+
 \item{\code{check_values}}{(\code{logical(1)})\cr
 If \code{TRUE} (default), hyperparameter configurations are check for validity.}
 }

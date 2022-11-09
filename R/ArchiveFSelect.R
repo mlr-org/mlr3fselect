@@ -73,6 +73,14 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
+    #' @param search_space ([paradox::ParamSet])\cr
+    #'   Search space.
+    #'   Internally created from provided [mlr3::Task].
+    #'
+    #' @param codomain ([bbotk::Codomain])\cr
+    #'   Specifies codomain of objective function i.e. a set of performance measures.
+    #'   Internally created from provided [mlr3::Measure]s.
+    #'
     #' @param check_values (`logical(1)`)\cr
     #'   If `TRUE` (default), hyperparameter configurations are check for validity.
     initialize = function(search_space, codomain, check_values = TRUE) {
@@ -155,7 +163,7 @@ as.data.table.ArchiveFSelect = function(x, ..., unnest = NULL, exclude_columns =
   # always ignore x_domain column
   exclude_columns = c("x_domain", exclude_columns)
   # default value for exclude_columns might be not present in archive
-  if (is.null(x$benchmark_result)) exclude_columns = exclude_columns[exclude_columns %nin% "uhash"]
+  if (!x$benchmark_result$n_resample_results) exclude_columns = exclude_columns[exclude_columns %nin% "uhash"]
 
   assert_subset(unnest, names(x$data))
   cols_y_extra = NULL
@@ -163,7 +171,7 @@ as.data.table.ArchiveFSelect = function(x, ..., unnest = NULL, exclude_columns =
   # unnest data
   tab = unnest(copy(x$data), unnest, prefix = "{col}_")
 
-  if (!is.null(x$benchmark_result)) {
+  if (x$benchmark_result$n_resample_results) {
     # add extra measures
     if (!is.null(measures)) {
       measures = assert_measures(as_measures(measures), learner = x$learners(1)[[1]], task = x$resample_result(1)$task)
