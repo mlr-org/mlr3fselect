@@ -74,11 +74,13 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
 
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner}).}
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+Learner to optimize the feature subset for.}
 
 \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
-Uninstantiated resamplings are instantiated during construction
-so that all configurations are evaluated on the same data splits.}
+Resampling that is used to evaluated the performance of the feature subsets.
+Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
+Already instantiated resamplings are kept unchanged.}
 
 \item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
 Measures to optimize.

@@ -23,7 +23,8 @@ Key to retrieve fselector from \link{mlr_fselectors} dictionary.}
 \item{task}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
 
-\item{learner}{(\link[mlr3:Learner]{mlr3::Learner}).}
+\item{learner}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+Learner to optimize the feature subset for.}
 
 \item{inner_resampling}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 Resampling used for the inner loop.}
@@ -32,7 +33,7 @@ Resampling used for the inner loop.}
 Resampling used for the outer loop.}
 
 \item{measure}{(\link[mlr3:Measure]{mlr3::Measure})\cr
-Measure to optimize.}
+Measure to optimize. If \code{NULL}, default measure is used.}
 
 \item{term_evals}{(\code{integer(1)})\cr
 Number of allowed evaluations.}
