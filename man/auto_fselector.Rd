@@ -12,7 +12,6 @@ auto_fselector(
   term_evals = NULL,
   term_time = NULL,
   terminator = NULL,
-  search_space = NULL,
   store_fselect_instance = TRUE,
   store_benchmark_result = TRUE,
   store_models = FALSE,
