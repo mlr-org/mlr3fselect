@@ -159,13 +159,15 @@ Task to operate on.</p></dd>
 
 
 <dt><code>learner</code></dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>).</p></dd>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+Learner to optimize the feature subset for.</p></dd>
 
 
 <dt><code>resampling</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
-Uninstantiated resamplings are instantiated during construction
-so that all configurations are evaluated on the same data splits.</p></dd>
+Resampling that is used to evaluated the performance of the feature subsets.
+Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
+Already instantiated resamplings are kept unchanged.</p></dd>
 
 
 <dt><code>measures</code></dt>

@@ -172,22 +172,25 @@ Task to operate on.</p></dd>
 
 
 <dt><code>learner</code></dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>).</p></dd>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+Learner to optimize the feature subset for.</p></dd>
 
 
 <dt><code>resampling</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
-Uninstantiated resamplings are instantiated during construction
-so that all configurations are evaluated on the same data splits.</p></dd>
+Resampling that is used to evaluated the performance of the feature subsets.
+Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
+Already instantiated resamplings are kept unchanged.</p></dd>
 
 
 <dt><code>measure</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
-Measure to optimize.</p></dd>
+Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
 
 <dt><code>terminator</code></dt>
-<dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>).</p></dd>
+<dd><p>(Terminator)<br>
+Stop criterion of the feature selection.</p></dd>
 
 
 <dt><code>store_models</code></dt>
@@ -288,11 +291,11 @@ Optimal outcome.</p></dd>
 <span class="r-in"><span><span class="co"># Get archive data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">inst</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE 0.07333333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         TRUE       FALSE         TRUE       FALSE 0.06000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:        FALSE        TRUE        FALSE        TRUE 0.04666667</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.561 2022-11-09 04:26:21        1 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.576 2022-11-09 04:26:21        1 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.681 2022-11-09 18:53:02        1 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.717 2022-11-09 18:53:02        1 &lt;ResampleResult[21]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

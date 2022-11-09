@@ -106,7 +106,8 @@ Task to operate on.</p></dd>
 
 
 <dt>learner</dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>).</p></dd>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+Learner to optimize the feature subset for.</p></dd>
 
 
 <dt>inner_resampling</dt>
@@ -121,7 +122,7 @@ Resampling used for the outer loop.</p></dd>
 
 <dt>measure</dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
-Measure to optimize.</p></dd>
+Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
 
 <dt>term_evals</dt>
@@ -162,19 +163,19 @@ Named arguments to be set as parameters of the fselector.</p></dd>
 <span class="r-in"><span><span class="co"># performance scores estimated on the outer resampling</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 task task_id             learner              learner_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;TaskClassif[50]&gt;    pima &lt;AutoFSelector[42]&gt; classif.rpart.fselector</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;TaskClassif[50]&gt;    pima &lt;AutoFSelector[42]&gt; classif.rpart.fselector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;TaskClassif[50]&gt;    pima &lt;AutoFSelector[46]&gt; classif.rpart.fselector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;TaskClassif[50]&gt;    pima &lt;AutoFSelector[46]&gt; classif.rpart.fselector</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            resampling resampling_id iteration              prediction</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResamplingCV[20]&gt;            cv         1 &lt;PredictionClassif[20]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResamplingCV[20]&gt;            cv         2 &lt;PredictionClassif[20]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   0.250000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   0.296875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  0.2552083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  0.2708333</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># unbiased performance of the final model trained on the full data set</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2734375 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2630208 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
