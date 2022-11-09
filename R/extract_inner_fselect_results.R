@@ -1,12 +1,10 @@
 #' @title Extract Inner Feature Selection Results
 #'
 #' @description
-#' Extract inner feature selection results of nested resampling. Implemented for
-#' [mlr3::ResampleResult] and [mlr3::BenchmarkResult]. The function iterates
-#' over the [AutoFSelector] objects and binds the feature selection results to a
-#' [data.table::data.table()]. [AutoFSelector] must be initialized with
-#' `store_fselect_instance = TRUE` and `resample()` or `benchmark()` must be
-#' called with `store_models = TRUE`.
+#' Extract inner feature selection results of nested resampling.
+#' Implemented for [mlr3::ResampleResult] and [mlr3::BenchmarkResult].
+#' The function iterates over the [AutoFSelector] objects and binds the feature selection results to a [data.table::data.table()].
+#' [AutoFSelector] must be initialized with `store_fselect_instance = TRUE` and `resample()` or `benchmark()` must be called with `store_models = TRUE`.
 #'
 #' @section Data structure:
 #'

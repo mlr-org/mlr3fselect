@@ -1,9 +1,8 @@
 #' @title ObjectiveFSelect
 #'
 #' @description
-#' Stores the objective function that estimates the performance of feature
-#' subsets. This class is usually constructed internally by by the
-#' [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
+#' Stores the objective function that estimates the performance of feature subsets.
+#' This class is usually constructed internally by by the [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
 #'
 #' @template param_task
 #' @template param_learner
@@ -44,9 +43,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    initialize = function(task, learner, resampling, measures,
-      check_values = TRUE, store_benchmark_result = TRUE,
-      store_models = FALSE) {
+    initialize = function(task, learner, resampling, measures, check_values = TRUE, store_benchmark_result = TRUE, store_models = FALSE) {
 
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE),
@@ -84,28 +81,32 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
         GraphLearner$new(graph)
       })
 
+      # benchmark feature subsets
       design = benchmark_grid(self$task, learners, self$resampling)
-      bmr = benchmark(design, store_models = self$store_models)
-      aggr = bmr$aggregate(self$measures)
-      y = map_chr(self$measures, "id")
+      benchmark_result = benchmark(design, store_models = self$store_models)
 
-      # add runtime
-      time = map_dbl(bmr$resample_results$resample_result, function(rr) {
-        sum(map_dbl(rr$learners, function(l) sum(l$timings)))
+      # aggregate performance scores
+      aggregated_performance = bmr$aggregate(self$measures)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+
+      # add runtime to evaluations
+      time = map_dbl(benchmark_result$resample_results$resample_result, function(rr) {
+        sum(map_dbl(get_private(rr)$.data$learner_states(get_private(rr)$.view), function(state) state$train_time + state$predict_time))
       })
-      aggr[, "runtime_learners" := time]
+      set(aggregated_performance, j = "runtime_learners", value = time)
 
+      # store benchmark result in archive
       if (self$store_benchmark_result) {
-        self$archive$benchmark_result =
-          if (is.null(self$archive$benchmark_result)) {
-            self$archive$benchmark_result = bmr
-          } else {
-            self$archive$benchmark_result$combine(bmr)
-          }
-        cbind(aggr[, c(y, "runtime_learners"), with = FALSE], uhash = bmr$uhashes)
-      } else {
-        aggr[, c(y, "runtime_learners"), with = FALSE]
+        self$archive$benchmark_result$combine(benchmark_result)
+        set(aggregated_performance, j = "uhash", value = benchmark_result$uhashes)
       }
+
+      # store benchmark result in archive
+      if (self$store_benchmark_result) {
+        self$archive$benchmark_result$combine(benchmark_result)
+        set(aggregated_performance, j = "uhash", value = benchmark_result$uhashes)
+      }
+
+      aggregated_performance
     }
   )
 )

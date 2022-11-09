@@ -1,12 +1,10 @@
 #' @title Extract Inner Feature Selection Archives
 #'
 #' @description
-#' Extract inner feature selection archives of nested resampling. Implemented for
-#' [mlr3::ResampleResult] and [mlr3::BenchmarkResult]. The function iterates
-#' over the [AutoFSelector] objects and binds the archives to a
-#' [data.table::data.table()]. [AutoFSelector] must be initialized with
-#' `store_fselect_instance = TRUE` and `resample()` or `benchmark()` must be
-#' called with `store_models = TRUE`.
+#' Extract inner feature selection archives of nested resampling.
+#' Implemented for [mlr3::ResampleResult] and [mlr3::BenchmarkResult].
+#' The function iterates over the [AutoFSelector] objects and binds the archives to a [data.table::data.table()].
+#' [AutoFSelector] must be initialized with `store_fselect_instance = TRUE` and `resample()` or `benchmark()` must be called with `store_models = TRUE`.
 #'
 #' @section Data structure:
 #'
@@ -21,7 +19,7 @@
 #' * `runtime_learners` (`numeric(1)`)\cr
 #'   Sum of training and predict times logged in learners per
 #'   [mlr3::ResampleResult] / evaluation. This does not include potential
-#'   overhead time. 
+#'   overhead time.
 #' * `timestamp` (`POSIXct`)\cr
 #'   Time stamp when the evaluation was logged into the archive.
 #' * `batch_nr` (`integer(1)`)\cr
@@ -35,7 +33,7 @@
 #'
 #' @param x ([mlr3::ResampleResult] | [mlr3::BenchmarkResult]).
 #' @param unnest (`character()`)\cr
-#'   Transforms list columns to separate columns. Set to `NULL` if no column 
+#'   Transforms list columns to separate columns. Set to `NULL` if no column
 #'   should be unnested.
 #' @param exclude_columns (`character()`)\cr
 #'   Exclude columns from result table. Set to `NULL` if no column should be
