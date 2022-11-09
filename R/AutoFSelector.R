@@ -284,6 +284,8 @@ AutoFSelector = R6Class("AutoFSelector",
       ia$task = task$clone()
       instance = invoke(FSelectInstanceSingleCrit$new, .args = ia)
       self$fselector$optimize(instance)
+      learner = ia$learner$clone(deep = TRUE)
+      task = task$clone()
 
       # disable timeout to allow train on full data set without time limit
       # timeout during tuning is not affected
@@ -291,9 +293,8 @@ AutoFSelector = R6Class("AutoFSelector",
 
       # fit final model
       feat = task$feature_names[as.logical(instance$result_x_search_space)]
-      ia$task$select(feat)
-      learner = ia$learner$clone(deep = TRUE)
-      learner$train(ia$task)
+      task$select(feat)
+      learner$train(task)
 
       # the return model is a list of "learner", "features" and "fselect_instance"
       result_model = list(learner = learner, features = feat)
