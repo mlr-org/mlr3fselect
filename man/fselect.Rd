@@ -23,11 +23,13 @@ Key to retrieve fselector from \link{mlr_fselectors} dictionary or \link{FSelect
 \item{task}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
 
-\item{learner}{(\link[mlr3:Learner]{mlr3::Learner}).}
+\item{learner}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+Learner to optimize the feature subset for.}
 
 \item{resampling}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
-Uninstantiated resamplings are instantiated during construction
-so that all configurations are evaluated on the same data splits.}
+Resampling that is used to evaluated the performance of the feature subsets.
+Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
+Already instantiated resamplings are kept unchanged.}
 
 \item{measures}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
 Measures to optimize.

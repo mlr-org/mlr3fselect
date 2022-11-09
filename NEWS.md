@@ -1,6 +1,9 @@
 # mlr3fselect 0.7.2.9000
 
 * refactor: `FSelectorRFE` throws an error if the learner does not support the `$importance()` method.
+* refactor: The `AutoFSelector` stores the instance and benchmark result if `store_models = TRUE`.
+* refactor: The `AutoFSelector` stores the instance if `store_benchmark_result = TRUE`.
+* feat: Add missing parameters from `AutoFSelector` to `auto_fselect()`.
 
 # mlr3fselect 0.7.2
 

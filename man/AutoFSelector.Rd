@@ -4,42 +4,87 @@
 \alias{AutoFSelector}
 \title{AutoFSelector}
 \description{
-The \code{AutoFSelector} is a \link[mlr3:Learner]{mlr3::Learner} which wraps another \link[mlr3:Learner]{mlr3::Learner}
-and performs the following steps during \verb{$train()}:
+The \link{AutoFSelector} wraps a \link[mlr3:Learner]{mlr3::Learner} and augments it with an automatic feature selection.
+The \code{\link[=auto_fselector]{auto_fselector()}} function creates an \link{AutoFSelector} object.
+}
+\details{
+The \link{AutoFSelector} is a \link[mlr3:Learner]{mlr3::Learner} which wraps another \link[mlr3:Learner]{mlr3::Learner} and performs the following steps during \verb{$train()}:
 \enumerate{
-\item The wrapped (inner) learner is trained on the feature subsets via
-resampling. The feature selection can be specified by providing a
-\link{FSelector}, a \link[bbotk:Terminator]{bbotk::Terminator}, a \link[mlr3:Resampling]{mlr3::Resampling} and a
-\link[mlr3:Measure]{mlr3::Measure}.
-\item A final model is fit on the complete training data with the best found
-feature subset.
+\item The wrapped (inner) learner is trained on the feature subsets via resampling.
+The feature selection can be specified by providing a \link{FSelector}, a \link[bbotk:Terminator]{bbotk::Terminator}, a \link[mlr3:Resampling]{mlr3::Resampling} and a \link[mlr3:Measure]{mlr3::Measure}.
+\item A final model is fit on the complete training data with the best found feature subset.
 }
 
-During \verb{$predict()} the \code{AutoFSelector} just calls the predict method of the
-wrapped (inner) learner.
-
-Note that this approach allows to perform nested resampling by passing an
-\link{AutoFSelector} object to \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
-To access the inner resampling results, set \code{store_fselect_instance = TRUE}
-and execute \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}} with
-\code{store_models = TRUE}.
+During \verb{$predict()} the \link{AutoFSelector} just calls the predict method of the wrapped (inner) learner.
 }
+\section{Resources}{
+
+\itemize{
+\item \href{https://mlr3book.mlr-org.com/feature-selection.html#autofselect}{book chapter} on automatic feature selection.
+}
+}
+
+\section{Nested Resampling}{
+
+Nested resampling can be performed by passing an \link{AutoFSelector} object to \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
+To access the inner resampling results, set \code{store_fselect_instance = TRUE} and execute \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}} with \code{store_models = TRUE} (see examples).
+The \link[mlr3:Resampling]{mlr3::Resampling} passed to the \link{AutoFSelector} is meant to be the inner resampling, operating on the training set of an arbitrary outer resampling.
+For this reason it is not feasible to pass an instantiated \link[mlr3:Resampling]{mlr3::Resampling} here.
+}
+
 \examples{
-library(mlr3)
+# Automafsic Feafsure Selection
 
-task = tsk("iris")
-learner = lrn("classif.rpart")
-resampling = rsmp("holdout")
-measure = msr("classif.ce")
+task = tsk("penguins")
+train_set = sample(task$nrow, 0.8 * task$nrow)
+test_set = setdiff(seq_len(task$nrow), train_set)
 
-terminator = trm("evals", n_evals = 3)
-fselector = fs("exhaustive_search")
-afs = AutoFSelector$new(learner, resampling, measure, terminator, fselector,
-  store_fselect_instance = TRUE)
+afs = auto_fselector(
+  method = fs("random_search"),
+  learner = lrn("classif.rpart"),
+  resampling = rsmp ("holdout"),
+  measure = msr("classif.ce"),
+  term_evals = 4)
 
-afs$train(task)
+# optimize feafsure subset and fit final model
+afs$train(task, row_ids = train_set)
+
+# predict with final model
+afs$predict(task, row_ids = test_set)
+
+# show fselect result
+afs$fselect_result
+
+# model slot contains trained learner and fselect instance
 afs$model
+
+# shortcut trained learner
 afs$learner
+
+# shortcut fselect instance
+afs$tuning_instance
+
+
+# Nested Resampling
+
+afs = auto_fselector(
+  method = fs("random_search"),
+  learner = lrn("classif.rpart"),
+  resampling = rsmp ("holdout"),
+  measure = msr("classif.ce"),
+  term_evals = 4)
+
+resampling_outer = rsmp("cv", folds = 3)
+rr = resample(task, afs, resampling_outer, store_models = TRUE)
+
+# retrieve inner tuning results.
+extract_inner_fselect_results(rr)
+
+# performance scores estimated on the outer resampling
+rr$score()
+
+# unbiased performance of the final model trained on the full dafsa set
+rr$aggregate()
 }
 \section{Super class}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{AutoFSelector}
@@ -48,11 +93,10 @@ afs$learner
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{instance_args}}{(\code{list()})\cr
-All arguments from construction to create the
-\link{FSelectInstanceSingleCrit}.}
+All arguments from construction to create the \link{FSelectInstanceSingleCrit}.}
 
 \item{\code{fselector}}{(\link{FSelector})\cr
-Stores the feature selection algorithm.}
+Optimization algorithm.}
 }
 \if{html}{\out{</div>}}
 }
@@ -66,11 +110,14 @@ Returns \link{FSelectInstanceSingleCrit} archive.}
 Trained learner.}
 
 \item{\code{fselect_instance}}{(\link{FSelectInstanceSingleCrit})\cr
-Internally created feature selection instance with all intermediate
-results.}
+Internally created feature selection instance with all intermediate results.}
 
 \item{\code{fselect_result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}
+
+\item{\code{predict_type}}{(\code{character(1)})\cr
+Stores the currently active predict type, e.g. \code{"response"}.
+Must be an element of \verb{$predict_types}.}
 
 \item{\code{hash}}{(\code{character(1)})\cr
 Hash (unique identifier) for this object.}
@@ -82,6 +129,11 @@ Hash (unique identifier) for this object.}
 \itemize{
 \item \href{#method-AutoFSelector-new}{\code{AutoFSelector$new()}}
 \item \href{#method-AutoFSelector-base_learner}{\code{AutoFSelector$base_learner()}}
+\item \href{#method-AutoFSelector-importance}{\code{AutoFSelector$importance()}}
+\item \href{#method-AutoFSelector-selected_features}{\code{AutoFSelector$selected_features()}}
+\item \href{#method-AutoFSelector-oob_error}{\code{AutoFSelector$oob_error()}}
+\item \href{#method-AutoFSelector-loglik}{\code{AutoFSelector$loglik()}}
+\item \href{#method-AutoFSelector-print}{\code{AutoFSelector$print()}}
 \item \href{#method-AutoFSelector-clone}{\code{AutoFSelector$clone()}}
 }
 }
@@ -92,7 +144,6 @@ Hash (unique identifier) for this object.}
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
 </ul>
@@ -107,7 +158,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$new(
   learner,
   resampling,
-  measure,
+  measure = NULL,
   terminator,
   fselector,
   store_fselect_instance = TRUE,
@@ -121,29 +172,25 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
-Learner to optimize the feature subset for, see
-\link{FSelectInstanceSingleCrit}.}
+Learner to optimize the feature subset for.}
 
 \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
-Resampling strategy during feature selection, see
-\link{FSelectInstanceSingleCrit}. This \link[mlr3:Resampling]{mlr3::Resampling} is meant to be the
-\strong{inner} resampling, operating on the training set of an arbitrary outer
-resampling. For this reason it is not feasible to pass an instantiated
-\link[mlr3:Resampling]{mlr3::Resampling} here.}
+Resampling that is used to evaluated the performance of the feature subsets.
+Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
+Already instantiated resamplings are kept unchanged.}
 
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
-Performance measure to optimize.}
+Measure to optimize. If \code{NULL}, default measure is used.}
 
-\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
-When to stop feature selection, see \link{FSelectInstanceSingleCrit}.}
+\item{\code{terminator}}{(\link{Terminator})\cr
+Stop criterion of the feature selection.}
 
 \item{\code{fselector}}{(\link{FSelector})\cr
-Feature selection algorithm to run.}
+Optimization algorithm.}
 
 \item{\code{store_fselect_instance}}{(\code{logical(1)})\cr
-If \code{TRUE} (default), stores the internally created
-\link{FSelectInstanceSingleCrit} with all intermediate results in slot
-\verb{$fselect_instance}.}
+If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
+Is set to \code{TRUE}, if \code{store_models = TRUE}}
 
 \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
 Store benchmark result in archive?}
@@ -162,9 +209,8 @@ validity?}
 \if{html}{\out{<a id="method-AutoFSelector-base_learner"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-base_learner}{}}}
 \subsection{Method \code{base_learner()}}{
-Extracts the base learner from nested learner objects like
-\code{GraphLearner} in \CRANpkg{mlr3pipelines}. If \code{recursive = 0}, the (tuned)
-learner is returned.
+Extracts the base learner from nested learner objects like \code{GraphLearner} in \CRANpkg{mlr3pipelines}.
+If \code{recursive = 0}, the (tuned) learner is returned.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$base_learner(recursive = Inf)}\if{html}{\out{</div>}}
 }
@@ -179,6 +225,76 @@ Depth of recursion for multiple nested objects.}
 }
 \subsection{Returns}{
 \link{Learner}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AutoFSelector-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-AutoFSelector-importance}{}}}
+\subsection{Method \code{importance()}}{
+The importance scores of the final model.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$importance()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Named \code{numeric()}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AutoFSelector-selected_features"></a>}}
+\if{latex}{\out{\hypertarget{method-AutoFSelector-selected_features}{}}}
+\subsection{Method \code{selected_features()}}{
+The selected features of the final model.
+These features are selected internally by the learner.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$selected_features()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{character()}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AutoFSelector-oob_error"></a>}}
+\if{latex}{\out{\hypertarget{method-AutoFSelector-oob_error}{}}}
+\subsection{Method \code{oob_error()}}{
+The out-of-bag error of the final model.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$oob_error()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{numeric(1)}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AutoFSelector-loglik"></a>}}
+\if{latex}{\out{\hypertarget{method-AutoFSelector-loglik}{}}}
+\subsection{Method \code{loglik()}}{
+The log-likelihood of the final model.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$loglik()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{logLik}.
+Printer.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AutoFSelector-print"></a>}}
+\if{latex}{\out{\hypertarget{method-AutoFSelector-print}{}}}
+\subsection{Method \code{print()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$print()}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
