@@ -86,7 +86,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       benchmark_result = benchmark(design, store_models = self$store_models)
 
       # aggregate performance scores
-      aggregated_performance = bmr$aggregate(self$measures)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+      aggregated_performance = benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
 
       # add runtime to evaluations
       time = map_dbl(benchmark_result$resample_results$resample_result, function(rr) {

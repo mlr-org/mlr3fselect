@@ -59,7 +59,6 @@ Collate:
     'AutoFSelector.R'
     'ArchiveFSelect.R'
     'ObjectiveFSelect.R'
-    'helper.R'
     'mlr_fselectors.R'
     'auto_fselector.R'
     'extract_inner_fselect_archives.R'

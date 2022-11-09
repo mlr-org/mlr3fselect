@@ -21,12 +21,10 @@ excluded.}
 \code{\link[data.table:data.table]{data.table::data.table()}}.
 }
 \description{
-Extract inner feature selection archives of nested resampling. Implemented for
-\link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}. The function iterates
-over the \link{AutoFSelector} objects and binds the archives to a
-\code{\link[data.table:data.table]{data.table::data.table()}}. \link{AutoFSelector} must be initialized with
-\code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be
-called with \code{store_models = TRUE}.
+Extract inner feature selection archives of nested resampling.
+Implemented for \link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
+The function iterates over the \link{AutoFSelector} objects and binds the archives to a \code{\link[data.table:data.table]{data.table::data.table()}}.
+\link{AutoFSelector} must be initialized with \code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be called with \code{store_models = TRUE}.
 }
 \section{Data structure}{
 

@@ -4,9 +4,8 @@
 \alias{ObjectiveFSelect}
 \title{ObjectiveFSelect}
 \description{
-Stores the objective function that estimates the performance of feature
-subsets. This class is usually constructed internally by by the
-\link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
+Stores the objective function that estimates the performance of feature subsets.
+This class is usually constructed internally by by the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
 }
 \section{Super class}{
 \code{\link[bbotk:Objective]{bbotk::Objective}} -> \code{ObjectiveFSelect}

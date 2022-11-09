@@ -81,13 +81,14 @@ Score feature sets on additional measures.
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
-Stores benchmark result.}
+Benchmark result.}
 }
 \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-ArchiveFSelect-new}{\code{ArchiveFSelect$new()}}
 \item \href{#method-ArchiveFSelect-learner}{\code{ArchiveFSelect$learner()}}
 \item \href{#method-ArchiveFSelect-learners}{\code{ArchiveFSelect$learners()}}
 \item \href{#method-ArchiveFSelect-predictions}{\code{ArchiveFSelect$predictions()}}
@@ -97,17 +98,34 @@ Stores benchmark result.}
 }
 }
 \if{html}{\out{
-<details><summary>Inherited methods</summary>
+<details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href='../../bbotk/html/Archive.html#method-Archive-add_evals'><code>bbotk::Archive$add_evals()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href='../../bbotk/html/Archive.html#method-Archive-best'><code>bbotk::Archive$best()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href='../../bbotk/html/Archive.html#method-Archive-clear'><code>bbotk::Archive$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="initialize"><a href='../../bbotk/html/Archive.html#method-Archive-initialize'><code>bbotk::Archive$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="nds_selection"><a href='../../bbotk/html/Archive.html#method-Archive-nds_selection'><code>bbotk::Archive$nds_selection()</code></a></span></li>
 </ul>
 </details>
 }}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ArchiveFSelect-new"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-new}{}}}
+\subsection{Method \code{new()}}{
+Creates a new instance of this \link[R6:R6Class]{R6} class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$new(search_space, codomain, check_values = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{check_values}}{(\code{logical(1)})\cr
+If \code{TRUE} (default), hyperparameter configurations are check for validity.}
+}
+\if{html}{\out{</div>}}
+}
+}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveFSelect-learner"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveFSelect-learner}{}}}
