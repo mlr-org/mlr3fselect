@@ -83,7 +83,7 @@ test_that("learner without importance method throw an error", {
     task = tsk("pima"),
     learner = learner,
     resampling = rsmp("holdout"),
-    measure = msr("classif.ce"),
+    measures = msr("classif.ce"),
     store_models = TRUE
   ), "does not work with")
 })

@@ -35,7 +35,7 @@
 #'   term_evals = 4)
 #'
 #' at$train(tsk("pima"))
-auto_fselector = function(method, learner, resampling, measure = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, search_space = NULL, store_tuning_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, ...) {
+auto_fselector = function(method, learner, resampling, measure = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, ...) {
   fselector = if (is.character(method)) {
     assert_choice(method, mlr_fselectors$keys())
     fs(method, ...)
@@ -44,5 +44,5 @@ auto_fselector = function(method, learner, resampling, measure = NULL, term_eval
   }
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
-  AutoFSelector$new(learner = learner, resampling = resampling, measure = measure, terminator = terminator, fselector = fselector, store_tuning_instance = store_tuning_instance, store_benchmark_result = store_benchmark_result, store_models = store_models, check_values = check_values)
+  AutoFSelector$new(learner = learner, resampling = resampling, measure = measure, terminator = terminator, fselector = fselector, store_fselect_instance = store_fselect_instance, store_benchmark_result = store_benchmark_result, store_models = store_models, check_values = check_values)
 }

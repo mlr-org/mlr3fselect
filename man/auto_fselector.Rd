@@ -13,7 +13,7 @@ auto_fselector(
   term_time = NULL,
   terminator = NULL,
   search_space = NULL,
-  store_tuning_instance = TRUE,
+  store_fselect_instance = TRUE,
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
@@ -44,6 +44,10 @@ Maximum allowed time in seconds.}
 \item{terminator}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}
 
+\item{store_fselect_instance}{(\code{logical(1)})\cr
+If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
+Is set to \code{TRUE}, if \code{store_models = TRUE}}
+
 \item{store_benchmark_result}{(\code{logical(1)})\cr
 Store benchmark result in archive?}
 
@@ -56,10 +60,6 @@ validity?}
 
 \item{...}{(named \code{list()})\cr
 Named arguments to be set as parameters of the fselector.}
-
-\item{store_fselect_instance}{(\code{logical(1)})\cr
-If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
-Is set to \code{TRUE}, if \code{store_models = TRUE}}
 }
 \value{
 \link{AutoFSelector}.
