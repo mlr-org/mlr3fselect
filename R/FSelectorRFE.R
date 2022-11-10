@@ -1,5 +1,6 @@
 #' @title Feature Selection via Recursive Feature Elimination
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_rfe
 #'
 #' @description

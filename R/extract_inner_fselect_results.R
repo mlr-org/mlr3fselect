@@ -3,8 +3,11 @@
 #' @description
 #' Extract inner feature selection results of nested resampling.
 #' Implemented for [mlr3::ResampleResult] and [mlr3::BenchmarkResult].
+#'
+#' @details
 #' The function iterates over the [AutoFSelector] objects and binds the feature selection results to a [data.table::data.table()].
 #' [AutoFSelector] must be initialized with `store_fselect_instance = TRUE` and `resample()` or `benchmark()` must be called with `store_models = TRUE`.
+#' Optionally, the instance can be added for each iteration.
 #'
 #' @section Data structure:
 #'
@@ -23,10 +26,16 @@
 #' * `resampling_id` (`character(1)`).
 #'
 #' @param x ([mlr3::ResampleResult] | [mlr3::BenchmarkResult]).
+#' @param fselect_instance (`logical(1)`)\cr
+#'   If `TRUE`, instances are added to the table.
+#' @param ... (any)\cr
+#'   Additional arguments.
+#'
 #' @return [data.table::data.table()].
 #'
 #' @export
 #' @examples
+#' # Nested resampling on Palmer Penguins data set
 #' at = auto_fselector(
 #'   method = "random_search",
 #'   learner = lrn("classif.rpart"),
@@ -37,13 +46,14 @@
 #' resampling_outer = rsmp("cv", folds = 2)
 #' rr = resample(tsk("iris"), at, resampling_outer, store_models = TRUE)
 #'
+#' # Extract inner results
 #' extract_inner_fselect_results(rr)
-extract_inner_fselect_results = function (x) {
+extract_inner_fselect_results = function (x, fselect_instance, ...) {
    UseMethod("extract_inner_fselect_results", x)
 }
 
 #' @export
-extract_inner_fselect_results.ResampleResult = function(x) {
+extract_inner_fselect_results.ResampleResult = function(x, fselect_instance = FALSE, ...) {
   rr = assert_resample_result(x)
   if (is.null(rr$learners[[1]]$model$fselect_instance)) {
     return(data.table())
@@ -51,6 +61,8 @@ extract_inner_fselect_results.ResampleResult = function(x) {
   tab = imap_dtr(rr$learners, function(learner, i) {
     data = setalloccol(learner$fselect_result)
     set(data, j = "iteration", value = i)
+    if (fselect_instance) set(data, j = "fselect_instance", value = list(learner$fselect_instance))
+    data
   })
   tab[, "task_id" := rr$task$id]
   tab[, "learner_id" := rr$learner$id]
@@ -62,10 +74,10 @@ extract_inner_fselect_results.ResampleResult = function(x) {
 }
 
 #' @export
-extract_inner_fselect_results.BenchmarkResult = function(x) {
+extract_inner_fselect_results.BenchmarkResult = function(x, fselect_instance = FALSE, ...) {
   bmr = assert_benchmark_result(x)
   tab = imap_dtr(bmr$resample_results$resample_result, function(rr, i) {
-     data = extract_inner_fselect_results(rr)
+     data = extract_inner_fselect_results(rr, fselect_instance = fselect_instance)
      if (nrow(data) > 0) set(data, j = "experiment", value = i)
   }, .fill = TRUE)
   # reorder dt

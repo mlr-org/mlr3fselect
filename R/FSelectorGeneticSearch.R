@@ -1,5 +1,6 @@
 #' @title Feature Selection via Genetic Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_genetic_search
 #'
 #' @description

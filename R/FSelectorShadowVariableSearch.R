@@ -1,5 +1,6 @@
 #' @title Feature Selection via Shadow Variable Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_shadow_variable_search
 #'
 #' @description

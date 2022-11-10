@@ -1,5 +1,6 @@
 #' @title Feature Selection via Exhaustive Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_exhaustive_search
 #'
 #' @description

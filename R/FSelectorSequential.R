@@ -1,5 +1,6 @@
 #' @title Feature Selection via Sequential Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_sequential
 #'
 #' @description

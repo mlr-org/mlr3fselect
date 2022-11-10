@@ -13,13 +13,13 @@ This class is usually constructed internally by by the \link{FSelectInstanceSing
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})}
+\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task}).}
 
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})}
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner}).}
 
-\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})}
+\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling}).}
 
-\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})}
+\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure}).}
 
 \item{\code{store_models}}{(\code{logical(1)}).}
 
@@ -63,7 +63,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   measures,
   check_values = TRUE,
   store_benchmark_result = TRUE,
-  store_models = FALSE
+  store_models = FALSE,
+  archive = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -94,6 +95,10 @@ Store benchmark result in archive?}
 
 \item{\code{store_models}}{(\code{logical(1)}).
 Store models in benchmark result?}
+
+\item{\code{archive}}{(\link{ArchiveFSelect})\cr
+Reference to the archive of \link{FSelectInstanceSingleCrit} | \link{FSelectInstanceMultiCrit}.
+If \code{NULL} (default), benchmark result and models cannot be stored.}
 }
 \if{html}{\out{</div>}}
 }

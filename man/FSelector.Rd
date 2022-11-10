@@ -2,58 +2,36 @@
 % Please edit documentation in R/FSelector.R
 \name{FSelector}
 \alias{FSelector}
-\title{FSelector}
+\title{Class for Feature Selection Algorithms}
 \description{
-Abstract \code{FSelector} class that implements the base functionality each
-fselector must provide. A \code{FSelector} object describes the feature selection
-strategy, i.e. how to optimize the black-box function and its feasible set
-defined by the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit} object.
-
-A fselector must write its result into the \link{FSelectInstanceSingleCrit} /
-\link{FSelectInstanceMultiCrit} using the \code{assign_result} method of the
-\link[bbotk:OptimInstance]{bbotk::OptimInstance} at the end of its selection in order to store the best
-selected feature subset and its estimated performance vector.
+The \link{FSelector} implements the optimization algorithm.
+}
+\details{
+\link{FSelector} is a abstract base class that implements the base functionality each fselector must provide.
+A subclass is implemented in the following way:
+\itemize{
+\item Inherit from FSelector.
+\item Specify the private abstract method \verb{$.optimize()} and use it to call into your optimizer.
+\item You need to call \code{instance$eval_batch()} to evaluate design points.
+\item The batch evaluation is requested at the \link{FSelectInstanceSingleCrit}/\link{FSelectInstanceMultiCrit} object \code{instance}, so each batch is possibly executed in parallel via \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, and all evaluations are stored inside of \code{instance$archive}.
+\item Before the batch evaluation, the \link[bbotk:Terminator]{bbotk::Terminator} is checked, and if it is positive, an exception of class \code{"terminated_error"} is generated.
+In the  later case the current batch of evaluations is still stored in \code{instance}, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
+\item After such an exception was caught we select the best set from \code{instance$archive} and return it.
+\item Note that therefore more points than specified by the \link[bbotk:Terminator]{bbotk::Terminator} may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
+How many more depends on the setting of the batch size.
+\item Overwrite the private super-method \code{.assign_result()} if you want to decide yourself how to estimate the final set in the instance and its estimated performance.
+The default behavior is: We pick the best resample-experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
+}
 }
 \section{Private Methods}{
 
 \itemize{
 \item \code{.optimize(instance)} -> \code{NULL}\cr
-Abstract base method. Implement to specify feature selection of your
-subclass. See technical details sections.
+Abstract base method. Implement to specify feature selection of your subclass.
+See technical details sections.
 \item \code{.assign_result(instance)} -> \code{NULL}\cr
-Abstract base method. Implement to specify how the final feature subset is
-selected. See technical details sections.
-}
-}
-
-\section{Technical Details and Subclasses}{
-
-A subclass is implemented in the following way:
-\itemize{
-\item Inherit from \code{FSelector}.
-\item Specify the private abstract method \verb{$.optimize()} and use it to call into
-your optimizer.
-\item You need to call \code{instance$eval_batch()} to evaluate feature subsets.
-\item The batch evaluation is requested at the \link{FSelectInstanceSingleCrit} /
-\link{FSelectInstanceMultiCrit} object \code{instance}, so each batch is possibly
-executed in parallel via \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, and all evaluations are stored
-inside of \code{instance$archive}.
-\item Before the batch evaluation, the \link[bbotk:Terminator]{bbotk::Terminator} is checked, and if it is
-positive, an exception of class \code{"terminated_error"} is generated. In the
-later case the current batch of evaluations is still stored in \code{instance},
-but the numeric scores are not sent back to the handling optimizer as it has
-lost execution control.
-\item After such an exception was caught we select the best feature subset from
-\code{instance$archive} and return it.
-\item Note that therefore more points than specified by the \link[bbotk:Terminator]{bbotk::Terminator}
-may be evaluated, as the Terminator is only checked before a batch
-evaluation, and not in-between evaluation in a batch. How many more depends
-on the setting of the batch size.
-\item Overwrite the private super-method \code{.assign_result()} if you want to decide
-yourself how to estimate the final feature subset in the instance and its
-estimated performance. The default behavior is: We pick the best
-resample-experiment, regarding the given measure, then assign its
-feature subset and aggregated performance to the instance.
+Abstract base method. Implement to specify how the final feature subset is  selected.
+See technical details sections.
 }
 }
 
@@ -185,10 +163,8 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \if{html}{\out{<a id="method-FSelector-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelector-optimize}{}}}
 \subsection{Method \code{optimize()}}{
-Performs the feature selection on a \link{FSelectInstanceSingleCrit} or
-\link{FSelectInstanceMultiCrit} until termination.
-The single evaluations will be written into the \link{ArchiveFSelect} that resides in the
-\link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
+Performs the feature selection on a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} until termination.
+The single evaluations will be written into the \link{ArchiveFSelect} that resides in the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
 The result will be written into the instance object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelector$optimize(inst)}\if{html}{\out{</div>}}
@@ -197,7 +173,7 @@ The result will be written into the instance object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{inst}}{(\link{FSelectInstanceSingleCrit}|\link{FSelectInstanceMultiCrit}).}
+\item{\code{inst}}{(\link{FSelectInstanceSingleCrit} | \link{FSelectInstanceMultiCrit}).}
 }
 \if{html}{\out{</div>}}
 }

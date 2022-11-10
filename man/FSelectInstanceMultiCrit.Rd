@@ -4,55 +4,53 @@
 \alias{FSelectInstanceMultiCrit}
 \title{Multi Criterion Feature Selection Instance}
 \description{
-Specifies a general feature selection scenario, including objective function
-and archive for feature selection algorithms to act upon. This class stores
-an \link{ObjectiveFSelect} object that encodes the black box objective function
-which an \link{FSelector} has to optimize. It allows the basic operations of
-querying the objective at feature subsets (\verb{$eval_batch()}), storing the
-evaluations in the internal \link[bbotk:Archive]{bbotk::Archive} and accessing the final result
-(\verb{$result}).
-
-Evaluations of feature subsets are performed in batches by calling
-\code{\link[mlr3:benchmark]{mlr3::benchmark()}} internally. Before a batch is evaluated, the
-\link[bbotk:Terminator]{bbotk::Terminator} is queried for the remaining budget. If the available
-budget is exhausted, an exception is raised, and no further evaluations can
-be performed from this point on.
-
-The \link{FSelector} is also supposed to store its final result, consisting
-of the selected feature subsets and associated estimated performance values, by
-calling the method \code{instance$assign_result()}.
+The \link{FSelectInstanceMultiCrit} specifies a feature selection problem for \link[=FSelector]{FSelectors}.
+The function \code{\link[=fsi]{fsi()}} creates a \link{FSelectInstanceMultiCrit} and the function \code{\link[=fselect]{fselect()}} creates an instance internally.
 }
+\section{Resources}{
+
+\itemize{
+\item \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{book chapter} on feature selection.
+}
+}
+
+\section{Analysis}{
+
+For analyzing the feature selection results, it is recommended to pass the archive to \code{as.data.table()}.
+The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature set.
+
+The archive provides various getters (e.g. \verb{$learners()}) to ease the access.
+All getters extract by position (\code{i}) or unique hash (\code{uhash}).
+For a complete list of all getters see the methods section.
+
+The benchmark result (\verb{$benchmark_result}) allows to score the feature sets again on a different measure.
+Alternatively, measures can be supplied to \code{as.data.table()}.
+}
+
 \examples{
-library(mlr3)
-library(data.table)
+# Feature selection on Palmer Penguins data set
+task = tsk("penguins")
 
-# Objects required to define the performance evaluator
-task = tsk("iris")
-measures = msrs(c("classif.ce", "classif.acc"))
-learner = lrn("classif.rpart")
-resampling = rsmp("cv")
-terminator = trm("evals", n_evals = 8)
-
-inst = FSelectInstanceMultiCrit$new(
+# Construct feature selection instance
+instance = fsi(
   task = task,
-  learner = learner,
-  resampling = resampling,
-  measures = measures,
-  terminator = terminator
+  learner = lrn("classif.rpart"),
+  resampling = rsmp("cv", folds = 3),
+  measures = msrs(c("classif.ce", "time_train")),
+  terminator = trm("evals", n_evals = 4)
 )
 
-# Try some feature subsets
-xdt = data.table(
-  Petal.Length = c(TRUE, FALSE),
-  Petal.Width = c(FALSE, TRUE),
-  Sepal.Length = c(TRUE, FALSE),
-  Sepal.Width = c(FALSE, TRUE)
-)
+# Choose optimization algorithm
+fselector = fs("random_search", batch_size = 2)
 
-inst$eval_batch(xdt)
+# Run feature selection
+fselector$optimize(instance)
 
-# Get archive data
-as.data.table(inst$archive)
+# Optimal feature sets
+instance$result_feature_set
+
+# Inspect all evaluated sets
+as.data.table(instance$archive)
 }
 \section{Super classes}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceMultiCrit]{bbotk::OptimInstanceMultiCrit}} -> \code{FSelectInstanceMultiCrit}
@@ -96,9 +94,9 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   resampling,
   measures,
   terminator,
+  store_benchmark_result = TRUE,
   store_models = FALSE,
-  check_values = TRUE,
-  store_benchmark_result = TRUE
+  check_values = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -123,15 +121,15 @@ If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
 \item{\code{terminator}}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}
 
+\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+Store benchmark result in archive?}
+
 \item{\code{store_models}}{(\code{logical(1)}).
 Store models in benchmark result?}
 
 \item{\code{check_values}}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
-
-\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
-Store benchmark result in archive?}
 }
 \if{html}{\out{</div>}}
 }

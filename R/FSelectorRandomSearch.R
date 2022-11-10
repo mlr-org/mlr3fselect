@@ -1,5 +1,6 @@
 #' @title Feature Selection via Random Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_random_search
 #'
 #' @description

@@ -1,5 +1,6 @@
 #' @title Feature Selection via Design Points
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_design_points
 #'
 #' @description

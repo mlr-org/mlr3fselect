@@ -51,18 +51,19 @@ Named arguments to be set as parameters of the fselector.}
 Function to conduct nested resampling.
 }
 \examples{
+# Nested resampling on Palmer Penguins data set
 rr = fselect_nested(
   method = "random_search",
-  task = tsk("pima"),
+  task = tsk("penguins"),
   learner = lrn("classif.rpart"),
   inner_resampling = rsmp ("holdout"),
   outer_resampling = rsmp("cv", folds = 2),
   measure = msr("classif.ce"),
   term_evals = 4)
 
-# performance scores estimated on the outer resampling
+# Performance scores estimated on the outer resampling
 rr$score()
 
-# unbiased performance of the final model trained on the full data set
+# Unbiased performance of the final model trained on the full data set
 rr$aggregate()
 }

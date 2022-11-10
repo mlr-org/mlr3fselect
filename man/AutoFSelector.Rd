@@ -2,7 +2,7 @@
 % Please edit documentation in R/AutoFSelector.R
 \name{AutoFSelector}
 \alias{AutoFSelector}
-\title{AutoFSelector}
+\title{Class for Automatic Feature Selection}
 \description{
 The \link{AutoFSelector} wraps a \link[mlr3:Learner]{mlr3::Learner} and augments it with an automatic feature selection.
 The \code{\link[=auto_fselector]{auto_fselector()}} function creates an \link{AutoFSelector} object.
@@ -33,7 +33,7 @@ For this reason it is not feasible to pass an instantiated \link[mlr3:Resampling
 }
 
 \examples{
-# Automafsic Feafsure Selection
+# Automatic Feature Selection
 
 task = tsk("penguins")
 train_set = sample(task$nrow, 0.8 * task$nrow)
@@ -46,7 +46,7 @@ afs = auto_fselector(
   measure = msr("classif.ce"),
   term_evals = 4)
 
-# optimize feafsure subset and fit final model
+# optimize feature subset and fit final model
 afs$train(task, row_ids = train_set)
 
 # predict with final model
@@ -83,7 +83,7 @@ extract_inner_fselect_results(rr)
 # performance scores estimated on the outer resampling
 rr$score()
 
-# unbiased performance of the final model trained on the full dafsa set
+# unbiased performance of the final model trained on the full data set
 rr$aggregate()
 }
 \section{Super class}{
