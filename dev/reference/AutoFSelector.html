@@ -379,20 +379,20 @@ Printer.</p>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">test_set</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PredictionClassif&gt; for 69 observations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     row_ids     truth  response</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          20    Adelie Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          22    Adelie    Adelie</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          30    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           4    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           8    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          14    Adelie    Adelie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         336 Chinstrap Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         343 Chinstrap    Gentoo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         343 Chinstrap Chinstrap</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         344 Chinstrap Chinstrap</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show fselect result</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">fselect_result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,body_mass,flipper_length,island,sex,year 0.05434783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE          FALSE   TRUE FALSE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,island,year 0.05434783</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># model slot contains trained learner and fselect instance</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">model</span></span></span>
@@ -407,8 +407,7 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   twoclass, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_length"    "body_mass"      "flipper_length" "island"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "sex"            "year"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_length" "island"      "year"       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fselect_instance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;FSelectInstanceSingleCrit&gt;</span>
@@ -425,19 +424,19 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7:           year ParamLgl    NA    NA       2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Terminator: &lt;TerminatorEvals&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE           TRUE   TRUE TRUE TRUE 0.05434783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE          FALSE   TRUE FALSE TRUE 0.05434783</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE      TRUE           TRUE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE     FALSE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE     FALSE          FALSE   TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.05434783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.23913043</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.05434783</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.05434783</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06521739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.22826087</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># shortcut trained learner</span></span></span>
@@ -471,17 +470,17 @@ Printer.</p>
 <span class="r-in"><span><span class="co"># retrieve inner tuning results.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island   sex year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE      TRUE           TRUE   TRUE  TRUE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE          FALSE   TRUE FALSE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3      FALSE        TRUE      TRUE           TRUE  FALSE  TRUE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce                                             features  task_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.11842105 bill_length,body_mass,flipper_length,island,sex,year penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06578947         bill_depth,bill_length,body_mass,island,year penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06493506        bill_length,body_mass,flipper_length,sex,year penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE      TRUE           TRUE   TRUE FALSE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE     FALSE           TRUE   TRUE  TRUE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce                                                       features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07894737               bill_length,body_mass,flipper_length,island,year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07894737 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.07792208          bill_depth,bill_length,flipper_length,island,sex,year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: penguins classif.rpart.fselector            cv</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># performance scores estimated on the outer resampling</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -494,14 +493,14 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResamplingCV[20]&gt;            cv         2 &lt;PredictionClassif[20]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;ResamplingCV[20]&gt;            cv         3 &lt;PredictionClassif[20]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.05217391</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07826087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.04385965</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06086957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.05217391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.05263158</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># unbiased performance of the final model trained on the full dafsa set</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05809814 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05522502 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
