@@ -17,6 +17,7 @@
 #'
 #' @inheritSection bbotk::OptimizerDesignPoints Parameters
 #'
+#' @family FSelector
 #' @export
 #' @examples
 #' # Feature Selection
@@ -35,7 +36,7 @@
 #'   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 #' )
 #'
-#' # Feature selection on the Pima Indians diabetes data set
+#' # run feature selection on the Pima Indians diabetes data set
 #' instance = fselect(
 #'   method = fs("design_points", design = design),
 #'   task = task,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ObjectiveFSelect.R
 \name{ObjectiveFSelect}
 \alias{ObjectiveFSelect}
-\title{ObjectiveFSelect}
+\title{Class for Feature Selection Objective}
 \description{
 Stores the objective function that estimates the performance of feature subsets.
 This class is usually constructed internally by by the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
@@ -51,9 +51,6 @@ This class is usually constructed internally by by the \link{FSelectInstanceSing
 \if{html}{\out{<a id="method-ObjectiveFSelect-new"></a>}}
 \if{latex}{\out{\hypertarget{method-ObjectiveFSelect-new}{}}}
 \subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-
-
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelect$new(

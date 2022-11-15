@@ -39,6 +39,7 @@
 #'
 #' The parameter `feature_fraction`, `feature_number` and `subset_sizes` are mutually exclusive.
 #'
+#' @family FSelector
 #' @export
 #' @examples
 #' # Feature Selection

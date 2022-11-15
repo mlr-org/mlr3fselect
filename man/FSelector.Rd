@@ -35,6 +35,13 @@ See technical details sections.
 }
 }
 
+\section{Resources}{
+
+\itemize{
+\item \href{https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class}{book section} on feature selection algorithms.
+}
+}
+
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

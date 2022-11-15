@@ -1,4 +1,4 @@
-#' @title ObjectiveFSelect
+#' @title Class for Feature Selection Objective
 #'
 #' @description
 #' Stores the objective function that estimates the performance of feature subsets.
@@ -15,9 +15,6 @@
 #' @export
 ObjectiveFSelect = R6Class("ObjectiveFSelect",
   inherit = Objective,
-
-  #' @description
-  #' Creates a new instance of this [R6][R6::R6Class] class.
   public = list(
 
     #' @field task ([mlr3::Task]).

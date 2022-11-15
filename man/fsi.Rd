@@ -51,6 +51,7 @@ Function to construct a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanc
 
 \itemize{
 \item \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{book chapter} on feature selection.
+\item \href{https://mlr-org.com/gallery/2020-09-14-mlr3fselect-basic/}{gallery post} on feature selection on the Titanic data set.
 }
 }
 

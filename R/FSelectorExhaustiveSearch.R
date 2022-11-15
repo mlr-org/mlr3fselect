@@ -17,10 +17,11 @@
 #' @section Control Parameters:
 #' \describe{
 #' \item{`max_features`}{`integer(1)`\cr
-#' Maximum number of features.
-#' By default, number of features in [mlr3::Task].}
+#'   Maximum number of features.
+#'   By default, number of features in [mlr3::Task].}
 #' }
 #'
+#' @family FSelector
 #' @export
 #' @template example
 FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",

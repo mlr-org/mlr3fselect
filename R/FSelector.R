@@ -28,6 +28,9 @@
 #'   Abstract base method. Implement to specify how the final feature subset is  selected.
 #'   See technical details sections.
 #'
+#' @section Resources:
+#' * [book section](https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class) on feature selection algorithms.
+#'
 #' @template param_man
 #'
 #' @export

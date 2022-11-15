@@ -15,6 +15,7 @@
 #' We set `ìters = 100000`  to allow the termination via our terminators.
 #' If more iterations are needed, set `ìters` to a higher value in the parameter set.
 #'
+#' @family FSelector
 #' @export
 #' @template example
 FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",

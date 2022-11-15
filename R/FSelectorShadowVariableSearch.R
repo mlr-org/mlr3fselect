@@ -17,6 +17,7 @@
 #' @source
 #' `r format_bib("thomas2017", "wu2007")`
 #'
+#' @family FSelector
 #' @export
 #' @examples
 #' # Feature Selection

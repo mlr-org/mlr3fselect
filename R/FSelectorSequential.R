@@ -19,13 +19,14 @@
 #' @section Control Parameters:
 #' \describe{
 #' \item{`min_features`}{`integer(1)`\cr
-#' Minimum number of features. By default, 1.}
+#'   Minimum number of features. By default, 1.}
 #' \item{`max_features`}{`integer(1)`\cr
-#' Maximum number of features. By default, number of features in [mlr3::Task].}
+#'   Maximum number of features. By default, number of features in [mlr3::Task].}
 #' \item{`strategy`}{`character(1)`\cr
-#' Search method `sfs` (forward search) or `sbs` (backward search).}
+#'   Search method `sfs` (forward search) or `sbs` (backward search).}
 #' }
 #'
+#' @family FSelector
 #' @export
 #' @template example
 FSelectorSequential = R6Class("FSelectorSequential",

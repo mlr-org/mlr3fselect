@@ -1,14 +1,24 @@
 #' @title Syntactic Sugar for FSelect Construction
 #'
 #' @description
-#' This function complements [mlr_fselectors] with functions in the spirit
-#' of [mlr3::mlr_sugar].
+#' Functions to retrieve objects, set parameters and assign to fields in one go.
+#' Relies on [mlr3misc::dictionary_sugar_get()] to extract objects from the respective [mlr3misc::Dictionary]:
+#'
+#' * `fs()` for a [FSelector] from [mlr_fselectors].
+#' * `fss()` for a list of [FSelectors][FSelector] from [mlr_fselectors].
+#' * `trm()` for a [Terminator] from [mlr_terminators].
+#' * `trms()` for a list of [Terminators][Terminator] from [mlr_terminators].
 #'
 #' @inheritParams mlr3::mlr_sugar
-#' @return [FSelector].
+#' @return [R6::R6Class] object of the respective type, or a list of [R6::R6Class] objects for the plural versions.
+#'
 #' @export
 #' @examples
-#' fs("sequential", max_features = 4)
+#' # random search with batch size of 5
+#' fs("random_search", batch_size = 5)
+#'
+#' # run time terminator with 20 seconds
+#' trm("run_time", secs = 20)
 fs = function(.key, ...) {
   dictionary_sugar_get(mlr_fselectors, .key, ...)
 }

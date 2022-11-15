@@ -20,6 +20,7 @@
 #'
 #' @section Resources:
 #' * [book chapter](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper) on feature selection.
+#' * [gallery post](https://mlr-org.com/gallery/2020-09-14-mlr3fselect-basic/) on feature selection on the Titanic data set.
 #'
 #' @template param_task
 #' @template param_learner

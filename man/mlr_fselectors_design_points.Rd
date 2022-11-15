@@ -15,11 +15,9 @@ It is not necessary to set a termination criterion.
 }
 \section{Dictionary}{
 
-This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:
+This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_fselectors$get("design_points")
-fs("design_points")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("design_points")
 }\if{html}{\out{</div>}}
 }
 
@@ -52,7 +50,7 @@ design = mlr3misc::rowwise_table(
   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 )
 
-# Feature selection on the Pima Indians diabetes data set
+# run feature selection on the Pima Indians diabetes data set
 instance = fselect(
   method = fs("design_points", design = design),
   task = task,
@@ -72,6 +70,17 @@ task$select(instance$result_feature_set)
 learner$train(task)
 }
 }
+\seealso{
+Other FSelector: 
+\code{\link{mlr_fselectors_exhaustive_search}},
+\code{\link{mlr_fselectors_genetic_search}},
+\code{\link{mlr_fselectors_random_search}},
+\code{\link{mlr_fselectors_rfe}},
+\code{\link{mlr_fselectors_sequential}},
+\code{\link{mlr_fselectors_shadow_variable_search}},
+\code{\link{mlr_fselectors}}
+}
+\concept{FSelector}
 \section{Super classes}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorFromOptimizer]{mlr3fselect::FSelectorFromOptimizer}} -> \code{FSelectorDesignPoints}
 }

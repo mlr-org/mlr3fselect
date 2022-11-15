@@ -47,9 +47,11 @@ Vector of selected feature set.
 }
 
 \examples{
-# Nested resampling on Palmer Penguins data set
+# Nested Resampling on Palmer Penguins Data Set
+
+# create auto fselector
 at = auto_fselector(
-  method = "random_search",
+  method = fs("random_search"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measure = msr("classif.ce"),
@@ -58,6 +60,6 @@ at = auto_fselector(
 resampling_outer = rsmp("cv", folds = 2)
 rr = resample(tsk("iris"), at, resampling_outer, store_models = TRUE)
 
-# Extract inner results
+# extract inner results
 extract_inner_fselect_results(rr)
 }

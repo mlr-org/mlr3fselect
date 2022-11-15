@@ -26,6 +26,7 @@
 #' @source
 #' `r format_bib("bergstra_2012")`
 #'
+#' @family FSelector
 #' @export
 #' @examples
 #' # Feature Selection
