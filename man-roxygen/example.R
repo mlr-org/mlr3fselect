@@ -1,12 +1,12 @@
 #' @examples
-#' # retrieve task
-#' task = tsk("pima")
+#' # Feature Selection
+#' \donttest{
 #'
-#' # load learner
+#' # retrieve task and load learner
+#' task = tsk("penguins")
 #' learner = lrn("classif.rpart")
 #'
-#' \donttest{
-#' # feature selection on the pima indians diabetes data set
+#' # run feature selection on the Palmer Penguins data set
 #' instance = fselect(
 #'   method = "<%= id %>",
 #'   task = task,
@@ -16,10 +16,10 @@
 #'   term_evals = 10
 #' )
 #'
-#' # best performing feature subset
+#' # best performing feature set
 #' instance$result
 #'
-#' # all evaluated feature subsets
+#' # all evaluated feature sets
 #' as.data.table(instance$archive)
 #'
 #' # subset the task and fit the final model

@@ -1,4 +1,4 @@
-#' @title Multi Criterion Feature Selection Instance
+#' @title Class for Multi Criteria Feature Selection
 #'
 #' @include FSelectInstanceSingleCrit.R ArchiveFSelect.R
 #'
@@ -19,7 +19,6 @@
 #' @template param_check_values
 #' @template param_store_benchmark_result
 #' @template param_xdt
-#'
 #'
 #' @export
 #' @examples
@@ -78,11 +77,11 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
     },
 
     #' @description
-    #' The [FSelector] object writes the best found feature subsets
-    #' and estimated performance values here. For internal use.
+    #' The [FSelector] object writes the best found feature subsets and estimated performance values here.
+    #' For internal use.
     #'
     #' @param ydt (`data.table::data.table()`)\cr
-    #' Optimal outcomes, e.g. the Pareto front.
+    #'   Optimal outcomes, e.g. the Pareto front.
     assign_result = function(xdt, ydt) {
       # Add feature names to result for easy task subsetting
       features = map(transpose_list(xdt), function(x) {
@@ -98,7 +97,7 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
   ),
 
   active = list(
-    #' @field result_feature_set (`list()` of `character()`)\cr
+    #' @field result_feature_set (list of `character()`)\cr
     #' Feature sets for task subsetting.
     result_feature_set = function() {
       map(self$result$features, function(x) {

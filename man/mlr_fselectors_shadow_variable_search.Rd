@@ -3,7 +3,7 @@
 \name{mlr_fselectors_shadow_variable_search}
 \alias{mlr_fselectors_shadow_variable_search}
 \alias{FSelectorShadowVariableSearch}
-\title{Feature Selection via Shadow Variable Search}
+\title{Feature Selection with Shadow Variable Search}
 \source{
 Thomas J, Hepp T, Mayr A, Bischl B (2017).
 \dQuote{Probing for Sparse and Fast Variable Selection with Model-Based Boosting.}
@@ -16,8 +16,10 @@ Wu Y, Boos DD, Stefanski LA (2007).
 \doi{10.1198/016214506000000843}.
 }
 \description{
+Feature selection using the Shadow Variable Search Algorithm.
 Shadow variable search creates for each feature a permutated copy and stops when one of them is selected.
-
+}
+\details{
 The feature selection terminates itself when the first shadow variable is selected.
 It is not necessary to set a termination criterion.
 }
@@ -32,16 +34,16 @@ fs("shadow_variable_search")
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
-  method = "shadow_variable_search",
+  method = fs("shadow_variable_search"),
   task = task,
   learner = learner,
   resampling = rsmp("holdout"),

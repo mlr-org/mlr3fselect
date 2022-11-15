@@ -178,7 +178,7 @@ The result will be written into the instance object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}.
+\code{\link[data.table:data.table]{data.table::data.table()}}.
 }
 }
 \if{html}{\out{<hr>}}

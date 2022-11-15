@@ -34,11 +34,13 @@ For this reason it is not feasible to pass an instantiated \link[mlr3:Resampling
 
 \examples{
 # Automatic Feature Selection
+\donttest{
 
+# split to train and external set
 task = tsk("penguins")
-train_set = sample(task$nrow, 0.8 * task$nrow)
-test_set = setdiff(seq_len(task$nrow), train_set)
+split = partition(task, ratio = 0.8)
 
+# create auto fselector
 afs = auto_fselector(
   method = fs("random_search"),
   learner = lrn("classif.rpart"),
@@ -47,12 +49,12 @@ afs = auto_fselector(
   term_evals = 4)
 
 # optimize feature subset and fit final model
-afs$train(task, row_ids = train_set)
+afs$train(task, row_ids = split$train)
 
 # predict with final model
-afs$predict(task, row_ids = test_set)
+afs$predict(task, row_ids = split$test)
 
-# show fselect result
+# show result
 afs$fselect_result
 
 # model slot contains trained learner and fselect instance
@@ -85,6 +87,7 @@ rr$score()
 
 # unbiased performance of the final model trained on the full data set
 rr$aggregate()
+}
 }
 \section{Super class}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{AutoFSelector}

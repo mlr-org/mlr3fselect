@@ -2,7 +2,7 @@
 % Please edit documentation in R/FSelectInstanceMultiCrit.R
 \name{FSelectInstanceMultiCrit}
 \alias{FSelectInstanceMultiCrit}
-\title{Multi Criterion Feature Selection Instance}
+\title{Class for Multi Criteria Feature Selection}
 \description{
 The \link{FSelectInstanceMultiCrit} specifies a feature selection problem for \link[=FSelector]{FSelectors}.
 The function \code{\link[=fsi]{fsi()}} creates a \link{FSelectInstanceMultiCrit} and the function \code{\link[=fselect]{fselect()}} creates an instance internally.
@@ -58,7 +58,7 @@ as.data.table(instance$archive)
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{result_feature_set}}{(\code{list()} of \code{character()})\cr
+\item{\code{result_feature_set}}{(list of \code{character()})\cr
 Feature sets for task subsetting.}
 }
 \if{html}{\out{</div>}}
@@ -138,8 +138,8 @@ validity?}
 \if{html}{\out{<a id="method-FSelectInstanceMultiCrit-assign_result"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceMultiCrit-assign_result}{}}}
 \subsection{Method \code{assign_result()}}{
-The \link{FSelector} object writes the best found feature subsets
-and estimated performance values here. For internal use.
+The \link{FSelector} object writes the best found feature subsets and estimated performance values here.
+For internal use.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceMultiCrit$assign_result(xdt, ydt)}\if{html}{\out{</div>}}
 }

@@ -3,10 +3,11 @@
 \name{mlr_fselectors_sequential}
 \alias{mlr_fselectors_sequential}
 \alias{FSelectorSequential}
-\title{Feature Selection via Sequential Search}
+\title{Feature Selection with Sequential Search}
 \description{
-Sequential search iteratively adds features to the set.
-
+Feature selection using Sequential Search Algorithm.
+}
+\details{
 Sequential forward selection (\code{strategy = fsf}) extends the feature set in each iteration with the feature that increases the models performance the most.
 Sequential backward selection (\code{strategy = fsb}) follows the same idea but starts with all features and removes features from the set.
 
@@ -23,7 +24,7 @@ fs("sequential")
 }\if{html}{\out{</div>}}
 }
 
-\section{Parameters}{
+\section{Control Parameters}{
 
 \describe{
 \item{\code{min_features}}{\code{integer(1)}\cr
@@ -36,14 +37,14 @@ Search method \code{sfs} (forward search) or \code{sbs} (backward search).}
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
   method = "sequential",
   task = task,
@@ -53,10 +54,10 @@ instance = fselect(
   term_evals = 10
 )
 
-# best performing feature subset
+# best performing feature set
 instance$result
 
-# all evaluated feature subsets
+# all evaluated feature sets
 as.data.table(instance$archive)
 
 # subset the task and fit the final model

@@ -35,12 +35,13 @@
 #' @export
 #' @examples
 #' # Automatic Feature Selection
-#'
-#' task = tsk("penguins")
-#' train_set = sample(task$nrow, 0.8 * task$nrow)
-#' test_set = setdiff(seq_len(task$nrow), train_set)
-#'
 #' \donttest{
+#'
+#' # split to train and external set
+#' task = tsk("penguins")
+#' split = partition(task, ratio = 0.8)
+#'
+#' # create auto fselector
 #' afs = auto_fselector(
 #'   method = fs("random_search"),
 #'   learner = lrn("classif.rpart"),
@@ -49,12 +50,12 @@
 #'   term_evals = 4)
 #'
 #' # optimize feature subset and fit final model
-#' afs$train(task, row_ids = train_set)
+#' afs$train(task, row_ids = split$train)
 #'
 #' # predict with final model
-#' afs$predict(task, row_ids = test_set)
+#' afs$predict(task, row_ids = split$test)
 #'
-#' # show fselect result
+#' # show result
 #' afs$fselect_result
 #'
 #' # model slot contains trained learner and fselect instance

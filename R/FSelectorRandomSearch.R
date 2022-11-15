@@ -1,21 +1,24 @@
-#' @title Feature Selection via Random Search
+#' @title Feature Selection with Random Search
 #'
 #' @include mlr_fselectors.R
 #' @name mlr_fselectors_random_search
 #'
 #' @description
-#' Random search randomly draws feature sets.
+#' Feature selection using Random Search Algorithm.
 #'
-#' Feature sets are evaluated in batches of size `batch_size`.
+#' @details
+#' The feature sets are randomly drawn.
+#' The sets are evaluated in batches of size `batch_size`.
 #' Larger batches mean we can parallelize more, smaller batches imply a more fine-grained checking of termination criteria.
 #'
 #' @templateVar id random_search
 #' @template section_dictionary_fselectors
 #'
-#' @section Parameters:
+#' @section Control Parameters:
 #' \describe{
 #' \item{`max_features`}{`integer(1)`\cr
-#' Maximum number of features. By default, number of features in [mlr3::Task].}
+#' Maximum number of features.
+#' By default, number of features in [mlr3::Task].}
 #' \item{`batch_size`}{`integer(1)`\cr
 #' Maximum number of feature sets to try in a batch.}
 #' }
@@ -25,21 +28,21 @@
 #'
 #' @export
 #' @examples
-#' # retrieve task
-#' task = tsk("pima")
+#' # Feature Selection
+#' \donttest{
 #'
-#' # load learner
+#' # retrieve task and load learner
+#' task = tsk("penguins")
 #' learner = lrn("classif.rpart")
 #'
-#' \donttest{
-#' # feature selection on the pima indians diabetes data set
+#' # run feature selection on the Palmer Penguins data set
 #' instance = fselect(
-#'   method = "random_search",
+#'   method = fs("random_search"),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp("holdout"),
 #'   measure = msr("classif.ce"),
-#'   term_evals = 100
+#'   term_evals = 10
 #' )
 #'
 #' # best performing feature subset

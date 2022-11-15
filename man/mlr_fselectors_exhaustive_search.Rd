@@ -3,10 +3,12 @@
 \name{mlr_fselectors_exhaustive_search}
 \alias{mlr_fselectors_exhaustive_search}
 \alias{FSelectorExhaustiveSearch}
-\title{Feature Selection via Exhaustive Search}
+\title{Feature Selection with Exhaustive Search}
 \description{
-Exhaustive search generates all possible feature sets.
-
+Feature Selection using the Exhaustive Search Algorithm.
+Exhaustive Search generates all possible feature sets.
+}
+\details{
 The feature selection terminates itself when all feature sets are evaluated.
 It is not necessary to set a termination criterion.
 }
@@ -20,23 +22,24 @@ fs("exhaustive_search")
 }\if{html}{\out{</div>}}
 }
 
-\section{Parameters}{
+\section{Control Parameters}{
 
 \describe{
 \item{\code{max_features}}{\code{integer(1)}\cr
-Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
+Maximum number of features.
+By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 }
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
   method = "exhaustive_search",
   task = task,
@@ -46,10 +49,10 @@ instance = fselect(
   term_evals = 10
 )
 
-# best performing feature subset
+# best performing feature set
 instance$result
 
-# all evaluated feature subsets
+# all evaluated feature sets
 as.data.table(instance$archive)
 
 # subset the task and fit the final model

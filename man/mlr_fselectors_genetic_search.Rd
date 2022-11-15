@@ -3,11 +3,9 @@
 \name{mlr_fselectors_genetic_search}
 \alias{mlr_fselectors_genetic_search}
 \alias{FSelectorGeneticSearch}
-\title{Feature Selection via Genetic Search}
+\title{Feature Selection with Genetic Search}
 \description{
-Genetic search imitates the process of natural selection to generate feature sets.
-
-Calls \code{\link[genalg:rbga.bin]{genalg::rbga.bin()}} from package \CRANpkg{genalg}.
+Feature selection using the Genetic Algorithm from the package \CRANpkg{genalg}.
 }
 \section{Dictionary}{
 
@@ -19,16 +17,7 @@ fs("genetic_search")
 }\if{html}{\out{</div>}}
 }
 
-\section{Parameters}{
-
-\describe{
-\item{\code{suggestions}}{\code{list()}}
-\item{\code{popSize}}{\code{integer(1)}}
-\item{\code{mutationChance}}{\code{numeric(1)}}
-\item{\code{elitism}}{\code{integer(1)}}
-\item{\code{zeroToOneRatio}}{\code{integer(1)}}
-\item{\code{iters}}{\code{integer(1)}}
-}
+\section{Control Parameters}{
 
 For the meaning of the control parameters, see \code{\link[genalg:rbga.bin]{genalg::rbga.bin()}}.
 \code{\link[genalg:rbga.bin]{genalg::rbga.bin()}} internally terminates after \code{iters} iteration.
@@ -37,14 +26,14 @@ If more iterations are needed, set \code{ìters} to a higher value in the parame
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
   method = "genetic_search",
   task = task,
@@ -54,10 +43,10 @@ instance = fselect(
   term_evals = 10
 )
 
-# best performing feature subset
+# best performing feature set
 instance$result
 
-# all evaluated feature subsets
+# all evaluated feature sets
 as.data.table(instance$archive)
 
 # subset the task and fit the final model
