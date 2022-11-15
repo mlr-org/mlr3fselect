@@ -65,7 +65,7 @@
 #' afs$learner
 #'
 #' # shortcut fselect instance
-#' afs$tuning_instance
+#' afs$fselect_instance
 #'
 #'
 #' # Nested Resampling
@@ -80,7 +80,7 @@
 #' resampling_outer = rsmp("cv", folds = 3)
 #' rr = resample(task, afs, resampling_outer, store_models = TRUE)
 #'
-#' # retrieve inner tuning results.
+#' # retrieve inner feature selection results.
 #' extract_inner_fselect_results(rr)
 #'
 #' # performance scores estimated on the outer resampling
@@ -291,7 +291,7 @@ AutoFSelector = R6Class("AutoFSelector",
       task = task$clone()
 
       # disable timeout to allow train on full data set without time limit
-      # timeout during tuning is not affected
+      # timeout during optimization is not affected
       learner$timeout = c(train = Inf, predict = Inf)
 
       # fit final model

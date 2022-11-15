@@ -64,7 +64,7 @@ afs$model
 afs$learner
 
 # shortcut fselect instance
-afs$tuning_instance
+afs$fselect_instance
 
 
 # Nested Resampling
@@ -79,7 +79,7 @@ afs = auto_fselector(
 resampling_outer = rsmp("cv", folds = 3)
 rr = resample(task, afs, resampling_outer, store_models = TRUE)
 
-# retrieve inner tuning results.
+# retrieve inner feature selection results.
 extract_inner_fselect_results(rr)
 
 # performance scores estimated on the outer resampling
