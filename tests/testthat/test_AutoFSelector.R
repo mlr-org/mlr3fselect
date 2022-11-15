@@ -93,7 +93,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
   at$train(task)
 
   expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
-  expect_null(at$fselect_instance$archive$benchmark_result)
+  expect_equal(at$fselect_instance$archive$benchmark_result$n_resample_results, 0L)
 
   at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
     fselector = fselector, store_fselect_instance = FALSE, store_benchmark_result = FALSE,

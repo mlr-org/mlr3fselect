@@ -9,10 +9,13 @@ fselect(
   task,
   learner,
   resampling,
-  measures,
+  measures = NULL,
   term_evals = NULL,
   term_time = NULL,
+  terminator = NULL,
+  store_benchmark_result = TRUE,
   store_models = FALSE,
+  check_values = FALSE,
   ...
 )
 }
@@ -31,9 +34,9 @@ Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.}
 
-\item{measures}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
-Measures to optimize.
-If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
+\item{measures}{(\link[mlr3:Measure]{mlr3::Measure} or list of \link[mlr3:Measure]{mlr3::Measure})\cr
+A single measure creates a \link{FSelectInstanceSingleCrit} and multiple measures a \link{FSelectInstanceMultiCrit}.
+If \code{NULL}, default measure is used.}
 
 \item{term_evals}{(\code{integer(1)})\cr
 Number of allowed evaluations.}
@@ -41,29 +44,80 @@ Number of allowed evaluations.}
 \item{term_time}{(\code{integer(1)})\cr
 Maximum allowed time in seconds.}
 
+\item{terminator}{(\link{Terminator})\cr
+Stop criterion of the feature selection.}
+
+\item{store_benchmark_result}{(\code{logical(1)})\cr
+Store benchmark result in archive?}
+
 \item{store_models}{(\code{logical(1)}).
 Store models in benchmark result?}
+
+\item{check_values}{(\code{logical(1)})\cr
+Check the parameters before the evaluation and the results for
+validity?}
 
 \item{...}{(named \code{list()})\cr
 Named arguments to be set as parameters of the fselector.}
 }
 \value{
-\code{FSelectInstanceSingleCrit} | \code{FSelectInstanceMultiCrit}
+\link{FSelectInstanceSingleCrit} | \link{FSelectInstanceMultiCrit}
 }
 \description{
-Function to optimize the feature set of a \link[mlr3:Learner]{mlr3::Learner}.
+Function to optimize the features of a \link[mlr3:Learner]{mlr3::Learner}.
+The function internally creates a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} which describe the feature selection problem.
+It executes the feature selection with the \link{FSelector} (\code{method}) and returns the result with the fselect instance (\verb{$result}).
+The \link{ArchiveFSelect} (\verb{$archive}) stores all evaluated hyperparameter configurations and performance scores.
 }
-\examples{
-task = tsk("pima")
+\details{
+The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link{Terminator} are used to construct a \link{FSelectInstanceSingleCrit}.
+If multiple performance \link[=Measure]{Measures} are supplied, a \link{FSelectInstanceMultiCrit} is created.
+The parameter \code{term_evals} and \code{term_time} are shortcuts to create a \link{Terminator}.
+If both parameters are passed, a \link{TerminatorCombo} is constructed.
+For other \link[=Terminator]{Terminators}, pass one with \code{terminator}.
+If no termination criterion is needed, set \code{term_evals}, \code{term_time} and \code{terminator} to \code{NULL}.
+}
+\section{Resources}{
 
+\itemize{
+\item \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{book chapter} on feature selection.
+\item \href{https://mlr-org.com/gallery/2020-09-14-mlr3fselect-basic/}{gallery post} on feature selection on the Titanic data set.
+}
+}
+
+\section{Analysis}{
+
+For analyzing the feature selection results, it is recommended to pass the archive to \code{as.data.table()}.
+The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature set.
+
+The archive provides various getters (e.g. \verb{$learners()}) to ease the access.
+All getters extract by position (\code{i}) or unique hash (\code{uhash}).
+For a complete list of all getters see the methods section.
+
+The benchmark result (\verb{$benchmark_result}) allows to score the feature sets again on a different measure.
+Alternatively, measures can be supplied to \code{as.data.table()}.
+}
+
+\examples{
+# Feature selection on the Palmer Penguins data set
+task = tsk("pima")
+learner = lrn("classif.rpart")
+
+# Run feature selection
 instance = fselect(
   method = "random_search",
   task = task,
-  learner = lrn("classif.rpart"),
+  learner = learner,
   resampling = rsmp ("holdout"),
   measures = msr("classif.ce"),
   term_evals = 4)
 
-# subset task to optimized feature set
+# Subset task to optimized feature set
 task$select(instance$result_feature_set)
+
+# Train the learner with optimal feature set on the full data set
+learner$train(task)
+
+# Inspect all evaluated configurations
+as.data.table(instance$archive)
 }

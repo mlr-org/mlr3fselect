@@ -3,7 +3,7 @@
 \name{mlr_fselectors_shadow_variable_search}
 \alias{mlr_fselectors_shadow_variable_search}
 \alias{FSelectorShadowVariableSearch}
-\title{Feature Selection via Shadow Variable Search}
+\title{Feature Selection with Shadow Variable Search}
 \source{
 Thomas J, Hepp T, Mayr A, Bischl B (2017).
 \dQuote{Probing for Sparse and Fast Variable Selection with Model-Based Boosting.}
@@ -16,32 +16,32 @@ Wu Y, Boos DD, Stefanski LA (2007).
 \doi{10.1198/016214506000000843}.
 }
 \description{
+Feature selection using the Shadow Variable Search Algorithm.
 Shadow variable search creates for each feature a permutated copy and stops when one of them is selected.
-
+}
+\details{
 The feature selection terminates itself when the first shadow variable is selected.
 It is not necessary to set a termination criterion.
 }
 \section{Dictionary}{
 
-This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:
+This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_fselectors$get("shadow_variable_search")
-fs("shadow_variable_search")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("shadow_variable_search")
 }\if{html}{\out{</div>}}
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
-  method = "shadow_variable_search",
+  method = fs("shadow_variable_search"),
   task = task,
   learner = learner,
   resampling = rsmp("holdout"),
@@ -59,6 +59,17 @@ task$select(instance$result_feature_set)
 learner$train(task)
 }
 }
+\seealso{
+Other FSelector: 
+\code{\link{mlr_fselectors_design_points}},
+\code{\link{mlr_fselectors_exhaustive_search}},
+\code{\link{mlr_fselectors_genetic_search}},
+\code{\link{mlr_fselectors_random_search}},
+\code{\link{mlr_fselectors_rfe}},
+\code{\link{mlr_fselectors_sequential}},
+\code{\link{mlr_fselectors}}
+}
+\concept{FSelector}
 \section{Super class}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorShadowVariableSearch}
 }

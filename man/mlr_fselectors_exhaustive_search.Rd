@@ -3,40 +3,41 @@
 \name{mlr_fselectors_exhaustive_search}
 \alias{mlr_fselectors_exhaustive_search}
 \alias{FSelectorExhaustiveSearch}
-\title{Feature Selection via Exhaustive Search}
+\title{Feature Selection with Exhaustive Search}
 \description{
-Exhaustive search generates all possible feature sets.
-
+Feature Selection using the Exhaustive Search Algorithm.
+Exhaustive Search generates all possible feature sets.
+}
+\details{
 The feature selection terminates itself when all feature sets are evaluated.
 It is not necessary to set a termination criterion.
 }
 \section{Dictionary}{
 
-This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:
+This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_fselectors$get("exhaustive_search")
-fs("exhaustive_search")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("exhaustive_search")
 }\if{html}{\out{</div>}}
 }
 
-\section{Parameters}{
+\section{Control Parameters}{
 
 \describe{
 \item{\code{max_features}}{\code{integer(1)}\cr
-Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
+Maximum number of features.
+By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 }
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
   method = "exhaustive_search",
   task = task,
@@ -46,10 +47,10 @@ instance = fselect(
   term_evals = 10
 )
 
-# best performing feature subset
+# best performing feature set
 instance$result
 
-# all evaluated feature subsets
+# all evaluated feature sets
 as.data.table(instance$archive)
 
 # subset the task and fit the final model
@@ -57,6 +58,17 @@ task$select(instance$result_feature_set)
 learner$train(task)
 }
 }
+\seealso{
+Other FSelector: 
+\code{\link{mlr_fselectors_design_points}},
+\code{\link{mlr_fselectors_genetic_search}},
+\code{\link{mlr_fselectors_random_search}},
+\code{\link{mlr_fselectors_rfe}},
+\code{\link{mlr_fselectors_sequential}},
+\code{\link{mlr_fselectors_shadow_variable_search}},
+\code{\link{mlr_fselectors}}
+}
+\concept{FSelector}
 \section{Super class}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorExhaustiveSearch}
 }

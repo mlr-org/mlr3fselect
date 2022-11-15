@@ -3,21 +3,21 @@
 \name{mlr_fselectors_design_points}
 \alias{mlr_fselectors_design_points}
 \alias{FSelectorDesignPoints}
-\title{Feature Selection via Design Points}
+\title{Feature Selection with Design Points}
 \description{
-Design points uses feature sets specified by the user.
-
+Feature selection using user-defined feature sets.
+}
+\details{
 The feature sets are evaluated in order as given.
+
 The feature selection terminates itself when all feature sets are evaluated.
 It is not necessary to set a termination criterion.
 }
 \section{Dictionary}{
 
-This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:
+This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_fselectors$get("design_points")
-fs("design_points")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("design_points")
 }\if{html}{\out{</div>}}
 }
 
@@ -34,16 +34,15 @@ Design points to try in search, one per row.}
 }
 
 \examples{
-library(mlr3misc)
+# Feature Selection
+\donttest{
 
-# retrieve task
+# retrieve task and load learner
 task = tsk("pima")
-
-# load learner
 learner = lrn("classif.rpart")
 
 # create design
-design = rowwise_table(
+design = mlr3misc::rowwise_table(
   ~age, ~glucose, ~insulin, ~mass, ~pedigree, ~pregnant, ~pressure, ~triceps,
   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       FALSE,    TRUE,
   TRUE, TRUE,     FALSE,    TRUE,  FALSE,     TRUE,       FALSE,    FALSE,
@@ -51,21 +50,19 @@ design = rowwise_table(
   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 )
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Pima Indians diabetes data set
 instance = fselect(
-  method = "design_points",
+  method = fs("design_points", design = design),
   task = task,
   learner = learner,
-  resampling = rsmp("cv", folds = 3),
-  measure = msr("classif.ce"),
-  design = design
+  resampling = rsmp("holdout"),
+  measure = msr("classif.ce")
 )
 
-# best performing feature subset
+# best performing feature set
 instance$result
 
-# all evaluated feature subsets
+# all evaluated feature sets
 as.data.table(instance$archive)
 
 # subset the task and fit the final model
@@ -73,6 +70,17 @@ task$select(instance$result_feature_set)
 learner$train(task)
 }
 }
+\seealso{
+Other FSelector: 
+\code{\link{mlr_fselectors_exhaustive_search}},
+\code{\link{mlr_fselectors_genetic_search}},
+\code{\link{mlr_fselectors_random_search}},
+\code{\link{mlr_fselectors_rfe}},
+\code{\link{mlr_fselectors_sequential}},
+\code{\link{mlr_fselectors_shadow_variable_search}},
+\code{\link{mlr_fselectors}}
+}
+\concept{FSelector}
 \section{Super classes}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorFromOptimizer]{mlr3fselect::FSelectorFromOptimizer}} -> \code{FSelectorDesignPoints}
 }

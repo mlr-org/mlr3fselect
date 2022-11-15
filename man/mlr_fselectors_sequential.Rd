@@ -3,10 +3,11 @@
 \name{mlr_fselectors_sequential}
 \alias{mlr_fselectors_sequential}
 \alias{FSelectorSequential}
-\title{Feature Selection via Sequential Search}
+\title{Feature Selection with Sequential Search}
 \description{
-Sequential search iteratively adds features to the set.
-
+Feature selection using Sequential Search Algorithm.
+}
+\details{
 Sequential forward selection (\code{strategy = fsf}) extends the feature set in each iteration with the feature that increases the models performance the most.
 Sequential backward selection (\code{strategy = fsb}) follows the same idea but starts with all features and removes features from the set.
 
@@ -15,15 +16,13 @@ It is not necessary to set a termination criterion.
 }
 \section{Dictionary}{
 
-This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:
+This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_fselectors$get("sequential")
-fs("sequential")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("sequential")
 }\if{html}{\out{</div>}}
 }
 
-\section{Parameters}{
+\section{Control Parameters}{
 
 \describe{
 \item{\code{min_features}}{\code{integer(1)}\cr
@@ -36,14 +35,14 @@ Search method \code{sfs} (forward search) or \code{sbs} (backward search).}
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
   method = "sequential",
   task = task,
@@ -53,10 +52,10 @@ instance = fselect(
   term_evals = 10
 )
 
-# best performing feature subset
+# best performing feature set
 instance$result
 
-# all evaluated feature subsets
+# all evaluated feature sets
 as.data.table(instance$archive)
 
 # subset the task and fit the final model
@@ -64,6 +63,17 @@ task$select(instance$result_feature_set)
 learner$train(task)
 }
 }
+\seealso{
+Other FSelector: 
+\code{\link{mlr_fselectors_design_points}},
+\code{\link{mlr_fselectors_exhaustive_search}},
+\code{\link{mlr_fselectors_genetic_search}},
+\code{\link{mlr_fselectors_random_search}},
+\code{\link{mlr_fselectors_rfe}},
+\code{\link{mlr_fselectors_shadow_variable_search}},
+\code{\link{mlr_fselectors}}
+}
+\concept{FSelector}
 \section{Super class}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorSequential}
 }

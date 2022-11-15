@@ -4,21 +4,28 @@
 \alias{extract_inner_fselect_results}
 \title{Extract Inner Feature Selection Results}
 \usage{
-extract_inner_fselect_results(x)
+extract_inner_fselect_results(x, fselect_instance, ...)
 }
 \arguments{
 \item{x}{(\link[mlr3:ResampleResult]{mlr3::ResampleResult} | \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}).}
+
+\item{fselect_instance}{(\code{logical(1)})\cr
+If \code{TRUE}, instances are added to the table.}
+
+\item{...}{(any)\cr
+Additional arguments.}
 }
 \value{
 \code{\link[data.table:data.table]{data.table::data.table()}}.
 }
 \description{
-Extract inner feature selection results of nested resampling. Implemented for
-\link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}. The function iterates
-over the \link{AutoFSelector} objects and binds the feature selection results to a
-\code{\link[data.table:data.table]{data.table::data.table()}}. \link{AutoFSelector} must be initialized with
-\code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be
-called with \code{store_models = TRUE}.
+Extract inner feature selection results of nested resampling.
+Implemented for \link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
+}
+\details{
+The function iterates over the \link{AutoFSelector} objects and binds the feature selection results to a \code{\link[data.table:data.table]{data.table::data.table()}}.
+\link{AutoFSelector} must be initialized with \code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be called with \code{store_models = TRUE}.
+Optionally, the instance can be added for each iteration.
 }
 \section{Data structure}{
 
@@ -40,8 +47,11 @@ Vector of selected feature set.
 }
 
 \examples{
+# Nested Resampling on Palmer Penguins Data Set
+
+# create auto fselector
 at = auto_fselector(
-  method = "random_search",
+  method = fs("random_search"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measure = msr("classif.ce"),
@@ -50,5 +60,6 @@ at = auto_fselector(
 resampling_outer = rsmp("cv", folds = 2)
 rr = resample(tsk("iris"), at, resampling_outer, store_models = TRUE)
 
+# extract inner results
 extract_inner_fselect_results(rr)
 }

@@ -26,15 +26,7 @@
 #' @template param_check_values
 #'
 #' @export
-#' @examples
-#' at = auto_fselector(
-#'   method = "random_search",
-#'   learner = lrn("classif.rpart"),
-#'   resampling = rsmp ("holdout"),
-#'   measure = msr("classif.ce"),
-#'   term_evals = 4)
-#'
-#' at$train(tsk("pima"))
+#' @inherit AutoFSelector examples
 auto_fselector = function(method, learner, resampling, measure = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, ...) {
   fselector = if (is.character(method)) {
     assert_choice(method, mlr_fselectors$keys())

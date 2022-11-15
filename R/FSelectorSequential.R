@@ -1,10 +1,12 @@
-#' @title Feature Selection via Sequential Search
+#' @title Feature Selection with Sequential Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_sequential
 #'
 #' @description
-#' Sequential search iteratively adds features to the set.
+#' Feature selection using Sequential Search Algorithm.
 #'
+#' @details
 #' Sequential forward selection (`strategy = fsf`) extends the feature set in each iteration with the feature that increases the models performance the most.
 #' Sequential backward selection (`strategy = fsb`) follows the same idea but starts with all features and removes features from the set.
 #'
@@ -14,16 +16,17 @@
 #' @templateVar id sequential
 #' @template section_dictionary_fselectors
 #'
-#' @section Parameters:
+#' @section Control Parameters:
 #' \describe{
 #' \item{`min_features`}{`integer(1)`\cr
-#' Minimum number of features. By default, 1.}
+#'   Minimum number of features. By default, 1.}
 #' \item{`max_features`}{`integer(1)`\cr
-#' Maximum number of features. By default, number of features in [mlr3::Task].}
+#'   Maximum number of features. By default, number of features in [mlr3::Task].}
 #' \item{`strategy`}{`character(1)`\cr
-#' Search method `sfs` (forward search) or `sbs` (backward search).}
+#'   Search method `sfs` (forward search) or `sbs` (backward search).}
 #' }
 #'
+#' @family FSelector
 #' @export
 #' @template example
 FSelectorSequential = R6Class("FSelectorSequential",

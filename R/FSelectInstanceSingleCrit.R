@@ -1,23 +1,26 @@
-#' @title Single Criterion Feature Selection Instance
+#' @title Class for Single Criterion Feature Selection
+#'
+#' @include ArchiveFSelect.R
 #'
 #' @description
-#' Specifies a general feature selection scenario, including objective function
-#' and archive for feature selection algorithms to act upon. This class stores
-#' an [ObjectiveFSelect] object that encodes the black box objective function
-#' which an [FSelector] has to optimize. It allows the basic operations of
-#' querying the objective at feature subsets (`$eval_batch()`), storing the
-#' evaluations in the internal [bbotk::Archive] and accessing the final result
-#' (`$result`).
+#' The [FSelectInstanceSingleCrit] specifies a feature selection problem for [FSelectors][FSelector].
+#' The function [fsi()] creates a [FSelectInstanceSingleCrit] and the function [fselect()] creates an instance internally.
 #'
-#' Evaluations of feature subsets are performed in batches by calling
-#' [mlr3::benchmark()] internally. Before a batch is evaluated, the
-#' [bbotk::Terminator] is queried for the remaining budget. If the available
-#' budget is exhausted, an exception is raised, and no further evaluations can
-#' be performed from this point on.
+#' @description
+#' The instance contains an [ObjectiveFSelect] object that encodes the black box objective function a [FSelector] has to optimize.
+#' The instance allows the basic operations of querying the objective at design points (`$eval_batch()`).
+#' This operation is usually done by the [FSelector].
+#' Evaluations of feature subsets are performed in batches by calling [mlr3::benchmark()] internally.
+#' The evaluated feature subsets are stored in the [Archive][ArchiveFSelect] (`$archive`).
+#' Before a batch is evaluated, the [bbotk::Terminator] is queried for the remaining budget.
+#' If the available budget is exhausted, an exception is raised, and no further evaluations can be performed from this point on.
+#' The [FSelector] is also supposed to store its final result, consisting of a selected feature subset and associated estimated performance values, by calling the method `instance$assign_result()`.
 #'
-#' The [FSelector] is also supposed to store its final result, consisting
-#' of a selected feature subset and associated estimated performance values, by
-#' calling the method `instance$assign_result()`.
+#' @inheritSection ArchiveFSelect Analysis
+#'
+#' @section Resources:
+#' * [book chapter](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper) on feature selection.
+#' * [gallery post](https://mlr-org.com/gallery/2020-09-14-mlr3fselect-basic/) on feature selection on the Titanic data set.
 #'
 #' @template param_task
 #' @template param_learner
@@ -31,63 +34,70 @@
 #'
 #' @export
 #' @examples
-#' library(mlr3)
-#' library(data.table)
-#'
-#' # Objects required to define the objective function
-#' task = tsk("iris")
-#' measure = msr("classif.ce")
+#' # Feature selection on Palmer Penguins data set
+#' task = tsk("penguins")
 #' learner = lrn("classif.rpart")
-#' resampling = rsmp("cv")
 #'
-#' # Create instance
-#' terminator = trm("evals", n_evals = 8)
-#' inst = FSelectInstanceSingleCrit$new(
+#' # Construct feature selection instance
+#' instance = fsi(
 #'   task = task,
 #'   learner = learner,
-#'   resampling = resampling,
-#'   measure = measure,
-#'   terminator = terminator
+#'   resampling = rsmp("cv", folds = 3),
+#'   measures = msr("classif.ce"),
+#'   terminator = trm("evals", n_evals = 4)
 #' )
 #'
-#' # Try some feature subsets
-#' xdt = data.table(
-#'   Petal.Length = c(TRUE, FALSE),
-#'   Petal.Width = c(FALSE, TRUE),
-#'   Sepal.Length = c(TRUE, FALSE),
-#'   Sepal.Width = c(FALSE, TRUE)
-#' )
+#' # Choose optimization algorithm
+#' fselector = fs("random_search", batch_size = 2)
 #'
-#' inst$eval_batch(xdt)
+#' # Run feature selection
+#' fselector$optimize(instance)
 #'
-#' # Get archive data
-#' as.data.table(inst$archive)
+#' # Subset task to optimal feature set
+#' task$select(instance$result_feature_set)
+#'
+#' # Train the learner with optimal feature set on the full data set
+#' learner$train(task)
+#'
+#' # Inspect all evaluated sets
+#' as.data.table(instance$archive)
 FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
   inherit = OptimInstanceSingleCrit,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    initialize = function(task, learner, resampling, measure, terminator,
-      store_models = FALSE, check_values = TRUE, store_benchmark_result = TRUE) {
-      obj = ObjectiveFSelect$new(task = task, learner = learner,
-        resampling = resampling, measures = measure,
-        store_benchmark_result = store_benchmark_result,
-        store_models = store_models, check_values = check_values)
-      super$initialize(obj, obj$domain, terminator)
-
-      self$archive = ArchiveFSelect$new(search_space = self$objective$domain, codomain = self$objective$codomain,
+    initialize = function(task, learner, resampling, measure, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE) {
+      # initialized specialized fselect archive and objective
+      archive = ArchiveFSelect$new(
+        search_space = task_to_domain(assert_task(task)),
+        codomain = measures_to_codomain(assert_measure(measure)),
         check_values = check_values)
-      self$objective$archive = self$archive
+
+      objective = ObjectiveFSelect$new(
+        task = task,
+        learner = learner,
+        resampling = resampling,
+        measures = measure,
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models,
+        check_values = check_values,
+        archive = archive)
+
+      super$initialize(objective, objective$domain, terminator)
+
+      # super class of instance initializes default archive, overwrite with fselect archive
+      self$archive = archive
 
       private$.objective_function = objective_function
     },
 
     #' @description
-    #' The [FSelector] writes the best found feature subset
-    #' and estimated performance value here. For internal use.
+    #' The [FSelector] writes the best found feature subset and estimated performance value here.
+    #' For internal use.
+    #'
     #' @param y (`numeric(1)`)\cr
-    #' Optimal outcome.
+    #'   Optimal outcome.
     assign_result = function(xdt, y) {
       # Add feature names to result for easy task subsetting
       features = list(self$objective$task$feature_names[as.logical(xdt)])

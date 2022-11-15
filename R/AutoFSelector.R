@@ -1,4 +1,4 @@
-#' @title AutoFSelector
+#' @title Class for Automatic Feature Selection
 #'
 #' @description
 #' The [AutoFSelector] wraps a [mlr3::Learner] and augments it with an automatic feature selection.
@@ -34,12 +34,14 @@
 #'
 #' @export
 #' @examples
-#' # Automafsic Feafsure Selection
+#' # Automatic Feature Selection
+#' \donttest{
 #'
+#' # split to train and external set
 #' task = tsk("penguins")
-#' train_set = sample(task$nrow, 0.8 * task$nrow)
-#' test_set = setdiff(seq_len(task$nrow), train_set)
+#' split = partition(task, ratio = 0.8)
 #'
+#' # create auto fselector
 #' afs = auto_fselector(
 #'   method = fs("random_search"),
 #'   learner = lrn("classif.rpart"),
@@ -47,13 +49,13 @@
 #'   measure = msr("classif.ce"),
 #'   term_evals = 4)
 #'
-#' # optimize feafsure subset and fit final model
-#' afs$train(task, row_ids = train_set)
+#' # optimize feature subset and fit final model
+#' afs$train(task, row_ids = split$train)
 #'
 #' # predict with final model
-#' afs$predict(task, row_ids = test_set)
+#' afs$predict(task, row_ids = split$test)
 #'
-#' # show fselect result
+#' # show result
 #' afs$fselect_result
 #'
 #' # model slot contains trained learner and fselect instance
@@ -84,8 +86,9 @@
 #' # performance scores estimated on the outer resampling
 #' rr$score()
 #'
-#' # unbiased performance of the final model trained on the full dafsa set
+#' # unbiased performance of the final model trained on the full data set
 #' rr$aggregate()
+#' }
 AutoFSelector = R6Class("AutoFSelector",
   inherit = Learner,
   public = list(

@@ -1,8 +1,10 @@
-#' @title Feature Selection via Recursive Feature Elimination
+#' @title Feature Selection with Recursive Feature Elimination
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_rfe
 #'
 #' @description
+#' Feature selection using the Recursive Feature Elimination Algorithm (RFE).
 #' Recursive feature elimination iteratively removes features with a low importance score.
 #' Only works with [Learner]s that can calculate importance scores (see section on optional extractors in [Learner]).
 #'
@@ -18,12 +20,14 @@
 #' @templateVar id rfe
 #' @template section_dictionary_fselectors
 #'
-#' @section Parameters:
+#' @section Control Parameters:
 #' \describe{
 #' \item{`n_features`}{`integer(1)`\cr
-#'   The number of features to select. By default half of the features are selected.}
+#'   The number of features to select.
+#'   By default half of the features are selected.}
 #' \item{`feature_fraction`}{`double(1)`\cr
-#'   Fraction of features to retain in each iteration, The default 0.5 retrains half of the features.}
+#'   Fraction of features to retain in each iteration.
+#'   The default 0.5 retrains half of the features.}
 #' \item{`feature_number`}{`integer(1)`\cr
 #'   Number of features to remove in each iteration.}
 #' \item{`subset_sizes`}{`integer()`\cr
@@ -35,18 +39,19 @@
 #'
 #' The parameter `feature_fraction`, `feature_number` and `subset_sizes` are mutually exclusive.
 #'
+#' @family FSelector
 #' @export
 #' @examples
-#' # retrieve task
-#' task = tsk("pima")
+#' # Feature Selection
+#' \donttest{
 #'
-#' # load learner
+#' # retrieve task and load learner
+#' task = tsk("penguins")
 #' learner = lrn("classif.rpart")
 #'
-#' \donttest{
-#' # feature selection on the pima indians diabetes data set
+#' # run feature selection on the Palmer Penguins data set
 #' instance = fselect(
-#'   method = "rfe",
+#'   method = fs("rfe"),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp("holdout"),

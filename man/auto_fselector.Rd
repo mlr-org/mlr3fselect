@@ -93,12 +93,59 @@ For this reason it is not feasible to pass an instantiated \link[mlr3:Resampling
 }
 
 \examples{
-at = auto_fselector(
-  method = "random_search",
+# Automatic Feature Selection
+\donttest{
+
+# split to train and external set
+task = tsk("penguins")
+split = partition(task, ratio = 0.8)
+
+# create auto fselector
+afs = auto_fselector(
+  method = fs("random_search"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measure = msr("classif.ce"),
   term_evals = 4)
 
-at$train(tsk("pima"))
+# optimize feature subset and fit final model
+afs$train(task, row_ids = split$train)
+
+# predict with final model
+afs$predict(task, row_ids = split$test)
+
+# show result
+afs$fselect_result
+
+# model slot contains trained learner and fselect instance
+afs$model
+
+# shortcut trained learner
+afs$learner
+
+# shortcut fselect instance
+afs$tuning_instance
+
+
+# Nested Resampling
+
+afs = auto_fselector(
+  method = fs("random_search"),
+  learner = lrn("classif.rpart"),
+  resampling = rsmp ("holdout"),
+  measure = msr("classif.ce"),
+  term_evals = 4)
+
+resampling_outer = rsmp("cv", folds = 3)
+rr = resample(task, afs, resampling_outer, store_models = TRUE)
+
+# retrieve inner tuning results.
+extract_inner_fselect_results(rr)
+
+# performance scores estimated on the outer resampling
+rr$score()
+
+# unbiased performance of the final model trained on the full data set
+rr$aggregate()
+}
 }

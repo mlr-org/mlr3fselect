@@ -1,30 +1,21 @@
-#' @title Feature Selection via Genetic Search
+#' @title Feature Selection with Genetic Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_genetic_search
 #'
 #' @description
-#' Genetic search imitates the process of natural selection to generate feature sets.
-#'
-#' Calls [genalg::rbga.bin()] from package \CRANpkg{genalg}.
+#' Feature selection using the Genetic Algorithm from the package \CRANpkg{genalg}.
 #'
 #' @templateVar id genetic_search
 #' @template section_dictionary_fselectors
 #'
-#' @section Parameters:
-#' \describe{
-#' \item{`suggestions`}{`list()`}
-#' \item{`popSize`}{`integer(1)`}
-#' \item{`mutationChance`}{`numeric(1)`}
-#' \item{`elitism`}{`integer(1)`}
-#' \item{`zeroToOneRatio`}{`integer(1)`}
-#' \item{`iters`}{`integer(1)`}
-#' }
-#'
+#' @section Control Parameters:
 #' For the meaning of the control parameters, see [genalg::rbga.bin()].
 #' [genalg::rbga.bin()] internally terminates after `iters` iteration.
 #' We set `ìters = 100000`  to allow the termination via our terminators.
 #' If more iterations are needed, set `ìters` to a higher value in the parameter set.
 #'
+#' @family FSelector
 #' @export
 #' @template example
 FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",

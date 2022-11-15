@@ -3,7 +3,7 @@
 \name{mlr_fselectors_random_search}
 \alias{mlr_fselectors_random_search}
 \alias{FSelectorRandomSearch}
-\title{Feature Selection via Random Search}
+\title{Feature Selection with Random Search}
 \source{
 Bergstra J, Bengio Y (2012).
 \dQuote{Random Search for Hyper-Parameter Optimization.}
@@ -11,47 +11,48 @@ Bergstra J, Bengio Y (2012).
 \url{https://jmlr.csail.mit.edu/papers/v13/bergstra12a.html}.
 }
 \description{
-Random search randomly draws feature sets.
-
-Feature sets are evaluated in batches of size \code{batch_size}.
+Feature selection using Random Search Algorithm.
+}
+\details{
+The feature sets are randomly drawn.
+The sets are evaluated in batches of size \code{batch_size}.
 Larger batches mean we can parallelize more, smaller batches imply a more fine-grained checking of termination criteria.
 }
 \section{Dictionary}{
 
-This \link{FSelector} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary}
-\link{mlr_fselectors} or with the associated sugar function \code{\link[=fs]{fs()}}:
+This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_fselectors$get("random_search")
-fs("random_search")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("random_search")
 }\if{html}{\out{</div>}}
 }
 
-\section{Parameters}{
+\section{Control Parameters}{
 
 \describe{
 \item{\code{max_features}}{\code{integer(1)}\cr
-Maximum number of features. By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
+Maximum number of features.
+By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 \item{\code{batch_size}}{\code{integer(1)}\cr
 Maximum number of feature sets to try in a batch.}
 }
 }
 
 \examples{
-# retrieve task
-task = tsk("pima")
+# Feature Selection
+\donttest{
 
-# load learner
+# retrieve task and load learner
+task = tsk("penguins")
 learner = lrn("classif.rpart")
 
-\donttest{
-# feature selection on the pima indians diabetes data set
+# run feature selection on the Palmer Penguins data set
 instance = fselect(
-  method = "random_search",
+  method = fs("random_search"),
   task = task,
   learner = learner,
   resampling = rsmp("holdout"),
   measure = msr("classif.ce"),
-  term_evals = 100
+  term_evals = 10
 )
 
 # best performing feature subset
@@ -65,6 +66,17 @@ task$select(instance$result_feature_set)
 learner$train(task)
 }
 }
+\seealso{
+Other FSelector: 
+\code{\link{mlr_fselectors_design_points}},
+\code{\link{mlr_fselectors_exhaustive_search}},
+\code{\link{mlr_fselectors_genetic_search}},
+\code{\link{mlr_fselectors_rfe}},
+\code{\link{mlr_fselectors_sequential}},
+\code{\link{mlr_fselectors_shadow_variable_search}},
+\code{\link{mlr_fselectors}}
+}
+\concept{FSelector}
 \section{Super class}{
 \code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorRandomSearch}
 }

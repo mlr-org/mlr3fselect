@@ -21,12 +21,22 @@ See \code{\link[mlr3misc:dictionary_sugar_get]{mlr3misc::dictionary_sugar_get()}
 Keys passed to the respective \link[mlr3misc:Dictionary]{dictionary} to retrieve multiple objects.}
 }
 \value{
-\link{FSelector}.
+\link[R6:R6Class]{R6::R6Class} object of the respective type, or a list of \link[R6:R6Class]{R6::R6Class} objects for the plural versions.
 }
 \description{
-This function complements \link{mlr_fselectors} with functions in the spirit
-of \link[mlr3:mlr_sugar]{mlr3::mlr_sugar}.
+Functions to retrieve objects, set parameters and assign to fields in one go.
+Relies on \code{\link[mlr3misc:dictionary_sugar_get]{mlr3misc::dictionary_sugar_get()}} to extract objects from the respective \link[mlr3misc:Dictionary]{mlr3misc::Dictionary}:
+\itemize{
+\item \code{fs()} for a \link{FSelector} from \link{mlr_fselectors}.
+\item \code{fss()} for a list of \link[=FSelector]{FSelectors} from \link{mlr_fselectors}.
+\item \code{trm()} for a \link{Terminator} from \link{mlr_terminators}.
+\item \code{trms()} for a list of \link[=Terminator]{Terminators} from \link{mlr_terminators}.
+}
 }
 \examples{
-fs("sequential", max_features = 4)
+# random search with batch size of 5
+fs("random_search", batch_size = 5)
+
+# run time terminator with 20 seconds
+trm("run_time", secs = 20)
 }

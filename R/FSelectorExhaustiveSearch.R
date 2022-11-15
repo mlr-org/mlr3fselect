@@ -1,22 +1,27 @@
-#' @title Feature Selection via Exhaustive Search
+#' @title Feature Selection with Exhaustive Search
 #'
+#' @include mlr_fselectors.R
 #' @name mlr_fselectors_exhaustive_search
 #'
 #' @description
-#' Exhaustive search generates all possible feature sets.
+#' Feature Selection using the Exhaustive Search Algorithm.
+#' Exhaustive Search generates all possible feature sets.
 #'
+#' @details
 #' The feature selection terminates itself when all feature sets are evaluated.
 #' It is not necessary to set a termination criterion.
 #'
 #' @templateVar id exhaustive_search
 #' @template section_dictionary_fselectors
 #'
-#' @section Parameters:
+#' @section Control Parameters:
 #' \describe{
 #' \item{`max_features`}{`integer(1)`\cr
-#' Maximum number of features. By default, number of features in [mlr3::Task].}
+#'   Maximum number of features.
+#'   By default, number of features in [mlr3::Task].}
 #' }
 #'
+#' @family FSelector
 #' @export
 #' @template example
 FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",

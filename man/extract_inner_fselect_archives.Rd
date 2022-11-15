@@ -4,14 +4,10 @@
 \alias{extract_inner_fselect_archives}
 \title{Extract Inner Feature Selection Archives}
 \usage{
-extract_inner_fselect_archives(x, unnest = NULL, exclude_columns = "uhash")
+extract_inner_fselect_archives(x, exclude_columns = "uhash")
 }
 \arguments{
 \item{x}{(\link[mlr3:ResampleResult]{mlr3::ResampleResult} | \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}).}
-
-\item{unnest}{(\code{character()})\cr
-Transforms list columns to separate columns. Set to \code{NULL} if no column
-should be unnested.}
 
 \item{exclude_columns}{(\code{character()})\cr
 Exclude columns from result table. Set to \code{NULL} if no column should be
@@ -21,12 +17,10 @@ excluded.}
 \code{\link[data.table:data.table]{data.table::data.table()}}.
 }
 \description{
-Extract inner feature selection archives of nested resampling. Implemented for
-\link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}. The function iterates
-over the \link{AutoFSelector} objects and binds the archives to a
-\code{\link[data.table:data.table]{data.table::data.table()}}. \link{AutoFSelector} must be initialized with
-\code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be
-called with \code{store_models = TRUE}.
+Extract inner feature selection archives of nested resampling.
+Implemented for \link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
+The function iterates over the \link{AutoFSelector} objects and binds the archives to a \code{\link[data.table:data.table]{data.table::data.table()}}.
+\link{AutoFSelector} must be initialized with \code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be called with \code{store_models = TRUE}.
 }
 \section{Data structure}{
 
@@ -57,15 +51,19 @@ Resample result of the inner resampling.
 }
 
 \examples{
+# Nested Resampling on Palmer Penguins Data Set
+
+# create auto fselector
 at = auto_fselector(
-  method = "random_search",
+  method = fs("random_search"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measure = msr("classif.ce"),
   term_evals = 4)
 
 resampling_outer = rsmp("cv", folds = 2)
-rr = resample(tsk("iris"), at, resampling_outer, store_models = TRUE)
+rr = resample(tsk("penguins"), at, resampling_outer, store_models = TRUE)
 
+# extract inner archives
 extract_inner_fselect_archives(rr)
 }

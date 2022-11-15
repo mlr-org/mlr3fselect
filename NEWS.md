@@ -4,6 +4,8 @@
 * refactor: The `AutoFSelector` stores the instance and benchmark result if `store_models = TRUE`.
 * refactor: The `AutoFSelector` stores the instance if `store_benchmark_result = TRUE`.
 * feat: Add missing parameters from `AutoFSelector` to `auto_fselect()`.
+* feat: Add `fsi()` function to create a `FSelectInstanceSingleCrit` or `FSelectInstanceMultiCrit`.
+* refactor: Remove `unnest` option from `as.data.table.ArchiveFSelect()` function.
 
 # mlr3fselect 0.7.2
 

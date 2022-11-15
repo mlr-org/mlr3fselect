@@ -1,23 +1,14 @@
-#' @title Multi Criterion Feature Selection Instance
+#' @title Class for Multi Criteria Feature Selection
+#'
+#' @include FSelectInstanceSingleCrit.R ArchiveFSelect.R
 #'
 #' @description
-#' Specifies a general feature selection scenario, including objective function
-#' and archive for feature selection algorithms to act upon. This class stores
-#' an [ObjectiveFSelect] object that encodes the black box objective function
-#' which an [FSelector] has to optimize. It allows the basic operations of
-#' querying the objective at feature subsets (`$eval_batch()`), storing the
-#' evaluations in the internal [bbotk::Archive] and accessing the final result
-#' (`$result`).
+#' The [FSelectInstanceMultiCrit] specifies a feature selection problem for [FSelectors][FSelector].
+#' The function [fsi()] creates a [FSelectInstanceMultiCrit] and the function [fselect()] creates an instance internally.
 #'
-#' Evaluations of feature subsets are performed in batches by calling
-#' [mlr3::benchmark()] internally. Before a batch is evaluated, the
-#' [bbotk::Terminator] is queried for the remaining budget. If the available
-#' budget is exhausted, an exception is raised, and no further evaluations can
-#' be performed from this point on.
-#'
-#' The [FSelector] is also supposed to store its final result, consisting
-#' of the selected feature subsets and associated estimated performance values, by
-#' calling the method `instance$assign_result()`.
+#' @inherit FSelectInstanceSingleCrit details
+#' @inheritSection FSelectInstanceSingleCrit Resources
+#' @inheritSection ArchiveFSelect Analysis
 #'
 #' @template param_task
 #' @template param_learner
@@ -31,63 +22,66 @@
 #'
 #' @export
 #' @examples
-#' library(mlr3)
-#' library(data.table)
+#' # Feature selection on Palmer Penguins data set
+#' task = tsk("penguins")
 #'
-#' # Objects required to define the performance evaluator
-#' task = tsk("iris")
-#' measures = msrs(c("classif.ce", "classif.acc"))
-#' learner = lrn("classif.rpart")
-#' resampling = rsmp("cv")
-#' terminator = trm("evals", n_evals = 8)
-#'
-#' inst = FSelectInstanceMultiCrit$new(
+#' # Construct feature selection instance
+#' instance = fsi(
 #'   task = task,
-#'   learner = learner,
-#'   resampling = resampling,
-#'   measures = measures,
-#'   terminator = terminator
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("cv", folds = 3),
+#'   measures = msrs(c("classif.ce", "time_train")),
+#'   terminator = trm("evals", n_evals = 4)
 #' )
 #'
-#' # Try some feature subsets
-#' xdt = data.table(
-#'   Petal.Length = c(TRUE, FALSE),
-#'   Petal.Width = c(FALSE, TRUE),
-#'   Sepal.Length = c(TRUE, FALSE),
-#'   Sepal.Width = c(FALSE, TRUE)
-#' )
+#' # Choose optimization algorithm
+#' fselector = fs("random_search", batch_size = 2)
 #'
-#' inst$eval_batch(xdt)
+#' # Run feature selection
+#' fselector$optimize(instance)
 #'
-#' # Get archive data
-#' as.data.table(inst$archive)
+#' # Optimal feature sets
+#' instance$result_feature_set
+#'
+#' # Inspect all evaluated sets
+#' as.data.table(instance$archive)
 FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
   inherit = OptimInstanceMultiCrit,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    initialize = function(task, learner, resampling, measures, terminator,
-      store_models = FALSE, check_values = TRUE, store_benchmark_result = TRUE) {
-      obj = ObjectiveFSelect$new(task = task, learner = learner,
-        resampling = resampling, measures = measures,
-        store_benchmark_result = store_benchmark_result,
-        store_models = store_models, check_values = check_values)
-      super$initialize(obj, obj$domain, terminator)
-
-      self$archive = ArchiveFSelect$new(search_space = self$objective$domain, codomain = self$objective$codomain,
+    initialize = function(task, learner, resampling, measures, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE) {
+      # initialized specialized fselect archive and objective
+      archive = ArchiveFSelect$new(
+        search_space = task_to_domain(assert_task(task)),
+        codomain = measures_to_codomain(assert_measures(measures)),
         check_values = check_values)
-      self$objective$archive = self$archive
+
+      objective = ObjectiveFSelect$new(
+        task = task,
+        learner = learner,
+        resampling = resampling,
+        measures = measures,
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models,
+        check_values = check_values,
+        archive = archive)
+
+      super$initialize(objective, objective$domain, terminator)
+
+      # super class of instance initializes default archive, overwrite with fselect archive
+      self$archive = archive
 
       private$.objective_function = objective_function
     },
 
     #' @description
-    #' The [FSelector] object writes the best found feature subsets
-    #' and estimated performance values here. For internal use.
+    #' The [FSelector] object writes the best found feature subsets and estimated performance values here.
+    #' For internal use.
     #'
     #' @param ydt (`data.table::data.table()`)\cr
-    #' Optimal outcomes, e.g. the Pareto front.
+    #'   Optimal outcomes, e.g. the Pareto front.
     assign_result = function(xdt, ydt) {
       # Add feature names to result for easy task subsetting
       features = map(transpose_list(xdt), function(x) {
@@ -103,7 +97,7 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
   ),
 
   active = list(
-    #' @field result_feature_set (`list()` of `character()`)\cr
+    #' @field result_feature_set (list of `character()`)\cr
     #' Feature sets for task subsetting.
     result_feature_set = function() {
       map(self$result$features, function(x) {
