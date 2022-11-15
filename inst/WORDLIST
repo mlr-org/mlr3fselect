@@ -3,7 +3,7 @@ AutoFSelector
 BenchmarkResult
 Bengio
 Bergstra
-CodeFactor
+Codomain
 FSelect
 FSelectInstanceMultiCrit
 FSelectInstanceSingleCrit
@@ -16,17 +16,17 @@ Hepp
 Mattermost
 Mayr
 ORCID
-ObjectiveFSelect
 ParamSet
 Pseudovariables
+RFE
 ResampleResult
 StackOverflow
 Stefanski
-Subclasses
 Uninstantiated
 bbotk
 cheatsheet
 cloneable
+codomain
 dev
 fselect
 fselector
@@ -38,4 +38,3 @@ parallelize
 permutated
 saveRDS
 th
-unnested
