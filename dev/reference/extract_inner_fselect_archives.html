@@ -155,23 +155,23 @@ Resample result of the inner resampling.</p></li>
 <span class="r-in"><span><span class="co"># extract inner archives</span></span></span>
 <span class="r-in"><span><span class="fu">extract_inner_fselect_archives</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE       FALSE     FALSE          FALSE   TRUE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         1      FALSE        TRUE      TRUE          FALSE  FALSE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         1       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         1      FALSE       FALSE      TRUE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         2      FALSE        TRUE      TRUE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:         2       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:         2       TRUE        TRUE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8:         2       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         1       TRUE        TRUE      TRUE           TRUE   TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         1       TRUE       FALSE      TRUE           TRUE  FALSE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         1       TRUE        TRUE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         2       TRUE        TRUE      TRUE          FALSE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:         2       TRUE        TRUE      TRUE           TRUE   TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7:         2       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8:         2       TRUE        TRUE     FALSE          FALSE   TRUE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.24561404            0.060 2022-11-15 17:03:21        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.12280702            0.057 2022-11-15 17:03:21        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.05263158            0.056 2022-11-15 17:03:22        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.35087719            0.053 2022-11-15 17:03:22        4        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.10526316            0.055 2022-11-15 17:03:22        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.07017544            0.055 2022-11-15 17:03:22        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.08771930            0.066 2022-11-15 17:03:22        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.07017544            0.059 2022-11-15 17:03:23        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.08771930            0.080 2022-11-15 17:23:02        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.03508772            0.064 2022-11-15 17:23:03        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.24561404            0.066 2022-11-15 17:23:03        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.03508772            0.062 2022-11-15 17:23:03        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.07017544            0.063 2022-11-15 17:23:03        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.14035088            0.065 2022-11-15 17:23:03        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.14035088            0.079 2022-11-15 17:23:04        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.07017544            0.106 2022-11-15 17:23:04        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result  task_id              learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt; penguins classif.rpart.fselector            cv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt; penguins classif.rpart.fselector            cv</span>
