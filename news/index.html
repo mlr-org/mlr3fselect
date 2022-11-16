@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,11 +74,22 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.7.2" id="mlr3fselect-072">mlr3fselect 0.7.2<a class="anchor" aria-label="anchor" href="#mlr3fselect-072"></a></h2>
-<ul><li>docs: Re-generate rd files with valid html.</li></ul></div>
+<h2 class="pkg-version" data-toc-text="0.8.0" id="mlr3fselect-080">mlr3fselect 0.8.0<a class="anchor" aria-label="anchor" href="#mlr3fselect-080"></a></h2><p class="text-muted">CRAN release: 2022-11-16</p>
+<ul><li>refactor: <code>FSelectorRFE</code> throws an error if the learner does not support the <code>$importance()</code> method.</li>
+<li>refactor: The <code>AutoFSelector</code> stores the instance and benchmark result if <code>store_models = TRUE</code>.</li>
+<li>refactor: The <code>AutoFSelector</code> stores the instance if <code>store_benchmark_result = TRUE</code>.</li>
+<li>feat: Add missing parameters from <code>AutoFSelector</code> to <code>auto_fselect()</code>.</li>
+<li>feat: Add <code><a href="../reference/fsi.html">fsi()</a></code> function to create a <code>FSelectInstanceSingleCrit</code> or <code>FSelectInstanceMultiCrit</code>.</li>
+<li>refactor: Remove <code>unnest</code> option from <code>as.data.table.ArchiveFSelect()</code> function.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.2" id="mlr3fselect-072">mlr3fselect 0.7.2<a class="anchor" aria-label="anchor" href="#mlr3fselect-072"></a></h2><p class="text-muted">CRAN release: 2022-08-25</p>
+<ul><li>docs: Re-generate rd files with valid html.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.1" id="mlr3fselect-071">mlr3fselect 0.7.1<a class="anchor" aria-label="anchor" href="#mlr3fselect-071"></a></h2><p class="text-muted">CRAN release: 2022-05-03</p>
-<ul><li>feat: <code>FSelector</code> objects have the field <code>$id</code> now.</li></ul></div>
+<ul><li>feat: <code>FSelector</code> objects have the field <code>$id</code> now.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="mlr3fselect-070">mlr3fselect 0.7.0<a class="anchor" aria-label="anchor" href="#mlr3fselect-070"></a></h2><p class="text-muted">CRAN release: 2022-04-08</p>
 <ul><li>feat: Allow to pass <code>FSelector</code> objects as <code>method</code> in <code><a href="../reference/fselect.html">fselect()</a></code> and <code><a href="../reference/auto_fselector.html">auto_fselector()</a></code>.</li>
@@ -101,7 +112,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="mlr3fselect-051">mlr3fselect 0.5.1<a class="anchor" aria-label="anchor" href="#mlr3fselect-051"></a></h2><p class="text-muted">CRAN release: 2021-03-09</p>
-<ul><li>Remove <code>x_domain</code> column from archive.</li></ul></div>
+<ul><li>Remove <code>x_domain</code> column from archive.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="mlr3fselect-050">mlr3fselect 0.5.0<a class="anchor" aria-label="anchor" href="#mlr3fselect-050"></a></h2><p class="text-muted">CRAN release: 2021-01-24</p>
 <ul><li>
@@ -112,7 +124,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="mlr3fselect-041">mlr3fselect 0.4.1<a class="anchor" aria-label="anchor" href="#mlr3fselect-041"></a></h2><p class="text-muted">CRAN release: 2020-10-30</p>
 <ul><li>Fix bug in <code>AutoFSelector$predict()</code>
-</li></ul></div>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.0" id="mlr3fselect-040">mlr3fselect 0.4.0<a class="anchor" aria-label="anchor" href="#mlr3fselect-040"></a></h2><p class="text-muted">CRAN release: 2020-10-22</p>
 <ul><li>Compact in-memory representation of R6 objects to save space when saving mlr3 objects via saveRDS(), serialize() etc.</li>
@@ -131,13 +144,16 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="mlr3fselect-030">mlr3fselect 0.3.0<a class="anchor" aria-label="anchor" href="#mlr3fselect-030"></a></h2><p class="text-muted">CRAN release: 2020-09-22</p>
 <ul><li>
-<code>Archive</code> is <code>ArchiveFSelect</code> now which stores the benchmark result in <code>$benchmark_result</code>. This change removed the resample results from the archive but they can be still accessed via the benchmark result.</li></ul></div>
+<code>Archive</code> is <code>ArchiveFSelect</code> now which stores the benchmark result in <code>$benchmark_result</code>. This change removed the resample results from the archive but they can be still accessed via the benchmark result.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.1" id="mlr3fselect-021">mlr3fselect 0.2.1<a class="anchor" aria-label="anchor" href="#mlr3fselect-021"></a></h2><p class="text-muted">CRAN release: 2020-09-10</p>
-<ul><li>Warning message if external package for feature selection is not installed.</li></ul></div>
+<ul><li>Warning message if external package for feature selection is not installed.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="mlr3fselect-020">mlr3fselect 0.2.0<a class="anchor" aria-label="anchor" href="#mlr3fselect-020"></a></h2><p class="text-muted">CRAN release: 2020-08-23</p>
-<ul><li>Initial CRAN release.</li></ul></div>
+<ul><li>Initial CRAN release.</li>
+</ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
