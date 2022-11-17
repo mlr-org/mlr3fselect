@@ -74,10 +74,11 @@ tsk("spam")
     ## * Target: type
     ## * Properties: twoclass
     ## * Features (57):
-    ##   - dbl (57): address, addresses, all, business, capitalAve, capitalLong, capitalTotal, charDollar,
-    ##     charExclamation, charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs,
-    ##     data, direct, edu, email, font, free, george, hp, hpl, internet, lab, labs, mail, make, meeting, money,
-    ##     num000, num1999, num3d, num415, num650, num85, num857, order, original, our, over, parts, people, pm,
+    ##   - dbl (57): address, addresses, all, business, capitalAve, capitalLong, capitalTotal,
+    ##     charDollar, charExclamation, charHash, charRoundbracket, charSemicolon,
+    ##     charSquarebracket, conference, credit, cs, data, direct, edu, email, font, free,
+    ##     george, hp, hpl, internet, lab, labs, mail, make, meeting, money, num000, num1999,
+    ##     num3d, num415, num650, num85, num857, order, original, our, over, parts, people, pm,
     ##     project, re, receive, remove, report, table, technology, telnet, will, you, your
 
 We construct an instance with the `fsi()` function. The instance
@@ -125,17 +126,20 @@ instance.
 instance$result_feature_set
 ```
 
-    ##  [1] "address"           "addresses"         "all"               "business"          "capitalAve"       
-    ##  [6] "capitalLong"       "capitalTotal"      "charDollar"        "charExclamation"   "charHash"         
-    ## [11] "charRoundbracket"  "charSemicolon"     "charSquarebracket" "conference"        "credit"           
-    ## [16] "cs"                "data"              "direct"            "edu"               "email"            
-    ## [21] "font"              "free"              "george"            "hp"                "internet"         
-    ## [26] "lab"               "labs"              "mail"              "make"              "meeting"          
-    ## [31] "money"             "num000"            "num1999"           "num3d"             "num415"           
-    ## [36] "num650"            "num85"             "num857"            "order"             "our"              
-    ## [41] "parts"             "people"            "pm"                "project"           "re"               
-    ## [46] "receive"           "remove"            "report"            "table"             "technology"       
-    ## [51] "telnet"            "will"              "you"               "your"
+    ##  [1] "address"           "addresses"         "all"               "business"         
+    ##  [5] "capitalAve"        "capitalLong"       "capitalTotal"      "charDollar"       
+    ##  [9] "charExclamation"   "charHash"          "charRoundbracket"  "charSemicolon"    
+    ## [13] "charSquarebracket" "conference"        "credit"            "cs"               
+    ## [17] "data"              "direct"            "edu"               "email"            
+    ## [21] "font"              "free"              "george"            "hp"               
+    ## [25] "internet"          "lab"               "labs"              "mail"             
+    ## [29] "make"              "meeting"           "money"             "num000"           
+    ## [33] "num1999"           "num3d"             "num415"            "num650"           
+    ## [37] "num85"             "num857"            "order"             "our"              
+    ## [41] "parts"             "people"            "pm"                "project"          
+    ## [45] "re"                "receive"           "remove"            "report"           
+    ## [49] "table"             "technology"        "telnet"            "will"             
+    ## [53] "you"               "your"
 
 And the corresponding measured performance.
 
@@ -152,19 +156,19 @@ The archive contains all evaluated hyperparameter configurations.
 as.data.table(instance$archive)
 ```
 
-    ##     address addresses   all business capitalAve capitalLong capitalTotal charDollar charExclamation charHash
-    ##  1:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE            TRUE    FALSE
-    ##  2:    TRUE      TRUE  TRUE    FALSE      FALSE        TRUE         TRUE       TRUE            TRUE     TRUE
-    ##  3:    TRUE      TRUE FALSE    FALSE       TRUE        TRUE         TRUE       TRUE            TRUE     TRUE
-    ##  4:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE            TRUE     TRUE
-    ##  5:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE       TRUE           FALSE    FALSE
-    ## ---                                                                                                         
-    ## 16:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE      FALSE           FALSE    FALSE
-    ## 17:   FALSE     FALSE FALSE     TRUE       TRUE        TRUE        FALSE      FALSE            TRUE     TRUE
-    ## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE           FALSE     TRUE
-    ## 19:    TRUE      TRUE  TRUE     TRUE      FALSE        TRUE         TRUE       TRUE            TRUE     TRUE
-    ## 20:    TRUE     FALSE  TRUE    FALSE      FALSE        TRUE        FALSE       TRUE           FALSE     TRUE
-    ## 54 variables not shown: [charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, email, ...]
+    ##     address addresses   all business capitalAve capitalLong capitalTotal charDollar charExclamation
+    ##  1:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE            TRUE
+    ##  2:    TRUE      TRUE  TRUE    FALSE      FALSE        TRUE         TRUE       TRUE            TRUE
+    ##  3:    TRUE      TRUE FALSE    FALSE       TRUE        TRUE         TRUE       TRUE            TRUE
+    ##  4:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE            TRUE
+    ##  5:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE       TRUE           FALSE
+    ## ---                                                                                                
+    ## 16:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE      FALSE           FALSE
+    ## 17:   FALSE     FALSE FALSE     TRUE       TRUE        TRUE        FALSE      FALSE            TRUE
+    ## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE           FALSE
+    ## 19:    TRUE      TRUE  TRUE     TRUE      FALSE        TRUE         TRUE       TRUE            TRUE
+    ## 20:    TRUE     FALSE  TRUE    FALSE      FALSE        TRUE        FALSE       TRUE           FALSE
+    ## 55 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]
 
 We fit a final model with the optimized feature set to make predictions
 on new data.
