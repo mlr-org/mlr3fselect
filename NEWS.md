@@ -1,4 +1,6 @@
-# mlr3fselect 0.7.2.9000
+# mlr3fselect 0.8.0.9000
+
+# mlr3fselect 0.8.0
 
 * refactor: `FSelectorRFE` throws an error if the learner does not support the `$importance()` method.
 * refactor: The `AutoFSelector` stores the instance and benchmark result if `store_models = TRUE`.
