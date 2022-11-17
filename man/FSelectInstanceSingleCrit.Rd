@@ -82,6 +82,7 @@ Feature set for task subsetting.}
 \itemize{
 \item \href{#method-FSelectInstanceSingleCrit-new}{\code{FSelectInstanceSingleCrit$new()}}
 \item \href{#method-FSelectInstanceSingleCrit-assign_result}{\code{FSelectInstanceSingleCrit$assign_result()}}
+\item \href{#method-FSelectInstanceSingleCrit-print}{\code{FSelectInstanceSingleCrit$print()}}
 \item \href{#method-FSelectInstanceSingleCrit-clone}{\code{FSelectInstanceSingleCrit$clone()}}
 }
 }
@@ -92,7 +93,6 @@ Feature set for task subsetting.}
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-eval_batch'><code>bbotk::OptimInstance$eval_batch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-format'><code>bbotk::OptimInstance$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="objective_function"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-objective_function'><code>bbotk::OptimInstance$objective_function()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-print'><code>bbotk::OptimInstance$print()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -167,6 +167,23 @@ additional columns for extra information.}
 
 \item{\code{y}}{(\code{numeric(1)})\cr
 Optimal outcome.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-FSelectInstanceSingleCrit-print"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectInstanceSingleCrit-print}{}}}
+\subsection{Method \code{print()}}{
+Printer.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceSingleCrit$print(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
 }
 \if{html}{\out{</div>}}
 }

@@ -69,6 +69,7 @@ Feature sets for task subsetting.}
 \itemize{
 \item \href{#method-FSelectInstanceMultiCrit-new}{\code{FSelectInstanceMultiCrit$new()}}
 \item \href{#method-FSelectInstanceMultiCrit-assign_result}{\code{FSelectInstanceMultiCrit$assign_result()}}
+\item \href{#method-FSelectInstanceMultiCrit-print}{\code{FSelectInstanceMultiCrit$print()}}
 \item \href{#method-FSelectInstanceMultiCrit-clone}{\code{FSelectInstanceMultiCrit$clone()}}
 }
 }
@@ -79,7 +80,6 @@ Feature sets for task subsetting.}
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="eval_batch"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-eval_batch'><code>bbotk::OptimInstance$eval_batch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-format'><code>bbotk::OptimInstance$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="objective_function"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-objective_function'><code>bbotk::OptimInstance$objective_function()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="print"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-print'><code>bbotk::OptimInstance$print()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -155,6 +155,23 @@ additional columns for extra information.}
 
 \item{\code{ydt}}{(\code{data.table::data.table()})\cr
 Optimal outcomes, e.g. the Pareto front.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-FSelectInstanceMultiCrit-print"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectInstanceMultiCrit-print}{}}}
+\subsection{Method \code{print()}}{
+Printer.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceMultiCrit$print(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
 }
 \if{html}{\out{</div>}}
 }

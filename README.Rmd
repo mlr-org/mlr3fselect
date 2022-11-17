@@ -5,8 +5,15 @@ output: github_document
 ```{r, include = FALSE}
 lgr::get_logger("mlr3")$set_threshold("warn")
 lgr::get_logger("bbotk")$set_threshold("warn")
-set.seed(1)
-options(datatable.print.class = FALSE, datatable.print.keys = FALSE, width = 200)
+set.seed(0)
+options(
+  datatable.print.nrows = 10,
+  datatable.print.class = FALSE,
+  datatable.print.keys = FALSE,
+  datatable.print.trunc.cols = TRUE,
+  width = 120)
+# mute load messages
+library("mlr3fselect")
 ```
 
 # mlr3fselect
@@ -20,16 +27,24 @@ Package website: [release](https://mlr3fselect.mlr-org.com/) | [dev](https://mlr
 [![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 <!-- badges: end -->
 
-This package provides feature selection for [mlr3](https://mlr3.mlr-org.com).
-It offers various feature selection wrappers, e.g. random search and sequential feature selection and different termination criteria can be set and combined. `AutoFSelect` provides a convenient way to perform nested resampling in combination with `mlr3`.
-The package is build on [bbotk](https://github.com/mlr-org/bbotk) which provides a common framework for optimization.
-For feature filters and embedded methods, see [mlr3filters](https://mlr3filters.mlr-org.com)
+*mlr3fselect* is the feature selection package of the [mlr3](https://mlr-org.com/) ecosystem.
+It selects the optimal feature set for any mlr3 [learner](https://github.com/mlr-org/mlr3learners).
+The package works with several optimization algorithms e.g. Random Search, Recursive Feature Elimination, and Genetic Search.
+Moreover, it can [automatically](https://mlr3book.mlr-org.com/feature-selection.html#autofselect) optimize learners and estimate the performance of optimized feature sets with [nested resampling](https://mlr3book.mlr-org.com/optimization.html#sec-nested-resampling).
+The package is built on the optimization framework [bbotk](https://github.com/mlr-org/bbotk).
 
 ## Resources
 
-* mlr3book [chapter](https://mlr3book.mlr-org.com/optimization.html#fs)
-* mlr3gallery [post](https://mlr3gallery.mlr-org.com/posts/2020-09-14-mlr3fselect-basic/)
-* [cheatsheet](https://cheatsheets.mlr-org.com/mlr3fselect.pdf)
+There are several section about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
+
+* Getting started with [Feature Selection](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper)
+* Estimate Model Performance with [Nested Resampling](https://mlr3book.mlr-org.com/optimization.html#sec-model-performance).
+
+The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
+
+* [Feature Selection](https://mlr3gallery.mlr-org.com/posts/2020-09-14-mlr3fselect-basic/) on the Titanic data set.
+
+The [cheatsheet](https://cheatsheets.mlr-org.com/mlr3fselect.pdf) summarizes the most important functions of mlr3fselect.
 
 ## Installation
 
@@ -47,92 +62,65 @@ remotes::install_github("mlr-org/mlr3fselect")
 
 ## Example
 
-```{r, include = FALSE}
-# mute load messages
-library("mlr3fselect")
-```
-
-### Basic feature selection
+We run a feature selection for a support vector machine on the [Spam](https://mlr3.mlr-org.com/reference/mlr_tasks_spam.html) data set.
 
 ```{r}
-library("mlr3fselect")
+library("mlr3verse")
 
-# feature selection on the pima indians diabetes data set
-instance = fselect(
-  method = "random_search",
-  task =  tsk("pima"),
-  learner = lrn("classif.rpart"),
-  resampling = rsmp("holdout"),
-  measure = msr("classif.ce"),
-  term_evals = 10,
-  batch_size = 5
+tsk("spam")
+```
+
+We construct an instance with the `fsi()` function.
+The instance describes the optimization problem.
+
+```{r}
+instance = fsi(
+  task = tsk("spam"),
+  learner = lrn("classif.svm", type = "C-classification"),
+  resampling = rsmp("cv", folds = 3),
+  measures = msr("classif.ce"),
+  terminator = trm("evals", n_evals = 20)
 )
+instance
+```
 
-# best performing feature set
-instance$result
+We select a simple random search as the optimization algorithm.
 
-# all evaluated feature sets
+```{r}
+fselector = fs("random_search", batch_size = 5)
+fselector
+```
+
+To start the feature selection, we simply pass the instance to the fselector.
+
+```{r, results='hide'}
+fselector$optimize(instance)
+```
+
+The fselector writes the best hyperparameter configuration to the instance.
+
+```{r}
+instance$result_feature_set
+```
+
+And the corresponding measured performance.
+
+```{r}
+instance$result_y
+```
+
+The archive contains all evaluated hyperparameter configurations.
+
+```{r}
 as.data.table(instance$archive)
 ```
 
-
-### Automatic feature selection
-
-```{r}
-# task
-task = tsk("pima")
-
-# construct auto tuner
-afs = auto_fselector(
-  method = "random_search",
-  learner = lrn("classif.rpart"),
-  resampling = rsmp("holdout"),
-  measure = msr("classif.ce"),
-  term_evals = 10,
-  batch_size = 5
-)
-
-# train/test split
-train_set = sample(task$nrow, 0.8 * task$nrow)
-test_set = setdiff(seq_len(task$nrow), train_set)
-
-# select features set and fit final model on the complete data set in one go
-afs$train(task, row_ids = train_set)
-
-# best performing feature set
-afs$fselect_result
-
-# all evaluated feature sets
-as.data.table(afs$archive)
-
-# predict new data
-afs$predict(task, row_ids = test_set)
-```
-
-### Nested resampling
+We fit a final model with the optimized feature set to make predictions on new data.
 
 ```{r}
-# nested resampling
-rr = fselect_nested(
-  method = "random_search",
-  task =  tsk("pima"),
-  learner = lrn("classif.rpart"),
-  inner_resampling = rsmp("holdout"),
-  outer_resampling = rsmp("cv", folds = 3),
-  measure = msr("classif.ce"),
-  term_evals = 10,
-  batch_size = 5
-)
+task = tsk("spam")
+learner = lrn("classif.svm", type = "C-classification")
 
-# aggregated performance of all outer resampling iterations
-rr$aggregate()
-
-# performance scores of the outer resampling
-rr$score()
-
-# inner resampling results
-extract_inner_fselect_results(rr)
-
-# inner resampling archives
-extract_inner_fselect_archives(rr)
+task$select(instance$result_feature_set)
+learner$train(task)
 ```
