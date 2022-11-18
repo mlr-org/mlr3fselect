@@ -12,7 +12,7 @@ The auto_fselector() function creates an AutoFSelector object."><meta name="robo
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.7.2.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -267,7 +267,7 @@ Depth of recursion for multiple nested objects.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
-<p><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learner</a>.</p>
+<p>Learner.</p>
 </div>
 
 </div><p></p><hr><a id="method-AutoFSelector-importance"></a><div class="section">
@@ -363,15 +363,15 @@ Printer.</p>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># split to train and external set</span></span></span>
-<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">split</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/partition.html" class="external-link">partition</a></span><span class="op">(</span><span class="va">task</span>, ratio <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">split</span> <span class="op">=</span> <span class="fu">partition</span><span class="op">(</span><span class="va">task</span>, ratio <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create auto fselector</span></span></span>
 <span class="r-in"><span><span class="va">afs</span> <span class="op">=</span> <span class="fu"><a href="auto_fselector.html">auto_fselector</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  learner <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span> <span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span> <span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  term_evals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># optimize feature subset and fit final model</span></span></span>
@@ -381,20 +381,20 @@ Printer.</p>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">split</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PredictionClassif&gt; for 69 observations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     row_ids     truth  response</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           2    Adelie    Adelie</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          13    Adelie    Adelie</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          17    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           1    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           3    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          10    Adelie    Adelie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         339 Chinstrap Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         342 Chinstrap Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         344 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         333 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         335 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         338 Chinstrap Chinstrap</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show result</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">fselect_result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE          FALSE   TRUE FALSE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,body_mass,island,year 0.07608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.06521739</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># model slot contains trained learner and fselect instance</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">model</span></span></span>
@@ -409,36 +409,28 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   twoclass, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_length" "body_mass"   "island"      "year"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "island"         "sex"            "year"          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fselect_instance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;FSelectInstanceSingleCrit&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * State:  Optimized</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Objective: &lt;ObjectiveFSelect:classif.rpart_on_penguins&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Search Space:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                id    class lower upper nlevels</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     bill_depth ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:    bill_length ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      body_mass ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: flipper_length ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         island ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:            sex ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:           year ParamLgl    NA    NA       2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Terminator: &lt;TerminatorEvals&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE          FALSE   TRUE FALSE TRUE 0.07608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE 0.06521739</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE     FALSE          FALSE  FALSE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE      TRUE          FALSE   TRUE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE     FALSE           TRUE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE     FALSE          FALSE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.29347826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07608696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.26086957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.08695652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.25000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.10869565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06521739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.29347826</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># shortcut trained learner</span></span></span>
@@ -457,58 +449,49 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;FSelectInstanceSingleCrit&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * State:  Optimized</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Objective: &lt;ObjectiveFSelect:classif.rpart_on_penguins&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Search Space:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                id    class lower upper nlevels</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     bill_depth ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:    bill_length ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      body_mass ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: flipper_length ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         island ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:            sex ParamLgl    NA    NA       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:           year ParamLgl    NA    NA       2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Terminator: &lt;TerminatorEvals&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE          FALSE   TRUE FALSE TRUE 0.07608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE 0.06521739</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE     FALSE          FALSE  FALSE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE      TRUE          FALSE   TRUE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE     FALSE           TRUE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE     FALSE          FALSE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.29347826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07608696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.26086957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.08695652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.25000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.10869565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06521739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.29347826</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Nested Resampling</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">afs</span> <span class="op">=</span> <span class="fu"><a href="auto_fselector.html">auto_fselector</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  learner <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span> <span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span> <span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  term_evals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">resampling_outer</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">rr</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/resample.html" class="external-link">resample</a></span><span class="op">(</span><span class="va">task</span>, <span class="va">afs</span>, <span class="va">resampling_outer</span>, store_models <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">resampling_outer</span> <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rr</span> <span class="op">=</span> <span class="fu">resample</span><span class="op">(</span><span class="va">task</span>, <span class="va">afs</span>, <span class="va">resampling_outer</span>, store_models <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># retrieve inner feature selection results.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island  sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE           TRUE   TRUE TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE           TRUE   TRUE TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE      TRUE           TRUE   TRUE TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce                                                       features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07894737 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.11842105 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.09090909     bill_depth,bill_length,body_mass,flipper_length,island,sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: penguins classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island   sex  year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE      TRUE          FALSE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE      TRUE          FALSE   TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3      FALSE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce                                             features  task_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.09210526                     bill_length,body_mass,island,sex penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.03947368                    bill_length,body_mass,island,year penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.11688312 bill_length,body_mass,flipper_length,island,sex,year penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.rpart.fselector            cv</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># performance scores estimated on the outer resampling</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -522,13 +505,13 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;ResamplingCV[20]&gt;            cv         3 &lt;PredictionClassif[20]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.04347826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07826087</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.05217391</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.07894737</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># unbiased performance of the final model trained on the full data set</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0668955 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05819985 </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
