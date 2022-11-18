@@ -6,7 +6,7 @@ Package website: [release](https://mlr3fselect.mlr-org.com/) |
 
 <!-- badges: start -->
 
-[![tic](https://github.com/mlr-org/mlr3fselect/workflows/tic/badge.svg?branch=main)](https://github.com/mlr-org/mlr3fselect/actions)
+[![r-cmd-check](https://github.com/mlr-org/mlr3fselect/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/mlr-org/mlr3fselect/actions/workflows/r-cmd-check.yml)
 [![CRAN
 Status](https://www.r-pkg.org/badges/version/mlr3fselect)](https://cran.r-project.org/package=mlr3fselect)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
