@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -215,9 +215,9 @@ Include <code>uhash</code> column?</p></dd>
 <span class="r-in"><span><span class="co"># best performing feature set</span></span></span>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length 0.07826087</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE          FALSE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,island  0.0173913</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -229,26 +229,26 @@ Include <code>uhash</code> column?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  5:      FALSE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  6:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE       FALSE     FALSE          FALSE  FALSE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:       TRUE       FALSE     FALSE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11:      FALSE       FALSE     FALSE           TRUE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12:      FALSE       FALSE     FALSE           TRUE  FALSE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13:      FALSE       FALSE     FALSE           TRUE  FALSE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:       TRUE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE        TRUE      TRUE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:      FALSE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:      FALSE        TRUE     FALSE          FALSE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:      FALSE        TRUE     FALSE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.26086957            0.069 2022-11-25 12:09:55        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.24347826            0.057 2022-11-25 12:09:55        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.24347826            0.059 2022-11-25 12:09:55        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.17391304            0.089 2022-11-25 12:09:55        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.27826087            0.072 2022-11-25 12:09:55        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.53043478            0.058 2022-11-25 12:09:55        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.53043478            0.058 2022-11-25 12:09:55        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.22608696            0.093 2022-11-25 12:09:56        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.07826087            0.065 2022-11-25 12:09:56        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.20000000            0.057 2022-11-25 12:09:56        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.13043478            0.060 2022-11-25 12:09:56        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.17391304            0.093 2022-11-25 12:09:56        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.17391304            0.063 2022-11-25 12:09:56        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.22608696            0.091 2022-11-27 17:07:11        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.19130435            0.073 2022-11-27 17:07:11        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.26086957            0.073 2022-11-27 17:07:11        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.22608696            0.112 2022-11-27 17:07:11        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.32173913            0.094 2022-11-27 17:07:11        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.57391304            0.081 2022-11-27 17:07:11        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.67826087            0.079 2022-11-27 17:07:11        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.06086957            0.111 2022-11-27 17:07:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.06086957            0.084 2022-11-27 17:07:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.06086957            0.075 2022-11-27 17:07:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.01739130            0.077 2022-11-27 17:07:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.21739130            0.115 2022-11-27 17:07:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.24347826            0.078 2022-11-27 17:07:12        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult[21]&gt;</span>
