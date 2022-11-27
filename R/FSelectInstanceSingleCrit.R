@@ -35,6 +35,8 @@
 #' @export
 #' @examples
 #' # Feature selection on Palmer Penguins data set
+#' \donttest{
+#'
 #' task = tsk("penguins")
 #' learner = lrn("classif.rpart")
 #'
@@ -61,6 +63,7 @@
 #'
 #' # Inspect all evaluated sets
 #' as.data.table(instance$archive)
+#' }
 FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
   inherit = OptimInstanceSingleCrit,
   public = list(

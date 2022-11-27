@@ -1,4 +1,4 @@
-# mlr3fselect 0.8.0.9000
+# mlr3fselect 0.8.1
 
 * fix: Add `genalg` to required packages of `FSelectorGeneticSearch`.
 

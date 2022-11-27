@@ -23,6 +23,8 @@
 #' @export
 #' @examples
 #' # Feature selection on Palmer Penguins data set
+#' \donttest{
+#'
 #' task = tsk("penguins")
 #'
 #' # Construct feature selection instance
@@ -45,6 +47,7 @@
 #'
 #' # Inspect all evaluated sets
 #' as.data.table(instance$archive)
+#' }
 FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
   inherit = OptimInstanceMultiCrit,
   public = list(
