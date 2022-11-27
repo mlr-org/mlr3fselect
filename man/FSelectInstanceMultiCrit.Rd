@@ -30,6 +30,8 @@ Alternatively, measures can be supplied to \code{as.data.table()}.
 
 \examples{
 # Feature selection on Palmer Penguins data set
+\donttest{
+
 task = tsk("penguins")
 
 # Construct feature selection instance
@@ -52,6 +54,7 @@ instance$result_feature_set
 
 # Inspect all evaluated sets
 as.data.table(instance$archive)
+}
 }
 \section{Super classes}{
 \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceMultiCrit]{bbotk::OptimInstanceMultiCrit}} -> \code{FSelectInstanceMultiCrit}

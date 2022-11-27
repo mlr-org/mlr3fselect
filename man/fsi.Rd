@@ -57,6 +57,8 @@ Function to construct a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanc
 
 \examples{
 # Feature selection on Palmer Penguins data set
+\donttest{
+
 task = tsk("penguins")
 learner = lrn("classif.rpart")
 
@@ -83,4 +85,5 @@ learner$train(task)
 
 # Inspect all evaluated sets
 as.data.table(instance$archive)
+}
 }
