@@ -184,7 +184,7 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE          FALSE   TRUE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,island 0.06086957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,island 0.03478261</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -219,34 +219,34 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-out co"><span class="r-pr">#&gt;</span> 28:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.24347826            0.056 2022-11-27 16:26:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.25217391            0.057 2022-11-27 16:26:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.27826087            0.078 2022-11-27 16:26:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.23478261            0.057 2022-11-27 16:26:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.31304348            0.056 2022-11-27 16:26:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.57391304            0.060 2022-11-27 16:26:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.57391304            0.082 2022-11-27 16:26:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.10434783            0.084 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.21739130            0.069 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.26086957            0.057 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.20869565            0.057 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.26086957            0.059 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.24347826            0.092 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.08695652            0.057 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.09565217            0.057 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.06086957            0.058 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.25217391            0.090 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.22608696            0.063 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.26086957            0.057 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.20000000            0.060 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.21739130            0.082 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.27826087            0.071 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.23478261            0.058 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.24347826            0.057 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.23478261            0.059 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.31304348            0.093 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.31304348            0.057 2022-11-27 16:26:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.57391304            0.058 2022-11-27 16:26:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.28695652            0.059 2022-11-27 17:02:13        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.23478261            0.060 2022-11-27 17:02:13        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.28695652            0.092 2022-11-27 17:02:13        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.20000000            0.059 2022-11-27 17:02:13        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.29565217            0.059 2022-11-27 17:02:13        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.56521739            0.062 2022-11-27 17:02:13        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.62608696            0.091 2022-11-27 17:02:13        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.07826087            0.093 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.26086957            0.067 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.20000000            0.059 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.25217391            0.059 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.28695652            0.061 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.28695652            0.077 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.05217391            0.059 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.06956522            0.059 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.03478261            0.060 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.23478261            0.096 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.24347826            0.062 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.23478261            0.059 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.24347826            0.060 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.26086957            0.089 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.28695652            0.070 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.17391304            0.059 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.20000000            0.059 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.21739130            0.061 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.29565217            0.102 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.37391304            0.061 2022-11-27 17:02:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.62608696            0.059 2022-11-27 17:02:16        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[21]&gt;</span>

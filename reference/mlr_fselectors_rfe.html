@@ -219,7 +219,7 @@ Stores the feature importance of the model with all variables if <code>recursive
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.02608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.06956522</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -227,11 +227,11 @@ Stores the feature importance of the model with all variables if <code>recursive
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.02608696            0.059 2022-11-27 16:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.03478261            0.065 2022-11-27 16:26:59        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06956522            0.062 2022-11-27 17:02:23        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06956522            0.068 2022-11-27 17:02:23        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                   importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 84.70838,80.72621,66.42271,55.58528,48.18994, 0.00000,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                                84.70838,80.72621,66.42271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 79.97048,78.84516,66.21620,54.92154,43.30213, 0.00000,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                                79.97048,78.84516,66.21620</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
