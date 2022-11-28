@@ -1,5 +1,5 @@
 
-# mlr3fselect
+# mlr3fselect <img src="man/figures/logo.png" align="right" width = "120" />
 
 Package website: [release](https://mlr3fselect.mlr-org.com/) |
 [dev](https://mlr3fselect.mlr-org.com/dev/)
@@ -98,6 +98,19 @@ instance
     ## <FSelectInstanceSingleCrit>
     ## * State:  Not optimized
     ## * Objective: <ObjectiveFSelect:classif.svm_on_spam>
+    ## * Search Space:
+    ##             id    class lower upper nlevels
+    ##  1:    address ParamLgl    NA    NA       2
+    ##  2:  addresses ParamLgl    NA    NA       2
+    ##  3:        all ParamLgl    NA    NA       2
+    ##  4:   business ParamLgl    NA    NA       2
+    ##  5: capitalAve ParamLgl    NA    NA       2
+    ## ---                                        
+    ## 53: technology ParamLgl    NA    NA       2
+    ## 54:     telnet ParamLgl    NA    NA       2
+    ## 55:       will ParamLgl    NA    NA       2
+    ## 56:        you ParamLgl    NA    NA       2
+    ## 57:       your ParamLgl    NA    NA       2
     ## * Terminator: <TerminatorEvals>
 
 We select a simple random search as the optimization algorithm.

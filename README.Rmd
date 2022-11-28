@@ -16,7 +16,7 @@ options(
 library("mlr3fselect")
 ```
 
-# mlr3fselect
+# mlr3fselect <img src="man/figures/logo.png" align="right" width = "120" />
 
 Package website: [release](https://mlr3fselect.mlr-org.com/) | [dev](https://mlr3fselect.mlr-org.com/dev/)
 
