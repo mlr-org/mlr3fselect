@@ -30,6 +30,7 @@
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_store_benchmark_result
+#' @template param_callbacks
 #' @template param_xdt
 #'
 #' @export
@@ -70,7 +71,7 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    initialize = function(task, learner, resampling, measure, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE) {
+    initialize = function(task, learner, resampling, measure, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
       # initialized specialized fselect archive and objective
       archive = ArchiveFSelect$new(
         search_space = task_to_domain(assert_task(task)),
@@ -85,9 +86,10 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
         store_benchmark_result = store_benchmark_result,
         store_models = store_models,
         check_values = check_values,
-        archive = archive)
+        archive = archive,
+        callbacks = callbacks)
 
-      super$initialize(objective, objective$domain, terminator)
+      super$initialize(objective, objective$domain, terminator, callbacks = callbacks)
 
       # super class of instance initializes default archive, overwrite with fselect archive
       self$archive = archive

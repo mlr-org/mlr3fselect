@@ -6,6 +6,8 @@
 \alias{mlr3fselect-package}
 \title{mlr3fselect: Feature Selection for 'mlr3'}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Feature selection package of the mlr3 ecosystem. It selects the optimal feature set for any mlr3 learner. The package works with several optimization algorithms e.g. Random Search, Recursive Feature Elimination, and Genetic Search. Moreover, it can automatically optimize learners and estimate the performance of optimized feature sets with nested resampling.
 }
 \seealso{

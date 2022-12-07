@@ -11,6 +11,11 @@
 
 .onLoad = function(libname, pkgname) {
   # nocov start
+
+  # callbacks
+  x = utils::getFromNamespace("mlr_callbacks", ns = "mlr3misc")
+  x$add("mlr3fselect.backup", load_callback_backup)
+
   assign("lg", lgr::get_logger("bbotk"), envir = parent.env(environment()))
   if (Sys.getenv("IN_PKGDOWN") == "true") {
     lg$set_threshold("warn")

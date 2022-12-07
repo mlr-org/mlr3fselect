@@ -1,6 +1,8 @@
 # mlr3fselect 0.8.1.9000
 
 * fix: Add `genalg` to required packages of `FSelectorGeneticSearch`.
+* feat: Add new callback that backups the benchmark result to disk after each batch.
+* feat: Create custom callbacks with the `callback_fselect()` function.
 
 # mlr3fselect 0.8.0
 

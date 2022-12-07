@@ -26,6 +26,8 @@ This class is usually constructed internally by by the \link{FSelectInstanceSing
 \item{\code{store_benchmark_result}}{(\code{logical(1)}).}
 
 \item{\code{archive}}{(\link{ArchiveFSelect}).}
+
+\item{\code{callbacks}}{(List of \link{CallbackFSelect}s).}
 }
 \if{html}{\out{</div>}}
 }
@@ -61,7 +63,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   check_values = TRUE,
   store_benchmark_result = TRUE,
   store_models = FALSE,
-  archive = NULL
+  archive = NULL,
+  callbacks = list()
 )}\if{html}{\out{</div>}}
 }
 
@@ -96,6 +99,9 @@ Store models in benchmark result?}
 \item{\code{archive}}{(\link{ArchiveFSelect})\cr
 Reference to the archive of \link{FSelectInstanceSingleCrit} | \link{FSelectInstanceMultiCrit}.
 If \code{NULL} (default), benchmark result and models cannot be stored.}
+
+\item{\code{callbacks}}{(list of \link{CallbackFSelect})\cr
+List of callbacks.}
 }
 \if{html}{\out{</div>}}
 }
