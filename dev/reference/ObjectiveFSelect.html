@@ -116,6 +116,10 @@ This class is usually constructed internally by by the <a href="FSelectInstanceS
 <dd><p>(<a href="ArchiveFSelect.html">ArchiveFSelect</a>).</p></dd>
 
 
+<dt><code>callbacks</code></dt>
+<dd><p>(List of <a href="CallbackFSelect.html">CallbackFSelect</a>s).</p></dd>
+
+
 </dl><p></p></div>
     </div>
     <div class="section level2">
@@ -143,7 +147,8 @@ This class is usually constructed internally by by the <a href="FSelectInstanceS
 <span>  check_values <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  store_benchmark_result <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  store_models <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  archive <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  archive <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -192,6 +197,11 @@ Store models in benchmark result?</p></dd>
 <dd><p>(<a href="ArchiveFSelect.html">ArchiveFSelect</a>)<br>
 Reference to the archive of <a href="FSelectInstanceSingleCrit.html">FSelectInstanceSingleCrit</a> | <a href="FSelectInstanceMultiCrit.html">FSelectInstanceMultiCrit</a>.
 If <code>NULL</code> (default), benchmark result and models cannot be stored.</p></dd>
+
+
+<dt><code>callbacks</code></dt>
+<dd><p>(list of <a href="CallbackFSelect.html">CallbackFSelect</a>)<br>
+List of callbacks.</p></dd>
 
 
 </dl><p></p></div>

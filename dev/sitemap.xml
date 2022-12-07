@@ -19,6 +19,12 @@
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/AutoFSelector.html</loc>
   </url>
   <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/CallbackFSelect.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ContextEval.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceMultiCrit.html</loc>
   </url>
   <url>
@@ -35,6 +41,9 @@
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/auto_fselector.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/callback_fselect.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.html</loc>
@@ -59,6 +68,9 @@
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect-package.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.backup.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors.html</loc>
