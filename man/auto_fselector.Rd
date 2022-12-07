@@ -16,6 +16,7 @@ auto_fselector(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
+  callbacks = list(),
   ...
 )
 }
@@ -56,6 +57,9 @@ Store models in benchmark result?}
 \item{check_values}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
+
+\item{callbacks}{(list of \link{CallbackFSelect})\cr
+List of callbacks.}
 
 \item{...}{(named \code{list()})\cr
 Named arguments to be set as parameters of the fselector.}

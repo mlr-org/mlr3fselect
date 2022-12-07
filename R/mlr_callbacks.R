@@ -13,7 +13,7 @@
 #' instance = fselect(
 #'   method = "random_search",
 #'   task = tsk("pima"),
-#'   learner = learner = lrn("classif.rpart"),
+#'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("holdout"),
 #'   measures = msr("classif.ce"),
 #'   term_evals = 4,
