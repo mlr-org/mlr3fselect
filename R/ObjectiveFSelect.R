@@ -11,6 +11,7 @@
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_store_benchmark_result
+#' @template param_callbacks
 #'
 #' @export
 ObjectiveFSelect = R6Class("ObjectiveFSelect",
@@ -38,13 +39,16 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
     #' @field archive ([ArchiveFSelect]).
     archive = NULL,
 
+    #' @field callbacks (List of [CallbackFSelect]s).
+    callbacks = NULL,
+
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
     #' @param archive ([ArchiveFSelect])\cr
     #'   Reference to the archive of [FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit].
     #'   If `NULL` (default), benchmark result and models cannot be stored.
-    initialize = function(task, learner, resampling, measures, check_values = TRUE, store_benchmark_result = TRUE, store_models = FALSE, archive = NULL) {
+    initialize = function(task, learner, resampling, measures, check_values = TRUE, store_benchmark_result = TRUE, store_models = FALSE, archive = NULL, callbacks = list()) {
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
       self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
@@ -54,6 +58,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       if (is.null(self$archive)) store_benchmark_result = store_models = FALSE
       self$store_models = assert_flag(store_models)
       self$store_benchmark_result = assert_flag(store_benchmark_result) || self$store_models
+      self$callbacks = assert_callbacks(as_callbacks(callbacks))
 
       if (!resampling$is_instantiated) self$resampling$instantiate(self$task)
 
@@ -67,7 +72,10 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
 
   private = list(
     .eval_many = function(xss) {
-      learners = map(xss, function(x) {
+      context = ContextEval$new(self)
+      private$.xss = xss
+
+      learners = map(private$.xss, function(x) {
         state = self$task$feature_names[unlist(x)]
         graph = po("select", selector = selector_name(state)) %>>%
           po("learner", self$learner)
@@ -75,24 +83,33 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       })
 
       # benchmark feature subsets
-      design = benchmark_grid(self$task, learners, self$resampling)
-      benchmark_result = benchmark(design, store_models = self$store_models)
+      private$.design  = benchmark_grid(self$task, learners, self$resampling)
+      call_back("on_eval_after_design", self$callbacks, context)
+
+      # learner is already cloned, task is internally cloned by PipeOpSelect, and resampling is not changed
+      private$.benchmark_result = benchmark(private$.design, store_models = self$store_models, clone = character())
+      call_back("on_eval_after_benchmark", self$callbacks, context)
 
       # aggregate performance scores
-      aggregated_performance = benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+      private$.aggregated_performance = private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
 
       # add runtime to evaluations
-      time = map_dbl(benchmark_result$resample_results$resample_result, function(rr) {
+      time = map_dbl(private$.benchmark_result$resample_results$resample_result, function(rr) {
         sum(map_dbl(get_private(rr)$.data$learner_states(get_private(rr)$.view), function(state) state$train_time + state$predict_time))
       })
-      set(aggregated_performance, j = "runtime_learners", value = time)
+      set(private$.aggregated_performance, j = "runtime_learners", value = time)
 
       # store benchmark result in archive
       if (self$store_benchmark_result) {
-        self$archive$benchmark_result$combine(benchmark_result)
-        set(aggregated_performance, j = "uhash", value = benchmark_result$uhashes)
+        self$archive$benchmark_result$combine(private$.benchmark_result)
+        set(private$.aggregated_performance, j = "uhash", value = private$.benchmark_result$uhashes)
       }
-      aggregated_performance
-    }
+      private$.aggregated_performance
+    },
+
+    .xss = NULL,
+    .design = NULL,
+    .benchmark_result = NULL,
+    .aggregated_performance = NULL
   )
 )

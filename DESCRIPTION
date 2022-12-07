@@ -1,7 +1,7 @@
 Package: mlr3fselect
 Title: Feature Selection for 'mlr3'
 Version: 0.8.1.9000
-Authors@R:c(
+Authors@R: c(
     person("Marc", "Becker", , "marcbecker@posteo.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8115-0400")),
     person("Patrick", "Schratz", , "patrick.schratz@gmail.com", role = "aut",
@@ -25,7 +25,7 @@ Depends:
     mlr3 (>= 0.12.0),
     R (>= 3.1.0)
 Imports:
-    bbotk (>= 0.5.2),
+    bbotk (>= 0.7.0.9000),
     checkmate (>= 2.0.0),
     data.table,
     lgr,
@@ -37,6 +37,8 @@ Suggests:
     genalg,
     rpart,
     testthat (>= 3.0.0)
+Remotes:
+  mlr-org/bbotk
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
@@ -47,6 +49,8 @@ RoxygenNote: 7.2.2
 Collate:
     'ArchiveFSelect.R'
     'AutoFSelector.R'
+    'CallbackFSelect.R'
+    'ContextEval.R'
     'FSelectInstanceSingleCrit.R'
     'FSelectInstanceMultiCrit.R'
     'mlr_fselectors.R'
@@ -68,6 +72,7 @@ Collate:
     'fselect.R'
     'fselect_nested.R'
     'helper.R'
+    'mlr_callbacks.R'
     'reexports.R'
     'sugar.R'
     'zzz.R'

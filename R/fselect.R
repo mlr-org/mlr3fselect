@@ -40,6 +40,7 @@
 #' @template param_store_benchmark_result
 #' @template param_store_models
 #' @template param_check_values
+#' @template param_callbacks
 #'
 #' @export
 #' @examples
@@ -64,7 +65,7 @@
 #'
 #' # Inspect all evaluated configurations
 #' as.data.table(instance$archive)
-fselect = function(method, task, learner, resampling, measures = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, ...) {
+fselect = function(method, task, learner, resampling, measures = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list(), ...) {
   fselector = if (is.character(method)) {
     assert_choice(method, mlr_fselectors$keys())
     fs(method, ...)
@@ -82,7 +83,8 @@ fselect = function(method, task, learner, resampling, measures = NULL, term_eval
     terminator = terminator,
     store_benchmark_result = store_benchmark_result,
     store_models = store_models,
-    check_values = check_values)
+    check_values = check_values,
+    callbacks = callbacks)
 
   fselector$optimize(instance)
   instance

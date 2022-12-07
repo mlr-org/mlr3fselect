@@ -27,10 +27,10 @@
 #' @template param_measure
 #' @template param_terminator
 #' @template param_store_fselect_instance
-#'
+#' @template param_store_benchmark_result
 #' @template param_store_models
 #' @template param_check_values
-#' @template param_store_benchmark_result
+#' @template param_callbacks
 #'
 #' @export
 #' @examples
@@ -106,7 +106,7 @@ AutoFSelector = R6Class("AutoFSelector",
     #'
     #' @param fselector ([FSelector])\cr
     #'   Optimization algorithm.
-    initialize = function(learner, resampling, measure = NULL, terminator, fselector, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE) {
+    initialize = function(learner, resampling, measure = NULL, terminator, fselector, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
       ia = list()
       ia$learner = assert_learner(as_learner(learner, clone = TRUE))
       ia$resampling = assert_resampling(resampling, instantiated = FALSE)$clone()
@@ -118,6 +118,7 @@ AutoFSelector = R6Class("AutoFSelector",
       private$.store_fselect_instance = assert_flag(store_fselect_instance) || ia$store_benchmark_result
 
       ia$check_values = assert_flag(check_values)
+      ia$callbacks = assert_callbacks(as_callbacks(callbacks))
       self$instance_args = ia
       self$fselector = assert_r6(fselector, "FSelector")$clone()
 
