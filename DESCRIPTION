@@ -31,6 +31,7 @@ Imports:
     lgr,
     mlr3misc (>= 0.9.4),
     mlr3pipelines (>= 0.3.0),
+    mlr3tuningspaces (>= 0.3.3),
     paradox (>= 0.7.0),
     R6
 Suggests:
