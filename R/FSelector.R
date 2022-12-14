@@ -77,7 +77,7 @@ FSelector = R6Class("FSelector",
     #' Helper for print outputs.
     #'
     #' @return (`character()`).
-    format = function() {
+    format = function(...) {
       sprintf("<%s>", class(self)[1L])
     },
 
