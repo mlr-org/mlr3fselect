@@ -136,9 +136,16 @@ The referenced help package can be opened via method \verb{$help()}.}
 \subsection{Method \code{format()}}{
 Helper for print outputs.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$format()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelector$format(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 (\code{character()}).
 }
