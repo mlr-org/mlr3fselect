@@ -3,7 +3,11 @@ AutoFSelector
 BenchmarkResult
 Bengio
 Bergstra
+CallbackFSelect
+CallbackFSelects
 Codomain
+ContextEval
+ContextOptimization
 FSelect
 FSelectInstanceMultiCrit
 FSelectInstanceSingleCrit
@@ -16,6 +20,7 @@ Hepp
 Mattermost
 Mayr
 ORCID
+ObjectiveFSelect
 ParamSet
 Pseudovariables
 RFE
