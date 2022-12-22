@@ -172,34 +172,34 @@ If more iterations are needed, set <code>ìters</code> to a higher value in the 
 <span class="r-in"><span><span class="co"># best performing feature set</span></span></span>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,island  0.1826087</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,body_mass 0.05217391</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:      FALSE       FALSE      TRUE          FALSE   TRUE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:       TRUE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      FALSE       FALSE     FALSE          FALSE   TRUE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:      FALSE       FALSE     FALSE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:      FALSE       FALSE      TRUE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:       TRUE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:       TRUE       FALSE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE       FALSE     FALSE           TRUE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      FALSE       FALSE     FALSE          FALSE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      FALSE       FALSE      TRUE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:      FALSE        TRUE      TRUE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10:      FALSE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  0.2086957            0.054 2022-12-22 07:39:39        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  0.3130435            0.080 2022-12-22 07:39:39        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  0.5826087            0.056 2022-12-22 07:39:39        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  0.1826087            0.053 2022-12-22 07:39:39        4        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  0.2869565            0.104 2022-12-22 07:39:40        5        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  0.2086957            0.053 2022-12-22 07:39:40        6        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  0.3130435            0.065 2022-12-22 07:39:40        7        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  0.3130435            0.055 2022-12-22 07:39:40        8        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  0.2434783            0.054 2022-12-22 07:39:40        9        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  0.2869565            0.076 2022-12-22 07:39:41       10        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.21739130            0.054 2022-12-22 07:51:39        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.71304348            0.095 2022-12-22 07:51:39        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.20000000            0.059 2022-12-22 07:51:39        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.33913043            0.056 2022-12-22 07:51:40        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.31304348            0.128 2022-12-22 07:51:40        5        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.19130435            0.056 2022-12-22 07:51:40        6        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.33913043            0.075 2022-12-22 07:51:40        7        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.05217391            0.057 2022-12-22 07:51:40        8        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.33913043            0.055 2022-12-22 07:51:41        9        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.33913043            0.087 2022-12-22 07:51:41       10        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult[21]&gt;</span>
