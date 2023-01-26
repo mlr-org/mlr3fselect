@@ -1,7 +1,7 @@
 # mlr3fselect (development version)
 
 * refactor: Remove internal use of `mlr3pipelines`.
-* fix: `AutoFSelector` now works with measures that require the importance or oob error.
+* fix: Feature selection with measures that require the importance or oob error works now.
 
 # mlr3fselect 0.9.0
 
