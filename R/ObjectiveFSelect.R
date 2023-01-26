@@ -75,15 +75,15 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       context = ContextEval$new(self)
       private$.xss = xss
 
-      learners = map(private$.xss, function(x) {
+      tasks = map(private$.xss, function(x) {
         state = self$task$feature_names[unlist(x)]
-        graph = po("select", selector = selector_name(state)) %>>%
-          po("learner", self$learner)
-        GraphLearner$new(graph)
+        task = self$task$clone()
+        task$select(state)
+        task
       })
 
       # benchmark feature subsets
-      private$.design  = benchmark_grid(self$task, learners, self$resampling)
+      private$.design  = benchmark_grid(tasks, self$learner, self$resampling)
       call_back("on_eval_after_design", self$callbacks, context)
 
       # learner is already cloned, task is internally cloned by PipeOpSelect, and resampling is not changed
