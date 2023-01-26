@@ -29,14 +29,14 @@ test_that("sbs strategy works with max_features parameter", {
 })
 
 test_that("optimization_path method works", {
-  z = test_fselector("sequential", store_models = TRUE)
+  z = test_fselector("sequential")
   op = z$fselector$optimization_path(z$inst)
   expect_data_table(op, nrows = 4, ncols = 6)
   expect_equal(op$dummy, c(1, 2, 4, 3))
 })
 
 test_that("optimization_path method works with included uhash", {
-  z = test_fselector("sequential", store_models = TRUE)
+  z = test_fselector("sequential")
   op = z$fselector$optimization_path(z$inst, include_uhash = TRUE)
   expect_data_table(op)
   expect_names(names(op), must.include = "uhash")

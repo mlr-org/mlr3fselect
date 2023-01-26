@@ -39,13 +39,15 @@ test_that("ArchiveFSelect access methods work", {
   })
 
   # resample result
-  map(instance$archive$data$uhash, function(uhash) {
-    expect_resample_result(instance$archive$resample_result(uhash = uhash))
-  })
 
-  map(seq(nrow(instance$archive$data)), function(i) {
-    expect_resample_result(instance$archive$resample_result(i))
-  })
+# Issue https://github.com/mlr-org/mlr3/issues/893
+#  map(instance$archive$data$uhash, function(uhash) {
+#    expect_resample_result(instance$archive$resample_result(uhash = uhash))
+#  })
+#
+#  map(seq(nrow(instance$archive$data)), function(i) {
+#    expect_resample_result(instance$archive$resample_result(i))
+#  })
 })
 
 test_that("ArchiveFSelect as.data.table function works", {

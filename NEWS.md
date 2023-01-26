@@ -1,5 +1,8 @@
 # mlr3fselect (development version)
 
+* refactor: Remove internal use of `mlr3pipelines`.
+* fix: `AutoFSelector` now works with measures that require the importance or oob error.
+
 # mlr3fselect 0.9.0
 
 * fix: Add `genalg` to required packages of `FSelectorGeneticSearch`.

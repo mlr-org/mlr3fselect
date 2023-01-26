@@ -1,7 +1,6 @@
 # nolint start
 library(mlr3)
 library(mlr3misc)
-library(mlr3pipelines)
 library(paradox)
 library(R6)
 library(data.table)
