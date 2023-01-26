@@ -16,7 +16,7 @@ AutoFSelector must be initialized with store_fselect_instance = TRUE and resampl
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,22 +156,22 @@ Resample result of the inner resampling.</p></li>
 <span class="r-in"><span><span class="fu">extract_inner_fselect_archives</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE       FALSE     FALSE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         1      FALSE       FALSE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         1      FALSE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         1       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         2      FALSE       FALSE     FALSE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:         2       TRUE       FALSE      TRUE           TRUE  FALSE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:         2       TRUE       FALSE      TRUE           TRUE  FALSE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8:         2      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         1      FALSE       FALSE     FALSE           TRUE   TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         1      FALSE        TRUE      TRUE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         1      FALSE        TRUE      TRUE          FALSE   TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         2      FALSE       FALSE      TRUE          FALSE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:         2       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7:         2      FALSE       FALSE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8:         2      FALSE       FALSE     FALSE          FALSE  FALSE FALSE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  0.3157895            0.009 2023-01-26 17:54:35        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  0.3508772            0.008 2023-01-26 17:54:35        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  0.4561404            0.007 2023-01-26 17:54:35        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:  0.1403509            0.009 2023-01-26 17:54:35        4        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:  0.1578947            0.008 2023-01-26 17:54:35        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:  0.1052632            0.007 2023-01-26 17:54:35        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:  0.1052632            0.009 2023-01-26 17:54:35        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8:  0.5964912            0.008 2023-01-26 17:54:35        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.24561404            0.021 2023-01-26 18:36:45        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.24561404            0.007 2023-01-26 18:36:45        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.12280702            0.007 2023-01-26 18:36:45        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.10526316            0.006 2023-01-26 18:36:45        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.24561404            0.007 2023-01-26 18:36:46        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.05263158            0.007 2023-01-26 18:36:46        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.24561404            0.008 2023-01-26 18:36:46        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.56140351            0.006 2023-01-26 18:36:46        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result  task_id              learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt; penguins classif.rpart.fselector            cv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt; penguins classif.rpart.fselector            cv</span>

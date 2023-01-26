@@ -12,7 +12,7 @@ Exhaustive Search generates all possible feature sets."><meta property="og:image
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -184,7 +184,7 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE          FALSE   TRUE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,island 0.06086957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,island 0.03478261</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -219,34 +219,34 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-out co"><span class="r-pr">#&gt;</span> 28:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.23478261            0.007 2023-01-26 17:54:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.26086957            0.006 2023-01-26 17:54:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.31304348            0.007 2023-01-26 17:54:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.21739130            0.008 2023-01-26 17:54:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.24347826            0.007 2023-01-26 17:54:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.57391304            0.005 2023-01-26 17:54:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.57391304            0.006 2023-01-26 17:54:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.08695652            0.027 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.23478261            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.22608696            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.20869565            0.008 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.22608696            0.008 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.23478261            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.11304348            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.06956522            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.06086957            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.26086957            0.008 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.26086957            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.21739130            0.008 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.25217391            0.008 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.25217391            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.31304348            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.16521739            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.20869565            0.009 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.21739130            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.30434783            0.006 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.24347826            0.007 2023-01-26 17:54:43        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.57391304            0.007 2023-01-26 17:54:43        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.25217391            0.007 2023-01-26 18:36:52        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.22608696            0.006 2023-01-26 18:36:52        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.26086957            0.006 2023-01-26 18:36:52        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.20869565            0.007 2023-01-26 18:36:52        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.34782609            0.006 2023-01-26 18:36:52        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.60000000            0.007 2023-01-26 18:36:52        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.47826087            0.006 2023-01-26 18:36:52        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.12173913            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.22608696            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.20869565            0.005 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.24347826            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.24347826            0.006 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.25217391            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.06086957            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.06956522            0.006 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.03478261            0.006 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.22608696            0.022 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.22608696            0.008 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.17391304            0.005 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.21739130            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.26086957            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.32173913            0.006 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.13043478            0.006 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.20869565            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.26956522            0.006 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.34782609            0.007 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.34782609            0.006 2023-01-26 18:36:53        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.55652174            0.006 2023-01-26 18:36:53        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[21]&gt;</span>
