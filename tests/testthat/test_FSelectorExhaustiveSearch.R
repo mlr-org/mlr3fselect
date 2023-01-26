@@ -1,5 +1,5 @@
 test_that("default parameters work", {
-  z = test_fselector("exhaustive_search", store_models = TRUE)
+  z = test_fselector("exhaustive_search")
   a = z$inst$archive$data
 
   expect_feature_number(a[batch_nr == 1, 1:4], n = 1)
@@ -11,7 +11,7 @@ test_that("default parameters work", {
 })
 
 test_that("max_features parameter works", {
-  z = test_fselector("exhaustive_search", max_features = 2, store_models = TRUE)
+  z = test_fselector("exhaustive_search", max_features = 2)
   a = z$inst$archive$data
 
   expect_max_features(a[, 1:4], n = 2)

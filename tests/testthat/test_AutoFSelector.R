@@ -76,7 +76,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
 
   expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
-  expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model$classif.rpart$model, "rpart")
+  expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
 
   at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
     fselector = fselector, store_fselect_instance = TRUE, store_benchmark_result = TRUE,
@@ -109,7 +109,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
 
   expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
-  expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model$classif.rpart$model, "rpart")
+  expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
 
   at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
     fselector = fselector, store_fselect_instance = FALSE, store_benchmark_result = TRUE,
@@ -122,6 +122,9 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
 })
 
 test_that("AutoFSelector works with GraphLearner", {
+  skip_if_not_installed("mlr3pipelines")
+  library("mlr3pipelines")
+
   task = TEST_MAKE_TSK()
   graph =  po("imputemedian") %>>% lrn("regr.rpart")
   learner = GraphLearner$new(graph)
@@ -150,6 +153,9 @@ test_that("AutoFSelector works with GraphLearner", {
 })
 
 test_that("AutoFSelector get_base_learner method works", {
+  skip_if_not_installed("mlr3pipelines")
+  library("mlr3pipelines")
+
   # simple learner
   learner = lrn("classif.rpart")
   afs = AutoFSelector$new(

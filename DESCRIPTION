@@ -30,11 +30,11 @@ Imports:
     data.table,
     lgr,
     mlr3misc (>= 0.9.4),
-    mlr3pipelines (>= 0.3.0),
     paradox (>= 0.7.0),
     R6
 Suggests:
     genalg,
+    mlr3pipelines,
     rpart,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
