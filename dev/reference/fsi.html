@@ -88,7 +88,8 @@
 <span>  <span class="va">terminator</span>,</span>
 <span>  store_benchmark_result <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  store_models <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check_values <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  check_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -137,6 +138,11 @@ Store models in benchmark result?</p></dd>
 Check the parameters before the evaluation and the results for
 validity?</p></dd>
 
+
+<dt>callbacks</dt>
+<dd><p>(list of <a href="CallbackFSelect.html">CallbackFSelect</a>)<br>
+List of callbacks.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
@@ -171,7 +177,7 @@ validity?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE  FALSE FALSE TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,year 0.07266718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,year 0.06971777</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Subset task to optimal feature set</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
@@ -182,15 +188,15 @@ validity?</p></dd>
 <span class="r-in"><span><span class="co"># Inspect all evaluated sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE  FALSE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE       FALSE      TRUE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE       FALSE     FALSE          FALSE  FALSE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE      TRUE           TRUE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE      TRUE           TRUE  FALSE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE       FALSE     FALSE           TRUE  FALSE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE      TRUE          FALSE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07266718            0.038 2023-01-26 18:36:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.21784897            0.021 2023-01-26 18:36:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.60177981            0.016 2023-01-26 18:36:49        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.25580981            0.018 2023-01-26 18:36:49        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.16277651            0.053 2023-01-27 13:40:36        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06971777            0.027 2023-01-27 13:40:36        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.22667175            0.025 2023-01-27 13:40:37        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.20068650            0.028 2023-01-27 13:40:37        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
