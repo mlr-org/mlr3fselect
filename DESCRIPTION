@@ -33,6 +33,7 @@ Imports:
     paradox (>= 0.7.0),
     R6
 Suggests:
+    e1071,
     genalg,
     mlr3learners,
     mlr3pipelines,
