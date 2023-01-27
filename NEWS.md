@@ -1,5 +1,7 @@
 # mlr3fselect (development version)
 
+* refactor: Add `callbacks` argument to `fsi()` function.
+
 # mlr3fselect 0.9.1
 
 * refactor: Remove internal use of `mlr3pipelines`.
