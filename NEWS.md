@@ -1,5 +1,6 @@
 # mlr3fselect (development version)
 
+* feat: Add callback `mlr3fselect.svm_rfe` to run recursive feature elimination on linear support vector machines.
 * refactor: Add `callbacks` argument to `fsi()` function.
 
 # mlr3fselect 0.9.1

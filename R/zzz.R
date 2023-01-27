@@ -10,6 +10,7 @@
 
 .onLoad = function(libname, pkgname) {
   # nocov start
+    utils::globalVariables(c("super", "self"))
 
   # callbacks
   x = utils::getFromNamespace("mlr_callbacks", ns = "mlr3misc")

@@ -75,7 +75,7 @@ load_callback_svm_rfe = function() {
     label = "SVM-RFE Callback",
     man = "mlr3fselect::mlr3fselect.svm_rfe",
     on_optimization_begin = function(callback, context) {
-      requireNamespace(mlr3learners)
+      requireNamespace("mlr3learners")
       assert_class(context$instance$objective$learner, "LearnerClassifSVM", .var.name = "learner")
       params = context$instance$objective$learner$param_set$values
 

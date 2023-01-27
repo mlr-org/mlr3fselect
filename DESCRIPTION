@@ -34,6 +34,7 @@ Imports:
     R6
 Suggests:
     genalg,
+    mlr3learners,
     mlr3pipelines,
     rpart,
     testthat (>= 3.0.0)
