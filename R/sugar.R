@@ -45,12 +45,13 @@ fss = function(.keys, ...) {
 #' @template param_store_benchmark_result
 #' @template param_store_models
 #' @template param_check_values
+#' @template param_callbacks
 #'
 #' @inheritSection FSelectInstanceSingleCrit Resources
 #'
 #' @export
 #' @inherit FSelectInstanceSingleCrit examples
-fsi = function(task, learner, resampling, measures = NULL, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE) {
+fsi = function(task, learner, resampling, measures = NULL, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
   FSelectInstance = if (!is.list(measures)) FSelectInstanceSingleCrit else FSelectInstanceMultiCrit
-  FSelectInstance$new(task, learner, resampling, measures, terminator, store_benchmark_result, store_models, check_values)
+  FSelectInstance$new(task, learner, resampling, measures, terminator, store_benchmark_result, store_models, check_values, callbacks)
 }

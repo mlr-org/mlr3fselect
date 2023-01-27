@@ -12,7 +12,8 @@ fsi(
   terminator,
   store_benchmark_result = TRUE,
   store_models = FALSE,
-  check_values = FALSE
+  check_values = FALSE,
+  callbacks = list()
 )
 }
 \arguments{
@@ -43,6 +44,9 @@ Store models in benchmark result?}
 \item{check_values}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
+
+\item{callbacks}{(list of \link{CallbackFSelect})\cr
+List of callbacks.}
 }
 \description{
 Function to construct a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit}.
