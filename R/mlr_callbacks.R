@@ -35,3 +35,70 @@ load_callback_backup = function() {
     }
   )
 }
+
+#' @title SVM-RFE Callback
+#'
+#' @include CallbackFSelect.R
+#' @name mlr3fselect.svm_rfe
+#'
+#' @description
+#' Runs a recursive feature elimination with a [mlr3learners::LearnerClassifSVM].
+#' The SVM must be configured with `type = "C-classification"` and `kernel = "linear"`.
+#'
+#' @source
+#' `r format_bib("guyon2002")`
+#'
+#' @examples
+#' clbk("mlr3fselect.svm_rfe")
+#'
+#' library(mlr3learners)
+#'
+#' # Create instance with classification svm with linear kernel
+#' instance = fsi(
+#'   task = tsk("sonar"),
+#'   learner = lrn("classif.svm", type = "C-classification", kernel = "linear"),
+#'   resampling = rsmp("cv", folds = 3),
+#'   measures = msr("classif.ce"),
+#'   terminator = trm("none"),
+#'   callbacks = clbk("mlr3fselect.svm_rfe"),
+#'   store_models = TRUE
+#' )
+#'
+#' fselector = fs("rfe", feature_number = 5, n_features = 10)
+#'
+#' # Run recursive feature elimination on the Sonar data set
+#' fselector$optimize(instance)
+NULL
+
+load_callback_svm_rfe = function() {
+  callback_fselect("mlr3fselect.svm_rfe",
+    label = "SVM-RFE Callback",
+    man = "mlr3fselect::mlr3fselect.svm_rfe",
+    on_optimization_begin = function(callback, context) {
+      requireNamespace(mlr3learners)
+      assert_class(context$instance$objective$learner, "LearnerClassifSVM", .var.name = "learner")
+      params = context$instance$objective$learner$param_set$values
+
+      if (isTRUE(params$type != "C-classification") || isTRUE(params$kernel != "linear")) {
+        stop("Only SVMs with `type = 'C-classification'` and `kernel = 'linear'` are supported.")
+      }
+
+      LearnerClassifSVMRFE = R6Class("LearnerClassifSVMRFE", inherit = mlr3learners::LearnerClassifSVM,
+        public = list(
+          initialize = function() {
+            super$initialize()
+            self$properties = c(self$properties, "importance")
+          },
+
+          importance = function() {
+            w = t(self$model$coefs) %*% self$model$SV
+            x = w * w
+            sort(x[1, ], decreasing = TRUE)
+           }
+      ))
+      learner = LearnerClassifSVMRFE$new()
+      learner$param_set$values = params
+      context$instance$objective$learner = learner
+    }
+  )
+}

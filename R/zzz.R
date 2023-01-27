@@ -14,6 +14,7 @@
   # callbacks
   x = utils::getFromNamespace("mlr_callbacks", ns = "mlr3misc")
   x$add("mlr3fselect.backup", load_callback_backup)
+  x$add("mlr3fselect.svm_rfe", load_callback_svm_rfe)
 
   assign("lg", lgr::get_logger("bbotk"), envir = parent.env(environment()))
   if (Sys.getenv("IN_PKGDOWN") == "true") {
