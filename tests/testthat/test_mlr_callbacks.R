@@ -15,3 +15,24 @@ test_that("backup callback works", {
   expect_file_exists(file)
   expect_benchmark_result(readRDS(file))
 })
+
+test_that("svm_rfe callbacks works", {
+  skip_if_not_installed("mlr3learners")
+  skip_if_not_installed("e1071")
+  requireNamespace("mlr3learners")
+
+  instance = fselect(
+    method = fs("rfe", feature_number = 5, n_features = 10),
+    task = tsk("sonar"),
+    learner = lrn("classif.svm", type = "C-classification", kernel = "linear"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("none"),
+    callbacks = clbk("mlr3fselect.svm_rfe"),
+    store_models = TRUE
+  )
+
+  archive = as.data.table(instance$archive)
+  expect_list(archive$importance, types = "numeric")
+
+})
