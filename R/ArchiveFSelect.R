@@ -155,6 +155,9 @@ as.data.table.ArchiveFSelect = function(x, ..., exclude_columns = "uhash", measu
   cols_y_extra = NULL
   tab = copy(x$data)
 
+  # add feature vector
+  tab[, "features" := apply(.SD, 1, function(features) x$cols_x[features]), .SDcols = x$cols_x]
+
   if (x$benchmark_result$n_resample_results) {
     # add extra measures
     if (!is.null(measures)) {

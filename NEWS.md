@@ -1,5 +1,6 @@
 # mlr3fselect (development version)
 
+* feat: The `as.data.table.ArchiveFSelect()` function additionally returns a character vector of selected features for each row.
 * refactor: Add `callbacks` argument to `fsi()` function.
 
 # mlr3fselect 0.9.1
