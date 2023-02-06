@@ -87,7 +87,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
         subset_sizes     = p_uty(),
         recursive        = p_lgl(default = TRUE)
       )
-      ps$values = list(recursive = TRUE, feature_fraction = 0.5)
+      ps$values = list(recursive = TRUE)
 
       super$initialize(
         id = "rfe",
@@ -115,6 +115,14 @@ FSelectorRFE = R6Class("FSelectorRFE",
       subset_sizes = pars$subset_sizes
 
       if (is.null(n_features)) n_features = floor(n / 2)
+
+      if (is.null(feature_fraction) && is.null(feature_number) && is.null(subset_sizes)) {
+        feature_fraction = 0.5
+      }
+
+      if (sum(!is.null(feature_fraction), !is.null(feature_number), !is.null(subset_sizes)) > 1) {
+        stopf("Only one of `feature_fraction`, `feature_number` and `subset_sizes` can be set.")
+      }
 
       subsets = if (!is.null(feature_number)) {
         seq(from = n - feature_number, to = n_features, by = -feature_number)
