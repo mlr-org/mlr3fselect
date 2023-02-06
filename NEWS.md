@@ -1,10 +1,7 @@
 # mlr3fselect (development version)
 
-<<<<<<< HEAD
 * feat: Add callback `mlr3fselect.svm_rfe` to run recursive feature elimination on linear support vector machines.
-=======
 * feat: The `as.data.table.ArchiveFSelect()` function additionally returns a character vector of selected features for each row.
->>>>>>> main
 * refactor: Add `callbacks` argument to `fsi()` function.
 
 # mlr3fselect 0.9.1
