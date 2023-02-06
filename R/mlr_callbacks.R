@@ -76,8 +76,9 @@ load_callback_svm_rfe = function() {
     man = "mlr3fselect::mlr3fselect.svm_rfe",
     on_optimization_begin = function(callback, context) {
       requireNamespace("mlr3learners")
-      assert_class(context$instance$objective$learner, "LearnerClassifSVM", .var.name = "learner")
-      params = context$instance$objective$learner$param_set$values
+      learner = context$instance$objective$learner
+      assert_class(learner, "LearnerClassifSVM", .var.name = "learner")
+      params = learner$param_set$values
 
       if (isTRUE(params$type != "C-classification") || isTRUE(params$kernel != "linear")) {
         stop("Only SVMs with `type = 'C-classification'` and `kernel = 'linear'` are supported.")
@@ -96,9 +97,14 @@ load_callback_svm_rfe = function() {
             sort(x[1, ], decreasing = TRUE)
            }
       ))
-      learner = LearnerClassifSVMRFE$new()
-      learner$param_set$values = params
-      context$instance$objective$learner = learner
+      learner_rfe = LearnerClassifSVMRFE$new()
+      learner_rfe$param_set$values = params
+      learner_rfe$id = learner$id
+      learner_rfe$predict_type = learner$predict_type
+      learner_rfe$fallback = learner$fallback
+      learner_rfe$timeout = learner$timeout
+      learner_rfe$parallel_predict = learner$parallel_predict
+      context$instance$objective$learner = learner_rfe
     }
   )
 }
