@@ -30,16 +30,18 @@ The package is built on the optimization framework
 There are several section about feature selection in the
 [mlr3book](https://mlr3book.mlr-org.com).
 
-  - Getting started with [Feature
+  - Getting started with [Wrapper Feature
     Selection](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper)
   - Estimate Model Performance with [Nested
-    Resampling](https://mlr3book.mlr-org.com/optimization.html#sec-model-performance).
+    Resampling](https://mlr3book.mlr-org.com/feature-selection.html#autofselect).
 
 The [gallery](https://mlr-org.com/gallery.html) features a collection of
 case studies and demos about optimization.
 
+  - Run a feature selection with [Shadow Variable
+    Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
   - [Feature
-    Selection](https://mlr3gallery.mlr-org.com/posts/2020-09-14-mlr3fselect-basic/)
+    Selection](https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/)
     on the Titanic data set.
 
 The [cheatsheet](https://cheatsheets.mlr-org.com/mlr3fselect.pdf)
