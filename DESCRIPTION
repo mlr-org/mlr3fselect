@@ -60,6 +60,7 @@ Collate:
     'FSelectorFromOptimizer.R'
     'FSelectorGeneticSearch.R'
     'FSelectorRFE.R'
+    'FSelectorRFECV.R'
     'FSelectorRandomSearch.R'
     'FSelectorSequential.R'
     'FSelectorShadowVariableSearch.R'
