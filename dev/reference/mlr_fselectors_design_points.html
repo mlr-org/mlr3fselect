@@ -113,6 +113,7 @@ Design points to try in search, one per row.</p></dd>
 <code><a href="mlr_fselectors_exhaustive_search.html">mlr_fselectors_exhaustive_search</a></code>,
 <code><a href="mlr_fselectors_genetic_search.html">mlr_fselectors_genetic_search</a></code>,
 <code><a href="mlr_fselectors_random_search.html">mlr_fselectors_random_search</a></code>,
+<code><a href="mlr_fselectors_rfecv.html">mlr_fselectors_rfecv</a></code>,
 <code><a href="mlr_fselectors_rfe.html">mlr_fselectors_rfe</a></code>,
 <code><a href="mlr_fselectors_sequential.html">mlr_fselectors_sequential</a></code>,
 <code><a href="mlr_fselectors_shadow_variable_search.html">mlr_fselectors_shadow_variable_search</a></code>,
@@ -168,8 +169,8 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># retrieve task and load learner</span></span></span>
-<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create design</span></span></span>
 <span class="r-in"><span><span class="va">design</span> <span class="op">=</span> <span class="fu">mlr3misc</span><span class="fu">::</span><span class="fu"><a href="https://mlr3misc.mlr-org.com/reference/rowwise_table.html" class="external-link">rowwise_table</a></span><span class="op">(</span></span></span>
@@ -185,8 +186,8 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"design_points"</span>, design <span class="op">=</span> <span class="va">design</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  task <span class="op">=</span> <span class="va">task</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="va">learner</span>,</span></span>
-<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># best performing feature set</span></span></span>
@@ -194,20 +195,20 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant  0.2304688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant  0.2460938</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
-<span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE    TRUE  0.3164062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2304688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE   FALSE  0.3281250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: TRUE   FALSE    TRUE TRUE    FALSE     TRUE     TRUE    TRUE  0.3164062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE    TRUE  0.3320312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2460938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE   FALSE  0.3242188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: TRUE   FALSE    TRUE TRUE    FALSE     TRUE     TRUE    TRUE  0.3203125</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.014 2023-02-13 15:40:29        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.013 2023-02-13 15:40:29        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.013 2023-02-13 15:40:29        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.014 2023-02-13 15:40:29        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.012 2023-02-13 22:46:07        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.010 2023-02-13 22:46:07        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.010 2023-02-13 22:46:07        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.012 2023-02-13 22:46:07        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      features      resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:          age,insulin,mass,pregnant,triceps &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:                  age,glucose,mass,pregnant &lt;ResampleResult[21]&gt;</span>

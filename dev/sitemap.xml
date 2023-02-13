@@ -73,6 +73,9 @@
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.backup.html</loc>
   </url>
   <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.svm_rfe.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors.html</loc>
   </url>
   <url>
@@ -89,6 +92,9 @@
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_rfe.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_rfecv.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_sequential.html</loc>

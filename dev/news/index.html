@@ -75,7 +75,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="mlr3fselect-development-version">mlr3fselect (development version)<a class="anchor" aria-label="anchor" href="#mlr3fselect-development-version"></a></h2>
-<ul><li>refactor: <code>FSelectorRFE</code> works without <code>store_models = TRUE</code> now.</li>
+<ul><li>feat: Add callback <code>mlr3fselect.svm_rfe</code> to run recursive feature elimination on linear support vector machines.</li>
+<li>refactor: The importance scores in <code>FSelectorRFE</code> are now aggregated by rank instead of averaging them.</li>
+<li>feat: Add <code>FSelectorRFECV</code> optimizer to run recursive feature elimination with cross-validation.</li>
+<li>refactor: <code>FSelectorRFE</code> works without <code>store_models = TRUE</code> now.</li>
 <li>feat: The <code>as.data.table.ArchiveFSelect()</code> function additionally returns a character vector of selected features for each row.</li>
 <li>refactor: Add <code>callbacks</code> argument to <code><a href="../reference/fsi.html">fsi()</a></code> function.</li>
 </ul></div>
