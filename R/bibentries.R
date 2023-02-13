@@ -43,5 +43,17 @@ bibentries = c(
     author    = "Yujun Wu and Dennis D Boos and Leonard A Stefanski",
     title     = "Controlling Variable Selection by the Addition of Pseudovariables",
     journal   = "Journal of the American Statistical Association"
+  ),
+
+  guyon2002     = bibentry("article",
+    title       = "Gene Selection for Cancer Classification using Support Vector Machines",
+    volume      = "46",
+    issn        = "1573-0565",
+    doi         = "10.1023/A:1012487302797",
+    pages       = "389--422",
+    number      = "1",
+    journal     = "Machine Learning",
+    author      = "Isabelle Guyon and Jason Weston and Stephen Barnhill and Vladimir Vapnik",
+    year        = "2002"
   )
 )

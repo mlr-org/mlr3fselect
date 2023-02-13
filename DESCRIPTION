@@ -33,7 +33,9 @@ Imports:
     paradox (>= 0.7.0),
     R6
 Suggests:
+    e1071,
     genalg,
+    mlr3learners,
     mlr3pipelines,
     rpart,
     testthat (>= 3.0.0)
@@ -58,6 +60,7 @@ Collate:
     'FSelectorFromOptimizer.R'
     'FSelectorGeneticSearch.R'
     'FSelectorRFE.R'
+    'FSelectorRFECV.R'
     'FSelectorRandomSearch.R'
     'FSelectorSequential.R'
     'FSelectorShadowVariableSearch.R'

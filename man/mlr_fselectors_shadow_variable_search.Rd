@@ -65,6 +65,7 @@ Other FSelector:
 \code{\link{mlr_fselectors_exhaustive_search}},
 \code{\link{mlr_fselectors_genetic_search}},
 \code{\link{mlr_fselectors_random_search}},
+\code{\link{mlr_fselectors_rfecv}},
 \code{\link{mlr_fselectors_rfe}},
 \code{\link{mlr_fselectors_sequential}},
 \code{\link{mlr_fselectors}}

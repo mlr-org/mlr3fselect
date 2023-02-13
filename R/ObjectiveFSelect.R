@@ -51,7 +51,6 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
     initialize = function(task, learner, resampling, measures, check_values = TRUE, store_benchmark_result = TRUE, store_models = FALSE, archive = NULL, callbacks = list()) {
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
-      self$resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
       self$measures = assert_measures(as_measures(measures, clone = TRUE), task = self$task, learner = self$learner)
 
       self$archive = assert_r6(archive, "ArchiveFSelect", null.ok = TRUE)
@@ -60,18 +59,23 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       self$store_benchmark_result = assert_flag(store_benchmark_result) || self$store_models
       self$callbacks = assert_callbacks(as_callbacks(callbacks))
 
-      if (!resampling$is_instantiated) self$resampling$instantiate(self$task)
-
       super$initialize(
         id = sprintf("%s_on_%s", self$learner$id, self$task$id),
         domain = task_to_domain(self$task),
         codomain = measures_to_codomain(self$measures),
-        check_values = check_values)
+        check_values = check_values,
+        constants = ps(resampling = p_uty()))
+
+      # set resamplings in constants
+      resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
+      if (!resampling$is_instantiated) resampling$instantiate(task)
+      self$resampling = resampling
+      self$constants$values$resampling = list(resampling)
     }
   ),
 
   private = list(
-    .eval_many = function(xss) {
+    .eval_many = function(xss, resampling) {
       context = ContextEval$new(self)
       private$.xss = xss
 
@@ -83,7 +87,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       })
 
       # benchmark feature subsets
-      private$.design  = benchmark_grid(tasks, self$learner, self$resampling)
+      private$.design = data.table(task = tasks, learner = list(self$learner), resampling = resampling)
       call_back("on_eval_after_design", self$callbacks, context)
 
       # learner is already cloned, task is internally cloned by PipeOpSelect, and resampling is not changed

@@ -50,4 +50,3 @@ MeasureDummy = R6Class("MeasureDummy", inherit = MeasureRegr,
     )
   )
 mlr3::mlr_measures$add("dummy", MeasureDummy)
-
