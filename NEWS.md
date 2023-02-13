@@ -1,5 +1,6 @@
 # mlr3fselect (development version)
 
+* refactor: `FSelectorRFE` works without `store_models = TRUE` now.
 * feat: The `as.data.table.ArchiveFSelect()` function additionally returns a character vector of selected features for each row.
 * refactor: Add `callbacks` argument to `fsi()` function.
 

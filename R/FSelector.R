@@ -110,9 +110,16 @@ FSelector = R6Class("FSelector",
     #' @return [data.table::data.table()].
     optimize = function(inst) {
       assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))
+
       inst$.__enclos_env__$private$.context = ContextOptimization$new(instance = inst, optimizer = self)
       call_back("on_optimization_begin", inst$callbacks, get_private(inst)$.context)
+
+      if ("requires_model" %in% self$properties) inst$objective$.__enclos_env__$private$.model_required = TRUE
+
       result = optimize_default(inst, self, private)
+
+      if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
+
       call_back("on_optimization_end", inst$callbacks, get_private(inst)$.context)
       result
     }

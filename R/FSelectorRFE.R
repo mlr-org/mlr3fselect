@@ -92,7 +92,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
       super$initialize(
         id = "rfe",
         param_set = ps,
-        properties = "single-crit",
+        properties = c("single-crit", "requires_model"),
         label = "Recursive Feature Elimination",
         man = "mlr3fselect::mlr_fselectors_rfe"
       )
@@ -137,6 +137,9 @@ FSelectorRFE = R6Class("FSelectorRFE",
       learners = rr$learners
       imp = importance_average(learners, feature_names)
 
+      # discard models if requested by the user
+      if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
+
       # Log importance to archive
       set(archive$data, archive$n_evals, "importance", list(imp))
 
@@ -173,6 +176,9 @@ FSelectorRFE = R6Class("FSelectorRFE",
           # Log importance to archive
           set(archive$data, archive$n_evals, "importance", list(imp[seq(i)]))
         }
+
+        # discard models if requested by the user
+        if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
       }
     }
   )
