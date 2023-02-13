@@ -145,7 +145,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
 # Some learners omit features that are not used at all, thus we have to assign zero to these features
 fix_importance = function(learners, features) {
   map(learners, function(learner) {
-    importance = learner$importance()
+    importance = learner$base_learner()$importance()
     set_names(map_dbl(features, function(feature) {
       if (feature %in% names(importance)) importance[[feature]] else 0
     }), features)

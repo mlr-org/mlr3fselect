@@ -173,3 +173,18 @@ test_that("works without storing models", {
   expect_numeric(instance$archive$data$importance[[2]])
   expect_class(instance$archive$benchmark_result$resample_result(2)$learners[[1]]$model, "rpart")
 })
+
+#test_that("pipelines works", {
+#  skip_if_not_installed("mlr3pipelines")
+#  library("mlr3pipelines")
+#
+#  learner = as_learner(po("subsample") %>>% lrn("classif.rpart"))
+#
+#  instance = fselect(
+#    method = fs("rfe"),
+#    task = tsk("pima"),
+#    learner = learner,
+#    resampling = rsmp("holdout"),
+#    measures = msr("classif.ce"),
+#  )
+#})
