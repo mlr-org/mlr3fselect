@@ -147,7 +147,7 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
 
       # average across iterations
       aggr = archive$data[, list("y" = mean(unlist(.SD))), by = "iteration", .SDcols = archive$cols_y]
-      n_features = aggr[order(get("y"), decreasing = TRUE), head(.SD, 1)]$iter
+      n_features = aggr[order(get("y"), decreasing = TRUE), head(.SD, 1)]$iteration
 
       # use full data set
       resampling_insample = rsmp("insample")
