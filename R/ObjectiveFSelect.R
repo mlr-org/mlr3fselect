@@ -87,7 +87,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       call_back("on_eval_after_design", self$callbacks, context)
 
       # learner is already cloned, task is internally cloned by PipeOpSelect, and resampling is not changed
-      private$.benchmark_result = benchmark(private$.design, store_models = self$store_models, clone = character())
+      private$.benchmark_result = benchmark(private$.design, store_models = self$store_models || private$.model_required, clone = character())
       call_back("on_eval_after_benchmark", self$callbacks, context)
 
       # aggregate performance scores
@@ -110,6 +110,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
     .xss = NULL,
     .design = NULL,
     .benchmark_result = NULL,
-    .aggregated_performance = NULL
+    .aggregated_performance = NULL,
+    .model_required = FALSE
   )
 )

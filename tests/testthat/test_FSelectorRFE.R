@@ -87,3 +87,38 @@ test_that("learner without importance method throw an error", {
     store_models = TRUE
   ), "does not work with")
 })
+
+test_that("works without storing models", {
+  optimizer = fs("rfe")
+  expect_subset("requires_model", optimizer$properties)
+
+  instance = fselect(
+    method = fs("rfe"),
+    task = tsk("pima"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measures = msr("classif.ce"),
+    store_models = FALSE
+  )
+
+  expect_false(instance$objective$store_models)
+  expect_numeric(instance$archive$data$importance[[1]])
+  expect_null(instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model)
+  expect_numeric(instance$archive$data$importance[[2]])
+  expect_null(instance$archive$benchmark_result$resample_result(2)$learners[[1]]$model)
+
+  instance = fselect(
+    method = fs("rfe"),
+    task = tsk("pima"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measures = msr("classif.ce"),
+    store_models = TRUE
+  )
+
+  expect_true(instance$objective$store_models)
+  expect_numeric(instance$archive$data$importance[[1]])
+  expect_class(instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
+  expect_numeric(instance$archive$data$importance[[2]])
+  expect_class(instance$archive$benchmark_result$resample_result(2)$learners[[1]]$model, "rpart")
+})
