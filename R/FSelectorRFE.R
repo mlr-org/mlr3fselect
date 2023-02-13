@@ -6,7 +6,7 @@
 #' @description
 #' Feature selection using the Recursive Feature Elimination (RFE) algorithm.
 #' Recursive feature elimination iteratively removes features with a low importance score.
-#' Only works with [Learner]s that can calculate importance scores (see the section on optional extractors in [mlr3::Learner]).
+#' Only works with [mlr3::Learner]s that can calculate importance scores (see the section on optional extractors in [mlr3::Learner]).
 #'
 #' @details
 #' The learner is trained on all features at the start and importance scores are calculated for each feature.
@@ -17,10 +17,10 @@
 #' The feature selection terminates itself when `n_features` is reached.
 #' It is not necessary to set a termination criterion.
 #'
-#' When using a cross-validation resampling strategy, the importance scores of the folds are aggregated.
+#' When using a cross-validation resampling strategy, the importance scores of the resampling iterations are aggregated.
 #' The parameter `aggregation` determines how the importance scores are aggregated.
 #' By default (`"rank"`), the importance score vector of each fold is ranked and the feature with the lowest average rank is removed.
-#' The option `"mean"` averages the score of each feature across folds and removes the feature with the lowest average score.
+#' The option `"mean"` averages the score of each feature across the resampling iterations and removes the feature with the lowest average score.
 #' Averaging the scores is not appropriate for most importance measures.
 #'
 #' @templateVar id rfe
@@ -42,11 +42,14 @@
 #' \item{`recursive`}{`logical(1)`\cr
 #'   If `TRUE` (default), the feature importance is calculated in each iteration.}
 #' \item{`aggregation`}{`logical(1)`\cr
-#'   The aggregation method for the importance scores of the resampling folds.
+#'   The aggregation method for the importance scores of the resampling iterations.
 #'   }
 #' }
 #'
 #' The parameter `feature_fraction`, `feature_number` and `subset_sizes` are mutually exclusive.
+#'
+#' @source
+#' `r format_bib("guyon2002")`
 #'
 #' @family FSelector
 #' @export
@@ -174,15 +177,17 @@ rank_importance = function(learners, features) {
 
 # Returns the sizes of the feature subsets
 rfe_subsets = function(n, n_features, feature_number, subset_sizes, feature_fraction) {
+
   subsets = if (!is.null(feature_number)) {
-    seq(from = n - feature_number, to = n_features, by = -feature_number)
+    seq(from = n, to = n_features, by = -feature_number)
   } else if (!is.null(subset_sizes)) {
+    if (subset_sizes[1] != n) subset_sizes = c(n, subset_sizes)
     subset_sizes
   } else if (!is.null(feature_fraction)) {
-    unique(floor(cumprod(c(n, rep(feature_fraction, log(n_features / n) / log(feature_fraction))))))[-1]
+    unique(floor(cumprod(c(n, rep(feature_fraction, log(n_features / n) / log(feature_fraction))))))
   }
 
-  assert_integerish(rev(subsets), any.missing = FALSE, lower = 1, upper = n - 1, sorted = TRUE)
+  assert_integerish(rev(subsets), any.missing = FALSE, lower = 1, upper = n, sorted = TRUE)
   subsets
 }
 
@@ -211,7 +216,7 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
   # Log importance and fold to archive
   archive$data[list(archive$n_batch), "importance" := importances, on = "batch_nr"]
 
-  for (j in subsets) {
+  for (j in subsets[-1]) {
     # eliminate features with the lowest importance
     states = archive$data[list(archive$n_batch), archive$cols_x, on = "batch_nr", with = FALSE]
     iwalk(importances, function(importance, i) {
@@ -237,7 +242,7 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
       set(archive$data, archive$n_evals, "importance", map(importances, function(x) x[seq(j)]))
     }
   }
-  if (folds > 1) set(archive$data, j = "iteration", value = rep(seq(folds), length(subsets) + 1))
+  if (folds > 1) set(archive$data, j = "iteration", value = rep(seq(folds), length(subsets)))
 
   # discard models if requested by the user
   if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)

@@ -4,10 +4,16 @@
 \alias{mlr_fselectors_rfe}
 \alias{FSelectorRFE}
 \title{Feature Selection with Recursive Feature Elimination}
+\source{
+Guyon I, Weston J, Barnhill S, Vapnik V (2002).
+\dQuote{Gene Selection for Cancer Classification using Support Vector Machines.}
+\emph{Machine Learning}, \bold{46}(1), 389--422.
+ISSN 1573-0565, \doi{10.1023/A:1012487302797}.
+}
 \description{
 Feature selection using the Recursive Feature Elimination (RFE) algorithm.
 Recursive feature elimination iteratively removes features with a low importance score.
-Only works with \link{Learner}s that can calculate importance scores (see the section on optional extractors in \link[mlr3:Learner]{mlr3::Learner}).
+Only works with \link[mlr3:Learner]{mlr3::Learner}s that can calculate importance scores (see the section on optional extractors in \link[mlr3:Learner]{mlr3::Learner}).
 }
 \details{
 The learner is trained on all features at the start and importance scores are calculated for each feature.
@@ -18,10 +24,10 @@ The non-recursive option (\code{recursive = FALSE}) only uses the importance sco
 The feature selection terminates itself when \code{n_features} is reached.
 It is not necessary to set a termination criterion.
 
-When using a cross-validation resampling strategy, the importance scores of the folds are aggregated.
+When using a cross-validation resampling strategy, the importance scores of the resampling iterations are aggregated.
 The parameter \code{aggregation} determines how the importance scores are aggregated.
 By default (\code{"rank"}), the importance score vector of each fold is ranked and the feature with the lowest average rank is removed.
-The option \code{"mean"} averages the score of each feature across folds and removes the feature with the lowest average score.
+The option \code{"mean"} averages the score of each feature across the resampling iterations and removes the feature with the lowest average score.
 Averaging the scores is not appropriate for most importance measures.
 }
 \section{Dictionary}{
@@ -49,7 +55,7 @@ Must be sorted in decreasing order.}
 \item{\code{recursive}}{\code{logical(1)}\cr
 If \code{TRUE} (default), the feature importance is calculated in each iteration.}
 \item{\code{aggregation}}{\code{logical(1)}\cr
-The aggregation method for the importance scores of the resampling folds.
+The aggregation method for the importance scores of the resampling iterations.
 }
 }
 

@@ -9,7 +9,7 @@
 #' RFECV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
 #' Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
 #' The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
-#' Only works with [Learner]s that can calculate importance scores (see the section on optional extractors in [Learner]).
+#' Only works with [mlr3::Learner]s that can calculate importance scores (see the section on optional extractors in [mlr3::Learner]).
 #'
 #' @details
 #' The resampling strategy is changed during the feature selection.
@@ -145,9 +145,10 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
       # optimize the number of features
       rfe_workhorse(inst, subsets, recursive, folds = resampling_cv$iters)
 
-      # average across iterations
-      aggr = archive$data[, list("y" = mean(unlist(.SD))), by = "iteration", .SDcols = archive$cols_y]
-      n_features = aggr[order(get("y"), decreasing = TRUE), head(.SD, 1)]$iteration
+      # average performance of feature numbers
+      aggr = archive$data[, list("y" = mean(unlist(.SD))), by = "batch_nr", .SDcols = archive$cols_y]
+      best_batch = aggr[order(get("y"), decreasing = TRUE), head(.SD, 1)]$batch_nr
+      n_features = rowSums(archive$data[list(best_batch), , on = "batch_nr"][1, archive$cols_x, with = FALSE])
 
       # use full data set
       resampling_insample = rsmp("insample")
