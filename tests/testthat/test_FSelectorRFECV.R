@@ -11,11 +11,10 @@ test_that("extra columns are stored in the archive", {
   optimizer = fs("rfecv", n_features = 1, feature_number = 1)
   optimizer$optimize(instance)
 
-  expect_names(names(instance$archive$data), must.include = c("importance", "fold", "iteration"))
+  expect_names(names(instance$archive$data), must.include = c("importance", "iteration"))
 })
 
 test_that("resampling is converted", {
-  set.seed(1)
   task = TEST_MAKE_TSK()
   resampling = rsmp("cv", folds = 3)
   resampling$instantiate(task)
@@ -35,7 +34,7 @@ test_that("resampling is converted", {
 
   # check cv to custom
   walk(seq(3), function(i) {
-    walk(data[list(i), resample_result, on = "fold"], function(rr) {
+    walk(data[list(i), resample_result, on = "iteration"], function(rr) {
       expect_class(rr$resampling, "ResamplingCustom")
       expect_equal(rr$resampling$train_set(1), resampling$train_set(i))
       expect_equal(rr$resampling$test_set(1), resampling$test_set(i))
@@ -43,7 +42,7 @@ test_that("resampling is converted", {
   })
 
   # check final run
-  walk(data[is.na(fold), resample_result], function(rr) {
+  walk(data[is.na(iteration), resample_result], function(rr) {
     expect_class(rr$resampling, "ResamplingInsample")
   })
 })
@@ -63,7 +62,7 @@ test_that("default parameters work", {
   data = as.data.table(instance$archive)
 
   walk(seq(3), function(i) {
-    data = data[list(i), , on = "fold"]
+    data = data[list(i), , on = "iteration"]
     expect_feature_number(data[1, 1:4], n = 4)
     expect_feature_number(data[2, 1:4], n = 2)
   })

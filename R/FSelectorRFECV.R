@@ -1,21 +1,32 @@
 #' @title Feature Selection with Recursive Feature Elimination with Cross Validation
 #'
 #' @include mlr_fselectors.R FSelectorRFE.R
-#' @name mlr_fselectors_rfe
+#' @name mlr_fselectors_rfecv
 #'
 #' @description
-#' Feature selection using the Recursive Feature Elimination (RFE) algorithm .
-#' Recursive feature elimination iteratively removes features with a low importance score.
-#' Only works with [Learner]s that can calculate importance scores (see section on optional extractors in [Learner]).
+#' Feature selection using the Recursive Feature Elimination with Cross-Validation (RFECV) algorithm.
+#' See [FSelectorRFE] for a description of the base algorithm.
+#' RFECV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
+#' Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
+#' The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
+#' Only works with [Learner]s that can calculate importance scores (see the section on optional extractors in [Learner]).
 #'
 #' @details
-#' The learner is trained on all features at the start and importance scores are calculated for each feature .
-#' Then the least important feature is removed and the learner is trained on the reduced feature set.
-#' The importance scores are calculated again and the procedure is repeated until the desired number of features is reached.
-#' The non-recursive option (`recursive = FALSE`) only uses the importance scores calculated in the first iteration.
+#' The resampling strategy is changed during the feature selection.
+#' The resampling strategy passed to the instance (`resampling`) is used to determine the optimal number of features.
+#' Usually, a cross-validation strategy is used and a recursive feature elimination is run in each iteration of the cross-validation.
+#' Internally, [mlr3::ResamplingCustom] is used to emulate this part of the algorithm.
+#' In the final recursive feature elimination run the resampling strategy is changed to [mlr3::ResamplingInsample] i.e. the complete data set is used for training and testing.
 #'
-#' The feature selection terminates itself when `n_features` is reached.
+#' The feature selection terminates itself when the optimal number of features is reached.
 #' It is not necessary to set a termination criterion.
+#'
+#' @section Archive:
+#' The [ArchiveFSelect] holds the following additional columns:
+#'  * `"iteration"` (`integer(1)`)\cr
+#'    The resampling iteration in which the feature subset was evaluated.
+#'  * `"importance"` (`numeric()`)\cr
+#'    The importance score vector of the feature subset.
 #'
 #' @templateVar id rfe
 #' @template section_dictionary_fselectors
@@ -51,10 +62,10 @@
 #'
 #' # run feature selection on the Palmer Penguins data set
 #' instance = fselect(
-#'   method = fs("rfe"),
+#'   method = fs("rfecv"),
 #'   task = task,
 #'   learner = learner,
-#'   resampling = rsmp("holdout"),
+#'   resampling = rsmp("cv", folds = 3),
 #'   measure = msr("classif.ce"),
 #'   store_models = TRUE
 #' )
@@ -73,10 +84,6 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
   inherit = FSelector,
   public = list(
 
-    #' @field importance `numeric()`\cr
-    #' Stores the feature importance of the model with all variables if `recursive` is set to `FALSE`
-    importance = NULL,
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
@@ -90,11 +97,11 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
       ps$values = list(recursive = TRUE)
 
       super$initialize(
-        id = "rfe",
+        id = "rfecv",
         param_set = ps,
         properties = "single-crit",
         label = "Recursive Feature Elimination",
-        man = "mlr3fselect::mlr_fselectors_rfe"
+        man = "mlr3fselect::mlr_fselectors_rfecv"
       )
     }
   ),
@@ -135,13 +142,12 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
         custom$instantiate(inst$objective$task, train_sets, test_sets)
       })
 
-      # optimize number of features
+      # optimize the number of features
       rfe_workhorse(inst, subsets, recursive, folds = resampling_cv$iters)
 
       # average across iterations
-      archive$data[, "iteration" := rep(seq(length(subsets) + 1), resampling_cv$iters )]
-      aggr = archive$data[, mean(unlist(.SD)), by = "iteration", .SDcols = archive$cols_y]
-      n_features = aggr[order(V1, decreasing = TRUE), head(.SD, 1)]$iter
+      aggr = archive$data[, list("y" = mean(unlist(.SD))), by = "iteration", .SDcols = archive$cols_y]
+      n_features = aggr[order(get("y"), decreasing = TRUE), head(.SD, 1)]$iter
 
       # use full data set
       resampling_insample = rsmp("insample")
@@ -151,9 +157,6 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
       # optimize feature set
       subsets = rfe_subsets(n, n_features, feature_number, subset_sizes, feature_fraction)
       rfe_workhorse(inst, subsets, recursive)
-
-      # add iteration
-      archive$data[is.na(get("iteration")), "iteration" := seq(length(subsets) + 1)]
     },
 
 

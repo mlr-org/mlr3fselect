@@ -4,12 +4,12 @@
 #' @name mlr_fselectors_rfe
 #'
 #' @description
-#' Feature selection using the Recursive Feature Elimination (RFE) algorithm .
+#' Feature selection using the Recursive Feature Elimination (RFE) algorithm.
 #' Recursive feature elimination iteratively removes features with a low importance score.
-#' Only works with [Learner]s that can calculate importance scores (see section on optional extractors in [Learner]).
+#' Only works with [Learner]s that can calculate importance scores (see the section on optional extractors in [mlr3::Learner]).
 #'
 #' @details
-#' The learner is trained on all features at the start and importance scores are calculated for each feature .
+#' The learner is trained on all features at the start and importance scores are calculated for each feature.
 #' Then the least important feature is removed and the learner is trained on the reduced feature set.
 #' The importance scores are calculated again and the procedure is repeated until the desired number of features is reached.
 #' The non-recursive option (`recursive = FALSE`) only uses the importance scores calculated in the first iteration.
@@ -17,13 +17,11 @@
 #' The feature selection terminates itself when `n_features` is reached.
 #' It is not necessary to set a termination criterion.
 #'
-#' When using a cross-validation resampling strategy, the importance scores of the folds are averaged.
-#' The parameter `aggregation` determines how the importance scores are averaged.
-#' The option `"rank"` ranks the feature scores in each fold seperatly and then removes the feature with lowest average rank across folds.
-#' The option `"mean"` averages the feature scores across folds and then removes the feature with lowest score.
-#' The latter should on
-#'
-#'
+#' When using a cross-validation resampling strategy, the importance scores of the folds are aggregated.
+#' The parameter `aggregation` determines how the importance scores are aggregated.
+#' By default (`"rank"`), the importance score vector of each fold is ranked and the feature with the lowest average rank is removed.
+#' The option `"mean"` averages the score of each feature across folds and removes the feature with the lowest average score.
+#' Averaging the scores is not appropriate for most importance measures.
 #'
 #' @templateVar id rfe
 #' @template section_dictionary_fselectors
@@ -43,6 +41,9 @@
 #'   Must be sorted in decreasing order.}
 #' \item{`recursive`}{`logical(1)`\cr
 #'   If `TRUE` (default), the feature importance is calculated in each iteration.}
+#' \item{`aggregation`}{`logical(1)`\cr
+#'   The aggregation method for the importance scores of the resampling folds.
+#'   }
 #' }
 #'
 #' The parameter `feature_fraction`, `feature_number` and `subset_sizes` are mutually exclusive.
@@ -80,10 +81,6 @@
 FSelectorRFE = R6Class("FSelectorRFE",
   inherit = FSelector,
   public = list(
-
-    #' @field importance `numeric()`\cr
-    #' Stores the feature importance of the model with all variables if `recursive` is set to `FALSE`
-    importance = NULL,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
@@ -202,7 +199,7 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
   inst$eval_batch(states)
 
   # Calculate the variable importance on the full feature set
-  uhashes = archive$data[list(archive$n_batch), uhash, on = "batch_nr"]
+  uhashes = archive$data[list(archive$n_batch), "uhash", on = "batch_nr"][[1]]
   importances = map(uhashes, function(uhash) {
     rr = archive$benchmark_result$resample_result(uhash = uhash)
     aggregation(rr$learners, rr$task$feature_names)
@@ -224,7 +221,7 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
 
     if (recursive) {
       # recalculate the variable importance on the reduced feature subset
-      uhashes = archive$data[list(archive$n_batch), uhash, on = "batch_nr"]
+      uhashes = archive$data[list(archive$n_batch), "uhash", on = "batch_nr"][[1]]
       importances = map(uhashes, function(uhash) {
         rr = archive$benchmark_result$resample_result(uhash = uhash)
         aggregation(rr$learners, rr$task$feature_names)
@@ -237,7 +234,7 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
       set(archive$data, archive$n_evals, "importance", map(importances, function(x) x[seq(j)]))
     }
   }
-  if (folds > 1) set(archive$data, j = "fold", value = rep(seq(folds), length(subsets) + 1))
+  if (folds > 1) set(archive$data, j = "iteration", value = rep(seq(folds), length(subsets) + 1))
 }
 
 mlr_fselectors$add("rfe", FSelectorRFE)
