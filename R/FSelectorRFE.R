@@ -41,8 +41,9 @@
 #'   Must be sorted in decreasing order.}
 #' \item{`recursive`}{`logical(1)`\cr
 #'   If `TRUE` (default), the feature importance is calculated in each iteration.}
-#' \item{`aggregation`}{`logical(1)`\cr
+#' \item{`aggregation`}{`character(1)`\cr
 #'   The aggregation method for the importance scores of the resampling iterations.
+#'   See details.
 #'   }
 #' }
 #'

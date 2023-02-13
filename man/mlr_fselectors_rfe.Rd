@@ -54,8 +54,9 @@ Vector of number of features to retain in each iteration.
 Must be sorted in decreasing order.}
 \item{\code{recursive}}{\code{logical(1)}\cr
 If \code{TRUE} (default), the feature importance is calculated in each iteration.}
-\item{\code{aggregation}}{\code{logical(1)}\cr
+\item{\code{aggregation}}{\code{character(1)}\cr
 The aggregation method for the importance scores of the resampling iterations.
+See details.
 }
 }
 
