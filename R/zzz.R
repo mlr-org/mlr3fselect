@@ -12,6 +12,10 @@
   # nocov start
     utils::globalVariables(c("super", "self"))
 
+  # reflections
+  x = utils::getFromNamespace("bbotk_reflections", ns = "bbotk")
+  x$optimizer_properties = c(x$optimizer_properties, "requires_model")
+
   # callbacks
   x = utils::getFromNamespace("mlr_callbacks", ns = "mlr3misc")
   x$add("mlr3fselect.backup", load_callback_backup)

@@ -98,7 +98,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
       super$initialize(
         id = "rfe",
         param_set = ps,
-        properties = "single-crit",
+        properties = c("single-crit", "requires_model"),
         label = "Recursive Feature Elimination",
         man = "mlr3fselect::mlr_fselectors_rfe"
       )
@@ -205,6 +205,9 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
     aggregation(rr$learners, rr$task$feature_names)
   })
 
+  # discard models if requested by the user
+  if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
+
   # Log importance and fold to archive
   archive$data[list(archive$n_batch), "importance" := importances, on = "batch_nr"]
 
@@ -235,6 +238,9 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
     }
   }
   if (folds > 1) set(archive$data, j = "iteration", value = rep(seq(folds), length(subsets) + 1))
+
+  # discard models if requested by the user
+  if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
 }
 
 mlr_fselectors$add("rfe", FSelectorRFE)
