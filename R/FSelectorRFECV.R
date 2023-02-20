@@ -99,7 +99,7 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
       super$initialize(
         id = "rfecv",
         param_set = ps,
-        properties = "single-crit",
+        properties = c("single-crit", "requires_model"),
         label = "Recursive Feature Elimination",
         man = "mlr3fselect::mlr_fselectors_rfecv"
       )
