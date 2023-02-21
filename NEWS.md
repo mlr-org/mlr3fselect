@@ -1,4 +1,4 @@
-# mlr3fselect (development version)
+# mlr3fselect 0.10.0
 
 * feat: Add callback `mlr3fselect.svm_rfe` to run recursive feature elimination on linear support vector machines.
 * refactor: The importance scores in `FSelectorRFE` are now aggregated by rank instead of averaging them.
