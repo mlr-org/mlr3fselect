@@ -5,9 +5,9 @@
 \alias{FSelectorRFECV}
 \title{Feature Selection with Recursive Feature Elimination with Cross Validation}
 \description{
-Feature selection using the Recursive Feature Elimination with Cross-Validation (RFECV) algorithm.
+Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
 See \link{FSelectorRFE} for a description of the base algorithm.
-RFECV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
+RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
 Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
 The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
 Only works with \link[mlr3:Learner]{mlr3::Learner}s that can calculate importance scores (see the section on optional extractors in \link[mlr3:Learner]{mlr3::Learner}).
