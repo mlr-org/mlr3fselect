@@ -38,6 +38,9 @@ There are several section about feature selection in the
 The [gallery](https://mlr-org.com/gallery.html) features a collection of
 case studies and demos about optimization.
 
+  - Utilize the built-in feature importance of models with [Recursive
+    Feature
+    Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
   - Run a feature selection with [Shadow Variable
     Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
   - [Feature
@@ -170,7 +173,7 @@ as.data.table(instance$archive)
     ## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE           FALSE
     ## 19:    TRUE      TRUE  TRUE     TRUE      FALSE        TRUE         TRUE       TRUE            TRUE
     ## 20:    TRUE     FALSE  TRUE    FALSE      FALSE        TRUE        FALSE       TRUE           FALSE
-    ## 56 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]
+    ## 55 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]
 
 We fit a final model with the optimized feature set to make predictions
 on new data.
