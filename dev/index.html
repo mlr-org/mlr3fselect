@@ -130,6 +130,7 @@
 </ul>
 <p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p>
 <ul>
+<li>Utilize the built-in feature importance of models with <a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</li>
 <li>Run a feature selection with <a href="https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/" class="external-link">Shadow Variable Search</a>.</li>
 <li>
 <a href="https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/" class="external-link">Feature Selection</a> on the Titanic data set.</li>
@@ -226,7 +227,7 @@
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE           FALSE</span></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 19:    TRUE      TRUE  TRUE     TRUE      FALSE        TRUE         TRUE       TRUE            TRUE</span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 20:    TRUE     FALSE  TRUE    FALSE      FALSE        TRUE        FALSE       TRUE           FALSE</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 56 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]</span></span></code></pre></div>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 55 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]</span></span></code></pre></div>
 <p>We fit a final model with the optimized feature set to make predictions on new data.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"spam"</span><span class="op">)</span></span>

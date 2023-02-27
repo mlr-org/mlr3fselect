@@ -218,7 +218,7 @@ Include <code>uhash</code> column?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length 0.05217391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length 0.03478261</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -237,19 +237,19 @@ Include <code>uhash</code> column?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12:      FALSE       FALSE     FALSE           TRUE  FALSE  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13:      FALSE       FALSE     FALSE           TRUE  FALSE FALSE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.26086957            0.011 2023-02-21 12:02:14        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.23478261            0.014 2023-02-21 12:02:14        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.27826087            0.009 2023-02-21 12:02:14        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.20000000            0.009 2023-02-21 12:02:14        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.26956522            0.008 2023-02-21 12:02:14        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.59130435            0.008 2023-02-21 12:02:14        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.59130435            0.007 2023-02-21 12:02:14        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.20000000            0.012 2023-02-21 12:02:15        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.05217391            0.011 2023-02-21 12:02:15        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.20000000            0.011 2023-02-21 12:02:15        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.13043478            0.010 2023-02-21 12:02:15        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.20000000            0.010 2023-02-21 12:02:15        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.20000000            0.012 2023-02-21 12:02:15        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.22608696            0.008 2023-02-27 12:55:55        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.22608696            0.007 2023-02-27 12:55:55        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.29565217            0.006 2023-02-27 12:55:55        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.20869565            0.006 2023-02-27 12:55:55        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.28695652            0.006 2023-02-27 12:55:55        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.57391304            0.005 2023-02-27 12:55:55        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.57391304            0.005 2023-02-27 12:55:55        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.20000000            0.009 2023-02-27 12:55:55        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.03478261            0.007 2023-02-27 12:55:55        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.19130435            0.006 2023-02-27 12:55:55        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.15652174            0.006 2023-02-27 12:55:55        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.20869565            0.006 2023-02-27 12:55:55        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.20869565            0.006 2023-02-27 12:55:55        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       features      resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:                 bill_depth &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2:                bill_length &lt;ResampleResult[21]&gt;</span>
