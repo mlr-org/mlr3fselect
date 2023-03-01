@@ -191,46 +191,46 @@ Maximum number of feature sets to try in a batch.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># best performing feature subset</span></span></span>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.06086957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex  year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE          FALSE   TRUE TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,body_mass,island,sex 0.04347826</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:       TRUE       FALSE      TRUE          FALSE   TRUE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:       TRUE       FALSE     FALSE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      FALSE       FALSE     FALSE          FALSE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:       TRUE       FALSE     FALSE          FALSE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:      FALSE        TRUE      TRUE          FALSE   TRUE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:       TRUE        TRUE     FALSE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:       TRUE        TRUE      TRUE           TRUE   TRUE FALSE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  6:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:      FALSE       FALSE      TRUE           TRUE   TRUE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:       TRUE       FALSE     FALSE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE        TRUE     FALSE           TRUE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE       FALSE     FALSE           TRUE  FALSE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.53913043            0.007 2023-03-01 14:25:01        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.06086957            0.009 2023-03-01 14:25:01        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.27826087            0.009 2023-03-01 14:25:01        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.26956522            0.007 2023-03-01 14:25:01        4        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.33043478            0.010 2023-03-01 14:25:01        5        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.06086957            0.008 2023-03-01 14:25:01        6        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.06086957            0.009 2023-03-01 14:25:01        7        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.20000000            0.007 2023-03-01 14:25:01        8        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.25217391            0.009 2023-03-01 14:25:01        9        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.06086957            0.009 2023-03-01 14:25:02       10        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.25217391            0.009 2023-03-01 15:42:12        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.04347826            0.012 2023-03-01 15:42:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.04347826            0.009 2023-03-01 15:42:12        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.04347826            0.010 2023-03-01 15:42:12        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.04347826            0.010 2023-03-01 15:42:12        5        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.04347826            0.013 2023-03-01 15:42:12        6        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.04347826            0.009 2023-03-01 15:42:12        7        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.21739130            0.009 2023-03-01 15:42:12        8        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.04347826            0.011 2023-03-01 15:42:12        9        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.20000000            0.012 2023-03-01 15:42:12       10        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                           features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:                                                            sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:                                bill_depth,body_mass,island,sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:                                      bill_depth,flipper_length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                                                     island,sex</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:                                          bill_depth,island,sex</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                               bill_length,body_mass,island,sex</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:          bill_depth,bill_length,flipper_length,island,sex,year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:    bill_depth,bill_length,body_mass,flipper_length,island,year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  6: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:                           body_mass,flipper_length,island,year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:                                              bill_depth,island</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:                              bill_length,flipper_length,island</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:                                       body_mass,flipper_length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:                             bill_depth,flipper_length,sex,year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult[21]&gt;</span>

@@ -81,7 +81,7 @@
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Sequential forward selection (<code>strategy = fsf</code>) extends the feature set in each iteration with the feature that increases the models performance the most.
+    <p>Sequential forward selection (<code>strategy = fsf</code>) extends the feature set in each iteration with the feature that increases the model's performance the most.
 Sequential backward selection (<code>strategy = fsb</code>) follows the same idea but starts with all features and removes features from the set.</p>
 <p>The feature selection terminates itself when <code>min_features</code> or <code>max_features</code> is reached.
 It is not necessary to set a termination criterion.</p>
@@ -218,7 +218,7 @@ Include <code>uhash</code> column?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length 0.04347826</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length 0.08695652</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -237,19 +237,19 @@ Include <code>uhash</code> column?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12:      FALSE       FALSE     FALSE           TRUE  FALSE  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13:      FALSE       FALSE     FALSE           TRUE  FALSE FALSE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.25217391            0.007 2023-03-01 14:25:05        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.26086957            0.007 2023-03-01 14:25:05        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.28695652            0.007 2023-03-01 14:25:05        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.17391304            0.007 2023-03-01 14:25:05        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.27826087            0.027 2023-03-01 14:25:05        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.56521739            0.010 2023-03-01 14:25:05        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.56521739            0.008 2023-03-01 14:25:05        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.17391304            0.007 2023-03-01 14:25:05        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.04347826            0.007 2023-03-01 14:25:05        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.16521739            0.008 2023-03-01 14:25:05        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.11304348            0.007 2023-03-01 14:25:05        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.17391304            0.011 2023-03-01 14:25:05        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.18260870            0.009 2023-03-01 14:25:05        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.26086957            0.008 2023-03-01 15:42:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.21739130            0.008 2023-03-01 15:42:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.25217391            0.008 2023-03-01 15:42:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.14782609            0.010 2023-03-01 15:42:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.22608696            0.010 2023-03-01 15:42:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.60000000            0.010 2023-03-01 15:42:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.60000000            0.007 2023-03-01 15:42:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.20000000            0.008 2023-03-01 15:42:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.08695652            0.008 2023-03-01 15:42:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.14782609            0.010 2023-03-01 15:42:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.10434783            0.010 2023-03-01 15:42:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.13913043            0.011 2023-03-01 15:42:16        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.18260870            0.008 2023-03-01 15:42:16        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       features      resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:                 bill_depth &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2:                bill_length &lt;ResampleResult[21]&gt;</span>

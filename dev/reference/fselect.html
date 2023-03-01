@@ -194,8 +194,10 @@ If no termination criterion is needed, set <code>term_evals</code>, <code>term_t
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
     
 
-<ul><li><p><a href="https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper" class="external-link">book chapter</a> on feature selection.</p></li>
-<li><p><a href="https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/" class="external-link">gallery post</a> on feature selection on the Titanic data set.</p></li>
+<p>There are several sections about feature selection in the <a href="https://mlr3book.mlr-org.com" class="external-link">mlr3book</a>.</p><ul><li><p>Getting started with <a href="https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper" class="external-link">wrapper feature selection</a>.</p></li>
+</ul><p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p><ul><li><p>Utilize the built-in feature importance of models with <a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</p></li>
+<li><p>Run a feature selection with <a href="https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/" class="external-link">Shadow Variable Search</a>.</p></li>
+<li><p><a href="https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/" class="external-link">Feature Selection</a> on the Titanic data set.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a></h2>
@@ -234,20 +236,20 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 <span class="r-in"><span><span class="co"># Inspect all evaluated configurations</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: FALSE   FALSE    TRUE  TRUE    FALSE    FALSE    FALSE   FALSE  0.4101562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.3359375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: FALSE   FALSE    TRUE FALSE     TRUE    FALSE     TRUE   FALSE  0.3515625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: FALSE    TRUE   FALSE  TRUE    FALSE     TRUE    FALSE    TRUE  0.2656250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  TRUE   FALSE    TRUE FALSE     TRUE     TRUE    FALSE    TRUE  0.2773438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  TRUE    TRUE   FALSE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE     TRUE   FALSE  0.2734375</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.010 2023-03-01 14:24:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.012 2023-03-01 14:24:50        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.011 2023-03-01 14:24:50        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.013 2023-03-01 14:24:50        4        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     features      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                       age &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:              insulin,mass &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                  pedigree &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: insulin,pedigree,pressure &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.014 2023-03-01 15:41:58        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.014 2023-03-01 15:41:58        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.015 2023-03-01 15:41:58        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.015 2023-03-01 15:41:58        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           features      resample_result</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                   glucose,mass,pregnant,triceps &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:           age,insulin,pedigree,pregnant,triceps &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: age,glucose,mass,pedigree,pregnant,pressure,... &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:              age,glucose,mass,pregnant,pressure &lt;ResampleResult[21]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

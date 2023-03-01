@@ -101,6 +101,12 @@ Shadow variable search creates for each feature a permutated copy and stops when
 It is not necessary to set a termination criterion.</p>
     </div>
     <div class="section level2">
+    <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
+    
+
+<p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p><ul><li><p>Run a feature selection with <a href="https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/" class="external-link">Shadow Variable Search</a>.</p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
     
 
@@ -208,7 +214,7 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length 0.08695652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length  0.1043478</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -292,83 +298,83 @@ Instance optimized with FSelectorShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 77:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.26086957            0.019 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.23478261            0.024 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.26956522            0.020 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.21739130            0.018 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.32173913            0.018 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.53913043            0.018 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.64347826            0.017 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.51304348            0.016 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.51304348            0.038 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.64347826            0.021 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.64347826            0.018 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.60869565            0.016 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.53913043            0.016 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.53913043            0.015 2023-03-01 14:25:06        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.21739130            0.019 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.08695652            0.021 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.24347826            0.043 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.13043478            0.022 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.21739130            0.018 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.21739130            0.018 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.25217391            0.018 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.21739130            0.019 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.21739130            0.020 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.21739130            0.023 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.27826087            0.025 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.20000000            0.023 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.21739130            0.017 2023-03-01 14:25:07        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 0.08695652            0.043 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 0.08695652            0.025 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 0.08695652            0.020 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 0.08695652            0.020 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 0.08695652            0.019 2023-03-01 14:25:08        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 0.08695652            0.019 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 0.08695652            0.020 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 0.08695652            0.043 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 0.08695652            0.024 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 0.08695652            0.022 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 0.08695652            0.018 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 0.08695652            0.019 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 0.08695652            0.019 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48: 0.08695652            0.019 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49: 0.08695652            0.019 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50: 0.08695652            0.024 2023-03-01 14:25:08        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51: 0.08695652            0.025 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52: 0.08695652            0.025 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53: 0.08695652            0.022 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54: 0.08695652            0.018 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55: 0.08695652            0.018 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56: 0.08695652            0.020 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57: 0.08695652            0.019 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58: 0.08695652            0.019 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59: 0.08695652            0.026 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60: 0.08695652            0.024 2023-03-01 14:25:09        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61: 0.08695652            0.026 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62: 0.08695652            0.025 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63: 0.08695652            0.019 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64: 0.08695652            0.019 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65: 0.08695652            0.021 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66: 0.08695652            0.019 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67: 0.08695652            0.020 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68: 0.08695652            0.045 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69: 0.08695652            0.024 2023-03-01 14:25:10        6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70: 0.08695652            0.045 2023-03-01 14:25:10        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71: 0.08695652            0.026 2023-03-01 14:25:10        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72: 0.08695652            0.022 2023-03-01 14:25:10        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73: 0.08695652            0.020 2023-03-01 14:25:10        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74: 0.08695652            0.019 2023-03-01 14:25:10        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75: 0.08695652            0.021 2023-03-01 14:25:10        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76: 0.08695652            0.022 2023-03-01 14:25:10        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77: 0.08695652            0.044 2023-03-01 14:25:10        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  0.3217391            0.026 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  0.2782609            0.023 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  0.3304348            0.021 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  0.2695652            0.020 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  0.3043478            0.021 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  0.5913043            0.021 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  0.5913043            0.020 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  0.5652174            0.044 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  0.5739130            0.024 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  0.6173913            0.019 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:  0.6173913            0.019 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:  0.6086957            0.019 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:  0.5913043            0.019 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:  0.6608696            0.019 2023-03-01 15:42:18        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:  0.2695652            0.069 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:  0.1043478            0.026 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:  0.2695652            0.026 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:  0.2173913            0.021 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:  0.2695652            0.023 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:  0.2695652            0.021 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:  0.2608696            0.021 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:  0.2956522            0.021 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:  0.3217391            0.021 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:  0.2695652            0.026 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:  0.2695652            0.027 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:  0.2695652            0.022 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:  0.2695652            0.021 2023-03-01 15:42:19        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:  0.1043478            0.022 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:  0.1043478            0.021 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:  0.1043478            0.022 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:  0.1043478            0.022 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32:  0.1043478            0.046 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33:  0.1043478            0.026 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34:  0.1043478            0.028 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35:  0.1043478            0.021 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36:  0.1043478            0.021 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37:  0.1043478            0.023 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38:  0.1043478            0.022 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39:  0.1043478            0.022 2023-03-01 15:42:20        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:  0.1043478            0.023 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:  0.1043478            0.048 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:  0.1043478            0.027 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:  0.1043478            0.026 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:  0.1043478            0.021 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:  0.1043478            0.021 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:  0.1043478            0.022 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:  0.1043478            0.022 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:  0.1043478            0.022 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:  0.1043478            0.048 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:  0.1043478            0.026 2023-03-01 15:42:20        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51:  0.1043478            0.028 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52:  0.1043478            0.028 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53:  0.1043478            0.021 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54:  0.1043478            0.022 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55:  0.1043478            0.022 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56:  0.1043478            0.023 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57:  0.1043478            0.022 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58:  0.1043478            0.051 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59:  0.1043478            0.028 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60:  0.1043478            0.024 2023-03-01 15:42:21        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61:  0.1043478            0.030 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62:  0.1043478            0.023 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63:  0.1043478            0.021 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64:  0.1043478            0.023 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65:  0.1043478            0.022 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66:  0.1043478            0.023 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67:  0.1043478            0.050 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68:  0.1043478            0.029 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69:  0.1043478            0.025 2023-03-01 15:42:22        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70:  0.1043478            0.029 2023-03-01 15:42:22        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71:  0.1043478            0.027 2023-03-01 15:42:22        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72:  0.1043478            0.023 2023-03-01 15:42:22        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73:  0.1043478            0.024 2023-03-01 15:42:22        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74:  0.1043478            0.024 2023-03-01 15:42:22        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75:  0.1043478            0.024 2023-03-01 15:42:22        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76:  0.1043478            0.050 2023-03-01 15:42:22        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77:  0.1043478            0.030 2023-03-01 15:42:22        7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__bill_depth permuted__bill_length permuted__body_mass</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:                FALSE                 FALSE               FALSE</span>
