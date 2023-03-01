@@ -6,30 +6,37 @@
 #' The [FSelector] implements the optimization algorithm.
 #'
 #' @details
-#' [FSelector] is a abstract base class that implements the base functionality each fselector must provide.
+#' [FSelector] is an abstract base class that implements the base functionality each fselector must provide.
 #' A subclass is implemented in the following way:
 #'  * Inherit from FSelector.
 #'  * Specify the private abstract method `$.optimize()` and use it to call into your optimizer.
 #'  * You need to call `instance$eval_batch()` to evaluate design points.
 #'  * The batch evaluation is requested at the [FSelectInstanceSingleCrit]/[FSelectInstanceMultiCrit] object `instance`, so each batch is possibly executed in parallel via [mlr3::benchmark()], and all evaluations are stored inside of `instance$archive`.
 #'  * Before the batch evaluation, the [bbotk::Terminator] is checked, and if it is positive, an exception of class `"terminated_error"` is generated.
-#'    In the  later case the current batch of evaluations is still stored in `instance`, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
+#'    In the latter case the current batch of evaluations is still stored in `instance`, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
 #'  * After such an exception was caught we select the best set from `instance$archive` and return it.
 #'  * Note that therefore more points than specified by the [bbotk::Terminator] may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
 #'    How many more depends on the setting of the batch size.
-#'  * Overwrite the private super-method `.assign_result()` if you want to decide yourself how to estimate the final set in the instance and its estimated performance.
-#'    The default behavior is: We pick the best resample-experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
+#'  * Overwrite the private super-method `.assign_result()` if you want to decide how to estimate the final set in the instance and its estimated performance.
+#'    The default behavior is: We pick the best resample experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
 #'
 #' @section Private Methods:
 #' * `.optimize(instance)` -> `NULL`\cr
 #'   Abstract base method. Implement to specify feature selection of your subclass.
 #'   See technical details sections.
 #' * `.assign_result(instance)` -> `NULL`\cr
-#'   Abstract base method. Implement to specify how the final feature subset is  selected.
+#'   Abstract base method. Implement to specify how the final feature subset is selected.
 #'   See technical details sections.
 #'
 #' @section Resources:
-#' * [book section](https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class) on feature selection algorithms.
+#' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
+#'
+#' * Learn more about [fselectors](https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class).
+#'
+#' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
+#'
+#' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
+#' * Run a feature selection with [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
 #'
 #' @template param_man
 #'

@@ -7,7 +7,7 @@
 The \link{FSelector} implements the optimization algorithm.
 }
 \details{
-\link{FSelector} is a abstract base class that implements the base functionality each fselector must provide.
+\link{FSelector} is an abstract base class that implements the base functionality each fselector must provide.
 A subclass is implemented in the following way:
 \itemize{
 \item Inherit from FSelector.
@@ -15,12 +15,12 @@ A subclass is implemented in the following way:
 \item You need to call \code{instance$eval_batch()} to evaluate design points.
 \item The batch evaluation is requested at the \link{FSelectInstanceSingleCrit}/\link{FSelectInstanceMultiCrit} object \code{instance}, so each batch is possibly executed in parallel via \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, and all evaluations are stored inside of \code{instance$archive}.
 \item Before the batch evaluation, the \link[bbotk:Terminator]{bbotk::Terminator} is checked, and if it is positive, an exception of class \code{"terminated_error"} is generated.
-In the  later case the current batch of evaluations is still stored in \code{instance}, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
+In the latter case the current batch of evaluations is still stored in \code{instance}, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
 \item After such an exception was caught we select the best set from \code{instance$archive} and return it.
 \item Note that therefore more points than specified by the \link[bbotk:Terminator]{bbotk::Terminator} may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
 How many more depends on the setting of the batch size.
-\item Overwrite the private super-method \code{.assign_result()} if you want to decide yourself how to estimate the final set in the instance and its estimated performance.
-The default behavior is: We pick the best resample-experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
+\item Overwrite the private super-method \code{.assign_result()} if you want to decide how to estimate the final set in the instance and its estimated performance.
+The default behavior is: We pick the best resample experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
 }
 }
 \section{Private Methods}{
@@ -30,15 +30,22 @@ The default behavior is: We pick the best resample-experiment, regarding the giv
 Abstract base method. Implement to specify feature selection of your subclass.
 See technical details sections.
 \item \code{.assign_result(instance)} -> \code{NULL}\cr
-Abstract base method. Implement to specify how the final feature subset is  selected.
+Abstract base method. Implement to specify how the final feature subset is selected.
 See technical details sections.
 }
 }
 
 \section{Resources}{
 
+There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item \href{https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class}{book section} on feature selection algorithms.
+\item Learn more about \href{https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class}{fselectors}.
+}
+
+The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
+\itemize{
+\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+\item Run a feature selection with \href{https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/}{Shadow Variable Search}.
 }
 }
 

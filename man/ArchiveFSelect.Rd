@@ -11,7 +11,7 @@ The \link{ArchiveFSelect} is a container around a \code{\link[data.table:data.ta
 Each row corresponds to a single evaluation of a feature set.
 See the section on Data Structure for more information.
 The archive stores additionally a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} (\verb{$benchmark_result}) that records the resampling experiments.
-Each experiment corresponds to to a single evaluation of a feature set.
+Each experiment corresponds to a single evaluation of a feature set.
 The table (\verb{$data}) and the benchmark result (\verb{$benchmark_result}) are linked by the \code{uhash} column.
 If the archive is passed to \code{as.data.table()}, both are joined automatically.
 }

@@ -4,7 +4,7 @@
 #'
 #' @description
 #' Function to optimize the features of a [mlr3::Learner].
-#' The function internally creates a [FSelectInstanceSingleCrit] or [FSelectInstanceMultiCrit] which describe the feature selection problem.
+#' The function internally creates a [FSelectInstanceSingleCrit] or [FSelectInstanceMultiCrit] which describes the feature selection problem.
 #' It executes the feature selection with the [FSelector] (`method`) and returns the result with the fselect instance (`$result`).
 #' The [ArchiveFSelect] (`$archive`) stores all evaluated hyperparameter configurations and performance scores.
 #'

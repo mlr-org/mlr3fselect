@@ -2,8 +2,8 @@
 #'
 #' @description
 #' The [ContextEval] allows [CallbackFSelect]s to access and modify data while a batch of feature sets is evaluated.
-#' See section on active bindings for a list of modifiable objects.
-#' See [callback_fselect()] for a list of stages which access [ContextEval].
+#' See the section on active bindings for a list of modifiable objects.
+#' See [callback_fselect()] for a list of stages that access [ContextEval].
 #'
 #' @details
 #' This context is re-created each time a new batch of feature sets is evaluated.

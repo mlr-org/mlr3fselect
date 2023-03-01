@@ -69,7 +69,7 @@ Named arguments to be set as parameters of the fselector.}
 }
 \description{
 Function to optimize the features of a \link[mlr3:Learner]{mlr3::Learner}.
-The function internally creates a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} which describe the feature selection problem.
+The function internally creates a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} which describes the feature selection problem.
 It executes the feature selection with the \link{FSelector} (\code{method}) and returns the result with the fselect instance (\verb{$result}).
 The \link{ArchiveFSelect} (\verb{$archive}) stores all evaluated hyperparameter configurations and performance scores.
 }
@@ -83,9 +83,16 @@ If no termination criterion is needed, set \code{term_evals}, \code{term_time} a
 }
 \section{Resources}{
 
+There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{book chapter} on feature selection.
-\item \href{https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/}{gallery post} on feature selection on the Titanic data set.
+\item Getting started with \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{wrapper feature selection}.
+}
+
+The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
+\itemize{
+\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+\item Run a feature selection with \href{https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/}{Shadow Variable Search}.
+\item \href{https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/}{Feature Selection} on the Titanic data set.
 }
 }
 

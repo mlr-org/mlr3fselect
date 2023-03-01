@@ -96,7 +96,7 @@ See also the section on parameters for more information on the stages.
 A feature selection callback works with \link[bbotk:ContextOptimization]{bbotk::ContextOptimization} and \link{ContextEval}.
 }
 \details{
-When implementing a callback, each functions must have two arguments named \code{callback} and \code{context}.
+When implementing a callback, each function must have two arguments named \code{callback} and \code{context}.
 
 A callback can write data to the state (\verb{$state}), e.g. settings that affect the callback itself.
 Avoid writing large data the state.

@@ -53,9 +53,31 @@ Function to construct a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanc
 }
 \section{Resources}{
 
+There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{book chapter} on feature selection.
-\item \href{https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/}{gallery post} on feature selection on the Titanic data set.
+\item Getting started with \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{wrapper feature selection}.
+}
+
+The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
+\itemize{
+\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+\item Run a feature selection with \href{https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/}{Shadow Variable Search}.
+\item \href{https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/}{Feature Selection} on the Titanic data set.
+}
+}
+
+\section{Default Measures}{
+
+If no measure is passed, the default measure is used.
+The default measure depends on the task type.\tabular{lll}{
+   Task \tab Default Measure \tab Package \cr
+   \code{"classif"} \tab \code{"classif.ce"} \tab \CRANpkg{mlr3} \cr
+   \code{"regr"} \tab \code{"regr.mse"} \tab \CRANpkg{mlr3} \cr
+   \code{"surv"} \tab \code{"surv.cindex"} \tab \CRANpkg{mlr3proba} \cr
+   \code{"dens"} \tab \code{"dens.logloss"} \tab \CRANpkg{mlr3proba} \cr
+   \code{"classif_st"} \tab \code{"classif.ce"} \tab \CRANpkg{mlr3spatial} \cr
+   \code{"regr_st"} \tab \code{"regr.mse"} \tab \CRANpkg{mlr3spatial} \cr
+   \code{"clust"} \tab \code{"clust.dunn"} \tab \CRANpkg{mlr3cluster} \cr
 }
 }
 

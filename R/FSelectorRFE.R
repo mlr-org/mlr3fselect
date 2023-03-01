@@ -23,6 +23,16 @@
 #' The option `"mean"` averages the score of each feature across the resampling iterations and removes the feature with the lowest average score.
 #' Averaging the scores is not appropriate for most importance measures.
 #'
+#' @section Archive:
+#' The [ArchiveFSelect] holds the following additional columns:
+#'  * `"importance"` (`numeric()`)\cr
+#'    The importance score vector of the feature subset.
+#'
+#' @section Resources:
+#' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
+#'
+#' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
+#'
 #' @templateVar id rfe
 #' @template section_dictionary_fselectors
 #'
