@@ -42,7 +42,7 @@ split = partition(task, ratio = 0.8)
 
 # create auto fselector
 afs = auto_fselector(
-  method = fs("random_search"),
+  fselector = fs("random_search"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measure = msr("classif.ce"),
@@ -70,7 +70,7 @@ afs$fselect_instance
 # Nested Resampling
 
 afs = auto_fselector(
-  method = fs("random_search"),
+  fselector = fs("random_search"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measure = msr("classif.ce"),
@@ -159,11 +159,11 @@ Hash (unique identifier) for this object.}
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$new(
+  fselector,
   learner,
   resampling,
   measure = NULL,
   terminator,
-  fselector,
   store_fselect_instance = TRUE,
   store_benchmark_result = TRUE,
   store_models = FALSE,
@@ -175,6 +175,9 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{fselector}}{(\link{FSelector})\cr
+Optimization algorithm.}
+
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Learner to optimize the feature subset for.}
 
@@ -188,9 +191,6 @@ Measure to optimize. If \code{NULL}, default measure is used.}
 
 \item{\code{terminator}}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}
-
-\item{\code{fselector}}{(\link{FSelector})\cr
-Optimization algorithm.}
 
 \item{\code{store_fselect_instance}}{(\code{logical(1)})\cr
 If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.

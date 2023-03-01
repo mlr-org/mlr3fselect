@@ -51,7 +51,7 @@ Vector of selected feature set.
 
 # create auto fselector
 at = auto_fselector(
-  method = fs("random_search"),
+  fselector = fs("random_search"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measure = msr("classif.ce"),

@@ -38,7 +38,7 @@
 #'
 #' # run feature selection on the Pima Indians diabetes data set
 #' instance = fselect(
-#'   method = fs("design_points", design = design),
+#'   fselector = fs("design_points", design = design),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp("holdout"),

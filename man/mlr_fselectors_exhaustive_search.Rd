@@ -39,7 +39,7 @@ learner = lrn("classif.rpart")
 
 # run feature selection on the Palmer Penguins data set
 instance = fselect(
-  method = "exhaustive_search",
+  fselector = fs("exhaustive_search"),
   task = task,
   learner = learner,
   resampling = rsmp("holdout"),

@@ -73,7 +73,7 @@ test_that("learner without importance method throw an error", {
   learner$properties = setdiff(learner$properties, "importance")
 
   expect_error(fselect(
-    method = fs("rfecv"),
+    fselector = fs("rfecv"),
     task = tsk("pima"),
     learner = learner,
     resampling = rsmp("holdout"),

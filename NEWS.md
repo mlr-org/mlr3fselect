@@ -1,5 +1,10 @@
 # mlr3fselect (development version)
 
+* BREAKING CHANGE: The `method` parameter of `fselect()`, `fselect_nested()` and `auto_fselector()` is renamed to `fselector`.
+  Only `FSelector` objects are accepted now.
+  Arguments to the tuner cannot be passed with `...` anymore.
+* BREAKING CHANGE: The `fselect` parameter of `FSelector` is moved to the first position to achieve consistency with the other functions.
+
 # mlr3fselect 0.10.0
 
 * feat: Add callback `mlr3fselect.svm_rfe` to run recursive feature elimination on linear support vector machines.

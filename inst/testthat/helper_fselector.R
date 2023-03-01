@@ -4,14 +4,13 @@ test_fselector = function(.key, ..., term_evals = NULL, store_models = FALSE) {
   expect_man_exists(fselector$man)
 
   inst = fselect(
-    method = .key,
+    fselector = fselector,
     task = TEST_MAKE_TSK(),
     learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("dummy"),
     term_evals = term_evals,
-    store_models = store_models,
-    ...
+    store_models = store_models
   )
 
   # result checks
@@ -32,14 +31,13 @@ test_fselector_2D = function(.key, ..., term_evals = NULL, store_models = FALSE)
   expect_man_exists(fselector$man)
 
   inst = fselect(
-    method = .key,
+    fselector = fselector,
     task = TEST_MAKE_TSK(),
     learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
     measures = msrs(c("regr.rmse", "regr.mse")),
     term_evals = term_evals,
-    store_models = store_models,
-    ...
+    store_models = store_models
   )
 
   # result checks
