@@ -88,7 +88,7 @@ test_that("learner without importance method throw an error", {
   learner$properties = setdiff(learner$properties, "importance")
 
   expect_error(fselect(
-    method = "rfe",
+    fselector = fs("rfe"),
     task = tsk("pima"),
     learner = learner,
     resampling = rsmp("holdout"),
@@ -150,7 +150,7 @@ test_that("works without storing models", {
   expect_subset("requires_model", optimizer$properties)
 
   instance = fselect(
-    method = fs("rfe"),
+    fselector = fs("rfe"),
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
@@ -165,7 +165,7 @@ test_that("works without storing models", {
   expect_null(instance$archive$benchmark_result$resample_result(2)$learners[[1]]$model)
 
   instance = fselect(
-    method = fs("rfe"),
+    fselector = fs("rfe"),
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
@@ -187,7 +187,7 @@ test_that("works without storing models", {
 #  learner = as_learner(po("subsample") %>>% lrn("classif.rpart"))
 #
 #  instance = fselect(
-#    method = fs("rfe"),
+#    fselector = fs("rfe"),
 #    task = tsk("pima"),
 #    learner = learner,
 #    resampling = rsmp("holdout"),

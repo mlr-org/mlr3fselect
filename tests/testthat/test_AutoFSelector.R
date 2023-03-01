@@ -8,7 +8,7 @@ test_that("train and predict work", {
   fselector = fs("sequential")
   terminator = trm("evals", n_evals = 4L)
 
-  at = AutoFSelector$new(learner, resampling, measures, terminator, fselector)
+  at = AutoFSelector$new(fselector, learner, resampling, measures, terminator)
   expect_learner(at)
   at$train(task)
   expect_learner(at)
@@ -35,8 +35,7 @@ test_that("nested resampling works", {
   fselector = fs("sequential")
   terminator = trm("evals", n_evals = 10L)
 
-  at = AutoFSelector$new(learner, resampling_inner, measures, terminator,
-    fselector = fselector, store_models = TRUE)
+  at = AutoFSelector$new(fselector, learner, resampling_inner, measures, terminator, store_models = TRUE)
   expect_null(at$fselect_instance)
 
   resampling_outer = rsmp("cv", folds = 2)
@@ -133,7 +132,7 @@ test_that("AutoFSelector works with GraphLearner", {
   fselector = fs("sequential")
   terminator = trm("evals", n_evals = 4L)
 
-  at = AutoFSelector$new(learner, resampling, measures, terminator, fselector)
+  at = AutoFSelector$new(fselector, learner, resampling, measures, terminator)
   expect_learner(at)
   at$train(task)
   expect_learner(at)

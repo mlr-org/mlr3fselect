@@ -1,6 +1,6 @@
 test_that("ArchiveFSelect access methods work", {
   instance = fselect(
-    method = "random_search",
+    fselector = fs("random_search"),
     task = tsk("iris"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
@@ -52,13 +52,12 @@ test_that("ArchiveFSelect access methods work", {
 
 test_that("ArchiveFSelect as.data.table function works", {
   instance = fselect(
-    method = "random_search",
+    fselector = fs("random_search", batch_size = 4),
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
-    term_evals = 4,
-    batch_size = 4)
+    term_evals = 4)
 
   # default
   tab = as.data.table(instance$archive)
@@ -130,13 +129,12 @@ test_that("ArchiveFSelect as.data.table function works", {
 
   # row order
   instance = fselect(
-    method = "random_search",
+    fselector = fs("random_search", batch_size = 1),
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
-    term_evals = 10,
-    batch_size = 1)
+    term_evals = 10)
 
   tab = as.data.table(instance$archive)
   expect_equal(tab$batch_nr, 1:10)

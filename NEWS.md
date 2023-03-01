@@ -1,5 +1,9 @@
 # mlr3fselect (development version)
 
+* BREAKING CHANGE: The `method` parameter of `fselect()`, `fselect_nested()` and `auto_fselector()` is renamed to `fselector`.
+  Only `FSelector` objects are accepted now.
+  Arguments to the tuner cannot be passed with `...` anymore.
+* BREAKING CHANGE: The `fselect` parameter of `FSelector` is moved to the first position to achieve consistency with the other functions.
 * docs: Update resources sections.
 * docs: Add list of default measures.
 

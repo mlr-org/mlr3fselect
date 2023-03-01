@@ -1,6 +1,6 @@
 test_that("fselect_nested function works", {
-  rr = fselect_nested(method = "random_search", task = tsk("pima"), learner = lrn("classif.rpart"), 
-    inner_resampling = rsmp ("holdout"), outer_resampling = rsmp("cv", folds = 3), measure = msr("classif.ce"), 
+  rr = fselect_nested(fselector = fs("random_search"), task = tsk("pima"), learner = lrn("classif.rpart"),
+    inner_resampling = rsmp ("holdout"), outer_resampling = rsmp("cv", folds = 3), measure = msr("classif.ce"),
     term_evals = 2)
 
   expect_resample_result(rr)

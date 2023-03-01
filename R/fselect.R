@@ -19,23 +19,18 @@
 #' @inheritSection FSelectInstanceSingleCrit Resources
 #' @inheritSection ArchiveFSelect Analysis
 #'
-#' @param method (`character(1)` | [FSelector])\cr
-#'  Key to retrieve fselector from [mlr_fselectors] dictionary or [FSelector] object.
 #' @param measures ([mlr3::Measure] or list of [mlr3::Measure])\cr
 #'   A single measure creates a [FSelectInstanceSingleCrit] and multiple measures a [FSelectInstanceMultiCrit].
 #'   If `NULL`, default measure is used.
-#' @param term_evals (`integer(1)`)\cr
-#'  Number of allowed evaluations.
-#' @param term_time (`integer(1)`)\cr
-#'  Maximum allowed time in seconds.
-#' @param ... (named `list()`)\cr
-#'  Named arguments to be set as parameters of the fselector.
 #'
 #' @return [FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit]
 #'
+#' @template param_fselector
 #' @template param_task
 #' @template param_learner
 #' @template param_resampling
+#' @template param_term_evals
+#' @template param_term_time
 #' @template param_terminator
 #' @template param_store_benchmark_result
 #' @template param_store_models
@@ -50,7 +45,7 @@
 #'
 #' # Run feature selection
 #' instance = fselect(
-#'   method = "random_search",
+#'   fselector = fs("random_search"),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp ("holdout"),
@@ -65,13 +60,8 @@
 #'
 #' # Inspect all evaluated configurations
 #' as.data.table(instance$archive)
-fselect = function(method, task, learner, resampling, measures = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list(), ...) {
-  fselector = if (is.character(method)) {
-    assert_choice(method, mlr_fselectors$keys())
-    fs(method, ...)
-  } else {
-    assert_fselector(method)
-  }
+fselect = function(fselector, task, learner, resampling, measures = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+  assert_fselector(fselector)
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
   FSelectInstance = if (!is.list(measures)) FSelectInstanceSingleCrit else FSelectInstanceMultiCrit

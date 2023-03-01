@@ -8,7 +8,7 @@
 #'
 #' # run feature selection on the Palmer Penguins data set
 #' instance = fselect(
-#'   method = "<%= id %>",
+#'   fselector = fs("<%= id %>"),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp("holdout"),
