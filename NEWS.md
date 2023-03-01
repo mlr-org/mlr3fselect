@@ -4,6 +4,8 @@
   Only `FSelector` objects are accepted now.
   Arguments to the tuner cannot be passed with `...` anymore.
 * BREAKING CHANGE: The `fselect` parameter of `FSelector` is moved to the first position to achieve consistency with the other functions.
+* docs: Update resources sections.
+* docs: Add list of default measures.
 
 # mlr3fselect 0.10.0
 

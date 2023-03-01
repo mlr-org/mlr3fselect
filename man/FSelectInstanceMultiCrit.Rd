@@ -9,10 +9,12 @@ The function \code{\link[=fsi]{fsi()}} creates a \link{FSelectInstanceMultiCrit}
 }
 \section{Resources}{
 
+There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{book chapter} on feature selection.
-\item \href{https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/}{gallery post} on feature selection on the Titanic data set.
+\item Learn about \href{https://mlr3book.mlr-org.com/optimization.html#sec-multi-metrics-tuning}{multi-objective optimization} (Tuning workflow is transferable to feature selection).
 }
+
+The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
 }
 
 \section{Analysis}{

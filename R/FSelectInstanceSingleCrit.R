@@ -16,11 +16,32 @@
 #' If the available budget is exhausted, an exception is raised, and no further evaluations can be performed from this point on.
 #' The [FSelector] is also supposed to store its final result, consisting of a selected feature subset and associated estimated performance values, by calling the method `instance$assign_result()`.
 #'
+#' @section Default Measures:
+#' If no measure is passed, the default measure is used.
+#' The default measure depends on the task type.
+#'
+#' | Task           | Default Measure     | Package               |
+#' |----------------|---------------------|-----------------------|
+#' | `"classif"`    | `"classif.ce"`      | \CRANpkg{mlr3}        |
+#' | `"regr"`       | `"regr.mse"`        | \CRANpkg{mlr3}        |
+#' | `"surv"`       | `"surv.cindex"`     | \CRANpkg{mlr3proba}   |
+#' | `"dens"`       | `"dens.logloss"`    | \CRANpkg{mlr3proba}   |
+#' | `"classif_st"` | `"classif.ce"`      | \CRANpkg{mlr3spatial} |
+#' | `"regr_st"`    | `"regr.mse"`        | \CRANpkg{mlr3spatial} |
+#' | `"clust"`      | `"clust.dunn"`      | \CRANpkg{mlr3cluster} |
+#'
 #' @inheritSection ArchiveFSelect Analysis
 #'
 #' @section Resources:
-#' * [book chapter](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper) on feature selection.
-#' * [gallery post](https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/) on feature selection on the Titanic data set.
+#' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
+#'
+#' * Getting started with [wrapper feature selection](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper).
+#'
+#' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
+#'
+#' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
+#' * Run a feature selection with [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
+#' * [Feature Selection](https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/) on the Titanic data set.
 #'
 #' @template param_task
 #' @template param_learner

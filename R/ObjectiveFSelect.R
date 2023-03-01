@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Stores the objective function that estimates the performance of feature subsets.
-#' This class is usually constructed internally by by the [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
+#' This class is usually constructed internally by the [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
 #'
 #' @template param_task
 #' @template param_learner

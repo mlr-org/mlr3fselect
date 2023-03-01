@@ -8,7 +8,7 @@
 #' Each row corresponds to a single evaluation of a feature set.
 #' See the section on Data Structure for more information.
 #' The archive stores additionally a [mlr3::BenchmarkResult] (`$benchmark_result`) that records the resampling experiments.
-#' Each experiment corresponds to to a single evaluation of a feature set.
+#' Each experiment corresponds to a single evaluation of a feature set.
 #' The table (`$data`) and the benchmark result (`$benchmark_result`) are linked by the `uhash` column.
 #' If the archive is passed to `as.data.table()`, both are joined automatically.
 #'

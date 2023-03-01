@@ -7,8 +7,14 @@
 #' The function [fsi()] creates a [FSelectInstanceMultiCrit] and the function [fselect()] creates an instance internally.
 #'
 #' @inherit FSelectInstanceSingleCrit details
-#' @inheritSection FSelectInstanceSingleCrit Resources
 #' @inheritSection ArchiveFSelect Analysis
+#'
+#' @section Resources:
+#' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
+#'
+#'  * Learn about [multi-objective optimization](https://mlr3book.mlr-org.com/optimization.html#sec-multi-metrics-tuning) (Tuning workflow is transferable to feature selection).
+#'
+#' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'
 #' @template param_task
 #' @template param_learner
