@@ -183,7 +183,7 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run feature selection on the Pima Indians diabetes data set</span></span></span>
 <span class="r-in"><span><span class="va">instance</span> <span class="op">=</span> <span class="fu"><a href="fselect.html">fselect</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  method <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"design_points"</span>, design <span class="op">=</span> <span class="va">design</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"design_points"</span>, design <span class="op">=</span> <span class="va">design</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  task <span class="op">=</span> <span class="va">task</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="va">learner</span>,</span></span>
 <span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
@@ -195,20 +195,20 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant  0.2734375</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     age glucose insulin mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE    TRUE  0.3046875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2578125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE   FALSE  0.3046875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: TRUE   FALSE    TRUE TRUE    FALSE     TRUE     TRUE    TRUE  0.2851562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE    TRUE  0.3281250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: TRUE    TRUE   FALSE TRUE    FALSE     TRUE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: TRUE   FALSE    TRUE TRUE    FALSE     TRUE    FALSE   FALSE  0.3281250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: TRUE   FALSE    TRUE TRUE    FALSE     TRUE     TRUE    TRUE  0.3359375</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.012 2023-02-27 12:55:48        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.011 2023-02-27 12:55:48        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.011 2023-02-27 12:55:48        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.012 2023-02-27 12:55:48        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.012 2023-03-01 14:24:57        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.012 2023-03-01 14:24:57        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.013 2023-03-01 14:24:57        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.015 2023-03-01 14:24:57        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      features      resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:          age,insulin,mass,pregnant,triceps &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:                  age,glucose,mass,pregnant &lt;ResampleResult[21]&gt;</span>
