@@ -5,20 +5,25 @@
 \title{Function for Nested Resampling}
 \usage{
 fselect_nested(
-  method,
+  fselector,
   task,
   learner,
   inner_resampling,
   outer_resampling,
-  measure,
+  measure = NULL,
   term_evals = NULL,
   term_time = NULL,
-  ...
+  terminator = NULL,
+  store_fselect_instance = TRUE,
+  store_benchmark_result = TRUE,
+  store_models = FALSE,
+  check_values = FALSE,
+  callbacks = list()
 )
 }
 \arguments{
-\item{method}{(\code{character(1)})\cr
-Key to retrieve fselector from \link{mlr_fselectors} dictionary.}
+\item{fselector}{(\link{FSelector})\cr
+Optimization algorithm.}
 
 \item{task}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
@@ -36,13 +41,32 @@ Resampling used for the outer loop.}
 Measure to optimize. If \code{NULL}, default measure is used.}
 
 \item{term_evals}{(\code{integer(1)})\cr
-Number of allowed evaluations.}
+Number of allowed evaluations.
+Ignored if \code{terminator} is passed.}
 
 \item{term_time}{(\code{integer(1)})\cr
-Maximum allowed time in seconds.}
+Maximum allowed time in seconds.
+Ignored if \code{terminator} is passed.}
 
-\item{...}{(named \code{list()})\cr
-Named arguments to be set as parameters of the fselector.}
+\item{terminator}{(\link{Terminator})\cr
+Stop criterion of the feature selection.}
+
+\item{store_fselect_instance}{(\code{logical(1)})\cr
+If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
+Is set to \code{TRUE}, if \code{store_models = TRUE}}
+
+\item{store_benchmark_result}{(\code{logical(1)})\cr
+Store benchmark result in archive?}
+
+\item{store_models}{(\code{logical(1)}).
+Store models in benchmark result?}
+
+\item{check_values}{(\code{logical(1)})\cr
+Check the parameters before the evaluation and the results for
+validity?}
+
+\item{callbacks}{(list of \link{CallbackFSelect})\cr
+List of callbacks.}
 }
 \value{
 \link[mlr3:ResampleResult]{mlr3::ResampleResult}
@@ -53,7 +77,7 @@ Function to conduct nested resampling.
 \examples{
 # Nested resampling on Palmer Penguins data set
 rr = fselect_nested(
-  method = "random_search",
+  fselector = fs("random_search"),
   task = tsk("penguins"),
   learner = lrn("classif.rpart"),
   inner_resampling = rsmp ("holdout"),

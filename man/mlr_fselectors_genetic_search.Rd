@@ -33,7 +33,7 @@ learner = lrn("classif.rpart")
 
 # run feature selection on the Palmer Penguins data set
 instance = fselect(
-  method = "genetic_search",
+  fselector = fs("genetic_search"),
   task = task,
   learner = learner,
   resampling = rsmp("holdout"),

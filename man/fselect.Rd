@@ -5,7 +5,7 @@
 \title{Function for Feature Selection}
 \usage{
 fselect(
-  method,
+  fselector,
   task,
   learner,
   resampling,
@@ -16,13 +16,12 @@ fselect(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
-  ...
+  callbacks = list()
 )
 }
 \arguments{
-\item{method}{(\code{character(1)} | \link{FSelector})\cr
-Key to retrieve fselector from \link{mlr_fselectors} dictionary or \link{FSelector} object.}
+\item{fselector}{(\link{FSelector})\cr
+Optimization algorithm.}
 
 \item{task}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
@@ -40,10 +39,12 @@ A single measure creates a \link{FSelectInstanceSingleCrit} and multiple measure
 If \code{NULL}, default measure is used.}
 
 \item{term_evals}{(\code{integer(1)})\cr
-Number of allowed evaluations.}
+Number of allowed evaluations.
+Ignored if \code{terminator} is passed.}
 
 \item{term_time}{(\code{integer(1)})\cr
-Maximum allowed time in seconds.}
+Maximum allowed time in seconds.
+Ignored if \code{terminator} is passed.}
 
 \item{terminator}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}
@@ -60,16 +61,13 @@ validity?}
 
 \item{callbacks}{(list of \link{CallbackFSelect})\cr
 List of callbacks.}
-
-\item{...}{(named \code{list()})\cr
-Named arguments to be set as parameters of the fselector.}
 }
 \value{
 \link{FSelectInstanceSingleCrit} | \link{FSelectInstanceMultiCrit}
 }
 \description{
 Function to optimize the features of a \link[mlr3:Learner]{mlr3::Learner}.
-The function internally creates a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} which describe the feature selection problem.
+The function internally creates a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} which describes the feature selection problem.
 It executes the feature selection with the \link{FSelector} (\code{method}) and returns the result with the fselect instance (\verb{$result}).
 The \link{ArchiveFSelect} (\verb{$archive}) stores all evaluated hyperparameter configurations and performance scores.
 }
@@ -109,7 +107,7 @@ learner = lrn("classif.rpart")
 
 # Run feature selection
 instance = fselect(
-  method = "random_search",
+  fselector = fs("random_search"),
   task = task,
   learner = learner,
   resampling = rsmp ("holdout"),

@@ -29,7 +29,7 @@
 #'
 #' # run feature selection on the Palmer Penguins data set
 #' instance = fselect(
-#'   method = fs("shadow_variable_search"),
+#'   fselector = fs("shadow_variable_search"),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp("holdout"),

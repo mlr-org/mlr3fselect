@@ -22,6 +22,7 @@
 #' The [mlr3::Resampling] passed to the [AutoFSelector] is meant to be the inner resampling, operating on the training set of an arbitrary outer resampling.
 #' For this reason it is not feasible to pass an instantiated [mlr3::Resampling] here.
 #'
+#' @template param_fselector
 #' @template param_learner
 #' @template param_resampling
 #' @template param_measure
@@ -43,7 +44,7 @@
 #'
 #' # create auto fselector
 #' afs = auto_fselector(
-#'   method = fs("random_search"),
+#'   fselector = fs("random_search"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("holdout"),
 #'   measure = msr("classif.ce"),
@@ -71,7 +72,7 @@
 #' # Nested Resampling
 #'
 #' afs = auto_fselector(
-#'   method = fs("random_search"),
+#'   fselector = fs("random_search"),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("holdout"),
 #'   measure = msr("classif.ce"),
@@ -106,8 +107,9 @@ AutoFSelector = R6Class("AutoFSelector",
     #'
     #' @param fselector ([FSelector])\cr
     #'   Optimization algorithm.
-    initialize = function(learner, resampling, measure = NULL, terminator, fselector, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+    initialize = function(fselector, learner, resampling, measure = NULL, terminator, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
       ia = list()
+      self$fselector = assert_r6(fselector, "FSelector")$clone()
       ia$learner = assert_learner(as_learner(learner, clone = TRUE))
       ia$resampling = assert_resampling(resampling, instantiated = FALSE)$clone()
       if (!is.null(measure)) ia$measure = assert_measure(as_measure(measure), learner = learner)
@@ -120,7 +122,6 @@ AutoFSelector = R6Class("AutoFSelector",
       ia$check_values = assert_flag(check_values)
       ia$callbacks = assert_callbacks(as_callbacks(callbacks))
       self$instance_args = ia
-      self$fselector = assert_r6(fselector, "FSelector")$clone()
 
       super$initialize(
         id = paste0(learner$id, ".fselector"),

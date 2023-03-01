@@ -2,13 +2,12 @@ test_that("backup callback works", {
   file = tempfile(fileext = ".rds")
 
   instance = fselect(
-    method = "random_search",
+    fselector = fs("random_search", batch_size = 2),
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
     term_evals = 4,
-    batch_size = 2,
     callbacks = clbk("mlr3fselect.backup", path = file)
   )
 
@@ -22,7 +21,7 @@ test_that("svm_rfe callbacks works", {
   requireNamespace("mlr3learners")
 
   instance = fselect(
-    method = fs("rfe", feature_number = 5, n_features = 10),
+    fselector = fs("rfe", feature_number = 5, n_features = 10),
     task = tsk("sonar"),
     learner = lrn("classif.svm", type = "C-classification", kernel = "linear"),
     resampling = rsmp("cv", folds = 3),

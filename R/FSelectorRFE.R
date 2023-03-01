@@ -64,7 +64,7 @@
 #'
 #' # run feature selection on the Palmer Penguins data set
 #' instance = fselect(
-#'   method = fs("rfe"),
+#'   fselector = fs("rfe"),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp("holdout"),
