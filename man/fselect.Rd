@@ -20,6 +20,9 @@ fselect(
 )
 }
 \arguments{
+\item{fselector}{(\link{FSelector})\cr
+Optimization algorithm.}
+
 \item{task}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
 
@@ -34,6 +37,14 @@ Already instantiated resamplings are kept unchanged.}
 \item{measures}{(\link[mlr3:Measure]{mlr3::Measure} or list of \link[mlr3:Measure]{mlr3::Measure})\cr
 A single measure creates a \link{FSelectInstanceSingleCrit} and multiple measures a \link{FSelectInstanceMultiCrit}.
 If \code{NULL}, default measure is used.}
+
+\item{term_evals}{(\code{integer(1)})\cr
+Number of allowed evaluations.
+Ignored if \code{terminator} is passed.}
+
+\item{term_time}{(\code{integer(1)})\cr
+Maximum allowed time in seconds.
+Ignored if \code{terminator} is passed.}
 
 \item{terminator}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}

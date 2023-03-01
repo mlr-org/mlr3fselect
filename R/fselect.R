@@ -25,9 +25,12 @@
 #'
 #' @return [FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit]
 #'
+#' @template param_fselector
 #' @template param_task
 #' @template param_learner
 #' @template param_resampling
+#' @template param_term_evals
+#' @template param_term_time
 #' @template param_terminator
 #' @template param_store_benchmark_result
 #' @template param_store_models
