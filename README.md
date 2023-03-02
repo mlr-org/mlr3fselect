@@ -30,10 +30,10 @@ The package is built on the optimization framework
 There are several section about feature selection in the
 [mlr3book](https://mlr3book.mlr-org.com).
 
-  - Getting started with [Wrapper Feature
-    Selection](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper)
-  - Estimate Model Performance with [Nested
-    Resampling](https://mlr3book.mlr-org.com/feature-selection.html#autofselect).
+  - Getting started with [wrapper feature
+    selection](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper)
+  - Estimate Model Performance with [nested
+    resampling](https://mlr3book.mlr-org.com/feature-selection.html#autofselect).
 
 The [gallery](https://mlr-org.com/gallery.html) features a collection of
 case studies and demos about optimization.
@@ -173,7 +173,7 @@ as.data.table(instance$archive)
     ## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE           FALSE
     ## 19:    TRUE      TRUE  TRUE     TRUE      FALSE        TRUE         TRUE       TRUE            TRUE
     ## 20:    TRUE     FALSE  TRUE    FALSE      FALSE        TRUE        FALSE       TRUE           FALSE
-    ## 55 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]
+    ## 56 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]
 
 We fit a final model with the optimized feature set to make predictions
 on new data.
