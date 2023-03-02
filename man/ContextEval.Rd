@@ -5,8 +5,8 @@
 \title{Evaluation Context}
 \description{
 The \link{ContextEval} allows \link{CallbackFSelect}s to access and modify data while a batch of feature sets is evaluated.
-See section on active bindings for a list of modifiable objects.
-See \code{\link[=callback_fselect]{callback_fselect()}} for a list of stages which access \link{ContextEval}.
+See the section on active bindings for a list of modifiable objects.
+See \code{\link[=callback_fselect]{callback_fselect()}} for a list of stages that access \link{ContextEval}.
 }
 \details{
 This context is re-created each time a new batch of feature sets is evaluated.

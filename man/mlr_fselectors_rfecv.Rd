@@ -33,6 +33,14 @@ The importance score vector of the feature subset.
 }
 }
 
+\section{Resources}{
+
+The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
+\itemize{
+\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+}
+}
+
 \section{Dictionary}{
 
 This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:

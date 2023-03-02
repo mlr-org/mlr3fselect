@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Specialized [bbotk::CallbackOptimization] for feature selection.
-#' Callbacks allow to customize the behavior of processes in mlr3fselect.
+#' Callbacks allow customizing the behavior of processes in mlr3fselect.
 #' The [callback_fselect()] function creates a [CallbackFSelect].
 #' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved with [clbk()].
 #' For more information on callbacks see [callback_fselect()].
@@ -65,7 +65,7 @@ CallbackFSelect = R6Class("CallbackFSelect",
 #' A feature selection callback works with [bbotk::ContextOptimization] and [ContextEval].
 #'
 #' @details
-#' When implementing a callback, each functions must have two arguments named `callback` and `context`.
+#' When implementing a callback, each function must have two arguments named `callback` and `context`.
 #'
 #' A callback can write data to the state (`$state`), e.g. settings that affect the callback itself.
 #' Avoid writing large data the state.

@@ -5,7 +5,7 @@
 \title{Create Feature Selection Callback}
 \description{
 Specialized \link[bbotk:CallbackOptimization]{bbotk::CallbackOptimization} for feature selection.
-Callbacks allow to customize the behavior of processes in mlr3fselect.
+Callbacks allow customizing the behavior of processes in mlr3fselect.
 The \code{\link[=callback_fselect]{callback_fselect()}} function creates a \link{CallbackFSelect}.
 Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_callbacks} and can be retrieved with \code{\link[=clbk]{clbk()}}.
 For more information on callbacks see \code{\link[=callback_fselect]{callback_fselect()}}.

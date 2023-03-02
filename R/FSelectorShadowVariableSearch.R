@@ -11,6 +11,11 @@
 #' The feature selection terminates itself when the first shadow variable is selected.
 #' It is not necessary to set a termination criterion.
 #'
+#' @section Resources:
+#' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
+#'
+#' * Run a feature selection with [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
+#'
 #' @templateVar id shadow_variable_search
 #' @template section_dictionary_fselectors
 #'

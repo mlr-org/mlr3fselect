@@ -7,7 +7,7 @@
 #' Feature selection using Sequential Search Algorithm.
 #'
 #' @details
-#' Sequential forward selection (`strategy = fsf`) extends the feature set in each iteration with the feature that increases the models performance the most.
+#' Sequential forward selection (`strategy = fsf`) extends the feature set in each iteration with the feature that increases the model's performance the most.
 #' Sequential backward selection (`strategy = fsb`) follows the same idea but starts with all features and removes features from the set.
 #'
 #' The feature selection terminates itself when `min_features` or `max_features` is reached.

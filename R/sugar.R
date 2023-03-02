@@ -48,6 +48,7 @@ fss = function(.keys, ...) {
 #' @template param_callbacks
 #'
 #' @inheritSection FSelectInstanceSingleCrit Resources
+#' @inheritSection FSelectInstanceSingleCrit Default Measures
 #'
 #' @export
 #' @inherit FSelectInstanceSingleCrit examples
