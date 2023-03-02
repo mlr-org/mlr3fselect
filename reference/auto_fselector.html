@@ -12,7 +12,7 @@ The auto_fselector() function creates an AutoFSelector object."><meta property="
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.11.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,7 +84,7 @@ The <code>auto_fselector()</code> function creates an <a href="AutoFSelector.htm
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">auto_fselector</span><span class="op">(</span></span>
-<span>  <span class="va">method</span>,</span>
+<span>  <span class="va">fselector</span>,</span>
 <span>  <span class="va">learner</span>,</span>
 <span>  <span class="va">resampling</span>,</span>
 <span>  measure <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -95,16 +95,15 @@ The <code>auto_fselector()</code> function creates an <a href="AutoFSelector.htm
 <span>  store_benchmark_result <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  store_models <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>method</dt>
-<dd><p>(<code>character(1)</code> | <a href="FSelector.html">FSelector</a>)<br>
-Key to retrieve fselector from <a href="mlr_fselectors.html">mlr_fselectors</a> dictionary or <a href="FSelector.html">FSelector</a> object.</p></dd>
+    <dl><dt>fselector</dt>
+<dd><p>(<a href="FSelector.html">FSelector</a>)<br>
+Optimization algorithm.</p></dd>
 
 
 <dt>learner</dt>
@@ -126,12 +125,14 @@ Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
 <dt>term_evals</dt>
 <dd><p>(<code>integer(1)</code>)<br>
-Number of allowed evaluations.</p></dd>
+Number of allowed evaluations.
+Ignored if <code>terminator</code> is passed.</p></dd>
 
 
 <dt>term_time</dt>
 <dd><p>(<code>integer(1)</code>)<br>
-Maximum allowed time in seconds.</p></dd>
+Maximum allowed time in seconds.
+Ignored if <code>terminator</code> is passed.</p></dd>
 
 
 <dt>terminator</dt>
@@ -165,11 +166,6 @@ validity?</p></dd>
 <dd><p>(list of <a href="CallbackFSelect.html">CallbackFSelect</a>)<br>
 List of callbacks.</p></dd>
 
-
-<dt>...</dt>
-<dd><p>(named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
-Named arguments to be set as parameters of the fselector.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -181,15 +177,17 @@ Named arguments to be set as parameters of the fselector.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <a href="AutoFSelector.html">AutoFSelector</a> is a <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> which wraps another <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> and performs the following steps during <code>$train()</code>:</p><ol><li><p>The wrapped (inner) learner is trained on the feature subsets via resampling.
 The feature selection can be specified by providing a <a href="FSelector.html">FSelector</a>, a <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>, a <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> and a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>.</p></li>
-<li><p>A final model is fit on the complete training data with the best found feature subset.</p></li>
+<li><p>A final model is fit on the complete training data with the best-found feature subset.</p></li>
 </ol><p>During <code>$predict()</code> the <a href="AutoFSelector.html">AutoFSelector</a> just calls the predict method of the wrapped (inner) learner.</p>
     </div>
     <div class="section level2">
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
     
 
-<ul><li><p><a href="https://mlr3book.mlr-org.com/feature-selection.html#autofselect" class="external-link">book chapter</a> on automatic feature selection.</p></li>
-</ul></div>
+<p>There are several sections about feature selection in the <a href="https://mlr3book.mlr-org.com" class="external-link">mlr3book</a>.</p><ul><li><p>Estimate Model Performance with <a href="https://mlr3book.mlr-org.com/optimization.html#sec-nested-resampling" class="external-link">nested resampling</a> (Tuning workflow is transferable to feature selection).</p></li>
+<li><p><a href="https://mlr3book.mlr-org.com/feature-selection.html#sec-autofselectr" class="external-link">Automate</a> the feature selection.</p></li>
+</ul><p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p>
+    </div>
     <div class="section level2">
     <h2 id="nested-resampling">Nested Resampling<a class="anchor" aria-label="anchor" href="#nested-resampling"></a></h2>
     
@@ -211,7 +209,7 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create auto fselector</span></span></span>
 <span class="r-in"><span><span class="va">afs</span> <span class="op">=</span> <span class="fu">auto_fselector</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  method <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span> <span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
@@ -224,20 +222,20 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">split</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PredictionClassif&gt; for 69 observations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     row_ids     truth  response</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           1    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           2    Adelie    Adelie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           3    Adelie    Adelie</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           8    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           7    Adelie    Adelie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         332 Chinstrap Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         335 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         340 Chinstrap    Gentoo</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         342 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         343 Chinstrap    Gentoo</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show result</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">fselect_result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                   features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,island 0.04347826</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.02173913</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># model slot contains trained learner and fselect instance</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">model</span></span></span>
@@ -252,7 +250,8 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-out co"><span class="r-pr">#&gt;</span>   twoclass, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_depth"  "bill_length" "body_mass"   "island"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "island"         "sex"            "year"          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fselect_instance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;FSelectInstanceSingleCrit&gt;</span>
@@ -260,21 +259,19 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Objective: &lt;ObjectiveFSelect:classif.rpart_on_penguins&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Terminator: &lt;TerminatorEvals&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.04347826</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE 0.02173913</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE      TRUE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      FALSE        TRUE     FALSE          FALSE  FALSE  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.21739130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.22826087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.04347826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.21739130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.02173913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.08695652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.59782609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.32608696</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># shortcut trained learner</span></span></span>
@@ -295,27 +292,25 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Objective: &lt;ObjectiveFSelect:classif.rpart_on_penguins&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Terminator: &lt;TerminatorEvals&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.04347826</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE 0.02173913</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE      TRUE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE          FALSE   TRUE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE       FALSE     FALSE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      FALSE        TRUE     FALSE          FALSE  FALSE  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.21739130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.22826087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.04347826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.21739130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.02173913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.08695652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.59782609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.32608696</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Nested Resampling</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">afs</span> <span class="op">=</span> <span class="fu">auto_fselector</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  method <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span> <span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
@@ -326,18 +321,18 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># retrieve inner feature selection results.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island   sex year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE     FALSE           TRUE   TRUE FALSE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE          FALSE   TRUE  TRUE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE     FALSE          FALSE  FALSE  TRUE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce                                         features  task_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.02631579           bill_length,flipper_length,island,year penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.10526316 bill_depth,bill_length,body_mass,island,sex,year penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06493506                  bill_depth,bill_length,sex,year penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island   sex  year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE           TRUE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce                                                       features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.05263158 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.03947368         bill_depth,bill_length,body_mass,flipper_length,island</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06493506 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: penguins classif.rpart.fselector            cv</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># performance scores estimated on the outer resampling</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -350,14 +345,14 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResamplingCV[20]&gt;            cv         2 &lt;PredictionClassif[20]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;ResamplingCV[20]&gt;            cv         3 &lt;PredictionClassif[20]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07826087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.02608696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.07894737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.08695652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.05217391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06140351</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># unbiased performance of the final model trained on the full data set</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0610984 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.06684465 </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

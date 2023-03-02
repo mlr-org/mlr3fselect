@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.11.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,9 +148,17 @@ List of callbacks.</p></dd>
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
     
 
-<ul><li><p><a href="https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper" class="external-link">book chapter</a> on feature selection.</p></li>
-<li><p><a href="https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/" class="external-link">gallery post</a> on feature selection on the Titanic data set.</p></li>
+<p>There are several sections about feature selection in the <a href="https://mlr3book.mlr-org.com" class="external-link">mlr3book</a>.</p><ul><li><p>Getting started with <a href="https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper" class="external-link">wrapper feature selection</a>.</p></li>
+</ul><p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p><ul><li><p>Utilize the built-in feature importance of models with <a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</p></li>
+<li><p>Run a feature selection with <a href="https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/" class="external-link">Shadow Variable Search</a>.</p></li>
+<li><p><a href="https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/" class="external-link">Feature Selection</a> on the Titanic data set.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="default-measures">Default Measures<a class="anchor" aria-label="anchor" href="#default-measures"></a></h2>
+    
+
+<p>If no measure is passed, the default measure is used.
+The default measure depends on the task type.</p><table class="table table"><tr><td>Task</td><td>Default Measure</td><td>Package</td></tr><tr><td><code>"classif"</code></td><td><code>"classif.ce"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a></td></tr><tr><td><code>"regr"</code></td><td><code>"regr.mse"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a></td></tr><tr><td><code>"surv"</code></td><td><code>"surv.cindex"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a></td></tr><tr><td><code>"dens"</code></td><td><code>"dens.logloss"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a></td></tr><tr><td><code>"classif_st"</code></td><td><code>"classif.ce"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3spatial" class="external-link"><span class="pkg">mlr3spatial</span></a></td></tr><tr><td><code>"regr_st"</code></td><td><code>"regr.mse"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3spatial" class="external-link"><span class="pkg">mlr3spatial</span></a></td></tr><tr><td><code>"clust"</code></td><td><code>"clust.dunn"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3cluster" class="external-link"><span class="pkg">mlr3cluster</span></a></td></tr></table></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -174,10 +182,10 @@ List of callbacks.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run feature selection</span></span></span>
 <span class="r-in"><span><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE           TRUE   TRUE FALSE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,flipper_length,island,year 0.06681922</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...  0.0726926</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Subset task to optimal feature set</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
@@ -188,20 +196,20 @@ List of callbacks.</p></dd>
 <span class="r-in"><span><span class="co"># Inspect all evaluated sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE           TRUE   TRUE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE     FALSE          FALSE  FALSE  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE     FALSE           TRUE  FALSE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE      TRUE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06681922            0.023 2023-02-21 11:58:20        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.26442919            0.021 2023-02-21 11:58:20        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.20935673            0.026 2023-02-21 11:58:20        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06681922            0.024 2023-02-21 11:58:20        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07269260            0.030 2023-03-02 12:42:25        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.24419019            0.027 2023-03-02 12:42:25        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.07559115            0.024 2023-03-02 12:42:25        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.07559115            0.024 2023-03-02 12:42:25        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:              bill_depth,bill_length,flipper_length,island,year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                                                    bill_length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                                       body_mass,flipper_length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                                                bill_length,sex</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                 bill_depth,bill_length,flipper_length,sex,year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                bill_depth,bill_length,body_mass,flipper_length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>

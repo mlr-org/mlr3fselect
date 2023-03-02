@@ -20,7 +20,7 @@ Only works with mlr3::Learners that can calculate importance scores (see the sec
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.11.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,6 +112,12 @@ It is not necessary to set a termination criterion.</p>
 The resampling iteration in which the feature subset was evaluated.</p></li>
 <li><p><code>"importance"</code> (<code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code>)<br>
 The importance score vector of the feature subset.</p></li>
+</ul></div>
+    <div class="section level2">
+    <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
+    
+
+<p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p><ul><li><p>Utilize the built-in feature importance of models with <a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
@@ -217,7 +223,7 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run feature selection on the Palmer Penguins data set</span></span></span>
 <span class="r-in"><span><span class="va">instance</span> <span class="op">=</span> <span class="fu"><a href="fselect.html">fselect</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  method <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"rfecv"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"rfecv"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  task <span class="op">=</span> <span class="va">task</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="va">learner</span>,</span></span>
 <span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
@@ -227,10 +233,10 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># best performing feature subset</span></span></span>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.03488372</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,flipper_length  0.0377907</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -242,22 +248,25 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.10434783            0.009 2023-02-21 11:58:32        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.04347826            0.009 2023-02-21 11:58:32        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.09649123            0.008 2023-02-21 11:58:32        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.10434783            0.007 2023-02-21 11:58:32        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.05217391            0.007 2023-02-21 11:58:32        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.06140351            0.007 2023-02-21 11:58:32        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.011 2023-02-21 11:58:32        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06086957            0.008 2023-03-02 12:42:38        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.09565217            0.008 2023-03-02 12:42:38        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.03508772            0.008 2023-03-02 12:42:38        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06956522            0.008 2023-03-02 12:42:38        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.09565217            0.009 2023-03-02 12:42:38        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.03508772            0.007 2023-03-02 12:42:38        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.010 2023-03-02 12:42:38        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.03779070            0.009 2023-03-02 12:42:38        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance iteration</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       80.44692,80.01615,64.73986,61.84106,42.51573, 0.00000,...         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       87.65441,87.20160,70.65631,64.24777,62.81070, 0.00000,...         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       84.11481,76.74316,62.22210,56.67708,46.48583, 0.00000,...         3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                      80.44692,80.01615,64.73986         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:                                      87.65441,87.20160,70.65631         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:                                      83.38267,76.01102,60.75781         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       79.62073,79.02241,58.47072,56.67162,44.97748, 0.00000,...         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       92.75216,87.35120,65.51831,61.72015,48.42658, 0.00000,...         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       85.02369,79.84248,71.75478,59.51483,56.43610, 0.00000,...         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                      79.62073,79.02241,58.47072         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:                                      92.75216,87.35120,65.51831         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:                                      85.02369,79.84248,71.75478         3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7: 124.20793,121.52400,102.74919, 87.26186, 78.61700,  0.00000,...        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8:                                      124.2079,121.5240,104.2507        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
@@ -266,6 +275,7 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5:                          bill_depth,bill_length,flipper_length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6:                          bill_depth,bill_length,flipper_length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8:                          bill_depth,bill_length,flipper_length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
@@ -274,6 +284,7 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: &lt;ResampleResult[21]&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subset the task and fit the final model</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
