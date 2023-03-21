@@ -1,5 +1,7 @@
 # mlr3fselect (development version)
 
+* feat: Add `batch_size` parameter to `FSelectorExhaustiveSearch` to reduce memory consumption.
+
 # mlr3fselect 0.11.0
 
 * BREAKING CHANGE: The `method` parameter of `fselect()`, `fselect_nested()` and `auto_fselector()` is renamed to `fselector`.

@@ -64,11 +64,10 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        "max_features" = p_int(lower = 1),
-        "batch_size" = p_int(default = 1, lower = 1)
+        max_features = p_int(lower = 1L),
+        batch_size = p_int(lower = 1L, default = 10L, tags = "required")
       )
-
-      ps$values = list(batch_size = 1L)
+      ps$values = list(batch_size = 10L)
 
       super$initialize(
         id = "random_search",
