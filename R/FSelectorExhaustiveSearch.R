@@ -32,8 +32,10 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        max_features = p_int(lower = 1)
+        max_features = p_int(lower = 1L),
+        batch_size = p_int(lower = 1L, default = 10L, tags = "required")
       )
+      ps$values = list(batch_size = 10L)
 
       super$initialize(
         id = "exhaustive_search",
@@ -47,24 +49,19 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
     .optimize = function(inst) {
       pars = self$param_set$values
       feature_names = inst$archive$cols_x
-      archive = inst$archive
+      n_features = length(feature_names)
 
-      if (is.null(pars$max_features)) {
-        pars$max_features = length(feature_names)
+      fun = function(i, state) {
+        state[i] = TRUE
+        as.list(state)
       }
 
-      repeat({
-        combinations = combn(length(feature_names),
-          archive$n_batch + 1)
-        states = map_dtr(seq_len(ncol(combinations)), function(j) {
-          state = rep(FALSE, length(feature_names))
-          state[combinations[, j]] = TRUE
-          set_names(as.list(state), feature_names)
-        })
-        inst$eval_batch(states)
+      states = set_col_names(rbindlist(unlist(map(seq(pars$max_features %??% n_features), function(n) {
+        combn(n_features, n, fun, simplify = FALSE, state = logical(n_features))
+      }), recursive = FALSE)), feature_names)
 
-        if (archive$n_batch == pars$max_features) break
-      })
+      chunks = split(seq_row(states), ceiling(seq_along(seq_row(states)) / pars$batch_size))
+      walk(chunks, function(row_ids) inst$eval_batch(states[row_ids]))
     }
   )
 )
