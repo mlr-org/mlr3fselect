@@ -182,10 +182,10 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run feature selection</span></span></span>
 <span class="r-in"><span><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE           TRUE   TRUE TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                           features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,body_mass,flipper_length,island,sex 0.06397152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.06399695</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Subset task to optimal feature set</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
@@ -195,21 +195,21 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Inspect all evaluated sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE       FALSE      TRUE           TRUE   TRUE FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE      TRUE           TRUE  FALSE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE        TRUE      TRUE           TRUE   TRUE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      FALSE       FALSE      TRUE           TRUE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.16275108            0.037 2023-03-02 12:46:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06687007            0.044 2023-03-02 12:46:50        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06397152            0.033 2023-03-02 12:46:50        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.20348335            0.032 2023-03-02 12:46:50        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                     body_mass,flipper_length,island,year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: bill_depth,bill_length,body_mass,flipper_length,sex,year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:          bill_length,body_mass,flipper_length,island,sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                 body_mass,flipper_length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex year classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE       FALSE      TRUE          FALSE   TRUE FALSE TRUE 0.22946860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE       FALSE      TRUE           TRUE   TRUE  TRUE TRUE 0.15692855</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE     FALSE          FALSE  FALSE  TRUE TRUE 0.07564200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE TRUE 0.06399695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.021 2023-03-21 15:16:07        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.021 2023-03-21 15:16:07        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.022 2023-03-21 15:16:08        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.023 2023-03-21 15:16:08        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                                          body_mass,island,year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            bill_depth,body_mass,flipper_length,island,sex,year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                                bill_depth,bill_length,sex,year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
