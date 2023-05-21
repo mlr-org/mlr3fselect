@@ -1,5 +1,7 @@
 # mlr3fselect (development version)
 
+* fix: Add `$phash()` method to `AutoFSelector`.
+* fix: Include `FSelector` in hash of  `AutoFSelector`.
 * refactor: Change default batch size of `FSelectorRandomSearch` to 10.
 * feat: Add `batch_size` parameter to `FSelectorExhaustiveSearch` to reduce memory consumption.
 
