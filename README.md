@@ -18,10 +18,9 @@ Status](https://www.r-pkg.org/badges/version/mlr3fselect)](https://cran.r-projec
 set for any mlr3 [learner](https://github.com/mlr-org/mlr3learners). The
 package works with several optimization algorithms e.g. Random Search,
 Recursive Feature Elimination, and Genetic Search. Moreover, it can
-[automatically](https://mlr3book.mlr-org.com/feature-selection.html#autofselect)
-optimize learners and estimate the performance of optimized feature sets
-with [nested
-resampling](https://mlr3book.mlr-org.com/optimization.html#sec-nested-resampling).
+automatically optimize learners and estimate the performance of
+optimized feature sets with [nested
+resampling](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect).
 The package is built on the optimization framework
 [bbotk](https://github.com/mlr-org/bbotk).
 
@@ -31,9 +30,14 @@ There are several section about feature selection in the
 [mlr3book](https://mlr3book.mlr-org.com).
 
   - Getting started with [wrapper feature
-    selection](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper)
+    selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper).
+  - Do a [sequential forward
+    selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper-example)
+    Palmer Penguins data set.
+  - Optimize [multiple performance
+    measures](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-multicrit-featsel).
   - Estimate Model Performance with [nested
-    resampling](https://mlr3book.mlr-org.com/feature-selection.html#autofselect).
+    resampling](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect).
 
 The [gallery](https://mlr-org.com/gallery.html) features a collection of
 case studies and demos about optimization.

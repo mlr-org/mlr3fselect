@@ -16,8 +16,7 @@
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
 #'
-#' * Estimate Model Performance with [nested resampling](https://mlr3book.mlr-org.com/optimization.html#sec-nested-resampling) (Tuning workflow is transferable to feature selection).
-#' * [Automate](https://mlr3book.mlr-org.com/feature-selection.html#sec-autofselectr) the feature selection.
+#' * Estimate Model Performance with [nested resampling](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect).
 #'
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'

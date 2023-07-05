@@ -35,7 +35,8 @@
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
 #'
-#' * Getting started with [wrapper feature selection](https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper).
+#' * Getting started with [wrapper feature selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper).
+#' * Do a [sequential forward selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper-example) Palmer Penguins data set.
 #'
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'

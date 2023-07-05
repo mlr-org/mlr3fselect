@@ -35,7 +35,8 @@ The default measure depends on the task type.\tabular{lll}{
 
 There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item Getting started with \href{https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper}{wrapper feature selection}.
+\item Getting started with \href{https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper}{wrapper feature selection}.
+\item Do a \href{https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper-example}{sequential forward selection} Palmer Penguins data set.
 }
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
