@@ -11,7 +11,7 @@ The function \code{\link[=fsi]{fsi()}} creates a \link{FSelectInstanceMultiCrit}
 
 There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item Learn about \href{https://mlr3book.mlr-org.com/optimization.html#sec-multi-metrics-tuning}{multi-objective optimization} (Tuning workflow is transferable to feature selection).
+\item Learn about \href{https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-multicrit-featsel}{multi-objective optimization}.
 }
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.

@@ -31,7 +31,7 @@
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
 #'
-#' * Learn more about [fselectors](https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class).
+#' * Learn more about [fselectors](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#the-fselector-class).
 #'
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'

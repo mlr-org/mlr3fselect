@@ -39,7 +39,7 @@ See technical details sections.
 
 There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item Learn more about \href{https://mlr3book.mlr-org.com/feature-selection.html#the-fselector-class}{fselectors}.
+\item Learn more about \href{https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#the-fselector-class}{fselectors}.
 }
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.

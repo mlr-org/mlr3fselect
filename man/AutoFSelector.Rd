@@ -21,8 +21,7 @@ During \verb{$predict()} the \link{AutoFSelector} just calls the predict method 
 
 There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item Estimate Model Performance with \href{https://mlr3book.mlr-org.com/optimization.html#sec-nested-resampling}{nested resampling} (Tuning workflow is transferable to feature selection).
-\item \href{https://mlr3book.mlr-org.com/feature-selection.html#sec-autofselectr}{Automate} the feature selection.
+\item Estimate Model Performance with \href{https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect}{nested resampling}.
 }
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
@@ -128,6 +127,9 @@ Must be an element of \verb{$predict_types}.}
 
 \item{\code{hash}}{(\code{character(1)})\cr
 Hash (unique identifier) for this object.}
+
+\item{\code{phash}}{(\code{character(1)})\cr
+Hash (unique identifier) for this partial object, excluding some components which are varied systematically during tuning (parameter values) or feature selection (feature names).}
 }
 \if{html}{\out{</div>}}
 }
