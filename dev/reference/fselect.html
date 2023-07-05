@@ -194,7 +194,8 @@ If no termination criterion is needed, set <code>term_evals</code>, <code>term_t
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
     
 
-<p>There are several sections about feature selection in the <a href="https://mlr3book.mlr-org.com" class="external-link">mlr3book</a>.</p><ul><li><p>Getting started with <a href="https://mlr3book.mlr-org.com/feature-selection.html#fs-wrapper" class="external-link">wrapper feature selection</a>.</p></li>
+<p>There are several sections about feature selection in the <a href="https://mlr3book.mlr-org.com" class="external-link">mlr3book</a>.</p><ul><li><p>Getting started with <a href="https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper" class="external-link">wrapper feature selection</a>.</p></li>
+<li><p>Do a <a href="https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper-example" class="external-link">sequential forward selection</a> Palmer Penguins data set.</p></li>
 </ul><p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p><ul><li><p>Utilize the built-in feature importance of models with <a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</p></li>
 <li><p>Run a feature selection with <a href="https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/" class="external-link">Shadow Variable Search</a>.</p></li>
 <li><p><a href="https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/" class="external-link">Feature Selection</a> on the Titanic data set.</p></li>
@@ -236,38 +237,38 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 <span class="r-in"><span><span class="co"># Inspect all evaluated configurations</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: FALSE   FALSE   FALSE  TRUE     TRUE     TRUE    FALSE   FALSE  0.3085938</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: FALSE    TRUE   FALSE FALSE    FALSE     TRUE    FALSE    TRUE  0.3164062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE    FALSE    TRUE  0.2656250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3476562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  TRUE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3906250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2656250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE   FALSE    TRUE FALSE     TRUE    FALSE    FALSE   FALSE  0.3515625</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  TRUE    TRUE    TRUE FALSE     TRUE     TRUE     TRUE   FALSE  0.2773438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2656250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  TRUE   FALSE    TRUE  TRUE    FALSE     TRUE     TRUE   FALSE  0.3085938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2539062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  TRUE    TRUE    TRUE  TRUE    FALSE    FALSE    FALSE   FALSE  0.2656250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: FALSE   FALSE   FALSE FALSE    FALSE    FALSE     TRUE    TRUE  0.3671875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  TRUE    TRUE    TRUE  TRUE    FALSE    FALSE     TRUE    TRUE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: FALSE   FALSE   FALSE FALSE     TRUE     TRUE     TRUE   FALSE  0.3007812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: FALSE   FALSE    TRUE FALSE    FALSE    FALSE     TRUE   FALSE  0.3828125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  TRUE   FALSE    TRUE FALSE    FALSE     TRUE    FALSE    TRUE  0.2890625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE    TRUE  0.2539062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  TRUE   FALSE   FALSE FALSE    FALSE     TRUE     TRUE    TRUE  0.3007812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FALSE   FALSE   FALSE  TRUE     TRUE     TRUE     TRUE    TRUE  0.3085938</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.011 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.010 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.012 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.011 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.010 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.013 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.010 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.012 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.013 2023-07-05 07:47:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.012 2023-07-05 07:47:09        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.016 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.015 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.013 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.015 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.015 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.013 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.015 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.014 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.015 2023-07-05 08:07:16        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.018 2023-07-05 08:07:16        1        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                           features      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:                         mass,pedigree,pregnant &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                       glucose,pregnant,triceps &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: age,glucose,insulin,mass,pedigree,pregnant,... &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:                                       pregnant &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                                   age,pregnant &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: age,glucose,insulin,mass,pedigree,pregnant,... &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:                               insulin,pedigree &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: age,glucose,insulin,pedigree,pregnant,pressure &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: age,glucose,insulin,mass,pedigree,pregnant,... &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:             age,insulin,mass,pregnant,pressure &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: age,glucose,insulin,mass,pedigree,pregnant,... &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                       age,glucose,insulin,mass &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:                               pressure,triceps &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      age,glucose,insulin,mass,pressure,triceps &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                     pedigree,pregnant,pressure &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:                               insulin,pressure &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:                   age,insulin,pregnant,triceps &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: age,glucose,insulin,mass,pedigree,pregnant,... &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:                  age,pregnant,pressure,triceps &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:        mass,pedigree,pregnant,pressure,triceps &lt;ResampleResult[21]&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
