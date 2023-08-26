@@ -66,3 +66,55 @@ test_that("result$features works", {
   inst$assign_result(xdt, y)
   expect_character(inst$result_feature_set)
 })
+
+test_that("always include variable works", {
+  task = tsk("pima")
+  task$set_col_roles("glucose", "always_included")
+
+  learner = lrn("classif.rpart")
+  resampling = rsmp("cv", folds = 3)
+
+  instance = fselect(
+    fselector = fs("random_search", batch_size = 100),
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 100),
+    store_models = TRUE
+  )
+
+  data = as.data.table(instance$archive)
+
+  expect_names(instance$archive$cols_x, disjunct.from = "gloucose")
+  expect_names(names(instance$archive$data), disjunct.from = "gloucose")
+  walk(data$resample_result, function(rr) {
+    expect_names(names(rr$learners[[1]]$state$data_prototype), must.include = "glucose")
+  })
+})
+
+test_that("always include variables works", {
+  task = tsk("pima")
+  task$set_col_roles(c("glucose", "age"), "always_included")
+
+  learner = lrn("classif.rpart")
+  resampling = rsmp("cv", folds = 3)
+
+  instance = fselect(
+    fselector = fs("random_search", batch_size = 100),
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 100),
+    store_models = TRUE
+  )
+
+  data = as.data.table(instance$archive)
+
+  expect_names(instance$archive$cols_x, disjunct.from = c("glucose", "age"))
+  expect_names(names(instance$archive$data), disjunct.from = c("glucose", "age"))
+  walk(data$resample_result, function(rr) {
+    expect_names(names(rr$learners[[1]]$state$data_prototype), must.include = c("glucose", "age"))
+  })
+})

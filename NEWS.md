@@ -1,5 +1,6 @@
 # mlr3fselect (development version)
 
+* feat: Features can be always included with the `always_include` column role.
 * fix: Add `$phash()` method to `AutoFSelector`.
 * fix: Include `FSelector` in hash of  `AutoFSelector`.
 * refactor: Change default batch size of `FSelectorRandomSearch` to 10.
