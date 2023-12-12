@@ -104,6 +104,7 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
       assert_data_table(ydt)
       assert_names(names(ydt), permutation.of = self$objective$codomain$ids())
       private$.result = cbind(xdt, ydt)
+      call_back("on_result", self$callbacks, private$.context)
     },
 
     #' @description

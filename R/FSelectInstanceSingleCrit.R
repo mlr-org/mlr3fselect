@@ -134,6 +134,7 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
       assert_number(y)
       assert_names(names(y), permutation.of = self$objective$codomain$ids())
       private$.result = cbind(xdt, t(y)) # t(y) so the name of y stays
+      call_back("on_result", self$callbacks, private$.context)
     },
 
     #' @description

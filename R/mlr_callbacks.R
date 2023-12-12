@@ -108,3 +108,51 @@ load_callback_svm_rfe = function() {
     }
   )
 }
+
+#' @title One Standard Error Rule Callback
+#'
+#' @include CallbackFSelect.R
+#' @name mlr3fselect.one_se_rule
+#'
+#' @description
+#' Selects the smallest feature set within one standard error of the best as the result.
+#'
+#' @examples
+#' clbk("mlr3fselect.one_se_rule")
+#'
+#' # Run feature selection on the pima data set with the callback
+#' instance = fselect(
+#'   fselector = fs("random_search"),
+#'   task = tsk("pima"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp ("cv", folds = 3),
+#'   measures = msr("classif.ce"),
+#'   term_evals = 10,
+#'   callbacks = clbk("mlr3fselect.one_se_rule"))
+#
+#' # Smallest feature set within one standard error of the best
+#' instance$result
+NULL
+
+load_callback_one_se_rule = function() {
+  callback = callback_fselect("mlr3fselect.one_se_rule",
+    label = "One Standard Error Rule Callback",
+    man = "mlr3fselect::mlr3fselect.one_se_rule",
+
+    on_result = function(callback, context) {
+      archive = context$instance$archive
+      data = as.data.table(archive)
+      data[, n_features := map(features, length)]
+
+      # standard error
+      y = data[[archive$cols_y]]
+      se = sd(y) / sqrt(length(y))
+
+      # select smallest future set within one standard error of the best
+      best_y = context$instance$result_y
+      data = data[y > best_y - se & y < best_y + se, ][which.min(n_features)]
+
+      context$instance$.__enclos_env__$private$.result = data[, names(context$instance$result), with = FALSE]
+    }
+  )
+}
