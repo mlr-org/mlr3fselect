@@ -33,5 +33,24 @@ test_that("svm_rfe callbacks works", {
 
   archive = as.data.table(instance$archive)
   expect_list(archive$importance, types = "numeric")
+})
 
+test_that("one_se_rule callback works", {
+
+  score_design = data.table(
+    score = c(0.1, 0.1, 0.58, 0.6),
+    features = list("x1", c("x1", "x2"), c("x1", "x2", "x3"), c("x1", "x2", "x3", "x4"))
+  )
+  measure = msr("dummy", score_design = score_design)
+
+  instance = fselect(
+    fselector = fs("exhaustive_search"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    callbacks = clbk("mlr3fselect.one_se_rule")
+  )
+
+  expect_equal(instance$result_feature_set, c("x1", "x2", "x3"))
 })
