@@ -157,6 +157,7 @@ as.data.table.ArchiveFSelect = function(x, ..., exclude_columns = "uhash", measu
 
   # add feature vector
   tab[, "features" := lapply(transpose(.SD), function(col) x$cols_x[col]), .SDcols = x$cols_x]
+  tab[, "n_features" := map(get("features"), length)]
 
   if (x$benchmark_result$n_resample_results) {
     # add extra measures
