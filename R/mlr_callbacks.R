@@ -118,6 +118,9 @@ load_callback_svm_rfe = function() {
 #' Selects the smallest feature set within one standard error of the best as the result.
 #' If there are multiple feature sets with the same performance and number of features, the first one is selected.
 #'
+#' @source
+#' `r format_bib("kuhn2013")`
+#'
 #' @examples
 #' clbk("mlr3fselect.one_se_rule")
 #'
@@ -143,7 +146,7 @@ load_callback_one_se_rule = function() {
     on_result = function(callback, context) {
       archive = context$instance$archive
       data = as.data.table(archive)
-      data[, n_features := map(features, length)]
+      data[, "n_features" := map(get("features"), length)]
 
       # standard error
       y = data[[archive$cols_y]]
