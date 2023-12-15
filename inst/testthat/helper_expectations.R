@@ -17,3 +17,7 @@ expect_max_features = function(features, n) {
   res = max(rowSums(features))
   expect_set_equal(res, n)
 }
+
+expect_features = function(res, identical_to = NULL, must_include = NULL) {
+  expect_names(names(res)[as.logical(res)], must.include = must_include, identical.to = identical_to)
+}

@@ -141,6 +141,48 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     print = function() {
       catf(format(self))
       print(self$data[, setdiff(names(self$data), "uhash"), with = FALSE], digits=2)
+    },
+
+    #' @description
+    #' Returns the best scoring feature sets.
+    #'
+    #' @param batch (`integer()`)\cr
+    #'  The batch number(s) to limit the best results to.
+    #'  Default is all batches.
+    #' @param ties_method (`character(1)`)\cr
+    #'  How to handle ties.
+    #'  Default is "first" which returns the first added best feature set.
+    #'  "random" returns a random feature set from the best feature sets.
+    #'  "n_features" returns the feature set with the least features.
+    #'
+    #' @return [data.table::data.table()]
+    best = function(batch = NULL, ties_method = "first") {
+      assert_choice(ties_method, c("first", "random", "n_features"))
+      assert_subset(batch, seq_len(self$n_batch))
+      if (self$n_batch == 0L) return(data.table())
+
+      if (is.null(batch)) {
+        tab = self$data
+      } else {
+        tab = self$data[list(batch), , on = "batch_nr"]
+      }
+
+      if (self$codomain$target_length == 1L) {
+        y = tab[[self$cols_y]] * -self$codomain$maximization_to_minimization
+
+        if (ties_method == "n_features") {
+          ii = which(y == max(y))
+          ii = which.min(rowSums(tab[ii, self$cols_x, with = FALSE]))
+          tab[ii]
+        } else {
+          ii = which_max(y, ties_method = ties_method)
+          tab[ii]
+        }
+      } else {
+        ymat = t(as.matrix(tab[, self$cols_y, with = FALSE]))
+        ymat = self$codomain$maximization_to_minimization * ymat
+        tab[!is_dominated(ymat)]
+      }
     }
   )
 )
@@ -157,6 +199,7 @@ as.data.table.ArchiveFSelect = function(x, ..., exclude_columns = "uhash", measu
 
   # add feature vector
   tab[, "features" := lapply(transpose(.SD), function(col) x$cols_x[col]), .SDcols = x$cols_x]
+  tab[, "n_features" := map(get("features"), length)]
 
   if (x$benchmark_result$n_resample_results) {
     # add extra measures
