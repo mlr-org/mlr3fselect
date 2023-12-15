@@ -151,6 +151,19 @@ FSelectorRFE = R6Class("FSelectorRFE",
 
       subsets = rfe_subsets(n, n_features, feature_number, subset_sizes, feature_fraction)
       rfe_workhorse(inst, subsets, recursive, aggregation)
+    },
+
+    .assign_result = function(inst) {
+      assert_class(inst, "FSelectInstanceSingleCrit")
+      res = inst$archive$best()
+
+      xdt = res[, c(inst$search_space$ids(), "importance"), with = FALSE]
+
+      # unlist keeps name!
+      y = unlist(res[, inst$archive$cols_y, with = FALSE])
+      inst$assign_result(xdt, y)
+
+      invisible(NULL)
     }
   )
 )
