@@ -173,14 +173,15 @@ test_that("best method works with ties and maximization", {
 
   design = mlr3misc::rowwise_table(
     ~x1,   ~x2,   ~x3,    ~x4,
+    FALSE, TRUE,  FALSE,  TRUE,
     TRUE,  FALSE, FALSE,  TRUE,
     TRUE,  FALSE, FALSE,  FALSE,
     FALSE, TRUE,  FALSE,  FALSE
   )
 
   score_design = data.table(
-    score = c(0.2, 0.2, 0.1),
-    features = list(c("x1", "x4"), "x1", c("x1", "x2"))
+    score = c(0.1, 0.2, 0.2, 0.1),
+    features = list(c("x2", "x4"), c("x1", "x4"), "x1", c("x1", "x2"))
   )
   measure = msr("dummy", score_design = score_design, minimize = FALSE)
 
@@ -210,7 +211,7 @@ test_that("best method works with ties and minimization", {
 
   score_design = data.table(
     score = c(0.2, 0.2, 0.1, 0.1),
-    features = list(c("x1", "x4"), "x1", c("x1", "x2"), c("x2", "x4"))
+    features = list(c("x1", "x4"), "x1", "x2", c("x2", "x4"))
   )
   measure = msr("dummy", score_design = score_design, minimize = TRUE)
 

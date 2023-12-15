@@ -172,7 +172,8 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
 
         if (ties_method == "n_features") {
           ii = which(y == max(y))
-          ii = which.min(rowSums(tab[ii, self$cols_x, with = FALSE]))
+          tab = tab[ii]
+          ii = which.min(rowSums(tab[, self$cols_x, with = FALSE]))
           tab[ii]
         } else {
           ii = which_max(y, ties_method = ties_method)

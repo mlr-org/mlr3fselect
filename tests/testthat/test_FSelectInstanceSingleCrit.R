@@ -89,7 +89,7 @@ test_that("always include variable works", {
   expect_names(instance$archive$cols_x, disjunct.from = "gloucose")
   expect_names(names(instance$archive$data), disjunct.from = "gloucose")
   walk(data$resample_result, function(rr) {
-    expect_names(names(rr$learners[[1]]$state$data_prototype), must.include = "glucose")
+    expect_names(names(rr$learners[[1]]$state$data_prototype) %??% rr$learners[[1]]$state$feature_names, must.include = "glucose")
   })
 })
 
@@ -115,6 +115,6 @@ test_that("always include variables works", {
   expect_names(instance$archive$cols_x, disjunct.from = c("glucose", "age"))
   expect_names(names(instance$archive$data), disjunct.from = c("glucose", "age"))
   walk(data$resample_result, function(rr) {
-    expect_names(names(rr$learners[[1]]$state$data_prototype), must.include = c("glucose", "age"))
+    expect_names(names(rr$learners[[1]]$state$data_prototype) %??% rr$learners[[1]]$state$feature_names, must.include = c("glucose", "age"))
   })
 })
