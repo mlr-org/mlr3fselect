@@ -133,13 +133,12 @@ The importance score vector of the feature subset.</p></li>
 
 <dl><dt><code>n_features</code></dt>
 <dd><p><code>integer(1)</code><br>
-The number of features to select.
-By default half of the features are selected.</p></dd>
+The minimum number of features to select, by default half of the features.</p></dd>
 
 <dt><code>feature_fraction</code></dt>
 <dd><p><code>double(1)</code><br>
 Fraction of features to retain in each iteration.
-The default 0.5 retrains half of the features.</p></dd>
+The default of 0.5 retains half of the features.</p></dd>
 
 <dt><code>feature_number</code></dt>
 <dd><p><code>integer(1)</code><br>
@@ -147,7 +146,7 @@ Number of features to remove in each iteration.</p></dd>
 
 <dt><code>subset_sizes</code></dt>
 <dd><p><code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code><br>
-Vector of number of features to retain in each iteration.
+Vector of the number of features to retain in each iteration.
 Must be sorted in decreasing order.</p></dd>
 
 <dt><code>recursive</code></dt>
@@ -242,22 +241,22 @@ See details.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.02608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.06956522</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE      TRUE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.02608696            0.006 2023-12-15 20:40:15        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.03478261            0.005 2023-12-15 20:40:15        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06956522            0.006 2023-12-15 20:58:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07826087            0.005 2023-12-15 20:58:05        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         importance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: 7,6,5,4,3,2,...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:           3,2,1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                          bill_depth,bill_length,flipper_length          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                           bill_length,body_mass,flipper_length          3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
