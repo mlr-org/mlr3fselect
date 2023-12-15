@@ -79,7 +79,7 @@ test_that("always include variable works", {
     task = task,
     learner = learner,
     resampling = resampling,
-    measure = msr("classif.ce"),
+    measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 100),
     store_models = TRUE
   )
@@ -105,7 +105,7 @@ test_that("always include variables works", {
     task = task,
     learner = learner,
     resampling = resampling,
-    measure = msr("classif.ce"),
+    measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 100),
     store_models = TRUE
   )
