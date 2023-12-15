@@ -145,7 +145,7 @@ load_callback_one_se_rule = function() {
     on_result = function(callback, context) {
       archive = context$instance$archive
       data = as.data.table(archive)
-      data[, n_features := map(features, length)]
+      data[, "n_features" := map(get("features"), length)]
 
       # standard error
       y = data[[archive$cols_y]]
