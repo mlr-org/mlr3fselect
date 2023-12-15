@@ -159,9 +159,9 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #' Default is all batches.
     #' @param ties_method (`character(1)`)\cr
     #' Method to handle ties.
-    #' If `NULL` (default), the global ties method set during initialization is used.
     #' Can be one of `n_features`, `first`, `random`.
-    #' The option `n_features` (default) selects the feature set with the least features.
+    #' If `NULL` (default), the global ties method set during initialization is used.
+    #' The default global ties method is `n_features` which selects the feature set with the least features.
     #' If there are multiple best feature sets with the same number of features, the first one is selected.
     #' The `first` method returns the first added best feature set.
     #' The `random` method returns a random feature set from the best feature sets.
