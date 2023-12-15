@@ -3,6 +3,13 @@
 \name{mlr3fselect.one_se_rule}
 \alias{mlr3fselect.one_se_rule}
 \title{One Standard Error Rule Callback}
+\source{
+Kuhn, Max, Johnson, Kjell (2013).
+\dQuote{Applied Predictive Modeling.}
+In chapter Over-Fitting and Model Tuning, 61--92.
+Springer New York, New York, NY.
+ISBN 978-1-4614-6849-3, \doi{10.1007/978-1-4614-6849-3_4}, \url{https://doi.org/10.1007/978-1-4614-6849-3_4}.
+}
 \description{
 Selects the smallest feature set within one standard error of the best as the result.
 }

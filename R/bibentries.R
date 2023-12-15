@@ -55,5 +55,19 @@ bibentries = c(
     journal     = "Machine Learning",
     author      = "Isabelle Guyon and Jason Weston and Stephen Barnhill and Vladimir Vapnik",
     year        = "2002"
+  ),
+
+  kuhn2013 = bibentry("Inbook",
+    author    = "Kuhn, Max and Johnson, Kjell",
+    chapter   = "Over-Fitting and Model Tuning",
+    title     = "Applied Predictive Modeling",
+    year      = "2013",
+    publisher = "Springer New York",
+    address   = "New York, NY",
+    pages     = "61--92",
+    isbn      = "978-1-4614-6849-3",
+    doi       = "10.1007/978-1-4614-6849-3_4",
+    url       = "https://doi.org/10.1007/978-1-4614-6849-3_4"
   )
 )
+

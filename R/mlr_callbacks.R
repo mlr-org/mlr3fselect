@@ -117,6 +117,9 @@ load_callback_svm_rfe = function() {
 #' @description
 #' Selects the smallest feature set within one standard error of the best as the result.
 #'
+#' @source
+#' `r format_bib("kuhn2013")`
+#'
 #' @examples
 #' clbk("mlr3fselect.one_se_rule")
 #'
