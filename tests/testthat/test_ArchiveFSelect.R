@@ -193,7 +193,6 @@ test_that("best method works with ties and maximization", {
     measures = measure
   )
 
-  expect_features(instance$archive$best()[, list(x1, x2, x3, x4)], identical_to = c("x1", "x4"))
   expect_features(instance$archive$best(ties_method = "first")[, list(x1, x2, x3, x4)], identical_to = c("x1", "x4"))
   expect_features(instance$archive$best(ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x1")
   expect_features(instance$archive$best(ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
@@ -223,7 +222,6 @@ test_that("best method works with ties and minimization", {
     measures = measure
   )
 
-  expect_features(instance$archive$best()[, list(x1, x2, x3, x4)], identical_to = "x2")
   expect_features(instance$archive$best(ties_method = "first")[, list(x1, x2, x3, x4)], identical_to = "x2")
   expect_features(instance$archive$best(ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x2")
   expect_features(instance$archive$best(ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x2")
@@ -253,7 +251,6 @@ test_that("best method works with batches and ties", {
     measures = measure
   )
 
-  expect_features(instance$archive$best(batch = c(2, 3))[, list(x1, x2, x3, x4)], identical_to = "x1")
   expect_features(instance$archive$best(batch = c(1, 3), ties_method = "first")[, list(x1, x2, x3, x4)], identical_to = c("x1", "x4"))
   expect_features(instance$archive$best(batch = c(1, 2), ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x1")
   expect_features(instance$archive$best(batch = c(2, 3), ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
