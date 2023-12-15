@@ -205,7 +205,7 @@ rfe_subsets = function(n, n_features, feature_number, subset_sizes, feature_frac
 
 # Run recursive feature elimination
 # instance is changed by reference
-rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance, ties_method, folds = 1) {
+rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance, folds = 1) {
   archive = inst$archive
   feature_names = inst$archive$cols_x
   n = length(feature_names)
