@@ -49,6 +49,8 @@
 #'     * `measures` (list of [mlr3::Measure])\cr
 #'       Score feature sets on additional measures.
 #'
+#' @template param_ties_method
+#'
 #' @export
 ArchiveFSelect = R6Class("ArchiveFSelect",
   inherit = Archive,
@@ -72,8 +74,14 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #'
     #' @param check_values (`logical(1)`)\cr
     #'   If `TRUE` (default), hyperparameter configurations are check for validity.
-    initialize = function(search_space, codomain, check_values = TRUE) {
+    initialize = function(
+      search_space,
+      codomain,
+      check_values = TRUE,
+      ties_method = "n_features"
+      ) {
       super$initialize(search_space, codomain, check_values)
+      self$ties_method = ties_method
 
       # initialize empty benchmark result
       self$benchmark_result = BenchmarkResult$new()
@@ -147,17 +155,21 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #' Returns the best scoring feature sets.
     #'
     #' @param batch (`integer()`)\cr
-    #'  The batch number(s) to limit the best results to.
-    #'  Default is all batches.
+    #' The batch number(s) to limit the best results to.
+    #' Default is all batches.
     #' @param ties_method (`character(1)`)\cr
-    #'  How to handle ties.
-    #'  Default is "first" which returns the first added best feature set.
-    #'  "random" returns a random feature set from the best feature sets.
-    #'  "n_features" returns the feature set with the least features.
-    #'
+    #' Method to handle ties.
+    #' If `NULL` (default), the global ties method set during initialization is used.
+    #' Can be one of `n_features`, `first`, `random`.
+    #' The option `n_features` (default) selects the feature set with the least features.
+    #' If there are multiple best feature sets with the same number of features, the first one is selected.
+    #' The `first` method returns the first added best feature set.
+    #' The `random` method returns a random feature set from the best feature sets.
+    #
     #' @return [data.table::data.table()]
-    best = function(batch = NULL, ties_method = "first") {
-      assert_choice(ties_method, c("first", "random", "n_features"))
+    best = function(batch = NULL, ties_method = NULL) {
+      assert_choice(ties_method, c("first", "random", "n_features"), null.ok = TRUE)
+      if (is.null(ties_method)) ties_method = self$ties_method
       assert_subset(batch, seq_len(self$n_batch))
       if (self$n_batch == 0L) return(data.table())
 
@@ -185,6 +197,24 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
         tab[!is_dominated(ymat)]
       }
     }
+  ),
+
+  active = list(
+
+    #' @field ties_method (`character(1)`)\cr
+    #' Method to handle ties.
+    ties_method = function(rhs) {
+      if (!missing(rhs)) {
+        assert_choice(rhs, c("first", "random", "n_features"))
+        private$.ties_method = rhs
+      } else {
+        private$.ties_method
+      }
+    }
+  ),
+
+  private = list(
+    .ties_method = NULL
   )
 )
 

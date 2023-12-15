@@ -54,6 +54,7 @@
 #' @template param_store_benchmark_result
 #' @template param_callbacks
 #' @template param_xdt
+#' @template param_ties_method
 #'
 #' @export
 #' @examples
@@ -93,12 +94,24 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    initialize = function(task, learner, resampling, measure, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+    initialize = function(
+      task,
+      learner,
+      resampling,
+      measure,
+      terminator,
+      store_benchmark_result = TRUE,
+      store_models = FALSE,
+      check_values = FALSE,
+      callbacks = list(),
+      ties_method = "n_features"
+      ) {
       # initialized specialized fselect archive and objective
       archive = ArchiveFSelect$new(
         search_space = task_to_domain(assert_task(task)),
         codomain = measures_to_codomain(assert_measure(measure)),
-        check_values = check_values)
+        check_values = check_values,
+        ties_method = ties_method)
 
       objective = ObjectiveFSelect$new(
         task = task,

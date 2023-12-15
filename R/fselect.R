@@ -36,6 +36,7 @@
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_callbacks
+#' @template param_ties_method
 #'
 #' @export
 #' @examples
@@ -60,21 +61,48 @@
 #'
 #' # Inspect all evaluated configurations
 #' as.data.table(instance$archive)
-fselect = function(fselector, task, learner, resampling, measures = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+fselect = function(
+  fselector,
+  task,
+  learner,
+  resampling,
+  measures = NULL,
+  term_evals = NULL,
+  term_time = NULL,
+  terminator = NULL,
+  store_benchmark_result = TRUE,
+  store_models = FALSE,
+  check_values = FALSE,
+  callbacks = list(),
+  ties_method = "n_features"
+  ) {
   assert_fselector(fselector)
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
-  FSelectInstance = if (!is.list(measures)) FSelectInstanceSingleCrit else FSelectInstanceMultiCrit
-  instance = FSelectInstance$new(
-    task = task,
-    learner = learner,
-    resampling = resampling,
-    measures,
-    terminator = terminator,
-    store_benchmark_result = store_benchmark_result,
-    store_models = store_models,
-    check_values = check_values,
-    callbacks = callbacks)
+  instance = if (!is.list(measures)) {
+    FSelectInstanceSingleCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measure = measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      ties_method = ties_method)
+  }  else {
+    FSelectInstanceMultiCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks)
+  }
 
   fselector$optimize(instance)
   instance

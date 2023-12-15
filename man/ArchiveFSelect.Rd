@@ -74,6 +74,14 @@ Benchmark result.}
 }
 \if{html}{\out{</div>}}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{ties_method}}{(\code{character(1)})\cr
+Method to handle ties.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -83,6 +91,7 @@ Benchmark result.}
 \item \href{#method-ArchiveFSelect-predictions}{\code{ArchiveFSelect$predictions()}}
 \item \href{#method-ArchiveFSelect-resample_result}{\code{ArchiveFSelect$resample_result()}}
 \item \href{#method-ArchiveFSelect-print}{\code{ArchiveFSelect$print()}}
+\item \href{#method-ArchiveFSelect-best}{\code{ArchiveFSelect$best()}}
 \item \href{#method-ArchiveFSelect-clone}{\code{ArchiveFSelect$clone()}}
 }
 }
@@ -90,7 +99,6 @@ Benchmark result.}
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href='../../bbotk/html/Archive.html#method-Archive-add_evals'><code>bbotk::Archive$add_evals()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href='../../bbotk/html/Archive.html#method-Archive-best'><code>bbotk::Archive$best()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href='../../bbotk/html/Archive.html#method-Archive-clear'><code>bbotk::Archive$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="nds_selection"><a href='../../bbotk/html/Archive.html#method-Archive-nds_selection'><code>bbotk::Archive$nds_selection()</code></a></span></li>
@@ -103,7 +111,12 @@ Benchmark result.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$new(search_space, codomain, check_values = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$new(
+  search_space,
+  codomain,
+  check_values = TRUE,
+  ties_method = "n_features"
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -119,6 +132,15 @@ Internally created from provided \link[mlr3:Measure]{mlr3::Measure}s by instance
 
 \item{\code{check_values}}{(\code{logical(1)})\cr
 If \code{TRUE} (default), hyperparameter configurations are check for validity.}
+
+\item{\code{ties_method}}{(\code{character(1)})\cr
+The method to break ties when selecting sets while optimizing and when selecting the best set.
+Can be one of \code{n_features}, \code{first}, \code{random}.
+The option \code{n_features} (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, the first one is selected.
+The \code{first} method returns the first added best feature set.
+The \code{random} method returns a random feature set from the best feature sets.
+Ignored if multiple measures are used.}
 }
 \if{html}{\out{</div>}}
 }
@@ -229,6 +251,37 @@ Printer.
 \item{\code{...}}{(ignored).}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ArchiveFSelect-best"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveFSelect-best}{}}}
+\subsection{Method \code{best()}}{
+Returns the best scoring feature sets.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveFSelect$best(batch = NULL, ties_method = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{batch}}{(\code{integer()})\cr
+The batch number(s) to limit the best results to.
+Default is all batches.}
+
+\item{\code{ties_method}}{(\code{character(1)})\cr
+Method to handle ties.
+If \code{NULL} (default), the global ties method set during initialization is used.
+Can be one of \code{n_features}, \code{first}, \code{random}.
+The option \code{n_features} (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, the first one is selected.
+The \code{first} method returns the first added best feature set.
+The \code{random} method returns a random feature set from the best feature sets.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{\link[data.table:data.table]{data.table::data.table()}}
 }
 }
 \if{html}{\out{<hr>}}

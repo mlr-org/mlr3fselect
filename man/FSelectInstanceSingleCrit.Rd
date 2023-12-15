@@ -137,7 +137,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list()
+  callbacks = list(),
+  ties_method = "n_features"
 )}\if{html}{\out{</div>}}
 }
 
@@ -173,6 +174,15 @@ validity?}
 
 \item{\code{callbacks}}{(list of \link{CallbackFSelect})\cr
 List of callbacks.}
+
+\item{\code{ties_method}}{(\code{character(1)})\cr
+The method to break ties when selecting sets while optimizing and when selecting the best set.
+Can be one of \code{n_features}, \code{first}, \code{random}.
+The option \code{n_features} (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, the first one is selected.
+The \code{first} method returns the first added best feature set.
+The \code{random} method returns a random feature set from the best feature sets.
+Ignored if multiple measures are used.}
 }
 \if{html}{\out{</div>}}
 }
