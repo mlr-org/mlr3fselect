@@ -237,38 +237,38 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 <span class="r-in"><span><span class="co"># Inspect all evaluated configurations</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin  mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: FALSE   FALSE    TRUE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3828125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  TRUE    TRUE    TRUE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2109375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  TRUE    TRUE    TRUE  TRUE    FALSE     TRUE    FALSE   FALSE  0.2265625</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE   FALSE   FALSE  TRUE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  TRUE    TRUE    TRUE FALSE     TRUE     TRUE    FALSE    TRUE  0.2304688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  TRUE   FALSE    TRUE FALSE     TRUE    FALSE     TRUE    TRUE  0.3281250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE    TRUE    TRUE FALSE    FALSE    FALSE    FALSE    TRUE  0.2304688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: FALSE   FALSE   FALSE  TRUE     TRUE    FALSE    FALSE   FALSE  0.3789062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  TRUE   FALSE   FALSE FALSE    FALSE    FALSE    FALSE   FALSE  0.3125000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FALSE   FALSE    TRUE FALSE     TRUE    FALSE    FALSE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  TRUE    TRUE    TRUE  TRUE    FALSE    FALSE     TRUE    TRUE  0.2343750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  TRUE    TRUE    TRUE  TRUE     TRUE    FALSE     TRUE   FALSE  0.2343750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: FALSE   FALSE   FALSE FALSE     TRUE    FALSE    FALSE   FALSE  0.3750000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: FALSE    TRUE    TRUE FALSE     TRUE     TRUE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  TRUE   FALSE   FALSE  TRUE     TRUE    FALSE    FALSE    TRUE  0.3242188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  TRUE   FALSE   FALSE FALSE    FALSE     TRUE    FALSE   FALSE  0.3554688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: FALSE   FALSE   FALSE FALSE    FALSE     TRUE     TRUE    TRUE  0.3437500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  TRUE    TRUE    TRUE FALSE    FALSE     TRUE     TRUE    TRUE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  TRUE    TRUE   FALSE  TRUE    FALSE     TRUE     TRUE   FALSE  0.2460938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  TRUE    TRUE   FALSE  TRUE     TRUE     TRUE     TRUE   FALSE  0.2382812</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.008 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.009 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.008 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.007 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.008 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.007 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.023 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.009 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.007 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.007 2023-12-15 15:06:07        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                           features n_features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:                                   insulin,mass          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: age,glucose,insulin,mass,pedigree,pregnant,...          7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:              age,glucose,insulin,mass,pregnant          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:                                           mass          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  age,glucose,insulin,pedigree,pregnant,triceps          6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:          age,insulin,pedigree,pressure,triceps          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:                        glucose,insulin,triceps          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:                                  mass,pedigree          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:                                            age          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:                               insulin,pedigree          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.009 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.008 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.007 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.008 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.009 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.008 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.011 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.007 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.008 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.009 2023-12-15 20:31:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                          features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:     age,glucose,insulin,mass,pressure,triceps          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:    age,glucose,insulin,mass,pedigree,pressure          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:                                      pedigree          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:             glucose,insulin,pedigree,pregnant          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                     age,mass,pedigree,triceps          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:                                  age,pregnant          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:                     pregnant,pressure,triceps          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: age,glucose,insulin,pregnant,pressure,triceps          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            age,glucose,mass,pregnant,pressure          5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:   age,glucose,mass,pedigree,pregnant,pressure          6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult[21]&gt;</span>

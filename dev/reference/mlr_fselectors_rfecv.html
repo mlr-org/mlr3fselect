@@ -244,47 +244,47 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      FALSE        TRUE     FALSE           TRUE   TRUE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8:       TRUE        TRUE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06086957            0.006 2023-12-15 15:06:17        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06086957            0.005 2023-12-15 15:06:17        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.07017544            0.005 2023-12-15 15:06:17        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06956522            0.004 2023-12-15 15:06:17        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.06956522            0.007 2023-12-15 15:06:17        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.07017544            0.006 2023-12-15 15:06:17        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.006 2023-12-15 15:06:17        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.03779070            0.005 2023-12-15 15:06:17        4        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                               importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 97.8941895,89.6461216,83.5851404,79.4199285,75.7189904, 0.7262575,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:             85.99872,84.83685,66.52547,63.82849,51.24259, 0.00000,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:             87.81776,83.75903,66.52396,62.36058,59.80806, 0.00000,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                            97.89419,89.64612,83.58514</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:                                            85.99872,84.83685,66.52547</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:                                            87.81776,83.75903,66.52396</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:       124.20793,121.52400,102.74919, 87.26186, 78.61700,  0.00000,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8:                                            124.2079,121.5240,104.2507</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    iteration                                                       features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3 bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         1                              bill_length,flipper_length,island</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:         2                          bill_depth,bill_length,flipper_length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:         3                          bill_depth,bill_length,flipper_length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:        NA bill_depth,bill_length,body_mass,flipper_length,island,sex,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8:        NA                          bill_depth,bill_length,flipper_length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    n_features      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          7 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:          7 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:          7 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:          3 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          3 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:          3 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:          7 &lt;ResampleResult[21]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8:          3 &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06086957            0.005 2023-12-15 20:31:15        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06956522            0.006 2023-12-15 20:31:15        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.04385965            0.005 2023-12-15 20:31:15        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06086957            0.006 2023-12-15 20:31:15        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.06956522            0.005 2023-12-15 20:31:15        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.05263158            0.003 2023-12-15 20:31:15        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.006 2023-12-15 20:31:15        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.03779070            0.005 2023-12-15 20:31:15        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance iteration</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       82.95717,73.49289,60.28241,50.71377,39.23141, 0.00000,...         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       88.88047,85.34046,60.50081,58.77222,46.67205, 0.00000,...         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       86.23278,81.65962,66.77963,63.75172,53.21110, 0.00000,...         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                      82.95717,73.49289,60.28241         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:                                      88.88047,85.34046,60.50081         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:                                      86.23278,81.65962,66.77963         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 124.20793,121.52400,102.74919, 87.26186, 78.61700,  0.00000,...        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8:                                      124.2079,121.5240,104.2507        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                          bill_depth,bill_length,flipper_length          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:                          bill_depth,bill_length,flipper_length          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:                          bill_depth,bill_length,flipper_length          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8:                          bill_depth,bill_length,flipper_length          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;ResampleResult[21]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: &lt;ResampleResult[21]&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subset the task and fit the final model</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
