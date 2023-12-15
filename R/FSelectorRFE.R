@@ -39,15 +39,14 @@
 #' @section Control Parameters:
 #' \describe{
 #' \item{`n_features`}{`integer(1)`\cr
-#'   The number of features to select.
-#'   By default half of the features are selected.}
+#'   The minimum number of features to select, by default half of the features.}
 #' \item{`feature_fraction`}{`double(1)`\cr
 #'   Fraction of features to retain in each iteration.
-#'   The default 0.5 retrains half of the features.}
+#'   The default of 0.5 retains half of the features.}
 #' \item{`feature_number`}{`integer(1)`\cr
 #'   Number of features to remove in each iteration.}
 #' \item{`subset_sizes`}{`integer()`\cr
-#'   Vector of number of features to retain in each iteration.
+#'   Vector of the number of features to retain in each iteration.
 #'   Must be sorted in decreasing order.}
 #' \item{`recursive`}{`logical(1)`\cr
 #'   If `TRUE` (default), the feature importance is calculated in each iteration.}
