@@ -1,6 +1,8 @@
 test_that("importance is stored in the archive", {
   z = test_fselector("rfe", store_models = TRUE)
   a = z$inst$archive$data
+  expect_names(names(z$inst$result), must.include = "importance")
+  expect_numeric(z$inst$result$importance[[1]])
   expect_names(names(z$inst$archive$data), must.include = "importance")
   pwalk(a, function(x1, x2, x3, x4, importance, ...) expect_equal(x1 + x2 + x3 + x4, length(importance)))
 })

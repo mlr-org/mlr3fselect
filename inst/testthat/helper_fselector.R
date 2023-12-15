@@ -16,7 +16,7 @@ test_fselector = function(.key, ..., term_evals = NULL, store_models = FALSE) {
   # result checks
   archive = inst$archive
   expect_data_table(inst$result, nrows = 1)
-  expect_names(names(inst$result), identical.to = c("x1", "x2", "x3", "x4", "features", "dummy"))
+  expect_names(names(inst$result), must.include = c("x1", "x2", "x3", "x4", "features", "dummy"))
   expect_subset(inst$result$features[[1]], c("x1", "x2", "x3", "x4"))
   expect_data_table(inst$result_x_search_space, nrows = 1, ncols = 4, types = "logical")
   expect_names(names(inst$result_x_search_space), identical.to = c("x1", "x2", "x3", "x4"))
