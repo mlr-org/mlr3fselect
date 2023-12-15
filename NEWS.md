@@ -1,5 +1,7 @@
 # mlr3fselect (development version)
 
+* feat: Add `ties_method` options `"n_features"`, `"first"` and `"random"` to `ArchiveFSelect$best()`.
+* refactor: Optimize runtime of `ArchiveFSelect$best()` method.
 * feat: Add importance scores to result of `FSelectorRFE`.
 * feat: Add number of features to `as.data.table.ArchiveFSelect()`.
 * feat: Features can be always included with the `always_include` column role.
