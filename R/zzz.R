@@ -6,11 +6,12 @@
 #' @import bbotk
 #' @importFrom R6 R6Class
 #' @importFrom utils combn head
+#' @importFrom stats sd
 "_PACKAGE"
 
 .onLoad = function(libname, pkgname) {
   # nocov start
-    utils::globalVariables(c("super", "self"))
+    utils::globalVariables(c("super", "self", "n_features"))
 
   # reflections
   x = utils::getFromNamespace("bbotk_reflections", ns = "bbotk")
