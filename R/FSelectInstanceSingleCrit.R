@@ -140,7 +140,8 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
     #'   Optimal outcome.
     assign_result = function(xdt, y) {
       # Add feature names to result for easy task subsetting
-      features = list(self$objective$task$feature_names[as.logical(xdt)])
+      feature_names = self$objective$task$feature_names
+      features = list(feature_names[as.logical(xdt[, feature_names, with = FALSE])])
       xdt[, features := list(features)]
       assert_data_table(xdt, nrows = 1L)
       assert_names(names(xdt), must.include = self$search_space$ids())

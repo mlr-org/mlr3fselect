@@ -59,15 +59,14 @@ This \link{FSelector} can be instantiated with the associated sugar function \co
 
 \describe{
 \item{\code{n_features}}{\code{integer(1)}\cr
-The number of features to select.
-By default half of the features are selected.}
+The minimum number of features to select, by default half of the features.}
 \item{\code{feature_fraction}}{\code{double(1)}\cr
 Fraction of features to retain in each iteration.
-The default 0.5 retrains half of the features.}
+The default of 0.5 retains half of the features.}
 \item{\code{feature_number}}{\code{integer(1)}\cr
 Number of features to remove in each iteration.}
 \item{\code{subset_sizes}}{\code{integer()}\cr
-Vector of number of features to retain in each iteration.
+Vector of the number of features to retain in each iteration.
 Must be sorted in decreasing order.}
 \item{\code{recursive}}{\code{logical(1)}\cr
 If \code{TRUE} (default), the feature importance is calculated in each iteration.}
