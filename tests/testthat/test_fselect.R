@@ -38,7 +38,7 @@ test_that("fselect interface is equal to FSelectInstanceSingleCrit", {
 
 test_that("fselect interface is equal to FSelectInstanceMultiCrit", {
   fselect_args = formalArgs(fselect)
-  fselect_args = fselect_args[fselect_args != "fselector"]
+  fselect_args = fselect_args[fselect_args %nin% c("fselector", "ties_method")]
 
   instance_args = formalArgs(FSelectInstanceMultiCrit$public_methods$initialize)
   instance_args = c(instance_args, "term_evals", "term_time")

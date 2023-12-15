@@ -91,7 +91,7 @@ fselect = function(
       check_values = check_values,
       callbacks = callbacks,
       ties_method = ties_method)
-  }  else {
+  } else {
     FSelectInstanceMultiCrit$new(
       task = task,
       learner = learner,

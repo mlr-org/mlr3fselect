@@ -140,7 +140,61 @@ test_that("ArchiveFSelect as.data.table function works", {
   expect_equal(tab$batch_nr, 1:10)
 })
 
-test_that("best method works with ties and maximization", {
+test_that("global ties method works", {
+  design = mlr3misc::rowwise_table(
+    ~x1,   ~x2,   ~x3,    ~x4,
+    FALSE, TRUE,  FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  FALSE,
+    FALSE, TRUE,  FALSE,  FALSE
+  )
+
+  score_design = data.table(
+    score = c(0.1, 0.2, 0.2, 0.1),
+    features = list(c("x2", "x4"), c("x1", "x4"), "x1", c("x1", "x2"))
+  )
+  measure = msr("dummy", score_design = score_design, minimize = FALSE)
+
+  # n_features
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    ties_method = "n_features"
+  )
+
+  expect_equal(instance$result_feature_set, "x1")
+
+  # first
+  instance$clear()
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    ties_method = "first"
+  )
+
+  expect_equal(instance$result_feature_set, c("x1", "x4"))
+
+  # random
+  instance$clear()
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    ties_method = "random"
+  )
+
+  expect_names(instance$result_feature_set, must.include = "x1")
+})
+
+test_that("local ties method works when maximize measure", {
 
   design = mlr3misc::rowwise_table(
     ~x1,   ~x2,   ~x3,    ~x4,
@@ -169,7 +223,7 @@ test_that("best method works with ties and maximization", {
   expect_features(instance$archive$best(ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
 })
 
-test_that("best method works with ties and minimization", {
+test_that("local ties method works when minimize measure", {
 
   design = mlr3misc::rowwise_table(
     ~x1,   ~x2,   ~x3,    ~x4,
@@ -198,7 +252,7 @@ test_that("best method works with ties and minimization", {
   expect_features(instance$archive$best(ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x2")
 })
 
-test_that("best method works with batches and ties", {
+test_that("local ties method works with batches", {
 
   design = mlr3misc::rowwise_table(
     ~x1,   ~x2,   ~x3,    ~x4,

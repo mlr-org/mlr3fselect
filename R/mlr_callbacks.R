@@ -116,6 +116,7 @@ load_callback_svm_rfe = function() {
 #'
 #' @description
 #' Selects the smallest feature set within one standard error of the best as the result.
+#' If there are multiple feature sets with the same performance and number of features, the first one is selected.
 #'
 #' @examples
 #' clbk("mlr3fselect.one_se_rule")
