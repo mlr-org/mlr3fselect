@@ -140,35 +140,6 @@ test_that("ArchiveFSelect as.data.table function works", {
   expect_equal(tab$batch_nr, 1:10)
 })
 
-test_that("best method works with ties", {
-
-  design = mlr3misc::rowwise_table(
-    ~x1,   ~x2,   ~x3,    ~x4,
-    TRUE,  FALSE, FALSE,  TRUE,
-    TRUE,  FALSE, FALSE,  FALSE,
-    TRUE,  TRUE,  FALSE,  FALSE
-  )
-
-  score_design = data.table(
-    score = c(0.2, 0.2, 0.1),
-    features = list(c("x1", "x4"), "x1", c("x1", "x2"))
-  )
-  measure = msr("dummy", score_design = score_design, minimize = FALSE)
-
-  instance = fselect(
-    fselector = fs("design_points", design = design),
-    task = TEST_MAKE_TSK(),
-    learner = lrn("regr.rpart"),
-    resampling = rsmp("cv", folds = 3),
-    measures = measure
-  )
-
-  instance$archive$best()
-  instance$archive$best(ties_method = "first")
-  instance$archive$best(ties_method = "random")
-  instance$archive$best(ties_method = "n_features")
-})
-
 test_that("best method works with ties and maximization", {
 
   design = mlr3misc::rowwise_table(
