@@ -94,7 +94,8 @@
 <span>  store_benchmark_result <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  store_models <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -173,6 +174,16 @@ validity?</p></dd>
 <dd><p>(list of <a href="CallbackFSelect.html">CallbackFSelect</a>)<br>
 List of callbacks.</p></dd>
 
+
+<dt>ties_method</dt>
+<dd><p>(<code>character(1)</code>)<br>
+The method to break ties when selecting sets while optimizing and when selecting the best set.
+Can be <code>"least_features"</code> or <code>"random"</code>.
+The option <code>"least_features"</code> (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, one is selected randomly.
+The <code>random</code> method returns a random feature set from the best feature sets.
+Ignored if multiple measures are used.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -198,14 +209,14 @@ List of callbacks.</p></dd>
 <span class="r-in"><span><span class="co"># Performance scores estimated on the outer resampling</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id iteration classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv         1 0.03488372</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv         2 0.07558140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv         1 0.05813953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv         2 0.08139535</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Hidden columns: task, learner, resampling, prediction</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Unbiased performance of the final model trained on the full data set</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05523256 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.06976744 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

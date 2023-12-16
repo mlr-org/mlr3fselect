@@ -145,6 +145,15 @@ Benchmark result.</p></dd>
 </dl><p></p></div>
     </div>
     <div class="section level2">
+    <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
+    <p></p><div class="r6-active-bindings"><dl><dt><code>ties_method</code></dt>
+<dd><p>(<code>character(1)</code>)<br>
+Method to handle ties.</p></dd>
+
+
+</dl><p></p></div>
+    </div>
+    <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
     
 <div class="section">
@@ -156,9 +165,9 @@ Benchmark result.</p></dd>
 <li><p><a href="#method-ArchiveFSelect-predictions"><code>ArchiveFSelect$predictions()</code></a></p></li>
 <li><p><a href="#method-ArchiveFSelect-resample_result"><code>ArchiveFSelect$resample_result()</code></a></p></li>
 <li><p><a href="#method-ArchiveFSelect-print"><code>ArchiveFSelect$print()</code></a></p></li>
+<li><p><a href="#method-ArchiveFSelect-best"><code>ArchiveFSelect$best()</code></a></p></li>
 <li><p><a href="#method-ArchiveFSelect-clone"><code>ArchiveFSelect$clone()</code></a></p></li>
 </ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="add_evals"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-add_evals"><code>bbotk::Archive$add_evals()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="best"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-best"><code>bbotk::Archive$best()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-clear"><code>bbotk::Archive$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-format"><code>bbotk::Archive$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="nds_selection"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-nds_selection"><code>bbotk::Archive$nds_selection()</code></a></span></li>
@@ -166,7 +175,12 @@ Benchmark result.</p></dd>
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ArchiveFSelect.html">ArchiveFSelect</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">search_space</span>, <span class="va">codomain</span>, check_values <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ArchiveFSelect.html">ArchiveFSelect</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  <span class="va">search_space</span>,</span>
+<span>  <span class="va">codomain</span>,</span>
+<span>  check_values <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -186,6 +200,16 @@ Internally created from provided <a href="https://mlr3.mlr-org.com/reference/Mea
 <dt><code>check_values</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 If <code>TRUE</code> (default), hyperparameter configurations are check for validity.</p></dd>
+
+
+<dt><code>ties_method</code></dt>
+<dd><p>(<code>character(1)</code>)<br>
+The method to break ties when selecting sets while optimizing and when selecting the best set.
+Can be <code>"least_features"</code> or <code>"random"</code>.
+The option <code>"least_features"</code> (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, one is selected randomly.
+The <code>random</code> method returns a random feature set from the best feature sets.
+Ignored if multiple measures are used.</p></dd>
 
 
 </dl><p></p></div>
@@ -302,15 +326,46 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveFSelect-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-ArchiveFSelect-best"></a><div class="section">
+<h3 id="method-best-">Method <code>best()</code><a class="anchor" aria-label="anchor" href="#method-best-"></a></h3>
+<p>Returns the best scoring feature sets.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveFSelect</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveFSelect</span><span class="op">$</span><span class="fu">best</span><span class="op">(</span>batch <span class="op">=</span> <span class="cn">NULL</span>, ties_method <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>batch</code></dt>
+<dd><p>(<code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code>)<br>
+The batch number(s) to limit the best results to.
+Default is all batches.</p></dd>
+
+
+<dt><code>ties_method</code></dt>
+<dd><p>(<code>character(1)</code>)<br>
+Method to handle ties.
+If <code>NULL</code> (default), the global ties method set during initialization is used.
+The default global ties method is <code>least_features</code> which selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, one is selected randomly.
+The <code>random</code> method returns a random feature set from the best feature sets.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
+<p><code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code></p>
+</div>
+
+</div><p></p><hr><a id="method-ArchiveFSelect-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveFSelect</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

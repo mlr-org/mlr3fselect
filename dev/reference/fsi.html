@@ -89,7 +89,8 @@
 <span>  store_benchmark_result <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  store_models <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -143,6 +144,16 @@ validity?</p></dd>
 <dd><p>(list of <a href="CallbackFSelect.html">CallbackFSelect</a>)<br>
 List of callbacks.</p></dd>
 
+
+<dt>ties_method</dt>
+<dd><p>(<code>character(1)</code>)<br>
+The method to break ties when selecting sets while optimizing and when selecting the best set.
+Can be <code>"least_features"</code> or <code>"random"</code>.
+The option <code>"least_features"</code> (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, one is selected randomly.
+The <code>random</code> method returns a random feature set from the best feature sets.
+Ignored if multiple measures are used.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
@@ -186,7 +197,7 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island  sex year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE TRUE TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,... 0.06399695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...  0.0668955</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Subset task to optimal feature set</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
@@ -197,20 +208,20 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 <span class="r-in"><span><span class="co"># Inspect all evaluated sets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE      TRUE          FALSE  FALSE  TRUE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE     FALSE           TRUE   TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE      TRUE          FALSE  FALSE FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE      TRUE           TRUE   TRUE  TRUE  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06399695            0.019 2023-12-15 21:00:24        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.10465294            0.015 2023-12-15 21:00:24        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06399695            0.020 2023-12-15 21:00:24        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06399695            0.015 2023-12-15 21:00:24        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06979405            0.020 2023-12-16 17:40:02        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.09588101            0.016 2023-12-16 17:40:02        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06689550            0.033 2023-12-16 17:40:03        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.15703026            0.017 2023-12-16 17:40:03        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                      bill_depth,bill_length,body_mass,sex,year          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     bill_depth,bill_length,body_mass,flipper_length,island,sex          6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:              bill_depth,bill_length,flipper_length,island,year          5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:           bill_length,body_mass,flipper_length,island,sex,year          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                                          bill_length,body_mass          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            bill_depth,body_mass,flipper_length,island,sex,year          6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult[21]&gt;</span>
