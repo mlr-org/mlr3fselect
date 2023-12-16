@@ -135,10 +135,9 @@ If \code{TRUE} (default), hyperparameter configurations are check for validity.}
 
 \item{\code{ties_method}}{(\code{character(1)})\cr
 The method to break ties when selecting sets while optimizing and when selecting the best set.
-Can be one of \code{n_features}, \code{first}, \code{random}.
-The option \code{n_features} (default) selects the feature set with the least features.
-If there are multiple best feature sets with the same number of features, the first one is selected.
-The \code{first} method returns the first added best feature set.
+Can be \code{"least_features"} or \code{"random"}.
+The option \code{"least_features"} (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
 }
@@ -271,11 +270,9 @@ Default is all batches.}
 
 \item{\code{ties_method}}{(\code{character(1)})\cr
 Method to handle ties.
-Can be one of \code{n_features}, \code{first}, \code{random}.
 If \code{NULL} (default), the global ties method set during initialization is used.
-The default global ties method is \code{n_features} which selects the feature set with the least features.
-If there are multiple best feature sets with the same number of features, the first one is selected.
-The \code{first} method returns the first added best feature set.
+The default global ties method is \code{least_features} which selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.}
 }
 \if{html}{\out{</div>}}

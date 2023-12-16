@@ -159,36 +159,29 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #' Default is all batches.
     #' @param ties_method (`character(1)`)\cr
     #' Method to handle ties.
-    #' Can be one of `n_features`, `first`, `random`.
     #' If `NULL` (default), the global ties method set during initialization is used.
-    #' The default global ties method is `n_features` which selects the feature set with the least features.
-    #' If there are multiple best feature sets with the same number of features, the first one is selected.
-    #' The `first` method returns the first added best feature set.
+    #' The default global ties method is `least_features` which selects the feature set with the least features.
+    #' If there are multiple best feature sets with the same number of features, one is selected randomly.
     #' The `random` method returns a random feature set from the best feature sets.
     #
     #' @return [data.table::data.table()]
     best = function(batch = NULL, ties_method = NULL) {
-      assert_choice(ties_method, c("first", "random", "n_features"), null.ok = TRUE)
-      if (is.null(ties_method)) ties_method = self$ties_method
+      ties_method = assert_choice(ties_method, c("least_features", "random"), null.ok = TRUE) %??% self$ties_method
       assert_subset(batch, seq_len(self$n_batch))
       if (self$n_batch == 0L) return(data.table())
 
-      if (is.null(batch)) {
-        tab = self$data
-      } else {
-        tab = self$data[list(batch), , on = "batch_nr"]
-      }
+       tab = if (is.null(batch)) self$data else self$data[list(batch), , on = "batch_nr"]
 
       if (self$codomain$target_length == 1L) {
         y = tab[[self$cols_y]] * -self$codomain$maximization_to_minimization
 
-        if (ties_method == "n_features") {
+        if (ties_method == "least_features") {
           ii = which(y == max(y))
           tab = tab[ii]
-          ii = which.min(rowSums(tab[, self$cols_x, with = FALSE]))
+          ii = which_min(rowSums(tab[, self$cols_x, with = FALSE]), ties_method = "random")
           tab[ii]
         } else {
-          ii = which_max(y, ties_method = ties_method)
+          ii = which_max(y, ties_method = "random")
           tab[ii]
         }
       } else {
@@ -205,7 +198,7 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #' Method to handle ties.
     ties_method = function(rhs) {
       if (!missing(rhs)) {
-        assert_choice(rhs, c("first", "random", "n_features"))
+        assert_choice(rhs, c("least_features", "random"))
         private$.ties_method = rhs
       } else {
         private$.ties_method

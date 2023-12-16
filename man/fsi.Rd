@@ -51,10 +51,9 @@ List of callbacks.}
 
 \item{ties_method}{(\code{character(1)})\cr
 The method to break ties when selecting sets while optimizing and when selecting the best set.
-Can be one of \code{n_features}, \code{first}, \code{random}.
-The option \code{n_features} (default) selects the feature set with the least features.
-If there are multiple best feature sets with the same number of features, the first one is selected.
-The \code{first} method returns the first added best feature set.
+Can be \code{"least_features"} or \code{"random"}.
+The option \code{"least_features"} (default) selects the feature set with the least features.
+If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
 }

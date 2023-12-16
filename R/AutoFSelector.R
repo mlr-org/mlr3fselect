@@ -138,7 +138,7 @@ AutoFSelector = R6Class("AutoFSelector",
 
       ia$check_values = assert_flag(check_values)
       ia$callbacks = assert_callbacks(as_callbacks(callbacks))
-      ia$ties_method = assert_choice(ties_method, c("n_features", "first", "random"))
+      ia$ties_method = assert_choice(ties_method, c("least_features", "random"))
       self$instance_args = ia
 
       super$initialize(
