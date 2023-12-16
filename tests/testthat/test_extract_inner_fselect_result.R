@@ -4,7 +4,7 @@ test_that("extract_inner_fselect_results function works with resample and cv", {
 
   irr = extract_inner_fselect_results(rr)
   expect_data_table(irr, nrows = 2)
-  expect_named(irr, c("iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "task_id", "learner_id", "resampling_id"))
+  expect_named(irr, c("iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "n_features", "task_id", "learner_id", "resampling_id"))
 })
 
 test_that("extract_inner_fselect_results function works with resample and repeated cv", {
@@ -13,7 +13,7 @@ test_that("extract_inner_fselect_results function works with resample and repeat
 
   irr = extract_inner_fselect_results(rr)
   expect_data_table(irr, nrows = 6)
-  expect_named(irr, c("iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "task_id", "learner_id", "resampling_id"))
+  expect_named(irr, c("iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "n_features", "task_id", "learner_id", "resampling_id"))
 })
 
 test_that("extract_inner_fselect_results function works with benchmark and cv", {
@@ -25,7 +25,7 @@ test_that("extract_inner_fselect_results function works with benchmark and cv", 
 
   ibmr = extract_inner_fselect_results(bmr)
   expect_data_table(ibmr, nrows = 4)
-  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "task_id", "learner_id", "resampling_id"))
+  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "n_features", "task_id", "learner_id", "resampling_id"))
   expect_equal(unique(ibmr$experiment), c(1, 2))
 })
 
@@ -38,7 +38,7 @@ test_that("extract_inner_fselect_results function works with benchmark and repea
 
   ibmr = extract_inner_fselect_results(bmr)
   expect_data_table(ibmr, nrows = 12)
-  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "task_id", "learner_id", "resampling_id"))
+  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "n_features", "task_id", "learner_id", "resampling_id"))
   expect_equal(unique(ibmr$experiment), c(1, 2))
 })
 
@@ -51,7 +51,7 @@ test_that("extract_inner_fselect_results function works with multiple tasks", {
 
   ibmr = extract_inner_fselect_results(bmr)
   expect_data_table(ibmr, nrows = 8)
-  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce", "features", "task_id", "learner_id", "resampling_id"))
+  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce", "features", "n_features", "task_id", "learner_id", "resampling_id"))
   expect_equal(unique(ibmr$experiment), c(1, 2, 3, 4))
 })
 
@@ -92,7 +92,7 @@ test_that("extract_inner_fselect_results function works with mixed store instanc
   bmr = benchmark(grid, store_models = TRUE)
 
   ibmr = extract_inner_fselect_results(bmr)
-  expect_data_table(ibmr, nrows = 2, ncols = 11)
+  expect_data_table(ibmr, nrows = 2, ncols = 12)
   expect_equal(unique(ibmr$experiment), 2)
 })
 
@@ -105,7 +105,7 @@ test_that("extract_inner_fselect_results function works with learner and autotun
 
   ibmr = extract_inner_fselect_results(bmr)
   expect_data_table(ibmr, nrows = 2)
-  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "task_id", "learner_id", "resampling_id"))
+  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "n_features", "task_id", "learner_id", "resampling_id"))
   expect_equal(unique(ibmr$experiment), 1)
 })
 
@@ -114,7 +114,7 @@ test_that("extract_inner_fselect_results function works with resample and return
 
   irr = extract_inner_fselect_results(rr, fselect_instance = TRUE)
   expect_data_table(irr, nrows = 2)
-  expect_named(irr, c("iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "fselect_instance", "task_id", "learner_id", "resampling_id"))
+  expect_named(irr, c("iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "n_features", "fselect_instance", "task_id", "learner_id", "resampling_id"))
 })
 
 test_that("extract_inner_fselect_results function works with benchmark and return of instance", {
@@ -126,6 +126,6 @@ test_that("extract_inner_fselect_results function works with benchmark and retur
 
   ibmr = extract_inner_fselect_results(bmr, fselect_instance = TRUE)
   expect_data_table(ibmr, nrows = 4)
-  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "fselect_instance", "task_id", "learner_id", "resampling_id"))
+  expect_named(ibmr, c("experiment", "iteration", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width", "classif.ce", "features", "n_features", "fselect_instance", "task_id", "learner_id", "resampling_id"))
   expect_equal(unique(ibmr$experiment), c(1, 2))
 })
