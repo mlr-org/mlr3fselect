@@ -104,8 +104,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
         feature_number   = p_int(lower = 1),
         subset_sizes     = p_uty(),
         recursive        = p_lgl(default = TRUE),
-        aggregation      = p_fct(c("mean", "rank"), default = "rank"),
-        ties_method      = p_fct(c("first", "random", "n_features"), default = "first")
+        aggregation      = p_fct(c("mean", "rank"), default = "rank")
       )
       ps$values = list(recursive = TRUE, aggregation = "rank")
 
