@@ -123,7 +123,7 @@ AutoFSelector = R6Class("AutoFSelector",
       store_models = FALSE,
       check_values = FALSE,
       callbacks = list(),
-      ties_method = "n_features"
+      ties_method = "least_features"
       ) {
       ia = list()
       self$fselector = assert_r6(fselector, "FSelector")$clone()

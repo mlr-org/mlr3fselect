@@ -22,6 +22,7 @@
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_callbacks
+#' @template param_ties_method
 #'
 #' @export
 #' @examples
@@ -40,7 +41,23 @@
 #'
 #' # Unbiased performance of the final model trained on the full data set
 #' rr$aggregate()
-fselect_nested = function(fselector, task, learner, inner_resampling, outer_resampling, measure = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+fselect_nested = function(
+  fselector,
+  task,
+  learner,
+  inner_resampling,
+  outer_resampling,
+  measure = NULL,
+  term_evals = NULL,
+  term_time = NULL,
+  terminator = NULL,
+  store_fselect_instance = TRUE,
+  store_benchmark_result = TRUE,
+  store_models = FALSE,
+  check_values = FALSE,
+  callbacks = list()
+  ties_method = "least_features"
+  ) {
   assert_task(task)
   assert_resampling(inner_resampling)
   assert_resampling(outer_resampling)
@@ -56,7 +73,8 @@ fselect_nested = function(fselector, task, learner, inner_resampling, outer_resa
     store_benchmark_result = store_benchmark_result,
     store_models = store_models,
     check_values = check_values,
-    callbacks = callbacks)
+    callbacks = callbacks,
+    ties_method = ties_method)
 
   resample(task, afs, outer_resampling, store_models = TRUE)
 }

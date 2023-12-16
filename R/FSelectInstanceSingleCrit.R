@@ -104,7 +104,7 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
       store_models = FALSE,
       check_values = FALSE,
       callbacks = list(),
-      ties_method = "n_features"
+      ties_method = "least_features"
       ) {
       # initialized specialized fselect archive and objective
       archive = ArchiveFSelect$new(
