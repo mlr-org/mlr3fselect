@@ -162,23 +162,10 @@ test_that("global ties method works", {
     learner = lrn("regr.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = measure,
-    ties_method = "n_features"
+    ties_method = "least_features"
   )
 
   expect_equal(instance$result_feature_set, "x1")
-
-  # first
-  instance$clear()
-  instance = fselect(
-    fselector = fs("design_points", design = design),
-    task = TEST_MAKE_TSK(),
-    learner = lrn("regr.rpart"),
-    resampling = rsmp("cv", folds = 3),
-    measures = measure,
-    ties_method = "first"
-  )
-
-  expect_equal(instance$result_feature_set, c("x1", "x4"))
 
   # random
   instance$clear()
@@ -218,9 +205,8 @@ test_that("local ties method works when maximize measure", {
     measures = measure
   )
 
-  expect_features(instance$archive$best(ties_method = "first")[, list(x1, x2, x3, x4)], identical_to = c("x1", "x4"))
   expect_features(instance$archive$best(ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x1")
-  expect_features(instance$archive$best(ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
+  expect_features(instance$archive$best(ties_method = "least_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
 })
 
 test_that("local ties method works when minimize measure", {
@@ -247,9 +233,8 @@ test_that("local ties method works when minimize measure", {
     measures = measure
   )
 
-  expect_features(instance$archive$best(ties_method = "first")[, list(x1, x2, x3, x4)], identical_to = "x2")
   expect_features(instance$archive$best(ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x2")
-  expect_features(instance$archive$best(ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x2")
+  expect_features(instance$archive$best(ties_method = "least_features")[, list(x1, x2, x3, x4)], identical_to = "x2")
 })
 
 test_that("local ties method works with batches", {
@@ -276,7 +261,6 @@ test_that("local ties method works with batches", {
     measures = measure
   )
 
-  expect_features(instance$archive$best(batch = c(1, 3), ties_method = "first")[, list(x1, x2, x3, x4)], identical_to = c("x1", "x4"))
   expect_features(instance$archive$best(batch = c(1, 2), ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x1")
-  expect_features(instance$archive$best(batch = c(2, 3), ties_method = "n_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
+  expect_features(instance$archive$best(batch = c(2, 3), ties_method = "least_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
 })
