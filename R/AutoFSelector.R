@@ -36,6 +36,7 @@
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_callbacks
+#' @template param_ties_method
 #'
 #' @export
 #' @examples
@@ -111,7 +112,19 @@ AutoFSelector = R6Class("AutoFSelector",
     #'
     #' @param fselector ([FSelector])\cr
     #'   Optimization algorithm.
-    initialize = function(fselector, learner, resampling, measure = NULL, terminator, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+    initialize = function(
+      fselector,
+      learner,
+      resampling,
+      measure = NULL,
+      terminator,
+      store_fselect_instance = TRUE,
+      store_benchmark_result = TRUE,
+      store_models = FALSE,
+      check_values = FALSE,
+      callbacks = list(),
+      ties_method = "least_features"
+      ) {
       ia = list()
       self$fselector = assert_r6(fselector, "FSelector")$clone()
       ia$learner = assert_learner(as_learner(learner, clone = TRUE))
@@ -125,6 +138,7 @@ AutoFSelector = R6Class("AutoFSelector",
 
       ia$check_values = assert_flag(check_values)
       ia$callbacks = assert_callbacks(as_callbacks(callbacks))
+      ia$ties_method = assert_choice(ties_method, c("least_features", "random"))
       self$instance_args = ia
 
       super$initialize(

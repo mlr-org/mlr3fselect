@@ -29,7 +29,7 @@ TEST_MAKE_INST_2D = function(n = 4L, folds = 2L, store_models = FALSE, store_ben
 
 MeasureDummy = R6Class("MeasureDummy", inherit = MeasureRegr,
   public = list(
-    initialize = function(score_design = NULL) {
+    initialize = function(score_design = NULL, minimize = FALSE) {
       if (is.null(score_design)) {
         score_design = data.table(
           score = c(1, 2, 4, 3),
@@ -37,7 +37,7 @@ MeasureDummy = R6Class("MeasureDummy", inherit = MeasureRegr,
         )
       }
       private$.score_design = score_design
-      super$initialize(id = "dummy", range = c(0, 4), minimize = FALSE)
+      super$initialize(id = "dummy", range = c(0, 4), minimize = minimize)
     }
   ),
     private = list(

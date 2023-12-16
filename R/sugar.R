@@ -46,13 +46,47 @@ fss = function(.keys, ...) {
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_callbacks
+#' @template param_ties_method
 #'
 #' @inheritSection FSelectInstanceSingleCrit Resources
 #' @inheritSection FSelectInstanceSingleCrit Default Measures
 #'
 #' @export
 #' @inherit FSelectInstanceSingleCrit examples
-fsi = function(task, learner, resampling, measures = NULL, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
-  FSelectInstance = if (!is.list(measures)) FSelectInstanceSingleCrit else FSelectInstanceMultiCrit
-  FSelectInstance$new(task, learner, resampling, measures, terminator, store_benchmark_result, store_models, check_values, callbacks)
+fsi = function(
+  task,
+  learner,
+  resampling,
+  measures = NULL,
+  terminator,
+  store_benchmark_result = TRUE,
+  store_models = FALSE,
+  check_values = FALSE,
+  callbacks = list(),
+  ties_method = "least_features"
+  ) {
+  if (!is.list(measures)) {
+    FSelectInstanceSingleCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measure = measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      ties_method = ties_method)
+  } else {
+    FSelectInstanceMultiCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks)
+  }
 }

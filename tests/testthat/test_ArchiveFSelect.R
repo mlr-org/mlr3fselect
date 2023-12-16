@@ -139,3 +139,128 @@ test_that("ArchiveFSelect as.data.table function works", {
   tab = as.data.table(instance$archive)
   expect_equal(tab$batch_nr, 1:10)
 })
+
+test_that("global ties method works", {
+  design = mlr3misc::rowwise_table(
+    ~x1,   ~x2,   ~x3,    ~x4,
+    FALSE, TRUE,  FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  FALSE,
+    FALSE, TRUE,  FALSE,  FALSE
+  )
+
+  score_design = data.table(
+    score = c(0.1, 0.2, 0.2, 0.1),
+    features = list(c("x2", "x4"), c("x1", "x4"), "x1", c("x1", "x2"))
+  )
+  measure = msr("dummy", score_design = score_design, minimize = FALSE)
+
+  # n_features
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    ties_method = "least_features"
+  )
+
+  expect_equal(instance$result_feature_set, "x1")
+
+  # random
+  instance$clear()
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    ties_method = "random"
+  )
+
+  expect_names(instance$result_feature_set, must.include = "x1")
+})
+
+test_that("local ties method works when maximize measure", {
+
+  design = mlr3misc::rowwise_table(
+    ~x1,   ~x2,   ~x3,    ~x4,
+    FALSE, TRUE,  FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  FALSE,
+    FALSE, TRUE,  FALSE,  FALSE
+  )
+
+  score_design = data.table(
+    score = c(0.1, 0.2, 0.2, 0.1),
+    features = list(c("x2", "x4"), c("x1", "x4"), "x1", c("x1", "x2"))
+  )
+  measure = msr("dummy", score_design = score_design, minimize = FALSE)
+
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure
+  )
+
+  expect_features(instance$archive$best(ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x1")
+  expect_features(instance$archive$best(ties_method = "least_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
+})
+
+test_that("local ties method works when minimize measure", {
+
+  design = mlr3misc::rowwise_table(
+    ~x1,   ~x2,   ~x3,    ~x4,
+    TRUE,  FALSE, FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  FALSE,
+    FALSE, TRUE,  FALSE,  FALSE,
+    FALSE, TRUE,  FALSE,  TRUE
+  )
+
+  score_design = data.table(
+    score = c(0.2, 0.2, 0.1, 0.1),
+    features = list(c("x1", "x4"), "x1", "x2", c("x2", "x4"))
+  )
+  measure = msr("dummy", score_design = score_design, minimize = TRUE)
+
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure
+  )
+
+  expect_features(instance$archive$best(ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x2")
+  expect_features(instance$archive$best(ties_method = "least_features")[, list(x1, x2, x3, x4)], identical_to = "x2")
+})
+
+test_that("local ties method works with batches", {
+
+  design = mlr3misc::rowwise_table(
+    ~x1,   ~x2,   ~x3,    ~x4,
+    TRUE,  FALSE, FALSE,  TRUE,
+    TRUE,  FALSE, FALSE,  FALSE,
+    FALSE, TRUE,  TRUE,   FALSE,
+    FALSE, TRUE,  FALSE,  FALSE
+  )
+
+  score_design = data.table(
+    score = c(0.2, 0.2, 0.2, 0.1),
+    features = list(c("x1", "x4"), "x1", c("x2", "x3"), c("x1", "x2"))
+  )
+  measure = msr("dummy", score_design = score_design, minimize = FALSE)
+
+  instance = fselect(
+    fselector = fs("design_points", design = design, batch_size = 1),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure
+  )
+
+  expect_features(instance$archive$best(batch = c(1, 2), ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x1")
+  expect_features(instance$archive$best(batch = c(2, 3), ties_method = "least_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
+})

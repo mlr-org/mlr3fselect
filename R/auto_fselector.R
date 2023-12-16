@@ -19,10 +19,25 @@
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_callbacks
+#' @template param_ties_method
 #'
 #' @export
 #' @inherit AutoFSelector examples
-auto_fselector = function(fselector, learner, resampling, measure = NULL, term_evals = NULL, term_time = NULL, terminator = NULL, store_fselect_instance = TRUE, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+auto_fselector = function(
+  fselector,
+  learner,
+  resampling,
+  measure = NULL,
+  term_evals = NULL,
+  term_time = NULL,
+  terminator = NULL,
+  store_fselect_instance = TRUE,
+  store_benchmark_result = TRUE,
+  store_models = FALSE,
+  check_values = FALSE,
+  callbacks = list(),
+  ties_method = "least_features"
+  ) {
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
   AutoFSelector$new(
@@ -35,5 +50,6 @@ auto_fselector = function(fselector, learner, resampling, measure = NULL, term_e
     store_benchmark_result = store_benchmark_result,
     store_models = store_models,
     check_values = check_values,
-    callbacks = callbacks)
+    callbacks = callbacks,
+    ties_method = ties_method)
 }
