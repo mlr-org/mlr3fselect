@@ -175,7 +175,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   store_models = FALSE,
   check_values = FALSE,
   callbacks = list(),
-  ties_method = "n_features"
+  ties_method = "least_features"
 )}\if{html}{\out{</div>}}
 }
 

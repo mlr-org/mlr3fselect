@@ -115,7 +115,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   search_space,
   codomain,
   check_values = TRUE,
-  ties_method = "n_features"
+  ties_method = "least_features"
 )}\if{html}{\out{</div>}}
 }
 
