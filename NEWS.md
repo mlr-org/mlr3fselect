@@ -1,5 +1,6 @@
 # mlr3fselect (development version)
 
+* feat: Add number of features to `instance$result`.
 * feat: Add importance scores to result of `FSelectorRFE`.
 * feat: Add number of features to `as.data.table.ArchiveFSelect()`.
 * feat: Features can be always included with the `always_include` column role.
