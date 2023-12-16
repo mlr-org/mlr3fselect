@@ -170,7 +170,7 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
       assert_subset(batch, seq_len(self$n_batch))
       if (self$n_batch == 0L) return(data.table())
 
-       tab = if (is.null(batch)) self$data else self$data[list(batch), , on = "batch_nr"]
+      tab = if (is.null(batch)) self$data else self$data[list(batch), , on = "batch_nr"]
 
       if (self$codomain$target_length == 1L) {
         y = tab[[self$cols_y]] * -self$codomain$maximization_to_minimization
