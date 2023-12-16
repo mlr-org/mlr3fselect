@@ -184,8 +184,8 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island   sex  year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE          FALSE  FALSE FALSE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length 0.09565217</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  features n_features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length          2  0.1130435</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -201,16 +201,16 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-out co"><span class="r-pr">#&gt;</span>  9:       TRUE       FALSE      TRUE          FALSE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE       FALSE     FALSE           TRUE  FALSE FALSE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.26956522            0.007 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.24347826            0.006 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.29565217            0.004 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.26086957            0.003 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.31304348            0.005 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.62608696            0.005 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.61739130            0.004 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.09565217            0.005 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.24347826            0.004 2023-12-16 17:40:08        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.26086957            0.004 2023-12-16 17:40:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  0.2869565            0.020 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  0.2869565            0.007 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  0.3217391            0.005 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  0.2434783            0.005 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  0.2956522            0.006 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  0.5565217            0.005 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  0.5565217            0.004 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  0.1130435            0.004 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  0.2695652            0.004 2023-12-16 17:42:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  0.2347826            0.005 2023-12-16 17:42:17        1        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      features n_features      resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:                bill_depth          1 &lt;ResampleResult[21]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2:               bill_length          1 &lt;ResampleResult[21]&gt;</span>
