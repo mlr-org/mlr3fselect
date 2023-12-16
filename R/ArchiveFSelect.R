@@ -49,6 +49,8 @@
 #'     * `measures` (list of [mlr3::Measure])\cr
 #'       Score feature sets on additional measures.
 #'
+#' @template param_ties_method
+#'
 #' @export
 ArchiveFSelect = R6Class("ArchiveFSelect",
   inherit = Archive,
@@ -72,8 +74,14 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     #'
     #' @param check_values (`logical(1)`)\cr
     #'   If `TRUE` (default), hyperparameter configurations are check for validity.
-    initialize = function(search_space, codomain, check_values = TRUE) {
+    initialize = function(
+      search_space,
+      codomain,
+      check_values = TRUE,
+      ties_method = "least_features"
+      ) {
       super$initialize(search_space, codomain, check_values)
+      self$ties_method = ties_method
 
       # initialize empty benchmark result
       self$benchmark_result = BenchmarkResult$new()
@@ -141,7 +149,65 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
     print = function() {
       catf(format(self))
       print(self$data[, setdiff(names(self$data), "uhash"), with = FALSE], digits=2)
+    },
+
+    #' @description
+    #' Returns the best scoring feature sets.
+    #'
+    #' @param batch (`integer()`)\cr
+    #' The batch number(s) to limit the best results to.
+    #' Default is all batches.
+    #' @param ties_method (`character(1)`)\cr
+    #' Method to handle ties.
+    #' If `NULL` (default), the global ties method set during initialization is used.
+    #' The default global ties method is `least_features` which selects the feature set with the least features.
+    #' If there are multiple best feature sets with the same number of features, one is selected randomly.
+    #' The `random` method returns a random feature set from the best feature sets.
+    #
+    #' @return [data.table::data.table()]
+    best = function(batch = NULL, ties_method = NULL) {
+      ties_method = assert_choice(ties_method, c("least_features", "random"), null.ok = TRUE) %??% self$ties_method
+      assert_subset(batch, seq_len(self$n_batch))
+      if (self$n_batch == 0L) return(data.table())
+
+      tab = if (is.null(batch)) self$data else self$data[list(batch), , on = "batch_nr"]
+
+      if (self$codomain$target_length == 1L) {
+        y = tab[[self$cols_y]] * -self$codomain$maximization_to_minimization
+
+        if (ties_method == "least_features") {
+          ii = which(y == max(y))
+          tab = tab[ii]
+          ii = which_min(rowSums(tab[, self$cols_x, with = FALSE]), ties_method = "random")
+          tab[ii]
+        } else {
+          ii = which_max(y, ties_method = "random")
+          tab[ii]
+        }
+      } else {
+        ymat = t(as.matrix(tab[, self$cols_y, with = FALSE]))
+        ymat = self$codomain$maximization_to_minimization * ymat
+        tab[!is_dominated(ymat)]
+      }
     }
+  ),
+
+  active = list(
+
+    #' @field ties_method (`character(1)`)\cr
+    #' Method to handle ties.
+    ties_method = function(rhs) {
+      if (!missing(rhs)) {
+        assert_choice(rhs, c("least_features", "random"))
+        private$.ties_method = rhs
+      } else {
+        private$.ties_method
+      }
+    }
+  ),
+
+  private = list(
+    .ties_method = NULL
   )
 )
 

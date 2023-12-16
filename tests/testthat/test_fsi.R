@@ -42,7 +42,10 @@ test_that("fsi and FSelectInstanceSingleCrit are equal", {
 })
 
 test_that("fsi and FSelectInstanceMultiCrit are equal", {
-    expect_equal(formalArgs(fsi), formalArgs(FSelectInstanceMultiCrit$public_methods$initialize))
+    fsi_args = formalArgs(fsi)
+    fsi_args = fsi_args[fsi_args != "ties_method"]
+
+    expect_equal(fsi_args, formalArgs(FSelectInstanceMultiCrit$public_methods$initialize))
 
     task = tsk("pima")
     learner = lrn("classif.rpart")
