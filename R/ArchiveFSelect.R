@@ -78,7 +78,7 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
       search_space,
       codomain,
       check_values = TRUE,
-      ties_method = "n_features"
+      ties_method = "least_features"
       ) {
       super$initialize(search_space, codomain, check_values)
       self$ties_method = ties_method
