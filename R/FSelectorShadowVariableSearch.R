@@ -101,7 +101,10 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
       task$cbind(data)
 
       # add shadow variables to domain
-      inst$objective$domain = ParamSet$new(map(inst$objective$task$feature_names, function(s) ParamLgl$new(id = s)))
+      fnames = inst$objective$task$feature_names
+      params = rep(list(p_lgl()), length(inst$objective$task$feature_names))
+      names(params) = fnames
+      inst$objective$domain = do.call(ps, params)
 
       # add shadow variables to search_space
       inst$archive$search_space =  inst$objective$domain
