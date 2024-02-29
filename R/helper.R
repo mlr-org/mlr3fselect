@@ -1,9 +1,19 @@
 task_to_domain = function(task) {
-  ParamSet$new(map(task$feature_names, function(s) ParamLgl$new(id = s)))
+  params = rep(list(p_lgl()), length(task$feature_names))
+  names(params) = task$feature_names
+  do.call(ps, params)
 }
 
 measures_to_codomain = function(measures) {
-  Codomain$new(map(as_measures(measures), function(s) {
-    ParamDbl$new(id = s$id, tags = ifelse(s$minimize, "minimize", "maximize"))
-  }))
+  measures = as_measures(measures)
+  domains = map(measures, function(s) {
+    if ("set_id" %in% names(ps())) {
+      # old paradox
+      get("ParamDbl")$new(id = s$id, tags = ifelse(s$minimize, "minimize", "maximize"))
+    } else {
+      p_dbl(tags = ifelse(s$minimize, "minimize", "maximize"))
+    }
+  })
+  names(domains) = ids(measures)
+  Codomain$new(domains)
 }

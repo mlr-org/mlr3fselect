@@ -33,7 +33,7 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
     initialize = function() {
       ps = ps(
         max_features = p_int(lower = 1L),
-        batch_size = p_int(lower = 1L, default = 10L, tags = "required")
+        batch_size = p_int(lower = 1L, tags = "required")
       )
       ps$values = list(batch_size = 10L)
 
