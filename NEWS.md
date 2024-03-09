@@ -1,4 +1,4 @@
-# mlr3fselect 0.12.0
+# mlr3fselect (development version)
 
 * feat: Add number of features to `instance$result`.
 * feat: Add `ties_method` options `"least_features"` and `"random"` to `ArchiveFSelect$best()`.
@@ -10,7 +10,7 @@
 * fix: Include `FSelector` in hash of  `AutoFSelector`.
 * refactor: Change default batch size of `FSelectorRandomSearch` to 10.
 * feat: Add `batch_size` parameter to `FSelectorExhaustiveSearch` to reduce memory consumption.
-* compatibility: Work with new paradox version 1.0.0
+* Compatibility with upcoming paradox release.
 
 # mlr3fselect 0.11.0
 
