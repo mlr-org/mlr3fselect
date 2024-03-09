@@ -65,8 +65,7 @@ bibentries = c(
     publisher = "Springer New York",
     address   = "New York, NY",
     pages     = "61--92",
-    isbn      = "978-1-4614-6849-3",
-    url       = "https://doi.org/10.1007/978-1-4614-6849-3_4"
+    isbn      = "978-1-4614-6849-3"
   )
 )
 
