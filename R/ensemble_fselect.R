@@ -1,11 +1,48 @@
+#' @title Ensemble Feature Selection
+#'
+#' @description
+#' Ensemble feature selection using multiple learners.
+#'
+#' @param learners (list of [mlr3::Learner])\cr
+#'  The learners to be used for feature selection.
+#' @param outer_resampling ([mlr3::Resampling])\cr
+#'  The outer resampling strategy.
+#'  The number of iterations must match the number of learners.
+#' @param inner_resampling ([mlr3::Resampling])\cr
+#'  The inner resampling strategy used by the [FSelector].
+#'
+#' @template param_fselector
+#' @template param_task
+#' @template param_measure
+#' @template param_terminator
+#'
 #' @export
-ensemble_fselect = function(task, learners, outer_resampling, inner_resampling, fselector, terminator) {
+#' @examples
+#' \donttest{
+#'
+#'   ensemble_fselect(
+#'     fselector = fs("random_search"),
+#'     task = tsk("sonar"),
+#'     learners = lrns(c("classif.rpart", "classif.featureless")),
+#'     outer_resampling = rsmp("subsampling", repeats = 2),
+#'     inner_resampling = rsmp("cv", folds = 3),
+#'     measure = msr("classif.ce"),
+#'     terminator = trm("evals", n_evals = 10)
+#'   )
+#' }
+ensemble_fselect = function(fselector, task, learners, outer_resampling, inner_resampling, measure, terminator) {
   assert_task(task)
-  assert_learners(learners)
+  assert_learners(as_learners(learners), task = task)
   assert_resampling(outer_resampling)
   assert_resampling(inner_resampling)
+  assert_measure(measure)
   assert_fselector(fselector)
   assert_terminator(terminator)
+
+  if (length(learners) != outer_resampling$iters) {
+    stopf("Number of learners %i must match number of outer resampling iterations %i.",
+      length(learners), outer_resampling$iters)
+  }
 
   outer_resampling$instantiate(task)
 
@@ -33,7 +70,7 @@ ensemble_fselect = function(task, learners, outer_resampling, inner_resampling, 
     )
   })
 
-  design = grid[, list(learner, task, resampling)]
+  design = grid[, c("learner", "task", "resampling"), with = FALSE]
 
   bmr = benchmark(design, store_models = TRUE)
 
@@ -51,17 +88,4 @@ ensemble_fselect = function(task, learners, outer_resampling, inner_resampling, 
   set(grid, j = "n_features", value = n_features)
 
   grid
-}
-
-if (FALSE) {
-  task = tsk("sonar")
-  learners = lrns(c("classif.rpart", "classif.rpart"))
-  outer_resampling = rsmp("subsampling", repeats = 2)
-  inner_resampling = rsmp("cv", folds = 3)
-  measure = msr("classif.ce")
-  fselector = fs("random_search")
-  terminator = trm("evals", n_evals = 10)
-
-  ensemble_fselect(task, learners, outer_resampling, inner_resampling, fselector, terminator)
-
 }
