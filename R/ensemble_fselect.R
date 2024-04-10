@@ -15,6 +15,7 @@
 #' @template param_task
 #' @template param_measure
 #' @template param_terminator
+#' @template param_callbacks
 #'
 #' @export
 #' @examples

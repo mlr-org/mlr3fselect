@@ -11,7 +11,8 @@ ensemble_fselect(
   outer_resampling,
   inner_resampling,
   measure,
-  terminator
+  terminator,
+  callbacks = list()
 )
 }
 \arguments{
@@ -36,6 +37,9 @@ Measure to optimize. If \code{NULL}, default measure is used.}
 
 \item{terminator}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}
+
+\item{callbacks}{(list of \link{CallbackFSelect})\cr
+List of callbacks.}
 }
 \description{
 Ensemble feature selection using multiple learners.
