@@ -9,7 +9,7 @@ test_that("esemble feature selection works", {
     terminator = trm("evals", n_evals = 10)
   )
 
-  expect_data_table(res, nrows = 2)
+  expect_data_table(res, nrows = 4)
 })
 
 

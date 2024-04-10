@@ -39,32 +39,30 @@ ensemble_fselect = function(fselector, task, learners, outer_resampling, inner_r
   assert_fselector(fselector)
   assert_terminator(terminator)
 
-  if (length(learners) != outer_resampling$iters) {
-    stopf("Number of learners %i must match number of outer resampling iterations %i.",
-      length(learners), outer_resampling$iters)
-  }
-
-  outer_resampling$instantiate(task)
-
-  grid = map_dtr(seq(outer_resampling$iters), function(i) {
-
-    afs = auto_fselector(
+  # create fselector for each learner
+  afss = map(learners, function(learner) {
+    auto_fselector(
       fselector = fselector,
-      learner = learners[[i]],
+      learner = learner,
       resampling = inner_resampling,
       measure = measure,
       terminator = terminator,
       store_models = TRUE
     )
+  })
 
+  outer_resampling$instantiate(task)
+  grid = map_dtr(seq(outer_resampling$iters), function(i) {
+
+    # create task and resampling for each outer iteration
     task_subset = task$clone()$filter(outer_resampling$train_set(i))
     resampling = rsmp("insample")$instantiate(task_subset)
 
     data.table(
       iter = i,
-      base_learner_id = learners[[i]]$id,
-      base_learner = list(learners[[i]]),
-      learner = list(afs),
+      base_learner_id = map(learners, "id"),
+      base_learner = learners,
+      learner = afss,
       task = list(task_subset),
       resampling = list(resampling)
     )
