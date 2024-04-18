@@ -31,7 +31,17 @@
 #'     terminator = trm("evals", n_evals = 10)
 #'   )
 #' }
-ensemble_fselect = function(fselector, task, learners, outer_resampling, inner_resampling, measure, terminator, callbacks = list()) {
+ensemble_fselect = function(
+  fselector,
+  task,
+  learners,
+  outer_resampling,
+  inner_resampling,
+  measure,
+  terminator,
+  callbacks = list(),
+  store_models = TRUE
+  ) {
   assert_task(task)
   assert_learners(as_learners(learners), task = task)
   assert_resampling(outer_resampling)
@@ -44,7 +54,7 @@ ensemble_fselect = function(fselector, task, learners, outer_resampling, inner_r
       resampling = inner_resampling,
       measure = measure,
       terminator = terminator,
-      store_models = TRUE,
+      store_models = store_models,
       callbacks = callbacks
     )
   })
