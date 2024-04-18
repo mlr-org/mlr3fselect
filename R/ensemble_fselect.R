@@ -80,18 +80,27 @@ ensemble_fselect = function(
 
   bmr = benchmark(design, store_models = TRUE)
 
-  # extract
+
   afss = bmr$score()$learner
+
+  # extract features
   features = map(afss, function(afs) {
     afs$fselect_result$features[[1]]
   })
 
+  # extract n_features
   n_features = map_int(afss, function(afs) {
     afs$fselect_result$n_features[[1]]
   })
 
+  # extract scores
+  scores = map_dbl(afss, function(afs) {
+    afs$fselect_instance$archive$best()[, measure$id, with = FALSE][[1]]
+  })
+
   set(grid, j = "features", value = features)
   set(grid, j = "n_features", value = n_features)
+  set(grid, j = measure$id, value = scores)
 
   grid
 }
