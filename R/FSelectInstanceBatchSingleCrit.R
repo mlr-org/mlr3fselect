@@ -145,7 +145,7 @@ FSelectInstanceBatchSingleCrit = R6Class("FSelectInstanceBatchSingleCrit",
       set(xdt, j = "features", value = list(features))
       set(xdt, j = "n_features", value = length(features[[1L]]))
       super$assign_result(xdt, y)
-      set(private$.result, j = "x_domain", value = NULL)
+      if (!is.null(private$.result$x_domain)) set(private$.result, j = "x_domain", value = NULL)
     },
 
     #' @description

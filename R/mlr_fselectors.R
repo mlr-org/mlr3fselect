@@ -25,7 +25,7 @@
 #'
 #' @export
 #' @examples
-#' as.data.table(mlr_fselectors)x
+#' as.data.table(mlr_fselectors)
 #' mlr_fselectors$get("random_search")
 #' fs("random_search")
 mlr_fselectors = R6Class("DictionaryFSelector",
