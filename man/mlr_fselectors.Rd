@@ -37,6 +37,7 @@ fs("random_search")
 Sugar functions: \code{\link[=fs]{fs()}}, \code{\link[=fss]{fss()}}
 
 Other FSelector: 
+\code{\link{FSelector}},
 \code{\link{mlr_fselectors_design_points}},
 \code{\link{mlr_fselectors_exhaustive_search}},
 \code{\link{mlr_fselectors_genetic_search}},

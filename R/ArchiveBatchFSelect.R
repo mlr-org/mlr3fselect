@@ -1,10 +1,10 @@
 #' @title Class for Logging Evaluated Feature Sets
 #'
 #' @description
-#' The [ArchiveFSelect] stores all evaluated feature sets and performance scores.
+#' The [ArchiveBatchFSelect] stores all evaluated feature sets and performance scores.
 #'
 #' @details
-#' The [ArchiveFSelect] is a container around a [data.table::data.table()].
+#' The [ArchiveBatchFSelect] is a container around a [data.table::data.table()].
 #' Each row corresponds to a single evaluation of a feature set.
 #' See the section on Data Structure for more information.
 #' The archive stores additionally a [mlr3::BenchmarkResult] (`$benchmark_result`) that records the resampling experiments.
@@ -40,10 +40,10 @@
 #' Alternatively, measures can be supplied to `as.data.table()`.
 #'
 #' @section S3 Methods:
-#' * `as.data.table.ArchiveFSelect(x, exclude_columns = "uhash", measures = NULL)`\cr
+#' * `as.data.table.ArchiveBatchFSelect(x, exclude_columns = "uhash", measures = NULL)`\cr
 #' Returns a tabular view of all evaluated feature sets.\cr
-#' [ArchiveFSelect] -> [data.table::data.table()]\cr
-#'     * `x` ([ArchiveFSelect])
+#' [ArchiveBatchFSelect] -> [data.table::data.table()]\cr
+#'     * `x` ([ArchiveBatchFSelect])
 #'     * `exclude_columns` (`character()`)\cr
 #'       Exclude columns from table. Set to `NULL` if no column should be excluded.
 #'     * `measures` (list of [mlr3::Measure])\cr
@@ -52,8 +52,8 @@
 #' @template param_ties_method
 #'
 #' @export
-ArchiveFSelect = R6Class("ArchiveFSelect",
-  inherit = Archive,
+ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
+  inherit = ArchiveBatch,
 
   public = list(
 
@@ -212,7 +212,7 @@ ArchiveFSelect = R6Class("ArchiveFSelect",
 )
 
 #' @export
-as.data.table.ArchiveFSelect = function(x, ..., exclude_columns = "uhash", measures = NULL) {
+as.data.table.ArchiveBatchFSelect = function(x, ..., exclude_columns = "uhash", measures = NULL) {
   if (nrow(x$data) == 0) return(data.table())
   # always ignore x_domain column
   exclude_columns = c("x_domain", exclude_columns)

@@ -18,8 +18,8 @@
 #' @family FSelector
 #' @export
 #' @template example
-FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
-  inherit = FSelector,
+FSelectorBatchGeneticSearch = R6Class("FSelectorBatchGeneticSearch",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -57,4 +57,4 @@ FSelectorGeneticSearch = R6Class("FSelectorGeneticSearch",
   )
 )
 
-mlr_fselectors$add("genetic_search", FSelectorGeneticSearch)
+mlr_fselectors$add("genetic_search", FSelectorBatchGeneticSearch)

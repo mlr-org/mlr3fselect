@@ -3,15 +3,15 @@
 # mlr3fselect 0.12.0
 
 * feat: Add number of features to `instance$result`.
-* feat: Add `ties_method` options `"least_features"` and `"random"` to `ArchiveFSelect$best()`.
-* refactor: Optimize runtime of `ArchiveFSelect$best()` method.
+* feat: Add `ties_method` options `"least_features"` and `"random"` to `ArchiveBatchFSelect$best()`.
+* refactor: Optimize runtime of `ArchiveBatchFSelect$best()` method.
 * feat: Add importance scores to result of `FSelectorRFE`.
-* feat: Add number of features to `as.data.table.ArchiveFSelect()`.
+* feat: Add number of features to `as.data.table.ArchiveBatchFSelect()`.
 * feat: Features can be always included with the `always_include` column role.
 * fix: Add `$phash()` method to `AutoFSelector`.
 * fix: Include `FSelector` in hash of  `AutoFSelector`.
-* refactor: Change default batch size of `FSelectorRandomSearch` to 10.
-* feat: Add `batch_size` parameter to `FSelectorExhaustiveSearch` to reduce memory consumption.
+* refactor: Change default batch size of `FSelectorBatchRandomSearch` to 10.
+* feat: Add `batch_size` parameter to `FSelectorBatchExhaustiveSearch` to reduce memory consumption.
 * compatibility: Work with new paradox version 1.0.0
 
 # mlr3fselect 0.11.0
@@ -29,7 +29,7 @@
 * refactor: The importance scores in `FSelectorRFE` are now aggregated by rank instead of averaging them.
 * feat: Add `FSelectorRFECV` optimizer to run recursive feature elimination with cross-validation.
 * refactor: `FSelectorRFE` works without `store_models = TRUE` now.
-* feat: The `as.data.table.ArchiveFSelect()` function additionally returns a character vector of selected features for each row.
+* feat: The `as.data.table.ArchiveBatchFSelect()` function additionally returns a character vector of selected features for each row.
 * refactor: Add `callbacks` argument to `fsi()` function.
 
 # mlr3fselect 0.9.1
@@ -39,9 +39,9 @@
 
 # mlr3fselect 0.9.0
 
-* fix: Add `genalg` to required packages of `FSelectorGeneticSearch`.
+* fix: Add `genalg` to required packages of `FSelectorBatchGeneticSearch`.
 * feat: Add new callback that backups the benchmark result to disk after each batch.
-* feat: Create custom callbacks with the `callback_fselect()` function.
+* feat: Create custom callbacks with the `callback_batch_fselect()` function.
 
 # mlr3fselect 0.8.0
 
@@ -49,8 +49,8 @@
 * refactor: The `AutoFSelector` stores the instance and benchmark result if `store_models = TRUE`.
 * refactor: The `AutoFSelector` stores the instance if `store_benchmark_result = TRUE`.
 * feat: Add missing parameters from `AutoFSelector` to `auto_fselect()`.
-* feat: Add `fsi()` function to create a `FSelectInstanceSingleCrit` or `FSelectInstanceMultiCrit`.
-* refactor: Remove `unnest` option from `as.data.table.ArchiveFSelect()` function.
+* feat: Add `fsi()` function to create a `FSelectInstanceBatchSingleCrit` or `FSelectInstanceBatchMultiCrit`.
+* refactor: Remove `unnest` option from `as.data.table.ArchiveBatchFSelect()` function.
 
 # mlr3fselect 0.7.2
 
@@ -67,7 +67,7 @@
 * docs: New examples with `fselect()` function.
 * feat: `$help()` method which opens manual page of a `FSelector`.
 * feat: Added a `as.data.table.DictionaryFSelector` function.
-* feat: Added `min_features` parameter to `FSelectorSequential`.
+* feat: Added `min_features` parameter to `FSelectorBatchSequential`.
 
 # mlr3fselect 0.6.1
 
@@ -90,7 +90,7 @@
 
 * `FSelectorRFE` stores importance values of each evaluated feature set in
   archive.
-* `ArchiveFSelect$data` is a public field now.
+* `ArchiveBatchFSelect$data` is a public field now.
 
 # mlr3fselect 0.4.1
 
@@ -110,15 +110,15 @@
 * Option to control `store_benchmark_result`, `store_models` and `check_values`
   in `AutoFSelector`. `store_fselect_instance` must be set as a parameter during
   initialization.
-* Adds `FSelectorGeneticSearch`.
-* Fixes `check_values` flag in `FSelectInstanceSingleCrit` and
-  `FSelectInstanceMultiCrit`.
+* Adds `FSelectorBatchGeneticSearch`.
+* Fixes `check_values` flag in `FSelectInstanceBatchSingleCrit` and
+  `FSelectInstanceBatchMultiCrit`.
 * Removed dependency on orphaned package `bibtex`.
 * `PipeOpSelect` is internally used for task subsetting.
 
 # mlr3fselect 0.3.0
 
-* `Archive` is `ArchiveFSelect` now which stores the benchmark result in
+* `Archive` is `ArchiveBatchFSelect` now which stores the benchmark result in
   `$benchmark_result`. This change removed the resample results from the archive
   but they can be still accessed via the benchmark result.
 

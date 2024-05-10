@@ -24,7 +24,7 @@
 #' Averaging the scores is not appropriate for most importance measures.
 #'
 #' @section Archive:
-#' The [ArchiveFSelect] holds the following additional columns:
+#' The [ArchiveBatchFSelect] holds the following additional columns:
 #'  * `"importance"` (`numeric()`)\cr
 #'    The importance score vector of the feature subset.
 #'
@@ -91,8 +91,8 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorRFE = R6Class("FSelectorRFE",
-  inherit = FSelector,
+FSelectorBatchRFE = R6Class("FSelectorBatchRFE",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -153,7 +153,7 @@ FSelectorRFE = R6Class("FSelectorRFE",
     },
 
     .assign_result = function(inst) {
-      assert_class(inst, "FSelectInstanceSingleCrit")
+      assert_class(inst, "FSelectInstanceBatchSingleCrit")
       res = inst$archive$best()
 
       xdt = res[, c(inst$search_space$ids(), "importance"), with = FALSE]
@@ -271,4 +271,4 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
   if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
 }
 
-mlr_fselectors$add("rfe", FSelectorRFE)
+mlr_fselectors$add("rfe", FSelectorBatchRFE)

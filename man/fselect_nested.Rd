@@ -18,7 +18,7 @@ fselect_nested(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
+  callbacks = NULL,
   ties_method = "least_features"
 )
 }
@@ -53,7 +53,7 @@ Ignored if \code{terminator} is passed.}
 Stop criterion of the feature selection.}
 
 \item{store_fselect_instance}{(\code{logical(1)})\cr
-If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
+If \code{TRUE} (default), stores the internally created \link{FSelectInstanceBatchSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
 Is set to \code{TRUE}, if \code{store_models = TRUE}}
 
 \item{store_benchmark_result}{(\code{logical(1)})\cr
@@ -66,7 +66,7 @@ Store models in benchmark result?}
 Check the parameters before the evaluation and the results for
 validity?}
 
-\item{callbacks}{(list of \link{CallbackFSelect})\cr
+\item{callbacks}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
 
 \item{ties_method}{(\code{character(1)})\cr

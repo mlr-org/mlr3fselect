@@ -73,7 +73,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
     store_models = TRUE)
   at$train(task)
 
-  expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
+  expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
   expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
 
@@ -82,7 +82,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
     store_models = FALSE)
   at$train(task)
 
-  expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
+  expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
   expect_null(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model)
 
@@ -91,7 +91,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
     store_models = FALSE)
   at$train(task)
 
-  expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
+  expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_equal(at$fselect_instance$archive$benchmark_result$n_resample_results, 0L)
 
   at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
@@ -106,7 +106,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
     store_models = TRUE)
   at$train(task)
 
-  expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
+  expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
   expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
 
@@ -115,7 +115,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
     store_models = FALSE)
   at$train(task)
 
-  expect_r6(at$fselect_instance, "FSelectInstanceSingleCrit")
+  expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
   expect_null(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model)
 })

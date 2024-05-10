@@ -24,8 +24,8 @@
 #' @family FSelector
 #' @export
 #' @template example
-FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
-  inherit = FSelector,
+FSelectorBatchExhaustiveSearch = R6Class("FSelectorBatchExhaustiveSearch",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -66,4 +66,4 @@ FSelectorExhaustiveSearch = R6Class("FSelectorExhaustiveSearch",
   )
 )
 
-mlr_fselectors$add("exhaustive_search", FSelectorExhaustiveSearch)
+mlr_fselectors$add("exhaustive_search", FSelectorBatchExhaustiveSearch)

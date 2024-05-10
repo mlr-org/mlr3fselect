@@ -1,4 +1,4 @@
-#' @title FSelectorFromOptimizer
+#' @title FSelectorBatchFromOptimizerBatch
 #'
 #' @description
 #' Internally used to transform [bbotk::Optimizer] to [FSelector].
@@ -7,8 +7,8 @@
 #'
 #' @keywords internal
 #' @export
-FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
-  inherit = FSelector,
+FSelectorBatchFromOptimizerBatch= R6Class("FSelectorBatchFromOptimizerBatch",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -32,17 +32,17 @@ FSelectorFromOptimizer = R6Class("FSelectorFromOptimizer",
     },
 
     #' @description
-    #' Performs the feature selection on a [FSelectInstanceSingleCrit] /
-    #' [FSelectInstanceMultiCrit] until termination.
+    #' Performs the feature selection on a [FSelectInstanceBatchSingleCrit] /
+    #' [FSelectInstanceBatchMultiCrit] until termination.
     #'
-    #' @param inst ([FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit]).
+    #' @param inst ([FSelectInstanceBatchSingleCrit] | [FSelectInstanceBatchMultiCrit]).
     #'
     #' @return [data.table::data.table].
     optimize = function(inst) {
       # We check for both classes since there is no FSelectInstance super
       # class anymore and OptimInstance would not ensure that we are in the
       # scope of mlr3fselect
-      assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))
+      assert_fselect_instance_batch(inst)
       private$.optimizer$optimize(inst)
     }
   ),
