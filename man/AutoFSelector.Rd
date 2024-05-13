@@ -99,7 +99,7 @@ rr$aggregate()
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{instance_args}}{(\code{list()})\cr
-All arguments from construction to create the \link{FSelectInstanceSingleCrit}.}
+All arguments from construction to create the \link{FSelectInstanceBatchSingleCrit}.}
 
 \item{\code{fselector}}{(\link{FSelector})\cr
 Optimization algorithm.}
@@ -109,17 +109,17 @@ Optimization algorithm.}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{archive}}{([ArchiveFSelect)\cr
-Returns \link{FSelectInstanceSingleCrit} archive.}
+\item{\code{archive}}{([ArchiveBatchFSelect)\cr
+Returns \link{FSelectInstanceBatchSingleCrit} archive.}
 
 \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Trained learner.}
 
-\item{\code{fselect_instance}}{(\link{FSelectInstanceSingleCrit})\cr
+\item{\code{fselect_instance}}{(\link{FSelectInstanceBatchSingleCrit})\cr
 Internally created feature selection instance with all intermediate results.}
 
 \item{\code{fselect_result}}{(\link[data.table:data.table]{data.table::data.table})\cr
-Short-cut to \verb{$result} from \link{FSelectInstanceSingleCrit}.}
+Short-cut to \verb{$result} from \link{FSelectInstanceBatchSingleCrit}.}
 
 \item{\code{predict_type}}{(\code{character(1)})\cr
 Stores the currently active predict type, e.g. \code{"response"}.
@@ -149,6 +149,7 @@ Hash (unique identifier) for this partial object, excluding some components whic
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="estimate_memory_usage"><a href='../../mlr3/html/Learner.html#method-Learner-estimate_memory_usage'><code>mlr3::Learner$estimate_memory_usage()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
@@ -174,7 +175,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
+  callbacks = NULL,
   ties_method = "least_features"
 )}\if{html}{\out{</div>}}
 }
@@ -200,7 +201,7 @@ Measure to optimize. If \code{NULL}, default measure is used.}
 Stop criterion of the feature selection.}
 
 \item{\code{store_fselect_instance}}{(\code{logical(1)})\cr
-If \code{TRUE} (default), stores the internally created \link{FSelectInstanceSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
+If \code{TRUE} (default), stores the internally created \link{FSelectInstanceBatchSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
 Is set to \code{TRUE}, if \code{store_models = TRUE}}
 
 \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
@@ -213,7 +214,7 @@ Store models in benchmark result?}
 Check the parameters before the evaluation and the results for
 validity?}
 
-\item{\code{callbacks}}{(list of \link{CallbackFSelect})\cr
+\item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
 
 \item{\code{ties_method}}{(\code{character(1)})\cr

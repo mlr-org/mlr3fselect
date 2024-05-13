@@ -2,39 +2,13 @@
 % Please edit documentation in R/FSelector.R
 \name{FSelector}
 \alias{FSelector}
-\title{Class for Feature Selection Algorithms}
+\title{FSelector}
 \description{
-The \link{FSelector} implements the optimization algorithm.
+The `FSelector`` implements the optimization algorithm.
 }
 \details{
-\link{FSelector} is an abstract base class that implements the base functionality each fselector must provide.
-A subclass is implemented in the following way:
-\itemize{
-\item Inherit from FSelector.
-\item Specify the private abstract method \verb{$.optimize()} and use it to call into your optimizer.
-\item You need to call \code{instance$eval_batch()} to evaluate design points.
-\item The batch evaluation is requested at the \link{FSelectInstanceSingleCrit}/\link{FSelectInstanceMultiCrit} object \code{instance}, so each batch is possibly executed in parallel via \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, and all evaluations are stored inside of \code{instance$archive}.
-\item Before the batch evaluation, the \link[bbotk:Terminator]{bbotk::Terminator} is checked, and if it is positive, an exception of class \code{"terminated_error"} is generated.
-In the latter case the current batch of evaluations is still stored in \code{instance}, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
-\item After such an exception was caught we select the best set from \code{instance$archive} and return it.
-\item Note that therefore more points than specified by the \link[bbotk:Terminator]{bbotk::Terminator} may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
-How many more depends on the setting of the batch size.
-\item Overwrite the private super-method \code{.assign_result()} if you want to decide how to estimate the final set in the instance and its estimated performance.
-The default behavior is: We pick the best resample experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
+\code{FSelector} is an abstract base class that implements the base functionality each fselector must provide.
 }
-}
-\section{Private Methods}{
-
-\itemize{
-\item \code{.optimize(instance)} -> \code{NULL}\cr
-Abstract base method. Implement to specify feature selection of your subclass.
-See technical details sections.
-\item \code{.assign_result(instance)} -> \code{NULL}\cr
-Abstract base method. Implement to specify how the final feature subset is selected.
-See technical details sections.
-}
-}
-
 \section{Resources}{
 
 There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
@@ -49,6 +23,19 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 }
 }
 
+\seealso{
+Other FSelector: 
+\code{\link{mlr_fselectors}},
+\code{\link{mlr_fselectors_design_points}},
+\code{\link{mlr_fselectors_exhaustive_search}},
+\code{\link{mlr_fselectors_genetic_search}},
+\code{\link{mlr_fselectors_random_search}},
+\code{\link{mlr_fselectors_rfe}},
+\code{\link{mlr_fselectors_rfecv}},
+\code{\link{mlr_fselectors_sequential}},
+\code{\link{mlr_fselectors_shadow_variable_search}}
+}
+\concept{FSelector}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
@@ -89,7 +76,6 @@ The referenced help package can be opened via method \verb{$help()}.}
 \item \href{#method-FSelector-format}{\code{FSelector$format()}}
 \item \href{#method-FSelector-print}{\code{FSelector$print()}}
 \item \href{#method-FSelector-help}{\code{FSelector$help()}}
-\item \href{#method-FSelector-optimize}{\code{FSelector$optimize()}}
 \item \href{#method-FSelector-clone}{\code{FSelector$clone()}}
 }
 }
@@ -179,28 +165,6 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \if{html}{\out{<div class="r">}}\preformatted{FSelector$help()}\if{html}{\out{</div>}}
 }
 
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelector-optimize"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelector-optimize}{}}}
-\subsection{Method \code{optimize()}}{
-Performs the feature selection on a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} until termination.
-The single evaluations will be written into the \link{ArchiveFSelect} that resides in the \link{FSelectInstanceSingleCrit} / \link{FSelectInstanceMultiCrit}.
-The result will be written into the instance object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$optimize(inst)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inst}}{(\link{FSelectInstanceSingleCrit} | \link{FSelectInstanceMultiCrit}).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{\link[data.table:data.table]{data.table::data.table()}}.
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelector-clone"></a>}}

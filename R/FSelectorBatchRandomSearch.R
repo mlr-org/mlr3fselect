@@ -56,8 +56,8 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
-  inherit = FSelector,
+FSelectorBatchRandomSearch = R6Class("FSelectorBatchRandomSearch",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -98,4 +98,4 @@ FSelectorRandomSearch = R6Class("FSelectorRandomSearch",
   )
 )
 
-mlr_fselectors$add("random_search", FSelectorRandomSearch)
+mlr_fselectors$add("random_search", FSelectorBatchRandomSearch)

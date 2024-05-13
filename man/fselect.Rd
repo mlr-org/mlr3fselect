@@ -16,7 +16,7 @@ fselect(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
+  callbacks = NULL,
   ties_method = "least_features"
 )
 }
@@ -36,7 +36,7 @@ Uninstantiated resamplings are instantiated during construction so that all feat
 Already instantiated resamplings are kept unchanged.}
 
 \item{measures}{(\link[mlr3:Measure]{mlr3::Measure} or list of \link[mlr3:Measure]{mlr3::Measure})\cr
-A single measure creates a \link{FSelectInstanceSingleCrit} and multiple measures a \link{FSelectInstanceMultiCrit}.
+A single measure creates a \link{FSelectInstanceBatchSingleCrit} and multiple measures a \link{FSelectInstanceBatchMultiCrit}.
 If \code{NULL}, default measure is used.}
 
 \item{term_evals}{(\code{integer(1)})\cr
@@ -60,7 +60,7 @@ Store models in benchmark result?}
 Check the parameters before the evaluation and the results for
 validity?}
 
-\item{callbacks}{(list of \link{CallbackFSelect})\cr
+\item{callbacks}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
 
 \item{ties_method}{(\code{character(1)})\cr
@@ -72,17 +72,17 @@ The \code{random} method returns a random feature set from the best feature sets
 Ignored if multiple measures are used.}
 }
 \value{
-\link{FSelectInstanceSingleCrit} | \link{FSelectInstanceMultiCrit}
+\link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}
 }
 \description{
 Function to optimize the features of a \link[mlr3:Learner]{mlr3::Learner}.
-The function internally creates a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit} which describes the feature selection problem.
+The function internally creates a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit} which describes the feature selection problem.
 It executes the feature selection with the \link{FSelector} (\code{method}) and returns the result with the fselect instance (\verb{$result}).
-The \link{ArchiveFSelect} (\verb{$archive}) stores all evaluated hyperparameter configurations and performance scores.
+The \link{ArchiveBatchFSelect} (\verb{$archive}) stores all evaluated hyperparameter configurations and performance scores.
 }
 \details{
-The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link{Terminator} are used to construct a \link{FSelectInstanceSingleCrit}.
-If multiple performance \link[=Measure]{Measures} are supplied, a \link{FSelectInstanceMultiCrit} is created.
+The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link{Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
+If multiple performance \link[=Measure]{Measures} are supplied, a \link{FSelectInstanceBatchMultiCrit} is created.
 The parameter \code{term_evals} and \code{term_time} are shortcuts to create a \link{Terminator}.
 If both parameters are passed, a \link{TerminatorCombo} is constructed.
 For other \link[=Terminator]{Terminators}, pass one with \code{terminator}.

@@ -6,7 +6,7 @@ TEST_MAKE_TSK = function(n = 4L) {
 
 TEST_MAKE_INST_1D = function(n = 4L, folds = 2L, store_models = TRUE, store_benchmark_result = TRUE,
   measure = msr("dummy"), terminator = trm("evals", n_evals = 10)) {
-  FSelectInstanceSingleCrit$new(
+  FSelectInstanceBatchSingleCrit$new(
     task = TEST_MAKE_TSK(n),
     learner = lrn("regr.rpart"),
     resampling = rsmp("cv", folds = folds),
@@ -17,7 +17,7 @@ TEST_MAKE_INST_1D = function(n = 4L, folds = 2L, store_models = TRUE, store_benc
 }
 
 TEST_MAKE_INST_2D = function(n = 4L, folds = 2L, store_models = FALSE, store_benchmark_result = TRUE) {
-  FSelectInstanceMultiCrit$new(
+  FSelectInstanceBatchMultiCrit$new(
     task = TEST_MAKE_TSK(n),
     learner = lrn("regr.rpart"),
     resampling = rsmp("cv", folds = folds),

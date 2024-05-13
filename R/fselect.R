@@ -1,29 +1,29 @@
 #' @title Function for Feature Selection
 #'
-#' @include FSelectInstanceSingleCrit.R ArchiveFSelect.R
+#' @include FSelectInstanceBatchSingleCrit.R ArchiveBatchFSelect.R
 #'
 #' @description
 #' Function to optimize the features of a [mlr3::Learner].
-#' The function internally creates a [FSelectInstanceSingleCrit] or [FSelectInstanceMultiCrit] which describes the feature selection problem.
+#' The function internally creates a [FSelectInstanceBatchSingleCrit] or [FSelectInstanceBatchMultiCrit] which describes the feature selection problem.
 #' It executes the feature selection with the [FSelector] (`method`) and returns the result with the fselect instance (`$result`).
-#' The [ArchiveFSelect] (`$archive`) stores all evaluated hyperparameter configurations and performance scores.
+#' The [ArchiveBatchFSelect] (`$archive`) stores all evaluated hyperparameter configurations and performance scores.
 #'
 #' @details
-#' The [mlr3::Task], [mlr3::Learner], [mlr3::Resampling], [mlr3::Measure] and [Terminator] are used to construct a [FSelectInstanceSingleCrit].
-#' If multiple performance [Measures][Measure] are supplied, a [FSelectInstanceMultiCrit] is created.
+#' The [mlr3::Task], [mlr3::Learner], [mlr3::Resampling], [mlr3::Measure] and [Terminator] are used to construct a [FSelectInstanceBatchSingleCrit].
+#' If multiple performance [Measures][Measure] are supplied, a [FSelectInstanceBatchMultiCrit] is created.
 #' The parameter `term_evals` and `term_time` are shortcuts to create a [Terminator].
 #' If both parameters are passed, a [TerminatorCombo] is constructed.
 #' For other [Terminators][Terminator], pass one with `terminator`.
 #' If no termination criterion is needed, set `term_evals`, `term_time` and `terminator` to `NULL`.
 #'
-#' @inheritSection FSelectInstanceSingleCrit Resources
-#' @inheritSection ArchiveFSelect Analysis
+#' @inheritSection FSelectInstanceBatchSingleCrit Resources
+#' @inheritSection ArchiveBatchFSelect Analysis
 #'
 #' @param measures ([mlr3::Measure] or list of [mlr3::Measure])\cr
-#'   A single measure creates a [FSelectInstanceSingleCrit] and multiple measures a [FSelectInstanceMultiCrit].
+#'   A single measure creates a [FSelectInstanceBatchSingleCrit] and multiple measures a [FSelectInstanceBatchMultiCrit].
 #'   If `NULL`, default measure is used.
 #'
-#' @return [FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit]
+#' @return [FSelectInstanceBatchSingleCrit] | [FSelectInstanceBatchMultiCrit]
 #'
 #' @template param_fselector
 #' @template param_task
@@ -73,14 +73,14 @@ fselect = function(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
+  callbacks = NULL,
   ties_method = "least_features"
   ) {
   assert_fselector(fselector)
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
   instance = if (!is.list(measures)) {
-    FSelectInstanceSingleCrit$new(
+    FSelectInstanceBatchSingleCrit$new(
       task = task,
       learner = learner,
       resampling = resampling,
@@ -92,7 +92,7 @@ fselect = function(
       callbacks = callbacks,
       ties_method = ties_method)
   } else {
-    FSelectInstanceMultiCrit$new(
+    FSelectInstanceBatchMultiCrit$new(
       task = task,
       learner = learner,
       resampling = resampling,
