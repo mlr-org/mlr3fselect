@@ -13,37 +13,43 @@
     <loc>https://mlr3fselect.mlr-org.com/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ArchiveFSelect.html</loc>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ArchiveBatchFSelect.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/AutoFSelector.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/CallbackFSelect.html</loc>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/CallbackBatchFSelect.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ContextEval.html</loc>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ContextBatchFSelect.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceMultiCrit.html</loc>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchMultiCrit.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceSingleCrit.html</loc>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchSingleCrit.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorFromOptimizer.html</loc>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatchFromOptimizerBatch.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.html</loc>
   </url>
   <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelectBatch.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/auto_fselector.html</loc>
   </url>
   <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/callback_fselect.html</loc>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/callback_batch_fselect.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.html</loc>
@@ -77,6 +83,9 @@
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.svm_rfe.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.html</loc>
   </url>
   <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors.html</loc>
