@@ -13,8 +13,9 @@
 #' robust feature selection.
 #'
 #' For each subsample generated in the previous step, the method performs
-#' **wrapped-based feature selection** using each provided learner, an inner
-#' resampling method and a performance measure.
+#' **wrapped-based feature selection** ([auto_fselector]) using each provided
+#' learner, the given inner resampling method, performance measure and
+#' optimization algorithm.
 #' This process generates a best feature subset for each combination of
 #' subsample and learner.
 #' Results are stored in a [data.table] object.
@@ -27,6 +28,8 @@
 #'  Can only be [mlr_resamplings_subsampling] or [mlr_resamplings_bootstrap].
 #' @param inner_resampling ([mlr3::Resampling])\cr
 #'  The inner resampling strategy used by the [FSelector].
+#' @param store_model (`logical(1)`)\cr
+#'  Whether to store models in [auto_fselector] or not.
 #'
 #' @template param_fselector
 #' @template param_task
@@ -37,7 +40,6 @@
 #' @export
 #' @examples
 #' \donttest{
-#'
 #'   ensemble_fselect(
 #'     fselector = fs("random_search"),
 #'     task = tsk("sonar"),
@@ -45,7 +47,7 @@
 #'     init_resampling = rsmp("subsampling", repeats = 2),
 #'     inner_resampling = rsmp("cv", folds = 3),
 #'     measure = msr("classif.ce"),
-#'     terminator = trm("evals", n_evals = 10)
+#'     terminator = trm("evals", n_evals = 5)
 #'   )
 #' }
 ensemble_fselect = function(
