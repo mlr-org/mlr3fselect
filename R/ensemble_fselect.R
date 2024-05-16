@@ -47,7 +47,7 @@
 #'     init_resampling = rsmp("subsampling", repeats = 2),
 #'     inner_resampling = rsmp("cv", folds = 3),
 #'     measure = msr("classif.ce"),
-#'     terminator = trm("evals", n_evals = 5)
+#'     terminator = trm("evals", n_evals = 10)
 #'   )
 #' }
 ensemble_fselect = function(
