@@ -28,7 +28,7 @@
 #'  Can only be [mlr_resamplings_subsampling] or [mlr_resamplings_bootstrap].
 #' @param inner_resampling ([mlr3::Resampling])\cr
 #'  The inner resampling strategy used by the [FSelector].
-#' @param store_model (`logical(1)`)\cr
+#' @param store_models (`logical(1)`)\cr
 #'  Whether to store models in [auto_fselector] or not.
 #'
 #' @template param_fselector

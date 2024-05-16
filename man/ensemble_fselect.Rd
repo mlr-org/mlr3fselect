@@ -43,7 +43,7 @@ Stop criterion of the feature selection.}
 \item{callbacks}{(list of \link{CallbackFSelect})\cr
 List of callbacks.}
 
-\item{store_model}{(\code{logical(1)})\cr
+\item{store_models}{(\code{logical(1)})\cr
 Whether to store models in \link{auto_fselector} or not.}
 }
 \description{
