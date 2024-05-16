@@ -122,5 +122,13 @@ ensemble_fselect = function(
   set(grid, j = "n_features", value = n_features)
   set(grid, j = measure$id, value = scores)
 
+  # extract importance scores if RFE optimization was used
+  if (class(fselector)[1] == "FSelectorRFE") {
+    imp_scores = map(afss, function(afs) {
+      afs$fselect_result$importance[[1]]
+    })
+    set(grid, j = "importance", value = imp_scores)
+  }
+
   grid
 }
