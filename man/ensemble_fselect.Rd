@@ -42,6 +42,9 @@ Stop criterion of the feature selection.}
 
 \item{callbacks}{(list of \link{CallbackFSelect})\cr
 List of callbacks.}
+
+\item{store_model}{(\code{logical(1)})\cr
+Whether to store models in \link{auto_fselector} or not.}
 }
 \description{
 Ensemble feature selection using multiple learners.
@@ -51,19 +54,20 @@ machine learning models and resampling techniques.
 }
 \details{
 The method begins by applying an initial resampling technique specified
-by the user, to create multiple subsamples from the original dataset.
+by the user, to create \strong{multiple subsamples} from the original dataset.
 This resampling process helps in generating diverse subsets of data for
 robust feature selection.
+
 For each subsample generated in the previous step, the method performs
-wrapped-based feature selection using each provided learner, an inner
-resampling method and a performance measure.
+\strong{wrapped-based feature selection} (\link{auto_fselector}) using each provided
+learner, the given inner resampling method, performance measure and
+optimization algorithm.
 This process generates a best feature subset for each combination of
 subsample and learner.
-All the results are stored in a \link{data.table} object.
+Results are stored in a \link{data.table} object.
 }
 \examples{
 \donttest{
-
   ensemble_fselect(
     fselector = fs("random_search"),
     task = tsk("sonar"),
