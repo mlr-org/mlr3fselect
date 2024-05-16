@@ -1,5 +1,7 @@
 #' @title Ensemble Feature Selection
 #'
+#' @include CallbackFSelect.R
+#'
 #' @description
 #' Ensemble feature selection using multiple learners.
 #' The ensemble feature selection method is designed to identify the
@@ -67,7 +69,7 @@ ensemble_fselect = function(
   assert_choice(class(init_resampling)[1],
                 choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
 
-  # create fselector for each learner
+  # create auto_fselector for each learner
   afss = map(learners, function(learner) {
     auto_fselector(
       fselector = fselector,
