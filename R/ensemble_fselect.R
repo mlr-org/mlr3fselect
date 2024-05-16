@@ -2,12 +2,29 @@
 #'
 #' @description
 #' Ensemble feature selection using multiple learners.
+#' The ensemble feature selection method is designed to identify the
+#' most informative features from a given dataset by leveraging multiple
+#' machine learning models and resampling techniques.
+#'
+#' @details
+#' The method begins by applying an initial resampling technique specified
+#' by the user, to create **multiple subsamples** from the original dataset.
+#' This resampling process helps in generating diverse subsets of data for
+#' robust feature selection.
+#'
+#' For each subsample generated in the previous step, the method performs
+#' **wrapped-based feature selection** using each provided learner, an inner
+#' resampling method and a performance measure.
+#' This process generates a best feature subset for each combination of
+#' subsample and learner.
+#' Results are stored in a [data.table] object.
 #'
 #' @param learners (list of [mlr3::Learner])\cr
 #'  The learners to be used for feature selection.
-#' @param outer_resampling ([mlr3::Resampling])\cr
-#'  The outer resampling strategy.
-#'  The number of iterations must match the number of learners.
+#' @param init_resampling ([mlr3::Resampling])\cr
+#'  The initial resampling strategy of the data, from which each train set
+#'  will be passed on to the learners.
+#'  Can only be [mlr_resamplings_subsampling] or [mlr_resamplings_bootstrap].
 #' @param inner_resampling ([mlr3::Resampling])\cr
 #'  The inner resampling strategy used by the [FSelector].
 #'
@@ -25,7 +42,7 @@
 #'     fselector = fs("random_search"),
 #'     task = tsk("sonar"),
 #'     learners = lrns(c("classif.rpart", "classif.featureless")),
-#'     outer_resampling = rsmp("subsampling", repeats = 2),
+#'     init_resampling = rsmp("subsampling", repeats = 2),
 #'     inner_resampling = rsmp("cv", folds = 3),
 #'     measure = msr("classif.ce"),
 #'     terminator = trm("evals", n_evals = 10)
@@ -35,7 +52,7 @@ ensemble_fselect = function(
   fselector,
   task,
   learners,
-  outer_resampling,
+  init_resampling,
   inner_resampling,
   measure,
   terminator,
@@ -44,7 +61,9 @@ ensemble_fselect = function(
   ) {
   assert_task(task)
   assert_learners(as_learners(learners), task = task)
-  assert_resampling(outer_resampling)
+  assert_resampling(init_resampling)
+  assert_choice(class(init_resampling)[1],
+                choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
 
   # create fselector for each learner
   afss = map(learners, function(learner) {
@@ -59,11 +78,11 @@ ensemble_fselect = function(
     )
   })
 
-  outer_resampling$instantiate(task)
-  grid = map_dtr(seq(outer_resampling$iters), function(i) {
+  init_resampling$instantiate(task)
+  grid = map_dtr(seq(init_resampling$iters), function(i) {
 
     # create task and resampling for each outer iteration
-    task_subset = task$clone()$filter(outer_resampling$train_set(i))
+    task_subset = task$clone()$filter(init_resampling$train_set(i))
     resampling = rsmp("insample")$instantiate(task_subset)
 
     data.table(
@@ -79,7 +98,6 @@ ensemble_fselect = function(
   design = grid[, c("learner", "task", "resampling"), with = FALSE]
 
   bmr = benchmark(design, store_models = TRUE)
-
 
   afss = bmr$score()$learner
 
