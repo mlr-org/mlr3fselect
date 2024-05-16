@@ -89,8 +89,7 @@ ensemble_fselect = function(
 
     data.table(
       iter = i,
-      base_learner_id = map(learners, "id"),
-      base_learner = learners,
+      learner_id = map(learners, "id"),
       learner = afss,
       task = list(task_subset),
       resampling = list(resampling)
@@ -118,6 +117,7 @@ ensemble_fselect = function(
     afs$fselect_instance$archive$best()[, measure$id, with = FALSE][[1]]
   })
 
+  set(grid, j = "iter", value = 1:bmr$n_resample_results)
   set(grid, j = "features", value = features)
   set(grid, j = "n_features", value = n_features)
   set(grid, j = measure$id, value = scores)
