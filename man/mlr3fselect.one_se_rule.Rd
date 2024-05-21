@@ -12,7 +12,9 @@ ISBN 978-1-4614-6849-3.
 }
 \description{
 Selects the smallest feature set within one standard error of the best as the result.
-If there are multiple feature sets with the same performance and number of features, the first one is selected.
+If there are multiple such feature sets with the same number of features, the first one is selected.
+If the sets have exactly the same performance but different number of features,
+the one with the smallest number of features is selected.
 }
 \examples{
 clbk("mlr3fselect.one_se_rule")
