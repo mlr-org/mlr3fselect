@@ -40,7 +40,7 @@ Measure to optimize. If \code{NULL}, default measure is used.}
 \item{terminator}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}
 
-\item{callbacks}{(list of \link{CallbackFSelect})\cr
+\item{callbacks}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
 
 \item{store_models}{(\code{logical(1)})\cr
