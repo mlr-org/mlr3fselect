@@ -25,12 +25,12 @@ Depends:
     mlr3 (>= 0.12.0),
     R (>= 3.1.0)
 Imports:
-    bbotk (>= 0.7.2),
+    bbotk (>= 0.8.0.9000),
     checkmate (>= 2.0.0),
     data.table,
     lgr,
-    mlr3misc (>= 0.9.4),
-    paradox (>= 0.7.0),
+    mlr3misc (>= 0.15.0.9000),
+    paradox (>= 1.0.0),
     R6
 Suggests:
     e1071,
@@ -39,6 +39,10 @@ Suggests:
     mlr3pipelines,
     rpart,
     testthat (>= 3.0.0)
+Remotes:
+    mlr-org/bbotk,
+    mlr-org/paradox,
+    mlr-org/mlr3misc
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
@@ -47,24 +51,26 @@ NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Collate:
-    'ArchiveFSelect.R'
+    'ArchiveBatchFSelect.R'
     'AutoFSelector.R'
-    'CallbackFSelect.R'
-    'ContextEval.R'
-    'FSelectInstanceSingleCrit.R'
-    'FSelectInstanceMultiCrit.R'
+    'CallbackBatchFSelect.R'
+    'ContextBatchFSelect.R'
+    'FSelectInstanceBatchSingleCrit.R'
+    'FSelectInstanceBatchMultiCrit.R'
     'mlr_fselectors.R'
     'FSelector.R'
-    'FSelectorDesignPoints.R'
-    'FSelectorExhaustiveSearch.R'
-    'FSelectorFromOptimizer.R'
-    'FSelectorGeneticSearch.R'
-    'FSelectorRFE.R'
-    'FSelectorRFECV.R'
-    'FSelectorRandomSearch.R'
-    'FSelectorSequential.R'
-    'FSelectorShadowVariableSearch.R'
+    'FSelectorBatch.R'
+    'FSelectorBatchDesignPoints.R'
+    'FSelectorBatchExhaustiveSearch.R'
+    'FSelectorBatchFromOptimizerBatch.R'
+    'FSelectorBatchGeneticSearch.R'
+    'FSelectorBatchRFE.R'
+    'FSelectorBatchRFECV.R'
+    'FSelectorBatchRandomSearch.R'
+    'FSelectorBatchSequential.R'
+    'FSelectorBatchShadowVariableSearch.R'
     'ObjectiveFSelect.R'
+    'ObjectiveFSelectBatch.R'
     'assertions.R'
     'auto_fselector.R'
     'bibentries.R'

@@ -1,12 +1,12 @@
-test_that("ObjectiveFSelect", {
+test_that("ObjectiveFSelectBatch", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
   measures = msr("dummy")
 
-  archive = ArchiveFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
+  archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
 
-  obj = ObjectiveFSelect$new(task = task, learner = learner, resampling = resampling, measures = measures, archive = archive)
+  obj = ObjectiveFSelectBatch$new(task = task, learner = learner, resampling = resampling, measures = measures, archive = archive)
 
   xss = list(
     list("x1" = TRUE, "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
@@ -19,14 +19,14 @@ test_that("ObjectiveFSelect", {
   expect_null(obj$archive$benchmark_result$resample_result(1)$learners[[1]]$model)
 })
 
-test_that("ObjectiveFSelect works with multiple measures", {
+test_that("ObjectiveFSelectBatch works with multiple measures", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
   measures = msrs(c("regr.mse", "regr.rmse"))
 
-  archive = ArchiveFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
-  obj = ObjectiveFSelect$new(task = task, learner = learner, resampling = resampling, measures = measures, archive = archive)
+  archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
+  obj = ObjectiveFSelectBatch$new(task = task, learner = learner, resampling = resampling, measures = measures, archive = archive)
 
   xss = list(
     list("x1" = TRUE, "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
@@ -36,14 +36,14 @@ test_that("ObjectiveFSelect works with multiple measures", {
   expect_data_table(z, nrows = 2, ncols = 6)
 })
 
-test_that("ObjectiveFSelect works with store_models", {
+test_that("ObjectiveFSelectBatch works with store_models", {
   task = TEST_MAKE_TSK()
   learner = lrn("regr.rpart")
   resampling = rsmp("holdout")
   measures = msr("dummy")
 
-   archive = ArchiveFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
-  obj = ObjectiveFSelect$new(task = task, learner = learner,
+   archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
+  obj = ObjectiveFSelectBatch$new(task = task, learner = learner,
     resampling = resampling, measures = measures, archive = archive,
     store_models = TRUE)
 

@@ -1,4 +1,4 @@
-test_that("ArchiveFSelect access methods work", {
+test_that("ArchiveBatchFSelect access methods work", {
   instance = fselect(
     fselector = fs("random_search"),
     task = tsk("iris"),
@@ -50,7 +50,7 @@ test_that("ArchiveFSelect access methods work", {
 #  })
 })
 
-test_that("ArchiveFSelect as.data.table function works", {
+test_that("ArchiveBatchFSelect as.data.table function works", {
   instance = fselect(
     fselector = fs("random_search", batch_size = 4),
     task = tsk("pima"),
@@ -102,7 +102,7 @@ test_that("ArchiveFSelect as.data.table function works", {
     "runtime_learners", "timestamp", "batch_nr",  "warnings", "errors", "features", "n_features", "resample_result"))
 
   # without benchmark result
-  instance = FSelectInstanceSingleCrit$new(
+  instance = FSelectInstanceBatchSingleCrit$new(
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
@@ -118,7 +118,7 @@ test_that("ArchiveFSelect as.data.table function works", {
     "runtime_learners", "timestamp", "batch_nr", "warnings", "errors", "features", "n_features"))
 
   # empty archive
-  instance = FSelectInstanceSingleCrit$new(
+  instance = FSelectInstanceBatchSingleCrit$new(
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),

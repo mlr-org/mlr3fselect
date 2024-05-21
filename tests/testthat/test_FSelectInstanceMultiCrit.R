@@ -1,4 +1,4 @@
-test_that("empty FSelectInstanceMultiCrit works", {
+test_that("empty FSelectInstanceBatchMultiCrit works", {
   inst = TEST_MAKE_INST_2D()
 
   expect_data_table(inst$archive$data, nrows = 0L)

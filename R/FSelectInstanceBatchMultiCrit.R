@@ -1,13 +1,13 @@
 #' @title Class for Multi Criteria Feature Selection
 #'
-#' @include FSelectInstanceSingleCrit.R ArchiveFSelect.R
+#' @include FSelectInstanceBatchSingleCrit.R ArchiveBatchFSelect.R
 #'
 #' @description
-#' The [FSelectInstanceMultiCrit] specifies a feature selection problem for [FSelectors][FSelector].
-#' The function [fsi()] creates a [FSelectInstanceMultiCrit] and the function [fselect()] creates an instance internally.
+#' The [FSelectInstanceBatchMultiCrit] specifies a feature selection problem for a [FSelector].
+#' The function [fsi()] creates a [FSelectInstanceBatchMultiCrit] and the function [fselect()] creates an instance internally.
 #'
-#' @inherit FSelectInstanceSingleCrit details
-#' @inheritSection ArchiveFSelect Analysis
+#' @inherit FSelectInstanceBatchSingleCrit details
+#' @inheritSection ArchiveBatchFSelect Analysis
 #'
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
@@ -55,20 +55,20 @@
 #' # Inspect all evaluated sets
 #' as.data.table(instance$archive)
 #' }
-FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
-  inherit = OptimInstanceMultiCrit,
+FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
+  inherit = OptimInstanceBatchMultiCrit,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    initialize = function(task, learner, resampling, measures, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = list()) {
+    initialize = function(task, learner, resampling, measures, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = NULL) {
       # initialized specialized fselect archive and objective
-      archive = ArchiveFSelect$new(
+      archive = ArchiveBatchFSelect$new(
         search_space = task_to_domain(assert_task(task)),
         codomain = measures_to_codomain(assert_measures(measures)),
         check_values = check_values)
 
-      objective = ObjectiveFSelect$new(
+      objective = ObjectiveFSelectBatch$new(
         task = task,
         learner = learner,
         resampling = resampling,
@@ -98,14 +98,10 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
       features = map(transpose_list(xdt), function(x) {
         self$objective$task$feature_names[as.logical(x)]
       })
-      xdt[, features := list(features)]
-      xdt[, n_features := map(features, length)]
-      assert_data_table(xdt)
-      assert_names(names(xdt), must.include = self$search_space$ids())
-      assert_data_table(ydt)
-      assert_names(names(ydt), permutation.of = self$objective$codomain$ids())
-      private$.result = cbind(xdt, ydt)
-      call_back("on_result", self$callbacks, private$.context)
+      set(xdt, j = "features", value = list(features))
+      set(xdt, j = "n_features", value = length(features[[1L]]))
+      super$assign_result(xdt, ydt)
+      if (!is.null(private$.result$x_domain)) set(private$.result, j = "x_domain", value = NULL)
     },
 
     #' @description
@@ -133,6 +129,14 @@ FSelectInstanceMultiCrit = R6Class("FSelectInstanceMultiCrit",
       map(self$result$features, function(x) {
         unlist(x)
       })
+    }
+  ),
+
+  private = list(
+    # initialize context for optimization
+    .initialize_context = function(optimizer) {
+      context = ContextBatchFSelect$new(self, optimizer)
+      self$objective$context = context
     }
   )
 )

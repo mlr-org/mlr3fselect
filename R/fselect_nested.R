@@ -55,7 +55,7 @@ fselect_nested = function(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
+  callbacks = NULL,
   ties_method = "least_features"
   ) {
   assert_task(task)

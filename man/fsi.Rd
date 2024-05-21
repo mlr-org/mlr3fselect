@@ -13,7 +13,7 @@ fsi(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
+  callbacks = NULL,
   ties_method = "least_features"
 )
 }
@@ -30,7 +30,7 @@ Uninstantiated resamplings are instantiated during construction so that all feat
 Already instantiated resamplings are kept unchanged.}
 
 \item{measures}{(\link[mlr3:Measure]{mlr3::Measure} or list of \link[mlr3:Measure]{mlr3::Measure})\cr
-A single measure creates a \link{FSelectInstanceSingleCrit} and multiple measures a \link{FSelectInstanceMultiCrit}.
+A single measure creates a \link{FSelectInstanceBatchSingleCrit} and multiple measures a \link{FSelectInstanceBatchMultiCrit}.
 If \code{NULL}, default measure is used.}
 
 \item{terminator}{(\link{Terminator})\cr
@@ -46,7 +46,7 @@ Store models in benchmark result?}
 Check the parameters before the evaluation and the results for
 validity?}
 
-\item{callbacks}{(list of \link{CallbackFSelect})\cr
+\item{callbacks}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
 
 \item{ties_method}{(\code{character(1)})\cr
@@ -58,7 +58,7 @@ The \code{random} method returns a random feature set from the best feature sets
 Ignored if multiple measures are used.}
 }
 \description{
-Function to construct a \link{FSelectInstanceSingleCrit} or \link{FSelectInstanceMultiCrit}.
+Function to construct a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit}.
 }
 \section{Resources}{
 

@@ -1,32 +1,12 @@
-#' @title Class for Feature Selection Algorithms
+#' @title FSelector
 #'
 #' @include mlr_fselectors.R
 #'
 #' @description
-#' The [FSelector] implements the optimization algorithm.
+#' The `FSelector`` implements the optimization algorithm.
 #'
 #' @details
-#' [FSelector] is an abstract base class that implements the base functionality each fselector must provide.
-#' A subclass is implemented in the following way:
-#'  * Inherit from FSelector.
-#'  * Specify the private abstract method `$.optimize()` and use it to call into your optimizer.
-#'  * You need to call `instance$eval_batch()` to evaluate design points.
-#'  * The batch evaluation is requested at the [FSelectInstanceSingleCrit]/[FSelectInstanceMultiCrit] object `instance`, so each batch is possibly executed in parallel via [mlr3::benchmark()], and all evaluations are stored inside of `instance$archive`.
-#'  * Before the batch evaluation, the [bbotk::Terminator] is checked, and if it is positive, an exception of class `"terminated_error"` is generated.
-#'    In the latter case the current batch of evaluations is still stored in `instance`, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
-#'  * After such an exception was caught we select the best set from `instance$archive` and return it.
-#'  * Note that therefore more points than specified by the [bbotk::Terminator] may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
-#'    How many more depends on the setting of the batch size.
-#'  * Overwrite the private super-method `.assign_result()` if you want to decide how to estimate the final set in the instance and its estimated performance.
-#'    The default behavior is: We pick the best resample experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
-#'
-#' @section Private Methods:
-#' * `.optimize(instance)` -> `NULL`\cr
-#'   Abstract base method. Implement to specify feature selection of your subclass.
-#'   See technical details sections.
-#' * `.assign_result(instance)` -> `NULL`\cr
-#'   Abstract base method. Implement to specify how the final feature subset is selected.
-#'   See technical details sections.
+#' `FSelector` is an abstract base class that implements the base functionality each fselector must provide.
 #'
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
@@ -38,38 +18,32 @@
 #' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
 #' * Run a feature selection with [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
 #'
+#' @family FSelector
+#' @template field_id
+#'
+#' @template param_id
+#' @template param_param_set
+#' @template param_properties
+#' @template param_packages
+#' @template param_label
 #' @template param_man
 #'
 #' @export
 FSelector = R6Class("FSelector",
   public = list(
 
-    #' @field id (`character(1)`)\cr
-    #'   Identifier of the object.
-    #'   Used in tables, plot and text output.
     id = NULL,
 
     #' @description
     #'   Creates a new instance of this [R6][R6::R6Class] class.
-    #'
-    #' @param id (`character(1)`)\cr
-    #'   Identifier for the new instance.
-    #'
-    #' @param param_set [paradox::ParamSet]\cr
-    #'   Set of control parameters.
-    #'
-    #' @param properties (`character()`)\cr
-    #'   Set of properties of the fselector.
-    #'   Must be a subset of [`mlr_reflections$fselect_properties`][mlr3::mlr_reflections].
-    #'
-    #' @param packages (`character()`)\cr
-    #'   Set of required packages.
-    #'   Note that these packages will be loaded via [requireNamespace()], and are not attached.
-    #'
-    #' @param label (`character(1)`)\cr
-    #'   Label for this object.
-    #'   Can be used in tables, plot and text output instead of the ID.
-    initialize = function(id = "fselector", param_set, properties, packages = character(), label = NA_character_, man = NA_character_) {
+    initialize = function(
+      id = "fselector",
+      param_set,
+      properties,
+      packages = character(),
+      label = NA_character_,
+      man = NA_character_
+      ) {
       self$id = assert_string(id, min.chars = 1L)
       private$.param_set = assert_param_set(param_set)
       private$.properties = assert_subset(properties, bbotk_reflections$optimizer_properties, empty.ok = FALSE)
@@ -100,35 +74,10 @@ FSelector = R6Class("FSelector",
       catf(str_indent("* Packages:", self$packages))
     },
 
-
     #' @description
     #' Opens the corresponding help page referenced by field `$man`.
     help = function() {
       open_help(self$man)
-    },
-
-    #' @description
-    #' Performs the feature selection on a [FSelectInstanceSingleCrit] or [FSelectInstanceMultiCrit] until termination.
-    #' The single evaluations will be written into the [ArchiveFSelect] that resides in the [FSelectInstanceSingleCrit] / [FSelectInstanceMultiCrit].
-    #' The result will be written into the instance object.
-    #'
-    #' @param inst ([FSelectInstanceSingleCrit] | [FSelectInstanceMultiCrit]).
-    #'
-    #' @return [data.table::data.table()].
-    optimize = function(inst) {
-      assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))
-
-      inst$.__enclos_env__$private$.context = ContextOptimization$new(instance = inst, optimizer = self)
-      call_back("on_optimization_begin", inst$callbacks, get_private(inst)$.context)
-
-      if ("requires_model" %in% self$properties) inst$objective$.__enclos_env__$private$.model_required = TRUE
-
-      result = optimize_default(inst, self, private)
-
-      if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
-
-      call_back("on_optimization_end", inst$callbacks, get_private(inst)$.context)
-      result
     }
   ),
 
@@ -188,7 +137,7 @@ FSelector = R6Class("FSelector",
     .optimize = function(inst) stop("abstract"),
 
     .assign_result = function(inst) {
-      assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))
+      assert_fselect_instance(inst)
       assign_result_default(inst)
     },
 

@@ -1,11 +1,11 @@
 #' @title Feature Selection with Recursive Feature Elimination with Cross Validation
 #'
-#' @include mlr_fselectors.R FSelectorRFE.R
+#' @include mlr_fselectors.R FSelectorBatchRFE.R
 #' @name mlr_fselectors_rfecv
 #'
 #' @description
 #' Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
-#' See [FSelectorRFE] for a description of the base algorithm.
+#' See [FSelectorBatchRFE] for a description of the base algorithm.
 #' RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
 #' Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
 #' The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
@@ -22,7 +22,7 @@
 #' It is not necessary to set a termination criterion.
 #'
 #' @section Archive:
-#' The [ArchiveFSelect] holds the following additional columns:
+#' The [ArchiveBatchFSelect] holds the following additional columns:
 #'  * `"iteration"` (`integer(1)`)\cr
 #'    The resampling iteration in which the feature subset was evaluated.
 #'  * `"importance"` (`numeric()`)\cr
@@ -85,8 +85,8 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorRFECV = R6Class("FSelectorRFECV",
-  inherit = FSelector,
+FSelectorBatchRFECV = R6Class("FSelectorBatchRFECV",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -167,7 +167,7 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
 
 
     .assign_result = function(inst) {
-      assert_multi_class(inst, c("FSelectInstanceSingleCrit", "FSelectInstanceMultiCrit"))
+      assert_multi_class(inst, c("FSelectInstanceBatchSingleCrit", "FSelectInstanceBatchMultiCrit"))
 
       xdt = inst$archive$data[inst$archive$n_evals, inst$search_space$ids(), with = FALSE]
       y = unlist(inst$archive$data[inst$archive$n_evals, inst$archive$cols_y, with = FALSE])
@@ -177,4 +177,4 @@ FSelectorRFECV = R6Class("FSelectorRFECV",
   )
 )
 
-mlr_fselectors$add("rfecv", FSelectorRFECV)
+mlr_fselectors$add("rfecv", FSelectorBatchRFECV)

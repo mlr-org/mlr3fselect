@@ -104,7 +104,7 @@ instance = fsi(
 instance
 ```
 
-    ## <FSelectInstanceSingleCrit>
+    ## <FSelectInstanceBatchSingleCrit>
     ## * State:  Not optimized
     ## * Objective: <ObjectiveFSelect:classif.svm_on_spam>
     ## * Terminator: <TerminatorEvals>
@@ -116,7 +116,7 @@ fselector = fs("random_search", batch_size = 5)
 fselector
 ```
 
-    ## <FSelectorRandomSearch>: Random Search
+    ## <FSelectorBatchRandomSearch>: Random Search
     ## * Parameters: batch_size=5
     ## * Properties: single-crit, multi-crit
     ## * Packages: mlr3fselect
@@ -135,19 +135,19 @@ instance.
 instance$result_feature_set
 ```
 
-    ##  [1] "address"           "addresses"         "all"               "business"         
-    ##  [5] "capitalAve"        "capitalLong"       "capitalTotal"      "charDollar"       
-    ##  [9] "charExclamation"   "charHash"          "charRoundbracket"  "charSemicolon"    
-    ## [13] "charSquarebracket" "conference"        "credit"            "cs"               
-    ## [17] "data"              "direct"            "edu"               "email"            
-    ## [21] "font"              "free"              "george"            "hp"               
-    ## [25] "internet"          "lab"               "labs"              "mail"             
-    ## [29] "make"              "meeting"           "money"             "num000"           
-    ## [33] "num1999"           "num3d"             "num415"            "num650"           
-    ## [37] "num85"             "num857"            "order"             "our"              
-    ## [41] "parts"             "people"            "pm"                "project"          
-    ## [45] "re"                "receive"           "remove"            "report"           
-    ## [49] "table"             "technology"        "telnet"            "will"             
+    ##  [1] "address"           "addresses"         "all"               "business"
+    ##  [5] "capitalAve"        "capitalLong"       "capitalTotal"      "charDollar"
+    ##  [9] "charExclamation"   "charHash"          "charRoundbracket"  "charSemicolon"
+    ## [13] "charSquarebracket" "conference"        "credit"            "cs"
+    ## [17] "data"              "direct"            "edu"               "email"
+    ## [21] "font"              "free"              "george"            "hp"
+    ## [25] "internet"          "lab"               "labs"              "mail"
+    ## [29] "make"              "meeting"           "money"             "num000"
+    ## [33] "num1999"           "num3d"             "num415"            "num650"
+    ## [37] "num85"             "num857"            "order"             "our"
+    ## [41] "parts"             "people"            "pm"                "project"
+    ## [45] "re"                "receive"           "remove"            "report"
+    ## [49] "table"             "technology"        "telnet"            "will"
     ## [53] "you"               "your"
 
 And the corresponding measured performance.
@@ -156,7 +156,7 @@ And the corresponding measured performance.
 instance$result_y
 ```
 
-    ## classif.ce 
+    ## classif.ce
     ## 0.07042005
 
 The archive contains all evaluated hyperparameter configurations.
@@ -171,7 +171,7 @@ as.data.table(instance$archive)
     ##  3:    TRUE      TRUE FALSE    FALSE       TRUE        TRUE         TRUE       TRUE            TRUE
     ##  4:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE            TRUE
     ##  5:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE       TRUE           FALSE
-    ## ---                                                                                                
+    ## ---
     ## 16:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE      FALSE           FALSE
     ## 17:   FALSE     FALSE FALSE     TRUE       TRUE        TRUE        FALSE      FALSE            TRUE
     ## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE           FALSE

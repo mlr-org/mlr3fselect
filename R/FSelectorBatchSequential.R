@@ -29,8 +29,8 @@
 #' @family FSelector
 #' @export
 #' @template example
-FSelectorSequential = R6Class("FSelectorSequential",
-  inherit = FSelector,
+FSelectorBatchSequential = R6Class("FSelectorBatchSequential",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -55,8 +55,8 @@ FSelectorSequential = R6Class("FSelectorSequential",
     #' @description
     #' Returns the optimization path.
     #'
-    #' @param inst ([FSelectInstanceSingleCrit])\cr
-    #'   Instance optimized with [FSelectorSequential].
+    #' @param inst ([FSelectInstanceBatchSingleCrit])\cr
+    #'   Instance optimized with [FSelectorBatchSequential].
     #' @param include_uhash (`logical(1)`)\cr
     #'   Include `uhash` column?
     #'
@@ -118,4 +118,4 @@ FSelectorSequential = R6Class("FSelectorSequential",
   )
 )
 
-mlr_fselectors$add("sequential", FSelectorSequential)
+mlr_fselectors$add("sequential", FSelectorBatchSequential)

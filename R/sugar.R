@@ -5,7 +5,7 @@
 #' Relies on [mlr3misc::dictionary_sugar_get()] to extract objects from the respective [mlr3misc::Dictionary]:
 #'
 #' * `fs()` for a [FSelector] from [mlr_fselectors].
-#' * `fss()` for a list of [FSelectors][FSelector] from [mlr_fselectors].
+#' * `fss()` for a list of a [FSelector] from [mlr_fselectors].
 #' * `trm()` for a [Terminator] from [mlr_terminators].
 #' * `trms()` for a list of [Terminators][Terminator] from [mlr_terminators].
 #'
@@ -32,10 +32,10 @@ fss = function(.keys, ...) {
 #' @title Syntactic Sugar for Instance Construction
 #'
 #' @description
-#' Function to construct a [FSelectInstanceSingleCrit] or [FSelectInstanceMultiCrit].
+#' Function to construct a [FSelectInstanceBatchSingleCrit] or [FSelectInstanceBatchMultiCrit].
 #'
 #' @param measures ([mlr3::Measure] or list of [mlr3::Measure])\cr
-#'   A single measure creates a [FSelectInstanceSingleCrit] and multiple measures a [FSelectInstanceMultiCrit].
+#'   A single measure creates a [FSelectInstanceBatchSingleCrit] and multiple measures a [FSelectInstanceBatchMultiCrit].
 #'   If `NULL`, default measure is used.
 #'
 #' @template param_task
@@ -48,11 +48,11 @@ fss = function(.keys, ...) {
 #' @template param_callbacks
 #' @template param_ties_method
 #'
-#' @inheritSection FSelectInstanceSingleCrit Resources
-#' @inheritSection FSelectInstanceSingleCrit Default Measures
+#' @inheritSection FSelectInstanceBatchSingleCrit Resources
+#' @inheritSection FSelectInstanceBatchSingleCrit Default Measures
 #'
 #' @export
-#' @inherit FSelectInstanceSingleCrit examples
+#' @inherit FSelectInstanceBatchSingleCrit examples
 fsi = function(
   task,
   learner,
@@ -62,11 +62,11 @@ fsi = function(
   store_benchmark_result = TRUE,
   store_models = FALSE,
   check_values = FALSE,
-  callbacks = list(),
+  callbacks = NULL,
   ties_method = "least_features"
   ) {
   if (!is.list(measures)) {
-    FSelectInstanceSingleCrit$new(
+    FSelectInstanceBatchSingleCrit$new(
       task = task,
       learner = learner,
       resampling = resampling,
@@ -78,7 +78,7 @@ fsi = function(
       callbacks = callbacks,
       ties_method = ties_method)
   } else {
-    FSelectInstanceMultiCrit$new(
+    FSelectInstanceBatchMultiCrit$new(
       task = task,
       learner = learner,
       resampling = resampling,

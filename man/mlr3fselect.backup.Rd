@@ -4,7 +4,7 @@
 \alias{mlr3fselect.backup}
 \title{Backup Benchmark Result Callback}
 \description{
-This \link{CallbackFSelect} writes the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} after each batch to disk.
+This \link{CallbackBatchFSelect} writes the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} after each batch to disk.
 }
 \examples{
 clbk("mlr3fselect.backup", path = "backup.rds")

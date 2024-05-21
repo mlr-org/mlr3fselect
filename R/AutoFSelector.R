@@ -100,7 +100,7 @@ AutoFSelector = R6Class("AutoFSelector",
   public = list(
 
     #' @field instance_args (`list()`)\cr
-    #' All arguments from construction to create the [FSelectInstanceSingleCrit].
+    #' All arguments from construction to create the [FSelectInstanceBatchSingleCrit].
     instance_args = NULL,
 
     #' @field fselector ([FSelector])\cr
@@ -122,7 +122,7 @@ AutoFSelector = R6Class("AutoFSelector",
       store_benchmark_result = TRUE,
       store_models = FALSE,
       check_values = FALSE,
-      callbacks = list(),
+      callbacks = NULL,
       ties_method = "least_features"
       ) {
       ia = list()
@@ -249,8 +249,8 @@ AutoFSelector = R6Class("AutoFSelector",
 
   active = list(
 
-    #' @field archive ([ArchiveFSelect)\cr
-    #' Returns [FSelectInstanceSingleCrit] archive.
+    #' @field archive ([ArchiveBatchFSelect)\cr
+    #' Returns [FSelectInstanceBatchSingleCrit] archive.
     archive = function() self$fselect_instance$archive,
 
     #' @field learner ([mlr3::Learner])\cr
@@ -264,12 +264,12 @@ AutoFSelector = R6Class("AutoFSelector",
       }
     },
 
-    #' @field fselect_instance ([FSelectInstanceSingleCrit])\cr
+    #' @field fselect_instance ([FSelectInstanceBatchSingleCrit])\cr
     #' Internally created feature selection instance with all intermediate results.
     fselect_instance = function() self$model$fselect_instance,
 
     #' @field fselect_result ([data.table::data.table])\cr
-    #' Short-cut to `$result` from [FSelectInstanceSingleCrit].
+    #' Short-cut to `$result` from [FSelectInstanceBatchSingleCrit].
     fselect_result = function() self$fselect_instance$result,
 
     #' @field predict_type (`character(1)`)\cr
@@ -311,7 +311,7 @@ AutoFSelector = R6Class("AutoFSelector",
       # construct instance from args; then tune
       ia = self$instance_args
       ia$task = task$clone()
-      instance = invoke(FSelectInstanceSingleCrit$new, .args = ia)
+      instance = invoke(FSelectInstanceBatchSingleCrit$new, .args = ia)
       self$fselector$optimize(instance)
       learner = ia$learner$clone(deep = TRUE)
       task = task$clone()

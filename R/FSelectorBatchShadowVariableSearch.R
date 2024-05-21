@@ -51,8 +51,8 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
-  inherit = FSelector,
+FSelectorBatchShadowVariableSearch = R6Class("FSelectorBatchShadowVariableSearch",
+  inherit = FSelectorBatch,
   public = list(
 
     #' @description
@@ -70,8 +70,8 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
     #' @description
     #' Returns the optimization path.
     #'
-    #' @param inst ([FSelectInstanceSingleCrit])\cr
-    #' Instance optimized with [FSelectorShadowVariableSearch].
+    #' @param inst ([FSelectInstanceBatchSingleCrit])\cr
+    #' Instance optimized with [FSelectorBatchShadowVariableSearch].
     #'
     #' @return [data.table::data.table]
     optimization_path = function(inst) {
@@ -162,4 +162,4 @@ FSelectorShadowVariableSearch = R6Class("FSelectorShadowVariableSearch",
   )
 )
 
-mlr_fselectors$add("shadow_variable_search", FSelectorShadowVariableSearch)
+mlr_fselectors$add("shadow_variable_search", FSelectorBatchShadowVariableSearch)

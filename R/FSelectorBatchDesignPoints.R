@@ -15,7 +15,7 @@
 #' @templateVar id design_points
 #' @template section_dictionary_fselectors
 #'
-#' @inheritSection bbotk::OptimizerDesignPoints Parameters
+#' @inheritSection bbotk::OptimizerBatchDesignPoints Parameters
 #'
 #' @family FSelector
 #' @export
@@ -55,19 +55,19 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorDesignPoints = R6Class("FSelectorDesignPoints",
-  inherit = FSelectorFromOptimizer,
+FSelectorBatchDesignPoints = R6Class("FSelectorBatchDesignPoints",
+  inherit = FSelectorBatchFromOptimizerBatch,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       super$initialize(
-        optimizer = OptimizerDesignPoints$new(),
+        optimizer = OptimizerBatchDesignPoints$new(),
         man = "mlr3fselect::mlr_fselectors_design_points"
       )
     }
   )
 )
 
-mlr_fselectors$add("design_points", FSelectorDesignPoints)
+mlr_fselectors$add("design_points", FSelectorBatchDesignPoints)

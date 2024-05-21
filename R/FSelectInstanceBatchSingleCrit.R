@@ -1,17 +1,17 @@
 #' @title Class for Single Criterion Feature Selection
 #'
-#' @include ArchiveFSelect.R
+#' @include ArchiveBatchFSelect.R
 #'
 #' @description
-#' The [FSelectInstanceSingleCrit] specifies a feature selection problem for [FSelectors][FSelector].
-#' The function [fsi()] creates a [FSelectInstanceSingleCrit] and the function [fselect()] creates an instance internally.
+#' The [FSelectInstanceBatchSingleCrit] specifies a feature selection problem for a [FSelector].
+#' The function [fsi()] creates a [FSelectInstanceBatchSingleCrit] and the function [fselect()] creates an instance internally.
 #'
 #' @description
-#' The instance contains an [ObjectiveFSelect] object that encodes the black box objective function a [FSelector] has to optimize.
+#' The instance contains an [ObjectiveFSelectBatch] object that encodes the black box objective function a [FSelector] has to optimize.
 #' The instance allows the basic operations of querying the objective at design points (`$eval_batch()`).
 #' This operation is usually done by the [FSelector].
 #' Evaluations of feature subsets are performed in batches by calling [mlr3::benchmark()] internally.
-#' The evaluated feature subsets are stored in the [Archive][ArchiveFSelect] (`$archive`).
+#' The evaluated feature subsets are stored in the [Archive][ArchiveBatchFSelect] (`$archive`).
 #' Before a batch is evaluated, the [bbotk::Terminator] is queried for the remaining budget.
 #' If the available budget is exhausted, an exception is raised, and no further evaluations can be performed from this point on.
 #' The [FSelector] is also supposed to store its final result, consisting of a selected feature subset and associated estimated performance values, by calling the method `instance$assign_result()`.
@@ -30,7 +30,7 @@
 #' | `"regr_st"`    | `"regr.mse"`        | \CRANpkg{mlr3spatial} |
 #' | `"clust"`      | `"clust.dunn"`      | \CRANpkg{mlr3cluster} |
 #'
-#' @inheritSection ArchiveFSelect Analysis
+#' @inheritSection ArchiveBatchFSelect Analysis
 #'
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
@@ -88,8 +88,8 @@
 #' # Inspect all evaluated sets
 #' as.data.table(instance$archive)
 #' }
-FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
-  inherit = OptimInstanceSingleCrit,
+FSelectInstanceBatchSingleCrit = R6Class("FSelectInstanceBatchSingleCrit",
+  inherit = OptimInstanceBatchSingleCrit,
   public = list(
 
     #' @description
@@ -103,17 +103,17 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
       store_benchmark_result = TRUE,
       store_models = FALSE,
       check_values = FALSE,
-      callbacks = list(),
+      callbacks = NULL,
       ties_method = "least_features"
       ) {
       # initialized specialized fselect archive and objective
-      archive = ArchiveFSelect$new(
+      archive = ArchiveBatchFSelect$new(
         search_space = task_to_domain(assert_task(task)),
         codomain = measures_to_codomain(assert_measure(measure)),
         check_values = check_values,
         ties_method = ties_method)
 
-      objective = ObjectiveFSelect$new(
+      objective = ObjectiveFSelectBatch$new(
         task = task,
         learner = learner,
         resampling = resampling,
@@ -142,14 +142,10 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
       # Add feature names to result for easy task subsetting
       feature_names = self$objective$task$feature_names
       features = list(feature_names[as.logical(xdt[, feature_names, with = FALSE])])
-      xdt[, features := list(features)]
-      xdt[, n_features := length(features[[1L]])]
-      assert_data_table(xdt, nrows = 1L)
-      assert_names(names(xdt), must.include = self$search_space$ids())
-      assert_number(y)
-      assert_names(names(y), permutation.of = self$objective$codomain$ids())
-      private$.result = cbind(xdt, t(y)) # t(y) so the name of y stays
-      call_back("on_result", self$callbacks, private$.context)
+      set(xdt, j = "features", value = list(features))
+      set(xdt, j = "n_features", value = length(features[[1L]]))
+      super$assign_result(xdt, y)
+      if (!is.null(private$.result$x_domain)) set(private$.result, j = "x_domain", value = NULL)
     },
 
     #' @description
@@ -175,6 +171,14 @@ FSelectInstanceSingleCrit = R6Class("FSelectInstanceSingleCrit",
     #' Feature set for task subsetting.
     result_feature_set = function() {
       unlist(self$result$features)
+    }
+  ),
+
+  private = list(
+    # initialize context for optimization
+    .initialize_context = function(optimizer) {
+      context = ContextBatchFSelect$new(self, optimizer)
+      self$objective$context = context
     }
   )
 )
