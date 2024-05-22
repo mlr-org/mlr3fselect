@@ -39,6 +39,8 @@
 #' @template param_terminator
 #' @template param_callbacks
 #'
+#' @source
+#' `r format_bib("saeys2008", "abeel2010", "pes2020")`
 #' @export
 #' @examples
 #' \donttest{

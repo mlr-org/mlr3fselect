@@ -3,6 +3,22 @@
 \name{ensemble_fselect}
 \alias{ensemble_fselect}
 \title{Ensemble Feature Selection}
+\source{
+Saeys, Yvan, Abeel, Thomas, Van De Peer, Yves (2008).
+\dQuote{Robust feature selection using ensemble feature selection techniques.}
+\emph{Machine Learning and Knowledge Discovery in Databases}, \bold{5212 LNAI}, 313--325.
+\doi{10.1007/978-3-540-87481-2_21}.
+
+Abeel, Thomas, Helleputte, Thibault, Van de Peer, Yves, Dupont, Pierre, Saeys, Yvan (2010).
+\dQuote{Robust biomarker identification for cancer diagnosis with ensemble feature selection methods.}
+\emph{Bioinformatics}, \bold{26}, 392--398.
+ISSN 1367-4803, \doi{10.1093/BIOINFORMATICS/BTP630}.
+
+Pes, Barbara (2020).
+\dQuote{Ensemble feature selection for high-dimensional data: a stability analysis across multiple domains.}
+\emph{Neural Computing and Applications}, \bold{32}(10), 5951--5973.
+ISSN 14333058, \doi{10.1007/s00521-019-04082-3}.
+}
 \usage{
 ensemble_fselect(
   fselector,
