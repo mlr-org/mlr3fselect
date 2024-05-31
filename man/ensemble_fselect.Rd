@@ -28,7 +28,7 @@ ensemble_fselect(
   inner_resampling,
   measure,
   terminator,
-  callbacks = list(),
+  callbacks = NULL,
   store_models = TRUE
 )
 }
@@ -56,8 +56,9 @@ Measure to optimize. If \code{NULL}, default measure is used.}
 \item{terminator}{(\link{Terminator})\cr
 Stop criterion of the feature selection.}
 
-\item{callbacks}{(list of \link{CallbackBatchFSelect})\cr
-List of callbacks.}
+\item{callbacks}{(list of lists of \link{CallbackBatchFSelect})\cr
+Callbacks to be used for each learner.
+The lists must have the same length as the number of learners.}
 
 \item{store_models}{(\code{logical(1)})\cr
 Whether to store models in \link{auto_fselector} or not.}

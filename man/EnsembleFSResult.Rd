@@ -49,6 +49,8 @@ Returns the result of the ensemble feature selection.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-EnsembleFSResult-new}{\code{EnsembleFSResult$new()}}
+\item \href{#method-EnsembleFSResult-format}{\code{EnsembleFSResult$format()}}
+\item \href{#method-EnsembleFSResult-print}{\code{EnsembleFSResult$print()}}
 \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
 \item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
 \item \href{#method-EnsembleFSResult-clone}{\code{EnsembleFSResult$clone()}}
@@ -71,6 +73,40 @@ The benchmark result object.}
 
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 The result of the ensemble feature selection results.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-format"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-format}{}}}
+\subsection{Method \code{format()}}{
+Helper for print outputs.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$format(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-print"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-print}{}}}
+\subsection{Method \code{print()}}{
+Printer.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$print(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
 }
 \if{html}{\out{</div>}}
 }

@@ -19,9 +19,9 @@ ContextBatchFSelect = R6Class("ContextBatchFSelect",
     #'   The feature sets of the latest batch.
     xss = function(rhs) {
       if (missing(rhs)) {
-        return(get_private(self$objective_fselect)$.xss)
+        return(get_private(self$instance$objective)$.xss)
       } else {
-        get_private(self$objective_fselect)$.xss = rhs
+        get_private(self$instance$objective)$.xss = rhs
       }
     },
 
@@ -29,9 +29,9 @@ ContextBatchFSelect = R6Class("ContextBatchFSelect",
     #'   The benchmark design of the latest batch.
     design = function(rhs) {
       if (missing(rhs)) {
-        return(get_private(self$objective_fselect)$.design)
+        return(get_private(self$instance$objective)$.design)
       } else {
-        get_private(self$objective_fselect)$.design = rhs
+        get_private(self$instance$objective)$.design = rhs
       }
     },
 
@@ -39,9 +39,9 @@ ContextBatchFSelect = R6Class("ContextBatchFSelect",
     #'   The benchmark result of the latest batch.
     benchmark_result = function(rhs) {
       if (missing(rhs)) {
-        return(get_private(self$objective_fselect)$.benchmark_result)
+        return(get_private(self$instance$objective)$.benchmark_result)
       } else {
-        get_private(self$objective_fselect)$.benchmark_result = rhs
+        get_private(self$instance$objective)$.benchmark_result = rhs
       }
     },
 
@@ -51,9 +51,9 @@ ContextBatchFSelect = R6Class("ContextBatchFSelect",
     #'   A callback can add additional columns which are also written to the archive.
     aggregated_performance = function(rhs) {
       if (missing(rhs)) {
-        return(get_private(self$objective_fselect)$.aggregated_performance)
+        return(get_private(self$instance$objective)$.aggregated_performance)
       } else {
-        get_private(self$objective_fselect)$.aggregated_performance = rhs
+        get_private(self$instance$objective)$.aggregated_performance = rhs
       }
     }
   )

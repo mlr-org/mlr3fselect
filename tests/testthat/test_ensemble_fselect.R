@@ -23,6 +23,13 @@ test_that("ensemble feature selection works", {
 })
 
 test_that("different callbacks can be set", {
+
+  callback_test = callback_batch_fselect("mlr3fselect.test",
+    on_eval_before_archive = function(callback, context) {
+      context$aggregated_performance[, callback_active := context$instance$objective$learner$id == "classif.rpart"]
+    }
+  )
+
   efsr = ensemble_fselect(
     fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
     task = tsk("sonar"),
@@ -30,6 +37,10 @@ test_that("different callbacks can be set", {
     init_resampling = rsmp("subsampling", repeats = 2),
     inner_resampling = rsmp("cv", folds = 3),
     measure = msr("classif.ce"),
-    terminator = trm("none")
+    terminator = trm("none"),
+    callbacks = list(list(callback_test), list())
   )
+
+  expect_true(all(efsr$benchmark_result$score()$learner[[1]]$fselect_instance$archive$data$callback_active))
+  expect_null(efsr$benchmark_result$score()$learner[[2]]$fselect_instance$archive$data$callback_active)
 })

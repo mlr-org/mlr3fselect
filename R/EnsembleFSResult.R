@@ -45,6 +45,22 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @description
+    #' Helper for print outputs.
+    #' @param ... (ignored).
+    format = function(...) {
+      sprintf("<%s>", class(self)[1L])
+    },
+
+    #' @description
+    #' Printer.
+    #'
+    #' @param ... (ignored).
+    print = function(...) {
+      catf(format(self))
+      print(self$result[, c("learner_id", "n_features"), with = FALSE])
+    },
+
+    #' @description
     #' Calculates the feature ranking.
     #'
     #' @param method (`character(1)`)\cr
