@@ -32,7 +32,7 @@ efsr$stability(stability_measure = "jaccard")
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{benchmark_result}}{(\code{BenchmarkResult})\cr
+\item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result.}
 }
 \if{html}{\out{</div>}}
@@ -66,7 +66,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{benchmark_result}}{(\code{BenchmarkResult})\cr
+\item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result object.}
 
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
@@ -99,8 +99,14 @@ Currently, only \code{"inclusion_probability"} is supported.}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-stability}{}}}
 \subsection{Method \code{stability()}}{
 Calculates the stability of the selected features with the \code{stabm} package.
+The results are cached.
+When the same stability measure is requested again with different arguments, the cache must be reset.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$stability(stability_measure = "jaccard", ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$stability(
+  stability_measure = "jaccard",
+  ...,
+  reset_cache = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -113,6 +119,9 @@ Default is \code{"jaccard"}.}
 
 \item{\code{...}}{(\code{any})\cr
 Additional arguments passed to the stability measure function.}
+
+\item{\code{reset_cache}}{(\code{logical(1)})\cr
+If \code{TRUE}, the cached results are ignored.}
 }
 \if{html}{\out{</div>}}
 }
