@@ -21,3 +21,15 @@ test_that("ensemble feature selection works", {
   expect_data_table(feature_ranking, nrows = 60)
   expect_names(names(feature_ranking), identical.to = c("feature", "inclusion_probability"))
 })
+
+test_that("different callbacks can be set", {
+  efsr = ensemble_fselect(
+    fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
+    task = tsk("sonar"),
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    measure = msr("classif.ce"),
+    terminator = trm("none")
+  )
+})

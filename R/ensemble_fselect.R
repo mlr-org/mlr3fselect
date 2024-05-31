@@ -32,12 +32,14 @@
 #'  The inner resampling strategy used by the [FSelector].
 #' @param store_models (`logical(1)`)\cr
 #'  Whether to store models in [auto_fselector] or not.
+#' @param callbacks (list of lists of [CallbackBatchFSelect])\cr
+#'  Callbacks to be used for each learner.
+#'  The lists must have the same length as the number of learners.
 #'
 #' @template param_fselector
 #' @template param_task
 #' @template param_measure
 #' @template param_terminator
-#' @template param_callbacks
 #'
 #' @source
 #' `r format_bib("saeys2008", "abeel2010", "pes2020")`
@@ -62,17 +64,17 @@ ensemble_fselect = function(
   inner_resampling,
   measure,
   terminator,
-  callbacks = list(),
+  callbacks = NULL,
   store_models = TRUE
   ) {
   assert_task(task)
   assert_learners(as_learners(learners), task = task)
   assert_resampling(init_resampling)
-  assert_choice(class(init_resampling)[1],
-                choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
+  assert_choice(class(init_resampling)[1], choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
+  assert_list(callbacks, types = "list", len = length(learners), null.ok = TRUE)
 
   # create auto_fselector for each learner
-  afss = map(learners, function(learner) {
+  afss = imap(unname(learners), function(learner, i) {
     auto_fselector(
       fselector = fselector,
       learner = learner,
@@ -80,7 +82,7 @@ ensemble_fselect = function(
       measure = measure,
       terminator = terminator,
       store_models = store_models,
-      callbacks = callbacks
+      callbacks = callbacks[[i]]
     )
   })
 
