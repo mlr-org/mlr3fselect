@@ -45,9 +45,26 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @description
-    #' Returns the feature ranking.
-    feature_ranking = function() {
+    #' Calculates the feature ranking.
+    #'
+    #' @param method (`character(1)`)\cr
+    #' The method to calculate the feature ranking.
+    #' Currently, only `"inclusion_probability"` is supported.
+    feature_ranking = function(method = "inclusion_probability") {
+      assert_choice(method, choices = "inclusion_probability")
 
+      features = self$benchmark_result$tasks$task[[1]]$feature_names
+
+      count = map_int(features, function(feature) {
+        sum(map_lgl(self$result$features, function(iteration) {
+          feature %in% iteration
+        }))
+      })
+
+      res = data.table(feature = features, inclusion_probability = count / nrow(self$result))
+      setorderv(res, "inclusion_probability", order = -1L)
+
+      res
     },
 
     #' @description

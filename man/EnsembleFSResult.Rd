@@ -79,11 +79,20 @@ The result of the ensemble feature selection results.}
 \if{html}{\out{<a id="method-EnsembleFSResult-feature_ranking"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-feature_ranking}{}}}
 \subsection{Method \code{feature_ranking()}}{
-Returns the feature ranking.
+Calculates the feature ranking.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "inclusion_probability")}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{method}}{(\code{character(1)})\cr
+The method to calculate the feature ranking.
+Currently, only \code{"inclusion_probability"} is supported.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-stability"></a>}}
