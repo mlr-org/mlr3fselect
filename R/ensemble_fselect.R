@@ -134,5 +134,5 @@ ensemble_fselect = function(
     set(grid, j = "importance", value = imp_scores)
   }
 
-  grid
+  EnsembleFSResult$new(bmr, grid)
 }

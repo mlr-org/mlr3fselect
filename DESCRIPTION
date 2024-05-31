@@ -31,7 +31,8 @@ Imports:
     lgr,
     mlr3misc (>= 0.15.0.9000),
     paradox (>= 1.0.0),
-    R6
+    R6,
+    stabm
 Suggests:
     e1071,
     genalg,
@@ -55,6 +56,7 @@ Collate:
     'AutoFSelector.R'
     'CallbackBatchFSelect.R'
     'ContextBatchFSelect.R'
+    'EnsembleFSResult.R'
     'FSelectInstanceBatchSingleCrit.R'
     'FSelectInstanceBatchMultiCrit.R'
     'mlr_fselectors.R'
