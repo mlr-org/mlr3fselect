@@ -134,5 +134,8 @@ ensemble_fselect = function(
     set(grid, j = "importance", value = imp_scores)
   }
 
+  set(grid, j = "learner", value = NULL)
+  set(grid, j = "task", value = NULL)
+  set(grid, j = "resampling", value = NULL)
   EnsembleFSResult$new(bmr, grid)
 }

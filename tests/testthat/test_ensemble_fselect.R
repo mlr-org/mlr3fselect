@@ -9,11 +9,11 @@ test_that("ensemble feature selection works", {
     terminator = trm("none")
   )
 
-  expect_data_table(efsr$grid, nrows = 4)
-  expect_list(efsr$grid$features, any.missing = FALSE, len = 4)
-  expect_vector(efsr$grid$n_features, size = 4)
-  expect_vector(efsr$grid$classif.ce, size = 4)
-  expect_list(efsr$grid$importance, any.missing = FALSE, len = 4)
+  expect_data_table(efsr$result, nrows = 4)
+  expect_list(efsr$result$features, any.missing = FALSE, len = 4)
+  expect_vector(efsr$result$n_features, size = 4)
+  expect_vector(efsr$result$classif.ce, size = 4)
+  expect_list(efsr$result$importance, any.missing = FALSE, len = 4)
   expect_benchmark_result(efsr$benchmark_result)
 })
 

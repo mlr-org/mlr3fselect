@@ -20,7 +20,7 @@
 #' efsr$benchmark_result
 #'
 #' # contains the selected features for each iteration
-#' efsr$grid
+#' efsr$result
 #'
 #' # returns the stability of the selected features
 #' efsr$stability(stability_measure = "jaccard")
@@ -29,23 +29,19 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
   public = list(
 
     #' @field benchmark_result (`BenchmarkResult`)\cr
-    #' The benchmark result object.
+    #' The benchmark result.
     benchmark_result = NULL,
-
-    #' @field grid (`data.table`)\cr
-    #' The grid of feature selection results.
-    grid = NULL,
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
     #' @param benchmark_result (`BenchmarkResult`)\cr
     #'  The benchmark result object.
-    #' @param grid (`data.table`)\cr
-    #'  The grid of feature selection results.
-    initialize = function(benchmark_result, grid) {
+    #' @param result ([data.table::data.table])\cr
+    #'  The result of the ensemble feature selection results.
+    initialize = function(benchmark_result, result) {
       self$benchmark_result = assert_benchmark_result(benchmark_result)
-      self$grid = assert_data_table(grid)
+      private$.result = assert_data_table(result)
     },
 
     #' @description
@@ -69,7 +65,27 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       assert_choice(stability_measure, choices = keys)
 
       fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
-      fun(self$grid$features, ...)
+      fun(self$result$features, ...)
     }
+  ),
+
+  active = list(
+
+    #' @field result ([data.table::data.table])\cr
+    #' Returns the result of the ensemble feature selection.
+    result = function(rhs) {
+      assert_ro_binding(rhs)
+      tab = as.data.table(self$benchmark_result)[, c("task", "learner", "resampling"), with = FALSE]
+      cbind(private$.result, tab)
+    }
+  ),
+
+  private = list(
+    .result = NULL
   )
 )
+
+#' @export
+as.data.table.EnsembleFSResult = function(x, ...) {
+  x$result
+}

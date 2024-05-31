@@ -23,7 +23,7 @@ efsr = ensemble_fselect(
 efsr$benchmark_result
 
 # contains the selected features for each iteration
-efsr$grid
+efsr$result
 
 # returns the stability of the selected features
 efsr$stability(stability_measure = "jaccard")
@@ -33,10 +33,15 @@ efsr$stability(stability_measure = "jaccard")
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{benchmark_result}}{(\code{BenchmarkResult})\cr
-The benchmark result object.}
-
-\item{\code{grid}}{(\code{data.table})\cr
-The grid of feature selection results.}
+The benchmark result.}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
+Returns the result of the ensemble feature selection.}
 }
 \if{html}{\out{</div>}}
 }
@@ -55,7 +60,7 @@ The grid of feature selection results.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$new(benchmark_result, grid)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$new(benchmark_result, result)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -64,8 +69,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \item{\code{benchmark_result}}{(\code{BenchmarkResult})\cr
 The benchmark result object.}
 
-\item{\code{grid}}{(\code{data.table})\cr
-The grid of feature selection results.}
+\item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
+The result of the ensemble feature selection results.}
 }
 \if{html}{\out{</div>}}
 }

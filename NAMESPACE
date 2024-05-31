@@ -2,6 +2,7 @@
 
 S3method(as.data.table,ArchiveBatchFSelect)
 S3method(as.data.table,DictionaryFSelector)
+S3method(as.data.table,EnsembleFSResult)
 S3method(extract_inner_fselect_archives,BenchmarkResult)
 S3method(extract_inner_fselect_archives,ResampleResult)
 S3method(extract_inner_fselect_results,BenchmarkResult)
