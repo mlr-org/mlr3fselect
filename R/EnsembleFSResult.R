@@ -1,7 +1,12 @@
 #' @title Ensemble Feature Selection Result
 #'
+#' @name ensemble_fs_result
+#'
 #' @description
-#' The `EnsembleFSResult` stores the results of the ensemble feature selection.
+#' The `EnsembleFSResult` stores the results of the ensemble feature selection
+#' and incorporates methods for assessing the stability of the feature selection
+#' and ranking the features.
+#'
 #' The function [ensemble_fselect()] returns an object of this class.
 #'
 #' @examples
@@ -32,6 +37,10 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' The benchmark result.
     benchmark_result = NULL,
 
+    #' @field man (`character(1)`)\cr
+    #' Manual page for this object.
+    man = NULL,
+
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
@@ -42,6 +51,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     initialize = function(benchmark_result, result) {
       self$benchmark_result = assert_benchmark_result(benchmark_result)
       private$.result = assert_data_table(result)
+      self$man = "mlr3fselect::ensemble_fs_result"
     },
 
     #' @description
@@ -58,6 +68,12 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     print = function(...) {
       catf(format(self))
       print(self$result[, c("learner_id", "n_features"), with = FALSE])
+    },
+
+    #' @description
+    #' Opens the corresponding help page referenced by field `$man`.
+    help = function() {
+      open_help(self$man)
     },
 
     #' @description
