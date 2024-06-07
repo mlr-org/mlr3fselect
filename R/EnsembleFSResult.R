@@ -48,9 +48,23 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  The benchmark result object.
     #' @param result ([data.table::data.table])\cr
     #'  The result of the ensemble feature selection results.
-    initialize = function(benchmark_result, result) {
-      self$benchmark_result = assert_benchmark_result(benchmark_result)
-      private$.result = assert_data_table(result)
+    #' @param features ([character()])\cr
+    #'  The vector of features of the task that was used in the ensemble feature
+    #'  selection. Ignored if `benchmark_result` is given and mandatory to have
+    #'  if `benchmark_result` is `NULL`.
+    initialize = function(benchmark_result = NULL, result, features) {
+      if (is.null(benchmark_result)) {
+        assert_character(features, any.missing = FALSE, null.ok = FALSE)
+        private$.features = features
+      } else {
+        self$benchmark_result = assert_benchmark_result(benchmark_result)
+        private$.features = self$benchmark_result$tasks$task[[1]]$feature_names
+      }
+
+      assert_data_table(result)
+      assert_names(names(result), must.include = c("iter", "learner_id", "features", "n_features"))
+
+      private$.result = result
       self$man = "mlr3fselect::ensemble_fs_result"
     },
 
@@ -147,7 +161,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
   private = list(
     .result = NULL,
     .stability = NULL,
-    .feature_ranking = NULL
+    .feature_ranking = NULL,
+    .features = NULL
   )
 )
 
