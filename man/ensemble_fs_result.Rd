@@ -5,9 +5,9 @@
 \alias{EnsembleFSResult}
 \title{Ensemble Feature Selection Result}
 \description{
-The \code{EnsembleFSResult} stores the results of the ensemble feature selection
-and incorporates methods for assessing the stability of the feature selection
-and ranking the features.
+The \code{EnsembleFSResult} class stores the results of ensemble feature selection.
+It includes methods for evaluating the stability of the feature selection
+process and for ranking the selected features.
 
 The function \code{\link[=ensemble_fselect]{ensemble_fselect()}} returns an object of this class.
 }
@@ -31,6 +31,9 @@ efsr$result
 
 # returns the stability of the selected features
 efsr$stability(stability_measure = "jaccard")
+
+# returns a ranking of all features
+head(efsr$feature_ranking())
 }
 }
 \section{Public fields}{
@@ -70,17 +73,22 @@ Returns the result of the ensemble feature selection.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$new(benchmark_result, result)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$new(benchmark_result = NULL, result, features)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
-The benchmark result object.}
+The benchmark result object.
+Default is \code{NULL}, but the task's \code{"features"} must be given.}
 
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
-The result of the ensemble feature selection results.}
+The result of the ensemble feature selection.}
+
+\item{\code{features}}{(\code{\link[=character]{character()}})\cr
+The vector of features of the task that was used in the ensemble feature
+selection. Ignored if \code{"benchmark_result"} is given.}
 }
 \if{html}{\out{</div>}}
 }
@@ -147,12 +155,17 @@ Currently, only \code{"inclusion_probability"} is supported.}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+A \link[data.table:data.table]{data.table} listing all the features,
+ordered by decreasing inclusion probability scores (depending on the
+\code{method})
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-stability"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-stability}{}}}
 \subsection{Method \code{stability()}}{
-Calculates the stability of the selected features with the \code{stabm} package.
+Calculates the stability of the selected features with the \CRANpkg{stabm} package.
 The results are cached.
 When the same stability measure is requested again with different arguments, the cache must be reset.
 \subsection{Usage}{
