@@ -120,7 +120,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  If `TRUE`, the cached results are ignored.
     stability = function(stability_measure = "jaccard", ..., reset_cache = FALSE) {
       funs = stabm::listStabilityMeasures()$Name
-      keys =  tolower(gsub("stability", "", funs))
+      keys = tolower(gsub("stability", "", funs))
       assert_choice(stability_measure, choices = keys)
 
       # cached results
@@ -140,8 +140,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Returns the result of the ensemble feature selection.
     result = function(rhs) {
       assert_ro_binding(rhs)
-      tab = as.data.table(self$benchmark_result)[, c("task", "learner", "resampling"), with = FALSE]
-      cbind(private$.result, tab)
+      private$.result
     }
   ),
 
