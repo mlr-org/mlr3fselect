@@ -24,6 +24,18 @@ test_that("ensemble feature selection works", {
   expect_names(names(feature_ranking), identical.to = c("feature", "inclusion_probability"))
 })
 
+test_that("EnsembleFSResult initialization", {
+  features = LETTERS
+  result = data.table(a = 1) # not proper column name
+  expect_error(EnsembleFSResult$new(result = result, features = features))
+
+  result = data.table(iter = 1:2, learner_id = list("l1", "l2"),
+                      features = list(LETTERS[1], LETTERS[1:3]),
+                      n_features = c(1,3))
+  # works without benchmark result object
+  expect_class(EnsembleFSResult$new(result = result, features = features), "EnsembleFSResult")
+})
+
 test_that("different callbacks can be set", {
 
   callback_test = callback_batch_fselect("mlr3fselect.test",
