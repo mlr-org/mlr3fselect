@@ -96,6 +96,10 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
     #' Currently, only `"inclusion_probability"` is supported.
+    #'
+    #' @return A [data.table][data.table::data.table] listing all the features,
+    #' ordered by decreasing inclusion probability scores (depending on the
+    #' `method`)
     feature_ranking = function(method = "inclusion_probability") {
       assert_choice(method, choices = "inclusion_probability")
 
@@ -104,16 +108,21 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         return(private$.feature_ranking[[method]])
       }
 
-      features = self$benchmark_result$tasks$task[[1]]$feature_names
+      count_tbl = sort(table(unlist(self$result$features)), decreasing = TRUE)
+      features_selected = names(count_tbl)
+      features_not_selected = setdiff(private$.features, features_selected)
 
-      count = map_int(features, function(feature) {
-        sum(map_lgl(self$result$features, function(iteration) {
-          feature %in% iteration
-        }))
-      })
+      res_fs = data.table(
+        feature = features_selected,
+        inclusion_probability = as.vector(count_tbl) / nrow(self$result)
+      )
 
-      res = data.table(feature = features, inclusion_probability = count / nrow(self$result))
-      setorderv(res, "inclusion_probability", order = -1L)
+      res_fns = data.table(
+        feature = features_not_selected,
+        inclusion_probability = 0
+      )
+
+      res = rbindlist(list(res_fs, res_fns))
 
       private$.feature_ranking[[method]] = res
       private$.feature_ranking[[method]]
