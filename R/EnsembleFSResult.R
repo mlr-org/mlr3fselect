@@ -3,9 +3,9 @@
 #' @name ensemble_fs_result
 #'
 #' @description
-#' The `EnsembleFSResult` stores the results of the ensemble feature selection
-#' and incorporates methods for assessing the stability of the feature selection
-#' and ranking the features.
+#' The `EnsembleFSResult` class stores the results of ensemble feature selection.
+#' It includes methods for evaluating the stability of the feature selection
+#' process and for ranking the selected features.
 #'
 #' The function [ensemble_fselect()] returns an object of this class.
 #'
@@ -29,6 +29,9 @@
 #'
 #' # returns the stability of the selected features
 #' efsr$stability(stability_measure = "jaccard")
+#'
+#' # returns a ranking of all features
+#' head(efsr$feature_ranking())
 #' }
 EnsembleFSResult = R6Class("EnsembleFSResult",
   public = list(
@@ -46,12 +49,12 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
     #'  The benchmark result object.
+    #'  Default is `NULL`, but the task's `"features"` must be given.
     #' @param result ([data.table::data.table])\cr
-    #'  The result of the ensemble feature selection results.
+    #'  The result of the ensemble feature selection.
     #' @param features ([character()])\cr
     #'  The vector of features of the task that was used in the ensemble feature
-    #'  selection. Ignored if `benchmark_result` is given and mandatory to have
-    #'  if `benchmark_result` is `NULL`.
+    #'  selection. Ignored if `"benchmark_result"` is given.
     initialize = function(benchmark_result = NULL, result, features) {
       if (is.null(benchmark_result)) {
         assert_character(features, any.missing = FALSE, null.ok = FALSE)
@@ -129,7 +132,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @description
-    #' Calculates the stability of the selected features with the `stabm` package.
+    #' Calculates the stability of the selected features with the \CRANpkg{stabm} package.
     #' The results are cached.
     #' When the same stability measure is requested again with different arguments, the cache must be reset.
     #'
