@@ -3,11 +3,17 @@
 #' @name ensemble_fs_result
 #'
 #' @description
-#' The `EnsembleFSResult` class stores the results of ensemble feature selection.
-#' It includes methods for evaluating the stability of the feature selection
-#' process and for ranking the selected features.
-#'
+#' The `EnsembleFSResult` stores the results of ensemble feature selection.
+#' It includes methods for evaluating the stability of the feature selection process and for ranking the selected features.
 #' The function [ensemble_fselect()] returns an object of this class.
+#'
+#' @section S3 Methods:
+#' * `as.data.table.EnsembleFSResult(x, benchmark_result = TRUE)`\cr
+#' Returns a tabular view of the ensemble feature selection.\cr
+#' [EnsembleFSResult] -> [data.table::data.table()]\cr
+#'     * `x` ([EnsembleFSResult])
+#'     * `benchmark_result` (`logical(1)`)\cr
+#'       Whether to add the learner, task and resampling information from the benchmark result.
 #'
 #' @examples
 #' \donttest{
@@ -47,27 +53,20 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
-    #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
-    #'  The benchmark result object.
-    #'  Default is `NULL`, but the task's `"features"` must be given.
     #' @param result ([data.table::data.table])\cr
     #'  The result of the ensemble feature selection.
     #' @param features ([character()])\cr
     #'  The vector of features of the task that was used in the ensemble feature
     #'  selection. Ignored if `"benchmark_result"` is given.
-    initialize = function(benchmark_result = NULL, result, features) {
-      if (is.null(benchmark_result)) {
-        assert_character(features, any.missing = FALSE, null.ok = FALSE)
-        private$.features = features
-      } else {
-        self$benchmark_result = assert_benchmark_result(benchmark_result)
-        private$.features = self$benchmark_result$tasks$task[[1]]$feature_names
-      }
-
+    #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
+    #'  The benchmark result object.
+    initialize = function(result, features, benchmark_result = NULL) {
       assert_data_table(result)
       assert_names(names(result), must.include = c("iter", "learner_id", "features", "n_features"))
-
       private$.result = result
+      private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
+      self$benchmark_result = if (!is.null(benchmark_result)) assert_benchmark_result(benchmark_result)
+
       self$man = "mlr3fselect::ensemble_fs_result"
     },
 
@@ -84,7 +83,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @param ... (ignored).
     print = function(...) {
       catf(format(self))
-      print(self$result[, c("learner_id", "n_features"), with = FALSE])
+      print(private$.result[, c("iter", "learner_id", "n_features"), with = FALSE])
     },
 
     #' @description
@@ -111,13 +110,13 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         return(private$.feature_ranking[[method]])
       }
 
-      count_tbl = sort(table(unlist(self$result$features)), decreasing = TRUE)
+      count_tbl = sort(table(unlist(private$.result$features)), decreasing = TRUE)
       features_selected = names(count_tbl)
       features_not_selected = setdiff(private$.features, features_selected)
 
       res_fs = data.table(
         feature = features_selected,
-        inclusion_probability = as.vector(count_tbl) / nrow(self$result)
+        inclusion_probability = as.vector(count_tbl) / nrow(private$.result)
       )
 
       res_fns = data.table(
@@ -155,7 +154,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       }
 
       fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
-      private$.stability[[stability_measure]] = fun(self$result$features, ...)
+      private$.stability[[stability_measure]] = fun(private$.result$features, ...)
       private$.stability[[stability_measure]]
     }
   ),
@@ -166,7 +165,9 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Returns the result of the ensemble feature selection.
     result = function(rhs) {
       assert_ro_binding(rhs)
-      private$.result
+      if (is.null(self$benchmark_result)) return(private$.result)
+      tab = as.data.table(self$benchmark_result)[, c("task", "learner", "resampling"), with = FALSE]
+      cbind(private$.result, tab)
     }
   ),
 
@@ -179,6 +180,6 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 )
 
 #' @export
-as.data.table.EnsembleFSResult = function(x, ...) {
+as.data.table.EnsembleFSResult = function(x,  ...) {
   x$result
 }

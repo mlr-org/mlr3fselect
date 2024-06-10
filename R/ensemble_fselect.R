@@ -4,23 +4,15 @@
 #'
 #' @description
 #' Ensemble feature selection using multiple learners.
-#' The ensemble feature selection method is designed to identify the
-#' most informative features from a given dataset by leveraging multiple
-#' machine learning models and resampling techniques.
+#' The ensemble feature selection method is designed to identify the most informative features from a given dataset by leveraging multiple machine learning models and resampling techniques.
 #'
 #' @details
-#' The method begins by applying an initial resampling technique specified
-#' by the user, to create **multiple subsamples** from the original dataset.
-#' This resampling process helps in generating diverse subsets of data for
-#' robust feature selection.
+#' The method begins by applying an initial resampling technique specified by the user, to create **multiple subsamples** from the original dataset.
+#' This resampling process helps in generating diverse subsets of data for robust feature selection.
 #'
-#' For each subsample generated in the previous step, the method performs
-#' **wrapped-based feature selection** ([auto_fselector]) using each provided
-#' learner, the given inner resampling method, performance measure and
-#' optimization algorithm.
-#' This process generates a best feature subset for each combination of
-#' subsample and learner.
-#' Results are stored in a [data.table] object.
+#' For each subsample generated in the previous step, the method performs **wrapped-based feature selection** ([auto_fselector]) using each provided learner, the given inner resampling method, performance measure and optimization algorithm.
+#' This process generates the best feature subset for each combination of subsample and learner.
+#' Results are stored in an [EnsembleFSResult].
 #'
 #' @param learners (list of [mlr3::Learner])\cr
 #'  The learners to be used for feature selection.
@@ -30,6 +22,8 @@
 #'  Can only be [mlr_resamplings_subsampling] or [mlr_resamplings_bootstrap].
 #' @param inner_resampling ([mlr3::Resampling])\cr
 #'  The inner resampling strategy used by the [FSelector].
+#' @param store_benchmark_result (`logical(1)`)\cr
+#'  Whether to store the benchmark result in [EnsembleFSResult] or not.
 #' @param store_models (`logical(1)`)\cr
 #'  Whether to store models in [auto_fselector] or not.
 #' @param callbacks (list of lists of [CallbackBatchFSelect])\cr
@@ -65,6 +59,7 @@ ensemble_fselect = function(
   measure,
   terminator,
   callbacks = NULL,
+  store_benchmark_result = TRUE,
   store_models = TRUE
   ) {
   assert_task(task)
@@ -72,6 +67,7 @@ ensemble_fselect = function(
   assert_resampling(init_resampling)
   assert_choice(class(init_resampling)[1], choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
   assert_list(callbacks, types = "list", len = length(learners), null.ok = TRUE)
+  assert_flag(store_benchmark_result)
 
   # create auto_fselector for each learner
   afss = imap(unname(learners), function(learner, i) {
@@ -139,5 +135,8 @@ ensemble_fselect = function(
   set(grid, j = "learner", value = NULL)
   set(grid, j = "task", value = NULL)
   set(grid, j = "resampling", value = NULL)
-  EnsembleFSResult$new(bmr, grid)
+  EnsembleFSResult$new(
+    result = grid,
+    features = task$feature_names,
+    benchmark_result = if (store_benchmark_result) bmr)
 }

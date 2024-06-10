@@ -1,6 +1,34 @@
 test_that("ensemble feature selection works", {
   task = tsk("sonar")
   efsr = ensemble_fselect(
+    fselector = fs("random_search"),
+    task = task,
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 5)
+  )
+
+  expect_character(efsr$man)
+  expect_data_table(efsr$result, nrows = 4)
+  expect_list(efsr$result$features, any.missing = FALSE, len = 4)
+  expect_vector(efsr$result$n_features, size = 4)
+  expect_vector(efsr$result$classif.ce, size = 4)
+  expect_benchmark_result(efsr$benchmark_result)
+
+  expect_number(efsr$stability(stability_measure = "jaccard"))
+  feature_ranking = efsr$feature_ranking()
+  expect_data_table(feature_ranking, nrows = length(task$feature_names))
+  expect_names(names(feature_ranking), identical.to = c("feature", "inclusion_probability"))
+
+  tab = as.data.table(efsr)
+  tab
+})
+
+test_that("ensemble feature selection works with rfe", {
+  task = tsk("sonar")
+  efsr = ensemble_fselect(
     fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
     task = task,
     learners = lrns(c("classif.rpart", "classif.featureless")),
@@ -22,6 +50,9 @@ test_that("ensemble feature selection works", {
   feature_ranking = efsr$feature_ranking()
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
   expect_names(names(feature_ranking), identical.to = c("feature", "inclusion_probability"))
+
+  tab = as.data.table(efsr)
+  tab
 })
 
 test_that("EnsembleFSResult initialization", {
@@ -33,7 +64,11 @@ test_that("EnsembleFSResult initialization", {
                       features = list(LETTERS[1], LETTERS[1:3]),
                       n_features = c(1,3))
   # works without benchmark result object
-  expect_class(EnsembleFSResult$new(result = result, features = features), "EnsembleFSResult")
+  efsr = EnsembleFSResult$new(result = result, features = features)
+  expect_class(efsr, "EnsembleFSResult")
+  tab = as.data.table(efsr)
+  expect_data_table(tab)
+  expect_names(names(tab), identical.to = c("iter", "learner_id", "features", "n_features"))
 })
 
 test_that("different callbacks can be set", {

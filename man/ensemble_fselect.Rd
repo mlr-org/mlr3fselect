@@ -29,6 +29,7 @@ ensemble_fselect(
   measure,
   terminator,
   callbacks = NULL,
+  store_benchmark_result = TRUE,
   store_models = TRUE
 )
 }
@@ -60,28 +61,23 @@ Stop criterion of the feature selection.}
 Callbacks to be used for each learner.
 The lists must have the same length as the number of learners.}
 
+\item{store_benchmark_result}{(\code{logical(1)})\cr
+Whether to store the benchmark result in \link{EnsembleFSResult} or not.}
+
 \item{store_models}{(\code{logical(1)})\cr
 Whether to store models in \link{auto_fselector} or not.}
 }
 \description{
 Ensemble feature selection using multiple learners.
-The ensemble feature selection method is designed to identify the
-most informative features from a given dataset by leveraging multiple
-machine learning models and resampling techniques.
+The ensemble feature selection method is designed to identify the most informative features from a given dataset by leveraging multiple machine learning models and resampling techniques.
 }
 \details{
-The method begins by applying an initial resampling technique specified
-by the user, to create \strong{multiple subsamples} from the original dataset.
-This resampling process helps in generating diverse subsets of data for
-robust feature selection.
+The method begins by applying an initial resampling technique specified by the user, to create \strong{multiple subsamples} from the original dataset.
+This resampling process helps in generating diverse subsets of data for robust feature selection.
 
-For each subsample generated in the previous step, the method performs
-\strong{wrapped-based feature selection} (\link{auto_fselector}) using each provided
-learner, the given inner resampling method, performance measure and
-optimization algorithm.
-This process generates a best feature subset for each combination of
-subsample and learner.
-Results are stored in a \link{data.table} object.
+For each subsample generated in the previous step, the method performs \strong{wrapped-based feature selection} (\link{auto_fselector}) using each provided learner, the given inner resampling method, performance measure and optimization algorithm.
+This process generates the best feature subset for each combination of subsample and learner.
+Results are stored in an \link{EnsembleFSResult}.
 }
 \examples{
 \donttest{
