@@ -60,7 +60,7 @@ test_that("EnsembleFSResult initialization", {
   result = data.table(a = 1) # not proper column name
   expect_error(EnsembleFSResult$new(result = result, features = features))
 
-  result = data.table(iter = 1:2, learner_id = list("l1", "l2"),
+  result = data.table(resampling_id = 1:2, learner_id = list("l1", "l2"),
                       features = list(LETTERS[1], LETTERS[1:3]),
                       n_features = c(1,3))
   # works without benchmark result object
@@ -68,7 +68,7 @@ test_that("EnsembleFSResult initialization", {
   expect_class(efsr, "EnsembleFSResult")
   tab = as.data.table(efsr)
   expect_data_table(tab)
-  expect_names(names(tab), identical.to = c("iter", "learner_id", "features", "n_features"))
+  expect_names(names(tab), identical.to = c("resampling_id", "learner_id", "features", "n_features"))
 })
 
 test_that("different callbacks can be set", {
