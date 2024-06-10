@@ -95,15 +95,23 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @description
     #' Calculates the feature ranking.
     #'
+    #' @details
+    #' The feature ranking process is built on the following framework: models
+    #' act as voters, features act as candidates, and voters select certain
+    #' candidates (features). The primary objective is to compile these selections
+    #' into a consensus ranked list of features, effectively forming a committee.
+    #' Currently, only `"approval_voting"` method is supported, which selects the
+    #' candidates/features that have the highest approval score or selection
+    #' frequency, i.e. appear the most often.
+    #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
-    #' Currently, only `"inclusion_probability"` is supported.
     #'
     #' @return A [data.table][data.table::data.table] listing all the features,
     #' ordered by decreasing inclusion probability scores (depending on the
     #' `method`)
-    feature_ranking = function(method = "inclusion_probability") {
-      assert_choice(method, choices = "inclusion_probability")
+    feature_ranking = function(method = "approval_voting") {
+      assert_choice(method, choices = "approval_voting")
 
       # cached results
       if (!is.null(private$.feature_ranking[[method]])) {
