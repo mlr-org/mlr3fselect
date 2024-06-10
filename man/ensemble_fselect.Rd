@@ -67,6 +67,9 @@ Whether to store the benchmark result in \link{EnsembleFSResult} or not.}
 \item{store_models}{(\code{logical(1)})\cr
 Whether to store models in \link{auto_fselector} or not.}
 }
+\value{
+an \link{EnsembleFSResult} object.
+}
 \description{
 Ensemble feature selection using multiple learners.
 The ensemble feature selection method is designed to identify the most informative features from a given dataset by leveraging multiple machine learning models and resampling techniques.

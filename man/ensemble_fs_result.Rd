@@ -96,7 +96,7 @@ The result of the ensemble feature selection.}
 
 \item{\code{features}}{(\code{\link[=character]{character()}})\cr
 The vector of features of the task that was used in the ensemble feature
-selection. Ignored if \code{"benchmark_result"} is given.}
+selection.}
 
 \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result object.}
@@ -154,18 +154,27 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \subsection{Method \code{feature_ranking()}}{
 Calculates the feature ranking.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "inclusion_probability")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "approval_voting")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{method}}{(\code{character(1)})\cr
-The method to calculate the feature ranking.
-Currently, only \code{"inclusion_probability"} is supported.}
+The method to calculate the feature ranking.}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Details}{
+The feature ranking process is built on the following framework: models
+act as voters, features act as candidates, and voters select certain
+candidates (features). The primary objective is to compile these selections
+into a consensus ranked list of features, effectively forming a committee.
+Currently, only \code{"approval_voting"} method is supported, which selects the
+candidates/features that have the highest approval score or selection
+frequency, i.e. appear the most often.
+}
+
 \subsection{Returns}{
 A \link[data.table:data.table]{data.table} listing all the features,
 ordered by decreasing inclusion probability scores (depending on the
