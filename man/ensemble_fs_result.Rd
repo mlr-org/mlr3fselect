@@ -92,7 +92,9 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
-The result of the ensemble feature selection.}
+The result of the ensemble feature selection.
+Column names should include \code{"resampling_id"}, \code{"learner_id"}, \code{"features"}
+and \code{"n_features"}.}
 
 \item{\code{features}}{(\code{\link[=character]{character()}})\cr
 The vector of features of the task that was used in the ensemble feature
