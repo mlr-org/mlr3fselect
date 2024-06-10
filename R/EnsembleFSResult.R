@@ -57,12 +57,12 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  The result of the ensemble feature selection.
     #' @param features ([character()])\cr
     #'  The vector of features of the task that was used in the ensemble feature
-    #'  selection. Ignored if `"benchmark_result"` is given.
+    #'  selection.
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
     #'  The benchmark result object.
     initialize = function(result, features, benchmark_result = NULL) {
       assert_data_table(result)
-      assert_names(names(result), must.include = c("iter", "learner_id", "features", "n_features"))
+      assert_names(names(result), must.include = c("resampling_id", "learner_id", "features", "n_features"))
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
       self$benchmark_result = if (!is.null(benchmark_result)) assert_benchmark_result(benchmark_result)

@@ -35,6 +35,8 @@
 #' @template param_measure
 #' @template param_terminator
 #'
+#' @returns an [EnsembleFSResult] object.
+#'
 #' @source
 #' `r format_bib("saeys2008", "abeel2010", "pes2020")`
 #' @export
@@ -90,7 +92,7 @@ ensemble_fselect = function(
     resampling = rsmp("insample")$instantiate(task_subset)
 
     data.table(
-      iter = i,
+      resampling_id = i,
       learner_id = map(learners, "id"),
       learner = afss,
       task = list(task_subset),
@@ -119,7 +121,6 @@ ensemble_fselect = function(
     afs$fselect_instance$archive$best()[, measure$id, with = FALSE][[1]]
   })
 
-  set(grid, j = "iter", value = 1:bmr$n_resample_results)
   set(grid, j = "features", value = features)
   set(grid, j = "n_features", value = n_features)
   set(grid, j = measure$id, value = scores)
@@ -138,5 +139,6 @@ ensemble_fselect = function(
   EnsembleFSResult$new(
     result = grid,
     features = task$feature_names,
-    benchmark_result = if (store_benchmark_result) bmr)
+    benchmark_result = if (store_benchmark_result) bmr
+  )
 }
