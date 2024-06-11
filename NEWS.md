@@ -1,6 +1,10 @@
 # mlr3fselect (development version)
 
 * feat: Add ensemble feature selection function `ensemble_fselect()`.
+* BREAKING CHANGE: The `FSelector` class is `FSelectorBatch` now.
+* BREAKING CHANGE: THe `FSelectInstanceSingleCrit` and `FSelectInstanceMultiCrit` classes are `FSelectInstanceBatchSingleCrit` and `FSelectInstanceBatchMultiCrit` now.
+* BREAKING CHANGE: The `CallbackFSelect` class is `CallbackBatchFSelect` now.
+* BREAKING CHANGE: The `ContextEval` class is `ContextBatchFSelect` now.
 
 # mlr3fselect 0.12.0
 
