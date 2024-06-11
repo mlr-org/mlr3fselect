@@ -195,25 +195,25 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin   mass pedigree pregnant pressure triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;  &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;  &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     features n_features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant          4  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             features n_features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,insulin,mass,pregnant,triceps          5  0.2617188</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;  &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;  &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.2656250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2578125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2695312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.2656250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.2617188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.2617188</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.014 2024-05-13 08:21:47        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.011 2024-05-13 08:21:47        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.012 2024-05-13 08:21:48        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.031 2024-05-13 08:21:48        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.012 2024-06-11 09:48:04        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.012 2024-06-11 09:48:04        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.011 2024-06-11 09:48:04        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.013 2024-06-11 09:48:04        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      features n_features  resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                        &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:          age,insulin,mass,pregnant,triceps          5 &lt;ResampleResult&gt;</span>
@@ -232,7 +232,7 @@ Design points to try in search, one per row.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Marc Becker, Patrick Schratz, Michel Lang, Bernd Bischl.</p>
+  <p>Developed by Marc Becker, Patrick Schratz, Michel Lang, Bernd Bischl, John Zobolas.</p>
 </div>
 
 <div class="pkgdown-footer-right">

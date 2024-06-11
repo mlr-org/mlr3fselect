@@ -151,12 +151,12 @@ Vector of selected feature set.</p></li>
 <span class="r-in"><span><span class="fu">extract_inner_fselect_results</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;       &lt;lgcl&gt;      &lt;lgcl&gt;       &lt;lgcl&gt;      &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE       FALSE        FALSE        TRUE       0.04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2         TRUE        TRUE        FALSE       FALSE       0.04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE       FALSE        FALSE       FALSE       0.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2        FALSE        TRUE         TRUE       FALSE       0.04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    features n_features task_id              learner_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      &lt;list&gt;      &lt;int&gt;  &lt;char&gt;                  &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Sepal.Width          2    iris classif.rpart.fselector</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Length,Petal.Width          2    iris classif.rpart.fselector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:             Petal.Length          1    iris classif.rpart.fselector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Width,Sepal.Length          2    iris classif.rpart.fselector</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:            cv</span>
@@ -168,7 +168,7 @@ Vector of selected feature set.</p></li>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Marc Becker, Patrick Schratz, Michel Lang, Bernd Bischl.</p>
+  <p>Developed by Marc Becker, Patrick Schratz, Michel Lang, Bernd Bischl, John Zobolas.</p>
 </div>
 
 <div class="pkgdown-footer-right">

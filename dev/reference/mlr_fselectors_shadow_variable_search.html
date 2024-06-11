@@ -217,7 +217,7 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             features n_features classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length,island          3 0.02608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length,island          3 0.06956522</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -262,48 +262,70 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 37:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 38:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 39:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:      FALSE        TRUE      TRUE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:      FALSE        TRUE     FALSE           TRUE   TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.26086957            0.017 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.27826087            0.016 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.26086957            0.017 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.20000000            0.035 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.21739130            0.022 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.61739130            0.016 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.61739130            0.014 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.55652174            0.014 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.61739130            0.014 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.64347826            0.014 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.66086957            0.015 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.61739130            0.056 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.61739130            0.020 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.61739130            0.017 2024-05-13 08:21:55        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.25217391            0.018 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.07826087            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.21739130            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.13043478            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.20000000            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.19130435            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.20000000            0.024 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.20000000            0.021 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.20000000            0.018 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.22608696            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.20000000            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.20000000            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.20000000            0.016 2024-05-13 08:21:56        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.07826087            0.017 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 0.07826087            0.033 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 0.02608696            0.024 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 0.07826087            0.021 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 0.07826087            0.017 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 0.06956522            0.017 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 0.07826087            0.017 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 0.07826087            0.017 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 0.07826087            0.015 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 0.07826087            0.036 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 0.07826087            0.022 2024-05-13 08:21:56        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 0.07826087            0.018 2024-05-13 08:21:56        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.32173913            0.016 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.24347826            0.015 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.31304348            0.016 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.19130435            0.015 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.28695652            0.018 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.55652174            0.014 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.55652174            0.015 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.60000000            0.014 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.61739130            0.014 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.60000000            0.015 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.57391304            0.015 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.58260870            0.015 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.55652174            0.015 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.55652174            0.014 2024-06-11 09:48:11        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.21739130            0.017 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.07826087            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.19130435            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.13043478            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.25217391            0.017 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.19130435            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.19130435            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.18260870            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.20000000            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.20869565            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.19130435            0.016 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.19130435            0.014 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.19130435            0.015 2024-06-11 09:48:11        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.07826087            0.018 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 0.07826087            0.017 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 0.06956522            0.017 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 0.07826087            0.015 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 0.07826087            0.016 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 0.07826087            0.016 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 0.07826087            0.016 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 0.07826087            0.016 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 0.07826087            0.016 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 0.07826087            0.016 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 0.07826087            0.016 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 0.07826087            0.037 2024-06-11 09:48:12        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 0.06956522            0.017 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 0.06956522            0.016 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 0.06956522            0.016 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 0.06956522            0.016 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 0.06956522            0.015 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 0.06956522            0.016 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 0.06956522            0.016 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 0.06956522            0.016 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48: 0.06956522            0.038 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49: 0.06956522            0.016 2024-06-11 09:48:12        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50: 0.06956522            0.015 2024-06-11 09:48:12        4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__bill_depth permuted__bill_length permuted__body_mass</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   &lt;lgcl&gt;                &lt;lgcl&gt;              &lt;lgcl&gt;</span>
@@ -346,6 +368,17 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 37:                FALSE                 FALSE               FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 38:                FALSE                 FALSE               FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 39:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:                 TRUE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:                FALSE                  TRUE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:                FALSE                 FALSE                TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:                FALSE                 FALSE               FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:                FALSE                 FALSE               FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__bill_depth permuted__bill_length permuted__body_mass</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__flipper_length permuted__island permuted__sex permuted__year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       &lt;lgcl&gt;           &lt;lgcl&gt;        &lt;lgcl&gt;         &lt;lgcl&gt;</span>
@@ -388,49 +421,71 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 37:                    FALSE             TRUE         FALSE          FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 38:                    FALSE            FALSE          TRUE          FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 39:                    FALSE            FALSE         FALSE           TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:                    FALSE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:                    FALSE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:                    FALSE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:                    FALSE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:                    FALSE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:                    FALSE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:                    FALSE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:                     TRUE            FALSE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:                    FALSE             TRUE         FALSE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:                    FALSE            FALSE          TRUE          FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:                    FALSE            FALSE         FALSE           TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__flipper_length permuted__island permuted__sex permuted__year</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     warnings errors                              features n_features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;  &lt;int&gt;                                &lt;list&gt;     &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:        0      0                            bill_depth          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:        0      0                           bill_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:        0      0                             body_mass          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:        0      0                                island          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:        0      0                                   sex          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:        0      0                                  year          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:        0      0                                                0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:        0      0                                                0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:        0      0                                                0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11:        0      0                                                0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12:        0      0                                                0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13:        0      0                                                0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14:        0      0                                                0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15:        0      0             bill_depth,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17:        0      0              body_mass,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18:        0      0                 flipper_length,island          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19:        0      0                    flipper_length,sex          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20:        0      0                   flipper_length,year          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27:        0      0                        flipper_length          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28:        0      0 bill_depth,bill_length,flipper_length          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29:        0      0  bill_length,body_mass,flipper_length          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30:        0      0     bill_length,flipper_length,island          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31:        0      0        bill_length,flipper_length,sex          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32:        0      0       bill_length,flipper_length,year          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39:        0      0            bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     warnings errors                              features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     warnings errors                                     features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;  &lt;int&gt;                                       &lt;list&gt;     &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:        0      0                                   bill_depth          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:        0      0                                  bill_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:        0      0                                    body_mass          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:        0      0                                       island          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:        0      0                                          sex          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:        0      0                                         year          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:        0      0                                                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:        0      0                                                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:        0      0                                                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:        0      0                                                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:        0      0                                                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:        0      0                                                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:        0      0                                                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:        0      0                    bill_depth,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:        0      0                     body_mass,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:        0      0                        flipper_length,island          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:        0      0                           flipper_length,sex          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:        0      0                          flipper_length,year          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27:        0      0                               flipper_length          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28:        0      0        bill_depth,bill_length,flipper_length          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29:        0      0         bill_length,body_mass,flipper_length          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31:        0      0               bill_length,flipper_length,sex          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32:        0      0              bill_length,flipper_length,year          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39:        0      0                   bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40:        0      0 bill_depth,bill_length,flipper_length,island          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41:        0      0  bill_length,body_mass,flipper_length,island          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42:        0      0        bill_length,flipper_length,island,sex          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43:        0      0       bill_length,flipper_length,island,year          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50:        0      0            bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     warnings errors                                     features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult&gt;</span>
@@ -472,6 +527,17 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 37: &lt;ResampleResult&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 38: &lt;ResampleResult&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 39: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50: &lt;ResampleResult&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      resample_result</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subset the task and fit the final model</span></span></span>
@@ -485,7 +551,7 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Marc Becker, Patrick Schratz, Michel Lang, Bernd Bischl.</p>
+  <p>Developed by Marc Becker, Patrick Schratz, Michel Lang, Bernd Bischl, John Zobolas.</p>
 </div>
 
 <div class="pkgdown-footer-right">

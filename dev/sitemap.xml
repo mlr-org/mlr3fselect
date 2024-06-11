@@ -52,6 +52,12 @@
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/callback_batch_fselect.html</loc>
   </url>
   <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fs_result.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fselect.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.html</loc>
   </url>
   <url>
