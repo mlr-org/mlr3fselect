@@ -17,27 +17,27 @@
 #'
 #' @examples
 #' \donttest{
-#' efsr = ensemble_fselect(
-#'   fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
-#'   task = tsk("sonar"),
-#'   learners = lrns(c("classif.rpart", "classif.featureless")),
-#'   init_resampling = rsmp("subsampling", repeats = 2),
-#'   inner_resampling = rsmp("cv", folds = 3),
-#'   measure = msr("classif.ce"),
-#'   terminator = trm("none")
-#' )
+#'   efsr = ensemble_fselect(
+#'     fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
+#'     task = tsk("sonar"),
+#'     learners = lrns(c("classif.rpart", "classif.featureless")),
+#'     init_resampling = rsmp("subsampling", repeats = 2),
+#'     inner_resampling = rsmp("cv", folds = 3),
+#'     measure = msr("classif.ce"),
+#'     terminator = trm("none")
+#'   )
 #'
-#' # contains the benchmark result
-#' efsr$benchmark_result
+#'   # contains the benchmark result
+#'   efsr$benchmark_result
 #'
-#' # contains the selected features for each iteration
-#' efsr$result
+#'   # contains the selected features for each iteration
+#'   efsr$result
 #'
-#' # returns the stability of the selected features
-#' efsr$stability(stability_measure = "jaccard")
+#'   # returns the stability of the selected features
+#'   efsr$stability(stability_measure = "jaccard")
 #'
-#' # returns a ranking of all features
-#' head(efsr$feature_ranking())
+#'   # returns a ranking of all features
+#'   head(efsr$feature_ranking())
 #' }
 EnsembleFSResult = R6Class("EnsembleFSResult",
   public = list(
@@ -149,6 +149,9 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  Whether to calculate the stability globally or for each learner.
     #' @param reset_cache (`logical(1)`)\cr
     #'  If `TRUE`, the cached results are ignored.
+    #'
+    #' @return A `numeric()` value representing the stability of the selected features.
+    #' Or a `numeric()` vector with the stability of the selected features for each learner.
     stability = function(stability_measure = "jaccard", ..., global = TRUE, reset_cache = FALSE) {
       funs = stabm::listStabilityMeasures()$Name
       keys = tolower(gsub("stability", "", funs))
@@ -175,8 +178,6 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         private$.stability_learner[[stability_measure]] = set_names(tab$score, tab$learner_id)
         private$.stability_learner[[stability_measure]]
       }
-
-
     }
   ),
 

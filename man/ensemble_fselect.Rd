@@ -73,6 +73,7 @@ an \link{EnsembleFSResult} object.
 \description{
 Ensemble feature selection using multiple learners.
 The ensemble feature selection method is designed to identify the most informative features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+Returns an \link{EnsembleFSResult}.
 }
 \details{
 The method begins by applying an initial resampling technique specified by the user, to create \strong{multiple subsamples} from the original dataset.
@@ -84,7 +85,7 @@ Results are stored in an \link{EnsembleFSResult}.
 }
 \examples{
 \donttest{
-  ensemble_fselect(
+  efsr = ensemble_fselect(
     fselector = fs("random_search"),
     task = tsk("sonar"),
     learners = lrns(c("classif.rpart", "classif.featureless")),
@@ -93,5 +94,6 @@ Results are stored in an \link{EnsembleFSResult}.
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 10)
   )
+  efsr
 }
 }

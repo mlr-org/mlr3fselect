@@ -25,27 +25,27 @@ Whether to add the learner, task and resampling information from the benchmark r
 
 \examples{
 \donttest{
-efsr = ensemble_fselect(
-  fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
-  task = tsk("sonar"),
-  learners = lrns(c("classif.rpart", "classif.featureless")),
-  init_resampling = rsmp("subsampling", repeats = 2),
-  inner_resampling = rsmp("cv", folds = 3),
-  measure = msr("classif.ce"),
-  terminator = trm("none")
-)
+  efsr = ensemble_fselect(
+    fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
+    task = tsk("sonar"),
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    measure = msr("classif.ce"),
+    terminator = trm("none")
+  )
 
-# contains the benchmark result
-efsr$benchmark_result
+  # contains the benchmark result
+  efsr$benchmark_result
 
-# contains the selected features for each iteration
-efsr$result
+  # contains the selected features for each iteration
+  efsr$result
 
-# returns the stability of the selected features
-efsr$stability(stability_measure = "jaccard")
+  # returns the stability of the selected features
+  efsr$stability(stability_measure = "jaccard")
 
-# returns a ranking of all features
-head(efsr$feature_ranking())
+  # returns a ranking of all features
+  head(efsr$feature_ranking())
 }
 }
 \section{Public fields}{
@@ -168,19 +168,13 @@ The method to calculate the feature ranking.}
 \if{html}{\out{</div>}}
 }
 \subsection{Details}{
-The feature ranking process is built on the following framework: models
-act as voters, features act as candidates, and voters select certain
-candidates (features). The primary objective is to compile these selections
-into a consensus ranked list of features, effectively forming a committee.
-Currently, only \code{"approval_voting"} method is supported, which selects the
-candidates/features that have the highest approval score or selection
-frequency, i.e. appear the most often.
+The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
+The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
+Currently, only \code{"approval_voting"} method is supported, which selects the candidates/features that have the highest approval score or selection frequency, i.e. appear the most often.
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table} listing all the features,
-ordered by decreasing inclusion probability scores (depending on the
-\code{method})
+A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing inclusion probability scores (depending on the \code{method})
 }
 }
 \if{html}{\out{<hr>}}
@@ -194,6 +188,7 @@ When the same stability measure is requested again with different arguments, the
 \if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$stability(
   stability_measure = "jaccard",
   ...,
+  global = TRUE,
   reset_cache = FALSE
 )}\if{html}{\out{</div>}}
 }
@@ -209,10 +204,17 @@ Default is \code{"jaccard"}.}
 \item{\code{...}}{(\code{any})\cr
 Additional arguments passed to the stability measure function.}
 
+\item{\code{global}}{(\code{logical(1)})\cr
+Whether to calculate the stability globally or for each learner.}
+
 \item{\code{reset_cache}}{(\code{logical(1)})\cr
 If \code{TRUE}, the cached results are ignored.}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{numeric()} value representing the stability of the selected features.
+Or a \code{numeric()} vector with the stability of the selected features for each learner.
 }
 }
 \if{html}{\out{<hr>}}

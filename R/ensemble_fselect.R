@@ -5,6 +5,7 @@
 #' @description
 #' Ensemble feature selection using multiple learners.
 #' The ensemble feature selection method is designed to identify the most informative features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+#' Returns an [EnsembleFSResult].
 #'
 #' @details
 #' The method begins by applying an initial resampling technique specified by the user, to create **multiple subsamples** from the original dataset.
@@ -42,7 +43,7 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   ensemble_fselect(
+#'   efsr = ensemble_fselect(
 #'     fselector = fs("random_search"),
 #'     task = tsk("sonar"),
 #'     learners = lrns(c("classif.rpart", "classif.featureless")),
@@ -51,6 +52,7 @@
 #'     measure = msr("classif.ce"),
 #'     terminator = trm("evals", n_evals = 10)
 #'   )
+#'   efsr
 #' }
 ensemble_fselect = function(
   fselector,
