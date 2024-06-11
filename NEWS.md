@@ -1,5 +1,7 @@
 # mlr3fselect (development version)
 
+* feat: Add ensemble feature selection function `ensemble_fselect()`.
+
 # mlr3fselect 0.12.0
 
 * feat: Add number of features to `instance$result`.
