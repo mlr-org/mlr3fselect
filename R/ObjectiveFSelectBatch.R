@@ -89,6 +89,9 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
         self$archive$benchmark_result$combine(private$.benchmark_result)
         set(private$.aggregated_performance, j = "uhash", value = private$.benchmark_result$uhashes)
       }
+
+      call_back("on_eval_before_archive", self$callbacks, self$context)
+
       private$.aggregated_performance
     },
 

@@ -66,6 +66,44 @@ bibentries = c(
     address   = "New York, NY",
     pages     = "61--92",
     isbn      = "978-1-4614-6849-3"
+  ),
+
+  saeys2008 = bibentry("article",
+    author      = "Saeys, Yvan and Abeel, Thomas and Van De Peer, Yves",
+    doi         = "10.1007/978-3-540-87481-2_21",
+    isbn        = "3540874801",
+    journal     = "Machine Learning and Knowledge Discovery in Databases",
+    pages       = "313--325",
+    publisher   = "Springer, Berlin, Heidelberg",
+    title       = "Robust feature selection using ensemble feature selection techniques",
+    volume      = "5212 LNAI",
+    year        = "2008"
+  ),
+
+  abeel2010 = bibentry("article",
+    author    = "Abeel, Thomas and Helleputte, Thibault and Van de Peer, Yves and Dupont, Pierre and Saeys, Yvan",
+    doi       = "10.1093/BIOINFORMATICS/BTP630",
+    issn      = "1367-4803",
+    journal   = "Bioinformatics",
+    month     = "feb",
+    pages     = "392--398",
+    publisher = "Oxford Academic",
+    title     = "Robust biomarker identification for cancer diagnosis with ensemble feature selection methods",
+    volume    = "26",
+    year      = "2010"
+  ),
+
+  pes2020 = bibentry("article",
+    author    = "Pes, Barbara",
+    doi       = "10.1007/s00521-019-04082-3",
+    issn      = "14333058",
+    journal   = "Neural Computing and Applications",
+    month     = "may",
+    number    = "10",
+    pages     = "5951--5973",
+    publisher = "Springer",
+    title     = "Ensemble feature selection for high-dimensional data: a stability analysis across multiple domains",
+    volume    = "32",
+    year      = "2020"
   )
 )
-
