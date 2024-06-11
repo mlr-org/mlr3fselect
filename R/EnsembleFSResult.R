@@ -64,7 +64,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  The benchmark result object.
     initialize = function(result, features, benchmark_result = NULL) {
       assert_data_table(result)
-      assert_names(names(result), must.include = c("resampling_id", "learner_id", "features", "n_features"))
+      assert_names(names(result), must.include = c("resampling_iteration", "learner_id", "features", "n_features"))
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
       self$benchmark_result = if (!is.null(benchmark_result)) assert_benchmark_result(benchmark_result)
@@ -85,7 +85,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @param ... (ignored).
     print = function(...) {
       catf(format(self))
-      print(private$.result[, c("iter", "learner_id", "n_features"), with = FALSE])
+      print(private$.result[, c("resampling_iteration", "learner_id", "n_features"), with = FALSE])
     },
 
     #' @description
@@ -98,20 +98,14 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Calculates the feature ranking.
     #'
     #' @details
-    #' The feature ranking process is built on the following framework: models
-    #' act as voters, features act as candidates, and voters select certain
-    #' candidates (features). The primary objective is to compile these selections
-    #' into a consensus ranked list of features, effectively forming a committee.
-    #' Currently, only `"approval_voting"` method is supported, which selects the
-    #' candidates/features that have the highest approval score or selection
-    #' frequency, i.e. appear the most often.
+    #' The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
+    #' The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
+    #' Currently, only `"approval_voting"` method is supported, which selects the candidates/features that have the highest approval score or selection frequency, i.e. appear the most often.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
     #'
-    #' @return A [data.table][data.table::data.table] listing all the features,
-    #' ordered by decreasing inclusion probability scores (depending on the
-    #' `method`)
+    #' @return A [data.table::data.table] listing all the features, ordered by decreasing inclusion probability scores (depending on the `method`)
     feature_ranking = function(method = "approval_voting") {
       assert_choice(method, choices = "approval_voting")
 
@@ -151,21 +145,38 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  Default is `"jaccard"`.
     #' @param ... (`any`)\cr
     #'  Additional arguments passed to the stability measure function.
+    #' @param global (`logical(1)`)\cr
+    #'  Whether to calculate the stability globally or for each learner.
     #' @param reset_cache (`logical(1)`)\cr
     #'  If `TRUE`, the cached results are ignored.
-    stability = function(stability_measure = "jaccard", ..., reset_cache = FALSE) {
+    stability = function(stability_measure = "jaccard", ..., global = TRUE, reset_cache = FALSE) {
       funs = stabm::listStabilityMeasures()$Name
       keys = tolower(gsub("stability", "", funs))
       assert_choice(stability_measure, choices = keys)
 
-      # cached results
-      if (!is.null(private$.stability[[stability_measure]]) && !reset_cache) {
-        return(private$.stability[[stability_measure]])
+      if (global) {
+        # cached results
+        if (!is.null(private$.stability_global[[stability_measure]]) && !reset_cache) {
+          return(private$.stability_global[[stability_measure]])
+        }
+
+        fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
+        private$.stability_global[[stability_measure]] = fun(private$.result$features, ...)
+        private$.stability_global[[stability_measure]]
+      } else {
+        # cached results
+        if (!is.null(private$.stability_learner[[stability_measure]]) && !reset_cache) {
+          return(private$.stability_learner[[stability_measure]])
+        }
+
+        fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
+
+        tab = private$.result[, list(score = fun(.SD$features, ...)), by = learner_id]
+        private$.stability_learner[[stability_measure]] = set_names(tab$score, tab$learner_id)
+        private$.stability_learner[[stability_measure]]
       }
 
-      fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
-      private$.stability[[stability_measure]] = fun(private$.result$features, ...)
-      private$.stability[[stability_measure]]
+
     }
   ),
 
@@ -183,7 +194,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
   private = list(
     .result = NULL,
-    .stability = NULL,
+    .stability_global = NULL,
+    .stability_learner = NULL,
     .feature_ranking = NULL,
     .features = NULL
   )

@@ -92,8 +92,8 @@ ensemble_fselect = function(
     resampling = rsmp("insample")$instantiate(task_subset)
 
     data.table(
-      resampling_id = i,
-      learner_id = map(learners, "id"),
+      resampling_iteration = i,
+      learner_id = map_chr(learners, "id"),
       learner = afss,
       task = list(task_subset),
       resampling = list(resampling)
