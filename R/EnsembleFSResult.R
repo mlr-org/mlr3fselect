@@ -69,7 +69,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  Column name of `"result"` that corresponds to the measure used.
     #' @param minimize (`logical(1)`)\cr
     #'  If `TRUE` (default), lower values of the measure correspond to higher performance.
-    initialize = function(result, features, benchmark_result = NULL, measure_var,
+    initialize = function(result, features, benchmark_result = NULL, measure_id,
                           minimize = TRUE) {
       assert_data_table(result)
       private$.measure_var = assert_string(measure_var, null.ok = FALSE)
