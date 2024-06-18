@@ -281,7 +281,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
     #' @field nlearners (`numeric(1)`)\cr
     #' Returns the number of learners used in the ensemble feature selection.
-    nlearners = function(rhs) {
+    n_learners = function(rhs) {
       assert_ro_binding(rhs)
       uniqueN(private$.result$learner_id)
     },
