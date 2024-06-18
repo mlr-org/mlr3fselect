@@ -186,6 +186,82 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         private$.stability_learner[[stability_measure]] = set_names(tab$score, tab$learner_id)
         private$.stability_learner[[stability_measure]]
       }
+    },
+
+    #' @description
+    #'
+    #' This function identifies the **Pareto front** of the ensemble feature
+    #' selection process, i.e., the set of points that represent the trade-off
+    #' between the number of features and performance (e.g. classification error).
+    #'
+    #' @param type (`character(1)`)\cr
+    #'  Specifies the type of Pareto front to return. See details.
+    #'
+    #' @details
+    #' Two options are available for the Pareto front:
+    #' - `"empirical"` (default): returns the empirical Pareto front.
+    #' - `"estimated"`: the Pareto front points are estimated by fitting a
+    #'  linear model with the inversed of the number of features (\eqn{1/x}) as
+    #'  input and the associated performance scores as output.
+    #'  This method is useful when the Pareto points are sparse and the front
+    #'  assumes a convex shape if better performance corresponds to lower measure
+    #'  values (e.g. classification error), or a concave shape otherwise (e.g.
+    #'  classification accuracy).
+    #'  The `estimated` Pareto front will include points for a number
+    #'  of features ranging from 1 up to the maximum number found in the
+    #'  empirical Pareto front.
+    #'
+    #' @return A [data.table] with columns the number of features and the
+    #' performance that together form the Pareto front.
+    pareto_front = function(type = "empirical") {
+      assert_choice(type, choices =  c("empirical", "estimated"))
+      result = private$.result
+      measure_var = private$.measure_var
+
+      # Keep only n_features and performance scores
+      cols_to_keep = c("n_features", measure_var)
+      data = result[, ..cols_to_keep][order(n_features)]
+
+      # Initialize the Pareto front
+      pf = data.table(n_features = numeric(0))
+      pf[, (measure_var) := numeric(0)]
+
+      # Initialize the best performance to a large number so
+      # that the Pareto front has at least one point
+      minimize = private$.minimize
+      best_score = if (minimize) Inf else -Inf
+
+      for (i in 1:nrow(data)) {
+        # Determine the condition based on minimize
+        if (minimize) {
+          condition = data[[measure_var]][i] < best_score
+        } else {
+          condition = data[[measure_var]][i] > best_score
+        }
+
+        if (condition) {
+          pf = rbind(pf, data[i])
+          best_score = data[[measure_var]][i]
+        }
+      }
+
+      if (type == "estimated") {
+        # Transform the data (x => 1/x)
+        pf[, n_features_inv := 1 / n_features]
+
+        # Fit the linear model
+        form = mlr3misc::formulate(lhs = measure_var, rhs = "n_features_inv")
+        model = stats::lm(formula = form, data = pf)
+
+        # Predict values using the model to create a smooth curve
+        pf_pred = data.table(n_features = seq(1, max(data$n_features)))
+        pf_pred[, n_features_inv := 1 / n_features]
+        pf_pred[, (measure_var) := predict(model, newdata = pf_pred)]
+        pf_pred$n_features_inv = NULL
+        pf = pf_pred
+      }
+
+      pf
     }
   ),
 
