@@ -234,7 +234,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       minimize = private$.minimize
       best_score = if (minimize) Inf else -Inf
 
-      for (i in 1:nrow(data)) {
+      for (i in seq_row(data)) {
         # Determine the condition based on minimize
         if (minimize) {
           condition = data[[measure_var]][i] < best_score
