@@ -65,16 +65,16 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  selection.
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
     #'  The benchmark result object.
-    #' @param measure_var (`character(1)`)\cr
+    #' @param measure_id (`character(1)`)\cr
     #'  Column name of `"result"` that corresponds to the measure used.
     #' @param minimize (`logical(1)`)\cr
     #'  If `TRUE` (default), lower values of the measure correspond to higher performance.
     initialize = function(result, features, benchmark_result = NULL, measure_id,
                           minimize = TRUE) {
       assert_data_table(result)
-      private$.measure_var = assert_string(measure_var, null.ok = FALSE)
+      private$.measure_id = assert_string(measure_id, null.ok = FALSE)
       mandatory_columns = c("resampling_iteration", "learner_id", "features", "n_features")
-      assert_names(names(result), must.include = c(mandatory_columns, measure_var))
+      assert_names(names(result), must.include = c(mandatory_columns, measure_id))
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
       private$.minimize = assert_logical(minimize, null.ok = FALSE)
@@ -219,15 +219,15 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     pareto_front = function(type = "empirical") {
       assert_choice(type, choices =  c("empirical", "estimated"))
       result = private$.result
-      measure_var = private$.measure_var
+      measure_id = private$.measure_id
 
       # Keep only n_features and performance scores
-      cols_to_keep = c("n_features", measure_var)
+      cols_to_keep = c("n_features", measure_id)
       data = result[, ..cols_to_keep][order(n_features)]
 
       # Initialize the Pareto front
       pf = data.table(n_features = numeric(0))
-      pf[, (measure_var) := numeric(0)]
+      pf[, (measure_id) := numeric(0)]
 
       # Initialize the best performance to a large number so
       # that the Pareto front has at least one point
@@ -237,14 +237,14 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       for (i in seq_row(data)) {
         # Determine the condition based on minimize
         if (minimize) {
-          condition = data[[measure_var]][i] < best_score
+          condition = data[[measure_id]][i] < best_score
         } else {
-          condition = data[[measure_var]][i] > best_score
+          condition = data[[measure_id]][i] > best_score
         }
 
         if (condition) {
           pf = rbind(pf, data[i])
-          best_score = data[[measure_var]][i]
+          best_score = data[[measure_id]][i]
         }
       }
 
@@ -253,13 +253,13 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         pf[, n_features_inv := 1 / n_features]
 
         # Fit the linear model
-        form = mlr3misc::formulate(lhs = measure_var, rhs = "n_features_inv")
+        form = mlr3misc::formulate(lhs = measure_id, rhs = "n_features_inv")
         model = stats::lm(formula = form, data = pf)
 
         # Predict values using the model to create a smooth curve
         pf_pred = data.table(n_features = seq(1, max(data$n_features)))
         pf_pred[, n_features_inv := 1 / n_features]
-        pf_pred[, (measure_var) := predict(model, newdata = pf_pred)]
+        pf_pred[, (measure_id) := predict(model, newdata = pf_pred)]
         pf_pred$n_features_inv = NULL
         pf = pf_pred
       }
@@ -279,7 +279,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       cbind(private$.result, tab)
     },
 
-    #' @field nlearners (`numeric(1)`)\cr
+    #' @field n_learners (`numeric(1)`)\cr
     #' Returns the number of learners used in the ensemble feature selection.
     n_learners = function(rhs) {
       assert_ro_binding(rhs)
@@ -290,7 +290,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Returns the measure id used in the ensemble feature selection.
     measure = function(rhs) {
       assert_ro_binding(rhs)
-      private$.measure_var
+      private$.measure_id
     }
   ),
 
@@ -300,7 +300,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     .stability_learner = NULL,
     .feature_ranking = NULL,
     .features = NULL,
-    .measure_var = NULL,
+    .measure_id = NULL,
     .minimize = NULL
   )
 )

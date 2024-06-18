@@ -17,7 +17,7 @@ test_that("ensemble feature selection works", {
   expect_vector(efsr$result$classif.ce, size = 4)
   expect_benchmark_result(efsr$benchmark_result)
   expect_equal(efsr$measure, "classif.ce")
-  expect_equal(efsr$nlearners, 2)
+  expect_equal(efsr$n_learners, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -63,7 +63,7 @@ test_that("ensemble feature selection works without benchmark result", {
   expect_vector(efsr$result$classif.ce, size = 4)
   expect_null(efsr$benchmark_result)
   expect_equal(efsr$measure, "classif.ce")
-  expect_equal(efsr$nlearners, 2)
+  expect_equal(efsr$n_learners, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -109,7 +109,7 @@ test_that("ensemble feature selection works with rfe", {
   expect_list(efsr$result$importance, any.missing = FALSE, len = 4)
   expect_benchmark_result(efsr$benchmark_result)
   expect_equal(efsr$measure, "classif.ce")
-  expect_equal(efsr$nlearners, 2)
+  expect_equal(efsr$n_learners, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -137,7 +137,7 @@ test_that("ensemble feature selection works with rfe", {
 
 test_that("EnsembleFSResult initialization", {
   result = data.table(a = 1, b = 3)
-  expect_error(EnsembleFSResult$new(result = result, features = LETTERS, measure_var = "a"), "missing elements")
+  expect_error(EnsembleFSResult$new(result = result, features = LETTERS, measure_id = "a"), "missing elements")
 
   result = data.table(
     resampling_iteration = c(1, 1, 1, 2, 2, 2, 3, 3, 3),
@@ -157,9 +157,9 @@ test_that("EnsembleFSResult initialization", {
   )
 
   # works without benchmark result object
-  efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:20), measure_var = "classif.ce")
+  efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:20), measure_id = "classif.ce")
   expect_class(efsr, "EnsembleFSResult")
-  expect_equal(efsr$nlearners, 3)
+  expect_equal(efsr$n_learners, 3)
   tab = as.data.table(efsr)
   expect_data_table(tab)
   expect_names(names(tab), identical.to = c("resampling_iteration", "learner_id",

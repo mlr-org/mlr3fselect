@@ -68,7 +68,7 @@ Manual page for this object.}
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 Returns the result of the ensemble feature selection.}
 
-\item{\code{nlearners}}{(\code{numeric(1)})\cr
+\item{\code{n_learners}}{(\code{numeric(1)})\cr
 Returns the number of learners used in the ensemble feature selection.}
 
 \item{\code{measure}}{(\code{character(1)})\cr
@@ -99,7 +99,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   result,
   features,
   benchmark_result = NULL,
-  measure_var,
+  measure_id,
   minimize = TRUE
 )}\if{html}{\out{</div>}}
 }
@@ -119,7 +119,7 @@ selection.}
 \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result object.}
 
-\item{\code{measure_var}}{(\code{character(1)})\cr
+\item{\code{measure_id}}{(\code{character(1)})\cr
 Column name of \code{"result"} that corresponds to the measure used.}
 
 \item{\code{minimize}}{(\code{logical(1)})\cr

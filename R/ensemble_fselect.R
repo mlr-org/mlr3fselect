@@ -142,7 +142,7 @@ ensemble_fselect = function(
     result = grid,
     features = task$feature_names,
     benchmark_result = if (store_benchmark_result) bmr,
-    measure_var = measure$id,
+    measure_id = measure$id,
     minimize = measure$minimize
   )
 }
