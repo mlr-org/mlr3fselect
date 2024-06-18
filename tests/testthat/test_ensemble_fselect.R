@@ -16,6 +16,8 @@ test_that("ensemble feature selection works", {
   expect_vector(efsr$result$n_features, size = 4)
   expect_vector(efsr$result$classif.ce, size = 4)
   expect_benchmark_result(efsr$benchmark_result)
+  expect_equal(efsr$measure, "classif.ce")
+  expect_equal(efsr$nlearners, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -27,6 +29,14 @@ test_that("ensemble feature selection works", {
   feature_ranking = efsr$feature_ranking()
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
   expect_names(names(feature_ranking), identical.to = c("feature", "inclusion_probability"))
+
+  # pareto_front
+  pf = efsr$pareto_front()
+  expect_data_table(pf)
+  expect_equal(names(pf), c("n_features", "classif.ce"))
+  pf_pred = efsr$pareto_front(type = "estimated")
+  expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
+  expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
   # data.table conversion
   tab = as.data.table(efsr)
@@ -52,6 +62,8 @@ test_that("ensemble feature selection works without benchmark result", {
   expect_vector(efsr$result$n_features, size = 4)
   expect_vector(efsr$result$classif.ce, size = 4)
   expect_null(efsr$benchmark_result)
+  expect_equal(efsr$measure, "classif.ce")
+  expect_equal(efsr$nlearners, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -63,6 +75,14 @@ test_that("ensemble feature selection works without benchmark result", {
   feature_ranking = efsr$feature_ranking()
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
   expect_names(names(feature_ranking), identical.to = c("feature", "inclusion_probability"))
+
+  # pareto_front
+  pf = efsr$pareto_front()
+  expect_data_table(pf)
+  expect_equal(names(pf), c("n_features", "classif.ce"))
+  pf_pred = efsr$pareto_front(type = "estimated")
+  expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
+  expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
   # data.table conversion
   tab = as.data.table(efsr)
@@ -88,6 +108,8 @@ test_that("ensemble feature selection works with rfe", {
   expect_vector(efsr$result$classif.ce, size = 4)
   expect_list(efsr$result$importance, any.missing = FALSE, len = 4)
   expect_benchmark_result(efsr$benchmark_result)
+  expect_equal(efsr$measure, "classif.ce")
+  expect_equal(efsr$nlearners, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -100,25 +122,48 @@ test_that("ensemble feature selection works with rfe", {
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
   expect_names(names(feature_ranking), identical.to = c("feature", "inclusion_probability"))
 
+  # pareto_front
+  pf = efsr$pareto_front()
+  expect_data_table(pf)
+  expect_equal(names(pf), c("n_features", "classif.ce"))
+  pf_pred = efsr$pareto_front(type = "estimated")
+  expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
+  expect_equal(names(pf_pred), c("n_features", "classif.ce"))
+
   # data.table conversion
   tab = as.data.table(efsr)
   expect_names(names(tab), identical.to = c("resampling_iteration", "learner_id", "features", "n_features", "classif.ce", "importance", "task", "learner", "resampling"))
 })
 
 test_that("EnsembleFSResult initialization", {
-  features = LETTERS
-  result = data.table(a = 1) # not proper column name
-  expect_error(EnsembleFSResult$new(result = result, features = features))
+  result = data.table(a = 1, b = 3)
+  expect_error(EnsembleFSResult$new(result = result, features = LETTERS, measure_var = "a"), "missing elements")
 
-  result = data.table(resampling_iteration = 1:2, learner_id = list("l1", "l2"),
-                      features = list(LETTERS[1], LETTERS[1:3]),
-                      n_features = c(1,3))
+  result = data.table(
+    resampling_iteration = c(1, 1, 1, 2, 2, 2, 3, 3, 3),
+    learner_id = rep(c("classif.xgboost", "classif.rpart", "classif.ranger"), 3),
+    n_features = c(2, 4, 4, 1, 5, 4, 1, 2, 4),
+    features = list(
+      c("V3", "V20"),
+      c("V3", "V5", "V19", "V15"),
+      c("V11", "V7", "V6", "V8"),
+      c("V11"),
+      c("V17", "V2", "V12", "V9", "V1"),
+      c("V11", "V18", "V9", "V2"),
+      c("V2"),
+      c("V4", "V12"),
+      c("V6", "V15", "V19", "V7")),
+    classif.ce = c(0.13, 0.24, 0.16, 0.11, 0.25, 0.18, 0.09, 0.1, 0.16)
+  )
+
   # works without benchmark result object
-  efsr = EnsembleFSResult$new(result = result, features = features)
+  efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:20), measure_var = "classif.ce")
   expect_class(efsr, "EnsembleFSResult")
+  expect_equal(efsr$nlearners, 3)
   tab = as.data.table(efsr)
   expect_data_table(tab)
-  expect_names(names(tab), identical.to = c("resampling_iteration", "learner_id", "features", "n_features"))
+  expect_names(names(tab), identical.to = c("resampling_iteration", "learner_id",
+                                            "n_features", "features", "classif.ce"))
 })
 
 test_that("different callbacks can be set", {
