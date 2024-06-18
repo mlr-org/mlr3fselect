@@ -4,7 +4,7 @@
 #'
 #' @description
 #' The `EnsembleFSResult` stores the results of ensemble feature selection.
-#' It includes methods for evaluating the stability of the feature selection process and for ranking the selected features.
+#' It includes methods for evaluating the stability of the feature selection process and for ranking the selected features among others.
 #' The function [ensemble_fselect()] returns an object of this class.
 #'
 #' @section S3 Methods:
@@ -38,6 +38,9 @@
 #'
 #'   # returns a ranking of all features
 #'   head(efsr$feature_ranking())
+#'
+#'   # returns the empirical pareto front (nfeatures vs error)
+#'   efsr$pareto_front()
 #' }
 EnsembleFSResult = R6Class("EnsembleFSResult",
   public = list(
