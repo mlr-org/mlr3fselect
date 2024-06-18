@@ -6,7 +6,7 @@
 \title{Ensemble Feature Selection Result}
 \description{
 The \code{EnsembleFSResult} stores the results of ensemble feature selection.
-It includes methods for evaluating the stability of the feature selection process and for ranking the selected features.
+It includes methods for evaluating the stability of the feature selection process and for ranking the selected features among others.
 The function \code{\link[=ensemble_fselect]{ensemble_fselect()}} returns an object of this class.
 }
 \section{S3 Methods}{
@@ -46,6 +46,9 @@ Whether to add the learner, task and resampling information from the benchmark r
 
   # returns a ranking of all features
   head(efsr$feature_ranking())
+
+  # returns the empirical pareto front (nfeatures vs error)
+  efsr$pareto_front()
 }
 }
 \section{Public fields}{
@@ -64,6 +67,12 @@ Manual page for this object.}
 \describe{
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 Returns the result of the ensemble feature selection.}
+
+\item{\code{nlearners}}{(\code{numeric(1)})\cr
+Returns the number of learners used in the ensemble feature selection.}
+
+\item{\code{measure}}{(\code{character(1)})\cr
+Returns the measure id used in the ensemble feature selection.}
 }
 \if{html}{\out{</div>}}
 }
@@ -76,6 +85,7 @@ Returns the result of the ensemble feature selection.}
 \item \href{#method-EnsembleFSResult-help}{\code{EnsembleFSResult$help()}}
 \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
 \item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
+\item \href{#method-EnsembleFSResult-pareto_front}{\code{EnsembleFSResult$pareto_front()}}
 \item \href{#method-EnsembleFSResult-clone}{\code{EnsembleFSResult$clone()}}
 }
 }
@@ -85,7 +95,13 @@ Returns the result of the ensemble feature selection.}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$new(result, features, benchmark_result = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$new(
+  result,
+  features,
+  benchmark_result = NULL,
+  measure_var,
+  minimize = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -93,7 +109,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \describe{
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 The result of the ensemble feature selection.
-Column names should include \code{"resampling_id"}, \code{"learner_id"}, \code{"features"}
+Column names should include \code{"resampling_iteration"}, \code{"learner_id"}, \code{"features"}
 and \code{"n_features"}.}
 
 \item{\code{features}}{(\code{\link[=character]{character()}})\cr
@@ -102,6 +118,12 @@ selection.}
 
 \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result object.}
+
+\item{\code{measure_var}}{(\code{character(1)})\cr
+Column name of \code{"result"} that corresponds to the measure used.}
+
+\item{\code{minimize}}{(\code{logical(1)})\cr
+If \code{TRUE} (default), lower values of the measure correspond to higher performance.}
 }
 \if{html}{\out{</div>}}
 }
@@ -215,6 +237,47 @@ If \code{TRUE}, the cached results are ignored.}
 \subsection{Returns}{
 A \code{numeric()} value representing the stability of the selected features.
 Or a \code{numeric()} vector with the stability of the selected features for each learner.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-pareto_front"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-pareto_front}{}}}
+\subsection{Method \code{pareto_front()}}{
+This function identifies the \strong{Pareto front} of the ensemble feature
+selection process, i.e., the set of points that represent the trade-off
+between the number of features and performance (e.g. classification error).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$pareto_front(type = "empirical")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{type}}{(\code{character(1)})\cr
+Specifies the type of Pareto front to return. See details.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+Two options are available for the Pareto front:
+\itemize{
+\item \code{"empirical"} (default): returns the empirical Pareto front.
+\item \code{"estimated"}: the Pareto front points are estimated by fitting a
+linear model with the inversed of the number of features (\eqn{1/x}) as
+input and the associated performance scores as output.
+This method is useful when the Pareto points are sparse and the front
+assumes a convex shape if better performance corresponds to lower measure
+values (e.g. classification error), or a concave shape otherwise (e.g.
+classification accuracy).
+The \code{estimated} Pareto front will include points for a number
+of features ranging from 1 up to the maximum number found in the
+empirical Pareto front.
+}
+}
+
+\subsection{Returns}{
+A \link{data.table} with columns the number of features and the
+performance that together form the Pareto front.
 }
 }
 \if{html}{\out{<hr>}}
