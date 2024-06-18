@@ -55,7 +55,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param result ([data.table::data.table])\cr
     #'  The result of the ensemble feature selection.
-    #'  Column names should include `"resampling_id"`, `"learner_id"`, `"features"`
+    #'  Column names should include `"resampling_iteration"`, `"learner_id"`, `"features"`
     #'  and `"n_features"`.
     #' @param features ([character()])\cr
     #'  The vector of features of the task that was used in the ensemble feature
