@@ -62,11 +62,19 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  selection.
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
     #'  The benchmark result object.
-    initialize = function(result, features, benchmark_result = NULL) {
+    #' @param measure_var (`character(1)`)\cr
+    #'  Column name of `"result"` that corresponds to the measure used.
+    #' @param minimize (`logical(1)`)\cr
+    #'  If `TRUE` (default), lower values of the measure correspond to higher performance.
+    initialize = function(result, features, benchmark_result = NULL, measure_var,
+                          minimize = TRUE) {
       assert_data_table(result)
-      assert_names(names(result), must.include = c("resampling_iteration", "learner_id", "features", "n_features"))
+      private$.measure_var = assert_string(measure_var, null.ok = FALSE)
+      mandatory_columns = c("resampling_iteration", "learner_id", "features", "n_features")
+      assert_names(names(result), must.include = c(mandatory_columns, measure_var))
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
+      private$.minimize = assert_logical(minimize, null.ok = FALSE)
       self$benchmark_result = if (!is.null(benchmark_result)) assert_benchmark_result(benchmark_result)
 
       self$man = "mlr3fselect::ensemble_fs_result"
@@ -190,15 +198,31 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       if (is.null(self$benchmark_result)) return(private$.result)
       tab = as.data.table(self$benchmark_result)[, c("task", "learner", "resampling"), with = FALSE]
       cbind(private$.result, tab)
+    },
+
+    #' @field nlearners (`numeric(1)`)\cr
+    #' Returns the number of learners used in the ensemble feature selection.
+    nlearners = function(rhs) {
+      assert_ro_binding(rhs)
+      uniqueN(private$.result$learner_id)
+    },
+
+    #' @field measure (`character(1)`)\cr
+    #' Returns the measure id used in the ensemble feature selection.
+    measure = function(rhs) {
+      assert_ro_binding(rhs)
+      private$.measure_var
     }
   ),
 
   private = list(
-    .result = NULL,
+    .result = NULL, # with no R6 classes
     .stability_global = NULL,
     .stability_learner = NULL,
     .feature_ranking = NULL,
-    .features = NULL
+    .features = NULL,
+    .measure_var = NULL,
+    .minimize = NULL
   )
 )
 
