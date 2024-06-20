@@ -220,10 +220,17 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       assert_choice(type, choices =  c("empirical", "estimated"))
       result = private$.result
       measure_id = private$.measure_id
+      minimize = private$.minimize
 
       # Keep only n_features and performance scores
       cols_to_keep = c("n_features", measure_id)
-      data = result[, ..cols_to_keep][order(n_features)]
+      data = result[, ..cols_to_keep]
+
+      # Order data according to measure
+      data = if (minimize)
+        data[order(n_features, -get(measure_id))]
+      else
+        data[order(n_features, get(measure_id))]
 
       # Initialize the Pareto front
       pf = data.table(n_features = numeric(0))
@@ -231,7 +238,6 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
       # Initialize the best performance to a large number so
       # that the Pareto front has at least one point
-      minimize = private$.minimize
       best_score = if (minimize) Inf else -Inf
 
       for (i in seq_row(data)) {
