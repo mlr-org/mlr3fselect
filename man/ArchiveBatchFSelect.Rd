@@ -99,6 +99,7 @@ Method to handle ties.}
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href='../../bbotk/html/Archive.html#method-Archive-help'><code>bbotk::Archive$help()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="add_evals"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-add_evals'><code>bbotk::ArchiveBatch$add_evals()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="clear"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-clear'><code>bbotk::ArchiveBatch$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="nds_selection"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-nds_selection'><code>bbotk::ArchiveBatch$nds_selection()</code></a></span></li>

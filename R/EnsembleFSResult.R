@@ -15,6 +15,7 @@
 #'     * `benchmark_result` (`logical(1)`)\cr
 #'       Whether to add the learner, task and resampling information from the benchmark result.
 #'
+#' @export
 #' @examples
 #' \donttest{
 #'   efsr = ensemble_fselect(
