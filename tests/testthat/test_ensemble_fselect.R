@@ -21,6 +21,7 @@ test_that("ensemble feature selection works", {
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
+  expect_error(efs$stability(stability_args = list(20)), "have names")
   stability = efsr$stability(stability_measure = "jaccard", global = FALSE)
   expect_numeric(stability, len = 2)
   expect_names(names(stability), identical.to = c("classif.rpart", "classif.featureless"))

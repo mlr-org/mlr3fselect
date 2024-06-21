@@ -171,6 +171,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       funs = stabm::listStabilityMeasures()$Name
       keys = tolower(gsub("stability", "", funs))
       assert_choice(stability_measure, choices = keys)
+      assert_list(stability_args, null.ok = TRUE, names = "named")
 
       if (global) {
         # cached results
