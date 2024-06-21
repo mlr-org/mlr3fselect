@@ -195,6 +195,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
         fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
 
+        learner_id = NULL
         tab = private$.result[, list(score = invoke(fun, features = .SD$features, .args = stability_args)), by = learner_id]
         private$.stability_learner[[stability_measure]] = set_names(tab$score, tab$learner_id)
         private$.stability_learner[[stability_measure]]
@@ -226,7 +227,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
       # Keep only n_features and performance scores
       cols_to_keep = c("n_features", measure_id)
-      data = result[, ..cols_to_keep]
+      data = result[, cols_to_keep, with = FALSE]
 
       # Order data according to the measure
       data = if (minimize)
@@ -258,6 +259,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
       if (type == "estimated") {
         # Transform the data (x => 1/x)
+        n_features_inv = NULL
         pf[, n_features_inv := 1 / n_features]
 
         # Fit the linear model
@@ -267,7 +269,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         # Predict values using the model to create a smooth curve
         pf_pred = data.table(n_features = seq(1, max(data$n_features)))
         pf_pred[, n_features_inv := 1 / n_features]
-        pf_pred[, (measure_id) := predict(model, newdata = pf_pred)]
+        pf_pred[, (measure_id) := stats::predict(model, newdata = pf_pred)]
         pf_pred$n_features_inv = NULL
         pf = pf_pred
       }
@@ -302,6 +304,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
 
       # Scale the Pareto front data to (0-1) range
+      nfeats_norm = perf_norm = dist_to_line = NULL
       pf_norm = pf[, .(
         nfeats_norm = (n_features - min(n_features)) /(max(n_features) - min(n_features)),
         perf_norm = (get(measure_id) - min(get(measure_id))) / (max(get(measure_id)) - min(get(measure_id)))
@@ -318,7 +321,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       }
 
       # knee point is the one with the maximum distance
-      knee_index = which_max(pf_norm[, dist_to_line], ties_method = "first")
+      knee_index = which_max(pf_norm[["dist_to_line"]], ties_method = "first")
       knee_point = pf[knee_index]
 
       knee_point
