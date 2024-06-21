@@ -216,7 +216,7 @@ When the same stability measure is requested again with different arguments, the
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$stability(
   stability_measure = "jaccard",
-  ...,
+  stability_args = NULL,
   global = TRUE,
   reset_cache = FALSE
 )}\if{html}{\out{</div>}}
@@ -230,7 +230,7 @@ The stability measure to be used.
 One of the measures returned by \code{\link[stabm:listStabilityMeasures]{stabm::listStabilityMeasures()}} in lower case.
 Default is \code{"jaccard"}.}
 
-\item{\code{...}}{(\code{any})\cr
+\item{\code{stability_args}}{(\code{list})\cr
 Additional arguments passed to the stability measure function.}
 
 \item{\code{global}}{(\code{logical(1)})\cr
@@ -296,7 +296,7 @@ which select points in the Pareto front, such that an optimal trade-off
 between performance and number of features is achieved.
 In most cases, only one such point is returned.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(method = "hyperplane", type = "empirical")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(method = "NBI", type = "empirical")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
