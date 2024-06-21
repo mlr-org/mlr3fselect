@@ -39,6 +39,11 @@ test_that("ensemble feature selection works", {
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
+  # knee_points
+  kps = efsr$knee_points()
+  expect_data_table(kps, min.rows = 1)
+  expect_equal(names(kps), c("n_features", "classif.ce"))
+
   # data.table conversion
   tab = as.data.table(efsr)
   expect_names(names(tab), identical.to = c("resampling_iteration", "learner_id", "features", "n_features", "classif.ce", "task", "learner", "resampling"))
@@ -85,6 +90,11 @@ test_that("ensemble feature selection works without benchmark result", {
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
+  # knee_points
+  kps = efsr$knee_points(type = "estimated")
+  expect_data_table(kps, min.rows = 1)
+  expect_equal(names(kps), c("n_features", "classif.ce"))
+
   # data.table conversion
   tab = as.data.table(efsr)
   expect_names(names(tab), identical.to = c("resampling_iteration", "learner_id", "features", "n_features", "classif.ce"))
@@ -130,6 +140,11 @@ test_that("ensemble feature selection works with rfe", {
   pf_pred = suppressWarnings(efsr$pareto_front(type = "estimated"))
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
+
+  # knee_points
+  kps = efsr$knee_points(type = "estimated")
+  expect_data_table(kps, min.rows = 1)
+  expect_equal(names(kps), c("n_features", "classif.ce"))
 
   # data.table conversion
   tab = as.data.table(efsr)
