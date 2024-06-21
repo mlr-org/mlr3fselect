@@ -306,8 +306,7 @@ In most cases, only one such point is returned.
 Type of method to use to identify the knee point. See details.}
 
 \item{\code{type}}{(\code{character(1)})\cr
-Specifies the type of Pareto front to use for the identification of the
-knee point.
+Specifies the type of Pareto front to use for the identification of the knee point.
 See \code{pareto_front()} method for more details.}
 }
 \if{html}{\out{</div>}}
@@ -315,9 +314,9 @@ See \code{pareto_front()} method for more details.}
 \subsection{Details}{
 The available KPI methods are:
 \itemize{
-\item \code{"NBI"} (default): Normal-Boundary Intersection method is a geometry-based
-method which calculates the perpendicular distance of each point from the
-line connecting the first and last points of the Pareto front.
+\item \code{"NBI"} (default): The \strong{Normal-Boundary Intersection} method is a
+geometry-based method which calculates the perpendicular distance of each
+point from the line connecting the first and last points of the Pareto front.
 The knee point is determined as the Pareto point with the maximum distance
 from this line, see Das (1999).
 }

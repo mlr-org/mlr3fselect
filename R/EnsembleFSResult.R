@@ -293,28 +293,27 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @details
     #' The available KPI methods are:
     #'
-    #' * `"NBI"` (default): Normal-Boundary Intersection method is a geometry-based
-    #' method which calculates the perpendicular distance of each point from the
-    #' line connecting the first and last points of the Pareto front.
+    #' - `"NBI"` (default): The **Normal-Boundary Intersection** method is a
+    #' geometry-based method which calculates the perpendicular distance of each
+    #' point from the line connecting the first and last points of the Pareto front.
     #' The knee point is determined as the Pareto point with the maximum distance
     #' from this line, see Das (1999).
     #'
     #' @param method (`character(1)`)\cr
     #'  Type of method to use to identify the knee point. See details.
     #' @param type (`character(1)`)\cr
-    #'  Specifies the type of Pareto front to use for the identification of the
-    #'  knee point.
+    #'  Specifies the type of Pareto front to use for the identification of the knee point.
     #'  See `pareto_front()` method for more details.
     #'
     #' @return A [data.table::data.table] with the knee point(s) of the Pareto front.
     knee_points = function(method = "NBI", type = "empirical") {
-      assert_choice(method, choices = c("hyperplane"))
+      assert_choice(method, choices = c("NBI"))
       assert_choice(type, choices = c("empirical", "estimated"))
       measure_id = private$.measure_id
 
       pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
 
-      # Normalize the pareto front data
+      # Scale the Pareto front data to (0,1)
       pf_norm = pf[, .(
         nfeats_norm = (n_features - min(n_features)) /(max(n_features) - min(n_features)),
         perf_norm = (get(measure_id) - min(get(measure_id))) / (max(get(measure_id)) - min(get(measure_id)))
