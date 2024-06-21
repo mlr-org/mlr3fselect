@@ -213,19 +213,11 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @details
     #' Two options are available for the Pareto front:
     #' - `"empirical"` (default): returns the empirical Pareto front.
-    #' - `"estimated"`: the Pareto front points are estimated by fitting a
-    #'  linear model with the inversed of the number of features (\eqn{1/x}) as
-    #'  input and the associated performance scores as output.
-    #'  This method is useful when the Pareto points are sparse and the front
-    #'  assumes a convex shape if better performance corresponds to lower measure
-    #'  values (e.g. classification error), or a concave shape otherwise (e.g.
-    #'  classification accuracy).
-    #'  The `estimated` Pareto front will include points for a number
-    #'  of features ranging from 1 up to the maximum number found in the
-    #'  empirical Pareto front.
+    #' - `"estimated"`: the Pareto front points are estimated by fitting a linear model with the inversed of the number of features (\eqn{1/x}) as input and the associated performance scores as output.
+    #'  This method is useful when the Pareto points are sparse and the front  assumes a convex shape if better performance corresponds to lower measure values (e.g. classification error), or a concave shape otherwise (e.g. classification accuracy).
+    #'  The `estimated` Pareto front will include points for a number of features ranging from 1 up to the maximum number found in the empirical Pareto front.
     #'
-    #' @return A [data.table::data.table] with columns the number of features and the
-    #' performance that together form the Pareto front.
+    #' @return A [data.table::data.table] with columns the number of features and the performance that together form the Pareto front.
     pareto_front = function(type = "empirical") {
       assert_choice(type, choices =  c("empirical", "estimated"))
       result = private$.result
@@ -236,7 +228,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       cols_to_keep = c("n_features", measure_id)
       data = result[, ..cols_to_keep]
 
-      # Order data according to measure
+      # Order data according to the measure
       data = if (minimize)
         data[order(n_features, -get(measure_id))]
       else
@@ -285,19 +277,14 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
     #' @description
     #'
-    #' This function implements various *knee* point identification (KPI) methods,
-    #' which select points in the Pareto front, such that an optimal trade-off
-    #' between performance and number of features is achieved.
+    #' This function implements various *knee* point identification (KPI) methods, which select points in the Pareto front, such that an optimal trade-off between performance and number of features is achieved.
     #' In most cases, only one such point is returned.
     #'
     #' @details
     #' The available KPI methods are:
     #'
-    #' - `"NBI"` (default): The **Normal-Boundary Intersection** method is a
-    #' geometry-based method which calculates the perpendicular distance of each
-    #' point from the line connecting the first and last points of the Pareto front.
-    #' The knee point is determined as the Pareto point with the maximum distance
-    #' from this line, see Das (1999).
+    #' - `"NBI"` (default): The **Normal-Boundary Intersection** method is a geometry-based method which calculates the perpendicular distance of each point from the line connecting the first and last points of the Pareto front.
+    #' The knee point is determined as the Pareto point with the maximum distance from this line, see Das (1999).
     #'
     #' @param method (`character(1)`)\cr
     #'  Type of method to use to identify the knee point. See details.

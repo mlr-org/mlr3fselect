@@ -269,31 +269,21 @@ Specifies the type of Pareto front to return. See details.}
 Two options are available for the Pareto front:
 \itemize{
 \item \code{"empirical"} (default): returns the empirical Pareto front.
-\item \code{"estimated"}: the Pareto front points are estimated by fitting a
-linear model with the inversed of the number of features (\eqn{1/x}) as
-input and the associated performance scores as output.
-This method is useful when the Pareto points are sparse and the front
-assumes a convex shape if better performance corresponds to lower measure
-values (e.g. classification error), or a concave shape otherwise (e.g.
-classification accuracy).
-The \code{estimated} Pareto front will include points for a number
-of features ranging from 1 up to the maximum number found in the
-empirical Pareto front.
+\item \code{"estimated"}: the Pareto front points are estimated by fitting a linear model with the inversed of the number of features (\eqn{1/x}) as input and the associated performance scores as output.
+This method is useful when the Pareto points are sparse and the front  assumes a convex shape if better performance corresponds to lower measure values (e.g. classification error), or a concave shape otherwise (e.g. classification accuracy).
+The \code{estimated} Pareto front will include points for a number of features ranging from 1 up to the maximum number found in the empirical Pareto front.
 }
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} with columns the number of features and the
-performance that together form the Pareto front.
+A \link[data.table:data.table]{data.table::data.table} with columns the number of features and the performance that together form the Pareto front.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-knee_points"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-knee_points}{}}}
 \subsection{Method \code{knee_points()}}{
-This function implements various \emph{knee} point identification (KPI) methods,
-which select points in the Pareto front, such that an optimal trade-off
-between performance and number of features is achieved.
+This function implements various \emph{knee} point identification (KPI) methods, which select points in the Pareto front, such that an optimal trade-off between performance and number of features is achieved.
 In most cases, only one such point is returned.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(method = "NBI", type = "empirical")}\if{html}{\out{</div>}}
@@ -314,11 +304,8 @@ See \code{pareto_front()} method for more details.}
 \subsection{Details}{
 The available KPI methods are:
 \itemize{
-\item \code{"NBI"} (default): The \strong{Normal-Boundary Intersection} method is a
-geometry-based method which calculates the perpendicular distance of each
-point from the line connecting the first and last points of the Pareto front.
-The knee point is determined as the Pareto point with the maximum distance
-from this line, see Das (1999).
+\item \code{"NBI"} (default): The \strong{Normal-Boundary Intersection} method is a geometry-based method which calculates the perpendicular distance of each point from the line connecting the first and last points of the Pareto front.
+The knee point is determined as the Pareto point with the maximum distance from this line, see Das (1999).
 }
 }
 
