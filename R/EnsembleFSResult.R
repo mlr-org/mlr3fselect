@@ -167,7 +167,12 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @return A `numeric()` value representing the stability of the selected features.
     #' Or a `numeric()` vector with the stability of the selected features for each learner.
-    stability = function(stability_measure = "jaccard", stability_args = NULL, global = TRUE, reset_cache = FALSE) {
+    stability = function(
+      stability_measure = "jaccard",
+      stability_args = NULL,
+      global = TRUE,
+      reset_cache = FALSE
+      ) {
       funs = stabm::listStabilityMeasures()$Name
       keys = tolower(gsub("stability", "", funs))
       assert_choice(stability_measure, choices = keys)
