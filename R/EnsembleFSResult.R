@@ -304,20 +304,20 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
 
       # Scale the Pareto front data to (0-1) range
-      nfeats_norm = perf_norm = dist_to_line = NULL
-      pf_norm = pf[, `:=`(
-        nfeats_norm = (n_features - min(n_features)) /(max(n_features) - min(n_features)),
-        perf_norm = (get(measure_id) - min(get(measure_id))) / (max(get(measure_id)) - min(get(measure_id)))
+      nfeats = perf = dist_to_line = NULL
+      pf_norm = pf[, list(
+        nfeats = (n_features - min(n_features)) /(max(n_features) - min(n_features)),
+        perf = (get(measure_id) - min(get(measure_id))) / (max(get(measure_id)) - min(get(measure_id)))
       )]
 
       if (minimize) {
         # The two edge points in the Pareto front are: (0,1) and (1,0)
         # They define the line (x + y - 1 = 0) and their distance is sqrt(2)
-        pf_norm[, dist_to_line := abs(nfeats_norm + perf_norm - 1)/sqrt(2)]
+        pf_norm[, dist_to_line := abs(nfeats + perf - 1)/sqrt(2)]
       } else {
         # The two edge points in the Pareto front are: (0,0) and (1,1)
         # They define the line (y - x = 0) and their distance is sqrt(2)
-        pf_norm[, dist_to_line := abs(nfeats_norm - perf_norm)/sqrt(2)]
+        pf_norm[, dist_to_line := abs(nfeats - perf)/sqrt(2)]
       }
 
       # knee point is the one with the maximum distance
