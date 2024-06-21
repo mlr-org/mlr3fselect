@@ -301,7 +301,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  See `pareto_front()` method for more details.
     #'
     #' @return A [data.table::data.table] with the knee point(s) of the Pareto front.
-    knee_points = function(method = "hyperplane", type = "empirical") {
+    knee_points = function(method = "NBI", type = "empirical") {
       assert_choice(method, choices = c("hyperplane"))
       assert_choice(type, choices = c("empirical", "estimated"))
       measure_id = private$.measure_id
