@@ -1,4 +1,4 @@
-# mlr3fselect (development version)
+# mlr3fselect 1.0.0
 
 * feat: Add ensemble feature selection function `ensemble_fselect()`.
 * BREAKING CHANGE: The `FSelector` class is `FSelectorBatch` now.
