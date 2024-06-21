@@ -14,6 +14,10 @@
 #'     * `x` ([EnsembleFSResult])
 #'     * `benchmark_result` (`logical(1)`)\cr
 #'       Whether to add the learner, task and resampling information from the benchmark result.
+#'
+#' @references
+#' `r format_bib("das1999")`
+#'
 #' @export
 #' @examples
 #' \donttest{
@@ -214,7 +218,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  of features ranging from 1 up to the maximum number found in the
     #'  empirical Pareto front.
     #'
-    #' @return A [data.table] with columns the number of features and the
+    #' @return A [data.table::data.table] with columns the number of features and the
     #' performance that together form the Pareto front.
     pareto_front = function(type = "empirical") {
       assert_choice(type, choices =  c("empirical", "estimated"))
@@ -271,6 +275,54 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       }
 
       pf
+    },
+
+    #' @description
+    #'
+    #' This function implements various *knee* point identification (KPI) methods,
+    #' which select points in the Pareto front, such that an optimal trade-off
+    #' between performance and number of features is achieved.
+    #' In most cases, only one such point is returned.
+    #'
+    #' @details
+    #' The available KPI methods are:
+    #'
+    #' * `"NBI"` (default): Normal-Boundary Intersection method is a geometry-based
+    #' method which calculates the perpendicular distance of each point from the
+    #' line connecting the first and last points of the Pareto front.
+    #' The knee point is determined as the Pareto point with the maximum distance
+    #' from this line, see Das (1999).
+    #'
+    #' @param method (`character(1)`)\cr
+    #'  Type of method to use to identify the knee point. See details.
+    #' @param type (`character(1)`)\cr
+    #'  Specifies the type of Pareto front to use for the identification of the
+    #'  knee point.
+    #'  See `pareto_front()` method for more details.
+    #'
+    #' @return A [data.table::data.table] with the knee point(s) of the Pareto front.
+    knee_points = function(method = "hyperplane", type = "empirical") {
+      assert_choice(method, choices = c("hyperplane"))
+      assert_choice(type, choices = c("empirical", "estimated"))
+      measure_id = private$.measure_id
+
+      pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
+
+      # Normalize the pareto front data
+      pf_norm = pf[, .(
+        nfeats_norm = (n_features - min(n_features)) /(max(n_features) - min(n_features)),
+        perf_norm = (get(measure_id) - min(get(measure_id))) / (max(get(measure_id)) - min(get(measure_id)))
+      )]
+
+      # The two edge points in the Pareto front are now: (0,1) and (1,0)
+      # They define the line (x + y - 1 = 0) and their distance is sqrt(2)
+      pf_norm[, dist_to_line := abs(nfeats_norm + perf_norm - 1)/sqrt(2)]
+
+      # knee point is the one with the maximum distance
+      knee_index = which_max(pf_norm[, dist_to_line], ties_method = "first")
+      knee_point = pf[knee_index]
+
+      knee_point
     }
   ),
 

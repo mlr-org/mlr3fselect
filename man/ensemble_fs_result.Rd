@@ -51,6 +51,12 @@ Whether to add the learner, task and resampling information from the benchmark r
   efsr$pareto_front()
 }
 }
+\references{
+Das, I (1999).
+\dQuote{On characterizing the 'knee' of the Pareto curve based on normal-boundary intersection.}
+\emph{Structural Optimization}, \bold{18}(1-2), 107--115.
+ISSN 09344373, \doi{10.1007/BF01195985/METRICS}.
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
@@ -86,6 +92,7 @@ Returns the measure id used in the ensemble feature selection.}
 \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
 \item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
 \item \href{#method-EnsembleFSResult-pareto_front}{\code{EnsembleFSResult$pareto_front()}}
+\item \href{#method-EnsembleFSResult-knee_points}{\code{EnsembleFSResult$knee_points()}}
 \item \href{#method-EnsembleFSResult-clone}{\code{EnsembleFSResult$clone()}}
 }
 }
@@ -276,8 +283,48 @@ empirical Pareto front.
 }
 
 \subsection{Returns}{
-A \link{data.table} with columns the number of features and the
+A \link[data.table:data.table]{data.table::data.table} with columns the number of features and the
 performance that together form the Pareto front.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-knee_points"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-knee_points}{}}}
+\subsection{Method \code{knee_points()}}{
+This function implements various \emph{knee} point identification (KPI) methods,
+which select points in the Pareto front, such that an optimal trade-off
+between performance and number of features is achieved.
+In most cases, only one such point is returned.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(method = "hyperplane", type = "empirical")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{method}}{(\code{character(1)})\cr
+Type of method to use to identify the knee point. See details.}
+
+\item{\code{type}}{(\code{character(1)})\cr
+Specifies the type of Pareto front to use for the identification of the
+knee point.
+See \code{pareto_front()} method for more details.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+The available KPI methods are:
+\itemize{
+\item \code{"NBI"} (default): Normal-Boundary Intersection method is a geometry-based
+method which calculates the perpendicular distance of each point from the
+line connecting the first and last points of the Pareto front.
+The knee point is determined as the Pareto point with the maximum distance
+from this line, see Das (1999).
+}
+}
+
+\subsection{Returns}{
+A \link[data.table:data.table]{data.table::data.table} with the knee point(s) of the Pareto front.
 }
 }
 \if{html}{\out{<hr>}}
