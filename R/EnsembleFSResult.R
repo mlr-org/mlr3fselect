@@ -305,7 +305,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 
       # Scale the Pareto front data to (0-1) range
       nfeats_norm = perf_norm = dist_to_line = NULL
-      pf_norm = pf[, .(
+      pf_norm = pf[, `:=`(
         nfeats_norm = (n_features - min(n_features)) /(max(n_features) - min(n_features)),
         perf_norm = (get(measure_id) - min(get(measure_id))) / (max(get(measure_id)) - min(get(measure_id)))
       )]
