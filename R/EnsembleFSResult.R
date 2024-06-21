@@ -310,18 +310,25 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       assert_choice(method, choices = c("NBI"))
       assert_choice(type, choices = c("empirical", "estimated"))
       measure_id = private$.measure_id
+      minimize = private$.minimize
 
       pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
 
-      # Scale the Pareto front data to (0,1)
+      # Scale the Pareto front data to (0-1) range
       pf_norm = pf[, .(
         nfeats_norm = (n_features - min(n_features)) /(max(n_features) - min(n_features)),
         perf_norm = (get(measure_id) - min(get(measure_id))) / (max(get(measure_id)) - min(get(measure_id)))
       )]
 
-      # The two edge points in the Pareto front are now: (0,1) and (1,0)
-      # They define the line (x + y - 1 = 0) and their distance is sqrt(2)
-      pf_norm[, dist_to_line := abs(nfeats_norm + perf_norm - 1)/sqrt(2)]
+      if (minimize) {
+        # The two edge points in the Pareto front are: (0,1) and (1,0)
+        # They define the line (x + y - 1 = 0) and their distance is sqrt(2)
+        pf_norm[, dist_to_line := abs(nfeats_norm + perf_norm - 1)/sqrt(2)]
+      } else {
+        # The two edge points in the Pareto front are: (0,0) and (1,1)
+        # They define the line (y - x = 0) and their distance is sqrt(2)
+        pf_norm[, dist_to_line := abs(nfeats_norm - perf_norm)/sqrt(2)]
+      }
 
       # knee point is the one with the maximum distance
       knee_index = which_max(pf_norm[, dist_to_line], ties_method = "first")
