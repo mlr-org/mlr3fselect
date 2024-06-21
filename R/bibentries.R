@@ -105,5 +105,19 @@ bibentries = c(
     title     = "Ensemble feature selection for high-dimensional data: a stability analysis across multiple domains",
     volume    = "32",
     year      = "2020"
+  ),
+
+  das1999 = bibentry("article",
+    author    = "Das, I",
+    doi       = "10.1007/BF01195985/METRICS",
+    issn      = "09344373",
+    journal   = "Structural Optimization",
+    month     = "may",
+    number    = "1-2",
+    pages     = "107--115",
+    publisher = "Springer",
+    title     = "On characterizing the 'knee' of the Pareto curve based on normal-boundary intersection",
+    volume    = "18",
+    year      = "1999"
   )
 )

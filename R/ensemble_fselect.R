@@ -141,6 +141,8 @@ ensemble_fselect = function(
   EnsembleFSResult$new(
     result = grid,
     features = task$feature_names,
-    benchmark_result = if (store_benchmark_result) bmr
+    benchmark_result = if (store_benchmark_result) bmr,
+    measure_id = measure$id,
+    minimize = measure$minimize
   )
 }
