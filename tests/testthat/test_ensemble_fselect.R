@@ -35,7 +35,7 @@ test_that("ensemble feature selection works", {
   pf = efsr$pareto_front()
   expect_data_table(pf)
   expect_equal(names(pf), c("n_features", "classif.ce"))
-  pf_pred = efsr$pareto_front(type = "estimated")
+  pf_pred = suppressWarnings(efsr$pareto_front(type = "estimated"))
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
@@ -81,7 +81,7 @@ test_that("ensemble feature selection works without benchmark result", {
   pf = efsr$pareto_front()
   expect_data_table(pf)
   expect_equal(names(pf), c("n_features", "classif.ce"))
-  pf_pred = efsr$pareto_front(type = "estimated")
+  pf_pred = suppressWarnings(efsr$pareto_front(type = "estimated"))
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
@@ -127,7 +127,7 @@ test_that("ensemble feature selection works with rfe", {
   pf = efsr$pareto_front()
   expect_data_table(pf)
   expect_equal(names(pf), c("n_features", "classif.ce"))
-  pf_pred = efsr$pareto_front(type = "estimated")
+  pf_pred = suppressWarnings(efsr$pareto_front(type = "estimated"))
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
