@@ -1,14 +1,16 @@
 test_that("ensemble feature selection works", {
   task = tsk("sonar")
-  efsr = ensemble_fselect(
-    fselector = fs("random_search"),
-    task = task,
-    learners = lrns(c("classif.rpart", "classif.featureless")),
-    init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
-    measure = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 5)
-  )
+  with_seed(42, {
+    efsr = ensemble_fselect(
+      fselector = fs("random_search"),
+      task = task,
+      learners = lrns(c("classif.rpart", "classif.featureless")),
+      init_resampling = rsmp("subsampling", repeats = 2),
+      inner_resampling = rsmp("cv", folds = 3),
+      measure = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 5)
+    )
+  })
 
   expect_character(efsr$man)
   expect_data_table(efsr$result, nrows = 4)
@@ -33,16 +35,19 @@ test_that("ensemble feature selection works", {
 
   # pareto_front
   pf = efsr$pareto_front()
-  expect_data_table(pf)
+  expect_data_table(pf, nrows = 3)
   expect_equal(names(pf), c("n_features", "classif.ce"))
-  pf_pred = suppressWarnings(efsr$pareto_front(type = "estimated"))
+  pf_pred = efsr$pareto_front(type = "estimated")
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
   # knee_points
   kps = efsr$knee_points()
-  expect_data_table(kps, min.rows = 1)
+  expect_data_table(kps, nrows = 1)
   expect_equal(names(kps), c("n_features", "classif.ce"))
+  kpse = efsr$knee_points(type = "estimated")
+  expect_data_table(kpse, nrows = 1)
+  expect_true(kps$n_features != kpse$n_features)
 
   # data.table conversion
   tab = as.data.table(efsr)
@@ -51,16 +56,18 @@ test_that("ensemble feature selection works", {
 
 test_that("ensemble feature selection works without benchmark result", {
   task = tsk("sonar")
-  efsr = ensemble_fselect(
-    fselector = fs("random_search"),
-    task = task,
-    learners = lrns(c("classif.rpart", "classif.featureless")),
-    init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
-    measure = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 5),
-    store_benchmark_result = FALSE
-  )
+  with_seed(42, {
+    efsr = ensemble_fselect(
+      fselector = fs("random_search"),
+      task = task,
+      learners = lrns(c("classif.rpart", "classif.featureless")),
+      init_resampling = rsmp("subsampling", repeats = 2),
+      inner_resampling = rsmp("cv", folds = 3),
+      measure = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 3),
+      store_benchmark_result = FALSE
+    )
+  })
 
   expect_character(efsr$man)
   expect_data_table(efsr$result, nrows = 4)
@@ -84,15 +91,12 @@ test_that("ensemble feature selection works without benchmark result", {
 
   # pareto_front
   pf = efsr$pareto_front()
-  expect_data_table(pf)
+  expect_data_table(pf, nrows = 3)
   expect_equal(names(pf), c("n_features", "classif.ce"))
-  pf_pred = suppressWarnings(efsr$pareto_front(type = "estimated"))
-  expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
-  expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
   # knee_points
-  kps = efsr$knee_points(type = "estimated")
-  expect_data_table(kps, min.rows = 1)
+  kps = efsr$knee_points()
+  expect_data_table(kps, nrows = 1)
   expect_equal(names(kps), c("n_features", "classif.ce"))
 
   # data.table conversion
@@ -102,15 +106,17 @@ test_that("ensemble feature selection works without benchmark result", {
 
 test_that("ensemble feature selection works with rfe", {
   task = tsk("sonar")
-  efsr = ensemble_fselect(
-    fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
-    task = task,
-    learners = lrns(c("classif.rpart", "classif.featureless")),
-    init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
-    measure = msr("classif.ce"),
-    terminator = trm("none")
-  )
+  with_seed(42, {
+    efsr = ensemble_fselect(
+      fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
+      task = task,
+      learners = lrns(c("classif.rpart", "classif.featureless")),
+      init_resampling = rsmp("subsampling", repeats = 2),
+      inner_resampling = rsmp("cv", folds = 3),
+      measure = msr("classif.ce"),
+      terminator = trm("none")
+    )
+  })
 
   expect_character(efsr$man)
   expect_data_table(efsr$result, nrows = 4)
@@ -135,15 +141,15 @@ test_that("ensemble feature selection works with rfe", {
 
   # pareto_front
   pf = efsr$pareto_front()
-  expect_data_table(pf)
+  expect_data_table(pf, nrows = 4)
   expect_equal(names(pf), c("n_features", "classif.ce"))
-  pf_pred = suppressWarnings(efsr$pareto_front(type = "estimated"))
+  pf_pred = efsr$pareto_front(type = "estimated")
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
 
   # knee_points
   kps = efsr$knee_points(type = "estimated")
-  expect_data_table(kps, min.rows = 1)
+  expect_data_table(kps, nrows = 1)
   expect_equal(names(kps), c("n_features", "classif.ce"))
 
   # data.table conversion
@@ -190,7 +196,8 @@ test_that("different callbacks can be set", {
   )
 
   efsr = ensemble_fselect(
-    fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
+    # 4-5 evaluations on sonar
+    fselector = fs("rfe", n_features = 25, feature_fraction = 0.8),
     task = tsk("sonar"),
     learners = lrns(c("classif.rpart", "classif.featureless")),
     init_resampling = rsmp("subsampling", repeats = 2),
