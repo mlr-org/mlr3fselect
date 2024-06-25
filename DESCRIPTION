@@ -31,7 +31,7 @@ Imports:
     checkmate (>= 2.0.0),
     data.table,
     lgr,
-    mlr3misc (>= 0.15.0.9000),
+    mlr3misc (>= 0.15.1),
     paradox (>= 1.0.0),
     R6,
     stabm
@@ -43,9 +43,7 @@ Suggests:
     rpart,
     testthat (>= 3.0.0)
 Remotes:
-    mlr-org/bbotk,
-    mlr-org/paradox,
-    mlr-org/mlr3misc
+    mlr-org/bbotk
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
