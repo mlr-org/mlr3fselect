@@ -109,7 +109,6 @@ bibentries = c(
 
   das1999 = bibentry("article",
     author    = "Das, I",
-    doi       = "10.1007/BF01195985/METRICS",
     issn      = "09344373",
     journal   = "Structural Optimization",
     month     = "may",
