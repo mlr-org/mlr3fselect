@@ -196,7 +196,7 @@ Already instantiated resamplings are kept unchanged.}
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Measure to optimize. If \code{NULL}, default measure is used.}
 
-\item{\code{terminator}}{(\link{Terminator})\cr
+\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
 
 \item{\code{store_fselect_instance}}{(\code{logical(1)})\cr
@@ -246,7 +246,7 @@ Depth of recursion for multiple nested objects.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\link{Learner}.
+\link[mlr3:Learner]{mlr3::Learner}.
 }
 }
 \if{html}{\out{<hr>}}

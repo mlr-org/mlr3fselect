@@ -20,7 +20,7 @@
 #' @param init_resampling ([mlr3::Resampling])\cr
 #'  The initial resampling strategy of the data, from which each train set
 #'  will be passed on to the learners.
-#'  Can only be [mlr_resamplings_subsampling] or [mlr_resamplings_bootstrap].
+#'  Can only be [mlr3::ResamplingSubsampling] or [mlr3::ResamplingBootstrap].
 #' @param inner_resampling ([mlr3::Resampling])\cr
 #'  The inner resampling strategy used by the [FSelector].
 #' @param store_benchmark_result (`logical(1)`)\cr

@@ -125,7 +125,7 @@ Already instantiated resamplings are kept unchanged.}
 Measures to optimize.
 If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
 
-\item{\code{terminator}}{(\link{Terminator})\cr
+\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
 
 \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr

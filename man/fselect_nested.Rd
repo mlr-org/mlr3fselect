@@ -49,7 +49,7 @@ Ignored if \code{terminator} is passed.}
 Maximum allowed time in seconds.
 Ignored if \code{terminator} is passed.}
 
-\item{terminator}{(\link{Terminator})\cr
+\item{terminator}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
 
 \item{store_fselect_instance}{(\code{logical(1)})\cr

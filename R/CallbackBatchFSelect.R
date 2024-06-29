@@ -76,7 +76,7 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
 #' This context can be used to customize the evaluation of a batch of feature sets.
 #' Changes to the state of callback are lost after the evaluation of a batch and changes to the fselect instance or the fselector are not possible.
 #' Persistent data should be written to the archive via `$aggregated_performance` (see [ContextBatchFSelect]).
-#' The other stages access [ContextBatch].
+#' The other stages access [bbotk::ContextBatch].
 #' This context can be used to modify the fselect instance, archive, fselector and final result.
 #' There are two different contexts because the evaluation can be parallelized i.e. multiple instances of [ContextBatchFSelect] exists on different workers at the same time.
 #'

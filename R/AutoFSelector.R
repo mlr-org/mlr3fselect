@@ -161,7 +161,7 @@ AutoFSelector = R6Class("AutoFSelector",
     #' @param recursive (`integer(1)`)\cr
     #'   Depth of recursion for multiple nested objects.
     #'
-    #' @return [Learner].
+    #' @return [mlr3::Learner].
     base_learner = function(recursive = Inf) {
       if (recursive == 0L) self$learner else self$learner$base_learner(recursive - 1L)
     },
