@@ -50,7 +50,7 @@ A feature selection callback works with bbotk::ContextBatch and ContextBatchFSel
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.12.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -231,7 +231,7 @@ The stages <code>on_eval_after_design</code>, <code>on_eval_after_benchmark</cod
 This context can be used to customize the evaluation of a batch of feature sets.
 Changes to the state of callback are lost after the evaluation of a batch and changes to the fselect instance or the fselector are not possible.
 Persistent data should be written to the archive via <code>$aggregated_performance</code> (see <a href="ContextBatchFSelect.html">ContextBatchFSelect</a>).
-The other stages access ContextBatch.
+The other stages access <a href="https://bbotk.mlr-org.com/reference/ContextBatch.html" class="external-link">bbotk::ContextBatch</a>.
 This context can be used to modify the fselect instance, archive, fselector and final result.
 There are two different contexts because the evaluation can be parallelized i.e. multiple instances of <a href="ContextBatchFSelect.html">ContextBatchFSelect</a> exists on different workers at the same time.</p>
     </div>

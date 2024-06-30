@@ -14,7 +14,7 @@ Returns an EnsembleFSResult."><meta property="og:image" content="https://mlr3fse
     
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.12.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,7 +139,7 @@ The learners to be used for feature selection.</p></dd>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 The initial resampling strategy of the data, from which each train set
 will be passed on to the learners.
-Can only be mlr_resamplings_subsampling or mlr_resamplings_bootstrap.</p></dd>
+Can only be <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_subsampling.html" class="external-link">mlr3::ResamplingSubsampling</a> or <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_bootstrap.html" class="external-link">mlr3::ResamplingBootstrap</a>.</p></dd>
 
 
 <dt>inner_resampling</dt>
@@ -153,7 +153,7 @@ Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
 
 <dt>terminator</dt>
-<dd><p>(Terminator)<br>
+<dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
 Stop criterion of the feature selection.</p></dd>
 
 
