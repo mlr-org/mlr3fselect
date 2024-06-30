@@ -47,7 +47,7 @@ Ignored if \code{terminator} is passed.}
 Maximum allowed time in seconds.
 Ignored if \code{terminator} is passed.}
 
-\item{terminator}{(\link{Terminator})\cr
+\item{terminator}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
 
 \item{store_benchmark_result}{(\code{logical(1)})\cr
@@ -81,11 +81,11 @@ It executes the feature selection with the \link{FSelector} (\code{method}) and 
 The \link{ArchiveBatchFSelect} (\verb{$archive}) stores all evaluated hyperparameter configurations and performance scores.
 }
 \details{
-The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link{Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
-If multiple performance \link[=Measure]{Measures} are supplied, a \link{FSelectInstanceBatchMultiCrit} is created.
-The parameter \code{term_evals} and \code{term_time} are shortcuts to create a \link{Terminator}.
-If both parameters are passed, a \link{TerminatorCombo} is constructed.
-For other \link[=Terminator]{Terminators}, pass one with \code{terminator}.
+The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link[bbotk:Terminator]{bbotk::Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
+If multiple performance \link[mlr3:Measure]{Measures} are supplied, a \link{FSelectInstanceBatchMultiCrit} is created.
+The parameter \code{term_evals} and \code{term_time} are shortcuts to create a \link[bbotk:Terminator]{bbotk::Terminator}.
+If both parameters are passed, a \link[bbotk:mlr_terminators_combo]{bbotk::TerminatorCombo} is constructed.
+For other \link[bbotk:Terminator]{Terminators}, pass one with \code{terminator}.
 If no termination criterion is needed, set \code{term_evals}, \code{term_time} and \code{terminator} to \code{NULL}.
 }
 \section{Resources}{

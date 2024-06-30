@@ -33,7 +33,7 @@ Already instantiated resamplings are kept unchanged.}
 A single measure creates a \link{FSelectInstanceBatchSingleCrit} and multiple measures a \link{FSelectInstanceBatchMultiCrit}.
 If \code{NULL}, default measure is used.}
 
-\item{terminator}{(\link{Terminator})\cr
+\item{terminator}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
 
 \item{store_benchmark_result}{(\code{logical(1)})\cr

@@ -28,8 +28,8 @@ Relies on \code{\link[mlr3misc:dictionary_sugar_get]{mlr3misc::dictionary_sugar_
 \itemize{
 \item \code{fs()} for a \link{FSelector} from \link{mlr_fselectors}.
 \item \code{fss()} for a list of a \link{FSelector} from \link{mlr_fselectors}.
-\item \code{trm()} for a \link{Terminator} from \link{mlr_terminators}.
-\item \code{trms()} for a list of \link[=Terminator]{Terminators} from \link{mlr_terminators}.
+\item \code{trm()} for a \link[bbotk:Terminator]{bbotk::Terminator} from \link{mlr_terminators}.
+\item \code{trms()} for a list of \link[bbotk:Terminator]{Terminators} from \link{mlr_terminators}.
 }
 }
 \examples{

@@ -55,7 +55,7 @@ Whether to add the learner, task and resampling information from the benchmark r
 Das, I (1999).
 \dQuote{On characterizing the 'knee' of the Pareto curve based on normal-boundary intersection.}
 \emph{Structural Optimization}, \bold{18}(1-2), 107--115.
-ISSN 09344373, \doi{10.1007/BF01195985/METRICS}.
+ISSN 09344373.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

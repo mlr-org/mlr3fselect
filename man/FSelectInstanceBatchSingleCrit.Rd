@@ -159,7 +159,7 @@ Already instantiated resamplings are kept unchanged.}
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Measure to optimize. If \code{NULL}, default measure is used.}
 
-\item{\code{terminator}}{(\link{Terminator})\cr
+\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
 
 \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr

@@ -46,7 +46,7 @@ The learners to be used for feature selection.}
 \item{init_resampling}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 The initial resampling strategy of the data, from which each train set
 will be passed on to the learners.
-Can only be \link{mlr_resamplings_subsampling} or \link{mlr_resamplings_bootstrap}.}
+Can only be \link[mlr3:mlr_resamplings_subsampling]{mlr3::ResamplingSubsampling} or \link[mlr3:mlr_resamplings_bootstrap]{mlr3::ResamplingBootstrap}.}
 
 \item{inner_resampling}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 The inner resampling strategy used by the \link{FSelector}.}
@@ -54,7 +54,7 @@ The inner resampling strategy used by the \link{FSelector}.}
 \item{measure}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Measure to optimize. If \code{NULL}, default measure is used.}
 
-\item{terminator}{(\link{Terminator})\cr
+\item{terminator}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
 
 \item{callbacks}{(list of lists of \link{CallbackBatchFSelect})\cr
