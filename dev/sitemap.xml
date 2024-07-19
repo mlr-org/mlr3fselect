@@ -1,126 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ArchiveBatchFSelect.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/AutoFSelector.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/CallbackBatchFSelect.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ContextBatchFSelect.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchMultiCrit.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchSingleCrit.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatchFromOptimizerBatch.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelectBatch.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/auto_fselector.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/callback_batch_fselect.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fs_result.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fselect.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_results.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/fs.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/fselect.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/fselect_nested.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/fsi.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect-package.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.backup.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.one_se_rule.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.svm_rfe.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_design_points.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_exhaustive_search.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_genetic_search.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_random_search.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_rfe.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_rfecv.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_sequential.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_shadow_variable_search.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3fselect.mlr-org.com/dev/reference/reexports.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/LICENSE-text.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/authors.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/index.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/news/index.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/ArchiveBatchFSelect.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/AutoFSelector.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/CallbackBatchFSelect.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/ContextBatchFSelect.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchMultiCrit.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchSingleCrit.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatchFromOptimizerBatch.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelectBatch.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/auto_fselector.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/callback_batch_fselect.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fs_result.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fselect.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_results.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/fs.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/fselect.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/fselect_nested.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/fsi.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/index.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect-package.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.backup.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.one_se_rule.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.svm_rfe.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_design_points.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_exhaustive_search.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_genetic_search.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_random_search.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_rfe.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_rfecv.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_sequential.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/mlr_fselectors_shadow_variable_search.html</loc></url>
+<url><loc>https://mlr3fselect.mlr-org.com/dev/reference/reexports.html</loc></url>
 </urlset>
+
