@@ -214,8 +214,6 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
 #' @export
 as.data.table.ArchiveBatchFSelect = function(x, ..., exclude_columns = "uhash", measures = NULL) {
   if (nrow(x$data) == 0) return(data.table())
-  # always ignore x_domain column
-  exclude_columns = c("x_domain", exclude_columns)
   # default value for exclude_columns might be not present in archive
   if (!x$benchmark_result$n_resample_results) exclude_columns = exclude_columns[exclude_columns %nin% "uhash"]
   cols_y_extra = NULL

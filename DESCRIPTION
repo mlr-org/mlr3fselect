@@ -27,7 +27,7 @@ Depends:
     mlr3 (>= 0.12.0),
     R (>= 3.1.0)
 Imports:
-    bbotk (>= 1.0.0),
+    bbotk (>= 1.0.0.9000),
     checkmate (>= 2.0.0),
     data.table,
     lgr,
@@ -42,6 +42,8 @@ Suggests:
     mlr3pipelines,
     rpart,
     testthat (>= 3.0.0)
+Remotes:
+    mlr-org/bbotk
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
