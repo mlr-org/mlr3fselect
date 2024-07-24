@@ -88,6 +88,15 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
     },
 
     #' @description
+    #' Adds function evaluations to the archive table.
+    #'
+    #' @param xss_trafoed (`list()`)\cr
+    #'   Ignored in feature selection.
+    add_evals = function(xdt, xss_trafoed = NULL, ydt) {
+      super$add_evals(xdt = xdt, ydt = ydt)
+    },
+
+    #' @description
     #' Retrieve [mlr3::Learner] of the i-th evaluation, by position or by unique hash `uhash`.
     #' `i` and `uhash` are mutually exclusive.
     #' Learner does not contain a model. Use `$learners()` to get learners with models.
@@ -214,8 +223,6 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
 #' @export
 as.data.table.ArchiveBatchFSelect = function(x, ..., exclude_columns = "uhash", measures = NULL) {
   if (nrow(x$data) == 0) return(data.table())
-  # always ignore x_domain column
-  exclude_columns = c("x_domain", exclude_columns)
   # default value for exclude_columns might be not present in archive
   if (!x$benchmark_result$n_resample_results) exclude_columns = exclude_columns[exclude_columns %nin% "uhash"]
   cols_y_extra = NULL
