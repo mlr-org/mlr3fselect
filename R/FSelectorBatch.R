@@ -73,7 +73,12 @@ FSelectorBatch = R6Class("FSelectorBatch",
     optimize = function(inst) {
       assert_fselect_instance_batch(inst)
       if ("requires_model" %in% self$properties) inst$objective$.__enclos_env__$private$.model_required = TRUE
-      optimize_batch_default(inst, self)
+      result = optimize_batch_default(inst, self)
+      inst$objective$.__enclos_env__$private$.xss = NULL
+      inst$objective$.__enclos_env__$private$.design = NULL
+      inst$objective$.__enclos_env__$private$.benchmark_result = NULL
+      inst$objective$.__enclos_env__$private$.aggregated_performance = NULL
+      return(result)
     }
   )
 )

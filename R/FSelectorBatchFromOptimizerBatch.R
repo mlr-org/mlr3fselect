@@ -43,7 +43,12 @@ FSelectorBatchFromOptimizerBatch= R6Class("FSelectorBatchFromOptimizerBatch",
       # class anymore and OptimInstance would not ensure that we are in the
       # scope of mlr3fselect
       assert_fselect_instance_batch(inst)
-      private$.optimizer$optimize(inst)
+      result = private$.optimizer$optimize(inst)
+      inst$objective$.__enclos_env__$private$.xss = NULL
+      inst$objective$.__enclos_env__$private$.design = NULL
+      inst$objective$.__enclos_env__$private$.benchmark_result = NULL
+      inst$objective$.__enclos_env__$private$.aggregated_performance = NULL
+      return(result)
     }
   ),
 

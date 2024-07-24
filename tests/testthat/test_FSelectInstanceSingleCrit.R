@@ -118,3 +118,17 @@ test_that("always include variables works", {
     expect_names(names(rr$learners[[1]]$state$data_prototype) %??% rr$learners[[1]]$state$feature_names, must.include = c("glucose", "age"))
   })
 })
+
+test_that("objective contains no benchmark results", {
+  task = tsk("pima")
+  learner = lrn("classif.rpart")
+  resampling = rsmp("holdout")
+  measure = msr("classif.ce")
+  terminator = trm("evals", n_evals = 10)
+
+  instance = fsi(task, learner, resampling, measure, terminator)
+  fselector = fs("random_search", batch_size = 1)
+  fselector$optimize(instance)
+
+  expect_null(instance$objective$.__enclos_env__$private$.benchmark_result)
+})
