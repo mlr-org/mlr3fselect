@@ -88,6 +88,15 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
     },
 
     #' @description
+    #' Adds function evaluations to the archive table.
+    #'
+    #' @param xss_trafoed (`list()`)\cr
+    #'   Ignored in feature selection.
+    add_evals = function(xdt, xss_trafoed = NULL, ydt) {
+      super$add_evals(xdt = xdt, ydt = ydt)
+    },
+
+    #' @description
     #' Retrieve [mlr3::Learner] of the i-th evaluation, by position or by unique hash `uhash`.
     #' `i` and `uhash` are mutually exclusive.
     #' Learner does not contain a model. Use `$learners()` to get learners with models.

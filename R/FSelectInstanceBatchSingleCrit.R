@@ -130,7 +130,6 @@ FSelectInstanceBatchSingleCrit = R6Class("FSelectInstanceBatchSingleCrit",
       self$archive = archive
 
       private$.objective_function = objective_function
-      private$.store_x_domain = FALSE
     },
 
     #' @description
