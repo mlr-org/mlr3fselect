@@ -16,7 +16,7 @@
 #'       Whether to add the learner, task and resampling information from the benchmark result.
 #'
 #' @references
-#' `r format_bib("das1999")`
+#' `r format_bib("das1999", "meinshausen2010")`
 #'
 #' @export
 #' @examples
