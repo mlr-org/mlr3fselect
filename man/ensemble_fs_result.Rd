@@ -56,6 +56,11 @@ Das, I (1999).
 \dQuote{On characterizing the 'knee' of the Pareto curve based on normal-boundary intersection.}
 \emph{Structural Optimization}, \bold{18}(1-2), 107--115.
 ISSN 09344373.
+
+Meinshausen, Nicolai, Buhlmann, Peter (2010).
+\dQuote{Stability Selection.}
+\emph{Journal of the Royal Statistical Society Series B: Statistical Methodology}, \bold{72}(4), 417--473.
+ISSN 1369-7412, \doi{10.1111/J.1467-9868.2010.00740.X}, 0809.2932.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -185,7 +190,7 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \subsection{Method \code{feature_ranking()}}{
 Calculates the feature ranking.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "approval_voting")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "av")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -199,11 +204,22 @@ The method to calculate the feature ranking.}
 \subsection{Details}{
 The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
 The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
-Currently, only \code{"approval_voting"} method is supported, which selects the candidates/features that have the highest approval score or selection frequency, i.e. appear the most often.
+
+For every feature a score is calculated, which depends on the \code{"method"} argument.
+Most methods have a \code{"*_weighted"} version that outputs a weighted score.
+The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
+The un-weighted methods use same weights for all voters (equal to 1).
+
+The following methods are currently supported:
+\itemize{
+\item \code{"av"|"av_weighted"} (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
+The outputs scores can be interpreted as selection probabilities, see Meinshausen et al. (2010).
+This is the default feature ranking method.
+}
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing inclusion probability scores (depending on the \code{method})
+A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{method}).
 }
 }
 \if{html}{\out{<hr>}}

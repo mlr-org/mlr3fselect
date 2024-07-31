@@ -50,6 +50,8 @@
 #'       Score feature sets on additional measures.
 #'
 #' @template param_ties_method
+#' @template param_xdt
+#' @template param_ydt
 #'
 #' @export
 ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",

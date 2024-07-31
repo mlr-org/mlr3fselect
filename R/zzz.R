@@ -15,7 +15,6 @@ NULL
 ## usethis namespace: start
 #' @useDynLib mlr3fselect, .registration = TRUE
 ## usethis namespace: end
-NULL
 "_PACKAGE"
 
 .onLoad = function(libname, pkgname) {
