@@ -24,6 +24,7 @@ approval_voting = function(voters, candidates, weights) {
 
     res = rbindlist(list(res_fs, res_fns))
   } else {
+    score = NULL # fix data.table note
     as.data.table(
       rcpp_approval_voting(voters, candidates, weights)
     )[order(-rank(score))]
