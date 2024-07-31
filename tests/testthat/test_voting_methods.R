@@ -42,7 +42,7 @@ test_that("approval voting", {
 
   av2_equalw = approval_voting(vot2, cand2, w2_equal)
   expect_equal(av2_equalw$feature[1:2], c("V3", "V1"))
-  expect_equal(av2_equalw$score[1], 1)
+  expect_equal(av2_equalw$score, c(1, 0.5, 0.25, 0.25))
   # using unequal weights, feature rankings should be different
   expect_false(identical(av2$feature, av2_equalw$feature))
 })
