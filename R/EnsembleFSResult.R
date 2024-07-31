@@ -119,35 +119,48 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @details
     #' The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
     #' The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
-    #' Currently, only `"approval_voting"` method is supported, which selects the candidates/features that have the highest approval score or selection frequency, i.e. appear the most often.
+    #'
+    #' For every feature a score is calculated, which depends on the `"method"` argument.
+    #' Most methods have a `"*_weighted"` version that outputs a weighted score.
+    #' The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
+    #' The un-weighted methods use same weights for all voters (equal to 1).
+    #'
+    #' The following methods are currently supported:
+    #'
+    #' - `"av"|"av_weighted"` (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
+    #' The outputs scores can be interpreted as selection probabilities, see Meinshausen et al. (2010).
+    #' This is the default feature ranking method.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
     #'
-    #' @return A [data.table::data.table] listing all the features, ordered by decreasing inclusion probability scores (depending on the `method`)
-    feature_ranking = function(method = "approval_voting") {
-      assert_choice(method, choices = "approval_voting")
+    #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `method`).
+    feature_ranking = function(method = "av") {
+      assert_choice(method, choices = c("av", "av_weighted"))
 
       # cached results
       if (!is.null(private$.feature_ranking[[method]])) {
         return(private$.feature_ranking[[method]])
       }
 
-      count_tbl = sort(table(unlist(private$.result$features)), decreasing = TRUE)
-      features_selected = names(count_tbl)
-      features_not_selected = setdiff(private$.features, features_selected)
+      # candidates => all features, voters => list of selected (best) features sets
+      candidates = private$.features
+      voters = private$.result$features
 
-      res_fs = data.table(
-        feature = features_selected,
-        inclusion_probability = as.vector(count_tbl) / nrow(private$.result)
-      )
+      # calculate weights
+      use_weights = grepl(pattern = "weighted", x = method)
+      if (use_weights) {
+        # voter weights are the (inverse) scores
+        scores = private$.result[, get(private$.measure_id)]
+        weights = if (private$.minimize) 1 / scores else scores
+      } else {
+        # all voters are equal
+        weights = rep(1, length(voters))
+      }
 
-      res_fns = data.table(
-        feature = features_not_selected,
-        inclusion_probability = 0
-      )
-
-      res = rbindlist(list(res_fs, res_fns))
+      if (method == "av" || method == "av_weighted") {
+        res = approval_voting(voters, candidates, weights)
+      }
 
       private$.feature_ranking[[method]] = res
       private$.feature_ranking[[method]]
