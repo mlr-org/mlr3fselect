@@ -82,6 +82,10 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
       private$.minimize = assert_logical(minimize, null.ok = FALSE)
+
+      # check that all feature sets are subsets of the task features
+      assert_subset(unlist(result$features), private$.features)
+
       self$benchmark_result = if (!is.null(benchmark_result)) assert_benchmark_result(benchmark_result)
 
       self$man = "mlr3fselect::ensemble_fs_result"
