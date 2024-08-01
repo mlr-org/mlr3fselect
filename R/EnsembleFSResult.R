@@ -117,10 +117,11 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Calculates the feature ranking.
     #'
     #' @details
-    #' The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
+    #' The feature ranking process is built on the following framework: models act as *voters*, features act as *candidates*, and voters select certain candidates (features).
     #' The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
     #'
     #' For every feature a score is calculated, which depends on the `"method"` argument.
+    #' The higher the score, the higher the rank of the feature.
     #' Most methods have a `"*_weighted"` version that outputs a weighted score.
     #' The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
     #' The un-weighted methods use same weights for all voters (equal to 1).
@@ -128,15 +129,17 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' The following methods are currently supported:
     #'
     #' - `"av"|"av_weighted"` (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
-    #' The outputs scores can be interpreted as selection probabilities, see Meinshausen et al. (2010).
     #' This is the default feature ranking method.
+    #' - `"sav"|"sav_weighted"` (satisfaction approval voting) selects the candidates that have a higher satisfaction score,in proportion to the size of the voters approval sets.
+    #' Voters who approve more candidates contribute a lesser score to the individual approved candidates.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
     #'
-    #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `method`).
+    #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `"method"`).
+    #' An extra column `"norm_score"` is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as **selection probabilities**, see Meinshausen et al. (2010).
     feature_ranking = function(method = "av") {
-      assert_choice(method, choices = c("av", "av_weighted"))
+      assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted"))
 
       # cached results
       if (!is.null(private$.feature_ranking[[method]])) {
@@ -158,8 +161,11 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         weights = rep(1, length(voters))
       }
 
+      # calculate scores
       if (method == "av" || method == "av_weighted") {
         res = approval_voting(voters, candidates, weights)
+      } else if (method == "sav" || method == "sav_weighted") {
+        res = satisfaction_approval_voting(voters, candidates, weights)
       }
 
       private$.feature_ranking[[method]] = res

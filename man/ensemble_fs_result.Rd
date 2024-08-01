@@ -202,10 +202,11 @@ The method to calculate the feature ranking.}
 \if{html}{\out{</div>}}
 }
 \subsection{Details}{
-The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
+The feature ranking process is built on the following framework: models act as \emph{voters}, features act as \emph{candidates}, and voters select certain candidates (features).
 The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
 
 For every feature a score is calculated, which depends on the \code{"method"} argument.
+The higher the score, the higher the rank of the feature.
 Most methods have a \code{"*_weighted"} version that outputs a weighted score.
 The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
 The un-weighted methods use same weights for all voters (equal to 1).
@@ -213,13 +214,15 @@ The un-weighted methods use same weights for all voters (equal to 1).
 The following methods are currently supported:
 \itemize{
 \item \code{"av"|"av_weighted"} (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
-The outputs scores can be interpreted as selection probabilities, see Meinshausen et al. (2010).
 This is the default feature ranking method.
+\item \code{"sav"|"sav_weighted"} (satisfaction approval voting) selects the candidates that have a higher satisfaction score,in proportion to the size of the voters approval sets.
+Voters who approve more candidates contribute a lesser score to the individual approved candidates.
 }
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{method}).
+A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{"method"}).
+An extra column \code{"norm_score"} is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as \strong{selection probabilities}, see Meinshausen et al. (2010).
 }
 }
 \if{html}{\out{<hr>}}
