@@ -86,6 +86,7 @@ Method to handle ties.}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-ArchiveBatchFSelect-new}{\code{ArchiveBatchFSelect$new()}}
+\item \href{#method-ArchiveBatchFSelect-add_evals}{\code{ArchiveBatchFSelect$add_evals()}}
 \item \href{#method-ArchiveBatchFSelect-learner}{\code{ArchiveBatchFSelect$learner()}}
 \item \href{#method-ArchiveBatchFSelect-learners}{\code{ArchiveBatchFSelect$learners()}}
 \item \href{#method-ArchiveBatchFSelect-predictions}{\code{ArchiveBatchFSelect$predictions()}}
@@ -100,7 +101,6 @@ Method to handle ties.}
 <ul>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href='../../bbotk/html/Archive.html#method-Archive-help'><code>bbotk::Archive$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="add_evals"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-add_evals'><code>bbotk::ArchiveBatch$add_evals()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="clear"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-clear'><code>bbotk::ArchiveBatch$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="nds_selection"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-nds_selection'><code>bbotk::ArchiveBatch$nds_selection()</code></a></span></li>
 </ul>
@@ -141,6 +141,32 @@ The option \code{"least_features"} (default) selects the feature set with the le
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ArchiveBatchFSelect-add_evals"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-add_evals}{}}}
+\subsection{Method \code{add_evals()}}{
+Adds function evaluations to the archive table.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$add_evals(xdt, xss_trafoed = NULL, ydt)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{xdt}}{(\code{data.table::data.table()})\cr
+x values as \code{data.table}. Each row is one point. Contains the value in
+the \emph{search space} of the \link{FSelectInstanceBatchMultiCrit} object. Can contain
+additional columns for extra information.}
+
+\item{\code{xss_trafoed}}{(\code{list()})\cr
+Ignored in feature selection.}
+
+\item{\code{ydt}}{(\code{\link[data.table:data.table]{data.table::data.table()}})\cr
+Optimal outcome.}
 }
 \if{html}{\out{</div>}}
 }
