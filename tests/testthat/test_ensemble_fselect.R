@@ -31,7 +31,7 @@ test_that("ensemble feature selection works", {
   # default feature ranking
   feature_ranking = efsr$feature_ranking()
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
-  expect_equal(names(feature_ranking), c("feature", "score"))
+  expect_equal(names(feature_ranking), c("feature", "score", "norm_score"))
 
   # pareto_front
   pf = efsr$pareto_front()
@@ -87,7 +87,7 @@ test_that("ensemble feature selection works without benchmark result", {
   # default feature ranking
   feature_ranking = efsr$feature_ranking()
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
-  expect_equal(names(feature_ranking), c("feature", "score"))
+  expect_equal(names(feature_ranking), c("feature", "score", "norm_score"))
 
   # pareto_front
   pf = efsr$pareto_front()
@@ -137,7 +137,7 @@ test_that("ensemble feature selection works with rfe", {
   # default feature ranking
   feature_ranking = efsr$feature_ranking()
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
-  expect_equal(names(feature_ranking), c("feature", "score"))
+  expect_equal(names(feature_ranking), c("feature", "score", "norm_score"))
 
   # pareto_front
   pf = efsr$pareto_front()
