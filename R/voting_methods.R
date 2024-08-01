@@ -11,22 +11,30 @@ approval_voting = function(voters, candidates, weights) {
     count_tbl = sort(table(unlist(voters)), decreasing = TRUE)
     features_selected = names(count_tbl)
     features_not_selected = setdiff(candidates, features_selected)
+    approval_counts = as.vector(count_tbl)
 
     res_fs = data.table(
       feature = features_selected,
-      score = as.vector(count_tbl) / length(voters)
+      score = approval_counts,
+      norm_score = approval_counts / length(voters)
     )
 
     res_fns = data.table(
       feature = features_not_selected,
-      score = 0
+      score = 0,
+      norm_score = 0
     )
 
     res = rbindlist(list(res_fs, res_fns))
   } else {
-    score = NULL # fix data.table note
-    as.data.table(
-      rcpp_approval_voting(voters, candidates, weights)
-    )[order(-rank(score))]
+    res = as.data.table(AV_rcpp(voters, candidates, weights))
+    setorderv(res, cols = "score", order = -1)
   }
+
+  res
+}
+
+satisfaction_approval_voting = function(voters, candidates, weights) {
+  res = as.data.table(SAV_rcpp(voters, candidates, weights))
+  setorderv(res, cols = "score", order = -1)
 }
