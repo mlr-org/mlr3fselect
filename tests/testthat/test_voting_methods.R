@@ -48,3 +48,31 @@ test_that("approval voting", {
   expect_equal(av2_equalw$score, c(4, 2, 1, 1, 0))
   expect_equal(av2_equalw$norm_score, c(1, 0.5, 0.25, 0.25, 0))
 })
+
+test_that("satisfaction approval voting", {
+  # large data
+  sav = satisfaction_approval_voting(vot, cand, w)
+  expect_data_table(sav, nrows = length(cand), ncols = 3)
+  expect_setequal(colnames(sav), c("feature", "score", "norm_score"))
+  expect_setequal(sav$feature, cand) # all features are there
+  expect_true(all(sav$score >= 0)) # positive scores
+  expect_true(all(sav$norm_score >= 0 & sav$norm_score <= 1)) # behave like probs
+
+  sav_equalw = satisfaction_approval_voting(vot, cand, w_equal)
+  expect_data_table(sav_equalw, nrows = length(cand), ncols = 3)
+  expect_true(all(sav_equalw$score >= 0)) # positive scores
+  expect_true(all(sav_equalw$norm_score >= 0 & sav_equalw$norm_score <= 1)) # behave like probs
+  # using unequal weights, feature rankings should be different
+  expect_false(identical(sav$feature, sav_equalw$feature))
+
+  # small data
+  sav2 = satisfaction_approval_voting(vot2, cand2, w2)
+  expect_equal(sav2$feature[1:2], c("V3", "V1"))
+  expect_equal(sav2$feature[5], "V5")
+  expect_equal(sav2[feature == "V3", norm_score], 1) # always present
+  expect_equal(sav2[feature == "V5", norm_score], 0) # never present
+
+  sav2_equalw = satisfaction_approval_voting(vot2, cand2, w2_equal)
+  expect_equal(sav2_equalw$feature, c("V3", "V1", "V4", "V2", "V5"))
+})
+
