@@ -126,6 +126,7 @@ Method to handle ties.</p></dd>
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-ArchiveBatchFSelect-new"><code>ArchiveBatchFSelect$new()</code></a></p></li>
+<li><p><a href="#method-ArchiveBatchFSelect-add_evals"><code>ArchiveBatchFSelect$add_evals()</code></a></p></li>
 <li><p><a href="#method-ArchiveBatchFSelect-learner"><code>ArchiveBatchFSelect$learner()</code></a></p></li>
 <li><p><a href="#method-ArchiveBatchFSelect-learners"><code>ArchiveBatchFSelect$learners()</code></a></p></li>
 <li><p><a href="#method-ArchiveBatchFSelect-predictions"><code>ArchiveBatchFSelect$predictions()</code></a></p></li>
@@ -135,7 +136,6 @@ Method to handle ties.</p></dd>
 <li><p><a href="#method-ArchiveBatchFSelect-clone"><code>ArchiveBatchFSelect$clone()</code></a></p></li>
 </ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-format"><code>bbotk::Archive$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-help"><code>bbotk::Archive$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="add_evals"><a href="https://bbotk.mlr-org.com/reference/ArchiveBatch.html#method-add_evals"><code>bbotk::ArchiveBatch$add_evals()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/ArchiveBatch.html#method-clear"><code>bbotk::ArchiveBatch$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="nds_selection"><a href="https://bbotk.mlr-org.com/reference/ArchiveBatch.html#method-nds_selection"><code>bbotk::ArchiveBatch$nds_selection()</code></a></span></li>
 </ul></details></p><hr><a id="method-ArchiveBatchFSelect-new"></a><div class="section">
@@ -182,17 +182,46 @@ Ignored if multiple measures are used.</p></dd>
 </dl><p></p></div>
 </div>
 
+</div><p></p><hr><a id="method-ArchiveBatchFSelect-add_evals"></a><div class="section">
+<h3 id="method-add-evals-">Method <code>add_evals()</code><a class="anchor" aria-label="anchor" href="#method-add-evals-"></a></h3>
+<p>Adds function evaluations to the archive table.</p><div class="section">
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">add_evals</span><span class="op">(</span><span class="va">xdt</span>, xss_trafoed <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">ydt</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>xdt</code></dt>
+<dd><p>(<code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
+x values as <code>data.table</code>. Each row is one point. Contains the value in
+the <em>search space</em> of the <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> object. Can contain
+additional columns for extra information.</p></dd>
+
+
+<dt><code>xss_trafoed</code></dt>
+<dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
+Ignored in feature selection.</p></dd>
+
+
+<dt><code>ydt</code></dt>
+<dd><p>(<code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
+Optimal outcome.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
 </div><p></p><hr><a id="method-ArchiveBatchFSelect-learner"></a><div class="section">
 <h3 id="method-learner-">Method <code>learner()</code><a class="anchor" aria-label="anchor" href="#method-learner-"></a></h3>
 <p>Retrieve <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> of the i-th evaluation, by position or by unique hash <code>uhash</code>.
 <code>i</code> and <code>uhash</code> are mutually exclusive.
 Learner does not contain a model. Use <code>$learners()</code> to get learners with models.</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">learner</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>i</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 The iteration value to filter for.</p></dd>
@@ -211,12 +240,12 @@ The <code>uhash</code> value to filter for.</p></dd>
 <p>Retrieve list of trained <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> objects of the i-th evaluation,
 by position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
 exclusive.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">learners</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>i</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 The iteration value to filter for.</p></dd>
@@ -235,31 +264,8 @@ The <code>uhash</code> value to filter for.</p></dd>
 <p>Retrieve list of <a href="https://mlr3.mlr-org.com/reference/Prediction.html" class="external-link">mlr3::Prediction</a> objects of the i-th evaluation, by
 position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
 exclusive.</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">predictions</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>i</code></dt>
-<dd><p>(<code>integer(1)</code>)<br>
-The iteration value to filter for.</p></dd>
-
-
-<dt><code>uhash</code></dt>
-<dd><p>(<code>logical(1)</code>)<br>
-The <code>uhash</code> value to filter for.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-
-</div><p></p><hr><a id="method-ArchiveBatchFSelect-resample_result"></a><div class="section">
-<h3 id="method-resample-result-">Method <code>resample_result()</code><a class="anchor" aria-label="anchor" href="#method-resample-result-"></a></h3>
-<p>Retrieve <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> of the i-th evaluation, by position
-or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">resample_result</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">predictions</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -277,15 +283,38 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveBatchFSelect-print"></a><div class="section">
-<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
-<p>Printer.</p><div class="section">
+</div><p></p><hr><a id="method-ArchiveBatchFSelect-resample_result"></a><div class="section">
+<h3 id="method-resample-result-">Method <code>resample_result()</code><a class="anchor" aria-label="anchor" href="#method-resample-result-"></a></h3>
+<p>Retrieve <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> of the i-th evaluation, by position
+or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually exclusive.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">resample_result</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>i</code></dt>
+<dd><p>(<code>integer(1)</code>)<br>
+The iteration value to filter for.</p></dd>
+
+
+<dt><code>uhash</code></dt>
+<dd><p>(<code>logical(1)</code>)<br>
+The <code>uhash</code> value to filter for.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-ArchiveBatchFSelect-print"></a><div class="section">
+<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+<p>Printer.</p><div class="section">
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>(ignored).</p></dd>
 
@@ -296,12 +325,12 @@ The <code>uhash</code> value to filter for.</p></dd>
 </div><p></p><hr><a id="method-ArchiveBatchFSelect-best"></a><div class="section">
 <h3 id="method-best-">Method <code>best()</code><a class="anchor" aria-label="anchor" href="#method-best-"></a></h3>
 <p>Returns the best scoring feature sets.</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">best</span><span class="op">(</span>batch <span class="op">=</span> <span class="cn">NULL</span>, ties_method <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>batch</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code>)<br>
 The batch number(s) to limit the best results to.
@@ -327,12 +356,12 @@ The <code>random</code> method returns a random feature set from the best featur
 </div><p></p><hr><a id="method-ArchiveBatchFSelect-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
