@@ -508,14 +508,14 @@ Printer.</p>
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island    sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;     &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE      TRUE           TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE           TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      year classif.ce                                        features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;      &lt;num&gt;                                          &lt;list&gt;      &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE 0.03947368                   bill_depth,bill_length,island          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE 0.07894737          bill_length,flipper_length,island,year          4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.05194805 bill_depth,bill_length,body_mass,flipper_length          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE 0.07894737          bill_length,flipper_length,island,year          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  FALSE 0.05194805 bill_depth,bill_length,body_mass,flipper_length          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.03947368                   bill_depth,bill_length,island          3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      &lt;char&gt;                  &lt;char&gt;        &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>

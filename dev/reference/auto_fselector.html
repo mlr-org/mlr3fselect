@@ -337,19 +337,19 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island    sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;     &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE          FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE          FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      year classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE 0.06578947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE 0.03947368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE 0.06493506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE 0.03947368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE 0.06493506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.06578947</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            &lt;list&gt;      &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         bill_depth,bill_length,body_mass,flipper_length,island          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                   bill_depth,bill_length,body_mass,island,year          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                   bill_depth,bill_length,body_mass,island,year          5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         bill_depth,bill_length,body_mass,flipper_length,island          5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      &lt;char&gt;                  &lt;char&gt;        &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>
