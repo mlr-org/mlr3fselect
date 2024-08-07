@@ -126,11 +126,17 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
     #' The un-weighted methods use same weights for all voters (equal to 1).
     #'
+    #' Note that some methods output a feature ranking instead of a score per feature.
+    #' Therefore we also calculate **Borda's score**:
+    #' \eqn{s_{borda} = (p-i)/(p-1)}, where \eqn{p} is the total number of features, and \eqn{i} is the feature ranking.
+    #' So the best feature gets a borda score of \eqn{1} and the worst-ranked feature a borda score of \eqn{0}.
+    #' This score is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
+    #'
     #' The following methods are currently supported:
     #'
     #' - `"av"|"av_weighted"` (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
     #' This is the default feature ranking method.
-    #' - `"sav"|"sav_weighted"` (satisfaction approval voting) selects the candidates that have a higher satisfaction score,in proportion to the size of the voters approval sets.
+    #' - `"sav"|"sav_weighted"` (satisfaction approval voting) selects the candidates that have a higher satisfaction score, in proportion to the size of the voters approval sets.
     #' Voters who approve more candidates contribute a lesser score to the individual approved candidates.
     #'
     #' @param method (`character(1)`)\cr
@@ -138,6 +144,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `"method"`).
     #' An extra column `"norm_score"` is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as **selection probabilities**, see Meinshausen et al. (2010).
+    #' The `"borda_score"` column is always included to incorporate feature ranking methods that don't output per-feature scores but only rankings.
+    #'
     feature_ranking = function(method = "av") {
       assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted"))
 

@@ -1,9 +1,10 @@
 # some collection of voting methods for feature ranking
 
-# Parameters:
 # @param voters list of feature vectors (best features, each a subset of "candidates")
 # @param candidates vector with ALL features
 # @param weights vector of weights, 1-1 correspondence with voters
+# @return data.table with 4 columns: features (mandatory), score, norm_score, borda_score (mandatory). Always features are ordered with decreasing `score` (or descreasing
+# `borda_score` if a method returns only a ranking).
 
 approval_voting = function(voters, candidates, weights) {
   # faster R version in case of equal weights
@@ -31,10 +32,11 @@ approval_voting = function(voters, candidates, weights) {
     setorderv(res, cols = "score", order = -1)
   }
 
-  res
+  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
 }
 
 satisfaction_approval_voting = function(voters, candidates, weights) {
   res = as.data.table(SAV_rcpp(voters, candidates, weights))
   setorderv(res, cols = "score", order = -1)
+  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
 }

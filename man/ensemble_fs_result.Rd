@@ -211,11 +211,17 @@ Most methods have a \code{"*_weighted"} version that outputs a weighted score.
 The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
 The un-weighted methods use same weights for all voters (equal to 1).
 
+Note that some methods output a feature ranking instead of a score per feature.
+Therefore we also calculate \strong{Borda's score}:
+\eqn{s_{borda} = (p-i)/(p-1)}, where \eqn{p} is the total number of features, and \eqn{i} is the feature ranking.
+So the best feature gets a borda score of \eqn{1} and the worst-ranked feature a borda score of \eqn{0}.
+This score is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
+
 The following methods are currently supported:
 \itemize{
 \item \code{"av"|"av_weighted"} (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
 This is the default feature ranking method.
-\item \code{"sav"|"sav_weighted"} (satisfaction approval voting) selects the candidates that have a higher satisfaction score,in proportion to the size of the voters approval sets.
+\item \code{"sav"|"sav_weighted"} (satisfaction approval voting) selects the candidates that have a higher satisfaction score, in proportion to the size of the voters approval sets.
 Voters who approve more candidates contribute a lesser score to the individual approved candidates.
 }
 }
@@ -223,6 +229,7 @@ Voters who approve more candidates contribute a lesser score to the individual a
 \subsection{Returns}{
 A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{"method"}).
 An extra column \code{"norm_score"} is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as \strong{selection probabilities}, see Meinshausen et al. (2010).
+The \code{"borda_score"} column is always included to incorporate feature ranking methods that don't output per-feature scores but only rankings.
 }
 }
 \if{html}{\out{<hr>}}
