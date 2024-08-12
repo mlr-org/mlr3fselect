@@ -84,3 +84,32 @@ test_that("satisfaction approval voting", {
   expect_equal(sav2_equalw$feature, c("V3", "V1", "V4", "V2", "V5"))
 })
 
+test_that("sequential proportional approval voting", {
+  # small data
+  seq_pav = seq_proportional_approval_voting(vot2, cand2, w2)
+  expect_data_table(seq_pav, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(seq_pav), c("feature", "borda_score"))
+  expect_equal(seq_pav$borda_score[1], 1)
+  expect_equal(seq_pav$borda_score[length(cand2)], 0)
+
+  seq_pav_equal = seq_proportional_approval_voting(vot2, cand2, w2_equal)
+  expect_data_table(seq_pav_equal, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(seq_pav_equal), c("feature", "borda_score"))
+  expect_equal(seq_pav_equal$borda_score[1], 1)
+  expect_equal(seq_pav_equal$borda_score[length(cand2)], 0)
+})
+
+test_that("reverse sequential proportional approval voting", {
+  # small data
+  rs_pav = revseq_proportional_approval_voting(vot2, cand2, w2)
+  expect_data_table(rs_pav, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(rs_pav), c("feature", "borda_score"))
+  expect_equal(rs_pav$borda_score[1], 1)
+  expect_equal(rs_pav$borda_score[length(cand2)], 0)
+
+  rs_pav_equal = seq_proportional_approval_voting(vot2, cand2, w2_equal)
+  expect_data_table(rs_pav_equal, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(rs_pav_equal), c("feature", "borda_score"))
+  expect_equal(rs_pav_equal$borda_score[1], 1)
+  expect_equal(rs_pav_equal$borda_score[length(cand2)], 0)
+})
