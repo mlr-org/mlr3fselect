@@ -36,10 +36,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// seq_PAV_rcpp
+List seq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weights);
+RcppExport SEXP _mlr3fselect_seq_PAV_rcpp(SEXP votersSEXP, SEXP candidatesSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type voters(votersSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type candidates(candidatesSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(seq_PAV_rcpp(voters, candidates, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
+// revseq_PAV_rcpp
+List revseq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weights);
+RcppExport SEXP _mlr3fselect_revseq_PAV_rcpp(SEXP votersSEXP, SEXP candidatesSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type voters(votersSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type candidates(candidatesSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(revseq_PAV_rcpp(voters, candidates, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mlr3fselect_AV_rcpp", (DL_FUNC) &_mlr3fselect_AV_rcpp, 3},
     {"_mlr3fselect_SAV_rcpp", (DL_FUNC) &_mlr3fselect_SAV_rcpp, 3},
+    {"_mlr3fselect_seq_PAV_rcpp", (DL_FUNC) &_mlr3fselect_seq_PAV_rcpp, 3},
+    {"_mlr3fselect_revseq_PAV_rcpp", (DL_FUNC) &_mlr3fselect_revseq_PAV_rcpp, 3},
     {NULL, NULL, 0}
 };
 

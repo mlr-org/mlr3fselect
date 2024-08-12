@@ -9,3 +9,11 @@ SAV_rcpp <- function(voters, candidates, weights) {
     .Call(`_mlr3fselect_SAV_rcpp`, voters, candidates, weights)
 }
 
+seq_PAV_rcpp <- function(voters, candidates, weights) {
+    .Call(`_mlr3fselect_seq_PAV_rcpp`, voters, candidates, weights)
+}
+
+revseq_PAV_rcpp <- function(voters, candidates, weights) {
+    .Call(`_mlr3fselect_revseq_PAV_rcpp`, voters, candidates, weights)
+}
+
