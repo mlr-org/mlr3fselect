@@ -134,7 +134,7 @@ List seq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weights
     int n_remaining_candidates = remaining_candidates.size();
     int index;
     String best_candidate;
-    Rcout << n_remaining_candidates << std::endl;
+    // Rcout << n_remaining_candidates << std::endl;
 
     if (n_remaining_candidates == 1) {
       // Only one candidate remaining so that's our best candidate!
@@ -195,7 +195,7 @@ List revseq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weig
     int n_remaining_candidates = remaining_candidates.size();
     int index;
     String worst_candidate;
-    Rcout << n_remaining_candidates << std::endl;
+    // Rcout << n_remaining_candidates << std::endl;
 
     if (n_remaining_candidates == 1) {
       // Only one candidate remaining so that's the last (worst) candidate!
