@@ -3,8 +3,8 @@
 # @param voters list of feature vectors (best features, each a subset of "candidates")
 # @param candidates vector with ALL features
 # @param weights vector of weights, 1-1 correspondence with voters
-# @return data.table with 4 columns: features (mandatory), score, norm_score, borda_score (mandatory). Always features are ordered with decreasing `score` (or descreasing
-# `borda_score` if a method returns only a ranking).
+# @return data.table with 4 columns: features (mandatory), score, norm_score, borda_score (mandatory).
+# Always features are ordered with decreasing `score` (or descreasing `borda_score` if a method returns only a ranking).
 
 approval_voting = function(voters, candidates, weights) {
   # faster R version in case of equal weights
@@ -28,15 +28,44 @@ approval_voting = function(voters, candidates, weights) {
 
     res = rbindlist(list(res_fs, res_fns))
   } else {
+    # returns AV scores so needs ordering
     res = as.data.table(AV_rcpp(voters, candidates, weights))
     setorderv(res, cols = "score", order = -1)
   }
 
+  # add normalized borda scores
   res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
+
+  res
 }
 
 satisfaction_approval_voting = function(voters, candidates, weights) {
+  # returns SAV scores so needs ordering
   res = as.data.table(SAV_rcpp(voters, candidates, weights))
   setorderv(res, cols = "score", order = -1)
+
+  # add normalized borda scores
   res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
+
+  res
+}
+
+seq_proportional_approval_voting = function(voters, candidates, weights) {
+  # returns ranked features from best to worst
+  res = as.data.table(seq_PAV_rcpp(voters, candidates, weights))
+
+  # add normalized borda scores
+  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
+
+  res
+}
+
+revseq_proportional_approval_voting = function(voters, candidates, weights) {
+  # returns ranked features from best to worst
+  res = as.data.table(revseq_PAV_rcpp(voters, candidates, weights))
+
+  # add normalized borda scores
+  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
+
+  res
 }
