@@ -138,6 +138,9 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' This is the default feature ranking method.
     #' - `"sav"|"sav_weighted"` (satisfaction approval voting) selects the candidates that have a higher satisfaction score, in proportion to the size of the voters approval sets.
     #' Voters who approve more candidates contribute a lesser score to the individual approved candidates.
+    #' - `"seq_pav"|"seq_pav_weighted"` (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
+    #' The **PAV score** (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
+    #' - `"revseq_pav"|"revseq_pav_weighted"` (reverse sequential proportional approval voting) sequentially removes candidates from a full committee, selecting the candidate whose removal minimizes the reduction in the PAV score, then reverses the order to determine the final committee.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
@@ -147,7 +150,9 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' The `"borda_score"` column is always included to incorporate feature ranking methods that don't output per-feature scores but only rankings.
     #'
     feature_ranking = function(method = "av") {
-      assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted"))
+      assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted",
+                                        "seq_pav", "seq_pav_weighted", "revseq_pav",
+                                        "revseq_pav_weighted"))
 
       # cached results
       if (!is.null(private$.feature_ranking[[method]])) {
@@ -170,10 +175,14 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       }
 
       # calculate scores
-      if (method == "av" || method == "av_weighted") {
+      if (startsWith(method) == "av") {
         res = approval_voting(voters, candidates, weights)
-      } else if (method == "sav" || method == "sav_weighted") {
+      } else if (startsWith(method) == "sav") {
         res = satisfaction_approval_voting(voters, candidates, weights)
+      } else if (startsWith(method) == "seq_pav") {
+        res = seq_proportional_approval_voting(voters, candidates, weights)
+      } else if (startsWith(method) == "revseq_pav") {
+        res = revseq_proportional_approval_voting(voters, candidates, weights)
       }
 
       private$.feature_ranking[[method]] = res
