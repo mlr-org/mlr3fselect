@@ -175,13 +175,13 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       }
 
       # calculate scores
-      if (startsWith(method) == "av") {
+      if (startsWith(method, "av")) {
         res = approval_voting(voters, candidates, weights)
-      } else if (startsWith(method) == "sav") {
+      } else if (startsWith(method, "sav")) {
         res = satisfaction_approval_voting(voters, candidates, weights)
-      } else if (startsWith(method) == "seq_pav") {
+      } else if (startsWith(method, "seq_pav")) {
         res = seq_proportional_approval_voting(voters, candidates, weights)
-      } else if (startsWith(method) == "revseq_pav") {
+      } else if (startsWith(method, "revseq_pav")) {
         res = revseq_proportional_approval_voting(voters, candidates, weights)
       }
 
