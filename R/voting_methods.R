@@ -4,7 +4,9 @@
 # @param candidates vector with ALL features
 # @param weights vector of weights, 1-1 correspondence with voters
 # @return data.table with 4 columns: features (mandatory), score, norm_score, borda_score (mandatory).
-# Always features are ordered with decreasing `score` (or descreasing `borda_score` if a method returns only a ranking).
+# Always features are ordered with decreasing `score` (or decreasing `borda_score` if a method returns only a ranking).
+
+borda_score = NULL # silence data.table note: "no visible global binding"
 
 approval_voting = function(voters, candidates, weights) {
   # faster R version in case of equal weights
