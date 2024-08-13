@@ -161,8 +161,8 @@ List seq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weights
         }
       }
 
-      // Break ties randomly
-      index = max_indices[rand() % max_indices.size()];
+      // Get random index from those that have max pav score
+      index = max_indices[std::floor(R::runif(0, max_indices.size()))];
       best_candidate = remaining_candidates[index];
     }
 
@@ -223,8 +223,8 @@ List revseq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weig
         }
       }
 
-      // Break ties randomly
-      index = max_indices[rand() % max_indices.size()];
+      // Get random index from those that have max pav score
+      index = max_indices[std::floor(R::runif(0, max_indices.size()))];
       worst_candidate = remaining_candidates[index];
     }
 
