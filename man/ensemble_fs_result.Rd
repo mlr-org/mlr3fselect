@@ -223,6 +223,9 @@ The following methods are currently supported:
 This is the default feature ranking method.
 \item \code{"sav"|"sav_weighted"} (satisfaction approval voting) selects the candidates that have a higher satisfaction score, in proportion to the size of the voters approval sets.
 Voters who approve more candidates contribute a lesser score to the individual approved candidates.
+\item \code{"seq_pav"|"seq_pav_weighted"} (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
+The \strong{PAV score} (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
+\item \code{"revseq_pav"|"revseq_pav_weighted"} (reverse sequential proportional approval voting) sequentially removes candidates from a full committee, selecting the candidate whose removal minimizes the reduction in the PAV score, then reverses the order to determine the final committee.
 }
 }
 
