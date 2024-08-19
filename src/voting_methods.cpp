@@ -118,8 +118,8 @@ double PAV_score(List voters, NumericVector weights, CharacterVector committee, 
 
 // Sequential Proportional Approval Voting
 // [[Rcpp::export]]
-List seq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weights) {
-  int n_candidates = candidates.size();
+List seq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weights, int committee_size) {
+  int n_candidates = std::min<int>(candidates.size(), committee_size);
   CharacterVector committee; // starts empty
   CharacterVector remaining_candidates = clone(candidates); // starts with all candidates
 

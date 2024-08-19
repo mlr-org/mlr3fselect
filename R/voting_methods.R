@@ -3,10 +3,9 @@
 # @param voters list of feature vectors (best features, each a subset of "candidates")
 # @param candidates vector with ALL features
 # @param weights vector of weights, 1-1 correspondence with voters
+# @param committee_size number of top N features
 # @return data.table with 4 columns: features (mandatory), score, norm_score, borda_score (mandatory).
 # Always features are ordered with decreasing `score` (or decreasing `borda_score` if a method returns only a ranking).
-
-borda_score = NULL # silence data.table note: "no visible global binding"
 
 approval_voting = function(voters, candidates, weights) {
   # faster R version in case of equal weights
@@ -35,10 +34,7 @@ approval_voting = function(voters, candidates, weights) {
     setorderv(res, cols = "score", order = -1)
   }
 
-  # add normalized borda scores
-  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
-
-  res
+  add_borda_score(res)
 }
 
 satisfaction_approval_voting = function(voters, candidates, weights) {
@@ -46,28 +42,29 @@ satisfaction_approval_voting = function(voters, candidates, weights) {
   res = as.data.table(SAV_rcpp(voters, candidates, weights))
   setorderv(res, cols = "score", order = -1)
 
-  # add normalized borda scores
-  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
-
-  res
+  add_borda_score(res)
 }
 
-seq_proportional_approval_voting = function(voters, candidates, weights) {
-  # returns ranked features from best to worst
-  res = as.data.table(seq_PAV_rcpp(voters, candidates, weights))
+seq_proportional_approval_voting = function(voters, candidates, weights, committee_size = NULL) {
+  if (is.null(committee_size)) {
+    committee_size = length(candidates)
+  }
 
-  # add normalized borda scores
-  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
+  # returns ranked features from best to worst (up to committee_size)
+  res = as.data.table(seq_PAV_rcpp(voters, candidates, weights, committee_size))
 
-  res
+  add_borda_score(res)
 }
 
 revseq_proportional_approval_voting = function(voters, candidates, weights) {
   # returns ranked features from best to worst
   res = as.data.table(revseq_PAV_rcpp(voters, candidates, weights))
 
-  # add normalized borda scores
-  res[, borda_score := (nrow(res) - .I) / (nrow(res) - 1)]
+  add_borda_score(res)
+}
 
-  res
+# add normalized borda scores
+add_borda_score = function(dt) {
+  borda_score = NULL # silence data.table note: "no visible global binding"
+  dt[, borda_score := if (nrow(dt) == 1) 1 else (nrow(dt) - .I) / (nrow(dt) - 1)]
 }

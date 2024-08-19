@@ -144,15 +144,19 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
+    #' @param committee_size (`integer(1)`)\cr
+    #' Number of top selected features in the output ranking.
+    #' This parameter can be used to speed-up methods that build a committee sequentially (`"seq_pav"`), by requesting only the top N selected candidates/features and not the complete feature ranking.
     #'
     #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `"method"`).
     #' An extra column `"norm_score"` is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as **selection probabilities**, see Meinshausen et al. (2010).
     #' The `"borda_score"` column is always included to incorporate feature ranking methods that don't output per-feature scores but only rankings.
     #'
-    feature_ranking = function(method = "av") {
+    feature_ranking = function(method = "av", committee_size = NULL) {
       assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted",
                                         "seq_pav", "seq_pav_weighted", "revseq_pav",
                                         "revseq_pav_weighted"))
+      assert_int(committee_size, lower = 1, null.ok = TRUE)
 
       # cached results
       if (!is.null(private$.feature_ranking[[method]])) {
@@ -180,7 +184,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       } else if (startsWith(method, "sav")) {
         res = satisfaction_approval_voting(voters, candidates, weights)
       } else if (startsWith(method, "seq_pav")) {
-        res = seq_proportional_approval_voting(voters, candidates, weights)
+        res = seq_proportional_approval_voting(voters, candidates, weights, committee_size)
       } else if (startsWith(method, "revseq_pav")) {
         res = revseq_proportional_approval_voting(voters, candidates, weights)
       }
