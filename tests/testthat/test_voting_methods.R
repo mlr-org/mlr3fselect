@@ -85,18 +85,31 @@ test_that("satisfaction approval voting", {
 })
 
 test_that("sequential proportional approval voting", {
-  # small data
-  seq_pav = seq_proportional_approval_voting(vot2, cand2, w2)
-  expect_data_table(seq_pav, nrows = length(cand2), ncols = 2)
-  expect_setequal(colnames(seq_pav), c("feature", "borda_score"))
-  expect_equal(seq_pav$borda_score[1], 1)
-  expect_equal(seq_pav$borda_score[length(cand2)], 0)
+  # large data
+  size = 2 # just get top 2 ranked features
+  sp = seq_proportional_approval_voting(vot, cand, w, size)
+  expect_data_table(sp, nrows = size, ncols = 2)
+  expect_setequal(colnames(sp), c("feature", "borda_score"))
+  sp1 = seq_proportional_approval_voting(vot, cand, w, committee_size = 1)
+  expect_equal(sp$feature[1], sp1$feature[1]) # house monotonicity
 
-  seq_pav_equal = seq_proportional_approval_voting(vot2, cand2, w2_equal)
-  expect_data_table(seq_pav_equal, nrows = length(cand2), ncols = 2)
-  expect_setequal(colnames(seq_pav_equal), c("feature", "borda_score"))
-  expect_equal(seq_pav_equal$borda_score[1], 1)
-  expect_equal(seq_pav_equal$borda_score[length(cand2)], 0)
+  spe = seq_proportional_approval_voting(vot, cand, w_equal, size)
+  expect_data_table(spe, nrows = size, ncols = 2)
+  # using unequal weights, feature rankings should be different
+  expect_false(identical(spe$feature, sp$feature))
+
+  # small data
+  seq_pav2 = seq_proportional_approval_voting(vot2, cand2, w2)
+  expect_data_table(seq_pav2, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(seq_pav2), c("feature", "borda_score"))
+  expect_equal(seq_pav2$borda_score[1], 1)
+  expect_equal(seq_pav2$borda_score[length(cand2)], 0)
+
+  seq_pav2_equal = seq_proportional_approval_voting(vot2, cand2, w2_equal)
+  expect_data_table(seq_pav2_equal, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(seq_pav2_equal), c("feature", "borda_score"))
+  expect_equal(seq_pav2_equal$borda_score[1], 1)
+  expect_equal(seq_pav2_equal$borda_score[length(cand2)], 0)
 })
 
 test_that("reverse sequential proportional approval voting", {
