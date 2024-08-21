@@ -51,14 +51,7 @@ seq_proportional_approval_voting = function(voters, candidates, weights, committ
   }
 
   # returns ranked features from best to worst (up to committee_size)
-  res = as.data.table(seq_PAV_rcpp(voters, candidates, weights, committee_size))
-
-  add_borda_score(res)
-}
-
-revseq_proportional_approval_voting = function(voters, candidates, weights) {
-  # returns ranked features from best to worst
-  res = as.data.table(revseq_PAV_rcpp(voters, candidates, weights))
+  res = as.data.table(seq_PAV_rcpp2(voters, candidates, weights, committee_size))
 
   add_borda_score(res)
 }

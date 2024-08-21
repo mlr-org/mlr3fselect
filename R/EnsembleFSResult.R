@@ -140,7 +140,6 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Voters who approve more candidates contribute a lesser score to the individual approved candidates.
     #' - `"seq_pav"|"seq_pav_weighted"` (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
     #' The **PAV score** (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
-    #' - `"revseq_pav"|"revseq_pav_weighted"` (reverse sequential proportional approval voting) sequentially removes candidates from a full committee, selecting the candidate whose removal minimizes the reduction in the PAV score, then reverses the order to determine the final committee.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
@@ -154,8 +153,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     feature_ranking = function(method = "av", committee_size = NULL) {
       assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted",
-                                        "seq_pav", "seq_pav_weighted", "revseq_pav",
-                                        "revseq_pav_weighted"))
+                                        "seq_pav", "seq_pav_weighted"))
       assert_int(committee_size, lower = 1, null.ok = TRUE)
 
       # cached results
@@ -185,8 +183,6 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         res = satisfaction_approval_voting(voters, candidates, weights)
       } else if (startsWith(method, "seq_pav")) {
         res = seq_proportional_approval_voting(voters, candidates, weights, committee_size)
-      } else if (startsWith(method, "revseq_pav")) {
-        res = revseq_proportional_approval_voting(voters, candidates, weights)
       }
 
       private$.feature_ranking[[method]] = res
