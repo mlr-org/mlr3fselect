@@ -5,15 +5,19 @@ AV_rcpp <- function(voters, candidates, weights) {
     .Call(`_mlr3fselect_AV_rcpp`, voters, candidates, weights)
 }
 
-SAV_rcpp <- function(voters, candidates, weights) {
-    .Call(`_mlr3fselect_SAV_rcpp`, voters, candidates, weights)
-}
-
 seq_PAV_rcpp <- function(voters, candidates, weights, committee_size) {
     .Call(`_mlr3fselect_seq_PAV_rcpp`, voters, candidates, weights, committee_size)
 }
 
-revseq_PAV_rcpp <- function(voters, candidates, weights) {
-    .Call(`_mlr3fselect_revseq_PAV_rcpp`, voters, candidates, weights)
+seq_PAV_rcpp2 <- function(voters, candidates, weights, committee_size) {
+    .Call(`_mlr3fselect_seq_PAV_rcpp2`, voters, candidates, weights, committee_size)
+}
+
+seq_Phragmen_rcpp <- function(voters, candidates, weights, committee_size) {
+    .Call(`_mlr3fselect_seq_Phragmen_rcpp`, voters, candidates, weights, committee_size)
+}
+
+SAV_rcpp <- function(voters, candidates, weights) {
+    .Call(`_mlr3fselect_SAV_rcpp`, voters, candidates, weights)
 }
 
