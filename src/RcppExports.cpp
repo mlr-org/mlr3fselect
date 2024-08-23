@@ -37,20 +37,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// seq_PAV_rcpp2
-List seq_PAV_rcpp2(List voters, CharacterVector candidates, NumericVector weights, int committee_size);
-RcppExport SEXP _mlr3fselect_seq_PAV_rcpp2(SEXP votersSEXP, SEXP candidatesSEXP, SEXP weightsSEXP, SEXP committee_sizeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type voters(votersSEXP);
-    Rcpp::traits::input_parameter< CharacterVector >::type candidates(candidatesSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< int >::type committee_size(committee_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(seq_PAV_rcpp2(voters, candidates, weights, committee_size));
-    return rcpp_result_gen;
-END_RCPP
-}
 // seq_Phragmen_rcpp
 List seq_Phragmen_rcpp(List voters, CharacterVector candidates, NumericVector weights, int committee_size);
 RcppExport SEXP _mlr3fselect_seq_Phragmen_rcpp(SEXP votersSEXP, SEXP candidatesSEXP, SEXP weightsSEXP, SEXP committee_sizeSEXP) {
@@ -82,7 +68,6 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_mlr3fselect_AV_rcpp", (DL_FUNC) &_mlr3fselect_AV_rcpp, 3},
     {"_mlr3fselect_seq_PAV_rcpp", (DL_FUNC) &_mlr3fselect_seq_PAV_rcpp, 4},
-    {"_mlr3fselect_seq_PAV_rcpp2", (DL_FUNC) &_mlr3fselect_seq_PAV_rcpp2, 4},
     {"_mlr3fselect_seq_Phragmen_rcpp", (DL_FUNC) &_mlr3fselect_seq_Phragmen_rcpp, 4},
     {"_mlr3fselect_SAV_rcpp", (DL_FUNC) &_mlr3fselect_SAV_rcpp, 3},
     {NULL, NULL, 0}

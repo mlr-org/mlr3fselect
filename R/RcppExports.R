@@ -9,10 +9,6 @@ seq_PAV_rcpp <- function(voters, candidates, weights, committee_size) {
     .Call(`_mlr3fselect_seq_PAV_rcpp`, voters, candidates, weights, committee_size)
 }
 
-seq_PAV_rcpp2 <- function(voters, candidates, weights, committee_size) {
-    .Call(`_mlr3fselect_seq_PAV_rcpp2`, voters, candidates, weights, committee_size)
-}
-
 seq_Phragmen_rcpp <- function(voters, candidates, weights, committee_size) {
     .Call(`_mlr3fselect_seq_Phragmen_rcpp`, voters, candidates, weights, committee_size)
 }
