@@ -143,6 +143,9 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Voters who approve more candidates contribute a lesser score to the individual approved candidates.
     #' - `"seq_pav"|"seq_pav_weighted"` (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
     #' The **PAV score** (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
+    #' - `"seq_phragmen"|"seq_phragmen_weighted"` (sequential Phragmen's rule) distributes "loads" equally among voters for each candidate added to the committee.
+    #' The rule iteratively selects the candidate that results in the smallest increase in voter load.
+    #' This approach is suitable for scenarios where a balanced representation is desired, as it seeks to evenly distribute the "burden" of representation among all voters.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
@@ -156,7 +159,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     feature_ranking = function(method = "av", committee_size = NULL) {
       assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted",
-                                        "seq_pav", "seq_pav_weighted"))
+                                        "seq_pav", "seq_pav_weighted", "seq_phragmen",
+                                        "seq_phragmen_weighted"))
       assert_int(committee_size, lower = 1, null.ok = TRUE)
 
       # cached results
@@ -189,6 +193,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         res = satisfaction_approval_voting(voters, candidates, weights)
       } else if (startsWith(method, "seq_pav")) {
         res = seq_proportional_approval_voting(voters, candidates, weights, committee_size)
+      } else if (startsWith(method, "seq_phragmen")) {
+        res = seq_phragmen_rule(voters, candidates, weights, committee_size)
       }
 
       private$.feature_ranking[[method]] = res

@@ -57,6 +57,17 @@ seq_proportional_approval_voting = function(voters, candidates, weights, committ
   add_borda_score(res)
 }
 
+seq_phragmen_rule = function(voters, candidates, weights, committee_size = NULL) {
+  if (is.null(committee_size)) {
+    committee_size = length(candidates)
+  }
+
+  # returns ranked features from best to worst (up to committee_size)
+  res = as.data.table(seq_PAV_rcpp(voters, candidates, weights, committee_size))
+
+  add_borda_score(res)
+}
+
 # add normalized borda scores
 add_borda_score = function(dt) {
   borda_score = NULL # silence data.table note: "no visible global binding"

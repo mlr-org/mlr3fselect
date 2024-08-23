@@ -232,6 +232,9 @@ This is the default feature ranking method.
 Voters who approve more candidates contribute a lesser score to the individual approved candidates.
 \item \code{"seq_pav"|"seq_pav_weighted"} (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
 The \strong{PAV score} (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
+\item \code{"seq_phragmen"|"seq_phragmen_weighted"} (sequential Phragmen's rule) distributes "loads" equally among voters for each candidate added to the committee.
+The rule iteratively selects the candidate that results in the smallest increase in voter load.
+This approach is suitable for scenarios where a balanced representation is desired, as it seeks to evenly distribute the "burden" of representation among all voters.
 }
 }
 
