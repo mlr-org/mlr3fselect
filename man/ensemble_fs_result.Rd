@@ -190,7 +190,7 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \subsection{Method \code{feature_ranking()}}{
 Calculates the feature ranking.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "av")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "av", committee_size = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -198,6 +198,10 @@ Calculates the feature ranking.
 \describe{
 \item{\code{method}}{(\code{character(1)})\cr
 The method to calculate the feature ranking.}
+
+\item{\code{committee_size}}{(\code{integer(1)})\cr
+Number of top selected features in the output ranking.
+This parameter can be used to speed-up methods that build a committee sequentially (\code{"seq_pav"}), by requesting only the top N selected candidates/features and not the complete feature ranking.}
 }
 \if{html}{\out{</div>}}
 }
@@ -217,6 +221,9 @@ Therefore we also calculate \strong{Borda's score}:
 So the best feature gets a borda score of \eqn{1} and the worst-ranked feature a borda score of \eqn{0}.
 This score is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
 
+We randomly shuffle the input candidates/features so that we enforce the same tie-breaking mechanism for all available methods.
+Users should use the same \code{seed} for consistent comparison between the different feature ranking methods and for reproducibility.
+
 The following methods are currently supported:
 \itemize{
 \item \code{"av"|"av_weighted"} (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
@@ -225,7 +232,6 @@ This is the default feature ranking method.
 Voters who approve more candidates contribute a lesser score to the individual approved candidates.
 \item \code{"seq_pav"|"seq_pav_weighted"} (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
 The \strong{PAV score} (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
-\item \code{"revseq_pav"|"revseq_pav_weighted"} (reverse sequential proportional approval voting) sequentially removes candidates from a full committee, selecting the candidate whose removal minimizes the reduction in the PAV score, then reverses the order to determine the final committee.
 }
 }
 

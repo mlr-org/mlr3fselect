@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include <random>
 #include <unordered_set>
 using namespace Rcpp;
 
@@ -10,12 +9,6 @@ List seq_PAV_rcpp(List voters, CharacterVector candidates, NumericVector weights
   int n_voters = voters.size();
   CharacterVector committee; // starts empty
   CharacterVector remaining_candidates = clone(candidates); // starts with all candidates
-
-  // In order to enforce random tie breaking,
-  // shuffle the remaining_candidates so that their order is random
-  std::random_device rd; // Obtain a random number from hardware
-  std::mt19937 g(rd()); // Seed the generator
-  std::shuffle(remaining_candidates.begin(), remaining_candidates.end(), g);
 
   // transform voters approvals in unsorted sets for faster membership lookups
   std::vector<std::unordered_set<std::string>> voters_sets;

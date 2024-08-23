@@ -132,6 +132,9 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' So the best feature gets a borda score of \eqn{1} and the worst-ranked feature a borda score of \eqn{0}.
     #' This score is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
     #'
+    #' We randomly shuffle the input candidates/features so that we enforce the same tie-breaking mechanism for all available methods.
+    #' Users should use the same `seed` for consistent comparison between the different feature ranking methods and for reproducibility.
+    #'
     #' The following methods are currently supported:
     #'
     #' - `"av"|"av_weighted"` (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
@@ -175,6 +178,9 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         # all voters are equal
         weights = rep(1, length(voters))
       }
+
+      # shuffle candidates (force same tie-breaking between methods)
+      candidates = sample(candidates)
 
       # calculate scores
       if (startsWith(method, "av")) {

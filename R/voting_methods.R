@@ -1,7 +1,8 @@
 # some collection of voting methods for feature ranking
 
 # @param voters list of feature vectors (best features, each a subset of "candidates")
-# @param candidates vector with ALL features
+# @param candidates vector with ALL features.
+# Should be shuffled before so that the same tie-breaking rule is applied to all methods.
 # @param weights vector of weights, 1-1 correspondence with voters
 # @param committee_size number of top N features
 # @return data.table with 4 columns: features (mandatory), score, norm_score, borda_score (mandatory).
