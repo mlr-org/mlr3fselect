@@ -136,3 +136,36 @@ test_that("sequential proportional approval voting", {
   expect_contains(seq_pav3$feature[1:3], c("V1", "V2", "V3"))
   expect_contains(seq_pav3$feature[4:5], c("V4", "V5"))
 })
+
+test_that("sequential Phragmen's rule", {
+  # large data
+  size = 5 # get top 5 ranked features
+  spr = seq_phragmen_rule(vot, cand, w, size)
+  expect_data_table(spr, nrows = size, ncols = 2)
+  expect_setequal(colnames(spr), c("feature", "borda_score"))
+  spr1 = seq_phragmen_rule(vot, cand, w, committee_size = 3)
+  expect_equal(spr$feature[1:3], spr1$feature[1:3]) # house monotonicity
+
+  spre = seq_phragmen_rule(vot, cand, w_equal, size)
+  expect_data_table(spre, nrows = size, ncols = 2)
+  # using unequal weights, feature rankings should be different
+  expect_false(identical(spre$feature, spr$feature))
+
+  # small data
+  spr2 = seq_phragmen_rule(vot2, cand2, w2)
+  expect_data_table(spr2, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(spr2), c("feature", "borda_score"))
+  expect_equal(spr2$borda_score[1], 1)
+  expect_equal(spr2$borda_score[length(cand2)], 0)
+
+  spr2e = seq_phragmen_rule(vot2, cand2, w2_equal)
+  expect_data_table(spr2e, nrows = length(cand2), ncols = 2)
+  expect_setequal(colnames(spr2e), c("feature", "borda_score"))
+  expect_equal(spr2e$borda_score[1], 1)
+  expect_equal(spr2e$borda_score[length(cand2)], 0)
+
+  # tie breaking
+  spr3 = seq_phragmen_rule(vot3, cand2, w2)
+  expect_contains(spr3$feature[1:3], c("V1", "V2", "V3"))
+  expect_contains(spr3$feature[4:5], c("V4", "V5"))
+})
