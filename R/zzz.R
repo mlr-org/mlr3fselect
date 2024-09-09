@@ -5,7 +5,7 @@
 #' @import mlr3
 #' @import bbotk
 #' @importFrom R6 R6Class
-#' @importFrom utils combn head
+#' @importFrom utils combn head packageVersion
 #' @importFrom stats sd
 "_PACKAGE"
 
