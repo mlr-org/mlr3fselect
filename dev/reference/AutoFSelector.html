@@ -139,7 +139,7 @@ Hash (unique identifier) for this partial object, excluding some components whic
 <li><p><a href="#method-AutoFSelector-loglik"><code>AutoFSelector$loglik()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-print"><code>AutoFSelector$print()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-clone"><code>AutoFSelector$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="estimate_memory_usage"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-estimate_memory_usage"><code>mlr3::Learner$estimate_memory_usage()</code></a></span></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
@@ -366,14 +366,14 @@ Printer.</p>
 <span class="r-in"><span><span class="co"># predict with final model</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">split</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PredictionClassif&gt; for 69 observations:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     row_ids     truth  response</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          15    Adelie    Adelie</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          16    Adelie    Adelie</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          20    Adelie Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         338 Chinstrap Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         340 Chinstrap    Gentoo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         344 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  row_ids     truth  response</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       15    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       16    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       20    Adelie Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      ---       ---       ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      338 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      340 Chinstrap    Gentoo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      344 Chinstrap Chinstrap</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show result</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">fselect_result</span></span></span>
