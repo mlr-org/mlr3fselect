@@ -1,4 +1,4 @@
-# mlr3fselect (development version)
+# mlr3fselect 1.1.0
 
 * compatibility: mlr3 0.21.0
 * fix: Delete intermediate `BenchmarkResult` in `ObjectiveFSelectBatch` after optimization.
