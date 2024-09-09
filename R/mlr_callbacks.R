@@ -107,7 +107,7 @@ load_callback_svm_rfe = function() {
         method = unname(learner$encapsulation[1])
         learner_rfe$encapsulate(method, fallback)
       } else {
-        learner_rfe$encapsulation = learner$encapsulation
+        learner_rfe$encapsulate = learner$encapsulate
         learner_rfe$fallback = fallback
       }
       learner_rfe$timeout = learner$timeout
