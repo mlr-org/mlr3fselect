@@ -168,4 +168,34 @@ test_that("sequential Phragmen's rule", {
   spr3 = seq_phragmen_rule(vot3, cand2, w2)
   expect_contains(spr3$feature[1:3], c("V1", "V2", "V3"))
   expect_contains(spr3$feature[4:5], c("V4", "V5"))
+
+  # Example 2.9 from Lackner's "Multi-Winner Voting with Approval Preferences"
+  cand4 = paste0("V", 1:7)
+  vot4 = list(
+    c("V1", "V2"),
+    c("V1", "V2"),
+    c("V1", "V2"),
+    c("V1", "V3"),
+    c("V1", "V3"),
+    c("V1", "V3"),
+    c("V1", "V4"),
+    c("V1", "V4"),
+    c("V2", "V3", "V6"),
+    "V5", "V6", "V7"
+  )
+  w4_equal = rep(1, length(vot4))
+  # output committee should be: V1, {V2, V3} => tied, V4, V6, {V5, V7} => tied
+  # sampling candidates should respect the above ordering
+  res = lapply(1:10, function(i) {
+    spr = seq_phragmen_rule(vot4, sample(cand4), w4_equal)
+    spr$feature
+  })
+
+  for (i in 1:10) {
+    committee = res[[i]]
+    expect_equal(committee[1], "V1")
+    expect_contains(committee[2:3], c("V2", "V3"))
+    expect_equal(committee[4:5], c("V4", "V6"))
+    expect_contains(committee[6:7], c("V5", "V7"))
+  }
 })
