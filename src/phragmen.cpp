@@ -58,7 +58,7 @@ List seq_Phragmen_rcpp(List voters, CharacterVector candidates, NumericVector we
       // need original candidate index for accessing 'approving_voters'
       int candidate_index = get_index(candidates, candidate);
       for (int v : approving_voters[candidate_index]) {
-        sum_current_loads += current_loads[v];
+        sum_current_loads += weights[v] * current_loads[v];
         total_weight += weights[v];
       }
       double new_load = (1.0 + sum_current_loads) / total_weight;
