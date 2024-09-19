@@ -101,7 +101,15 @@ load_callback_svm_rfe = function() {
       learner_rfe$param_set$values = params
       learner_rfe$id = learner$id
       learner_rfe$predict_type = learner$predict_type
-      learner_rfe$fallback = learner$fallback
+
+      fallback = learner$fallback
+      if (packageVersion("mlr3") > "0.20.2") {
+        method = unname(learner$encapsulation[1])
+        learner_rfe$encapsulate(method, fallback)
+      } else {
+        learner_rfe$encapsulate = learner$encapsulate
+        learner_rfe$fallback = fallback
+      }
       learner_rfe$timeout = learner$timeout
       learner_rfe$parallel_predict = learner$parallel_predict
       context$instance$objective$learner = learner_rfe
