@@ -193,7 +193,7 @@ Ignored if multiple measures are used.}
 The \link{FSelector} writes the best found feature subset and estimated performance value here.
 For internal use.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchSingleCrit$assign_result(xdt, y)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchSingleCrit$assign_result(xdt, y, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -206,6 +206,9 @@ additional columns for extra information.}
 
 \item{\code{y}}{(\code{numeric(1)})\cr
 Optimal outcome.}
+
+\item{\code{...}}{(\code{any})\cr
+ignored.}
 }
 \if{html}{\out{</div>}}
 }
