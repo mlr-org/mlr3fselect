@@ -9,7 +9,7 @@ The auto_fselector() function creates an AutoFSelector object."><meta property="
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -333,14 +333,14 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island    sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;     &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3      FALSE        TRUE      TRUE          FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE      TRUE          FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      year classif.ce                              features n_features  task_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;      &lt;num&gt;                                &lt;list&gt;      &lt;int&gt;   &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE 0.06578947 bill_depth,bill_length,body_mass,year          4 penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  FALSE 0.03896104     bill_length,flipper_length,island          3 penguins</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.03947368          bill_length,body_mass,island          3 penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE 0.03947368          bill_length,body_mass,island          3 penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE 0.06578947 bill_depth,bill_length,body_mass,year          4 penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.03896104     bill_length,flipper_length,island          3 penguins</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     &lt;char&gt;        &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>
