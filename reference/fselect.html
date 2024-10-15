@@ -13,7 +13,7 @@ The ArchiveBatchFSelect ($archive) stores all evaluated hyperparameter configura
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -209,40 +209,52 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        age glucose insulin   mass pedigree pregnant pressure triceps classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;lgcl&gt;  &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;  &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:   TRUE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.2500000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  FALSE   FALSE    TRUE  FALSE     TRUE     TRUE    FALSE   FALSE  0.2929688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE    FALSE   FALSE  0.3203125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  FALSE   FALSE   FALSE  FALSE    FALSE     TRUE    FALSE   FALSE  0.3281250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:   TRUE    TRUE    TRUE  FALSE     TRUE    FALSE     TRUE    TRUE  0.2851562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:   TRUE    TRUE   FALSE  FALSE     TRUE    FALSE     TRUE    TRUE  0.2851562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:   TRUE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.2500000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:   TRUE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.2500000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:   TRUE    TRUE    TRUE  FALSE     TRUE     TRUE    FALSE   FALSE  0.2734375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:   TRUE    TRUE    TRUE   TRUE     TRUE    FALSE     TRUE   FALSE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:   TRUE    TRUE    TRUE  FALSE     TRUE     TRUE     TRUE    TRUE  0.2734375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  FALSE   FALSE    TRUE   TRUE    FALSE    FALSE    FALSE   FALSE  0.3593750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  FALSE    TRUE    TRUE  FALSE    FALSE    FALSE    FALSE    TRUE  0.2968750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:   TRUE   FALSE   FALSE  FALSE    FALSE    FALSE    FALSE   FALSE  0.3398438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  FALSE   FALSE    TRUE  FALSE     TRUE     TRUE    FALSE   FALSE  0.2812500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:   TRUE   FALSE   FALSE  FALSE    FALSE    FALSE    FALSE   FALSE  0.3398438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  FALSE   FALSE    TRUE  FALSE    FALSE    FALSE    FALSE   FALSE  0.3320312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  FALSE   FALSE   FALSE  FALSE    FALSE    FALSE    FALSE    TRUE  0.3671875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:   TRUE    TRUE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3085938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:   TRUE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.3125000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.009 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.007 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.006 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.008 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.008 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.009 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.010 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.009 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.008 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.008 2024-09-10 08:26:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                           features n_features  resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                             &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: age,glucose,insulin,mass,pedigree,pregnant,...          8 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                      insulin,pedigree,pregnant          3 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:                                       pedigree          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:                                       pregnant          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  age,glucose,insulin,pedigree,pressure,triceps          6 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:          age,glucose,pedigree,pressure,triceps          5 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: age,glucose,insulin,mass,pedigree,pregnant,...          8 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: age,glucose,insulin,mass,pedigree,pregnant,...          8 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:          age,glucose,insulin,pedigree,pregnant          5 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:     age,glucose,insulin,mass,pedigree,pressure          6 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.007 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.006 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.005 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.006 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.006 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.005 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.004 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.005 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.007 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.007 2024-10-15 16:37:35        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                               features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 &lt;list&gt;     &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: age,glucose,insulin,pedigree,pregnant,pressure,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                                       insulin,mass          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:                            glucose,insulin,triceps          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:                                                age          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                          insulin,pedigree,pregnant          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:                                                age          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:                                            insulin          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:                                            triceps          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:     age,glucose,insulin,mass,pregnant,pressure,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:     age,glucose,insulin,mass,pedigree,pregnant,...          8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      resample_result</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: &lt;ResampleResult&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -254,7 +266,7 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

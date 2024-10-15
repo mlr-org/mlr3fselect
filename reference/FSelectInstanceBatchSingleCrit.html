@@ -25,7 +25,7 @@ The FSelector is also supposed to store its final result, consisting of a select
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -209,7 +209,7 @@ Ignored if multiple measures are used.</p></dd>
 <p>The <a href="FSelector.html">FSelector</a> writes the best found feature subset and estimated performance value here.
 For internal use.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceBatchSingleCrit</span><span class="op">$</span><span class="fu">assign_result</span><span class="op">(</span><span class="va">xdt</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceBatchSingleCrit</span><span class="op">$</span><span class="fu">assign_result</span><span class="op">(</span><span class="va">xdt</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -224,6 +224,11 @@ additional columns for extra information.</p></dd>
 <dt><code>y</code></dt>
 <dd><p>(<code>numeric(1)</code>)<br>
 Optimal outcome.</p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>(<code>any</code>)<br>
+ignored.</p></dd>
 
 
 </dl><p></p></div>
@@ -289,13 +294,13 @@ Optimal outcome.</p></dd>
 <span class="r-in"><span><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            &lt;list&gt;      &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        &lt;list&gt;      &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex          6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.04652937</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06112382</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Subset task to optimal feature set</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
@@ -307,22 +312,22 @@ Optimal outcome.</p></dd>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE      TRUE          FALSE  FALSE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE     FALSE           TRUE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE       FALSE     FALSE           TRUE  FALSE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.11929825            0.015 2024-09-10 08:26:41        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06117468            0.015 2024-09-10 08:26:41        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.04652937            0.016 2024-09-10 08:26:41        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.04652937            0.015 2024-09-10 08:26:41        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            &lt;list&gt;     &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                                          bill_length,body_mass          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:               bill_depth,bill_length,body_mass,island,sex,year          6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.15400458            0.015 2024-10-15 16:37:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.19768624            0.030 2024-10-15 16:37:17        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06112382            0.017 2024-10-15 16:37:17        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.18893974            0.014 2024-10-15 16:37:17        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        &lt;list&gt;     &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                  bill_depth,flipper_length,island,sex,year          5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                                    flipper_length,sex,year          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: bill_depth,bill_length,body_mass,flipper_length,island,sex          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                             bill_depth,flipper_length,year          3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult&gt;</span>
@@ -341,7 +346,7 @@ Optimal outcome.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

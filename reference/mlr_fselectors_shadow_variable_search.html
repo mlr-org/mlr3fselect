@@ -9,7 +9,7 @@ Shadow variable search creates for each feature a permutated copy and stops when
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -179,7 +179,7 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             features n_features classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length,island          3 0.06956522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_length,flipper_length,island          3 0.04347826</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
@@ -238,56 +238,56 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.32173913            0.012 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.24347826            0.011 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.31304348            0.012 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.19130435            0.011 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.28695652            0.012 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.55652174            0.012 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.55652174            0.012 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.60000000            0.011 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.61739130            0.011 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.60000000            0.010 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.57391304            0.010 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.58260870            0.010 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.55652174            0.010 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.55652174            0.010 2024-09-10 08:27:13        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.21739130            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.07826087            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.19130435            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.13043478            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.25217391            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.19130435            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.19130435            0.011 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.18260870            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.20000000            0.032 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.20869565            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.19130435            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.19130435            0.012 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.19130435            0.011 2024-09-10 08:27:13        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.07826087            0.011 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 0.07826087            0.012 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 0.06956522            0.012 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 0.07826087            0.013 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 0.07826087            0.012 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 0.07826087            0.012 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 0.07826087            0.011 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 0.07826087            0.013 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 0.07826087            0.012 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 0.07826087            0.012 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 0.07826087            0.015 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 0.07826087            0.012 2024-09-10 08:27:14        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 0.06956522            0.013 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 0.06956522            0.032 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48: 0.06956522            0.013 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50: 0.06956522            0.012 2024-09-10 08:27:14        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.32173913            0.011 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.25217391            0.011 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.26956522            0.011 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.20869565            0.011 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.28695652            0.011 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.54782609            0.010 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.54782609            0.010 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.50434783            0.010 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.58260870            0.010 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.53043478            0.010 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 0.56521739            0.009 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 0.59130435            0.010 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 0.54782609            0.014 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 0.54782609            0.012 2024-10-15 16:37:48        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 0.20869565            0.012 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 0.05217391            0.011 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 0.20000000            0.011 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 0.13913043            0.012 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 0.20869565            0.012 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 0.20000000            0.032 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 0.20869565            0.015 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 0.20869565            0.013 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 0.21739130            0.012 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 0.19130435            0.012 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 0.20869565            0.014 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 0.20869565            0.012 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 0.20869565            0.011 2024-10-15 16:37:49        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 0.05217391            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 0.05217391            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 0.04347826            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 0.05217391            0.012 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 0.05217391            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 0.05217391            0.013 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 0.05217391            0.012 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 0.05217391            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 0.05217391            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 0.05217391            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 0.05217391            0.011 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 0.05217391            0.012 2024-10-15 16:37:49        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 0.04347826            0.012 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 0.04347826            0.012 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48: 0.04347826            0.013 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50: 0.04347826            0.011 2024-10-15 16:37:49        4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     permuted__bill_depth permuted__bill_length permuted__body_mass</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   &lt;lgcl&gt;                &lt;lgcl&gt;              &lt;lgcl&gt;</span>
@@ -517,7 +517,7 @@ Instance optimized with FSelectorBatchShadowVariableSearch.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
