@@ -1,5 +1,7 @@
 # mlr3fselect (development version)
 
+* compatibility: bbotk 1.1.1
+
 # mlr3fselect 1.1.0
 
 * compatibility: mlr3 0.21.0

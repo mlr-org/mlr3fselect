@@ -151,7 +151,7 @@ List of callbacks.}
 The \link{FSelector} object writes the best found feature subsets and estimated performance values here.
 For internal use.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchMultiCrit$assign_result(xdt, ydt)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchMultiCrit$assign_result(xdt, ydt, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -164,6 +164,9 @@ additional columns for extra information.}
 
 \item{\code{ydt}}{(\code{data.table::data.table()})\cr
 Optimal outcomes, e.g. the Pareto front.}
+
+\item{\code{...}}{(\code{any})\cr
+ignored.}
 }
 \if{html}{\out{</div>}}
 }
