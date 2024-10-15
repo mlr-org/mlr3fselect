@@ -194,22 +194,22 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">split</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PredictionClassif&gt; for 69 observations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  row_ids     truth  response</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        5    Adelie    Adelie</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       11    Adelie    Adelie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       12    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       14    Adelie    Adelie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       20    Adelie Chinstrap</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      ---       ---       ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      321 Chinstrap Chinstrap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      331 Chinstrap    Adelie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      338 Chinstrap Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      339 Chinstrap Chinstrap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      340 Chinstrap Chinstrap</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show result</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">fselect_result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                               features n_features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,sex          5 0.06521739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             features n_features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                               &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,flipper_length,island,year          5 0.07608696</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># model slot contains trained learner and fselect instance</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">model</span></span></span>
@@ -224,8 +224,8 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-out co"><span class="r-pr">#&gt;</span>   twoclass, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "sex"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_depth"     "bill_length"    "flipper_length" "island"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "year"          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fselect_instance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;FSelectInstanceBatchSingleCrit&gt;</span>
@@ -235,34 +235,34 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06521739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07608696</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:       TRUE       FALSE     FALSE           TRUE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE        TRUE      TRUE          FALSE  FALSE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE       FALSE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE        TRUE      TRUE          FALSE  FALSE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:       TRUE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:       TRUE        TRUE      TRUE          FALSE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE       FALSE     FALSE           TRUE   TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:      FALSE        TRUE      TRUE           TRUE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.16304348</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.07608696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.13043478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.07608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.32608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.10869565</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.07608696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.06521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.06521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.31521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.06521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.16304348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.22826087</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.15217391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.21739130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.10869565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.10869565</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.07608696</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
@@ -286,34 +286,34 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Result:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06521739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07608696</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Archive:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:       TRUE       FALSE     FALSE           TRUE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE        TRUE      TRUE          FALSE  FALSE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE       FALSE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE        TRUE      TRUE          FALSE  FALSE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:       TRUE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:       TRUE        TRUE      TRUE          FALSE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE       FALSE     FALSE           TRUE   TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:      FALSE        TRUE      TRUE           TRUE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.16304348</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.07608696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.13043478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.07608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.32608696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.10869565</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.07608696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.06521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.06521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.31521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.06521739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.16304348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.22826087</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.15217391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.21739130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.10869565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.10869565</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.07608696</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -333,38 +333,33 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island    sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;     &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE          FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      year classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE 0.03947368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE 0.06493506</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.06578947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            &lt;list&gt;      &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                   bill_depth,bill_length,body_mass,island,year          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         bill_depth,bill_length,body_mass,flipper_length,island          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      &lt;char&gt;                  &lt;char&gt;        &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: penguins classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3      FALSE        TRUE      TRUE          FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      year classif.ce                              features n_features  task_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;      &lt;num&gt;                                &lt;list&gt;      &lt;int&gt;   &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE 0.06578947 bill_depth,bill_length,body_mass,year          4 penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  FALSE 0.03896104     bill_length,flipper_length,island          3 penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.03947368          bill_length,body_mass,island          3 penguins</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     &lt;char&gt;        &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: classif.rpart.fselector            cv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.rpart.fselector            cv</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># performance scores estimated on the outer resampling</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id iteration classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      &lt;char&gt;                  &lt;char&gt;        &lt;char&gt;     &lt;int&gt;      &lt;num&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv         1 0.05217391</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv         2 0.05217391</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: penguins classif.rpart.fselector            cv         3 0.07017544</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hidden columns: task, learner, resampling, prediction</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: penguins classif.rpart.fselector            cv         2 0.06956522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: penguins classif.rpart.fselector            cv         3 0.07894737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hidden columns: task, learner, resampling, prediction_test</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># unbiased performance of the final model trained on the full data set</span></span></span>
 <span class="r-in"><span><span class="va">rr</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.05817442 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0668955 </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -377,7 +372,7 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

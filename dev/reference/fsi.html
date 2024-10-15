@@ -160,10 +160,13 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 <span class="r-in"><span><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  features n_features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                    &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,island,sex,year          5 0.06114925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            &lt;list&gt;      &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  0.0669972</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Subset task to optimal feature set</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
@@ -175,22 +178,28 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE        TRUE      TRUE          FALSE   TRUE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE       FALSE     FALSE           TRUE  FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE        TRUE     FALSE           TRUE   TRUE   TRUE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       TRUE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.06114925            0.018 2024-09-11 08:05:04        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.19471142            0.015 2024-09-11 08:05:04        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06687007            0.014 2024-09-11 08:05:05        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06114925            0.016 2024-09-11 08:05:05        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                       features n_features  resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                         &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: bill_depth,bill_length,body_mass,island,sex          5 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                          flipper_length,sex          2 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  bill_length,flipper_length,island,sex,year          5 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      bill_depth,bill_length,island,sex,year          5 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.24424104            0.034 2024-10-15 14:07:00        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.06989575            0.013 2024-10-15 14:07:00        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.29674549            0.014 2024-10-15 14:07:00        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.06699720            0.016 2024-10-15 14:07:00        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          features n_features</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            &lt;list&gt;     &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                                              bill_depth,island          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                              bill_length,flipper_length,island          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                                                      body_mass          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     resample_result</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;ResampleResult&gt;</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -203,7 +212,7 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
