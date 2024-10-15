@@ -138,7 +138,9 @@ FSelectInstanceBatchSingleCrit = R6Class("FSelectInstanceBatchSingleCrit",
     #'
     #' @param y (`numeric(1)`)\cr
     #'   Optimal outcome.
-    assign_result = function(xdt, y) {
+    #' @param ... (`any`)\cr
+    #' ignored.
+    assign_result = function(xdt, y, ...) {
       # Add feature names to result for easy task subsetting
       feature_names = self$objective$task$feature_names
       features = list(feature_names[as.logical(xdt[, feature_names, with = FALSE])])
