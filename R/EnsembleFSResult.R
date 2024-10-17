@@ -103,7 +103,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param ... (ignored).
     print = function(...) {
-      catf(format(self))
+      catf("%s with %s learners and %s initial resamplings",
+           format(self), self$n_learners, self$n_resamples)
       print(private$.result[, c("resampling_iteration", "learner_id", "n_features"), with = FALSE])
     },
 
@@ -403,6 +404,13 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     measure = function(rhs) {
       assert_ro_binding(rhs)
       private$.measure_id
+    },
+
+    #' @field n_resamples (`character(1)`)\cr
+    #' Returns the number of times the task was initially resampled in the ensemble feature selection.
+    n_resamples = function(rhs) {
+      assert_ro_binding(rhs)
+      uniqueN(self$result$resampling_iteration)
     }
   ),
 

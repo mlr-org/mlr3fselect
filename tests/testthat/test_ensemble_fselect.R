@@ -20,6 +20,7 @@ test_that("ensemble feature selection works", {
   expect_benchmark_result(efsr$benchmark_result)
   expect_equal(efsr$measure, "classif.ce")
   expect_equal(efsr$n_learners, 2)
+  expect_equal(efsr$n_resamples, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -77,6 +78,7 @@ test_that("ensemble feature selection works without benchmark result", {
   expect_null(efsr$benchmark_result)
   expect_equal(efsr$measure, "classif.ce")
   expect_equal(efsr$n_learners, 2)
+  expect_equal(efsr$n_resamples, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -127,6 +129,7 @@ test_that("ensemble feature selection works with rfe", {
   expect_benchmark_result(efsr$benchmark_result)
   expect_equal(efsr$measure, "classif.ce")
   expect_equal(efsr$n_learners, 2)
+  expect_equal(efsr$n_resamples, 2)
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -185,6 +188,7 @@ test_that("EnsembleFSResult initialization", {
   efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:20), measure_id = "classif.ce")
   expect_class(efsr, "EnsembleFSResult")
   expect_equal(efsr$n_learners, 3)
+  expect_equal(efsr$n_resamples, 3)
   tab = as.data.table(efsr)
   expect_data_table(tab)
   expect_equal(names(tab), c("resampling_iteration", "learner_id", "n_features",
