@@ -73,5 +73,5 @@ seq_phragmen_rule = function(voters, candidates, weights, committee_size = NULL)
 add_borda_score = function(dt, n = NULL) {
   if (is.null(n)) n = nrow(dt)
   borda_score = NULL # silence data.table note: "no visible global binding"
-  dt[, borda_score := if (nrow(dt) == 1) 1 else (n - .I) / (n - 1)]
+  dt[, borda_score := if (nrow(dt) == 1) 1 else (n - .I) / (n - 1)][]
 }
