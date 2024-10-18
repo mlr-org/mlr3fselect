@@ -20,6 +20,7 @@
   x = utils::getFromNamespace("mlr_reflections", ns = "mlr3")
   x$task_col_roles$classif = unique(c(x$task_col_roles$classif, "always_included"))
   x$task_col_roles$regr = unique(c(x$task_col_roles$regr, "always_included"))
+  x$loaded_packages = c(x$loaded_packages, "mlr3fselect")
 
   # callbacks
   x = utils::getFromNamespace("mlr_callbacks", ns = "mlr3misc")
