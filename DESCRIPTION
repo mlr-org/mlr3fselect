@@ -34,6 +34,7 @@ Imports:
     mlr3misc (>= 0.15.1),
     paradox (>= 1.0.0),
     R6,
+    Rcpp,
     stabm
 Suggests:
     e1071,
@@ -71,6 +72,7 @@ Collate:
     'FSelectorBatchShadowVariableSearch.R'
     'ObjectiveFSelect.R'
     'ObjectiveFSelectBatch.R'
+    'RcppExports.R'
     'assertions.R'
     'auto_fselector.R'
     'bibentries.R'
@@ -83,4 +85,7 @@ Collate:
     'mlr_callbacks.R'
     'reexports.R'
     'sugar.R'
+    'voting_methods.R'
     'zzz.R'
+LinkingTo: 
+    Rcpp
