@@ -52,7 +52,7 @@ See <a href="mlr_fselectors_rfe.html">FSelectorBatchRFE</a> for a description of
 RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
 Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
 The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
-Only works with <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>s that can calculate importance scores (see the section on optional extractors in <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>).</p>
+Only works with <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>s that can calculate importance scores (see the section on optional extractors in <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>).</p>
     </div>
 
 
@@ -61,8 +61,8 @@ Only works with <a href="https://mlr3.mlr-org.com/reference/Learner.html" class=
     <p>The resampling strategy is changed during the feature selection.
 The resampling strategy passed to the instance (<code>resampling</code>) is used to determine the optimal number of features.
 Usually, a cross-validation strategy is used and a recursive feature elimination is run in each iteration of the cross-validation.
-Internally, <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_custom.html" class="external-link">mlr3::ResamplingCustom</a> is used to emulate this part of the algorithm.
-In the final recursive feature elimination run the resampling strategy is changed to <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_insample.html" class="external-link">mlr3::ResamplingInsample</a> i.e. the complete data set is used for training and testing.</p>
+Internally, <a href="https://rdrr.io/pkg/mlr3/man/mlr_resamplings_custom.html" class="external-link">mlr3::ResamplingCustom</a> is used to emulate this part of the algorithm.
+In the final recursive feature elimination run the resampling strategy is changed to <a href="https://rdrr.io/pkg/mlr3/man/mlr_resamplings_insample.html" class="external-link">mlr3::ResamplingInsample</a> i.e. the complete data set is used for training and testing.</p>
 <p>The feature selection terminates itself when the optimal number of features is reached.
 It is not necessary to set a termination criterion.</p>
     </div>
@@ -181,16 +181,16 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># retrieve task and load learner</span></span></span>
-<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run feature selection on the Palmer Penguins data set</span></span></span>
 <span class="r-in"><span><span class="va">instance</span> <span class="op">=</span> <span class="fu"><a href="fselect.html">fselect</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"rfecv"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  task <span class="op">=</span> <span class="va">task</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="va">learner</span>,</span></span>
-<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  store_models <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -217,14 +217,14 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07826087            0.006 2024-10-18 05:14:53        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07826087            0.006 2024-10-18 05:14:53        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.05263158            0.006 2024-10-18 05:14:53        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.12173913            0.005 2024-10-18 05:14:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.07826087            0.005 2024-10-18 05:14:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.06140351            0.004 2024-10-18 05:14:53        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.007 2024-10-18 05:14:53        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.03779070            0.006 2024-10-18 05:14:53        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.07826087            0.006 2024-10-18 12:44:12        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.07826087            0.007 2024-10-18 12:44:12        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.05263158            0.007 2024-10-18 12:44:12        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.12173913            0.006 2024-10-18 12:44:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.07826087            0.005 2024-10-18 12:44:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.06140351            0.006 2024-10-18 12:44:12        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.007 2024-10-18 12:44:12        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.03779070            0.007 2024-10-18 12:44:12        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance iteration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                             &lt;list&gt;     &lt;int&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       90.52138,81.73374,80.53600,80.52697,75.98572, 2.70389,...         1</span>

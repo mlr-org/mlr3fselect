@@ -63,7 +63,7 @@ It is not necessary to set a termination criterion.</p>
 <dl><dt><code>max_features</code></dt>
 <dd><p><code>integer(1)</code><br>
 Maximum number of features.
-By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a>.</p></dd>
+By default, number of features in <a href="https://rdrr.io/pkg/mlr3/man/Task.html" class="external-link">mlr3::Task</a>.</p></dd>
 
 
 </dl></div>
@@ -130,16 +130,16 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># retrieve task and load learner</span></span></span>
-<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run feature selection on the Palmer Penguins data set</span></span></span>
 <span class="r-in"><span><span class="va">instance</span> <span class="op">=</span> <span class="fu"><a href="fselect.html">fselect</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"exhaustive_search"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  task <span class="op">=</span> <span class="va">task</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="va">learner</span>,</span></span>
-<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  measure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  term_evals <span class="op">=</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -168,16 +168,16 @@ By default, number of features in <a href="https://mlr3.mlr-org.com/reference/Ta
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.24347826            0.005 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.28695652            0.004 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.30434783            0.004 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.19130435            0.004 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.23478261            0.005 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.63478261            0.004 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.63478261            0.004 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.08695652            0.005 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.23478261            0.005 2024-10-18 05:14:49        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.19130435            0.004 2024-10-18 05:14:49        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 0.24347826            0.005 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 0.28695652            0.005 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 0.30434783            0.004 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 0.19130435            0.005 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 0.23478261            0.004 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 0.63478261            0.004 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 0.63478261            0.004 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 0.08695652            0.005 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.23478261            0.005 2024-10-18 12:44:08        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.19130435            0.005 2024-10-18 12:44:08        1        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      features n_features  resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:                bill_depth          1 &lt;ResampleResult&gt;</span>

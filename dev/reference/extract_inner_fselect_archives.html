@@ -44,7 +44,7 @@ AutoFSelector must be initialized with store_fselect_instance = TRUE and resampl
 
     <div class="ref-description section level2">
     <p>Extract inner feature selection archives of nested resampling.
-Implemented for <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> and <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a>.
+Implemented for <a href="https://rdrr.io/pkg/mlr3/man/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> and <a href="https://rdrr.io/pkg/mlr3/man/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a>.
 The function iterates over the <a href="AutoFSelector.html">AutoFSelector</a> objects and binds the archives to a <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>.
 <a href="AutoFSelector.html">AutoFSelector</a> must be initialized with <code>store_fselect_instance = TRUE</code> and <code>resample()</code> or <code>benchmark()</code> must be called with <code>store_models = TRUE</code>.</p>
     </div>
@@ -59,7 +59,7 @@ The function iterates over the <a href="AutoFSelector.html">AutoFSelector</a> ob
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> | <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a>).</p></dd>
+<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> | <a href="https://rdrr.io/pkg/mlr3/man/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a>).</p></dd>
 
 
 <dt id="arg-exclude-columns">exclude_columns<a class="anchor" aria-label="anchor" href="#arg-exclude-columns"></a></dt>
@@ -85,14 +85,14 @@ Iteration of the outer resampling.</p></li>
 <li><p>One column for each performance measure.</p></li>
 <li><p><code>runtime_learners</code> (<code>numeric(1)</code>)<br>
 Sum of training and predict times logged in learners per
-<a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> / evaluation. This does not include potential
+<a href="https://rdrr.io/pkg/mlr3/man/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> / evaluation. This does not include potential
 overhead time.</p></li>
 <li><p><code>timestamp</code> (<code>POSIXct</code>)<br>
 Time stamp when the evaluation was logged into the archive.</p></li>
 <li><p><code>batch_nr</code> (<code>integer(1)</code>)<br>
 Feature sets are evaluated in batches. Each batch has a unique batch
 number.</p></li>
-<li><p><code>resample_result</code> (<a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a>)<br>
+<li><p><code>resample_result</code> (<a href="https://rdrr.io/pkg/mlr3/man/ResampleResult.html" class="external-link">mlr3::ResampleResult</a>)<br>
 Resample result of the inner resampling.</p></li>
 <li><p><code>task_id</code> (<code>character(1)</code>).</p></li>
 <li><p><code>learner_id</code> (<code>character(1)</code>).</p></li>
@@ -141,26 +141,26 @@ Resample result of the inner resampling.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     iteration bill_depth bill_length body_mass flipper_length island    sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       year classif.ce runtime_learners           timestamp batch_nr warnings</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;lgcl&gt;      &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:   TRUE 0.07017544            0.005 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:   TRUE 0.64912281            0.005 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:   TRUE 0.05263158            0.004 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  FALSE 0.05263158            0.005 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:   TRUE 0.36842105            0.004 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  FALSE 0.40350877            0.006 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:   TRUE 0.05263158            0.004 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:   TRUE 0.05263158            0.005 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:   TRUE 0.07017544            0.005 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:   TRUE 0.05263158            0.005 2024-10-18 05:14:40        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11:   TRUE 0.26315789            0.005 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12:   TRUE 0.07017544            0.005 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13:  FALSE 0.36842105            0.004 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14:  FALSE 0.26315789            0.005 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15:   TRUE 0.07017544            0.005 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16:   TRUE 0.07017544            0.005 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17:   TRUE 0.07017544            0.006 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18:  FALSE 0.07017544            0.005 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19:  FALSE 0.05263158            0.005 2024-10-18 05:14:39        1        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20:   TRUE 0.07017544            0.006 2024-10-18 05:14:39        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:   TRUE 0.07017544            0.006 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:   TRUE 0.64912281            0.023 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:   TRUE 0.05263158            0.006 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  FALSE 0.05263158            0.006 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:   TRUE 0.36842105            0.004 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  FALSE 0.40350877            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:   TRUE 0.05263158            0.006 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:   TRUE 0.05263158            0.006 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:   TRUE 0.07017544            0.006 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:   TRUE 0.05263158            0.006 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:   TRUE 0.26315789            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:   TRUE 0.07017544            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:  FALSE 0.36842105            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:  FALSE 0.26315789            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:   TRUE 0.07017544            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16:   TRUE 0.07017544            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17:   TRUE 0.07017544            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18:  FALSE 0.07017544            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19:  FALSE 0.05263158            0.005 2024-10-18 12:43:48        1        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20:   TRUE 0.07017544            0.006 2024-10-18 12:43:48        1        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       year classif.ce runtime_learners           timestamp batch_nr warnings</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     errors                                                       features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      &lt;int&gt;                                                         &lt;list&gt;</span>

@@ -39,7 +39,7 @@ The SVM must be configured with type = "C-classification" and kernel = "linear".
     </div>
 
     <div class="ref-description section level2">
-    <p>Runs a recursive feature elimination with a <a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.svm.html" class="external-link">mlr3learners::LearnerClassifSVM</a>.
+    <p>Runs a recursive feature elimination with a <a href="https://rdrr.io/pkg/mlr3learners/man/mlr_learners_classif.svm.html" class="external-link">mlr3learners::LearnerClassifSVM</a>.
 The SVM must be configured with <code>type = "C-classification"</code> and <code>kernel = "linear"</code>.</p>
     </div>
 
@@ -55,7 +55,7 @@ ISSN 1573-0565, <a href="https://doi.org/10.1023/A%3A1012487302797" class="exter
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://mlr3misc.mlr-org.com/reference/clbk.html" class="external-link">clbk</a></span><span class="op">(</span><span class="st">"mlr3fselect.svm_rfe"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/mlr3misc/man/clbk.html" class="external-link">clbk</a></span><span class="op">(</span><span class="st">"mlr3fselect.svm_rfe"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;CallbackBatchFSelect:mlr3fselect.svm_rfe&gt;: SVM-RFE Callback</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Active Stages: on_optimization_begin</span>
 <span class="r-in"><span></span></span>
@@ -63,12 +63,12 @@ ISSN 1573-0565, <a href="https://doi.org/10.1023/A%3A1012487302797" class="exter
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create instance with classification svm with linear kernel</span></span></span>
 <span class="r-in"><span><span class="va">instance</span> <span class="op">=</span> <span class="fu"><a href="fsi.html">fsi</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  task <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"sonar"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  learner <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.svm"</span>, type <span class="op">=</span> <span class="st">"C-classification"</span>, kernel <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  measures <span class="op">=</span> <span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  terminator <span class="op">=</span> <span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"none"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://mlr3misc.mlr-org.com/reference/clbk.html" class="external-link">clbk</a></span><span class="op">(</span><span class="st">"mlr3fselect.svm_rfe"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  task <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">tsk</a></span><span class="op">(</span><span class="st">"sonar"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  learner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.svm"</span>, type <span class="op">=</span> <span class="st">"C-classification"</span>, kernel <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">rsmp</a></span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  measures <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3/man/mlr_sugar.html" class="external-link">msr</a></span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  terminator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/bbotk/man/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"none"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mlr3misc/man/clbk.html" class="external-link">clbk</a></span><span class="op">(</span><span class="st">"mlr3fselect.svm_rfe"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  store_models <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

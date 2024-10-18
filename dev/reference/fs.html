@@ -52,10 +52,10 @@ trms() for a list of Terminators from mlr_terminators.
 
     <div class="ref-description section level2">
     <p>Functions to retrieve objects, set parameters and assign to fields in one go.
-Relies on <code><a href="https://mlr3misc.mlr-org.com/reference/dictionary_sugar_get.html" class="external-link">mlr3misc::dictionary_sugar_get()</a></code> to extract objects from the respective <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">mlr3misc::Dictionary</a>:</p><ul><li><p><code>fs()</code> for a <a href="FSelector.html">FSelector</a> from <a href="mlr_fselectors.html">mlr_fselectors</a>.</p></li>
+Relies on <code><a href="https://rdrr.io/pkg/mlr3misc/man/dictionary_sugar_get.html" class="external-link">mlr3misc::dictionary_sugar_get()</a></code> to extract objects from the respective <a href="https://rdrr.io/pkg/mlr3misc/man/Dictionary.html" class="external-link">mlr3misc::Dictionary</a>:</p><ul><li><p><code>fs()</code> for a <a href="FSelector.html">FSelector</a> from <a href="mlr_fselectors.html">mlr_fselectors</a>.</p></li>
 <li><p><code>fss()</code> for a list of a <a href="FSelector.html">FSelector</a> from <a href="mlr_fselectors.html">mlr_fselectors</a>.</p></li>
-<li><p><code><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trm()</a></code> for a <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a> from <a href="https://bbotk.mlr-org.com/reference/mlr_terminators.html" class="external-link">mlr_terminators</a>.</p></li>
-<li><p><code><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trms()</a></code> for a list of <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">Terminators</a> from <a href="https://bbotk.mlr-org.com/reference/mlr_terminators.html" class="external-link">mlr_terminators</a>.</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/bbotk/man/trm.html" class="external-link">trm()</a></code> for a <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a> from <a href="https://rdrr.io/pkg/bbotk/man/mlr_terminators.html" class="external-link">mlr_terminators</a>.</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/bbotk/man/trm.html" class="external-link">trms()</a></code> for a list of <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">Terminators</a> from <a href="https://rdrr.io/pkg/bbotk/man/mlr_terminators.html" class="external-link">mlr_terminators</a>.</p></li>
 </ul></div>
 
     <div class="section level2">
@@ -71,7 +71,7 @@ Relies on <code><a href="https://mlr3misc.mlr-org.com/reference/dictionary_sugar
 
 <dl><dt id="arg--key">.key<a class="anchor" aria-label="anchor" href="#arg--key"></a></dt>
 <dd><p>(<code>character(1)</code>)<br>
-Key passed to the respective <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> to retrieve the object.</p></dd>
+Key passed to the respective <a href="https://rdrr.io/pkg/mlr3misc/man/Dictionary.html" class="external-link">dictionary</a> to retrieve the object.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -81,7 +81,7 @@ Additional arguments.</p></dd>
 
 <dt id="arg--keys">.keys<a class="anchor" aria-label="anchor" href="#arg--keys"></a></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
-Keys passed to the respective <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> to retrieve multiple objects.</p></dd>
+Keys passed to the respective <a href="https://rdrr.io/pkg/mlr3misc/man/Dictionary.html" class="external-link">dictionary</a> to retrieve multiple objects.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -99,7 +99,7 @@ Keys passed to the respective <a href="https://mlr3misc.mlr-org.com/reference/Di
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3fselect</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run time terminator with 20 seconds</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"run_time"</span>, secs <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/bbotk/man/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"run_time"</span>, secs <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;TerminatorRunTime&gt;: Run Time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: secs=20</span>
 </code></pre></div>

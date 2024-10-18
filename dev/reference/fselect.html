@@ -43,7 +43,7 @@ The ArchiveBatchFSelect ($archive) stores all evaluated hyperparameter configura
     </div>
 
     <div class="ref-description section level2">
-    <p>Function to optimize the features of a <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>.
+    <p>Function to optimize the features of a <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>.
 The function internally creates a <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a> or <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> which describes the feature selection problem.
 It executes the feature selection with the <a href="FSelector.html">FSelector</a> (<code>method</code>) and returns the result with the fselect instance (<code>$result</code>).
 The <a href="ArchiveBatchFSelect.html">ArchiveBatchFSelect</a> (<code>$archive</code>) stores all evaluated hyperparameter configurations and performance scores.</p>
@@ -78,24 +78,24 @@ Optimization algorithm.</p></dd>
 
 
 <dt id="arg-task">task<a class="anchor" aria-label="anchor" href="#arg-task"></a></dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a>)<br>
+<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Task.html" class="external-link">mlr3::Task</a>)<br>
 Task to operate on.</p></dd>
 
 
 <dt id="arg-learner">learner<a class="anchor" aria-label="anchor" href="#arg-learner"></a></dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 Learner to optimize the feature subset for.</p></dd>
 
 
 <dt id="arg-resampling">resampling<a class="anchor" aria-label="anchor" href="#arg-resampling"></a></dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
+<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.</p></dd>
 
 
 <dt id="arg-measures">measures<a class="anchor" aria-label="anchor" href="#arg-measures"></a></dt>
-<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a> or list of <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
+<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">mlr3::Measure</a> or list of <a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 A single measure creates a <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a> and multiple measures a <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a>.
 If <code>NULL</code>, default measure is used.</p></dd>
 
@@ -113,7 +113,7 @@ Ignored if <code>terminator</code> is passed.</p></dd>
 
 
 <dt id="arg-terminator">terminator<a class="anchor" aria-label="anchor" href="#arg-terminator"></a></dt>
-<dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
+<dd><p>(<a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
 Stop criterion of the feature selection.</p></dd>
 
 
@@ -154,11 +154,11 @@ Ignored if multiple measures are used.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a>, <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>, <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>, <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a> and <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a> are used to construct a <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>.
-If multiple performance <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">Measures</a> are supplied, a <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> is created.
-The parameter <code>term_evals</code> and <code>term_time</code> are shortcuts to create a <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>.
-If both parameters are passed, a <a href="https://bbotk.mlr-org.com/reference/mlr_terminators_combo.html" class="external-link">bbotk::TerminatorCombo</a> is constructed.
-For other <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">Terminators</a>, pass one with <code>terminator</code>.
+    <p>The <a href="https://rdrr.io/pkg/mlr3/man/Task.html" class="external-link">mlr3::Task</a>, <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>, <a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a>, <a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">mlr3::Measure</a> and <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a> are used to construct a <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>.
+If multiple performance <a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">Measures</a> are supplied, a <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> is created.
+The parameter <code>term_evals</code> and <code>term_time</code> are shortcuts to create a <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a>.
+If both parameters are passed, a <a href="https://rdrr.io/pkg/bbotk/man/mlr_terminators_combo.html" class="external-link">bbotk::TerminatorCombo</a> is constructed.
+For other <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">Terminators</a>, pass one with <code>terminator</code>.
 If no termination criterion is needed, set <code>term_evals</code>, <code>term_time</code> and <code>terminator</code> to <code>NULL</code>.</p>
     </div>
     <div class="section level2">
@@ -176,7 +176,7 @@ If no termination criterion is needed, set <code>term_evals</code>, <code>term_t
 
 
 <p>For analyzing the feature selection results, it is recommended to pass the archive to <code>as.data.table()</code>.
-The returned data table is joined with the benchmark result which adds the <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> for each feature set.</p>
+The returned data table is joined with the benchmark result which adds the <a href="https://rdrr.io/pkg/mlr3/man/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> for each feature set.</p>
 <p>The archive provides various getters (e.g. <code>$learners()</code>) to ease the access.
 All getters extract by position (<code>i</code>) or unique hash (<code>uhash</code>).
 For a complete list of all getters see the methods section.</p>
@@ -221,16 +221,16 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10:   TRUE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.3125000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.007 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.005 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.005 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.004 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.005 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.006 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.005 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.005 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.006 2024-10-18 05:14:42        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.006 2024-10-18 05:14:42        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.008 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.007 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.007 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.006 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.006 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.005 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.006 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.006 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.007 2024-10-18 12:43:50        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.008 2024-10-18 12:43:50        1        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                 &lt;list&gt;     &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: age,glucose,insulin,pedigree,pregnant,pressure,...          7</span>
