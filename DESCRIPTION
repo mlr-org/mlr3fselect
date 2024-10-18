@@ -43,7 +43,7 @@ Suggests:
     rpart,
     testthat (>= 3.0.0)
 Remotes:
-    mlr-org/mlr3@loaded_pkg
+    mlr-org/mlr3
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
