@@ -314,6 +314,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         # Transform the data (x => 1/x)
         n_features_inv = NULL
         pf[, n_features_inv := 1 / n_features]
+        # remove edge cases where no features were selected
+        pf = pf[n_features > 0]
 
         # Fit the linear model
         form = mlr3misc::formulate(lhs = measure_id, rhs = "n_features_inv")
