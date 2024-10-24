@@ -55,25 +55,27 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
 #'
 #' Feature selection callbacks can be called from different stages of feature selection.
 #' The stages are prefixed with `on_*`.
+#' The `on_auto_fselector_*` stages are only available when the callback is used in an [AutoFSelector].
 #'
 #' ```
-#' Start Feature Selection
-#'      - on_optimization_begin
-#'     Start FSelect Batch
-#'          - on_optimizer_before_eval
-#'         Start Evaluation
-#'              - on_eval_after_design
-#'              - on_eval_after_benchmark
-#'              - on_eval_before_archive
-#'         End Evaluation
-#'          - on_optimizer_after_eval
-#'     End FSelect Batch
-#'      - on_result
-#'      - on_optimization_end
-#' End Feature Selection
-#' Fit Final Model
-#'     - on_final_model
-#' End Fit Final Model
+#' Start Automatic Feature Selection
+#'   Start Feature Selection
+#'       - on_optimization_begin
+#'       Start FSelect Batch
+#'           - on_optimizer_before_eval
+#'           Start Evaluation
+#'               - on_eval_after_design
+#'               - on_eval_after_benchmark
+#'               - on_eval_before_archive
+#'           End Evaluation
+#'           - on_optimizer_after_eval
+#'       End FSelect Batch
+#'       - on_result
+#'       - on_optimization_end
+#'   End Feature Selection
+#'   - on_auto_fselector_before_final_model
+#'   - on_auto_fselector_after_final_model
+#' End Automatic Feature Selection
 #' ```
 #'
 #' See also the section on parameters for more information on the stages.

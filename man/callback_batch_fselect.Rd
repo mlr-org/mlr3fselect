@@ -77,24 +77,26 @@ Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \l
 
 Feature selection callbacks can be called from different stages of feature selection.
 The stages are prefixed with \verb{on_*}.
+The \verb{on_auto_fselector_*} stages are only available when the callback is used in an \link{AutoFSelector}.
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{Start Feature Selection
-     - on_optimization_begin
-    Start FSelect Batch
-         - on_optimizer_before_eval
-        Start Evaluation
-             - on_eval_after_design
-             - on_eval_after_benchmark
-             - on_eval_before_archive
-        End Evaluation
-         - on_optimizer_after_eval
-    End FSelect Batch
-     - on_result
-     - on_optimization_end
-End Feature Selection
-Fit Final Model
-    - on_final_model
-End Fit Final Model
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Start Automatic Feature Selection
+  Start Feature Selection
+      - on_optimization_begin
+      Start FSelect Batch
+          - on_optimizer_before_eval
+          Start Evaluation
+              - on_eval_after_design
+              - on_eval_after_benchmark
+              - on_eval_before_archive
+          End Evaluation
+          - on_optimizer_after_eval
+      End FSelect Batch
+      - on_result
+      - on_optimization_end
+  End Feature Selection
+  - on_auto_fselector_before_final_model
+  - on_auto_fselector_after_final_model
+End Automatic Feature Selection
 }\if{html}{\out{</div>}}
 
 See also the section on parameters for more information on the stages.
