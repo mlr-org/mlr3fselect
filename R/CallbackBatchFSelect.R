@@ -31,7 +31,19 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
     #' @field on_eval_before_archive (`function()`)\cr
     #'   Stage called before performance values are written to the archive.
     #'   Called in `ObjectiveFSelectBatch$eval_many()`.
-    on_eval_before_archive = NULL
+    on_eval_before_archive = NULL,
+
+    #' @field on_auto_fselector_before_final_model (`function()`)\cr
+    #' Stage called before the final model is trained.
+    #' Called in `AutoFSelector$train()`.
+    #' This stage is called after the optimization has finished and the final model is trained with the best feature set found.
+    on_auto_fselector_before_final_model = NULL,
+
+    #' @field on_auto_fselector_after_final_model (`function()`)\cr
+    #' Stage called after the final model is trained.
+    #' Called in `AutoFSelector$train()`.
+    #' This stage is called after the final model is trained with the best feature set found.
+    on_auto_fselector_after_final_model = NULL
   )
 )
 
@@ -59,6 +71,9 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
 #'      - on_result
 #'      - on_optimization_end
 #' End Feature Selection
+#' Fit Final Model
+#'     - on_final_model
+#' End Fit Final Model
 #' ```
 #'
 #' See also the section on parameters for more information on the stages.
@@ -66,19 +81,8 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
 #'
 #' @details
 #' When implementing a callback, each function must have two arguments named `callback` and `context`.
-#'
 #' A callback can write data to the state (`$state`), e.g. settings that affect the callback itself.
 #' Avoid writing large data the state.
-#' This can slow down the feature selection when the evaluation of configurations is parallelized.
-#'
-#' Feature selection callbacks access two different contexts depending on the stage.
-#' The stages `on_eval_after_design`, `on_eval_after_benchmark`, `on_eval_before_archive` access [ContextBatchFSelect].
-#' This context can be used to customize the evaluation of a batch of feature sets.
-#' Changes to the state of callback are lost after the evaluation of a batch and changes to the fselect instance or the fselector are not possible.
-#' Persistent data should be written to the archive via `$aggregated_performance` (see [ContextBatchFSelect]).
-#' The other stages access [bbotk::ContextBatch].
-#' This context can be used to modify the fselect instance, archive, fselector and final result.
-#' There are two different contexts because the evaluation can be parallelized i.e. multiple instances of [ContextBatchFSelect] exists on different workers at the same time.
 #'
 #' @param id (`character(1)`)\cr
 #'   Identifier for the new instance.
@@ -111,6 +115,12 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
 #' @param on_optimization_end (`function()`)\cr
 #'   Stage called at the end of the optimization.
 #'   Called in `Optimizer$optimize()`.
+#' @param on_auto_fselector_before_final_model (`function()`)\cr
+#'   Stage called before the final model is trained.
+#'   Called in `AutoFSelector$train()`.
+#' @param on_auto_fselector_after_final_model (`function()`)\cr
+#'   Stage called after the final model is trained.
+#'   Called in `AutoFSelector$train()`.
 #'
 #' @export
 #' @inherit CallbackBatchFSelect examples
@@ -125,7 +135,9 @@ callback_batch_fselect = function(
   on_eval_before_archive = NULL,
   on_optimizer_after_eval = NULL,
   on_result = NULL,
-  on_optimization_end = NULL
+  on_optimization_end = NULL,
+  on_auto_fselector_before_final_model = NULL,
+  on_auto_fselector_after_final_model = NULL
   ) {
   stages = discard(set_names(list(
     on_optimization_begin,
@@ -135,7 +147,9 @@ callback_batch_fselect = function(
     on_eval_before_archive,
     on_optimizer_after_eval,
     on_result,
-    on_optimization_end),
+    on_optimization_end,
+    on_auto_fselector_before_final_model,
+    on_auto_fselector_after_final_model),
     c(
       "on_optimization_begin",
       "on_optimizer_before_eval",
@@ -144,7 +158,9 @@ callback_batch_fselect = function(
       "on_eval_before_archive",
       "on_optimizer_after_eval",
       "on_result",
-      "on_optimization_end")), is.null)
+      "on_optimization_end",
+      "on_auto_fselector_before_final_model",
+      "on_auto_fselector_after_final_model")), is.null)
   walk(stages, function(stage) assert_function(stage, args = c("callback", "context")))
   callback = CallbackBatchFSelect$new(id, label, man)
   iwalk(stages, function(stage, name) callback[[name]] = stage)

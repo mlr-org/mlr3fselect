@@ -138,15 +138,17 @@ FSelectInstanceBatchSingleCrit = R6Class("FSelectInstanceBatchSingleCrit",
     #'
     #' @param y (`numeric(1)`)\cr
     #'   Optimal outcome.
+    #' @param extra (`data.table::data.table()`)\cr
+    #' Additional information.
     #' @param ... (`any`)\cr
     #' ignored.
-    assign_result = function(xdt, y, ...) {
+    assign_result = function(xdt, y, extra = NULL, ...) {
       # Add feature names to result for easy task subsetting
       feature_names = self$objective$task$feature_names
       features = list(feature_names[as.logical(xdt[, feature_names, with = FALSE])])
       set(xdt, j = "features", value = list(features))
       set(xdt, j = "n_features", value = length(features[[1L]]))
-      super$assign_result(xdt, y)
+      super$assign_result(xdt, y, extra = extra)
       if (!is.null(private$.result$x_domain)) set(private$.result, j = "x_domain", value = NULL)
     },
 
