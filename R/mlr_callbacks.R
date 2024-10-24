@@ -176,3 +176,55 @@ load_callback_one_se_rule = function() {
     }
   )
 }
+
+#' @title Internal Tuning Callback
+#'
+#' @include CallbackBatchFSelect.R
+#' @name mlr3fselect.internal_tuning
+#'
+#' @description
+#' This callback runs internal tuning alongside the feature selection.
+#' The internal tuning values are aggregated and stored in the results.
+#' The final model is trained with the best feature set and the tuned value.
+#'
+#' @examples
+#' clbk("mlr3fselect.internal_tuning")
+NULL
+
+load_callback_internal_tuning = function() {
+  callback_batch_fselect("mlr3fselect.internal_tuning",
+    label = "Internal Tuning",
+    man = "mlr3fselect::mlr3fselect.internal_tuning",
+
+    on_eval_before_archive = function(callback, context) {
+      # extract internal tuned values and aggregate folds
+      internal_tuned_values = mlr3misc::map(context$benchmark_result$resample_results$resample_result, function(resample_result) {
+        internal_tuned_values = mlr3misc::transpose_list(mlr3misc::map(mlr3misc::get_private(resample_result)$.data$learner_states(mlr3misc::get_private(resample_result)$.view), "internal_tuned_values"))
+        callback$state$internal_search_space$aggr_internal_tuned_values(internal_tuned_values)
+      })
+
+        data.table::set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
+    },
+
+    on_optimization_end = function(callback, context) {
+      # save internal tuned values to results
+      set(context$result, j = "internal_tuned_values", value = list(context$result_extra[["internal_tuned_values"]]))
+    },
+
+    on_auto_fselector_before_final_model = function(callback, context) {
+      # copy original learner
+      callback$state$learner = context$auto_fselector$instance_args$learner$clone(deep = TRUE)
+
+      # deactivate internal tuning and set tuned values
+      learner = context$auto_fselector$instance_args$learner
+      learner$param_set$disable_internal_tuning(callback$state$internal_search_space$ids())
+      learner$param_set$set_values(.values = context$result$internal_tuned_values[[1]])
+      set_validate(learner, validate = NULL)
+    },
+
+    on_auto_fselector_after_final_model = function(callback, context) {
+      # restore original learner
+      context$auto_fselector$instance_args$learner = callback$state$learner
+    }
+  )
+}

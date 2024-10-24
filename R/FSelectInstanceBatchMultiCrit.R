@@ -93,16 +93,18 @@ FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
     #'
     #' @param ydt (`data.table::data.table()`)\cr
     #'   Optimal outcomes, e.g. the Pareto front.
+    #' @param extra (`data.table::data.table()`)\cr
+    #' Additional information.
     #' @param ... (`any`)\cr
     #' ignored.
-    assign_result = function(xdt, ydt, ...) {
+    assign_result = function(xdt, ydt, extra = NULL, ...) {
       # Add feature names to result for easy task subsetting
       features = map(transpose_list(xdt), function(x) {
         self$objective$task$feature_names[as.logical(x)]
       })
       set(xdt, j = "features", value = list(features))
       set(xdt, j = "n_features", value = length(features[[1L]]))
-      super$assign_result(xdt, ydt)
+      super$assign_result(xdt, ydt, extra = extra)
       if (!is.null(private$.result$x_domain)) set(private$.result, j = "x_domain", value = NULL)
     },
 
