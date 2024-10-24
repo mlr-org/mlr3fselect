@@ -15,7 +15,9 @@ callback_batch_fselect(
   on_eval_before_archive = NULL,
   on_optimizer_after_eval = NULL,
   on_result = NULL,
-  on_optimization_end = NULL
+  on_optimization_end = NULL,
+  on_auto_fselector_before_final_model = NULL,
+  on_auto_fselector_after_final_model = NULL
 )
 }
 \arguments{
@@ -60,6 +62,14 @@ Called in \code{OptimInstance$assign_result()}.}
 \item{on_optimization_end}{(\verb{function()})\cr
 Stage called at the end of the optimization.
 Called in \code{Optimizer$optimize()}.}
+
+\item{on_auto_fselector_before_final_model}{(\verb{function()})\cr
+Stage called before the final model is trained.
+Called in \code{AutoFSelector$train()}.}
+
+\item{on_auto_fselector_after_final_model}{(\verb{function()})\cr
+Stage called after the final model is trained.
+Called in \code{AutoFSelector$train()}.}
 }
 \description{
 Function to create a \link{CallbackBatchFSelect}.
@@ -82,6 +92,9 @@ The stages are prefixed with \verb{on_*}.
      - on_result
      - on_optimization_end
 End Feature Selection
+Fit Final Model
+    - on_final_model
+End Fit Final Model
 }\if{html}{\out{</div>}}
 
 See also the section on parameters for more information on the stages.
@@ -89,19 +102,8 @@ A feature selection callback works with \link[bbotk:ContextBatch]{bbotk::Context
 }
 \details{
 When implementing a callback, each function must have two arguments named \code{callback} and \code{context}.
-
 A callback can write data to the state (\verb{$state}), e.g. settings that affect the callback itself.
 Avoid writing large data the state.
-This can slow down the feature selection when the evaluation of configurations is parallelized.
-
-Feature selection callbacks access two different contexts depending on the stage.
-The stages \code{on_eval_after_design}, \code{on_eval_after_benchmark}, \code{on_eval_before_archive} access \link{ContextBatchFSelect}.
-This context can be used to customize the evaluation of a batch of feature sets.
-Changes to the state of callback are lost after the evaluation of a batch and changes to the fselect instance or the fselector are not possible.
-Persistent data should be written to the archive via \verb{$aggregated_performance} (see \link{ContextBatchFSelect}).
-The other stages access \link[bbotk:ContextBatch]{bbotk::ContextBatch}.
-This context can be used to modify the fselect instance, archive, fselector and final result.
-There are two different contexts because the evaluation can be parallelized i.e. multiple instances of \link{ContextBatchFSelect} exists on different workers at the same time.
 }
 \examples{
 # Write archive to disk
