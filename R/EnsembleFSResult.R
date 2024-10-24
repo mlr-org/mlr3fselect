@@ -16,7 +16,7 @@
 #'       Whether to add the learner, task and resampling information from the benchmark result.
 #'
 #' @references
-#' `r format_bib("das1999")`
+#' `r format_bib("das1999", "meinshausen2010")`
 #'
 #' @export
 #' @examples
@@ -82,6 +82,10 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
       private$.minimize = assert_logical(minimize, null.ok = FALSE)
+
+      # check that all feature sets are subsets of the task features
+      assert_subset(unlist(result$features), private$.features)
+
       self$benchmark_result = if (!is.null(benchmark_result)) assert_benchmark_result(benchmark_result)
 
       self$man = "mlr3fselect::ensemble_fs_result"
@@ -99,7 +103,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param ... (ignored).
     print = function(...) {
-      catf(format(self))
+      catf("%s with %s learners and %s initial resamplings",
+           format(self), self$n_learners, self$n_resamples)
       print(private$.result[, c("resampling_iteration", "learner_id", "n_features"), with = FALSE])
     },
 
@@ -113,37 +118,85 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Calculates the feature ranking.
     #'
     #' @details
-    #' The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
+    #' The feature ranking process is built on the following framework: models act as *voters*, features act as *candidates*, and voters select certain candidates (features).
     #' The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
-    #' Currently, only `"approval_voting"` method is supported, which selects the candidates/features that have the highest approval score or selection frequency, i.e. appear the most often.
+    #'
+    #' For every feature a score is calculated, which depends on the `"method"` argument.
+    #' The higher the score, the higher the rank of the feature.
+    #' Most methods have a `"*_weighted"` version that outputs a weighted score.
+    #' The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
+    #' The un-weighted methods use same weights for all voters (equal to 1).
+    #'
+    #' Note that some methods output a feature ranking instead of a score per feature.
+    #' Therefore we also calculate **Borda's score**:
+    #' \eqn{s_{borda} = (p-i)/(p-1)}, where \eqn{p} is the total number of features, and \eqn{i} is the feature ranking.
+    #' So the best feature gets a borda score of \eqn{1} and the worst-ranked feature a borda score of \eqn{0}.
+    #' This score is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
+    #'
+    #' We randomly shuffle the input candidates/features so that we enforce the same tie-breaking mechanism for all available methods.
+    #' Users should use the same `seed` for consistent comparison between the different feature ranking methods and for reproducibility.
+    #'
+    #' The following methods are currently supported:
+    #'
+    #' - `"av"|"av_weighted"` (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
+    #' This is the default feature ranking method.
+    #' - `"sav"|"sav_weighted"` (satisfaction approval voting) selects the candidates that have a higher satisfaction score, in proportion to the size of the voters approval sets.
+    #' Voters who approve more candidates contribute a lesser score to the individual approved candidates.
+    #' - `"seq_pav"|"seq_pav_weighted"` (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
+    #' The **PAV score** (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
+    #' - `"seq_phragmen"|"seq_phragmen_weighted"` (sequential Phragmen's rule) distributes "loads" equally among voters for each candidate added to the committee.
+    #' The rule iteratively selects the candidate that results in the smallest increase in voter load.
+    #' This approach is suitable for scenarios where a balanced representation is desired, as it seeks to evenly distribute the "burden" of representation among all voters.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking.
+    #' @param committee_size (`integer(1)`)\cr
+    #' Number of top selected features in the output ranking.
+    #' This parameter can be used to speed-up methods that build a committee sequentially (`"seq_pav"`), by requesting only the top N selected candidates/features and not the complete feature ranking.
     #'
-    #' @return A [data.table::data.table] listing all the features, ordered by decreasing inclusion probability scores (depending on the `method`)
-    feature_ranking = function(method = "approval_voting") {
-      assert_choice(method, choices = "approval_voting")
+    #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `"method"`).
+    #' An extra column `"norm_score"` is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as **selection probabilities**, see Meinshausen et al. (2010).
+    #' The `"borda_score"` column is always included to incorporate feature ranking methods that don't output per-feature scores but only rankings.
+    #'
+    feature_ranking = function(method = "av", committee_size = NULL) {
+      assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted",
+                                        "seq_pav", "seq_pav_weighted", "seq_phragmen",
+                                        "seq_phragmen_weighted"))
+      assert_int(committee_size, lower = 1, null.ok = TRUE)
 
       # cached results
       if (!is.null(private$.feature_ranking[[method]])) {
         return(private$.feature_ranking[[method]])
       }
 
-      count_tbl = sort(table(unlist(private$.result$features)), decreasing = TRUE)
-      features_selected = names(count_tbl)
-      features_not_selected = setdiff(private$.features, features_selected)
+      # candidates => all features, voters => list of selected (best) features sets
+      candidates = private$.features
+      voters = private$.result$features
 
-      res_fs = data.table(
-        feature = features_selected,
-        inclusion_probability = as.vector(count_tbl) / nrow(private$.result)
-      )
+      # calculate weights
+      use_weights = grepl(pattern = "weighted", x = method)
+      if (use_weights) {
+        # voter weights are the (inverse) scores
+        scores = private$.result[, get(private$.measure_id)]
+        weights = if (private$.minimize) 1 / scores else scores
+      } else {
+        # all voters are equal
+        weights = rep(1, length(voters))
+      }
 
-      res_fns = data.table(
-        feature = features_not_selected,
-        inclusion_probability = 0
-      )
+      # shuffle candidates (force same tie-breaking between methods)
+      candidates = sample(candidates)
 
-      res = rbindlist(list(res_fs, res_fns))
+      # calculate scores
+      if (startsWith(method, "av")) {
+        res = approval_voting(voters, candidates, weights)
+      } else if (startsWith(method, "sav")) {
+        res = satisfaction_approval_voting(voters, candidates, weights)
+      } else if (startsWith(method, "seq_pav")) {
+        res = seq_proportional_approval_voting(voters, candidates, weights, committee_size)
+      } else if (startsWith(method, "seq_phragmen")) {
+        res = seq_phragmen_rule(voters, candidates, weights, committee_size)
+      }
 
       private$.feature_ranking[[method]] = res
       private$.feature_ranking[[method]]
@@ -261,6 +314,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         # Transform the data (x => 1/x)
         n_features_inv = NULL
         pf[, n_features_inv := 1 / n_features]
+        # remove edge cases where no features were selected
+        pf = pf[n_features > 0]
 
         # Fit the linear model
         form = mlr3misc::formulate(lhs = measure_id, rhs = "n_features_inv")
@@ -351,6 +406,13 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     measure = function(rhs) {
       assert_ro_binding(rhs)
       private$.measure_id
+    },
+
+    #' @field n_resamples (`character(1)`)\cr
+    #' Returns the number of times the task was initially resampled in the ensemble feature selection.
+    n_resamples = function(rhs) {
+      assert_ro_binding(rhs)
+      uniqueN(self$result$resampling_iteration)
     }
   ),
 
