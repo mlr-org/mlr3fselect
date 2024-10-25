@@ -39,15 +39,15 @@ The auto_fselector() function creates an AutoFSelector object."><meta property="
     </div>
 
     <div class="ref-description section level2">
-    <p>The AutoFSelector wraps a <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a> and augments it with an automatic feature selection.
+    <p>The AutoFSelector wraps a <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> and augments it with an automatic feature selection.
 The <code><a href="auto_fselector.html">auto_fselector()</a></code> function creates an AutoFSelector object.</p>
     </div>
 
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The AutoFSelector is a <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a> which wraps another <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a> and performs the following steps during <code>$train()</code>:</p><ol><li><p>The wrapped (inner) learner is trained on the feature subsets via resampling.
-The feature selection can be specified by providing a <a href="FSelector.html">FSelector</a>, a <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a>, a <a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a> and a <a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">mlr3::Measure</a>.</p></li>
+    <p>The AutoFSelector is a <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> which wraps another <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> and performs the following steps during <code>$train()</code>:</p><ol><li><p>The wrapped (inner) learner is trained on the feature subsets via resampling.
+The feature selection can be specified by providing a <a href="FSelector.html">FSelector</a>, a <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>, a <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> and a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>.</p></li>
 <li><p>A final model is fit on the complete training data with the best-found feature subset.</p></li>
 </ol><p>During <code>$predict()</code> the AutoFSelector just calls the predict method of the wrapped (inner) learner.</p>
     </div>
@@ -62,14 +62,14 @@ The feature selection can be specified by providing a <a href="FSelector.html">F
     <h2 id="nested-resampling">Nested Resampling<a class="anchor" aria-label="anchor" href="#nested-resampling"></a></h2>
 
 
-<p>Nested resampling can be performed by passing an AutoFSelector object to <code><a href="https://rdrr.io/pkg/mlr3/man/resample.html" class="external-link">mlr3::resample()</a></code> or <code><a href="https://rdrr.io/pkg/mlr3/man/benchmark.html" class="external-link">mlr3::benchmark()</a></code>.
-To access the inner resampling results, set <code>store_fselect_instance = TRUE</code> and execute <code><a href="https://rdrr.io/pkg/mlr3/man/resample.html" class="external-link">mlr3::resample()</a></code> or <code><a href="https://rdrr.io/pkg/mlr3/man/benchmark.html" class="external-link">mlr3::benchmark()</a></code> with <code>store_models = TRUE</code> (see examples).
-The <a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a> passed to the AutoFSelector is meant to be the inner resampling, operating on the training set of an arbitrary outer resampling.
-For this reason it is not feasible to pass an instantiated <a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a> here.</p>
+<p>Nested resampling can be performed by passing an AutoFSelector object to <code><a href="https://mlr3.mlr-org.com/reference/resample.html" class="external-link">mlr3::resample()</a></code> or <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">mlr3::benchmark()</a></code>.
+To access the inner resampling results, set <code>store_fselect_instance = TRUE</code> and execute <code><a href="https://mlr3.mlr-org.com/reference/resample.html" class="external-link">mlr3::resample()</a></code> or <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">mlr3::benchmark()</a></code> with <code>store_models = TRUE</code> (see examples).
+The <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> passed to the AutoFSelector is meant to be the inner resampling, operating on the training set of an arbitrary outer resampling.
+For this reason it is not feasible to pass an instantiated <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> here.</p>
     </div>
     <div class="section level2">
     <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
-    <p><code><a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a></code> -&gt; <code>AutoFSelector</code></p>
+    <p><code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code> -&gt; <code>AutoFSelector</code></p>
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
@@ -93,7 +93,7 @@ Returns <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingle
 
 
 <dt><code>learner</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 Trained learner.</p></dd>
 
 
@@ -139,13 +139,13 @@ Hash (unique identifier) for this partial object, excluding some components whic
 <li><p><a href="#method-AutoFSelector-loglik"><code>AutoFSelector$loglik()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-print"><code>AutoFSelector$print()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-clone"><code>AutoFSelector$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://rdrr.io/pkg/mlr3/man/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://rdrr.io/pkg/mlr3/man/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://rdrr.io/pkg/mlr3/man/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://rdrr.io/pkg/mlr3/man/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://rdrr.io/pkg/mlr3/man/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://rdrr.io/pkg/mlr3/man/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://rdrr.io/pkg/mlr3/man/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
 </ul></details></p><hr><a id="method-AutoFSelector-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
@@ -173,24 +173,24 @@ Optimization algorithm.</p></dd>
 
 
 <dt><code>learner</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 Learner to optimize the feature subset for.</p></dd>
 
 
 <dt><code>resampling</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.</p></dd>
 
 
 <dt><code>measure</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">mlr3::Measure</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
 
 <dt><code>terminator</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
+<dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
 Stop criterion of the feature selection.</p></dd>
 
 
@@ -253,7 +253,7 @@ Depth of recursion for multiple nested objects.</p></dd>
 </div>
 <div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
-<p><a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>.</p>
+<p><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>.</p>
 </div>
 
 </div><p></p><hr><a id="method-AutoFSelector-importance"></a><div class="section">
@@ -505,14 +505,14 @@ Printer.</p>
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island    sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;     &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      year classif.ce                                  features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;      &lt;num&gt;                                    &lt;list&gt;      &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE 0.03947368                bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE 0.06493506 bill_length,body_mass,flipper_length,year          4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.09210526         bill_depth,bill_length,island,sex          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE 0.09210526         bill_depth,bill_length,island,sex          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  FALSE 0.03947368                bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE 0.06493506 bill_length,body_mass,flipper_length,year          4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      &lt;char&gt;                  &lt;char&gt;        &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>

@@ -47,11 +47,11 @@
 A subclass is implemented in the following way:</p><ul><li><p>Inherit from FSelectorBatch.</p></li>
 <li><p>Specify the private abstract method <code>$.optimize()</code> and use it to call into your optimizer.</p></li>
 <li><p>You need to call <code>instance$eval_batch()</code> to evaluate design points.</p></li>
-<li><p>The batch evaluation is requested at the <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>/<a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> object <code>instance</code>, so each batch is possibly executed in parallel via <code><a href="https://rdrr.io/pkg/mlr3/man/benchmark.html" class="external-link">mlr3::benchmark()</a></code>, and all evaluations are stored inside of <code>instance$archive</code>.</p></li>
-<li><p>Before the batch evaluation, the <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a> is checked, and if it is positive, an exception of class <code>"terminated_error"</code> is generated.
+<li><p>The batch evaluation is requested at the <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>/<a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> object <code>instance</code>, so each batch is possibly executed in parallel via <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">mlr3::benchmark()</a></code>, and all evaluations are stored inside of <code>instance$archive</code>.</p></li>
+<li><p>Before the batch evaluation, the <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a> is checked, and if it is positive, an exception of class <code>"terminated_error"</code> is generated.
 In the latter case the current batch of evaluations is still stored in <code>instance</code>, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.</p></li>
 <li><p>After such an exception was caught we select the best set from <code>instance$archive</code> and return it.</p></li>
-<li><p>Note that therefore more points than specified by the <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a> may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
+<li><p>Note that therefore more points than specified by the <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a> may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
 How many more depends on the setting of the batch size.</p></li>
 <li><p>Overwrite the private super-method <code>.assign_result()</code> if you want to decide how to estimate the final set in the instance and its estimated performance.
 The default behavior is: We pick the best resample experiment, regarding the given measure, then assign its set and aggregated performance to the instance.</p></li>
@@ -113,14 +113,14 @@ Identifier for the new instance.</p></dd>
 
 
 <dt><code>param_set</code></dt>
-<dd><p><a href="https://rdrr.io/pkg/paradox/man/ParamSet.html" class="external-link">paradox::ParamSet</a><br>
+<dd><p><a href="https://paradox.mlr-org.com/reference/ParamSet.html" class="external-link">paradox::ParamSet</a><br>
 Set of control parameters.</p></dd>
 
 
 <dt><code>properties</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
 Set of properties of the fselector.
-Must be a subset of <code><a href="https://rdrr.io/pkg/mlr3/man/mlr_reflections.html" class="external-link">mlr_reflections$fselect_properties</a></code>.</p></dd>
+Must be a subset of <code><a href="https://mlr3.mlr-org.com/reference/mlr_reflections.html" class="external-link">mlr_reflections$fselect_properties</a></code>.</p></dd>
 
 
 <dt><code>packages</code></dt>

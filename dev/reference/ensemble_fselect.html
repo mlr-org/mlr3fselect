@@ -90,34 +90,34 @@ Optimization algorithm.</p></dd>
 
 
 <dt id="arg-task">task<a class="anchor" aria-label="anchor" href="#arg-task"></a></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Task.html" class="external-link">mlr3::Task</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a>)<br>
 Task to operate on.</p></dd>
 
 
 <dt id="arg-learners">learners<a class="anchor" aria-label="anchor" href="#arg-learners"></a></dt>
-<dd><p>(list of <a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+<dd><p>(list of <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 The learners to be used for feature selection.</p></dd>
 
 
 <dt id="arg-init-resampling">init_resampling<a class="anchor" aria-label="anchor" href="#arg-init-resampling"></a></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 The initial resampling strategy of the data, from which each train set
 will be passed on to the learners.
-Can only be <a href="https://rdrr.io/pkg/mlr3/man/mlr_resamplings_subsampling.html" class="external-link">mlr3::ResamplingSubsampling</a> or <a href="https://rdrr.io/pkg/mlr3/man/mlr_resamplings_bootstrap.html" class="external-link">mlr3::ResamplingBootstrap</a>.</p></dd>
+Can only be <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_subsampling.html" class="external-link">mlr3::ResamplingSubsampling</a> or <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_bootstrap.html" class="external-link">mlr3::ResamplingBootstrap</a>.</p></dd>
 
 
 <dt id="arg-inner-resampling">inner_resampling<a class="anchor" aria-label="anchor" href="#arg-inner-resampling"></a></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 The inner resampling strategy used by the <a href="FSelector.html">FSelector</a>.</p></dd>
 
 
 <dt id="arg-measure">measure<a class="anchor" aria-label="anchor" href="#arg-measure"></a></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">mlr3::Measure</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
 
 <dt id="arg-terminator">terminator<a class="anchor" aria-label="anchor" href="#arg-terminator"></a></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
+<dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
 Stop criterion of the feature selection.</p></dd>
 
 
@@ -160,7 +160,7 @@ Results are stored in an <a href="ensemble_fs_result.html">EnsembleFSResult</a>.
 <span class="r-in"><span>    init_resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"subsampling"</span>, repeats <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    inner_resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    measure <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    terminator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/bbotk/man/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    terminator <span class="op">=</span> <span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;EnsembleFSResult&gt;</span>

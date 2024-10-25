@@ -60,9 +60,9 @@ The function <code><a href="fsi.html">fsi()</a></code> creates a FSelectInstance
 <p>The instance contains an <a href="ObjectiveFSelectBatch.html">ObjectiveFSelectBatch</a> object that encodes the black box objective function a <a href="FSelector.html">FSelector</a> has to optimize.
 The instance allows the basic operations of querying the objective at design points (<code>$eval_batch()</code>).
 This operation is usually done by the <a href="FSelector.html">FSelector</a>.
-Evaluations of feature subsets are performed in batches by calling <code><a href="https://rdrr.io/pkg/mlr3/man/benchmark.html" class="external-link">mlr3::benchmark()</a></code> internally.
+Evaluations of feature subsets are performed in batches by calling <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">mlr3::benchmark()</a></code> internally.
 The evaluated feature subsets are stored in the <a href="ArchiveBatchFSelect.html">Archive</a> (<code>$archive</code>).
-Before a batch is evaluated, the <a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a> is queried for the remaining budget.
+Before a batch is evaluated, the <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a> is queried for the remaining budget.
 If the available budget is exhausted, an exception is raised, and no further evaluations can be performed from this point on.
 The <a href="FSelector.html">FSelector</a> is also supposed to store its final result, consisting of a selected feature subset and associated estimated performance values, by calling the method <code>instance$assign_result()</code>.</p>
     </div>
@@ -89,7 +89,7 @@ The default measure depends on the task type.</p><table class="table table"><tr>
 
 
 <p>For analyzing the feature selection results, it is recommended to pass the archive to <code>as.data.table()</code>.
-The returned data table is joined with the benchmark result which adds the <a href="https://rdrr.io/pkg/mlr3/man/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> for each feature set.</p>
+The returned data table is joined with the benchmark result which adds the <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> for each feature set.</p>
 <p>The archive provides various getters (e.g. <code>$learners()</code>) to ease the access.
 All getters extract by position (<code>i</code>) or unique hash (<code>uhash</code>).
 For a complete list of all getters see the methods section.</p>
@@ -98,7 +98,7 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
-    <p><code><a href="https://rdrr.io/pkg/bbotk/man/OptimInstance.html" class="external-link">bbotk::OptimInstance</a></code> -&gt; <code><a href="https://rdrr.io/pkg/bbotk/man/OptimInstanceBatch.html" class="external-link">bbotk::OptimInstanceBatch</a></code> -&gt; <code><a href="https://rdrr.io/pkg/bbotk/man/OptimInstanceBatchSingleCrit.html" class="external-link">bbotk::OptimInstanceBatchSingleCrit</a></code> -&gt; <code>FSelectInstanceBatchSingleCrit</code></p>
+    <p><code><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html" class="external-link">bbotk::OptimInstance</a></code> -&gt; <code><a href="https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html" class="external-link">bbotk::OptimInstanceBatch</a></code> -&gt; <code><a href="https://bbotk.mlr-org.com/reference/OptimInstanceBatchSingleCrit.html" class="external-link">bbotk::OptimInstanceBatchSingleCrit</a></code> -&gt; <code>FSelectInstanceBatchSingleCrit</code></p>
     </div>
     <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
@@ -119,10 +119,10 @@ Feature set for task subsetting.</p></dd>
 <li><p><a href="#method-FSelectInstanceBatchSingleCrit-assign_result"><code>FSelectInstanceBatchSingleCrit$assign_result()</code></a></p></li>
 <li><p><a href="#method-FSelectInstanceBatchSingleCrit-print"><code>FSelectInstanceBatchSingleCrit$print()</code></a></p></li>
 <li><p><a href="#method-FSelectInstanceBatchSingleCrit-clone"><code>FSelectInstanceBatchSingleCrit$clone()</code></a></p></li>
-</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href="https://rdrr.io/pkg/bbotk/man/OptimInstance.html#method-clear"><code>bbotk::OptimInstance$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href="https://rdrr.io/pkg/bbotk/man/OptimInstance.html#method-format"><code>bbotk::OptimInstance$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="eval_batch"><a href="https://rdrr.io/pkg/bbotk/man/OptimInstanceBatch.html#method-eval_batch"><code>bbotk::OptimInstanceBatch$eval_batch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="objective_function"><a href="https://rdrr.io/pkg/bbotk/man/OptimInstanceBatch.html#method-objective_function"><code>bbotk::OptimInstanceBatch$objective_function()</code></a></span></li>
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear"><code>bbotk::OptimInstance$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href="https://bbotk.mlr-org.com/reference/OptimInstance.html#method-format"><code>bbotk::OptimInstance$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="eval_batch"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-eval_batch"><code>bbotk::OptimInstanceBatch$eval_batch()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="objective_function"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-objective_function"><code>bbotk::OptimInstanceBatch$objective_function()</code></a></span></li>
 </ul></details></p><hr><a id="method-FSelectInstanceBatchSingleCrit-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
@@ -144,29 +144,29 @@ Feature set for task subsetting.</p></dd>
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>task</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Task.html" class="external-link">mlr3::Task</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a>)<br>
 Task to operate on.</p></dd>
 
 
 <dt><code>learner</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Learner.html" class="external-link">mlr3::Learner</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 Learner to optimize the feature subset for.</p></dd>
 
 
 <dt><code>resampling</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.</p></dd>
 
 
 <dt><code>measure</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/mlr3/man/Measure.html" class="external-link">mlr3::Measure</a>)<br>
+<dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
 
 <dt><code>terminator</code></dt>
-<dd><p>(<a href="https://rdrr.io/pkg/bbotk/man/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
+<dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
 Stop criterion of the feature selection.</p></dd>
 
 
@@ -209,7 +209,7 @@ Ignored if multiple measures are used.</p></dd>
 <p>The <a href="FSelector.html">FSelector</a> writes the best found feature subset and estimated performance value here.
 For internal use.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceBatchSingleCrit</span><span class="op">$</span><span class="fu">assign_result</span><span class="op">(</span><span class="va">xdt</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceBatchSingleCrit</span><span class="op">$</span><span class="fu">assign_result</span><span class="op">(</span><span class="va">xdt</span>, <span class="va">y</span>, extra <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -224,6 +224,11 @@ additional columns for extra information.</p></dd>
 <dt><code>y</code></dt>
 <dd><p>(<code>numeric(1)</code>)<br>
 Optimal outcome.</p></dd>
+
+
+<dt><code>extra</code></dt>
+<dd><p>(<code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
+Additional information.</p></dd>
 
 
 <dt><code>...</code></dt>
@@ -284,7 +289,7 @@ ignored.</p></dd>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="va">learner</span>,</span></span>
 <span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span><span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  measures <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  terminator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/bbotk/man/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  terminator <span class="op">=</span> <span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Choose optimization algorithm</span></span></span>
@@ -318,10 +323,10 @@ ignored.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.15400458            0.014 2024-10-18 12:43:31        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.19768624            0.015 2024-10-18 12:43:31        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06112382            0.017 2024-10-18 12:43:31        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.18893974            0.012 2024-10-18 12:43:31        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.15400458            0.017 2024-10-25 12:58:04        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.19768624            0.016 2024-10-25 12:58:04        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06112382            0.019 2024-10-25 12:58:04        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.18893974            0.015 2024-10-25 12:58:04        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                      features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                        &lt;list&gt;     &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:                  bill_depth,flipper_length,island,sex,year          5</span>
