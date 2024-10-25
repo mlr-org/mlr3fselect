@@ -3,40 +3,50 @@
 Predefined callbacks are stored in the dictionary mlr_callbacks and can be retrieved with clbk().
 Feature selection callbacks can be called from different stages of feature selection.
 The stages are prefixed with on_*.
-Start Feature Selection
-     - on_optimization_begin
-    Start FSelect Batch
-         - on_optimizer_before_eval
-        Start Evaluation
-             - on_eval_after_design
-             - on_eval_after_benchmark
-             - on_eval_before_archive
-        End Evaluation
-         - on_optimizer_after_eval
-    End FSelect Batch
-     - on_result
-     - on_optimization_end
-End Feature Selection
+The on_auto_fselector_* stages are only available when the callback is used in an AutoFSelector.
+Start Automatic Feature Selection
+  Start Feature Selection
+      - on_optimization_begin
+      Start FSelect Batch
+          - on_optimizer_before_eval
+          Start Evaluation
+              - on_eval_after_design
+              - on_eval_after_benchmark
+              - on_eval_before_archive
+          End Evaluation
+          - on_optimizer_after_eval
+      End FSelect Batch
+      - on_result
+      - on_optimization_end
+  End Feature Selection
+  - on_auto_fselector_before_final_model
+  - on_auto_fselector_after_final_model
+End Automatic Feature Selection
 
 See also the section on parameters for more information on the stages.
 A feature selection callback works with bbotk::ContextBatch and ContextBatchFSelect."><meta property="og:description" content="Function to create a CallbackBatchFSelect.
 Predefined callbacks are stored in the dictionary mlr_callbacks and can be retrieved with clbk().
 Feature selection callbacks can be called from different stages of feature selection.
 The stages are prefixed with on_*.
-Start Feature Selection
-     - on_optimization_begin
-    Start FSelect Batch
-         - on_optimizer_before_eval
-        Start Evaluation
-             - on_eval_after_design
-             - on_eval_after_benchmark
-             - on_eval_before_archive
-        End Evaluation
-         - on_optimizer_after_eval
-    End FSelect Batch
-     - on_result
-     - on_optimization_end
-End Feature Selection
+The on_auto_fselector_* stages are only available when the callback is used in an AutoFSelector.
+Start Automatic Feature Selection
+  Start Feature Selection
+      - on_optimization_begin
+      Start FSelect Batch
+          - on_optimizer_before_eval
+          Start Evaluation
+              - on_eval_after_design
+              - on_eval_after_benchmark
+              - on_eval_before_archive
+          End Evaluation
+          - on_optimizer_after_eval
+      End FSelect Batch
+      - on_result
+      - on_optimization_end
+  End Feature Selection
+  - on_auto_fselector_before_final_model
+  - on_auto_fselector_after_final_model
+End Automatic Feature Selection
 
 See also the section on parameters for more information on the stages.
 A feature selection callback works with bbotk::ContextBatch and ContextBatchFSelect."><meta property="og:image" content="https://mlr3fselect.mlr-org.com/logo.png"></head><body>
@@ -47,7 +57,7 @@ A feature selection callback works with bbotk::ContextBatch and ContextBatchFSel
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.1</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +82,7 @@ A feature selection callback works with bbotk::ContextBatch and ContextBatchFSel
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create Feature Selection Callback</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/v1.1.1/R/CallbackBatchFSelect.R" class="external-link"><code>R/CallbackBatchFSelect.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/main/R/CallbackBatchFSelect.R" class="external-link"><code>R/CallbackBatchFSelect.R</code></a></small>
       <div class="d-none name"><code>callback_batch_fselect.Rd</code></div>
     </div>
 
@@ -80,21 +90,26 @@ A feature selection callback works with bbotk::ContextBatch and ContextBatchFSel
     <p>Function to create a <a href="CallbackBatchFSelect.html">CallbackBatchFSelect</a>.
 Predefined callbacks are stored in the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3misc.mlr-org.com/reference/mlr_callbacks.html" class="external-link">mlr_callbacks</a> and can be retrieved with <code><a href="https://mlr3misc.mlr-org.com/reference/clbk.html" class="external-link">clbk()</a></code>.</p>
 <p>Feature selection callbacks can be called from different stages of feature selection.
-The stages are prefixed with <code>on_*</code>.</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Start Feature Selection</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>     <span class="sc">-</span> on_optimization_begin</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    Start FSelect Batch</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>         <span class="sc">-</span> on_optimizer_before_eval</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>        Start Evaluation</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>             <span class="sc">-</span> on_eval_after_design</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>             <span class="sc">-</span> on_eval_after_benchmark</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>             <span class="sc">-</span> on_eval_before_archive</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>        End Evaluation</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>         <span class="sc">-</span> on_optimizer_after_eval</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    End FSelect Batch</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>     <span class="sc">-</span> on_result</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>     <span class="sc">-</span> on_optimization_end</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>End Feature Selection</span></code></pre><p></p></div>
+The stages are prefixed with <code>on_*</code>.
+The <code>on_auto_fselector_*</code> stages are only available when the callback is used in an <a href="AutoFSelector.html">AutoFSelector</a>.</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Start Automatic Feature Selection</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  Start Feature Selection</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>      <span class="sc">-</span> on_optimization_begin</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>      Start FSelect Batch</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>          <span class="sc">-</span> on_optimizer_before_eval</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>          Start Evaluation</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>              <span class="sc">-</span> on_eval_after_design</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>              <span class="sc">-</span> on_eval_after_benchmark</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>              <span class="sc">-</span> on_eval_before_archive</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>          End Evaluation</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>          <span class="sc">-</span> on_optimizer_after_eval</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>      End FSelect Batch</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>      <span class="sc">-</span> on_result</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>      <span class="sc">-</span> on_optimization_end</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  End Feature Selection</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="sc">-</span> on_auto_fselector_before_final_model</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="sc">-</span> on_auto_fselector_after_final_model</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>End Automatic Feature Selection</span></code></pre><p></p></div>
 <p>See also the section on parameters for more information on the stages.
 A feature selection callback works with <a href="https://bbotk.mlr-org.com/reference/ContextBatch.html" class="external-link">bbotk::ContextBatch</a> and <a href="ContextBatchFSelect.html">ContextBatchFSelect</a>.</p>
     </div>
@@ -112,7 +127,9 @@ A feature selection callback works with <a href="https://bbotk.mlr-org.com/refer
 <span>  on_eval_before_archive <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_optimizer_after_eval <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  on_result <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  on_optimization_end <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  on_optimization_end <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  on_auto_fselector_before_final_model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  on_auto_fselector_after_final_model <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -183,21 +200,24 @@ Called in <code>OptimInstance$assign_result()</code>.</p></dd>
 Stage called at the end of the optimization.
 Called in <code>Optimizer$optimize()</code>.</p></dd>
 
+
+<dt id="arg-on-auto-fselector-before-final-model">on_auto_fselector_before_final_model<a class="anchor" aria-label="anchor" href="#arg-on-auto-fselector-before-final-model"></a></dt>
+<dd><p>(<code>function()</code>)<br>
+Stage called before the final model is trained.
+Called in <code>AutoFSelector$train()</code>.</p></dd>
+
+
+<dt id="arg-on-auto-fselector-after-final-model">on_auto_fselector_after_final_model<a class="anchor" aria-label="anchor" href="#arg-on-auto-fselector-after-final-model"></a></dt>
+<dd><p>(<code>function()</code>)<br>
+Stage called after the final model is trained.
+Called in <code>AutoFSelector$train()</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>When implementing a callback, each function must have two arguments named <code>callback</code> and <code>context</code>.</p>
-<p>A callback can write data to the state (<code>$state</code>), e.g. settings that affect the callback itself.
-Avoid writing large data the state.
-This can slow down the feature selection when the evaluation of configurations is parallelized.</p>
-<p>Feature selection callbacks access two different contexts depending on the stage.
-The stages <code>on_eval_after_design</code>, <code>on_eval_after_benchmark</code>, <code>on_eval_before_archive</code> access <a href="ContextBatchFSelect.html">ContextBatchFSelect</a>.
-This context can be used to customize the evaluation of a batch of feature sets.
-Changes to the state of callback are lost after the evaluation of a batch and changes to the fselect instance or the fselector are not possible.
-Persistent data should be written to the archive via <code>$aggregated_performance</code> (see <a href="ContextBatchFSelect.html">ContextBatchFSelect</a>).
-The other stages access <a href="https://bbotk.mlr-org.com/reference/ContextBatch.html" class="external-link">bbotk::ContextBatch</a>.
-This context can be used to modify the fselect instance, archive, fselector and final result.
-There are two different contexts because the evaluation can be parallelized i.e. multiple instances of <a href="ContextBatchFSelect.html">ContextBatchFSelect</a> exists on different workers at the same time.</p>
+    <p>When implementing a callback, each function must have two arguments named <code>callback</code> and <code>context</code>.
+A callback can write data to the state (<code>$state</code>), e.g. settings that affect the callback itself.
+Avoid writing large data the state.</p>
     </div>
 
     <div class="section level2">

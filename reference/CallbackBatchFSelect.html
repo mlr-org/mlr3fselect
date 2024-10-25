@@ -15,7 +15,7 @@ For more information on callbacks see callback_batch_fselect()."><meta property=
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.1</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@ For more information on callbacks see callback_batch_fselect()."><meta property=
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create Feature Selection Callback</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/v1.1.1/R/CallbackBatchFSelect.R" class="external-link"><code>R/CallbackBatchFSelect.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/main/R/CallbackBatchFSelect.R" class="external-link"><code>R/CallbackBatchFSelect.R</code></a></small>
       <div class="d-none name"><code>CallbackBatchFSelect.Rd</code></div>
     </div>
 
@@ -75,6 +75,20 @@ Called in <code>ObjectiveFSelectBatch$eval_many()</code>.</p></dd>
 <dd><p>(<code>function()</code>)<br>
 Stage called before performance values are written to the archive.
 Called in <code>ObjectiveFSelectBatch$eval_many()</code>.</p></dd>
+
+
+<dt><code>on_auto_fselector_before_final_model</code></dt>
+<dd><p>(<code>function()</code>)<br>
+Stage called before the final model is trained.
+Called in <code>AutoFSelector$train()</code>.
+This stage is called after the optimization has finished and the final model is trained with the best feature set found.</p></dd>
+
+
+<dt><code>on_auto_fselector_after_final_model</code></dt>
+<dd><p>(<code>function()</code>)<br>
+Stage called after the final model is trained.
+Called in <code>AutoFSelector$train()</code>.
+This stage is called after the final model is trained with the best feature set found.</p></dd>
 
 
 </dl><p></p></div>

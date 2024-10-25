@@ -25,7 +25,7 @@ The FSelector is also supposed to store its final result, consisting of a select
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.1</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@ The FSelector is also supposed to store its final result, consisting of a select
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Class for Single Criterion Feature Selection</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/v1.1.1/R/FSelectInstanceBatchSingleCrit.R" class="external-link"><code>R/FSelectInstanceBatchSingleCrit.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/main/R/FSelectInstanceBatchSingleCrit.R" class="external-link"><code>R/FSelectInstanceBatchSingleCrit.R</code></a></small>
       <div class="d-none name"><code>FSelectInstanceBatchSingleCrit.Rd</code></div>
     </div>
 
@@ -209,7 +209,7 @@ Ignored if multiple measures are used.</p></dd>
 <p>The <a href="FSelector.html">FSelector</a> writes the best found feature subset and estimated performance value here.
 For internal use.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceBatchSingleCrit</span><span class="op">$</span><span class="fu">assign_result</span><span class="op">(</span><span class="va">xdt</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceBatchSingleCrit</span><span class="op">$</span><span class="fu">assign_result</span><span class="op">(</span><span class="va">xdt</span>, <span class="va">y</span>, extra <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -224,6 +224,11 @@ additional columns for extra information.</p></dd>
 <dt><code>y</code></dt>
 <dd><p>(<code>numeric(1)</code>)<br>
 Optimal outcome.</p></dd>
+
+
+<dt><code>extra</code></dt>
+<dd><p>(<code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
+Additional information.</p></dd>
 
 
 <dt><code>...</code></dt>
@@ -318,10 +323,10 @@ ignored.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.15400458            0.015 2024-10-15 16:39:37        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.19768624            0.033 2024-10-15 16:39:37        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06112382            0.015 2024-10-15 16:39:37        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.18893974            0.012 2024-10-15 16:39:37        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.15400458            0.033 2024-10-25 18:41:26        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.19768624            0.013 2024-10-25 18:41:26        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.06112382            0.016 2024-10-25 18:41:26        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.18893974            0.012 2024-10-25 18:41:26        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                      features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                        &lt;list&gt;     &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:                  bill_depth,flipper_length,island,sex,year          5</span>
