@@ -17,6 +17,14 @@ Any number of columns can be added.
 \section{Super classes}{
 \code{\link[mlr3misc:Context]{mlr3misc::Context}} -> \code{\link[bbotk:ContextBatch]{bbotk::ContextBatch}} -> \code{ContextBatchFSelect}
 }
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{auto_fselector}}{(\link{AutoFSelector})\cr
+The \link{AutoFSelector} instance.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{

@@ -157,10 +157,11 @@ FSelectorBatchRFE = R6Class("FSelectorBatchRFE",
       res = inst$archive$best()
 
       xdt = res[, c(inst$search_space$ids(), "importance"), with = FALSE]
+      extra = res[, !c(inst$search_space$ids(), "importance"), with = FALSE]
 
       # unlist keeps name!
       y = unlist(res[, inst$archive$cols_y, with = FALSE])
-      inst$assign_result(xdt, y)
+      inst$assign_result(xdt, y, extra = extra)
 
       invisible(NULL)
     }
