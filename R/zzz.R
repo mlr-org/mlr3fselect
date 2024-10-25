@@ -19,7 +19,7 @@ NULL
 
 .onLoad = function(libname, pkgname) {
   # nocov start
-    utils::globalVariables(c("super", "self", "n_features"))
+  utils::globalVariables(c("super", "self", "n_features"))
 
   # reflections
   x = utils::getFromNamespace("bbotk_reflections", ns = "bbotk")
