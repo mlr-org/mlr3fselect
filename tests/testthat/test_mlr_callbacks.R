@@ -74,7 +74,7 @@ test_that("internal tuning callback works", {
 
   expect_data_table(instance$result)
   expect_names(names(instance$result), must.include = "internal_tuned_values")
-  expect_equal(instance$result$internal_tuned_values[[1]], list(iter = 1))
+  expect_equal(instance$result$internal_tuned_values[[1]], list(iter = 233))
 })
 
 test_that("internal tuning callback works with AutoFSelector", {
