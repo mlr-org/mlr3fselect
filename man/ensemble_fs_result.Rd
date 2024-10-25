@@ -84,6 +84,9 @@ Returns the number of learners used in the ensemble feature selection.}
 
 \item{\code{measure}}{(\code{character(1)})\cr
 Returns the measure id used in the ensemble feature selection.}
+
+\item{\code{n_resamples}}{(\code{character(1)})\cr
+Returns the number of times the task was initially resampled in the ensemble feature selection.}
 }
 \if{html}{\out{</div>}}
 }
