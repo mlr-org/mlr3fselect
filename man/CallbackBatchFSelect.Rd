@@ -35,6 +35,16 @@ Called in \code{ObjectiveFSelectBatch$eval_many()}.}
 \item{\code{on_eval_before_archive}}{(\verb{function()})\cr
 Stage called before performance values are written to the archive.
 Called in \code{ObjectiveFSelectBatch$eval_many()}.}
+
+\item{\code{on_auto_fselector_before_final_model}}{(\verb{function()})\cr
+Stage called before the final model is trained.
+Called in \code{AutoFSelector$train()}.
+This stage is called after the optimization has finished and the final model is trained with the best feature set found.}
+
+\item{\code{on_auto_fselector_after_final_model}}{(\verb{function()})\cr
+Stage called after the final model is trained.
+Called in \code{AutoFSelector$train()}.
+This stage is called after the final model is trained with the best feature set found.}
 }
 \if{html}{\out{</div>}}
 }

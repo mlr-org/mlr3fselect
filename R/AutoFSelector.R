@@ -308,11 +308,18 @@ AutoFSelector = R6Class("AutoFSelector",
 
   private = list(
     .train = function(task) {
-      # construct instance from args; then tune
+      # construct instance from args
       ia = self$instance_args
       ia$task = task$clone()
       instance = invoke(FSelectInstanceBatchSingleCrit$new, .args = ia)
+
+      # optimize feature selection
       self$fselector$optimize(instance)
+
+      # make auto fselector available to callbacks
+      instance$objective$context$auto_fselector = self
+      call_back("on_auto_fselector_before_final_model", instance$objective$callbacks, instance$objective$context)
+
       learner = ia$learner$clone(deep = TRUE)
       task = task$clone()
 
@@ -325,9 +332,12 @@ AutoFSelector = R6Class("AutoFSelector",
       task$select(feat)
       learner$train(task)
 
+      call_back("on_auto_fselector_after_final_model", instance$objective$callbacks, instance$objective$context)
+
       # the return model is a list of "learner", "features" and "fselect_instance"
       result_model = list(learner = learner, features = feat)
       if (private$.store_fselect_instance) result_model$fselect_instance = instance
+
       result_model
     },
 

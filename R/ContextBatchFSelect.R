@@ -14,6 +14,13 @@
 #' @export
 ContextBatchFSelect = R6Class("ContextBatchFSelect",
   inherit = ContextBatch,
+  public = list(
+
+    #' @field auto_fselector ([AutoFSelector])\cr
+    #' The [AutoFSelector] instance.
+    auto_fselector = NULL
+  ),
+
   active = list(
     #' @field xss (list())\cr
     #'   The feature sets of the latest batch.

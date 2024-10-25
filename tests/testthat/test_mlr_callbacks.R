@@ -54,3 +54,49 @@ test_that("one_se_rule callback works", {
 
   expect_equal(instance$result_feature_set, c("x1", "x2", "x3"))
 })
+
+test_that("internal tuning callback works", {
+  learner = lrn("classif.debug", validate = "test", early_stopping = TRUE)
+
+  internal_search_space = ps(
+    iter = p_int(upper = 500, aggr = function(x) 233)
+  )
+
+  instance = fselect(
+    fselector = fs("random_search"),
+    task = tsk("pima"),
+    learner = learner,
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    term_evals = 10,
+    callbacks = clbk("mlr3fselect.internal_tuning", internal_search_space = internal_search_space)
+  )
+
+  expect_data_table(instance$result)
+  expect_names(names(instance$result), must.include = "internal_tuned_values")
+  expect_equal(instance$result$internal_tuned_values[[1]], list(iter = 233))
+})
+
+test_that("internal tuning callback works with AutoFSelector", {
+  learner = lrn("classif.debug", validate = "test", early_stopping = TRUE)
+
+  internal_search_space = ps(
+    iter = p_int(upper = 500, aggr = function(x) 233)
+  )
+
+  afs = auto_fselector(
+    fselector = fs("random_search"),
+    learner = learner,
+    resampling = rsmp("cv", folds = 3),
+    measure = msr("classif.ce"),
+    term_evals = 10,
+    callbacks = clbk("mlr3fselect.internal_tuning", internal_search_space = internal_search_space)
+  )
+
+  afs$train(tsk("pima"))
+
+  expect_data_table(afs$fselect_instance$result)
+  expect_names(names(afs$fselect_instance$result), must.include = "internal_tuned_values")
+  expect_equal(afs$fselect_instance$result$internal_tuned_values[[1]], list(iter = 233))
+  expect_equal(afs$model$learner$param_set$values$iter, 233)
+})
