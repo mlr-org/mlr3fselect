@@ -2,7 +2,7 @@
 % Please edit documentation in R/ensemble_fselect.R
 \name{ensemble_fselect}
 \alias{ensemble_fselect}
-\title{Ensemble Feature Selection}
+\title{Wrapper-based Ensemble Feature Selection}
 \source{
 Saeys, Yvan, Abeel, Thomas, Van De Peer, Yves (2008).
 \dQuote{Robust feature selection using ensemble feature selection techniques.}

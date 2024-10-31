@@ -1,4 +1,4 @@
-#' @title Ensemble Feature Selection
+#' @title Wrapper-based Ensemble Feature Selection
 #'
 #' @include CallbackBatchFSelect.R
 #'
@@ -135,9 +135,11 @@ ensemble_fselect = function(
     set(grid, j = "importance", value = imp_scores)
   }
 
+  # remove R6 objects
   set(grid, j = "learner", value = NULL)
   set(grid, j = "task", value = NULL)
   set(grid, j = "resampling", value = NULL)
+
   EnsembleFSResult$new(
     result = grid,
     features = task$feature_names,
