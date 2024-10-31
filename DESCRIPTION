@@ -78,6 +78,7 @@ Collate:
     'assertions.R'
     'auto_fselector.R'
     'bibentries.R'
+    'embedded_ensemble_fselect.R'
     'ensemble_fselect.R'
     'extract_inner_fselect_archives.R'
     'extract_inner_fselect_results.R'
