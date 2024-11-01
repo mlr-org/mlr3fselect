@@ -86,7 +86,6 @@ embedded_ensemble_fselect = function(
   })
 
   design = grid[, c("learner", "task", "resampling"), with = FALSE]
-  print(design)
 
   bmr = benchmark(design, store_models = TRUE)
 
