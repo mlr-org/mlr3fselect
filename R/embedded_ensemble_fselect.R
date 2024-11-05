@@ -85,6 +85,9 @@ embedded_ensemble_fselect = function(
     )
   })
 
+  # TOCHECK: can we have `task` as the original task here,
+  # `resampling` the subsamples (train/test partitions) so that
+  # bmr$score(measure) later just works out of the box?
   design = grid[, c("learner", "task", "resampling"), with = FALSE]
 
   bmr = benchmark(design, store_models = TRUE)
