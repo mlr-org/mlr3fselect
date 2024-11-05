@@ -17,8 +17,8 @@ test_that("extract_inner_fselect_results function works with resample and repeat
 })
 
 test_that("extract_inner_fselect_results function works with benchmark and cv", {
-  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
-  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
+  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_1")
+  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_2")
   resampling_outer = rsmp("cv", folds = 2)
   grid = benchmark_grid(tsk("iris"), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = TRUE)
@@ -30,8 +30,8 @@ test_that("extract_inner_fselect_results function works with benchmark and cv", 
 })
 
 test_that("extract_inner_fselect_results function works with benchmark and repeated cv", {
-  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
-  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
+  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_1")
+  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_2")
   resampling_outer = rsmp("repeated_cv", folds = 2, repeats = 3)
   grid = benchmark_grid(tsk("iris"), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = TRUE)
@@ -43,8 +43,8 @@ test_that("extract_inner_fselect_results function works with benchmark and repea
 })
 
 test_that("extract_inner_fselect_results function works with multiple tasks", {
-  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
-  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
+  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_1")
+  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_2")
   resampling_outer = rsmp("cv", folds = 2)
   grid = benchmark_grid(list(tsk("iris"), tsk("pima")), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = TRUE)
@@ -73,8 +73,8 @@ test_that("extract_inner_fselect_results function works no instance", {
 })
 
 test_that("extract_inner_fselect_results function works with benchmark and no models", {
-  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
-  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
+  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_1")
+  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_2")
   resampling_outer = rsmp("cv", folds = 2)
   grid = benchmark_grid(tsk("iris"), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = FALSE)
@@ -84,9 +84,9 @@ test_that("extract_inner_fselect_results function works with benchmark and no mo
 
 test_that("extract_inner_fselect_results function works with mixed store instance", {
   at_1 = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), trm("evals", n_evals = 4),
-  fselector = fs("random_search"), store_fselect_instance = FALSE, store_benchmark_result = FALSE)
+  fselector = fs("random_search"), store_fselect_instance = FALSE, store_benchmark_result = FALSE, id = "at_1")
   at_2 = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), trm("evals", n_evals = 4),
-  fselector = fs("random_search"))
+  fselector = fs("random_search"), id = "at_2")
   resampling_outer = rsmp("cv", folds = 2)
   grid = benchmark_grid(tsk("iris"), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = TRUE)
@@ -118,8 +118,8 @@ test_that("extract_inner_fselect_results function works with resample and return
 })
 
 test_that("extract_inner_fselect_results function works with benchmark and return of instance", {
-  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
-  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4)
+  at_1 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_1")
+  at_2 = auto_fselector(fs("random_search"), lrn("classif.rpart"), rsmp("holdout"), msr("classif.ce"), term_evals = 4, id = "at_2")
   resampling_outer = rsmp("cv", folds = 2)
   grid = benchmark_grid(tsk("iris"), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = TRUE)

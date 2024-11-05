@@ -36,7 +36,8 @@ auto_fselector = function(
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  ties_method = "least_features"
+  ties_method = "least_features",
+  id = NULL
   ) {
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
@@ -51,5 +52,6 @@ auto_fselector = function(
     store_models = store_models,
     check_values = check_values,
     callbacks = callbacks,
-    ties_method = ties_method)
+    ties_method = ties_method,
+    id = id)
 }

@@ -123,7 +123,8 @@ AutoFSelector = R6Class("AutoFSelector",
       store_models = FALSE,
       check_values = FALSE,
       callbacks = NULL,
-      ties_method = "least_features"
+      ties_method = "least_features",
+      id = NULL
       ) {
       ia = list()
       self$fselector = assert_r6(fselector, "FSelector")$clone()
@@ -141,8 +142,10 @@ AutoFSelector = R6Class("AutoFSelector",
       ia$ties_method = assert_choice(ties_method, c("least_features", "random"))
       self$instance_args = ia
 
+      id = assert_string(id, null.ok = TRUE) %??% paste0(learner$id, ".fselector")
+
       super$initialize(
-        id = paste0(learner$id, ".fselector"),
+        id = id,
         task_type = learner$task_type,
         packages = c("mlr3fselect", learner$packages),
         feature_types = learner$feature_types,
