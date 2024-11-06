@@ -37,6 +37,7 @@
 #' @template param_check_values
 #' @template param_callbacks
 #' @template param_ties_method
+#' @template param_id
 #'
 #' @export
 #' @examples
