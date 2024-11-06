@@ -17,7 +17,8 @@ auto_fselector(
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  ties_method = "least_features"
+  ties_method = "least_features",
+  id = NULL
 )
 }
 \arguments{
@@ -70,6 +71,9 @@ The option \code{"least_features"} (default) selects the feature set with the le
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+
+\item{id}{(\code{character(1)})\cr
+Identifier for the new instance.}
 }
 \value{
 \link{AutoFSelector}.
