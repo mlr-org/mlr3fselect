@@ -161,7 +161,8 @@ Hash (unique identifier) for this partial object, excluding some components whic
 <span>  store_models <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span></span>
+<span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span>,</span>
+<span>  id <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -229,6 +230,11 @@ The option <code>"least_features"</code> (default) selects the feature set with 
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The <code>random</code> method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.</p></dd>
+
+
+<dt><code>id</code></dt>
+<dd><p>(<code>character(1)</code>)<br>
+Identifier for the new instance.</p></dd>
 
 
 </dl><p></p></div>
