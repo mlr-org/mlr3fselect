@@ -153,7 +153,7 @@ load_callback_one_se_rule = function() {
     label = "One Standard Error Rule Callback",
     man = "mlr3fselect::mlr3fselect.one_se_rule",
 
-    on_result = function(callback, context) {
+    on_optimization_end = function(callback, context) {
       archive = context$instance$archive
       data = as.data.table(archive)
       data[, "n_features" := map(get("features"), length)]
@@ -203,7 +203,7 @@ load_callback_internal_tuning = function() {
         callback$state$internal_search_space$aggr_internal_tuned_values(internal_tuned_values)
       })
 
-        data.table::set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
+      data.table::set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
     },
 
     on_optimization_end = function(callback, context) {

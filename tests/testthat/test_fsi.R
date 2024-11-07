@@ -38,7 +38,7 @@ test_that("fsi and FSelectInstanceBatchSingleCrit are equal", {
     instance_1 = FSelectInstanceBatchSingleCrit$new(task, learner, resampling, measures, terminator, store_benchmark_result, store_models, check_values, callbacks)
     instance_2 = fsi(task, learner, resampling, measures, terminator, store_benchmark_result, store_models, check_values, callbacks)
 
-    expect_equal(instance_1, instance_2)
+    suppressWarnings(expect_equal(instance_1, instance_2))
 })
 
 test_that("fsi and FSelectInstanceBatchMultiCrit are equal", {
@@ -61,5 +61,5 @@ test_that("fsi and FSelectInstanceBatchMultiCrit are equal", {
     instance_1 = FSelectInstanceBatchMultiCrit$new(task, learner, resampling, measures, terminator, store_benchmark_result, store_models, check_values, callbacks)
     instance_2 = fsi(task, learner, resampling, measures, terminator, store_benchmark_result, store_models, check_values, callbacks)
 
-    expect_equal(instance_1, instance_2)
+    suppressWarnings(expect_equal(instance_1, instance_2))
 })

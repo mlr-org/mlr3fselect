@@ -189,6 +189,7 @@ test_that("AutoFSelector get_base_learner method works", {
 
 test_that("AutoFSelector hash works #647 in mlr3", {
   afs_1 = AutoFSelector$new(
+    id = "afs_1",
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
@@ -197,6 +198,7 @@ test_that("AutoFSelector hash works #647 in mlr3", {
     store_benchmark_result = FALSE)
 
   afs_2 = AutoFSelector$new(
+    id = "afs_2",
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),

@@ -1,8 +1,10 @@
 # mlr3fselect (development version)
 
+* compatibility: mlr3 0.22.0
+* feat: Add internal tuning callback `mlr3fselect.internal_tuning`.
+
 # mlr3fselect 1.2.0
 
-* feat: Add internal tuning callback `mlr3fselect.internal_tuning`.
 * fix: Register mlr3fselect in the `mlr_reflections$loaded_packages` field.
 
 # mlr3fselect 1.1.1
