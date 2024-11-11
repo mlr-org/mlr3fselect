@@ -66,7 +66,7 @@ ensemble_fselect = function(
   terminator,
   callbacks = NULL,
   store_benchmark_result = TRUE,
-  store_models = TRUE
+  store_models = FALSE
   ) {
   assert_task(task)
   assert_learners(as_learners(learners), task = task)
