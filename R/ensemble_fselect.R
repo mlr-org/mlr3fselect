@@ -88,22 +88,6 @@ ensemble_fselect = function(
     )
   })
 
-  # init_resampling$instantiate(task)
-  # # grid = map_dtr(seq(init_resampling$iters), function(i) {
-
-  # #   # create task and resampling for each outer iteration
-  # #   task_subset = task$clone()$filter(init_resampling$train_set(i))
-  # #   resampling = rsmp("insample")$instantiate(task_subset)
-
-  # #   data.table(
-  # #     resampling_iteration = i,
-  # #     learner_id = map_chr(learners, "id"),
-  # #     learner = afss,
-  # #     task = list(task_subset),
-  # #     resampling = list(resampling)
-  # #   )
-  # # })
-
   design = benchmark_grid(
     task = task,
     learners = afss,
