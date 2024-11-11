@@ -50,6 +50,7 @@
 #'     init_resampling = rsmp("subsampling", repeats = 2),
 #'     inner_resampling = rsmp("cv", folds = 3),
 #'     measure = msr("classif.ce"),
+#'     inner_measure = msr("classif.ce"),
 #'     terminator = trm("evals", n_evals = 10)
 #'   )
 #'   efsr
@@ -61,6 +62,7 @@ ensemble_fselect = function(
   init_resampling,
   inner_resampling,
   measure,
+  inner_measure,
   terminator,
   callbacks = NULL,
   store_benchmark_result = TRUE,
@@ -79,30 +81,34 @@ ensemble_fselect = function(
       fselector = fselector,
       learner = learner,
       resampling = inner_resampling,
-      measure = measure,
+      measure = inner_measure,
       terminator = terminator,
       store_models = store_models,
       callbacks = callbacks[[i]]
     )
   })
 
-  init_resampling$instantiate(task)
-  grid = map_dtr(seq(init_resampling$iters), function(i) {
+  # init_resampling$instantiate(task)
+  # # grid = map_dtr(seq(init_resampling$iters), function(i) {
 
-    # create task and resampling for each outer iteration
-    task_subset = task$clone()$filter(init_resampling$train_set(i))
-    resampling = rsmp("insample")$instantiate(task_subset)
+  # #   # create task and resampling for each outer iteration
+  # #   task_subset = task$clone()$filter(init_resampling$train_set(i))
+  # #   resampling = rsmp("insample")$instantiate(task_subset)
 
-    data.table(
-      resampling_iteration = i,
-      learner_id = map_chr(learners, "id"),
-      learner = afss,
-      task = list(task_subset),
-      resampling = list(resampling)
-    )
-  })
+  # #   data.table(
+  # #     resampling_iteration = i,
+  # #     learner_id = map_chr(learners, "id"),
+  # #     learner = afss,
+  # #     task = list(task_subset),
+  # #     resampling = list(resampling)
+  # #   )
+  # # })
 
-  design = grid[, c("learner", "task", "resampling"), with = FALSE]
+  design = benchmark_grid(
+    task = task,
+    learners = afss,
+    resamplings = init_resampling
+  )
 
   bmr = benchmark(design, store_models = TRUE)
 
@@ -119,13 +125,25 @@ ensemble_fselect = function(
   })
 
   # extract scores
-  scores = map_dbl(afss, function(afs) {
-    afs$fselect_instance$archive$best()[, measure$id, with = FALSE][[1]]
+  inner_scores = map_dbl(afss, function(afs) {
+    afs$fselect_instance$archive$best()[, inner_measure$id, with = FALSE][[1]]
   })
 
-  set(grid, j = "features", value = features)
-  set(grid, j = "n_features", value = n_features)
-  set(grid, j = measure$id, value = scores)
+  scores = bmr$score(measure)
+
+  set(scores, j = "features", value = features)
+  set(scores, j = "n_features", value = n_features)
+  set(scores, j = sprintf("%s_inner", inner_measure$id), value = inner_scores)
+  setnames(scores, "iteration", "resampling_iteration")
+
+  # remove R6 objects
+  set(scores, j = "learner", value = NULL)
+  set(scores, j = "task", value = NULL)
+  set(scores, j = "resampling", value = NULL)
+  set(scores, j = "prediction_test", value = NULL)
+  set(scores, j = "task_id", value = NULL)
+  set(scores, j = "nr", value = NULL)
+  set(scores, j = "resampling_id", value = NULL)
 
   # extract importance scores if RFE optimization was used
   if (class(fselector)[1] == "FSelectorBatchRFE") {
@@ -135,16 +153,12 @@ ensemble_fselect = function(
     set(grid, j = "importance", value = imp_scores)
   }
 
-  # remove R6 objects
-  set(grid, j = "learner", value = NULL)
-  set(grid, j = "task", value = NULL)
-  set(grid, j = "resampling", value = NULL)
-
   EnsembleFSResult$new(
-    result = grid,
+    result = scores,
     features = task$feature_names,
     benchmark_result = if (store_benchmark_result) bmr,
     measure_id = measure$id,
+    inner_measure_id = sprintf("%s_inner", inner_measure$id),
     minimize = measure$minimize
   )
 }

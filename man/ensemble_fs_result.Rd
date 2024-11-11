@@ -115,6 +115,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   features,
   benchmark_result = NULL,
   measure_id,
+  inner_measure_id = NULL,
   minimize = TRUE
 )}\if{html}{\out{</div>}}
 }
@@ -136,6 +137,9 @@ The benchmark result object.}
 
 \item{\code{measure_id}}{(\code{character(1)})\cr
 Column name of \code{"result"} that corresponds to the measure used.}
+
+\item{\code{inner_measure_id}}{(\code{character(1)})\cr
+Column name of \code{"result"} that corresponds to the inner measure used.}
 
 \item{\code{minimize}}{(\code{logical(1)})\cr
 If \code{TRUE} (default), lower values of the measure correspond to higher performance.}

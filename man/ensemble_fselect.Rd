@@ -27,6 +27,7 @@ ensemble_fselect(
   init_resampling,
   inner_resampling,
   measure,
+  inner_measure,
   terminator,
   callbacks = NULL,
   store_benchmark_result = TRUE,
@@ -92,6 +93,7 @@ Results are stored in an \link{EnsembleFSResult}.
     init_resampling = rsmp("subsampling", repeats = 2),
     inner_resampling = rsmp("cv", folds = 3),
     measure = msr("classif.ce"),
+    inner_measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 10)
   )
   efsr

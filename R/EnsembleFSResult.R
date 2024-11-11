@@ -71,12 +71,21 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  The benchmark result object.
     #' @param measure_id (`character(1)`)\cr
     #'  Column name of `"result"` that corresponds to the measure used.
+    #' @param inner_measure_id (`character(1)`)\cr
+    #'  Column name of `"result"` that corresponds to the inner measure used.
     #' @param minimize (`logical(1)`)\cr
     #'  If `TRUE` (default), lower values of the measure correspond to higher performance.
-    initialize = function(result, features, benchmark_result = NULL, measure_id,
-                          minimize = TRUE) {
+    initialize = function(
+      result,
+      features,
+      benchmark_result = NULL,
+      measure_id,
+      inner_measure_id = NULL,
+      minimize = TRUE
+      ) {
       assert_data_table(result)
       private$.measure_id = assert_string(measure_id, null.ok = FALSE)
+      private$.inner_measure_id = assert_string(inner_measure_id, null.ok = TRUE)
       mandatory_columns = c("resampling_iteration", "learner_id", "features", "n_features")
       assert_names(names(result), must.include = c(mandatory_columns, measure_id))
       private$.result = result
@@ -423,6 +432,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     .feature_ranking = NULL,
     .features = NULL,
     .measure_id = NULL,
+    .inner_measure_id = NULL,
     .minimize = NULL
   )
 )
