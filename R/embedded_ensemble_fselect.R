@@ -8,10 +8,10 @@
 #' Returns an [EnsembleFSResult].
 #'
 #' @details
-#' The method begins by applying an initial resampling technique specified by the user, to create **multiple subsamples** from the original dataset.
+#' The method begins by applying an initial resampling technique specified by the user, to create **multiple subsamples** from the original dataset (train/test splits).
 #' This resampling process helps in generating diverse subsets of data for robust feature selection.
 #'
-#' For each subsample generated in the previous step, the method applies learners
+#' For each subsample (train set) generated in the previous step, the method applies learners
 #' that support **embedded feature selection**.
 #' These learners are then scored on their ability to predict on the resampled
 #' test sets, storing the selected features during training, for each
@@ -63,6 +63,7 @@ embedded_ensemble_fselect = function(
   assert_learners(as_learners(learners), task = task, properties = "selected_features")
   assert_resampling(init_resampling)
   assert_choice(class(init_resampling)[1], choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
+  assert_measure(measure, task = task)
   assert_flag(store_benchmark_result)
 
   init_resampling$instantiate(task)
@@ -85,7 +86,7 @@ embedded_ensemble_fselect = function(
   # extract n_features
   n_features = map_int(features, length)
 
-  # performance scores
+  # extract scores on the test sets
   scores = bmr$score(measure)
 
   set(scores, j = "features", value = features)
@@ -100,6 +101,7 @@ embedded_ensemble_fselect = function(
   set(scores, j = "task_id", value = NULL)
   set(scores, j = "nr", value = NULL)
   set(scores, j = "resampling_id", value = NULL)
+  set(scores, j = "uhash", value = NULL)
 
   EnsembleFSResult$new(
     result = scores,

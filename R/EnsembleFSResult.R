@@ -43,8 +43,11 @@
 #'   # returns a ranking of all features
 #'   head(efsr$feature_ranking())
 #'
-#'   # returns the empirical pareto front (nfeatures vs error)
+#'   # returns the empirical pareto front, i.e. n_features vs measure (error)
 #'   efsr$pareto_front()
+#'
+#'   # returns the knee points (optimal trade-off between n_features and performance)
+#'   efsr$knee_points()
 #' }
 EnsembleFSResult = R6Class("EnsembleFSResult",
   public = list(
@@ -70,27 +73,40 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
     #'  The benchmark result object.
     #' @param measure_id (`character(1)`)\cr
-    #'  Column name of `"result"` that corresponds to the measure used.
+    #'  Column name of `"result"` that corresponds to the measure used to score
+    #'  the learners on the test sets generated during the ensemble feature selection process.
     #' @param inner_measure_id (`character(1)`)\cr
-    #'  Column name of `"result"` that corresponds to the inner measure used.
+    #'  Column name of `"result"` that corresponds to the inner measure used to score
+    #'  the learners on the train sets generated during the ensemble feature selection process.
+    #' @param use_inner_measure (`logical(1)`)\cr
+    #'  Specifies which is the active measure that will be used for subsequent
+    #'  methods such as `feature_ranking()`, `pareto_front()` and `knee_points()`.
+    #'  Default is `FALSE` and the `measure_id` is used to specify the measure.
+    #'  Otherwise, if `TRUE`, the `inner_measure_id` is used.
     #' @param minimize (`logical(1)`)\cr
-    #'  If `TRUE` (default), lower values of the measure correspond to higher performance.
+    #'  If `TRUE` (default), lower values of the active measure correspond to higher performance.
     initialize = function(
       result,
       features,
       benchmark_result = NULL,
       measure_id,
       inner_measure_id = NULL,
+      use_inner_measure = FALSE,
       minimize = TRUE
       ) {
       assert_data_table(result)
+      assert_flag(use_inner_measure)
       private$.measure_id = assert_string(measure_id, null.ok = FALSE)
-      private$.inner_measure_id = assert_string(inner_measure_id, null.ok = TRUE)
-      mandatory_columns = c("resampling_iteration", "learner_id", "features", "n_features")
-      assert_names(names(result), must.include = c(mandatory_columns, measure_id))
+      private$.inner_measure_id = assert_string(inner_measure_id, null.ok = !use_inner_measure)
+      # which measure to use
+      private$.active_measure_id = ifelse(use_inner_measure, inner_measure_id, measure_id)
+      # the non-NULL measure ids should be defined as columns in the dt result
+      mandatory_columns = c("resampling_iteration", "learner_id", "features",
+                            "n_features", private$.measure_id, private$.inner_measure_id)
+      assert_names(names(result), must.include = mandatory_columns)
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
-      private$.minimize = assert_logical(minimize, null.ok = FALSE)
+      private$.minimize = assert_flag(minimize, null.ok = FALSE)
 
       # check that all feature sets are subsets of the task features
       assert_subset(unlist(result$features), private$.features)
@@ -121,6 +137,24 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' Opens the corresponding help page referenced by field `$man`.
     help = function() {
       open_help(self$man)
+    },
+
+    #' @description
+    #' Use this function to change the active measure id.
+    #'
+    #' @param measure_id (`character(1)`)\cr
+    #'  Measure id to use in the methods of this class.
+    #'  Should be either the `measure_id` or the `inner_measure_id` value
+    #'  defined during initialization.
+    #' @param minimize (`logical(1)`)\cr
+    #'  If `TRUE`, lower values of the measure correspond to higher performance.
+    #'  This must be set explicitly by the user, so that it matches the corresponding
+    #'  `measure_id`.
+    set_active_measure = function(measure_id, minimize) {
+      private$.active_measure_id = assert_choice(measure_id,
+        choices = c(private$.measure_id, private$.inner_measure_id)
+      )
+      private$.minimize = assert_flag(minimize, null.ok = FALSE)
     },
 
     #' @description
@@ -186,7 +220,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       use_weights = grepl(pattern = "weighted", x = method)
       if (use_weights) {
         # voter weights are the (inverse) scores
-        scores = private$.result[, get(private$.measure_id)]
+        scores = private$.result[, get(private$.active_measure_id)]
         weights = if (private$.minimize) 1 / scores else scores
       } else {
         # all voters are equal
@@ -284,7 +318,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     pareto_front = function(type = "empirical") {
       assert_choice(type, choices =  c("empirical", "estimated"))
       result = private$.result
-      measure_id = private$.measure_id
+      measure_id = private$.active_measure_id
       minimize = private$.minimize
 
       # Keep only n_features and performance scores
@@ -362,7 +396,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     knee_points = function(method = "NBI", type = "empirical") {
       assert_choice(method, choices = c("NBI"))
       assert_choice(type, choices = c("empirical", "estimated"))
-      measure_id = private$.measure_id
+      measure_id = private$.active_measure_id
       minimize = private$.minimize
 
       pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
@@ -411,10 +445,17 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @field measure (`character(1)`)\cr
-    #' Returns the measure id used in the ensemble feature selection.
+    #' Returns the active measure id.
     measure = function(rhs) {
       assert_ro_binding(rhs)
-      private$.measure_id
+      private$.active_measure_id
+    },
+
+    #' @field minimize (`character(1)`)\cr
+    #' Returns the value of the public field `minimize` of the active measure.
+    minimize = function(rhs) {
+      assert_ro_binding(rhs)
+      private$.minimize
     },
 
     #' @field n_resamples (`character(1)`)\cr
@@ -433,6 +474,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     .features = NULL,
     .measure_id = NULL,
     .inner_measure_id = NULL,
+    .active_measure_id = NULL,
     .minimize = NULL
   )
 )
