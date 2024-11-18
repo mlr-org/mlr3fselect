@@ -55,10 +55,10 @@ The ensemble feature selection method is designed to identify the most informati
 Returns an \link{EnsembleFSResult}.
 }
 \details{
-The method begins by applying an initial resampling technique specified by the user, to create \strong{multiple subsamples} from the original dataset.
+The method begins by applying an initial resampling technique specified by the user, to create \strong{multiple subsamples} from the original dataset (train/test splits).
 This resampling process helps in generating diverse subsets of data for robust feature selection.
 
-For each subsample generated in the previous step, the method applies learners
+For each subsample (train set) generated in the previous step, the method applies learners
 that support \strong{embedded feature selection}.
 These learners are then scored on their ability to predict on the resampled
 test sets, storing the selected features during training, for each

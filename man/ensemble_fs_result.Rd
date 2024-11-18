@@ -47,8 +47,11 @@ Whether to add the learner, task and resampling information from the benchmark r
   # returns a ranking of all features
   head(efsr$feature_ranking())
 
-  # returns the empirical pareto front (nfeatures vs error)
+  # returns the empirical pareto front, i.e. n_features vs measure (error)
   efsr$pareto_front()
+
+  # returns the knee points (optimal trade-off between n_features and performance)
+  efsr$knee_points()
 }
 }
 \references{
@@ -83,7 +86,10 @@ Returns the result of the ensemble feature selection.}
 Returns the number of learners used in the ensemble feature selection.}
 
 \item{\code{measure}}{(\code{character(1)})\cr
-Returns the measure id used in the ensemble feature selection.}
+Returns the active measure id.}
+
+\item{\code{minimize}}{(\code{character(1)})\cr
+Returns the value of the public field \code{minimize} of the active measure.}
 
 \item{\code{n_resamples}}{(\code{character(1)})\cr
 Returns the number of times the task was initially resampled in the ensemble feature selection.}
@@ -97,6 +103,7 @@ Returns the number of times the task was initially resampled in the ensemble fea
 \item \href{#method-EnsembleFSResult-format}{\code{EnsembleFSResult$format()}}
 \item \href{#method-EnsembleFSResult-print}{\code{EnsembleFSResult$print()}}
 \item \href{#method-EnsembleFSResult-help}{\code{EnsembleFSResult$help()}}
+\item \href{#method-EnsembleFSResult-set_active_measure}{\code{EnsembleFSResult$set_active_measure()}}
 \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
 \item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
 \item \href{#method-EnsembleFSResult-pareto_front}{\code{EnsembleFSResult$pareto_front()}}
@@ -116,6 +123,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   benchmark_result = NULL,
   measure_id,
   inner_measure_id = NULL,
+  use_inner_measure = FALSE,
   minimize = TRUE
 )}\if{html}{\out{</div>}}
 }
@@ -136,13 +144,21 @@ selection.}
 The benchmark result object.}
 
 \item{\code{measure_id}}{(\code{character(1)})\cr
-Column name of \code{"result"} that corresponds to the measure used.}
+Column name of \code{"result"} that corresponds to the measure used to score
+the learners on the test sets generated during the ensemble feature selection process.}
 
 \item{\code{inner_measure_id}}{(\code{character(1)})\cr
-Column name of \code{"result"} that corresponds to the inner measure used.}
+Column name of \code{"result"} that corresponds to the inner measure used to score
+the learners on the train sets generated during the ensemble feature selection process.}
+
+\item{\code{use_inner_measure}}{(\code{logical(1)})\cr
+Specifies which is the active measure that will be used for subsequent
+methods such as \code{feature_ranking()}, \code{pareto_front()} and \code{knee_points()}.
+Default is \code{FALSE} and the \code{measure_id} is used to specify the measure.
+Otherwise, if \code{TRUE}, the \code{inner_measure_id} is used.}
 
 \item{\code{minimize}}{(\code{logical(1)})\cr
-If \code{TRUE} (default), lower values of the measure correspond to higher performance.}
+If \code{TRUE} (default), lower values of the active measure correspond to higher performance.}
 }
 \if{html}{\out{</div>}}
 }
@@ -190,6 +206,31 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$help()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-set_active_measure"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-set_active_measure}{}}}
+\subsection{Method \code{set_active_measure()}}{
+Use this function to change the active measure id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$set_active_measure(measure_id, minimize)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{measure_id}}{(\code{character(1)})\cr
+Measure id to use in the methods of this class.
+Should be either the \code{measure_id} or the \code{inner_measure_id} value
+defined during initialization.}
+
+\item{\code{minimize}}{(\code{logical(1)})\cr
+If \code{TRUE}, lower values of the measure correspond to higher performance.
+This must be set explicitly by the user, so that it matches the corresponding
+\code{measure_id}.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-feature_ranking"></a>}}
