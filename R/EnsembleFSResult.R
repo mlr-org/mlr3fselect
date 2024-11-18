@@ -27,7 +27,8 @@
 #'     learners = lrns(c("classif.rpart", "classif.featureless")),
 #'     init_resampling = rsmp("subsampling", repeats = 2),
 #'     inner_resampling = rsmp("cv", folds = 3),
-#'     measure = msr("classif.ce"),
+#'     inner_measure = msr("classif.ce"),
+#'     measure = msr("classif.acc"),
 #'     terminator = trm("none")
 #'   )
 #'
