@@ -105,7 +105,7 @@ ensemble_fselect = function(
   })
 
   design = benchmark_grid(
-    task = task,
+    tasks = task,
     learners = afss,
     resamplings = init_resampling
   )

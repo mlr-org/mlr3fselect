@@ -69,7 +69,7 @@ embedded_ensemble_fselect = function(
   init_resampling$instantiate(task)
 
   design = benchmark_grid(
-    task = task,
+    tasks = task,
     learners = learners,
     resamplings = init_resampling
   )
