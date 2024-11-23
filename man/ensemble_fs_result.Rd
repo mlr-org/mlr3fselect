@@ -237,20 +237,42 @@ This must be set explicitly by the user, so that it matches the corresponding
 \if{html}{\out{<a id="method-EnsembleFSResult-feature_ranking"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-feature_ranking}{}}}
 \subsection{Method \code{feature_ranking()}}{
-Calculates the feature ranking.
+Calculates the feature ranking via \code{\link[fastVoteR:rank_candidates]{fastVoteR::rank_candidates()}}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "av", committee_size = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(
+  method = "av",
+  use_weights = TRUE,
+  committee_size = NULL,
+  shuffle_features = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{method}}{(\code{character(1)})\cr
-The method to calculate the feature ranking.}
+The method to calculate the feature ranking. See \code{\link[fastVoteR:rank_candidates]{fastVoteR::rank_candidates()}}
+for a complete list of available methods.
+Approval voting (\code{"av"}) is the default method.}
+
+\item{\code{use_weights}}{(\code{logical(1)})\cr
+The default value (\code{TRUE}) uses weights equal to the performance scores
+of each voter/model (or the inverse scores if the measure is minimized).
+If \code{FALSE}, we treat all voters as equal and assign them all a weight equal to 1.}
 
 \item{\code{committee_size}}{(\code{integer(1)})\cr
 Number of top selected features in the output ranking.
-This parameter can be used to speed-up methods that build a committee sequentially (\code{"seq_pav"}), by requesting only the top N selected candidates/features and not the complete feature ranking.}
+This parameter can be used to speed-up methods that build a committee sequentially
+(\code{"seq_pav"}), by requesting only the top N selected candidates/features
+and not the complete feature ranking.}
+
+\item{\code{shuffle_features}}{(\code{logical(1)})\cr
+Whether to shuffle the task features randomly before computing the ranking.
+Shuffling ensures consistent random tie-breaking across methods and prevents
+deterministic biases when features with equal scores are encountered.
+Default is \code{TRUE} and it's advised to set a seed before running this function.
+Set to \code{FALSE} if deterministic ordering of features is preferred (same as
+during initialization).}
 }
 \if{html}{\out{</div>}}
 }
@@ -259,38 +281,22 @@ The feature ranking process is built on the following framework: models act as \
 The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
 
 For every feature a score is calculated, which depends on the \code{"method"} argument.
-The higher the score, the higher the rank of the feature.
-Most methods have a \code{"*_weighted"} version that outputs a weighted score.
-The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
-The un-weighted methods use same weights for all voters (equal to 1).
+The higher the score, the higher the ranking of the feature.
+Note that some methods output a feature ranking instead of a score per feature, so we always include \strong{Borda's score}, which is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
 
-Note that some methods output a feature ranking instead of a score per feature.
-Therefore we also calculate \strong{Borda's score}:
-\eqn{s_{borda} = (p-i)/(p-1)}, where \eqn{p} is the total number of features, and \eqn{i} is the feature ranking.
-So the best feature gets a borda score of \eqn{1} and the worst-ranked feature a borda score of \eqn{0}.
-This score is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
-
-We randomly shuffle the input candidates/features so that we enforce the same tie-breaking mechanism for all available methods.
-Users should use the same \code{seed} for consistent comparison between the different feature ranking methods and for reproducibility.
-
-The following methods are currently supported:
-\itemize{
-\item \code{"av"|"av_weighted"} (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
-This is the default feature ranking method.
-\item \code{"sav"|"sav_weighted"} (satisfaction approval voting) selects the candidates that have a higher satisfaction score, in proportion to the size of the voters approval sets.
-Voters who approve more candidates contribute a lesser score to the individual approved candidates.
-\item \code{"seq_pav"|"seq_pav_weighted"} (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
-The \strong{PAV score} (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
-\item \code{"seq_phragmen"|"seq_phragmen_weighted"} (sequential Phragmen's rule) distributes "loads" equally among voters for each candidate added to the committee.
-The rule iteratively selects the candidate that results in the smallest increase in voter load.
-This approach is suitable for scenarios where a balanced representation is desired, as it seeks to evenly distribute the "burden" of representation among all voters.
-}
+We shuffle the input candidates/features so that we enforce random tie-breaking.
+Users should set the same \code{seed} for consistent comparison between the different feature ranking methods and for reproducibility.
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{"method"}).
-An extra column \code{"norm_score"} is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as \strong{selection probabilities}, see Meinshausen et al. (2010).
-The \code{"borda_score"} column is always included to incorporate feature ranking methods that don't output per-feature scores but only rankings.
+A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{"method"}). Columns are as follows:
+\itemize{
+\item \code{"feature"}: Feature names.
+\item \code{"score"}: Scores assigned to each feature based on the selected method (if applicable).
+\item \code{"norm_score"}: Normalized scores (if applicable), scaled to the range \eqn{[0,1]}, which can be loosely interpreted as \strong{selection probabilities} (Meinshausen et al. (2010)).
+\item \code{"borda_score"}: Borda scores for method-agnostic comparison, ranging in \eqn{[0,1]}, where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
+This column is always included to incorporate feature ranking methods that output only rankings.
+}
 }
 }
 \if{html}{\out{<hr>}}

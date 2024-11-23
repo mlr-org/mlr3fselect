@@ -159,66 +159,55 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @description
-    #' Calculates the feature ranking.
+    #' Calculates the feature ranking via [fastVoteR::rank_candidates()].
     #'
     #' @details
     #' The feature ranking process is built on the following framework: models act as *voters*, features act as *candidates*, and voters select certain candidates (features).
     #' The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
     #'
     #' For every feature a score is calculated, which depends on the `"method"` argument.
-    #' The higher the score, the higher the rank of the feature.
-    #' Most methods have a `"*_weighted"` version that outputs a weighted score.
-    #' The weights used are equal to the performance scores of each voter/model (or the inverse scores if the measure is minimized).
-    #' The un-weighted methods use same weights for all voters (equal to 1).
+    #' The higher the score, the higher the ranking of the feature.
+    #' Note that some methods output a feature ranking instead of a score per feature, so we always include **Borda's score**, which is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
     #'
-    #' Note that some methods output a feature ranking instead of a score per feature.
-    #' Therefore we also calculate **Borda's score**:
-    #' \eqn{s_{borda} = (p-i)/(p-1)}, where \eqn{p} is the total number of features, and \eqn{i} is the feature ranking.
-    #' So the best feature gets a borda score of \eqn{1} and the worst-ranked feature a borda score of \eqn{0}.
-    #' This score is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
-    #'
-    #' We randomly shuffle the input candidates/features so that we enforce the same tie-breaking mechanism for all available methods.
-    #' Users should use the same `seed` for consistent comparison between the different feature ranking methods and for reproducibility.
-    #'
-    #' The following methods are currently supported:
-    #'
-    #' - `"av"|"av_weighted"` (approval voting) selects the candidates that have the highest approval score, i.e. the features that appear the most often.
-    #' This is the default feature ranking method.
-    #' - `"sav"|"sav_weighted"` (satisfaction approval voting) selects the candidates that have a higher satisfaction score, in proportion to the size of the voters approval sets.
-    #' Voters who approve more candidates contribute a lesser score to the individual approved candidates.
-    #' - `"seq_pav"|"seq_pav_weighted"` (sequential proportional approval voting) sequentially builds a committee by iteratively selecting the candidate that maximizes the PAV score when added, ensuring proportional representation.
-    #' The **PAV score** (Proportional Approval Voting score) is a metric that calculates the weighted sum of harmonic numbers corresponding to the number of elected candidates supported by each voter, reflecting the overall satisfaction of voters in a committee selection process.
-    #' - `"seq_phragmen"|"seq_phragmen_weighted"` (sequential Phragmen's rule) distributes "loads" equally among voters for each candidate added to the committee.
-    #' The rule iteratively selects the candidate that results in the smallest increase in voter load.
-    #' This approach is suitable for scenarios where a balanced representation is desired, as it seeks to evenly distribute the "burden" of representation among all voters.
+    #' We shuffle the input candidates/features so that we enforce random tie-breaking.
+    #' Users should set the same `seed` for consistent comparison between the different feature ranking methods and for reproducibility.
     #'
     #' @param method (`character(1)`)\cr
-    #' The method to calculate the feature ranking.
+    #' The method to calculate the feature ranking. See [fastVoteR::rank_candidates()]
+    #' for a complete list of available methods.
+    #' Approval voting (`"av"`) is the default method.
+    #' @param use_weights (`logical(1)`)\cr
+    #' The default value (`TRUE`) uses weights equal to the performance scores
+    #' of each voter/model (or the inverse scores if the measure is minimized).
+    #' If `FALSE`, we treat all voters as equal and assign them all a weight equal to 1.
     #' @param committee_size (`integer(1)`)\cr
     #' Number of top selected features in the output ranking.
-    #' This parameter can be used to speed-up methods that build a committee sequentially (`"seq_pav"`), by requesting only the top N selected candidates/features and not the complete feature ranking.
+    #' This parameter can be used to speed-up methods that build a committee sequentially
+    #' (`"seq_pav"`), by requesting only the top N selected candidates/features
+    #' and not the complete feature ranking.
+    #' @param shuffle_features (`logical(1)`)\cr
+    #' Whether to shuffle the task features randomly before computing the ranking.
+    #' Shuffling ensures consistent random tie-breaking across methods and prevents
+    #' deterministic biases when features with equal scores are encountered.
+    #' Default is `TRUE` and it's advised to set a seed before running this function.
+    #' Set to `FALSE` if deterministic ordering of features is preferred (same as
+    #' during initialization).
     #'
-    #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `"method"`).
-    #' An extra column `"norm_score"` is produced for methods for which the original scores (i.e. approval counts in the case of approval voting) can be normalized and interpreted as **selection probabilities**, see Meinshausen et al. (2010).
-    #' The `"borda_score"` column is always included to incorporate feature ranking methods that don't output per-feature scores but only rankings.
+    #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `"method"`). Columns are as follows:
+    #' - `"feature"`: Feature names.
+    #' - `"score"`: Scores assigned to each feature based on the selected method (if applicable).
+    #' - `"norm_score"`: Normalized scores (if applicable), scaled to the range \eqn{[0,1]}, which can be loosely interpreted as **selection probabilities** (Meinshausen et al. (2010)).
+    #' - `"borda_score"`: Borda scores for method-agnostic comparison, ranging in \eqn{[0,1]}, where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
+    #' This column is always included to incorporate feature ranking methods that output only rankings.
     #'
-    feature_ranking = function(method = "av", committee_size = NULL) {
-      assert_choice(method, choices = c("av", "av_weighted", "sav", "sav_weighted",
-                                        "seq_pav", "seq_pav_weighted", "seq_phragmen",
-                                        "seq_phragmen_weighted"))
-      assert_int(committee_size, lower = 1, null.ok = TRUE)
-
-      # cached results
-      if (!is.null(private$.feature_ranking[[method]])) {
-        return(private$.feature_ranking[[method]])
-      }
+    feature_ranking = function(method = "av", use_weights = TRUE, committee_size = NULL, shuffle_features = TRUE) {
+      requireNamespace("fastVoteR")
 
       # candidates => all features, voters => list of selected (best) features sets
       candidates = private$.features
       voters = private$.result$features
 
       # calculate weights
-      use_weights = grepl(pattern = "weighted", x = method)
       if (use_weights) {
         # voter weights are the (inverse) scores
         scores = private$.result[, get(private$.active_measure_id)]
@@ -228,22 +217,20 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         weights = rep(1, length(voters))
       }
 
-      # shuffle candidates (force same tie-breaking between methods)
-      candidates = sample(candidates)
+      # get consensus feature ranking
+      res = fastVoteR::rank_candidates(
+        voters = voters,
+        candidates = candidates,
+        weights = weights,
+        committee_size = committee_size,
+        method = method,
+        borda_score = TRUE,
+        shuffle_candidates = shuffle_features
+      )
 
-      # calculate scores
-      if (startsWith(method, "av")) {
-        res = approval_voting(voters, candidates, weights)
-      } else if (startsWith(method, "sav")) {
-        res = satisfaction_approval_voting(voters, candidates, weights)
-      } else if (startsWith(method, "seq_pav")) {
-        res = seq_proportional_approval_voting(voters, candidates, weights, committee_size)
-      } else if (startsWith(method, "seq_phragmen")) {
-        res = seq_phragmen_rule(voters, candidates, weights, committee_size)
-      }
+      setnames(res, "candidate", "feature")
 
-      private$.feature_ranking[[method]] = res
-      private$.feature_ranking[[method]]
+      res
     },
 
     #' @description
@@ -471,7 +458,6 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     .result = NULL, # with no R6 classes
     .stability_global = NULL,
     .stability_learner = NULL,
-    .feature_ranking = NULL,
     .features = NULL,
     .measure_id = NULL,
     .inner_measure_id = NULL,
@@ -481,6 +467,6 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 )
 
 #' @export
-as.data.table.EnsembleFSResult = function(x,  ...) {
+as.data.table.EnsembleFSResult = function(x, ...) {
   x$result
 }

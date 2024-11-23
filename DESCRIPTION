@@ -34,7 +34,6 @@ Imports:
     mlr3misc (>= 0.15.1),
     paradox (>= 1.0.0),
     R6,
-    Rcpp,
     stabm
 Suggests:
     e1071,
@@ -42,7 +41,10 @@ Suggests:
     mlr3learners,
     mlr3pipelines,
     rpart,
+    fastVoteR,
     testthat (>= 3.0.0)
+Remotes:
+    bblodfon/fastVoteR
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
@@ -72,7 +74,6 @@ Collate:
     'FSelectorBatchShadowVariableSearch.R'
     'ObjectiveFSelect.R'
     'ObjectiveFSelectBatch.R'
-    'RcppExports.R'
     'assertions.R'
     'auto_fselector.R'
     'bibentries.R'
@@ -86,7 +87,4 @@ Collate:
     'mlr_callbacks.R'
     'reexports.R'
     'sugar.R'
-    'voting_methods.R'
     'zzz.R'
-LinkingTo: 
-    Rcpp

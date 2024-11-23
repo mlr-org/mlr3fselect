@@ -7,14 +7,6 @@
 #' @importFrom R6 R6Class
 #' @importFrom utils combn head packageVersion
 #' @importFrom stats sd
-## usethis namespace: start
-#' @importFrom Rcpp sourceCpp
-## usethis namespace: end
-NULL
-
-## usethis namespace: start
-#' @useDynLib mlr3fselect, .registration = TRUE
-## usethis namespace: end
 "_PACKAGE"
 
 .onLoad = function(libname, pkgname) {
