@@ -197,7 +197,7 @@ test_that("EnsembleFSResult initialization", {
 test_that("different callbacks can be set", {
   callback_test = callback_batch_fselect("mlr3fselect.test",
     on_eval_before_archive = function(callback, context) {
-      context$aggregated_performance[, callback_active := context$instance$objective$learner$id == "classif.rpart.fselector"]
+      context$aggregated_performance[, callback_active := context$instance$objective$learner$id == "classif.rpart"]
     }
   )
 
@@ -210,9 +210,9 @@ test_that("different callbacks can be set", {
     inner_measure = msr("classif.ce"),
     measure = msr("classif.acc"),
     terminator = trm("none"),
-    callbacks = list(list(callback_test), list())
+    callbacks = list("classif.rpart" = callback_test)
   )
 
   expect_true(all(efsr$benchmark_result$score()$learner[[1]]$fselect_instance$archive$data$callback_active))
-  expect_null(efsr$benchmark_result$score()$learner[[2]]$fselect_instance$archive$data$callback_active)
+  expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
 })

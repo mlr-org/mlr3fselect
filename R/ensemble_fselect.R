@@ -40,9 +40,9 @@
 #'  Whether to store the benchmark result in [EnsembleFSResult] or not.
 #' @param store_models (`logical(1)`)\cr
 #'  Whether to store models in [auto_fselector] or not.
-#' @param callbacks (list of lists of [CallbackBatchFSelect])\cr
+#' @param callbacks (Named list of lists of [CallbackBatchFSelect])\cr
 #'  Callbacks to be used for each learner.
-#'  The lists must have the same length as the number of learners.
+#'  The lists must be named by the learner ids.
 #'
 #' @template param_fselector
 #' @template param_task
@@ -87,12 +87,13 @@ ensemble_fselect = function(
   assert_resampling(inner_resampling)
   assert_measure(inner_measure, task = task)
   assert_measure(measure, task = task)
-  assert_list(callbacks, types = "list", len = length(learners), null.ok = TRUE)
+  callbacks = map(callbacks, function(callbacks) assert_callbacks(as_callbacks(callbacks)))
+  if (length(callbacks)) assert_names(names(callbacks), subset.of = map_chr(learners, "id"))
   assert_flag(store_benchmark_result)
   assert_flag(store_models)
 
   # create auto_fselector for each learner
-  afss = imap(unname(learners), function(learner, i) {
+  afss = map(learners, function(learner) {
     auto_fselector(
       fselector = fselector,
       learner = learner,
@@ -100,7 +101,7 @@ ensemble_fselect = function(
       measure = inner_measure,
       terminator = terminator,
       store_models = store_models,
-      callbacks = callbacks[[i]]
+      callbacks = callbacks[[learner$id]]
     )
   })
 
