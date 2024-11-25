@@ -32,11 +32,6 @@ test_that("efs works", {
   expect_numeric(stability, len = 2)
   expect_equal(names(stability), c("classif.rpart.fselector", "classif.featureless.fselector"))
 
-  # default feature ranking
-  feature_ranking = efsr$feature_ranking()
-  expect_data_table(feature_ranking, nrows = length(task$feature_names))
-  expect_equal(names(feature_ranking), c("feature", "score", "norm_score", "borda_score"))
-
   # pareto_front
   pf = efsr$pareto_front()
   expect_data_table(pf, nrows = 2)
@@ -69,6 +64,12 @@ test_that("efs works", {
   expect_true(efsr$minimize) # classification error
   pf2 = efsr$pareto_front()
   expect_data_table(pf2, nrows = 3) # pareto front has changed
+
+  # default feature ranking
+  skip_if_not_installed("fastVoteR")
+  feature_ranking = efsr$feature_ranking()
+  expect_data_table(feature_ranking, nrows = length(task$feature_names))
+  expect_equal(names(feature_ranking), c("feature", "score", "norm_score", "borda_score"))
 })
 
 test_that("efs works with rfe", {
@@ -110,11 +111,6 @@ test_that("efs works with rfe", {
   expect_numeric(stability, len = 2)
   expect_equal(names(stability), c("classif.rpart.fselector", "classif.featureless.fselector"))
 
-  # default feature ranking
-  feature_ranking = efsr$feature_ranking()
-  expect_data_table(feature_ranking, nrows = length(task$feature_names))
-  expect_equal(names(feature_ranking), c("feature", "score", "norm_score", "borda_score"))
-
   # pareto_front
   pf = efsr$pareto_front()
   expect_data_table(pf, nrows = 4)
@@ -133,6 +129,12 @@ test_that("efs works with rfe", {
   expect_equal(names(tab), c("learner_id", "resampling_iteration", "classif.acc",
                              "features", "n_features", "classif.ce_inner",
                              "importance", "task", "learner", "resampling"))
+
+  # default feature ranking
+  skip_if_not_installed("fastVoteR")
+  feature_ranking = efsr$feature_ranking()
+  expect_data_table(feature_ranking, nrows = length(task$feature_names))
+  expect_equal(names(feature_ranking), c("feature", "score", "norm_score", "borda_score"))
 })
 
 test_that("EnsembleFSResult initialization", {
