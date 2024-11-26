@@ -463,6 +463,18 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       }
     },
 
+    #' @field active_measure (`character(1)`)\cr
+    #' Specifies the type of the active measure.
+    #' Can be one of the two:
+    #'
+    #' - `"outer"`: measure used in the test sets of the ensemble feature
+    #' selection process.
+    #' - `"inner"`: measure used for optimization and scoring the train sets.
+    active_measure = function(rhs) {
+      assert_ro_binding(rhs)
+      private$.active_measure
+    },
+
     #' @field n_resamples (`character(1)`)\cr
     #' Returns the number of times the task was initially resampled in the ensemble feature selection.
     n_resamples = function(rhs) {

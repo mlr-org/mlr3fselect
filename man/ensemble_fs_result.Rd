@@ -95,6 +95,15 @@ Returns the number of learners used in the ensemble feature selection.}
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Returns the active measure to use in methods of this object.}
 
+\item{\code{active_measure}}{(\code{character(1)})\cr
+Specifies the type of the active measure.
+Can be one of the two:
+\itemize{
+\item \code{"outer"}: measure used in the test sets of the ensemble feature
+selection process.
+\item \code{"inner"}: measure used for optimization and scoring the train sets.
+}}
+
 \item{\code{n_resamples}}{(\code{character(1)})\cr
 Returns the number of times the task was initially resampled in the ensemble feature selection.}
 }

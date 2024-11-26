@@ -23,6 +23,7 @@ test_that("efs works", {
   expect_measure(efsr$measure)
   expect_equal(efsr$measure$id, "classif.ce")
   expect_true(efsr$measure$minimize) # classification error
+  expect_equal(efsr$active_measure, "outer")
   expect_equal(efsr$n_learners, 2)
   expect_equal(efsr$n_resamples, 2)
 
@@ -62,6 +63,7 @@ test_that("efs works", {
   efsr$set_active_measure(which = "inner")
   expect_measure(efsr$measure)
   expect_equal(efsr$measure$id, "classif.ce") # classification error also used for inner measure
+  expect_equal(efsr$active_measure, "inner")
   pf_inner = efsr$pareto_front()
   expect_data_table(pf_inner, nrows = 3) # pareto front has changed
   expect_equal(names(pf_inner), c("n_features", "classif.ce_inner"))
@@ -71,6 +73,7 @@ test_that("efs works", {
   expect_equal(names(kps_inner), c("n_features", "classif.ce_inner"))
   # change to use outer measure again
   efsr$set_active_measure(which = "outer")
+  expect_equal(efsr$active_measure, "outer")
   pf_outer = efsr$pareto_front()
   expect_equal(pf_outer, pf) # same measure, same pareto front
 
@@ -107,6 +110,7 @@ test_that("efs works with rfe", {
   expect_measure(efsr$measure)
   expect_equal(efsr$measure$id, "classif.acc")
   expect_false(efsr$measure$minimize) # accuracy
+  expect_equal(efsr$active_measure, "outer")
   expect_equal(efsr$n_learners, 2)
   expect_equal(efsr$n_resamples, 2)
 
@@ -115,6 +119,7 @@ test_that("efs works with rfe", {
   expect_measure(efsr$measure)
   expect_equal(efsr$measure$id, "classif.ce") # no `_inner` end-fix here
   expect_true(efsr$measure$minimize) # classification error
+  expect_equal(efsr$active_measure, "inner")
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -137,6 +142,7 @@ test_that("efs works with rfe", {
 
   # change measure back to "outer"
   efsr$set_active_measure(which = "outer")
+  expect_equal(efsr$active_measure, "outer")
   pf_outer = efsr$pareto_front() # pareto front has used the accuracy measure
   expect_equal(names(pf_outer), c("n_features", "classif.acc"))
 
@@ -200,13 +206,14 @@ test_that("EnsembleFSResult initialization", {
   expect_measure(efsr$measure)
   expect_equal(efsr$measure$id, "classif.ce")
   expect_true(efsr$measure$minimize)
+  expect_equal(efsr$active_measure, "outer")
   tab = as.data.table(efsr)
   expect_data_table(tab)
   expect_equal(names(tab), c("resampling_iteration", "learner_id", "n_features",
                              "features", "classif.ce", "classif.acc_inner"))
   # change active measure
   efsr$set_active_measure(which = "inner")
-  expect_equal(efsr$.__enclos_env__$private$.active_measure, "inner")
+  expect_equal(efsr$active_measure, "inner")
   expect_measure(efsr$measure)
   expect_equal(efsr$measure$id, "classif.acc")
   expect_false(efsr$measure$minimize)
