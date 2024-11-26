@@ -91,7 +91,7 @@ The final models are then scored on their ability to predict on the resampled te
 
 Results are stored in an \link{EnsembleFSResult}.
 
-The scores on the train sets using the models with the best feature subsets are also stored in the result, with a column name \verb{<measure_id>_inner}.
+The scores on the train sets using the models with the best feature subsets are also stored in the result, with a column name \verb{\{measure_id\}_inner}.
 We note that the \strong{active measure} of performance is the one used on the test sets.
 This is a better choice as the scores on the train sets using the final models are most likely overestimated.
 The user can change the active measure via the \code{set_active_measure()} method of the \link{EnsembleFSResult}.

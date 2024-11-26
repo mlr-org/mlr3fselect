@@ -107,7 +107,6 @@ embedded_ensemble_fselect = function(
     result = scores,
     features = task$feature_names,
     benchmark_result = if (store_benchmark_result) bmr,
-    measure_id = measure$id,
-    minimize = measure$minimize
+    measure = measure
   )
 }

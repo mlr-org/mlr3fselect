@@ -53,6 +53,12 @@ Whether to add the learner, task and resampling information from the benchmark r
 
   # returns the knee points (optimal trade-off between n_features and performance)
   efsr$knee_points()
+
+  # change to use the inner optimization measure
+  efsr$set_active_measure(which = "inner")
+
+  # Pareto front is calculated on the inner measure
+  efsr$pareto_front()
 }
 }
 \references{
@@ -86,11 +92,8 @@ Returns the result of the ensemble feature selection.}
 \item{\code{n_learners}}{(\code{numeric(1)})\cr
 Returns the number of learners used in the ensemble feature selection.}
 
-\item{\code{measure}}{(\code{character(1)})\cr
-Returns the active measure id.}
-
-\item{\code{minimize}}{(\code{character(1)})\cr
-Returns the value of the public field \code{minimize} of the active measure.}
+\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+Returns the active measure to use in methods of this object.}
 
 \item{\code{n_resamples}}{(\code{character(1)})\cr
 Returns the number of times the task was initially resampled in the ensemble feature selection.}
@@ -122,10 +125,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   result,
   features,
   benchmark_result = NULL,
-  measure_id,
-  inner_measure_id = NULL,
-  use_inner_measure = FALSE,
-  minimize = TRUE
+  measure,
+  inner_measure = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -134,8 +135,13 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \describe{
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 The result of the ensemble feature selection.
-Column names should include \code{"resampling_iteration"}, \code{"learner_id"}, \code{"features"}
-and \code{"n_features"}.}
+Mandatory column names should include \code{"resampling_iteration"}, \code{"learner_id"},
+\code{"features"} and \code{"n_features"}.
+A column named as \code{{measure$id}} (scores on the test sets) must also be
+always present.
+The column with the \code{{inner_measure$id}} (scores on the train sets) is not mandatory,
+but note that it should be named as \verb{\{inner_measure$id\}_inner} to distinguish from
+the \code{{measure$id}}.}
 
 \item{\code{features}}{(\code{\link[=character]{character()}})\cr
 The vector of features of the task that was used in the ensemble feature
@@ -144,22 +150,15 @@ selection.}
 \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result object.}
 
-\item{\code{measure_id}}{(\code{character(1)})\cr
-Column name of \code{"result"} that corresponds to the measure used to score
-the learners on the test sets generated during the ensemble feature selection process.}
+\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+The measure used to score the learners on the test sets generated
+during the ensemble feature selection process.
+This will be the 'active' measure used in methods of this object, but this
+can be changed with \verb{$set_active_measure()}.}
 
-\item{\code{inner_measure_id}}{(\code{character(1)})\cr
-Column name of \code{"result"} that corresponds to the inner measure used to score
-the learners on the train sets generated during the ensemble feature selection process.}
-
-\item{\code{use_inner_measure}}{(\code{logical(1)})\cr
-Specifies which is the active measure that will be used for subsequent
-methods such as \code{feature_ranking()}, \code{pareto_front()} and \code{knee_points()}.
-Default is \code{FALSE} and the \code{measure_id} is used to specify the measure.
-Otherwise, if \code{TRUE}, the \code{inner_measure_id} is used.}
-
-\item{\code{minimize}}{(\code{logical(1)})\cr
-If \code{TRUE} (default), lower values of the active measure correspond to higher performance.}
+\item{\code{inner_measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+The inner measure used to optimize and score the learners on the train sets
+generated during the ensemble feature selection process.}
 }
 \if{html}{\out{</div>}}
 }
@@ -212,23 +211,19 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \if{html}{\out{<a id="method-EnsembleFSResult-set_active_measure"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-set_active_measure}{}}}
 \subsection{Method \code{set_active_measure()}}{
-Use this function to change the active measure id.
+Use this function to change the active measure.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$set_active_measure(measure_id, minimize)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$set_active_measure(which = "outer")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{measure_id}}{(\code{character(1)})\cr
-Measure id to use in the methods of this class.
-Should be either the \code{measure_id} or the \code{inner_measure_id} value
-defined during initialization.}
-
-\item{\code{minimize}}{(\code{logical(1)})\cr
-If \code{TRUE}, lower values of the measure correspond to higher performance.
-This must be set explicitly by the user, so that it matches the corresponding
-\code{measure_id}.}
+\item{\code{which}}{(\code{character(1)})\cr
+Which \link[mlr3:Measure]{measure} from the ensemble feature selection result
+to use in methods of this object.
+Should be either \code{"inner"} (optimization measure used in training sets)
+or \code{"outer"} (measure used in test sets, default value).}
 }
 \if{html}{\out{</div>}}
 }
@@ -295,7 +290,7 @@ A \link[data.table:data.table]{data.table::data.table} listing all the features,
 \item \code{"score"}: Scores assigned to each feature based on the selected method (if applicable).
 \item \code{"norm_score"}: Normalized scores (if applicable), scaled to the range \eqn{[0,1]}, which can be loosely interpreted as \strong{selection probabilities} (Meinshausen et al. (2010)).
 \item \code{"borda_score"}: Borda scores for method-agnostic comparison, ranging in \eqn{[0,1]}, where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
-This column is always included to incorporate feature ranking methods that output only rankings.
+This column is always included so that feature ranking methods that output only rankings have also a feature-wise score.
 }
 }
 }

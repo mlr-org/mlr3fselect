@@ -17,7 +17,7 @@
 #'
 #' Results are stored in an [EnsembleFSResult].
 #'
-#' The scores on the train sets using the models with the best feature subsets are also stored in the result, with a column name `<measure_id>_inner`.
+#' The scores on the train sets using the models with the best feature subsets are also stored in the result, with a column name `{measure_id}_inner`.
 #' We note that the **active measure** of performance is the one used on the test sets.
 #' This is a better choice as the scores on the train sets using the final models are most likely overestimated.
 #' The user can change the active measure via the `set_active_measure()` method of the [EnsembleFSResult].
@@ -160,9 +160,7 @@ ensemble_fselect = function(
     result = scores,
     features = task$feature_names,
     benchmark_result = if (store_benchmark_result) bmr,
-    measure_id = measure$id,
-    inner_measure_id = sprintf("%s_inner", inner_measure$id),
-    use_inner_measure = FALSE, # active measure is the `measure`
-    minimize = measure$minimize
+    measure = measure,
+    inner_measure = inner_measure
   )
 }

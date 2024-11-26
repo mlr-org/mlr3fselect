@@ -20,8 +20,9 @@ test_that("efs works", {
   expect_numeric(efsr$result$classif.ce, len = 4)
   expect_numeric(efsr$result$classif.ce_inner, len = 4)
   expect_benchmark_result(efsr$benchmark_result)
-  expect_equal(efsr$measure, "classif.ce")
-  expect_true(efsr$minimize) # classification error
+  expect_measure(efsr$measure)
+  expect_equal(efsr$measure$id, "classif.ce")
+  expect_true(efsr$measure$minimize) # classification error
   expect_equal(efsr$n_learners, 2)
   expect_equal(efsr$n_resamples, 2)
 
@@ -57,13 +58,21 @@ test_that("efs works", {
   assert_true(all(tab$classif.ce != tab$classif.ce_inner))
 
   # change to use inner measure
-  expect_error(efsr$set_active_measure(measure_id = "XYZ"), regexp = "Must be element")
-  expect_error(efsr$set_active_measure(measure_id = "classif.ce_inner"), regexp = "is missing")
-  efsr$set_active_measure(measure_id = "classif.ce_inner", minimize = TRUE)
-  expect_equal(efsr$measure, "classif.ce_inner")
-  expect_true(efsr$minimize) # classification error
-  pf2 = efsr$pareto_front()
-  expect_data_table(pf2, nrows = 3) # pareto front has changed
+  expect_error(efsr$set_active_measure(which = "XYZ"), regexp = "Must be element")
+  efsr$set_active_measure(which = "inner")
+  expect_measure(efsr$measure)
+  expect_equal(efsr$measure$id, "classif.ce") # classification error also used for inner measure
+  pf_inner = efsr$pareto_front()
+  expect_data_table(pf_inner, nrows = 3) # pareto front has changed
+  expect_equal(names(pf_inner), c("n_features", "classif.ce_inner"))
+  kps_inner = efsr$knee_points()
+  expect_data_table(kps_inner, nrows = 1)
+  # inner id to distinguish from outer measure
+  expect_equal(names(kps_inner), c("n_features", "classif.ce_inner"))
+  # change to use outer measure again
+  efsr$set_active_measure(which = "outer")
+  pf_outer = efsr$pareto_front()
+  expect_equal(pf_outer, pf) # same measure, same pareto front
 
   # default feature ranking
   skip_if_not_installed("fastVoteR")
@@ -95,15 +104,17 @@ test_that("efs works with rfe", {
   expect_numeric(efsr$result$classif.acc, len = 4)
   expect_list(efsr$result$importance, any.missing = FALSE, len = 4)
   expect_benchmark_result(efsr$benchmark_result)
-  expect_equal(efsr$measure, "classif.acc")
-  expect_false(efsr$minimize) # accuracy
+  expect_measure(efsr$measure)
+  expect_equal(efsr$measure$id, "classif.acc")
+  expect_false(efsr$measure$minimize) # accuracy
   expect_equal(efsr$n_learners, 2)
   expect_equal(efsr$n_resamples, 2)
 
   # change active measure
-  efsr$set_active_measure(measure_id = "classif.ce_inner", minimize = TRUE)
-  expect_equal(efsr$measure, "classif.ce_inner")
-  expect_true(efsr$minimize) # classification error
+  efsr$set_active_measure(which = "inner")
+  expect_measure(efsr$measure)
+  expect_equal(efsr$measure$id, "classif.ce") # no `_inner` end-fix here
+  expect_true(efsr$measure$minimize) # classification error
 
   # stability
   expect_number(efsr$stability(stability_measure = "jaccard"))
@@ -124,6 +135,11 @@ test_that("efs works with rfe", {
   expect_data_table(kps, nrows = 1)
   expect_equal(names(kps), c("n_features", "classif.ce_inner"))
 
+  # change measure back to "outer"
+  efsr$set_active_measure(which = "outer")
+  pf_outer = efsr$pareto_front() # pareto front has used the accuracy measure
+  expect_equal(names(pf_outer), c("n_features", "classif.acc"))
+
   # data.table conversion
   tab = as.data.table(efsr)
   expect_equal(names(tab), c("learner_id", "resampling_iteration", "classif.acc",
@@ -139,7 +155,9 @@ test_that("efs works with rfe", {
 
 test_that("EnsembleFSResult initialization", {
   result = data.table(a = 1, b = 3)
-  expect_error(EnsembleFSResult$new(result = result, features = LETTERS, measure_id = "a"), "missing elements")
+  # `result` doesn't have mandatory columns
+  expect_error(EnsembleFSResult$new(result = result, features = LETTERS,
+                                    measure = msr("classif.ce")), "is missing")
 
   errors = c(0.13, 0.24, 0.16, 0.11, 0.25, 0.18, 0.15, 0.1, 0.16)
   result = data.table(
@@ -157,43 +175,41 @@ test_that("EnsembleFSResult initialization", {
       c("V4", "V12"),
       c("V6", "V15", "V19", "V7")),
     classif.ce = errors,
-    classif.acc = 1 - errors
+    classif.acc_inner = 1 - errors # inner measure has the `_inner` end-fix
   )
 
   # a feature set includes "V20" which is not included in input "features"
-  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:19), measure_id = "classif.ce"), "Must be a subset of")
+  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:19), measure = msr("classif.ce")), "Must be a subset of")
+  # `inner_measure` is not a `Measure`
+  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
+                                    measure = msr("classif.ce"), inner_measure = "measure"))
+  # `inner_measure` id is not a column name in the `result`
+  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
+                                    measure = msr("classif.ce"), inner_measure = msr("classif.ce")))
+  # both `inner_measure` and `measure` ids are missing from the `result`'s column names
+  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
+                                    measure = msr("classif.acc"), inner_measure = msr("classif.ce")))
 
   # works without benchmark result object
-  efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:20), measure_id = "classif.ce")
+  efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
+                              measure = msr("classif.ce"), inner_measure = msr("classif.acc"))
   expect_class(efsr, "EnsembleFSResult")
   expect_equal(efsr$n_learners, 3)
   expect_equal(efsr$n_resamples, 3)
-  expect_equal(efsr$measure, "classif.ce")
-  expect_true(efsr$minimize)
+  expect_equal(efsr$.__enclos_env__$private$.active_measure, "outer")
+  expect_measure(efsr$measure)
+  expect_equal(efsr$measure$id, "classif.ce")
+  expect_true(efsr$measure$minimize)
   tab = as.data.table(efsr)
   expect_data_table(tab)
   expect_equal(names(tab), c("resampling_iteration", "learner_id", "n_features",
-                             "features", "classif.ce", "classif.acc"))
-
-  # non-existent `inner_measure_id`
-  expect_error(EnsembleFSResult$new(
-    result = result, features = paste0("V", 1:20), measure_id = "classif.ce", inner_measure_id = "a"
-  ), "missing")
-  # `use_inner_measure = TRUE`, no `inner_measure_id` though
-  expect_error(EnsembleFSResult$new(
-    result = result, features = paste0("V", 1:20), use_inner_measure = TRUE, measure_id = "classif.ce"
-  ), "Must be of type")
-  # `use_inner_measure = TRUE`, and `inner_measure_id` is
-  efsr2 = EnsembleFSResult$new(
-    result = result, features = paste0("V", 1:20), use_inner_measure = TRUE,
-    measure_id = "classif.ce", inner_measure_id = "classif.acc",
-    minimize = FALSE # now this applies to the inner measure (accuracy)
-  )
-  expect_class(efsr2, "EnsembleFSResult")
-  expect_equal(efsr2$n_learners, 3)
-  expect_equal(efsr2$n_resamples, 3)
-  expect_equal(efsr2$measure, "classif.acc")
-  expect_false(efsr2$minimize)
+                             "features", "classif.ce", "classif.acc_inner"))
+  # change active measure
+  efsr$set_active_measure(which = "inner")
+  expect_equal(efsr$.__enclos_env__$private$.active_measure, "inner")
+  expect_measure(efsr$measure)
+  expect_equal(efsr$measure$id, "classif.acc")
+  expect_false(efsr$measure$minimize)
 })
 
 test_that("different callbacks can be set", {
