@@ -43,8 +43,6 @@ Suggests:
     rpart,
     fastVoteR,
     testthat (>= 3.0.0)
-Remotes:
-    bblodfon/fastVoteR
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
