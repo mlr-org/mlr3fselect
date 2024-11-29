@@ -4,7 +4,7 @@
 #'
 #' @description
 #' Ensemble feature selection using multiple learners.
-#' The ensemble feature selection method is designed to identify the most informative features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+#' The ensemble feature selection method is designed to identify the most predictive features from a given dataset by leveraging multiple machine learning models and resampling techniques.
 #' Returns an [EnsembleFSResult].
 #'
 #' @details

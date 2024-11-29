@@ -7,7 +7,8 @@
 \description{
 The \code{EnsembleFSResult} stores the results of ensemble feature selection.
 It includes methods for evaluating the stability of the feature selection process and for ranking the selected features among others.
-The function \code{\link[=ensemble_fselect]{ensemble_fselect()}} returns an object of this class.
+
+Both functions \code{\link[=ensemble_fselect]{ensemble_fselect()}} and \code{\link[=embedded_ensemble_fselect]{embedded_ensemble_fselect()}} return an object of this class.
 }
 \section{S3 Methods}{
 
@@ -93,19 +94,20 @@ Returns the result of the ensemble feature selection.}
 Returns the number of learners used in the ensemble feature selection.}
 
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
-Returns the active measure to use in methods of this object.}
+Returns the 'active' measure that is used in methods of this object.}
 
 \item{\code{active_measure}}{(\code{character(1)})\cr
-Specifies the type of the active measure.
-Can be one of the two:
+Indicates the type of the active performance measure.
+
+During the ensemble feature selection process, the dataset is split into \strong{multiple subsamples} (train/test splits) using an initial resampling scheme.
+So, performance can be evaluated using one of two measures:
 \itemize{
-\item \code{"outer"}: measure used in the test sets of the ensemble feature
-selection process.
-\item \code{"inner"}: measure used for optimization and scoring the train sets.
+\item \code{"outer"}: measure used to evaluate the performance on the test sets.
+\item \code{"inner"}: measure used for optimization and to compute performance during inner resampling on the training sets.
 }}
 
 \item{\code{n_resamples}}{(\code{character(1)})\cr
-Returns the number of times the task was initially resampled in the ensemble feature selection.}
+Returns the number of times the task was initially resampled in the ensemble feature selection process.}
 }
 \if{html}{\out{</div>}}
 }
@@ -148,7 +150,7 @@ Mandatory column names should include \code{"resampling_iteration"}, \code{"lear
 \code{"features"} and \code{"n_features"}.
 A column named as \code{{measure$id}} (scores on the test sets) must also be
 always present.
-The column with the \code{{inner_measure$id}} (scores on the train sets) is not mandatory,
+The column with the performance scores on the inner resampling of the train sets is not mandatory,
 but note that it should be named as \verb{\{inner_measure$id\}_inner} to distinguish from
 the \code{{measure$id}}.}
 
@@ -160,14 +162,13 @@ selection.}
 The benchmark result object.}
 
 \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
-The measure used to score the learners on the test sets generated
+The performance measure used to evaluate the learners on the test sets generated
 during the ensemble feature selection process.
-This will be the 'active' measure used in methods of this object, but this
-can be changed with \verb{$set_active_measure()}.}
+By default, this serves as the 'active' measure for the methods of this object.
+The active measure can be updated using the \verb{$set_active_measure()} method.}
 
 \item{\code{inner_measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
-The inner measure used to optimize and score the learners on the train sets
-generated during the ensemble feature selection process.}
+The performance measure used to optimize and evaluate the learners during the inner resampling process of the training sets, generated as part of the ensemble feature selection procedure.}
 }
 \if{html}{\out{</div>}}
 }

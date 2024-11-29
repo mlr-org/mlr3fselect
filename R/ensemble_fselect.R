@@ -4,7 +4,7 @@
 #'
 #' @description
 #' Ensemble feature selection using multiple learners.
-#' The ensemble feature selection method is designed to identify the most informative features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+#' The ensemble feature selection method is designed to identify the most predictive features from a given dataset by leveraging multiple machine learning models and resampling techniques.
 #' Returns an [EnsembleFSResult].
 #'
 #' @details
@@ -17,10 +17,14 @@
 #'
 #' Results are stored in an [EnsembleFSResult].
 #'
-#' The scores on the train sets using the models with the best feature subsets are also stored in the result, with a column name `{measure_id}_inner`.
-#' We note that the **active measure** of performance is the one used on the test sets.
-#' This is a better choice as the scores on the train sets using the final models are most likely overestimated.
-#' The user can change the active measure via the `set_active_measure()` method of the [EnsembleFSResult].
+#' The result object also includes the performance scores calculated during the inner resampling of the training sets, using models with the best feature subsets.
+#' These scores are stored in a column named `{measure_id}_inner`.
+#'
+#' @section Note:
+#'
+#' The **active measure** of performance is the one applied to the test sets.
+#' This is preferred, as inner resampling scores on the training sets are likely to be overestimated when using the final models.
+#' Users can change the active measure by using the `set_active_measure()` method of the [EnsembleFSResult].
 #'
 #' @param learners (list of [mlr3::Learner])\cr
 #'  The learners to be used for feature selection.

@@ -5,7 +5,8 @@
 #' @description
 #' The `EnsembleFSResult` stores the results of ensemble feature selection.
 #' It includes methods for evaluating the stability of the feature selection process and for ranking the selected features among others.
-#' The function [ensemble_fselect()] returns an object of this class.
+#'
+#' Both functions [ensemble_fselect()] and [embedded_ensemble_fselect()] return an object of this class.
 #'
 #' @section S3 Methods:
 #' * `as.data.table.EnsembleFSResult(x, benchmark_result = TRUE)`\cr
@@ -76,7 +77,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  `"features"` and `"n_features"`.
     #'  A column named as `{measure$id}` (scores on the test sets) must also be
     #'  always present.
-    #'  The column with the `{inner_measure$id}` (scores on the train sets) is not mandatory,
+    #'  The column with the performance scores on the inner resampling of the train sets is not mandatory,
     #'  but note that it should be named as `{inner_measure$id}_inner` to distinguish from
     #'  the `{measure$id}`.
     #' @param features ([character()])\cr
@@ -85,13 +86,12 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
     #'  The benchmark result object.
     #' @param measure ([mlr3::Measure])\cr
-    #'  The measure used to score the learners on the test sets generated
+    #'  The performance measure used to evaluate the learners on the test sets generated
     #'  during the ensemble feature selection process.
-    #'  This will be the 'active' measure used in methods of this object, but this
-    #'  can be changed with `$set_active_measure()`.
+    #'  By default, this serves as the 'active' measure for the methods of this object.
+    #'  The active measure can be updated using the `$set_active_measure()` method.
     #' @param inner_measure ([mlr3::Measure])\cr
-    #'  The inner measure used to optimize and score the learners on the train sets
-    #'  generated during the ensemble feature selection process.
+    #'  The performance measure used to optimize and evaluate the learners during the inner resampling process of the training sets, generated as part of the ensemble feature selection procedure.
     initialize = function(
       result,
       features,
@@ -452,7 +452,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @field measure ([mlr3::Measure])\cr
-    #' Returns the active measure to use in methods of this object.
+    #' Returns the 'active' measure that is used in methods of this object.
     measure = function(rhs) {
       assert_ro_binding(rhs)
 
@@ -464,19 +464,20 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @field active_measure (`character(1)`)\cr
-    #' Specifies the type of the active measure.
-    #' Can be one of the two:
+    #' Indicates the type of the active performance measure.
     #'
-    #' - `"outer"`: measure used in the test sets of the ensemble feature
-    #' selection process.
-    #' - `"inner"`: measure used for optimization and scoring the train sets.
+    #' During the ensemble feature selection process, the dataset is split into **multiple subsamples** (train/test splits) using an initial resampling scheme.
+    #' So, performance can be evaluated using one of two measures:
+    #'
+    #' - `"outer"`: measure used to evaluate the performance on the test sets.
+    #' - `"inner"`: measure used for optimization and to compute performance during inner resampling on the training sets.
     active_measure = function(rhs) {
       assert_ro_binding(rhs)
       private$.active_measure
     },
 
     #' @field n_resamples (`character(1)`)\cr
-    #' Returns the number of times the task was initially resampled in the ensemble feature selection.
+    #' Returns the number of times the task was initially resampled in the ensemble feature selection process.
     n_resamples = function(rhs) {
       assert_ro_binding(rhs)
       uniqueN(self$result$resampling_iteration)
