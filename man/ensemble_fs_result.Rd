@@ -7,7 +7,8 @@
 \description{
 The \code{EnsembleFSResult} stores the results of ensemble feature selection.
 It includes methods for evaluating the stability of the feature selection process and for ranking the selected features among others.
-The function \code{\link[=ensemble_fselect]{ensemble_fselect()}} returns an object of this class.
+
+Both functions \code{\link[=ensemble_fselect]{ensemble_fselect()}} and \code{\link[=embedded_ensemble_fselect]{embedded_ensemble_fselect()}} return an object of this class.
 }
 \section{S3 Methods}{
 
@@ -31,7 +32,8 @@ Whether to add the learner, task and resampling information from the benchmark r
     learners = lrns(c("classif.rpart", "classif.featureless")),
     init_resampling = rsmp("subsampling", repeats = 2),
     inner_resampling = rsmp("cv", folds = 3),
-    measure = msr("classif.ce"),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.acc"),
     terminator = trm("none")
   )
 
@@ -47,7 +49,16 @@ Whether to add the learner, task and resampling information from the benchmark r
   # returns a ranking of all features
   head(efsr$feature_ranking())
 
-  # returns the empirical pareto front (nfeatures vs error)
+  # returns the empirical pareto front, i.e. n_features vs measure (error)
+  efsr$pareto_front()
+
+  # returns the knee points (optimal trade-off between n_features and performance)
+  efsr$knee_points()
+
+  # change to use the inner optimization measure
+  efsr$set_active_measure(which = "inner")
+
+  # Pareto front is calculated on the inner measure
   efsr$pareto_front()
 }
 }
@@ -56,6 +67,11 @@ Das, I (1999).
 \dQuote{On characterizing the 'knee' of the Pareto curve based on normal-boundary intersection.}
 \emph{Structural Optimization}, \bold{18}(1-2), 107--115.
 ISSN 09344373.
+
+Meinshausen, Nicolai, Buhlmann, Peter (2010).
+\dQuote{Stability Selection.}
+\emph{Journal of the Royal Statistical Society Series B: Statistical Methodology}, \bold{72}(4), 417--473.
+ISSN 1369-7412, \doi{10.1111/J.1467-9868.2010.00740.X}, 0809.2932.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -77,8 +93,21 @@ Returns the result of the ensemble feature selection.}
 \item{\code{n_learners}}{(\code{numeric(1)})\cr
 Returns the number of learners used in the ensemble feature selection.}
 
-\item{\code{measure}}{(\code{character(1)})\cr
-Returns the measure id used in the ensemble feature selection.}
+\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+Returns the 'active' measure that is used in methods of this object.}
+
+\item{\code{active_measure}}{(\code{character(1)})\cr
+Indicates the type of the active performance measure.
+
+During the ensemble feature selection process, the dataset is split into \strong{multiple subsamples} (train/test splits) using an initial resampling scheme.
+So, performance can be evaluated using one of two measures:
+\itemize{
+\item \code{"outer"}: measure used to evaluate the performance on the test sets.
+\item \code{"inner"}: measure used for optimization and to compute performance during inner resampling on the training sets.
+}}
+
+\item{\code{n_resamples}}{(\code{character(1)})\cr
+Returns the number of times the task was initially resampled in the ensemble feature selection process.}
 }
 \if{html}{\out{</div>}}
 }
@@ -89,6 +118,7 @@ Returns the measure id used in the ensemble feature selection.}
 \item \href{#method-EnsembleFSResult-format}{\code{EnsembleFSResult$format()}}
 \item \href{#method-EnsembleFSResult-print}{\code{EnsembleFSResult$print()}}
 \item \href{#method-EnsembleFSResult-help}{\code{EnsembleFSResult$help()}}
+\item \href{#method-EnsembleFSResult-set_active_measure}{\code{EnsembleFSResult$set_active_measure()}}
 \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
 \item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
 \item \href{#method-EnsembleFSResult-pareto_front}{\code{EnsembleFSResult$pareto_front()}}
@@ -106,8 +136,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   result,
   features,
   benchmark_result = NULL,
-  measure_id,
-  minimize = TRUE
+  measure,
+  inner_measure = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -116,8 +146,13 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \describe{
 \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 The result of the ensemble feature selection.
-Column names should include \code{"resampling_iteration"}, \code{"learner_id"}, \code{"features"}
-and \code{"n_features"}.}
+Mandatory column names should include \code{"resampling_iteration"}, \code{"learner_id"},
+\code{"features"} and \code{"n_features"}.
+A column named as \code{{measure$id}} (scores on the test sets) must also be
+always present.
+The column with the performance scores on the inner resampling of the train sets is not mandatory,
+but note that it should be named as \verb{\{inner_measure$id\}_inner} to distinguish from
+the \code{{measure$id}}.}
 
 \item{\code{features}}{(\code{\link[=character]{character()}})\cr
 The vector of features of the task that was used in the ensemble feature
@@ -126,11 +161,14 @@ selection.}
 \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result object.}
 
-\item{\code{measure_id}}{(\code{character(1)})\cr
-Column name of \code{"result"} that corresponds to the measure used.}
+\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+The performance measure used to evaluate the learners on the test sets generated
+during the ensemble feature selection process.
+By default, this serves as the 'active' measure for the methods of this object.
+The active measure can be updated using the \verb{$set_active_measure()} method.}
 
-\item{\code{minimize}}{(\code{logical(1)})\cr
-If \code{TRUE} (default), lower values of the measure correspond to higher performance.}
+\item{\code{inner_measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+The performance measure used to optimize and evaluate the learners during the inner resampling process of the training sets, generated as part of the ensemble feature selection procedure.}
 }
 \if{html}{\out{</div>}}
 }
@@ -180,30 +218,90 @@ Opens the corresponding help page referenced by field \verb{$man}.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-set_active_measure"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-set_active_measure}{}}}
+\subsection{Method \code{set_active_measure()}}{
+Use this function to change the active measure.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$set_active_measure(which = "outer")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{which}}{(\code{character(1)})\cr
+Which \link[mlr3:Measure]{measure} from the ensemble feature selection result
+to use in methods of this object.
+Should be either \code{"inner"} (optimization measure used in training sets)
+or \code{"outer"} (measure used in test sets, default value).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-feature_ranking"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-feature_ranking}{}}}
 \subsection{Method \code{feature_ranking()}}{
-Calculates the feature ranking.
+Calculates the feature ranking via \code{\link[fastVoteR:rank_candidates]{fastVoteR::rank_candidates()}}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(method = "approval_voting")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(
+  method = "av",
+  use_weights = TRUE,
+  committee_size = NULL,
+  shuffle_features = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{method}}{(\code{character(1)})\cr
-The method to calculate the feature ranking.}
+The method to calculate the feature ranking. See \code{\link[fastVoteR:rank_candidates]{fastVoteR::rank_candidates()}}
+for a complete list of available methods.
+Approval voting (\code{"av"}) is the default method.}
+
+\item{\code{use_weights}}{(\code{logical(1)})\cr
+The default value (\code{TRUE}) uses weights equal to the performance scores
+of each voter/model (or the inverse scores if the measure is minimized).
+If \code{FALSE}, we treat all voters as equal and assign them all a weight equal to 1.}
+
+\item{\code{committee_size}}{(\code{integer(1)})\cr
+Number of top selected features in the output ranking.
+This parameter can be used to speed-up methods that build a committee sequentially
+(\code{"seq_pav"}), by requesting only the top N selected candidates/features
+and not the complete feature ranking.}
+
+\item{\code{shuffle_features}}{(\code{logical(1)})\cr
+Whether to shuffle the task features randomly before computing the ranking.
+Shuffling ensures consistent random tie-breaking across methods and prevents
+deterministic biases when features with equal scores are encountered.
+Default is \code{TRUE} and it's advised to set a seed before running this function.
+Set to \code{FALSE} if deterministic ordering of features is preferred (same as
+during initialization).}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Details}{
-The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
+The feature ranking process is built on the following framework: models act as \emph{voters}, features act as \emph{candidates}, and voters select certain candidates (features).
 The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
-Currently, only \code{"approval_voting"} method is supported, which selects the candidates/features that have the highest approval score or selection frequency, i.e. appear the most often.
+
+For every feature a score is calculated, which depends on the \code{"method"} argument.
+The higher the score, the higher the ranking of the feature.
+Note that some methods output a feature ranking instead of a score per feature, so we always include \strong{Borda's score}, which is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
+
+We shuffle the input candidates/features so that we enforce random tie-breaking.
+Users should set the same \code{seed} for consistent comparison between the different feature ranking methods and for reproducibility.
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing inclusion probability scores (depending on the \code{method})
+A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{"method"}). Columns are as follows:
+\itemize{
+\item \code{"feature"}: Feature names.
+\item \code{"score"}: Scores assigned to each feature based on the selected method (if applicable).
+\item \code{"norm_score"}: Normalized scores (if applicable), scaled to the range \eqn{[0,1]}, which can be loosely interpreted as \strong{selection probabilities} (Meinshausen et al. (2010)).
+\item \code{"borda_score"}: Borda scores for method-agnostic comparison, ranging in \eqn{[0,1]}, where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
+This column is always included so that feature ranking methods that output only rankings have also a feature-wise score.
+}
 }
 }
 \if{html}{\out{<hr>}}

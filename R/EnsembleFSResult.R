@@ -5,7 +5,8 @@
 #' @description
 #' The `EnsembleFSResult` stores the results of ensemble feature selection.
 #' It includes methods for evaluating the stability of the feature selection process and for ranking the selected features among others.
-#' The function [ensemble_fselect()] returns an object of this class.
+#'
+#' Both functions [ensemble_fselect()] and [embedded_ensemble_fselect()] return an object of this class.
 #'
 #' @section S3 Methods:
 #' * `as.data.table.EnsembleFSResult(x, benchmark_result = TRUE)`\cr
@@ -16,7 +17,7 @@
 #'       Whether to add the learner, task and resampling information from the benchmark result.
 #'
 #' @references
-#' `r format_bib("das1999")`
+#' `r format_bib("das1999", "meinshausen2010")`
 #'
 #' @export
 #' @examples
@@ -27,7 +28,8 @@
 #'     learners = lrns(c("classif.rpart", "classif.featureless")),
 #'     init_resampling = rsmp("subsampling", repeats = 2),
 #'     inner_resampling = rsmp("cv", folds = 3),
-#'     measure = msr("classif.ce"),
+#'     inner_measure = msr("classif.ce"),
+#'     measure = msr("classif.acc"),
 #'     terminator = trm("none")
 #'   )
 #'
@@ -43,7 +45,16 @@
 #'   # returns a ranking of all features
 #'   head(efsr$feature_ranking())
 #'
-#'   # returns the empirical pareto front (nfeatures vs error)
+#'   # returns the empirical pareto front, i.e. n_features vs measure (error)
+#'   efsr$pareto_front()
+#'
+#'   # returns the knee points (optimal trade-off between n_features and performance)
+#'   efsr$knee_points()
+#'
+#'   # change to use the inner optimization measure
+#'   efsr$set_active_measure(which = "inner")
+#'
+#'   # Pareto front is calculated on the inner measure
 #'   efsr$pareto_front()
 #' }
 EnsembleFSResult = R6Class("EnsembleFSResult",
@@ -62,26 +73,52 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param result ([data.table::data.table])\cr
     #'  The result of the ensemble feature selection.
-    #'  Column names should include `"resampling_iteration"`, `"learner_id"`, `"features"`
-    #'  and `"n_features"`.
+    #'  Mandatory column names should include `"resampling_iteration"`, `"learner_id"`,
+    #'  `"features"` and `"n_features"`.
+    #'  A column named as `{measure$id}` (scores on the test sets) must also be
+    #'  always present.
+    #'  The column with the performance scores on the inner resampling of the train sets is not mandatory,
+    #'  but note that it should be named as `{inner_measure$id}_inner` to distinguish from
+    #'  the `{measure$id}`.
     #' @param features ([character()])\cr
     #'  The vector of features of the task that was used in the ensemble feature
     #'  selection.
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
     #'  The benchmark result object.
-    #' @param measure_id (`character(1)`)\cr
-    #'  Column name of `"result"` that corresponds to the measure used.
-    #' @param minimize (`logical(1)`)\cr
-    #'  If `TRUE` (default), lower values of the measure correspond to higher performance.
-    initialize = function(result, features, benchmark_result = NULL, measure_id,
-                          minimize = TRUE) {
+    #' @param measure ([mlr3::Measure])\cr
+    #'  The performance measure used to evaluate the learners on the test sets generated
+    #'  during the ensemble feature selection process.
+    #'  By default, this serves as the 'active' measure for the methods of this object.
+    #'  The active measure can be updated using the `$set_active_measure()` method.
+    #' @param inner_measure ([mlr3::Measure])\cr
+    #'  The performance measure used to optimize and evaluate the learners during the inner resampling process of the training sets, generated as part of the ensemble feature selection procedure.
+    initialize = function(
+      result,
+      features,
+      benchmark_result = NULL,
+      measure,
+      inner_measure = NULL
+      ) {
       assert_data_table(result)
-      private$.measure_id = assert_string(measure_id, null.ok = FALSE)
-      mandatory_columns = c("resampling_iteration", "learner_id", "features", "n_features")
-      assert_names(names(result), must.include = c(mandatory_columns, measure_id))
+      private$.measure = assert_measure(measure)
+      private$.active_measure = "outer"
+      measure_ids = c(private$.measure$id)
+      if (!is.null(inner_measure)) {
+        private$.inner_measure = assert_measure(inner_measure)
+        # special end-fix required for inner measure
+        measure_ids = c(measure_ids, sprintf("%s_inner", private$.inner_measure$id))
+      }
+
+      # the non-NULL measure ids should be defined as columns in the dt result
+      mandatory_columns = c("resampling_iteration", "learner_id", "features",
+                            "n_features", measure_ids)
+      assert_names(names(result), must.include = mandatory_columns)
       private$.result = result
       private$.features = assert_character(features, any.missing = FALSE, null.ok = FALSE)
-      private$.minimize = assert_logical(minimize, null.ok = FALSE)
+
+      # check that all feature sets are subsets of the task features
+      assert_subset(unlist(result$features), private$.features)
+
       self$benchmark_result = if (!is.null(benchmark_result)) assert_benchmark_result(benchmark_result)
 
       self$man = "mlr3fselect::ensemble_fs_result"
@@ -99,7 +136,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param ... (ignored).
     print = function(...) {
-      catf(format(self))
+      catf("%s with %s learners and %s initial resamplings",
+           format(self), self$n_learners, self$n_resamples)
       print(private$.result[, c("resampling_iteration", "learner_id", "n_features"), with = FALSE])
     },
 
@@ -110,43 +148,102 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     },
 
     #' @description
-    #' Calculates the feature ranking.
+    #' Use this function to change the active measure.
     #'
-    #' @details
-    #' The feature ranking process is built on the following framework: models act as voters, features act as candidates, and voters select certain candidates (features).
-    #' The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
-    #' Currently, only `"approval_voting"` method is supported, which selects the candidates/features that have the highest approval score or selection frequency, i.e. appear the most often.
-    #'
-    #' @param method (`character(1)`)\cr
-    #' The method to calculate the feature ranking.
-    #'
-    #' @return A [data.table::data.table] listing all the features, ordered by decreasing inclusion probability scores (depending on the `method`)
-    feature_ranking = function(method = "approval_voting") {
-      assert_choice(method, choices = "approval_voting")
+    #' @param which (`character(1)`)\cr
+    #'  Which [measure][mlr3::Measure] from the ensemble feature selection result
+    #'  to use in methods of this object.
+    #'  Should be either `"inner"` (optimization measure used in training sets)
+    #'  or `"outer"` (measure used in test sets, default value).
+    set_active_measure = function(which = "outer") {
+      assert_choice(which, c("inner", "outer"))
 
-      # cached results
-      if (!is.null(private$.feature_ranking[[method]])) {
-        return(private$.feature_ranking[[method]])
+      # check if `inner_measure` is an `mlr3::Measure`
+      if (which == "inner" && is.null(private$.inner_measure)) {
+        stop("No inner_measure was defined during initialization")
       }
 
-      count_tbl = sort(table(unlist(private$.result$features)), decreasing = TRUE)
-      features_selected = names(count_tbl)
-      features_not_selected = setdiff(private$.features, features_selected)
+      private$.active_measure = which
+    },
 
-      res_fs = data.table(
-        feature = features_selected,
-        inclusion_probability = as.vector(count_tbl) / nrow(private$.result)
+    #' @description
+    #' Calculates the feature ranking via [fastVoteR::rank_candidates()].
+    #'
+    #' @details
+    #' The feature ranking process is built on the following framework: models act as *voters*, features act as *candidates*, and voters select certain candidates (features).
+    #' The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
+    #'
+    #' For every feature a score is calculated, which depends on the `"method"` argument.
+    #' The higher the score, the higher the ranking of the feature.
+    #' Note that some methods output a feature ranking instead of a score per feature, so we always include **Borda's score**, which is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
+    #'
+    #' We shuffle the input candidates/features so that we enforce random tie-breaking.
+    #' Users should set the same `seed` for consistent comparison between the different feature ranking methods and for reproducibility.
+    #'
+    #' @param method (`character(1)`)\cr
+    #' The method to calculate the feature ranking. See [fastVoteR::rank_candidates()]
+    #' for a complete list of available methods.
+    #' Approval voting (`"av"`) is the default method.
+    #' @param use_weights (`logical(1)`)\cr
+    #' The default value (`TRUE`) uses weights equal to the performance scores
+    #' of each voter/model (or the inverse scores if the measure is minimized).
+    #' If `FALSE`, we treat all voters as equal and assign them all a weight equal to 1.
+    #' @param committee_size (`integer(1)`)\cr
+    #' Number of top selected features in the output ranking.
+    #' This parameter can be used to speed-up methods that build a committee sequentially
+    #' (`"seq_pav"`), by requesting only the top N selected candidates/features
+    #' and not the complete feature ranking.
+    #' @param shuffle_features (`logical(1)`)\cr
+    #' Whether to shuffle the task features randomly before computing the ranking.
+    #' Shuffling ensures consistent random tie-breaking across methods and prevents
+    #' deterministic biases when features with equal scores are encountered.
+    #' Default is `TRUE` and it's advised to set a seed before running this function.
+    #' Set to `FALSE` if deterministic ordering of features is preferred (same as
+    #' during initialization).
+    #'
+    #' @return A [data.table::data.table] listing all the features, ordered by decreasing scores (depends on the `"method"`). Columns are as follows:
+    #' - `"feature"`: Feature names.
+    #' - `"score"`: Scores assigned to each feature based on the selected method (if applicable).
+    #' - `"norm_score"`: Normalized scores (if applicable), scaled to the range \eqn{[0,1]}, which can be loosely interpreted as **selection probabilities** (Meinshausen et al. (2010)).
+    #' - `"borda_score"`: Borda scores for method-agnostic comparison, ranging in \eqn{[0,1]}, where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
+    #' This column is always included so that feature ranking methods that output only rankings have also a feature-wise score.
+    #'
+    feature_ranking = function(method = "av", use_weights = TRUE, committee_size = NULL, shuffle_features = TRUE) {
+      requireNamespace("fastVoteR")
+
+      # candidates => all features, voters => list of selected (best) features sets
+      candidates = private$.features
+      voters = private$.result$features
+
+      # calculate weights
+      if (use_weights) {
+        # voter weights are the (inverse) scores
+        measure = self$measure # get active measure
+        measure_id = ifelse(private$.active_measure == "inner",
+                            sprintf("%s_inner", measure$id),
+                            measure$id)
+
+        scores = private$.result[, get(measure_id)]
+        weights = if (measure$minimize) 1 / scores else scores
+      } else {
+        # all voters are equal
+        weights = rep(1, length(voters))
+      }
+
+      # get consensus feature ranking
+      res = fastVoteR::rank_candidates(
+        voters = voters,
+        candidates = candidates,
+        weights = weights,
+        committee_size = committee_size,
+        method = method,
+        borda_score = TRUE,
+        shuffle_candidates = shuffle_features
       )
 
-      res_fns = data.table(
-        feature = features_not_selected,
-        inclusion_probability = 0
-      )
+      setnames(res, "candidate", "feature")
 
-      res = rbindlist(list(res_fs, res_fns))
-
-      private$.feature_ranking[[method]] = res
-      private$.feature_ranking[[method]]
+      res
     },
 
     #' @description
@@ -222,8 +319,11 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     pareto_front = function(type = "empirical") {
       assert_choice(type, choices =  c("empirical", "estimated"))
       result = private$.result
-      measure_id = private$.measure_id
-      minimize = private$.minimize
+      measure = self$measure # get active measure
+      measure_id = ifelse(private$.active_measure == "inner",
+                          sprintf("%s_inner", measure$id),
+                          measure$id)
+      minimize = measure$minimize
 
       # Keep only n_features and performance scores
       cols_to_keep = c("n_features", measure_id)
@@ -261,6 +361,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         # Transform the data (x => 1/x)
         n_features_inv = NULL
         pf[, n_features_inv := 1 / n_features]
+        # remove edge cases where no features were selected
+        pf = pf[n_features > 0]
 
         # Fit the linear model
         form = mlr3misc::formulate(lhs = measure_id, rhs = "n_features_inv")
@@ -298,8 +400,11 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     knee_points = function(method = "NBI", type = "empirical") {
       assert_choice(method, choices = c("NBI"))
       assert_choice(type, choices = c("empirical", "estimated"))
-      measure_id = private$.measure_id
-      minimize = private$.minimize
+      measure = self$measure # get active measure
+      measure_id = ifelse(private$.active_measure == "inner",
+                          sprintf("%s_inner", measure$id),
+                          measure$id)
+      minimize = measure$minimize
 
       pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
 
@@ -346,11 +451,36 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       uniqueN(private$.result$learner_id)
     },
 
-    #' @field measure (`character(1)`)\cr
-    #' Returns the measure id used in the ensemble feature selection.
+    #' @field measure ([mlr3::Measure])\cr
+    #' Returns the 'active' measure that is used in methods of this object.
     measure = function(rhs) {
       assert_ro_binding(rhs)
-      private$.measure_id
+
+      if (private$.active_measure == "outer") {
+        private$.measure
+      } else {
+        private$.inner_measure
+      }
+    },
+
+    #' @field active_measure (`character(1)`)\cr
+    #' Indicates the type of the active performance measure.
+    #'
+    #' During the ensemble feature selection process, the dataset is split into **multiple subsamples** (train/test splits) using an initial resampling scheme.
+    #' So, performance can be evaluated using one of two measures:
+    #'
+    #' - `"outer"`: measure used to evaluate the performance on the test sets.
+    #' - `"inner"`: measure used for optimization and to compute performance during inner resampling on the training sets.
+    active_measure = function(rhs) {
+      assert_ro_binding(rhs)
+      private$.active_measure
+    },
+
+    #' @field n_resamples (`character(1)`)\cr
+    #' Returns the number of times the task was initially resampled in the ensemble feature selection process.
+    n_resamples = function(rhs) {
+      assert_ro_binding(rhs)
+      uniqueN(self$result$resampling_iteration)
     }
   ),
 
@@ -358,14 +488,14 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     .result = NULL, # with no R6 classes
     .stability_global = NULL,
     .stability_learner = NULL,
-    .feature_ranking = NULL,
     .features = NULL,
-    .measure_id = NULL,
-    .minimize = NULL
+    .measure = NULL,
+    .inner_measure = NULL,
+    .active_measure = NULL
   )
 )
 
 #' @export
-as.data.table.EnsembleFSResult = function(x,  ...) {
+as.data.table.EnsembleFSResult = function(x, ...) {
   x$result
 }

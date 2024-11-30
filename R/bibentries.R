@@ -9,7 +9,6 @@ bibentries = c(
     title       = "ecr 2.0",
     booktitle   = "Proceedings of the Genetic and Evolutionary Computation Conference Companion"
   ),
-
   bergstra_2012 = bibentry("article",
     title       = "Random Search for Hyper-Parameter Optimization",
     author      = "James Bergstra and Yoshua Bengio",
@@ -20,8 +19,7 @@ bibentries = c(
     pages       = "281--305",
     url         = "https://jmlr.csail.mit.edu/papers/v13/bergstra12a.html"
   ),
-
-  thomas2017  = bibentry("article",
+  thomas2017 = bibentry("article",
     doi       = "10.1155/2017/1421409",
     year      = "2017",
     publisher = "Hindawi Limited",
@@ -31,8 +29,7 @@ bibentries = c(
     title     = "Probing for Sparse and Fast Variable Selection with Model-Based Boosting",
     journal   = "Computational and Mathematical Methods in Medicine"
   ),
-
-  wu2007      = bibentry("article",
+  wu2007 = bibentry("article",
     doi       = "10.1198/016214506000000843",
     year      = "2007",
     month     = "3",
@@ -44,8 +41,7 @@ bibentries = c(
     title     = "Controlling Variable Selection by the Addition of Pseudovariables",
     journal   = "Journal of the American Statistical Association"
   ),
-
-  guyon2002     = bibentry("article",
+  guyon2002 = bibentry("article",
     title       = "Gene Selection for Cancer Classification using Support Vector Machines",
     volume      = "46",
     issn        = "1573-0565",
@@ -56,7 +52,6 @@ bibentries = c(
     author      = "Isabelle Guyon and Jason Weston and Stephen Barnhill and Vladimir Vapnik",
     year        = "2002"
   ),
-
   kuhn2013 = bibentry("Inbook",
     author    = "Kuhn, Max and Johnson, Kjell",
     chapter   = "Over-Fitting and Model Tuning",
@@ -67,7 +62,6 @@ bibentries = c(
     pages     = "61--92",
     isbn      = "978-1-4614-6849-3"
   ),
-
   saeys2008 = bibentry("article",
     author      = "Saeys, Yvan and Abeel, Thomas and Van De Peer, Yves",
     doi         = "10.1007/978-3-540-87481-2_21",
@@ -79,7 +73,6 @@ bibentries = c(
     volume      = "5212 LNAI",
     year        = "2008"
   ),
-
   abeel2010 = bibentry("article",
     author    = "Abeel, Thomas and Helleputte, Thibault and Van de Peer, Yves and Dupont, Pierre and Saeys, Yvan",
     doi       = "10.1093/BIOINFORMATICS/BTP630",
@@ -92,7 +85,6 @@ bibentries = c(
     volume    = "26",
     year      = "2010"
   ),
-
   pes2020 = bibentry("article",
     author    = "Pes, Barbara",
     doi       = "10.1007/s00521-019-04082-3",
@@ -106,7 +98,6 @@ bibentries = c(
     volume    = "32",
     year      = "2020"
   ),
-
   das1999 = bibentry("article",
     author    = "Das, I",
     issn      = "09344373",
@@ -118,5 +109,31 @@ bibentries = c(
     title     = "On characterizing the 'knee' of the Pareto curve based on normal-boundary intersection",
     volume    = "18",
     year      = "1999"
+  ),
+  meinshausen2010 = bibentry("article",
+    author    = "Meinshausen, Nicolai and Buhlmann, Peter",
+    doi       = "10.1111/J.1467-9868.2010.00740.X",
+    eprint    = "0809.2932",
+    issn      = "1369-7412",
+    journal   = "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+    month     = "sep",
+    number    = "4",
+    pages     = "417--473",
+    publisher = "Oxford Academic",
+    title     = "Stability Selection",
+    volume    = "72",
+    year      = "2010"
+  ),
+  hedou2024 = bibentry("article",
+    author = "Hedou, Julien and Maric, Ivana and Bellan, Gregoire and Einhaus, Jakob and Gaudilliere, Dyani K. and Ladant, Francois Xavier and Verdonk, Franck and Stelzer, Ina A. and Feyaerts, Dorien and Tsai, Amy S. and Ganio, Edward A. and Sabayev, Maximilian and Gillard, Joshua and Amar, Jonas and Cambriel, Amelie and Oskotsky, Tomiko T. and Roldan, Alennie and Golob, Jonathan L. and Sirota, Marina and Bonham, Thomas A. and Sato, Masaki and Diop, Maigane and Durand, Xavier and Angst, Martin S. and Stevenson, David K. and Aghaeepour, Nima and Montanari, Andrea and Gaudilliere, Brice", #nolint
+    doi = "10.1038/s41587-023-02033-x",
+    issn = "1546-1696",
+    journal = "Nature Biotechnology 2024",
+    month = "jan",
+    pages = "1--13",
+    publisher = "Nature Publishing Group",
+    title = "Discovery of sparse, reliable omic biomarkers with Stabl",
+    url = "https://www.nature.com/articles/s41587-023-02033-x",
+    year = "2024"
   )
 )
