@@ -136,6 +136,8 @@ ensemble_fselect = function(
 
   # extract scores on the test sets
   scores = bmr$score(measure)
+  # remove `bmr_score` class
+  class(scores) = c("data.table", "data.frame")
 
   set(scores, j = "features", value = features)
   set(scores, j = "n_features", value = n_features)
