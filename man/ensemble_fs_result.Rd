@@ -21,6 +21,9 @@ Returns a tabular view of the ensemble feature selection.\cr
 \item \code{benchmark_result} (\code{logical(1)})\cr
 Whether to add the learner, task and resampling information from the benchmark result.
 }
+\item \code{c(...)}\cr
+(\link{EnsembleFSResult}, ...) -> \link{EnsembleFSResult}\cr
+Combines multiple \link{EnsembleFSResult} objects into a new \link{EnsembleFSResult}.
 }
 }
 
@@ -119,6 +122,7 @@ Returns the number of times the task was initially resampled in the ensemble fea
 \item \href{#method-EnsembleFSResult-print}{\code{EnsembleFSResult$print()}}
 \item \href{#method-EnsembleFSResult-help}{\code{EnsembleFSResult$help()}}
 \item \href{#method-EnsembleFSResult-set_active_measure}{\code{EnsembleFSResult$set_active_measure()}}
+\item \href{#method-EnsembleFSResult-combine}{\code{EnsembleFSResult$combine()}}
 \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
 \item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
 \item \href{#method-EnsembleFSResult-pareto_front}{\code{EnsembleFSResult$pareto_front()}}
@@ -236,6 +240,38 @@ Should be either \code{"inner"} (optimization measure used in training sets)
 or \code{"outer"} (measure used in test sets, default value).}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-combine"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-combine}{}}}
+\subsection{Method \code{combine()}}{
+Combines a second \link{EnsembleFSResult} into the current object, modifying it \strong{in-place}.
+If the second \link{EnsembleFSResult} (\code{efsr}) is \code{NULL}, the method returns the object unmodified.
+
+Both objects must have the same task features and \code{measure}.
+If the \code{inner_measure} differs between the objects or is \code{NULL} in either, it will be set to \code{NULL} in the combined object.
+Additionally, the \code{importance} column will be removed if it is missing in either object.
+If both objects contain a \code{benchmark_result}, these will be combined.
+Otherwise, the combined object will have a \code{NULL} value for \code{benchmark_result}.
+
+This method modifies the object by reference.
+To preserve the original state, explicitly \verb{$clone()} the object beforehand.
+Alternatively, you can use the \code{\link[=c]{c()}} function, which internally calls this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$combine(efsr)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{efsr}}{(\link{EnsembleFSResult})\cr
+A second \link{EnsembleFSResult} object to combine with the current object.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns the object itself, but modified \strong{by reference}.
 }
 }
 \if{html}{\out{<hr>}}
