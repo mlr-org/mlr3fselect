@@ -219,6 +219,117 @@ test_that("EnsembleFSResult initialization", {
   expect_false(efsr$measure$minimize)
 })
 
+test_that("combining EnsembleFSResult objects", {
+  selected_features = list(
+    c("V3", "V20"),
+    c("V3", "V5", "V19", "V15"),
+    c("V11", "V7", "V6", "V8"),
+    c("V11"),
+    c("V17", "V2", "V12", "V9", "V1"),
+    c("V11", "V18", "V9")
+  )
+  feats = paste0("V", 1:20)
+
+  res1 = data.table(
+    resampling_iteration = c(1, 1, 2, 2, 3, 3),
+    learner_id = rep(c("lrn1", "lrn2"), 3),
+    n_features = c(2, 4, 4, 1, 5, 3),
+    features = selected_features,
+    classif.ce = runif(6),
+    classif.acc_inner = runif(6) # inner measure has the `_inner` end-fix
+  )
+
+  # same result, just different learners
+  res2 = data.table(
+    resampling_iteration = c(1, 1, 2, 2, 3, 3),
+    learner_id = rep(c("lrn3", "lrn4"), 3),
+    n_features = c(2, 4, 4, 1, 5, 3),
+    features = selected_features,
+    classif.ce = runif(6),
+    classif.acc_inner = runif(6) # inner measure has the `_inner` end-fix
+  )
+
+  # no `inner_measure`
+  res3 = res2[, -c("classif.acc_inner")]
+  # different `measure`
+  res4 = setnames(copy(res3), "classif.ce", "classif.auc")
+  # different `inner_measure`
+  res5 = setnames(copy(res2), "classif.acc_inner", "classif.ce_inner")
+
+  # initialize efsr objects
+  m1 = msr("classif.ce")
+  m2 = msr("classif.acc")
+  m3 = msr("classif.auc")
+  efsr1 = EnsembleFSResult$new(res1, features = feats, measure = m1, inner_measure = m2)
+  efsr2 = EnsembleFSResult$new(res2, features = feats, measure = m1, inner_measure = m2)
+  efsr3 = EnsembleFSResult$new(res3, features = feats, measure = m1)
+  efsr4 = EnsembleFSResult$new(res4, features = feats, measure = m3)
+  efsr5 = EnsembleFSResult$new(res5, features = feats, measure = m1, inner_measure = m1)
+
+  # combine efsr with nothing gives the same object back deep-cloned
+  efsr11 = c(efsr1)
+  assert_class(efsr11, "EnsembleFSResult")
+  expect_equal(efsr1$result$classif.ce, efsr11$result$classif.ce)
+
+  # combine efsrs with same inner and outer measures
+  comb1 = efsr1$clone(deep = TRUE)$combine(efsr2)
+  comb11 = c(efsr1, efsr2) # same as above
+  # efsr1 doesn't change
+  expect_data_table(efsr1$result, nrows = 6L)
+  expect_equal(efsr1$n_learners, 2L)
+  expect_equal(get_private(efsr1)$.measure$id, "classif.ce")
+  expect_equal(get_private(efsr1)$.inner_measure$id, "classif.acc")
+  # efsr2 doesn't change either
+  expect_data_table(efsr2$result, nrows = 6)
+  expect_equal(efsr2$n_learners, 2)
+  expect_equal(get_private(efsr2)$.measure$id, "classif.ce")
+  expect_equal(get_private(efsr2)$.inner_measure$id, "classif.acc")
+  # combined object has more rows
+  expect_data_table(comb1$result, nrows = 12L)
+  expect_data_table(comb11$result, nrows = 12L)
+  expect_equal(comb1$n_learners, 4L)
+  expect_equal(comb11$n_learners, 4L)
+  expect_equal(get_private(comb1)$.measure$id, "classif.ce")
+  expect_equal(get_private(comb11)$.measure$id, "classif.ce")
+  expect_equal(get_private(comb1)$.inner_measure$id, "classif.acc")
+  expect_equal(get_private(comb11)$.inner_measure$id, "classif.acc")
+
+  # no `inner_measure` in the 2nd efsr
+  comb2 = efsr1$clone(deep = TRUE)$combine(efsr3)
+  comb22 = c(efsr1, efsr3)
+  expect_equal(get_private(efsr1)$.measure$id, "classif.ce")
+  expect_equal(get_private(efsr1)$.inner_measure$id, "classif.acc")
+  expect_null(get_private(efsr3)$.inner_measure)
+  expect_data_table(comb2$result, nrows = 12L)
+  expect_data_table(comb22$result, nrows = 12L)
+  expect_equal(comb2$n_learners, 4L)
+  expect_equal(comb22$n_learners, 4L)
+  expect_equal(get_private(comb2)$.measure$id, "classif.ce")
+  expect_equal(get_private(comb22)$.measure$id, "classif.ce")
+  expect_null(get_private(comb2)$.inner_measure$id)
+  expect_null(get_private(comb22)$.inner_measure$id)
+
+  # different (outer) measure => not possible to combine
+  expect_error(efsr1$clone(deep = TRUE)$combine(efsr4), "Must be TRUE")
+
+  # different `inner_measure`
+  comb3 = efsr1$clone(deep = TRUE)$combine(efsr5)
+  expect_data_table(comb3$result, nrows = 12L)
+  expect_equal(comb3$n_learners, 4L)
+  expect_equal(get_private(comb3)$.measure$id, "classif.ce")
+  expect_null(get_private(comb3)$.inner_measure$id)
+  # `inner_measure`s of the individual objects did not change
+  expect_equal(get_private(efsr1)$.inner_measure$id, "classif.acc")
+  expect_equal(get_private(efsr5)$.inner_measure$id, "classif.ce")
+
+  # multi-combine works
+  comb_all = c(efsr1, efsr2, efsr3, efsr5)
+  expect_data_table(comb_all$result, nrows = 24L)
+  expect_equal(comb_all$n_learners, 4L)
+  expect_equal(get_private(comb_all)$.measure$id, "classif.ce")
+  expect_null(get_private(comb_all)$.inner_measure$id)
+})
+
 test_that("different callbacks can be set", {
   callback_test = callback_batch_fselect("mlr3fselect.test",
     on_eval_before_archive = function(callback, context) {

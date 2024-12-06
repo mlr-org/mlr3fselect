@@ -62,3 +62,44 @@ test_that("embedded efs works", {
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
   expect_equal(names(feature_ranking), c("feature", "score", "norm_score", "borda_score"))
 })
+
+test_that("combine embedded efs results", {
+  task = tsk("sonar")
+  with_seed(42, {
+    efsr1 = embedded_ensemble_fselect(
+      task = task,
+      learners = lrns(c("classif.rpart", "classif.featureless")),
+      init_resampling = rsmp("subsampling", repeats = 2),
+      measure = msr("classif.ce")
+    )
+  })
+
+  with_seed(43, {
+    efsr2 = embedded_ensemble_fselect(
+      task = task,
+      learners = lrns(c("classif.rpart", "classif.featureless")),
+      init_resampling = rsmp("subsampling", repeats = 3),
+      measure = msr("classif.ce")
+    )
+  })
+
+  comb1 = efsr1$clone(deep = TRUE)$combine(efsr2)
+  comb2 = c(efsr1, efsr2)
+
+  expect_class(comb1, "EnsembleFSResult")
+  expect_class(comb2, "EnsembleFSResult")
+  expect_data_table(comb1$result, nrows = 10L)
+  expect_data_table(comb2$result, nrows = 10L)
+  expect_equal(comb1$n_learners, 2L)
+  expect_equal(comb2$n_learners, 2L)
+  expect_equal(get_private(comb1)$.measure$id, "classif.ce")
+  expect_equal(get_private(comb2)$.measure$id, "classif.ce")
+  expect_null(get_private(comb1)$.inner_measure)
+  expect_null(get_private(comb2)$.inner_measure)
+  assert_benchmark_result(comb1$benchmark_result)
+  assert_benchmark_result(comb2$benchmark_result)
+  expect_equal(comb1$benchmark_result$n_resample_results, 4L)
+  expect_equal(comb2$benchmark_result$n_resample_results, 4L)
+  expect_equal(nrow(get_private(comb1$benchmark_result)$.data$data$fact), 10L)
+  expect_equal(nrow(get_private(comb2$benchmark_result)$.data$data$fact), 10L)
+})
