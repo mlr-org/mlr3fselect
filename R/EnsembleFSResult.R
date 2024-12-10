@@ -15,6 +15,9 @@
 #'     * `x` ([EnsembleFSResult])
 #'     * `benchmark_result` (`logical(1)`)\cr
 #'       Whether to add the learner, task and resampling information from the benchmark result.
+#' * `c(...)`\cr
+#'   ([EnsembleFSResult], ...) -> [EnsembleFSResult]\cr
+#'   Combines multiple [EnsembleFSResult] objects into a new [EnsembleFSResult].
 #'
 #' @references
 #' `r format_bib("das1999", "meinshausen2010")`
@@ -164,6 +167,75 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
       }
 
       private$.active_measure = which
+    },
+
+    #' @description
+    #' Combines a second [EnsembleFSResult] into the current object, modifying it **in-place**.
+    #' If the second [EnsembleFSResult] (`efsr`) is `NULL`, the method returns the object unmodified.
+    #'
+    #' Both objects must have the same task features and `measure`.
+    #' If the `inner_measure` differs between the objects or is `NULL` in either, it will be set to `NULL` in the combined object.
+    #' Additionally, the `importance` column will be removed if it is missing in either object.
+    #' If both objects contain a `benchmark_result`, these will be combined.
+    #' Otherwise, the combined object will have a `NULL` value for `benchmark_result`.
+    #'
+    #' This method modifies the object by reference.
+    #' To preserve the original state, explicitly `$clone()` the object beforehand.
+    #' Alternatively, you can use the [c()] function, which internally calls this method.
+    #'
+    #' @param efsr ([EnsembleFSResult])\cr
+    #'   A second [EnsembleFSResult] object to combine with the current object.
+    #'
+    #' @return
+    #' Returns the object itself, but modified **by reference**.
+    combine = function(efsr) {
+      if (!is.null(efsr)) {
+        assert_class(efsr, "EnsembleFSResult")
+
+        # Ensure both objects have the same task features
+        assert_set_equal(private$.features, get_private(efsr)$.features)
+
+        # Ensure both objects have the same (outer) measure
+        assert_set_equal(private$.measure$id, get_private(efsr)$.measure$id)
+
+        # Set inner measure to NULL if the measure ids are different or one of them is NULL
+        inner_msr = private$.inner_measure
+        inner_msr2 = get_private(efsr)$.inner_measure
+        result2 = get_private(efsr)$.result
+        if (is.null(inner_msr) || is.null(inner_msr2) || inner_msr$id != inner_msr2$id) {
+          private$.inner_measure = NULL
+
+          # Remove associated inner measure scores from results
+          if (!is.null(inner_msr)) {
+            private$.result[[sprintf("%s_inner", inner_msr$id)]] = NULL
+          }
+          if (!is.null(inner_msr2)) {
+            result2[[sprintf("%s_inner", inner_msr2$id)]] = NULL
+          }
+        }
+
+        # remove importance scores if missing in either object
+        has_imp = "importance" %in% names(private$.result)
+        has_imp2 = "importance" %in% names(result2)
+        if (!has_imp || !has_imp2) {
+          if (has_imp) private$.result[["importance"]] = NULL
+          if (has_imp2) result2[["importance"]] = NULL
+        }
+
+        # Combine results from both objects
+        private$.result = data.table::rbindlist(list(private$.result, result2), fill = FALSE)
+
+        # Merge benchmark results if available in both objects
+        has_bmr = !is.null(self$benchmark_result)
+        has_bmr2 = !is.null(efsr$benchmark_result)
+        if (has_bmr && has_bmr2) {
+          self$benchmark_result = self$benchmark_result$combine(efsr$benchmark_result)
+        } else {
+          self$benchmark_result = NULL
+        }
+      }
+
+      invisible(self)
     },
 
     #' @description
@@ -498,4 +570,21 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
 #' @export
 as.data.table.EnsembleFSResult = function(x, ...) {
   x$result
+}
+
+#' @export
+c.EnsembleFSResult = function(...) {
+  efsrs = list(...)
+
+  # Deep clone the first object for initialization
+  init = efsrs[[1]]$clone(deep = TRUE)
+
+  # If there's only one object, return it directly
+  if (length(efsrs) == 1) {
+    return(init)
+  }
+
+  # Combine the remaining objects
+  rest = tail(efsrs, -1)
+  Reduce(function(lhs, rhs) lhs$combine(rhs), rest, init = init)
 }
