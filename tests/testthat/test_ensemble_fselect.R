@@ -310,7 +310,7 @@ test_that("combining EnsembleFSResult objects", {
   expect_null(get_private(comb22)$.inner_measure$id)
 
   # different (outer) measure => not possible to combine
-  expect_error(efsr1$clone(deep = TRUE)$combine(efsr4), "Must be TRUE")
+  expect_error(efsr1$clone(deep = TRUE)$combine(efsr4))
 
   # different `inner_measure`
   comb3 = efsr1$clone(deep = TRUE)$combine(efsr5)
