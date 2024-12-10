@@ -193,10 +193,10 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         assert_class(efsr, "EnsembleFSResult")
 
         # Ensure both objects have the same task features
-        assert_true(setequal(private$.features, get_private(efsr)$.features))
+        assert_set_equal(private$.features, get_private(efsr)$.features)
 
         # Ensure both objects have the same (outer) measure
-        assert_true(private$.measure$id == get_private(efsr)$.measure$id)
+        assert_set_equal(private$.measure$id, get_private(efsr)$.measure$id)
 
         # Set inner measure to NULL if the measure ids are different or one of them is NULL
         inner_msr = private$.inner_measure
