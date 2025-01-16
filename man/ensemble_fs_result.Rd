@@ -158,7 +158,7 @@ The column with the performance scores on the inner resampling of the train sets
 but note that it should be named as \verb{\{inner_measure$id\}_inner} to distinguish from
 the \code{{measure$id}}.}
 
-\item{\code{features}}{(\code{\link[=character]{character()}})\cr
+\item{\code{features}}{(\code{character()})\cr
 The vector of features of the task that was used in the ensemble feature
 selection.}
 

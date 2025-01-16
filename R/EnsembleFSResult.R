@@ -83,7 +83,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'  The column with the performance scores on the inner resampling of the train sets is not mandatory,
     #'  but note that it should be named as `{inner_measure$id}_inner` to distinguish from
     #'  the `{measure$id}`.
-    #' @param features ([character()])\cr
+    #' @param features (`character()`)\cr
     #'  The vector of features of the task that was used in the ensemble feature
     #'  selection.
     #' @param benchmark_result ([mlr3::BenchmarkResult])\cr
