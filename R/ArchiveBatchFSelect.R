@@ -184,8 +184,7 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
       tab = if (is.null(batch)) self$data else self$data[list(batch), , on = "batch_nr"]
 
       if (self$codomain$target_length == 1L) {
-        y = tab[[self$cols_y]] * -self$codomain$maximization_to_minimization
-
+        y = tab[[self$cols_y]] * -self$codomain$direction
         if (ties_method == "least_features") {
           ii = which(y == max(y))
           tab = tab[ii]
@@ -197,7 +196,7 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
         }
       } else {
         ymat = t(as.matrix(tab[, self$cols_y, with = FALSE]))
-        ymat = self$codomain$maximization_to_minimization * ymat
+        ymat = self$codomain$direction * ymat
         tab[!is_dominated(ymat)]
       }
     }
