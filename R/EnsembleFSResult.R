@@ -379,17 +379,26 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param type (`character(1)`)\cr
     #'  Specifies the type of Pareto front to return. See details.
+    #' @param max_nfeatures (`integer(1)`)\cr
+    #'  Specifies the maximum number of features for which the estimated Pareto
+    #'  front is computed. Applicable only when `type = "estimated"`.
+    #'  If `NULL` (default), the maximum number of features
+    #'  is determined by the ensemble feature selection process.
     #'
     #' @details
     #' Two options are available for the Pareto front:
     #' - `"empirical"` (default): returns the empirical Pareto front.
     #' - `"estimated"`: the Pareto front points are estimated by fitting a linear model with the inversed of the number of features (\eqn{1/x}) as input and the associated performance scores as output.
-    #'  This method is useful when the Pareto points are sparse and the front  assumes a convex shape if better performance corresponds to lower measure values (e.g. classification error), or a concave shape otherwise (e.g. classification accuracy).
-    #'  The `estimated` Pareto front will include points for a number of features ranging from 1 up to the maximum number found in the empirical Pareto front.
+    #'
+    #'  This method is useful when the Pareto points are sparse and the front assumes a convex shape if better performance corresponds to lower measure values (e.g. classification error), or a concave shape otherwise (e.g. classification accuracy).
+    #'
+    #'  When `type = "estimated"`, the estimated Pareto front includes points with the number of features ranging from 1 up to `max_nfeatures`.
+    #'  If `max_nfeatures` is not provided, it defaults to the maximum number of features available in the ensemble feature selection `result`, i.e. the maximum out of all learners and resamplings included.
     #'
     #' @return A [data.table::data.table] with columns the number of features and the performance that together form the Pareto front.
-    pareto_front = function(type = "empirical") {
+    pareto_front = function(type = "empirical", max_nfeatures = NULL) {
       assert_choice(type, choices =  c("empirical", "estimated"))
+      assert_numeric(max_nfeatures, lower = 1, null.ok = TRUE)
       result = private$.result
       measure = self$measure # get active measure
       measure_id = ifelse(private$.active_measure == "inner",
@@ -441,7 +450,8 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
         model = stats::lm(formula = form, data = pf)
 
         # Predict values using the model to create a smooth curve
-        pf_pred = data.table(n_features = seq(1, max(data$n_features)))
+        if (is.null(max_nfeatures)) max_nfeatures = max(data[["n_features"]])
+        pf_pred = data.table(n_features = seq(1, max_nfeatures))
         pf_pred[, n_features_inv := 1 / n_features]
         pf_pred[, (measure_id) := stats::predict(model, newdata = pf_pred)]
         pf_pred$n_features_inv = NULL
@@ -463,13 +473,18 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #' The knee point is determined as the Pareto point with the maximum distance from this line, see Das (1999).
     #'
     #' @param method (`character(1)`)\cr
-    #'  Type of method to use to identify the knee point. See details.
+    #'  Type of method to use to identify the knee point.
     #' @param type (`character(1)`)\cr
     #'  Specifies the type of Pareto front to use for the identification of the knee point.
+    #' @param max_nfeatures (`integer(1)`)\cr
+    #'  Specifies the maximum number of features for which the estimated Pareto
+    #'  front is computed. Applicable only when `type = "estimated"`.
+    #'  If `NULL` (default), the maximum number of features
+    #'  is determined by the ensemble feature selection process.
     #'  See `pareto_front()` method for more details.
     #'
     #' @return A [data.table::data.table] with the knee point(s) of the Pareto front.
-    knee_points = function(method = "NBI", type = "empirical") {
+    knee_points = function(method = "NBI", type = "empirical", max_nfeatures = NULL) {
       assert_choice(method, choices = c("NBI"))
       assert_choice(type, choices = c("empirical", "estimated"))
       measure = self$measure # get active measure
@@ -478,7 +493,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
                           measure$id)
       minimize = measure$minimize
 
-      pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated")
+      pf = if (type == "empirical") self$pareto_front() else self$pareto_front(type = "estimated", max_nfeatures = max_nfeatures)
 
       # Scale the Pareto front data to (0-1) range
       nfeats = perf = dist_to_line = NULL

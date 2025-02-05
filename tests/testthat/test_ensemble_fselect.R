@@ -41,6 +41,9 @@ test_that("efs works", {
   pf_pred = efsr$pareto_front(type = "estimated")
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
   expect_equal(names(pf_pred), c("n_features", "classif.ce"))
+  # restrict estimation of Pareto front up to a specific number of features
+  pf_pred2 = efsr$pareto_front(type = "estimated", max_nfeatures = 10)
+  expect_equal(pf_pred[1:10, classif.ce], pf_pred2[, classif.ce])
 
   # knee_points
   kps = efsr$knee_points()
@@ -49,6 +52,12 @@ test_that("efs works", {
   kpse = efsr$knee_points(type = "estimated")
   expect_data_table(kpse, nrows = 1)
   expect_true(kps$n_features != kpse$n_features)
+  # setting the default `max_nfeatures` doesn't change the Pareto front
+  kpse2 = efsr$knee_points(type = "estimated", max_nfeatures = max(efsr$result$n_features))
+  expect_equal(kpse, kpse2)
+  # less points in the estimated pareto front, the knee point changes
+  kpse3 = efsr$knee_points(type = "estimated", max_nfeatures = 15)
+  expect_true(kpse$n_features != kpse3$n_features)
 
   # data.table conversion
   tab = as.data.table(efsr)
