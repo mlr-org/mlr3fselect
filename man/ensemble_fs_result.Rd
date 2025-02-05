@@ -388,7 +388,7 @@ This function identifies the \strong{Pareto front} of the ensemble feature
 selection process, i.e., the set of points that represent the trade-off
 between the number of features and performance (e.g. classification error).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$pareto_front(type = "empirical")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$pareto_front(type = "empirical", max_nfeatures = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -396,6 +396,12 @@ between the number of features and performance (e.g. classification error).
 \describe{
 \item{\code{type}}{(\code{character(1)})\cr
 Specifies the type of Pareto front to return. See details.}
+
+\item{\code{max_nfeatures}}{(\code{integer(1)})\cr
+Specifies the maximum number of features for which the estimated Pareto
+front is computed. Applicable only when \code{type = "estimated"}.
+If \code{NULL} (default), the maximum number of features
+is determined by the ensemble feature selection process.}
 }
 \if{html}{\out{</div>}}
 }
@@ -404,9 +410,12 @@ Two options are available for the Pareto front:
 \itemize{
 \item \code{"empirical"} (default): returns the empirical Pareto front.
 \item \code{"estimated"}: the Pareto front points are estimated by fitting a linear model with the inversed of the number of features (\eqn{1/x}) as input and the associated performance scores as output.
-This method is useful when the Pareto points are sparse and the front  assumes a convex shape if better performance corresponds to lower measure values (e.g. classification error), or a concave shape otherwise (e.g. classification accuracy).
-The \code{estimated} Pareto front will include points for a number of features ranging from 1 up to the maximum number found in the empirical Pareto front.
 }
+
+This method is useful when the Pareto points are sparse and the front assumes a convex shape if better performance corresponds to lower measure values (e.g. classification error), or a concave shape otherwise (e.g. classification accuracy).
+
+When \code{type = "estimated"}, the estimated Pareto front includes points with the number of features ranging from 1 up to \code{max_nfeatures}.
+If \code{max_nfeatures} is not provided, it defaults to the maximum number of features available in the ensemble feature selection \code{result}, i.e. the maximum out of all learners and resamplings included.
 }
 
 \subsection{Returns}{
@@ -420,17 +429,27 @@ A \link[data.table:data.table]{data.table::data.table} with columns the number o
 This function implements various \emph{knee} point identification (KPI) methods, which select points in the Pareto front, such that an optimal trade-off between performance and number of features is achieved.
 In most cases, only one such point is returned.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(method = "NBI", type = "empirical")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(
+  method = "NBI",
+  type = "empirical",
+  max_nfeatures = NULL
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{method}}{(\code{character(1)})\cr
-Type of method to use to identify the knee point. See details.}
+Type of method to use to identify the knee point.}
 
 \item{\code{type}}{(\code{character(1)})\cr
-Specifies the type of Pareto front to use for the identification of the knee point.
+Specifies the type of Pareto front to use for the identification of the knee point.}
+
+\item{\code{max_nfeatures}}{(\code{integer(1)})\cr
+Specifies the maximum number of features for which the estimated Pareto
+front is computed. Applicable only when \code{type = "estimated"}.
+If \code{NULL} (default), the maximum number of features
+is determined by the ensemble feature selection process.
 See \code{pareto_front()} method for more details.}
 }
 \if{html}{\out{</div>}}
