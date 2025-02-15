@@ -113,14 +113,16 @@ FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
     #'
     #' @param ... (ignored).
     print = function(...) {
-      catf(format(self))
-      catf(str_indent("* State: ", if (is.null(private$.result)) "Not optimized" else "Optimized"))
-      catf(str_indent("* Objective:", format(self$objective)))
-      catf(str_indent("* Terminator:", format(self$terminator)))
+      cli_h1("{.cls {class(self)[1]}}")
+      is_optimized = if (is.null(private$.result)) "Not optimized" else "Optimized"
+      cli_li("State: {is_optimized}")
+      cli_li("Objective: {.cls {class(self$objective)[1]}} ({self$objective$id})")
+      cli_li("Terminator: {.cls {class(self$terminator)[1]}}")
+
       if (!is.null(private$.result)) {
-        catf("* Result:")
+        cli_li("Result:")
         print(self$result[, c(self$archive$cols_x, self$archive$cols_y), with = FALSE])
-        catf("* Archive:")
+        cli_li("Archive")
         print(as.data.table(self$archive)[, c(self$archive$cols_x, self$archive$cols_y), with = FALSE])
       }
     }
