@@ -68,10 +68,13 @@ FSelector = R6Class("FSelector",
     #'
     #' @return (`character()`).
     print = function() {
-      catn(format(self), if (is.na(self$label)) "" else paste0(": ", self$label))
-      catf(str_indent("* Parameters:", as_short_string(self$param_set$values)))
-      catf(str_indent("* Properties:", self$properties))
-      catf(str_indent("* Packages:", self$packages))
+      msg_h = if (is.na(self$label)) "" else paste0(": ", self$label)
+      cat_cli({
+        cli_h1("{.cls {class(self)[1L]}}{msg_h}")
+        cli_li("Parameters: {as_short_string(self$param_set$values)}")
+        cli_li("Properties: {self$properties}")
+        cli_li("Packages: {.pkg {self$packages}}")
+      })
     },
 
     #' @description

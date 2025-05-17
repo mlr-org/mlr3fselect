@@ -139,8 +139,7 @@ EnsembleFSResult = R6Class("EnsembleFSResult",
     #'
     #' @param ... (ignored).
     print = function(...) {
-      catf("%s with %s learners and %s initial resamplings",
-           format(self), self$n_learners, self$n_resamples)
+      cat_cli(cli_h1("{.cls {class(self)[1L]}} with {.val {self$n_learners}} learners and {.val {self$n_resamples}} initial resamplings"))
       print(private$.result[, c("resampling_iteration", "learner_id", "n_features"), with = FALSE])
     },
 

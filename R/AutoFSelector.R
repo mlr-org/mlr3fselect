@@ -234,19 +234,25 @@ AutoFSelector = R6Class("AutoFSelector",
     #' Printer.
     #' @param ... (ignored).
     print = function() {
-      catf(format(self))
-      catf(str_indent("* Model:", if (is.null(self$model)) "-" else class(self$model)[1L]))
-      catf(str_indent("* Packages:", self$packages))
-      catf(str_indent("* Predict Type:", self$predict_type))
-      catf(str_indent("* Feature Types:", self$feature_types))
-      catf(str_indent("* Properties:", self$properties))
+      msg_h =  if (is.null(self$label) || is.na(self$label)) "" else paste0(": ", self$label)
+      model = if (is.null(self$model)) "-" else class(self$model)[1L]
+
+      cat_cli({
+        cli_h1("{.cls {class(self)[1L]}} ({self$id}){msg_h}")
+        cli_li("Model: {model}")
+        cli_li("Packages: {.pkg {self$packages}}")
+        cli_li("Predict Type: {self$predict_type}")
+        cli_li("Feature Types: {self$feature_types}")
+        cli_li("Properties: {self$properties}")
+      })
+
       w = self$warnings
       e = self$errors
       if (length(w)) {
-        catf(str_indent("* Warnings:", w))
+        cat_cli(cli_alert_warning("Warnings: {w}"))
       }
       if (length(e)) {
-        catf(str_indent("* Errors:", e))
+        cat_cli(cli_alert_danger("Errors: {e}"))
       }
     }
   ),
