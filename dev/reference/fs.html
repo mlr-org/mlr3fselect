@@ -105,10 +105,11 @@ Keys passed to the respective <a href="https://mlr3misc.mlr-org.com/reference/Di
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># random search with batch size of 5</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="op">(</span><span class="st">"random_search"</span>, batch_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;FSelectorBatchRandomSearch&gt;: Random Search</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: batch_size=5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: single-crit, multi-crit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3fselect</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;FSelectorBatchRandomSearch&gt;</span><span style="font-weight: bold;">: Random Search</span> <span style="color: #00BBBB;">─────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: batch_size=5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: single-crit and multi-crit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3fselect</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run time terminator with 20 seconds</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"run_time"</span>, secs <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
