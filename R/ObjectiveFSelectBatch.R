@@ -58,6 +58,8 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
     .eval_many = function(xss, resampling) {
       private$.xss = xss
 
+     lg$trace("Evaluating hyperparameter configuration %s", as_short_string(xs))
+
       tasks = map(private$.xss, function(x) {
         state = self$task$feature_names[unlist(x)]
         task = self$task$clone()
@@ -71,12 +73,18 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       private$.design = data.table(task = tasks, learner = list(self$learner), resampling = resampling)
       call_back("on_eval_after_design", self$callbacks, self$context)
 
+      lg$debug("Resampling feature subsets")
+
       # learner is already cloned, task is internally cloned by PipeOpSelect, and resampling is not changed
       private$.benchmark_result = benchmark(private$.design, store_models = self$store_models || private$.model_required, clone = character())
       call_back("on_eval_after_benchmark", self$callbacks, self$context)
 
+      lg$debug("Aggregating performance")
+
       # aggregate performance scores
       private$.aggregated_performance = private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+
+      lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
       # add runtime to evaluations
       time = map_dbl(private$.benchmark_result$resample_results$resample_result, function(rr) {
@@ -86,6 +94,7 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
 
       # store benchmark result in archive
       if (self$store_benchmark_result) {
+        lg$debug("Storing resample result")
         self$archive$benchmark_result$combine(private$.benchmark_result)
         set(private$.aggregated_performance, j = "uhash", value = private$.benchmark_result$uhashes)
       }

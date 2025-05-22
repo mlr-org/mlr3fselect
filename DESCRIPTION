@@ -24,10 +24,10 @@ URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
 BugReports: https://github.com/mlr-org/mlr3fselect/issues
 Depends:
-    mlr3 (>= 0.21.1),
+    mlr3 (>= 0.23.0.9000),
     R (>= 3.1.0)
 Imports:
-    bbotk (>= 1.5.0),
+    bbotk (>= 1.5.0.9000),
     checkmate (>= 2.0.0),
     cli,
     data.table,
@@ -44,7 +44,9 @@ Suggests:
     rpart,
     fastVoteR,
     testthat (>= 3.0.0)
-Remotes: mlr-org/mlr3misc
+Remotes:
+    mlr-org/mlr3,
+    mlr-org/bbotk
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
