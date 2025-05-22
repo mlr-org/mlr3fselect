@@ -29,7 +29,7 @@
   x$add("mlr3fselect.one_se_rule", load_callback_one_se_rule)
   x$add("mlr3fselect.internal_tuning", load_callback_internal_tuning)
 
-  assign("lg", lgr::get_logger("bbotk"), envir = parent.env(environment()))
+  assign("lg", lgr::get_logger("mlr3/bbotk"), envir = parent.env(environment()))
   if (Sys.getenv("IN_PKGDOWN") == "true") {
     lg$set_threshold("warn")
   }
