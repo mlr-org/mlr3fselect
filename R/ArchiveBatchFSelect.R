@@ -158,7 +158,7 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
     #'
     #' @param ... (ignored).
     print = function() {
-      catf(format(self))
+      cat_cli(cli_h1("{.cls {class(self)[1]}}"))
       print(self$data[, setdiff(names(self$data), "uhash"), with = FALSE], digits=2)
     },
 
