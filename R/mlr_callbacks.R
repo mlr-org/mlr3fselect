@@ -48,7 +48,7 @@ load_callback_backup = function() {
 #' @source
 #' `r format_bib("guyon2002")`
 #'
-#' @examples
+#' @examplesIf requireNamespace("mlr3learners", quietly = TRUE)
 #' clbk("mlr3fselect.svm_rfe")
 #'
 #' library(mlr3learners)

@@ -45,9 +45,7 @@ Task to operate on.}
 The learners to be used for feature selection.}
 
 \item{init_resampling}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
-The initial resampling strategy of the data, from which each train set
-will be passed on to the \link{auto_fselector} to optimize the learners and
-perform feature selection.
+The initial resampling strategy of the data, from which each train set will be passed on to the \link{auto_fselector} to optimize the learners and perform feature selection.
 Each test set will be used for prediction on the final models returned by \link{auto_fselector}.
 Can only be \link[mlr3:mlr_resamplings_subsampling]{mlr3::ResamplingSubsampling} or \link[mlr3:mlr_resamplings_bootstrap]{mlr3::ResamplingBootstrap}.}
 
@@ -94,14 +92,11 @@ Results are stored in an \link{EnsembleFSResult}.
 The result object also includes the performance scores calculated during the inner resampling of the training sets, using models with the best feature subsets.
 These scores are stored in a column named \verb{\{measure_id\}_inner}.
 }
-\section{Note}{
-
-
+\note{
 The \strong{active measure} of performance is the one applied to the test sets.
 This is preferred, as inner resampling scores on the training sets are likely to be overestimated when using the final models.
 Users can change the active measure by using the \code{set_active_measure()} method of the \link{EnsembleFSResult}.
 }
-
 \examples{
 \donttest{
   efsr = ensemble_fselect(

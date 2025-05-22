@@ -42,7 +42,6 @@
 #'
 #' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
 #' * Run a feature selection with [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
-#' * [Feature Selection](https://mlr-org.com/gallery/optimization/2020-09-14-mlr3fselect-basic/) on the Titanic data set.
 #'
 #' @template param_task
 #' @template param_learner
