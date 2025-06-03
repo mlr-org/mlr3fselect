@@ -18,5 +18,5 @@ test_that("FSelectorAsyncExhaustiveSearch works", {
   expect_data_table(fselector$optimize(instance), nrows = 1)
   expect_data_table(instance$archive$data, nrows = 15)
 
-  expect_rush_reset(instance$rush)
+  expect_rush_reset(instance$rush, type = "kill")
 })

@@ -23,7 +23,15 @@
 #' @template param_id
 #'
 #' @export
-#' @inherit AutoFSelector examples
+#' @examples
+#' afs = auto_fselector(
+#'   fselector = fs("random_search"),
+#'   learner = lrn("classif.rpart"),
+#'   resampling = rsmp("holdout"),
+#'   measure = msr("classif.ce"),
+#'   term_evals = 4)
+#'
+#' afs$train(tsk("pima"))
 auto_fselector = function(
   fselector,
   learner,
@@ -38,21 +46,23 @@ auto_fselector = function(
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features",
+  rush = NULL,
   id = NULL
   ) {
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
   AutoFSelector$new(
+    fselector = fselector,
     learner = learner,
     resampling = resampling,
     measure = measure,
     terminator = terminator,
-    fselector = fselector,
     store_fselect_instance = store_fselect_instance,
     store_benchmark_result = store_benchmark_result,
     store_models = store_models,
     check_values = check_values,
     callbacks = callbacks,
     ties_method = ties_method,
+    rush = rush,
     id = id)
 }

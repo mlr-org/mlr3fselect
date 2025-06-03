@@ -5,18 +5,22 @@
 #' @description
 #' Function to optimize the features of a [mlr3::Learner].
 #' The function internally creates a [FSelectInstanceBatchSingleCrit] or [FSelectInstanceBatchMultiCrit] which describes the feature selection problem.
-#' It executes the feature selection with the [FSelector] (`method`) and returns the result with the fselect instance (`$result`).
-#' The [ArchiveBatchFSelect] (`$archive`) stores all evaluated hyperparameter configurations and performance scores.
+#' It executes the feature selection with the [FSelector] (`fselector`) and returns the result with the feature selection instance (`$result`).
+#' The [ArchiveBatchFSelect] and [ArchiveAsyncFSelect] (`$archive`) stores all evaluated feature subsets and performance scores.
+#'
+#' You can find an overview of all feature selectors on our [website](https://mlr-org.com/feature-selectors.html).
 #'
 #' @details
 #' The [mlr3::Task], [mlr3::Learner], [mlr3::Resampling], [mlr3::Measure] and [bbotk::Terminator] are used to construct a [FSelectInstanceBatchSingleCrit].
-#' If multiple performance [Measures][mlr3::Measure] are supplied, a [FSelectInstanceBatchMultiCrit] is created.
+#' If multiple performance [mlr3::Measure]s are supplied, a [FSelectInstanceBatchMultiCrit] is created.
 #' The parameter `term_evals` and `term_time` are shortcuts to create a [bbotk::Terminator].
 #' If both parameters are passed, a [bbotk::TerminatorCombo] is constructed.
 #' For other [Terminators][bbotk::Terminator], pass one with `terminator`.
 #' If no termination criterion is needed, set `term_evals`, `term_time` and `terminator` to `NULL`.
 #'
+#' @inheritSection FSelectInstanceBatchSingleCrit Default Measures
 #' @inheritSection FSelectInstanceBatchSingleCrit Resources
+#'
 #' @inheritSection ArchiveBatchFSelect Analysis
 #'
 #' @param measures ([mlr3::Measure] or list of [mlr3::Measure])\cr
@@ -29,24 +33,27 @@
 #' @template param_task
 #' @template param_learner
 #' @template param_resampling
+#' @template param_terminator
 #' @template param_term_evals
 #' @template param_term_time
-#' @template param_terminator
 #' @template param_store_benchmark_result
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_callbacks
+#' @template param_rush
 #' @template param_ties_method
 #'
 #' @export
 #' @examples
-#' # Feature selection on the Palmer Penguins data set
+#' # Feature selection on the Pima Indians data set
 #' task = tsk("pima")
+#'
+#' # Load learner
 #' learner = lrn("classif.rpart")
 #'
 #' # Run feature selection
 #' instance = fselect(
-#'   fselector = fs("random_search"),
+#'   fselector = fs("random_search", batch_size = 2),
 #'   task = task,
 #'   learner = learner,
 #'   resampling = rsmp ("holdout"),
@@ -59,7 +66,7 @@
 #' # Train the learner with optimal feature set on the full data set
 #' learner$train(task)
 #'
-#' # Inspect all evaluated configurations
+#' # Inspect all evaluated feature subsets
 #' as.data.table(instance$archive)
 fselect = function(
   fselector,
@@ -74,34 +81,40 @@ fselect = function(
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  ties_method = "least_features"
+  ties_method = "least_features",
+  rush = NULL
   ) {
   assert_fselector(fselector)
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
-  instance = if (!is.list(measures)) {
-    FSelectInstanceBatchSingleCrit$new(
+  instance = if (inherits(fselector, "FSelectorAsync")) {
+    FSelectInstance = if (is.null(measures) || inherits(measures, "Measure")) FSelectInstanceAsyncSingleCrit else FSelectInstanceAsyncMultiCrit
+    FSelectInstance$new(
       task = task,
       learner = learner,
       resampling = resampling,
-      measure = measures,
+      measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      rush = rush,
+      ties_method = ties_method
+      )
+  } else {
+    FSelectInstance = if (is.null(measures) || inherits(measures, "Measure")) FSelectInstanceBatchSingleCrit else FSelectInstanceBatchMultiCrit
+    FSelectInstance$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures,
       terminator = terminator,
       store_benchmark_result = store_benchmark_result,
       store_models = store_models,
       check_values = check_values,
       callbacks = callbacks,
       ties_method = ties_method)
-  } else {
-    FSelectInstanceBatchMultiCrit$new(
-      task = task,
-      learner = learner,
-      resampling = resampling,
-      measures = measures,
-      terminator = terminator,
-      store_benchmark_result = store_benchmark_result,
-      store_models = store_models,
-      check_values = check_values,
-      callbacks = callbacks)
   }
 
   fselector$optimize(instance)

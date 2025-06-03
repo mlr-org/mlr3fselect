@@ -212,3 +212,26 @@ test_that("AutoFSelector hash works #647 in mlr3", {
 
   expect_data_table(bmr$learners, nrows = 2)
 })
+
+# Async ------------------------------------------------------------------------
+
+test_that("AutoFSelector works with async fselector", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
+  rush::rush_plan(n_workers = 2)
+  at = auto_fselector(
+    fselector = fs("async_random_search"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 4
+  )
+
+  at$train(tsk("pima"))
+
+  expect_data_table(at$fselect_instance$result, nrows = 1)
+  expect_data_table(at$fselect_instance$archive$data, min.rows = 4)
+  expect_rush_reset(at$fselect_instance$rush, type = "kill")
+})

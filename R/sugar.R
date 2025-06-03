@@ -115,8 +115,8 @@ fsi_async = function(
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  rush = NULL,
-  ties_method = "least_features"
+  ties_method = "least_features",
+  rush = NULL
   ) {
   FSelectInstance = if (is.null(measures) || inherits(measures, "Measure")) FSelectInstanceAsyncSingleCrit else FSelectInstanceAsyncMultiCrit
 

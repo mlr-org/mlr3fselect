@@ -14,6 +14,13 @@
 #' @export
 ContextAsyncFSelect = R6Class("ContextAsyncFSelect",
   inherit = ContextAsync,
+  public = list(
+
+    #' @field auto_fselector ([AutoFSelector])\cr
+    #' The [AutoFSelector] instance.
+    auto_fselector = NULL
+  ),
+
   active = list(
 
     #' @field resample_result ([mlr3::BenchmarkResult])\cr

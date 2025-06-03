@@ -14,6 +14,14 @@ Changes to \verb{$instance} and \verb{$optimizer} in the stages executed on the 
 \section{Super classes}{
 \code{\link[mlr3misc:Context]{mlr3misc::Context}} -> \code{\link[bbotk:ContextAsync]{bbotk::ContextAsync}} -> \code{ContextAsyncFSelect}
 }
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{auto_fselector}}{(\link{AutoFSelector})\cr
+The \link{AutoFSelector} instance.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{

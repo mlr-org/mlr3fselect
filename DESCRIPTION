@@ -57,6 +57,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
     'ArchiveAsyncFSelect.R'
+    'ArchiveAsyncFSelectFrozen.R'
     'ArchiveBatchFSelect.R'
     'AutoFSelector.R'
     'CallbackAsyncFSelect.R'

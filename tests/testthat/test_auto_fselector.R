@@ -17,3 +17,52 @@ test_that("auto_fselector function works", {
   expect_class(afs, "AutoFSelector")
   expect_class(afs$instance_args$terminator, "TerminatorCombo")
 })
+
+# Async ------------------------------------------------------------------------
+
+test_that("async auto fselector works", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
+  rush::rush_plan(n_workers = 2)
+
+  afs = auto_fselector(
+    fselector = fs("async_random_search"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3)
+  )
+
+  expect_class(afs, "AutoFSelector")
+  afs$train(tsk("pima"))
+
+  expect_class(afs$fselect_instance, "FSelectInstanceAsyncSingleCrit")
+  expect_rush_reset(afs$fselect_instance$rush, type = "kill")
+})
+
+test_that("async auto fselector works with rush controller", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
+  rush::rush_plan(n_workers = 2)
+  rush = rush::rsh(network_id = "fselect_network")
+
+  afs = auto_fselector(
+    fselector = fs("async_random_search"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3),
+    rush = rush
+  )
+
+  expect_class(afs, "AutoFSelector")
+  expect_class(afs$instance_args$rush, "Rush")
+  afs$train(tsk("pima"))
+
+  expect_class(afs$fselect_instance, "FSelectInstanceAsyncSingleCrit")
+  expect_rush_reset(afs$fselect_instance$rush, type = "kill")
+})

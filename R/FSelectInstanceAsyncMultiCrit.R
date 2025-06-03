@@ -52,8 +52,8 @@ FSelectInstanceAsyncMultiCrit = R6Class("FSelectInstanceAsyncMultiCrit",
       store_models = FALSE,
       check_values = FALSE,
       callbacks = NULL,
-      rush = NULL,
-      ties_method = "least_features"
+      ties_method = "least_features",
+      rush = NULL
       ) {
       require_namespaces("rush")
       learner = assert_learner(as_learner(learner, clone = TRUE))

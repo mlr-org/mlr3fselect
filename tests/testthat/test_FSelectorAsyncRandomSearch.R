@@ -18,5 +18,5 @@ test_that("FSelectorAsyncRandomSearch works", {
   expect_data_table(fselector$optimize(instance), nrows = 1)
   expect_data_table(instance$archive$data, min.rows = 5)
 
-  expect_rush_reset(instance$rush)
+  expect_rush_reset(instance$rush, type = "kill")
 })

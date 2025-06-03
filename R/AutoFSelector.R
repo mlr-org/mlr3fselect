@@ -37,6 +37,7 @@
 #' @template param_check_values
 #' @template param_callbacks
 #' @template param_ties_method
+#' @template param_rush
 #' @template param_id
 #'
 #' @export
@@ -125,6 +126,7 @@ AutoFSelector = R6Class("AutoFSelector",
       check_values = FALSE,
       callbacks = NULL,
       ties_method = "least_features",
+      rush = NULL,
       id = NULL
       ) {
       ia = list()
@@ -140,6 +142,7 @@ AutoFSelector = R6Class("AutoFSelector",
 
       ia$check_values = assert_flag(check_values)
       ia$callbacks = assert_callbacks(as_callbacks(callbacks))
+      if (!is.null(rush)) ia$rush = assert_class(rush, "Rush")
       ia$ties_method = assert_choice(ties_method, c("least_features", "random"))
       self$instance_args = ia
 
@@ -321,7 +324,24 @@ AutoFSelector = R6Class("AutoFSelector",
       # construct instance from args
       ia = self$instance_args
       ia$task = task$clone()
-      instance = invoke(FSelectInstanceBatchSingleCrit$new, .args = ia)
+
+      # check if task contains all row ids required for instantiated resampling
+      if (ia$resampling$is_instantiated) {
+        imap(ia$resampling$instance$train, function(x, i) {
+          if (!test_subset(x, task$row_ids)) {
+            stopf("Train set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}", i, ia$resampling$id, task$id, paste(setdiff(x, task$row_ids), collapse = ", "))
+          }
+        })
+
+        imap(ia$resampling$instance$test, function(x, i) {
+          if (!test_subset(x, task$row_ids)) {
+            stopf("Test set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}", i, ia$resampling$id, task$id, paste(setdiff(x, task$row_ids), collapse = ", "))
+          }
+        })
+      }
+
+      FSelectInstance = if (inherits(self$fselector, "FSelectorAsync")) FSelectInstanceAsyncSingleCrit else FSelectInstanceBatchSingleCrit
+      instance = do.call(FSelectInstance$new, args = ia)
 
       # optimize feature selection
       self$fselector$optimize(instance)
