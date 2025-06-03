@@ -30,7 +30,6 @@
 #' @template param_check_values
 #' @template param_callbacks
 #' @template param_rush
-#' @template param_ties_method
 #'
 #' @template param_xdt
 #' @template param_extra
@@ -52,7 +51,6 @@ FSelectInstanceAsyncMultiCrit = R6Class("FSelectInstanceAsyncMultiCrit",
       store_models = FALSE,
       check_values = FALSE,
       callbacks = NULL,
-      ties_method = "least_features",
       rush = NULL
       ) {
       require_namespaces("rush")
@@ -71,8 +69,7 @@ FSelectInstanceAsyncMultiCrit = R6Class("FSelectInstanceAsyncMultiCrit",
       archive = ArchiveAsyncFSelect$new(
         search_space = search_space,
         codomain = codomain,
-        rush = rush,
-        ties_method = ties_method
+        rush = rush
       )
 
       objective = ObjectiveFSelectAsync$new(

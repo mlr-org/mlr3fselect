@@ -14,8 +14,8 @@ fsi_async(
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  rush = NULL,
-  ties_method = "least_features"
+  ties_method = "least_features",
+  rush = NULL
 )
 }
 \arguments{
@@ -50,9 +50,6 @@ validity?}
 \item{callbacks}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
 
-\item{rush}{(\code{Rush})\cr
-If a rush instance is supplied, the optimization runs without batches.}
-
 \item{ties_method}{(\code{character(1)})\cr
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be \code{"least_features"} or \code{"random"}.
@@ -60,6 +57,9 @@ The option \code{"least_features"} (default) selects the feature set with the le
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+
+\item{rush}{(\code{Rush})\cr
+If a rush instance is supplied, the optimization runs without batches.}
 }
 \description{
 Function to construct a \link{FSelectInstanceAsyncSingleCrit} or \link{FSelectInstanceAsyncMultiCrit}.

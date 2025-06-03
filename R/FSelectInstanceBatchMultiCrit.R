@@ -70,8 +70,8 @@ FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
       store_benchmark_result = TRUE,
       store_models = FALSE,
       check_values = FALSE,
-      callbacks = NULL,
-      ties_method = "least_features") {
+      callbacks = NULL
+      ) {
       # initialized specialized fselect archive and objective
       archive = ArchiveBatchFSelect$new(
         search_space = task_to_domain(assert_task(task)),
