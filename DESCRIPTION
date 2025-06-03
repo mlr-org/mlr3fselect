@@ -42,6 +42,7 @@ Suggests:
     mlr3learners,
     mlr3pipelines,
     rpart,
+    rush (>= 0.2.0),
     fastVoteR,
     testthat (>= 3.0.0)
 Remotes:
@@ -55,15 +56,25 @@ NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
+    'ArchiveAsyncFSelect.R'
     'ArchiveBatchFSelect.R'
     'AutoFSelector.R'
+    'CallbackAsyncFSelect.R'
     'CallbackBatchFSelect.R'
+    'ContextAsyncFSelect.R'
     'ContextBatchFSelect.R'
     'EnsembleFSResult.R'
+    'FSelectInstanceAsyncSingleCrit.R'
+    'FSelectInstanceAsyncMultiCrit.R'
     'FSelectInstanceBatchSingleCrit.R'
     'FSelectInstanceBatchMultiCrit.R'
     'mlr_fselectors.R'
     'FSelector.R'
+    'FSelectorAsync.R'
+    'FSelectorAsyncDesignPoints.R'
+    'FSelectorAsyncExhaustiveSearch.R'
+    'FSelectorAsyncFromOptimizerAsync.R'
+    'FSelectorAsyncRandomSearch.R'
     'FSelectorBatch.R'
     'FSelectorBatchDesignPoints.R'
     'FSelectorBatchExhaustiveSearch.R'
@@ -75,6 +86,7 @@ Collate:
     'FSelectorBatchSequential.R'
     'FSelectorBatchShadowVariableSearch.R'
     'ObjectiveFSelect.R'
+    'ObjectiveFSelectAsync.R'
     'ObjectiveFSelectBatch.R'
     'assertions.R'
     'auto_fselector.R'

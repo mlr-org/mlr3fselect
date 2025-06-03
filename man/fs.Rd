@@ -3,7 +3,7 @@
 \name{fs}
 \alias{fs}
 \alias{fss}
-\title{Syntactic Sugar for FSelect Construction}
+\title{Syntactic Sugar for Feature Selection Objects Construction}
 \usage{
 fs(.key, ...)
 
@@ -27,13 +27,13 @@ Functions to retrieve objects, set parameters and assign to fields in one go.
 Relies on \code{\link[mlr3misc:dictionary_sugar_get]{mlr3misc::dictionary_sugar_get()}} to extract objects from the respective \link[mlr3misc:Dictionary]{mlr3misc::Dictionary}:
 \itemize{
 \item \code{fs()} for a \link{FSelector} from \link{mlr_fselectors}.
-\item \code{fss()} for a list of a \link{FSelector} from \link{mlr_fselectors}.
+\item \code{fss()} for a list of \link[=FSelector]{FSelectors} from \link{mlr_fselectors}.
 \item \code{trm()} for a \link[bbotk:Terminator]{bbotk::Terminator} from \link{mlr_terminators}.
 \item \code{trms()} for a list of \link[bbotk:Terminator]{Terminators} from \link{mlr_terminators}.
 }
 }
 \examples{
-# random search with batch size of 5
+# random search fselector with batch size of 5
 fs("random_search", batch_size = 5)
 
 # run time terminator with 20 seconds
