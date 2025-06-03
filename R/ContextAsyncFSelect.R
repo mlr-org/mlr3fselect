@@ -23,6 +23,16 @@ ContextAsyncFSelect = R6Class("ContextAsyncFSelect",
 
   active = list(
 
+    #' @field xs_objective (`list()`)\cr
+    #' The feature subset currently evaluated.
+    xs_objective = function(rhs) {
+      if (missing(rhs)) {
+        return(get_private(self$instance$objective)$.xs)
+      } else {
+        self$instance$objective$.__enclos_env__$private$.xs = rhs
+      }
+    },
+
     #' @field resample_result ([mlr3::BenchmarkResult])\cr
     #' The resample result of the feature subset currently evaluated.
     resample_result = function(rhs) {

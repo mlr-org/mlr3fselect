@@ -14,15 +14,16 @@ test_that("on_optimization_begin works", {
   rush::rush_plan(n_workers = 2)
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
+    measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$terminator$param_set$values$n_evals, 20)
+  expect_rush_reset(instance$rush, type = "kill")
 })
 
 test_that("on_optimization_end works", {
@@ -38,15 +39,16 @@ test_that("on_optimization_end works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
+    measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$terminator$param_set$values$n_evals, 20)
+  expect_rush_reset(instance$rush, type = "kill")
 })
 
 # stager in worker_loop() ------------------------------------------------------
@@ -59,21 +61,22 @@ test_that("on_worker_begin works", {
   callback = callback_async_fselect(id = "test",
     on_worker_begin = function(callback, context) {
       instance = context$instance
-      mlr3misc::get_private(instance)$.eval_point(c(TRUE, FALSE))
+      mlr3misc::get_private(instance)$.eval_point(list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  rush::rush_plan(n_workers = 1)
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
-    term_evals = 2,
+    measures = msr("regr.mse"),
+    term_evals = 1,
     callbacks = callback)
 
-  expect_subset(c(TRUE, FALSE), instance$archive$data$x_search_space)
+  expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE]))
+  expect_rush_reset(instance$rush, type = "kill")
 })
 
 test_that("on_worker_end works", {
@@ -84,21 +87,22 @@ test_that("on_worker_end works", {
   callback = callback_async_fselect(id = "test",
     on_worker_end = function(callback, context) {
       instance = context$instance
-      mlr3misc::get_private(instance)$.eval_point(c(TRUE, FALSE))
+      mlr3misc::get_private(instance)$.eval_point(list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  rush::rush_plan(n_workers = 1)
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
+    measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback)
 
-  expect_subset(c(TRUE, FALSE), instance$archive$data$x_search_space)
+  expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[nrow(instance$archive$data), c("x1", "x2", "x3", "x4"), with = FALSE]))
+  expect_rush_reset(instance$rush, type = "kill")
 })
 
 # stages in $.eval_point() -----------------------------------------------------
@@ -110,27 +114,27 @@ test_that("on_optimizer_before_eval and on_optimizer_after_eval works", {
 
   callback = callback_async_fselect(id = "test",
     on_optimizer_before_eval = function(callback, context) {
-      context$xs = c(TRUE, FALSE)
-      context$xs_trafoed = c(TRUE, FALSE)
+      context$xs = list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
     },
 
     on_optimizer_after_eval = function(callback, context) {
-      context$ys = list(classif.ce = 0)
+      context$ys = list(regr.mse = 0)
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  rush::rush_plan(n_workers = 1)
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
-    term_evals = 2,
+    measures = msr("regr.mse"),
+    term_evals = 1,
     callbacks = callback)
 
-  expect_equal(unique(instance$archive$data$x_search_space), c(TRUE, FALSE))
-  expect_equal(unique(instance$archive$data$classif.ce), 0)
+  expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE]))
+  expect_equal(0, instance$archive$data$regr.mse)
+  expect_rush_reset(instance$rush, type = "kill")
 })
 
 # stages in $eval() ------------------------------------------------------------
@@ -139,23 +143,24 @@ test_that("on_eval_after_xs works", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
+  options(bbotk_local = TRUE)
 
   callback = callback_async_fselect(id = "test",
     on_eval_after_xs = function(callback, context) {
-      context$xs_learner = c(TRUE, FALSE)
+      context$xs_objective = list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
     }
   )
-  rush::rush_plan(n_workers = 2)
+  rush::rush_plan(n_workers = 1)
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
-    term_evals = 2,
+    measures = msr("regr.mse"),
+    term_evals = 1,
     callbacks = callback)
 
-  expect_equal(instance$archive$benchmark_result$resample_result(1)$learner$selected_features, c("pregnant", "glucose"))
+  expect_equal(instance$archive$benchmark_result$resample_result(1)$learners[[1]]$state$feature_names, c("x1", "x3"))
 })
 
 test_that("on_eval_after_resample works", {
@@ -195,24 +200,24 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
 
   callback = callback_async_fselect(id = "test",
     on_fselect_result_begin = function(callback, context) {
-      context$result_xdt = data.table(x_search_space = c(TRUE, FALSE))
-      context$result_y = c(classif.ce = 0.7)
+      context$result_xdt = data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
+      context$result_y = c(regr.mse = 0.7)
     }
   )
 
   rush::rush_plan(n_workers = 2)
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
+    measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
-  expect_equal(instance$result$x_search_space, c(TRUE, FALSE))
-  expect_equal(instance$result$classif.ce, 0.7)
+  expect_equal(instance$result_x_search_space, data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
+  expect_equal(instance$result_y, c(regr.mse = 0.7))
 })
 
 test_that("on_result_end in FSelectInstanceSingleCrit works", {
@@ -274,24 +279,24 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
 
   callback = callback_async_fselect(id = "test",
     on_fselect_result_begin = function(callback, context) {
-      context$result_xdt = data.table(x_search_space = c(TRUE, FALSE))
-      context$result_ydt = data.table(classif.ce = 0.7, classif.acc = 0.8)
+      context$result_xdt = data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
+      context$result_ydt = data.table(regr.mse = 0.7, regr.rmse = 0.8)
     }
   )
 
   rush::rush_plan(n_workers = 2)
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
-    measures = msrs(c("classif.ce", "classif.acc")),
+    measures = msrs(c("regr.mse", "regr.rmse")),
     term_evals = 2,
     callbacks = callback)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
-  expect_equal(instance$result$x_search_space, c(TRUE, FALSE))
-  expect_equal(instance$result$classif.ce, 0.7)
+  expect_equal(instance$result_x_search_space, data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
+  expect_equal(instance$result_y, data.table(regr.mse = 0.7, regr.rmse = 0.8))
 })
 
 test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {

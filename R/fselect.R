@@ -88,35 +88,61 @@ fselect = function(
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
   instance = if (inherits(fselector, "FSelectorAsync")) {
-    FSelectInstance = if (is.null(measures) || inherits(measures, "Measure")) FSelectInstanceAsyncSingleCrit else FSelectInstanceAsyncMultiCrit
-    FSelectInstance$new(
-      task = task,
-      learner = learner,
-      resampling = resampling,
-      measures,
-      terminator = terminator,
-      store_benchmark_result = store_benchmark_result,
-      store_models = store_models,
-      check_values = check_values,
-      callbacks = callbacks,
-      rush = rush,
-      ties_method = ties_method
+    if (is.null(measures) || inherits(measures, "Measure")) {
+      FSelectInstanceAsyncSingleCrit$new(
+        task = task,
+        learner = learner,
+        resampling = resampling,
+        measure = measures,
+        terminator = terminator,
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models,
+        check_values = check_values,
+        callbacks = callbacks,
+        rush = rush,
+        ties_method = ties_method
       )
+    } else {
+      FSelectInstanceAsyncMultiCrit$new(
+        task = task,
+        learner = learner,
+        resampling = resampling,
+        measures = measures,
+        terminator = terminator,
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models,
+        check_values = check_values,
+        callbacks = callbacks,
+        rush = rush
+      )
+    }
   } else {
-    FSelectInstance = if (is.null(measures) || inherits(measures, "Measure")) FSelectInstanceBatchSingleCrit else FSelectInstanceBatchMultiCrit
-    FSelectInstance$new(
-      task = task,
-      learner = learner,
-      resampling = resampling,
-      measures,
-      terminator = terminator,
-      store_benchmark_result = store_benchmark_result,
-      store_models = store_models,
-      check_values = check_values,
-      callbacks = callbacks,
-      ties_method = ties_method)
+    if (is.null(measures) || inherits(measures, "Measure")) {
+      FSelectInstanceBatchSingleCrit$new(
+        task = task,
+        learner = learner,
+        resampling = resampling,
+        measure = measures,
+        terminator = terminator,
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models,
+        check_values = check_values,
+        callbacks = callbacks,
+        ties_method = ties_method
+      )
+    } else {
+      FSelectInstanceBatchMultiCrit$new(
+        task = task,
+        learner = learner,
+        resampling = resampling,
+        measures = measures,
+        terminator = terminator,
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models,
+        check_values = check_values,
+        callbacks = callbacks)
+    }
   }
-
   fselector$optimize(instance)
   instance
 }

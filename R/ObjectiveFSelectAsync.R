@@ -27,7 +27,7 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
       # select features
       private$.xs = xs
       call_back("on_eval_after_xs", self$callbacks, self$context)
-      self$task$select(names(xs)[as.logical(xs)])
+      self$task$select(names(private$.xs)[as.logical(private$.xs)])
 
       lg$debug("Resampling feature subset")
 
@@ -59,7 +59,7 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
       private$.aggregated_performance
     },
 
-    .xs  = NULL,
+    .xs = NULL,
     .resample_result = NULL,
     .aggregated_performance = NULL
   )

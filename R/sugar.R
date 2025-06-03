@@ -65,19 +65,31 @@ fsi = function(
   callbacks = NULL,
   ties_method = "least_features"
   ) {
-  FSelectInstance = if (is.null(measures) || inherits(measures, "Measure")) FSelectInstanceBatchSingleCrit else FSelectInstanceBatchMultiCrit
-
-  FSelectInstance$new(
-    task = task,
-    learner = learner,
-    resampling = resampling,
-    measures,
-    terminator = terminator,
-    store_benchmark_result = store_benchmark_result,
-    store_models = store_models,
-    check_values = check_values,
-    callbacks = callbacks,
-    ties_method = ties_method)
+  if (is.null(measures) || inherits(measures, "Measure")) {
+    FSelectInstanceBatchSingleCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      ties_method = ties_method
+    )
+  } else {
+    FSelectInstanceBatchMultiCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks)
+  }
 }
 
 #' @title Syntactic Sugar for Asynchronous Feature Selection Instance Construction
@@ -118,18 +130,30 @@ fsi_async = function(
   ties_method = "least_features",
   rush = NULL
   ) {
-  FSelectInstance = if (is.null(measures) || inherits(measures, "Measure")) FSelectInstanceAsyncSingleCrit else FSelectInstanceAsyncMultiCrit
-
-  FSelectInstance$new(
-    task = task,
-    learner = learner,
-    resampling = resampling,
-    measures,
-    terminator = terminator,
-    store_benchmark_result = store_benchmark_result,
-    store_models = store_models,
-    check_values = check_values,
-    callbacks = callbacks,
-    rush = rush,
-    ties_method = ties_method)
+  if (is.null(measures) || inherits(measures, "Measure")) {
+    FSelectInstanceAsyncSingleCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      rush = rush,
+      ties_method = ties_method)
+  } else {
+    FSelectInstanceAsyncMultiCrit$new(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      rush = rush)
+  }
 }

@@ -144,23 +144,3 @@ test_that("saving the models with FSelectInstanceAsyncMultiCrit works", {
   expect_rush_reset(instance$rush, type = "kill")
 })
 
-test_that("ties_method works in FSelectInstanceAsyncMultiCrit", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-
-  rush::rush_plan(n_workers = 2)
-
-  instance = fsi_async(
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
-    resampling = rsmp("cv", folds = 3),
-    measures = msrs(c("classif.ce", "classif.acc")),
-    terminator = trm("evals", n_evals = 3),
-    ties_method = "random"
-  )
-
-  expect_equal(instance$archive$ties_method, "random")
-
-  expect_rush_reset(instance$rush, type = "kill")
-})

@@ -91,7 +91,7 @@ FSelectorBatchShadowVariableSearch = R6Class("FSelectorBatchShadowVariableSearch
 
       # save initial state
       task = inst$objective$task
-      private$.task = task$clone(deep = TRUE)
+      private$.task = suppressWarnings(task$clone(deep = TRUE))
       private$.domain = inst$objective$domain$clone()
 
        # add shadow variables to task

@@ -44,6 +44,7 @@ test_that("fsi_async interface is equal to FSelectInstanceAsyncMultiCrit", {
   flush_redis()
 
   fsi_args = formalArgs(fsi_async)
+  fsi_args = fsi_args[fsi_args != "ties_method"]
   instance_args = formalArgs(FSelectInstanceAsyncMultiCrit$public_methods$initialize)
 
   expect_equal(fsi_args, instance_args)
