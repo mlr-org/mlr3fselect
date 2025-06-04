@@ -16,6 +16,33 @@
 #' @export
 ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
   inherit = ObjectiveFSelect,
+  public = list(
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
+    initialize = function(
+      task,
+      learner,
+      resampling,
+      measures,
+      check_values = TRUE,
+      store_benchmark_result = TRUE,
+      store_models = FALSE,
+      callbacks = NULL
+    ) {
+      super$initialize(
+        task = task,
+        learner = learner,
+        resampling = resampling,
+        measures = measures,
+        store_benchmark_result = store_benchmark_result,
+        store_models = store_models,
+        check_values = check_values,
+        callbacks = callbacks
+      )
+
+      private$.aggregator = if (all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures$properties) && self$codomain$length == 1) async_aggregator_fast else async_aggregator_default
+    }
+  ),
   private = list(
     .eval = function(xs, resampling) {
       lg$debug("Evaluating feature subset %s", as_short_string(xs))
@@ -37,8 +64,8 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
 
       lg$debug("Aggregating performance")
 
-      # aggregate performance
-      private$.aggregated_performance = as.list(private$.resample_result$aggregate(self$measures))
+      # aggregate performance using the appropriate aggregator
+      private$.aggregated_performance = as.list(private$.aggregator(private$.resample_result, self$measures))
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
@@ -61,6 +88,15 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
 
     .xs = NULL,
     .resample_result = NULL,
-    .aggregated_performance = NULL
+    .aggregated_performance = NULL,
+    .aggregator = NULL
   )
 )
+
+async_aggregator_default = function(resample_result, measures) {
+  resample_result$aggregate(measures)
+}
+
+async_aggregator_fast = function(resample_result, measures) {
+  mlr3::faggregate(resample_result, measures[[1]])
+}

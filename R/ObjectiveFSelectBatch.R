@@ -51,6 +51,8 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
         check_values = check_values,
         callbacks = callbacks
       )
+
+      private$.aggregator = if (all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures$properties) && self$codomain$length == 1) aggregator_fast else aggregator_default
     }
   ),
 
@@ -80,7 +82,7 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       lg$debug("Aggregating performance")
 
       # aggregate performance scores
-      private$.aggregated_performance = private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+      private$.aggregated_performance = private$.aggregator(private$.benchmark_result, self$measures, self$codomain)
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
@@ -106,6 +108,15 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
     .design = NULL,
     .benchmark_result = NULL,
     .aggregated_performance = NULL,
-    .model_required = FALSE
+    .model_required = FALSE,
+    .aggregator = NULL
   )
 )
+
+aggregator_default = function(benchmark_result, measures, codomain) {
+  benchmark_result$aggregate(measures, conditions = TRUE)[, c(codomain$target_ids, "warnings", "errors"), with = FALSE]
+}
+
+aggregator_fast = function(benchmark_result, measures, codomain) {
+  mlr3::faggregate(benchmark_result, measures[[1]])
+}
