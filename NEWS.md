@@ -1,5 +1,6 @@
 # mlr3fselect (development version)
 
+* feat: Introduce asynchronous optimization with the `FSelectorAsync` and `FSelectInstanceAsync*` classes.
 * feat: Add `max_nfeatures` argument in the `pareto_front()` and `knee_points()` methods of an `EnsembleFSResult()`
 
 # mlr3fselect 1.3.0

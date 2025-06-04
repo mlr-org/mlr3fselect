@@ -178,6 +178,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features",
+  rush = NULL,
   id = NULL
 )}\if{html}{\out{</div>}}
 }
@@ -226,6 +227,9 @@ The option \code{"least_features"} (default) selects the feature set with the le
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+
+\item{\code{rush}}{(\code{Rush})\cr
+If a rush instance is supplied, the optimization runs without batches.}
 
 \item{\code{id}}{(\code{character(1)})\cr
 Identifier for the new instance.}

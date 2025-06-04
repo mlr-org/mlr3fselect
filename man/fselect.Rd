@@ -17,7 +17,8 @@ fselect(
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  ties_method = "least_features"
+  ties_method = "least_features",
+  rush = NULL
 )
 }
 \arguments{
@@ -70,6 +71,9 @@ The option \code{"least_features"} (default) selects the feature set with the le
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+
+\item{rush}{(\code{Rush})\cr
+If a rush instance is supplied, the optimization runs without batches.}
 }
 \value{
 \link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}
@@ -77,17 +81,34 @@ Ignored if multiple measures are used.}
 \description{
 Function to optimize the features of a \link[mlr3:Learner]{mlr3::Learner}.
 The function internally creates a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit} which describes the feature selection problem.
-It executes the feature selection with the \link{FSelector} (\code{method}) and returns the result with the fselect instance (\verb{$result}).
-The \link{ArchiveBatchFSelect} (\verb{$archive}) stores all evaluated hyperparameter configurations and performance scores.
+It executes the feature selection with the \link{FSelector} (\code{fselector}) and returns the result with the feature selection instance (\verb{$result}).
+The \link{ArchiveBatchFSelect} and \link{ArchiveAsyncFSelect} (\verb{$archive}) stores all evaluated feature subsets and performance scores.
+
+You can find an overview of all feature selectors on our \href{https://mlr-org.com/feature-selectors.html}{website}.
 }
 \details{
 The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link[bbotk:Terminator]{bbotk::Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
-If multiple performance \link[mlr3:Measure]{Measures} are supplied, a \link{FSelectInstanceBatchMultiCrit} is created.
+If multiple performance \link[mlr3:Measure]{mlr3::Measure}s are supplied, a \link{FSelectInstanceBatchMultiCrit} is created.
 The parameter \code{term_evals} and \code{term_time} are shortcuts to create a \link[bbotk:Terminator]{bbotk::Terminator}.
 If both parameters are passed, a \link[bbotk:mlr_terminators_combo]{bbotk::TerminatorCombo} is constructed.
 For other \link[bbotk:Terminator]{Terminators}, pass one with \code{terminator}.
 If no termination criterion is needed, set \code{term_evals}, \code{term_time} and \code{terminator} to \code{NULL}.
 }
+\section{Default Measures}{
+
+If no measure is passed, the default measure is used.
+The default measure depends on the task type.\tabular{lll}{
+   Task \tab Default Measure \tab Package \cr
+   \code{"classif"} \tab \code{"classif.ce"} \tab \CRANpkg{mlr3} \cr
+   \code{"regr"} \tab \code{"regr.mse"} \tab \CRANpkg{mlr3} \cr
+   \code{"surv"} \tab \code{"surv.cindex"} \tab \CRANpkg{mlr3proba} \cr
+   \code{"dens"} \tab \code{"dens.logloss"} \tab \CRANpkg{mlr3proba} \cr
+   \code{"classif_st"} \tab \code{"classif.ce"} \tab \CRANpkg{mlr3spatial} \cr
+   \code{"regr_st"} \tab \code{"regr.mse"} \tab \CRANpkg{mlr3spatial} \cr
+   \code{"clust"} \tab \code{"clust.dunn"} \tab \CRANpkg{mlr3cluster} \cr
+}
+}
+
 \section{Resources}{
 
 There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
@@ -117,13 +138,15 @@ Alternatively, measures can be supplied to \code{as.data.table()}.
 }
 
 \examples{
-# Feature selection on the Palmer Penguins data set
+# Feature selection on the Pima Indians data set
 task = tsk("pima")
+
+# Load learner
 learner = lrn("classif.rpart")
 
 # Run feature selection
 instance = fselect(
-  fselector = fs("random_search"),
+  fselector = fs("random_search", batch_size = 2),
   task = task,
   learner = learner,
   resampling = rsmp ("holdout"),
@@ -136,6 +159,6 @@ task$select(instance$result_feature_set)
 # Train the learner with optimal feature set on the full data set
 learner$train(task)
 
-# Inspect all evaluated configurations
+# Inspect all evaluated feature subsets
 as.data.table(instance$archive)
 }
