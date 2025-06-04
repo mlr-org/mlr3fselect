@@ -7,11 +7,13 @@
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Function for Feature Selection — fselect"><meta name="description" content="Function to optimize the features of a mlr3::Learner.
 The function internally creates a FSelectInstanceBatchSingleCrit or FSelectInstanceBatchMultiCrit which describes the feature selection problem.
-It executes the feature selection with the FSelector (method) and returns the result with the fselect instance ($result).
-The ArchiveBatchFSelect ($archive) stores all evaluated hyperparameter configurations and performance scores."><meta property="og:description" content="Function to optimize the features of a mlr3::Learner.
+It executes the feature selection with the FSelector (fselector) and returns the result with the feature selection instance ($result).
+The ArchiveBatchFSelect and ArchiveAsyncFSelect ($archive) stores all evaluated feature subsets and performance scores.
+You can find an overview of all feature selectors on our website."><meta property="og:description" content="Function to optimize the features of a mlr3::Learner.
 The function internally creates a FSelectInstanceBatchSingleCrit or FSelectInstanceBatchMultiCrit which describes the feature selection problem.
-It executes the feature selection with the FSelector (method) and returns the result with the fselect instance ($result).
-The ArchiveBatchFSelect ($archive) stores all evaluated hyperparameter configurations and performance scores."><meta property="og:image" content="https://mlr3fselect.mlr-org.com/logo.png"><meta name="robots" content="noindex"></head><body>
+It executes the feature selection with the FSelector (fselector) and returns the result with the feature selection instance ($result).
+The ArchiveBatchFSelect and ArchiveAsyncFSelect ($archive) stores all evaluated feature subsets and performance scores.
+You can find an overview of all feature selectors on our website."><meta property="og:image" content="https://mlr3fselect.mlr-org.com/logo.png"><meta name="robots" content="noindex"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -57,8 +59,9 @@ The ArchiveBatchFSelect ($archive) stores all evaluated hyperparameter configura
     <div class="ref-description section level2">
     <p>Function to optimize the features of a <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>.
 The function internally creates a <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a> or <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> which describes the feature selection problem.
-It executes the feature selection with the <a href="FSelector.html">FSelector</a> (<code>method</code>) and returns the result with the fselect instance (<code>$result</code>).
-The <a href="ArchiveBatchFSelect.html">ArchiveBatchFSelect</a> (<code>$archive</code>) stores all evaluated hyperparameter configurations and performance scores.</p>
+It executes the feature selection with the <a href="FSelector.html">FSelector</a> (<code>fselector</code>) and returns the result with the feature selection instance (<code>$result</code>).
+The <a href="ArchiveBatchFSelect.html">ArchiveBatchFSelect</a> and <a href="ArchiveAsyncFSelect.html">ArchiveAsyncFSelect</a> (<code>$archive</code>) stores all evaluated feature subsets and performance scores.</p>
+<p>You can find an overview of all feature selectors on our <a href="https://mlr-org.com/feature-selectors.html" class="external-link">website</a>.</p>
     </div>
 
     <div class="section level2">
@@ -76,7 +79,8 @@ The <a href="ArchiveBatchFSelect.html">ArchiveBatchFSelect</a> (<code>$archive</
 <span>  store_models <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  callbacks <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span></span>
+<span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span>,</span>
+<span>  rush <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -159,6 +163,11 @@ If there are multiple best feature sets with the same number of features, one is
 The <code>random</code> method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.</p></dd>
 
+
+<dt id="arg-rush">rush<a class="anchor" aria-label="anchor" href="#arg-rush"></a></dt>
+<dd><p>(<code>Rush</code>)<br>
+If a rush instance is supplied, the optimization runs without batches.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -167,12 +176,18 @@ Ignored if multiple measures are used.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a>, <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>, <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>, <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a> and <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a> are used to construct a <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>.
-If multiple performance <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">Measures</a> are supplied, a <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> is created.
+If multiple performance <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>s are supplied, a <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> is created.
 The parameter <code>term_evals</code> and <code>term_time</code> are shortcuts to create a <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>.
 If both parameters are passed, a <a href="https://bbotk.mlr-org.com/reference/mlr_terminators_combo.html" class="external-link">bbotk::TerminatorCombo</a> is constructed.
 For other <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">Terminators</a>, pass one with <code>terminator</code>.
 If no termination criterion is needed, set <code>term_evals</code>, <code>term_time</code> and <code>terminator</code> to <code>NULL</code>.</p>
     </div>
+    <div class="section level2">
+    <h2 id="default-measures">Default Measures<a class="anchor" aria-label="anchor" href="#default-measures"></a></h2>
+
+
+<p>If no measure is passed, the default measure is used.
+The default measure depends on the task type.</p><table class="table table"><tr><td>Task</td><td>Default Measure</td><td>Package</td></tr><tr><td><code>"classif"</code></td><td><code>"classif.ce"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a></td></tr><tr><td><code>"regr"</code></td><td><code>"regr.mse"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a></td></tr><tr><td><code>"surv"</code></td><td><code>"surv.cindex"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a></td></tr><tr><td><code>"dens"</code></td><td><code>"dens.logloss"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a></td></tr><tr><td><code>"classif_st"</code></td><td><code>"classif.ce"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3spatial" class="external-link"><span class="pkg">mlr3spatial</span></a></td></tr><tr><td><code>"regr_st"</code></td><td><code>"regr.mse"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3spatial" class="external-link"><span class="pkg">mlr3spatial</span></a></td></tr><tr><td><code>"clust"</code></td><td><code>"clust.dunn"</code></td><td><a href="https://CRAN.R-project.org/package=mlr3cluster" class="external-link"><span class="pkg">mlr3cluster</span></a></td></tr></table></div>
     <div class="section level2">
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
 
@@ -197,13 +212,15 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Feature selection on the Palmer Penguins data set</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Feature selection on the Pima Indians data set</span></span></span>
 <span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Load learner</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run feature selection</span></span></span>
 <span class="r-in"><span><span class="va">instance</span> <span class="op">=</span> <span class="fu">fselect</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span>, batch_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  task <span class="op">=</span> <span class="va">task</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="va">learner</span>,</span></span>
 <span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span> <span class="op">(</span><span class="st">"holdout"</span><span class="op">)</span>,</span></span>
@@ -216,56 +233,26 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 <span class="r-in"><span><span class="co"># Train the learner with optimal feature set on the full data set</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Inspect all evaluated configurations</span></span></span>
+<span class="r-in"><span><span class="co"># Inspect all evaluated feature subsets</span></span></span>
 <span class="r-in"><span><span class="fu">as.data.table</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        age glucose insulin   mass pedigree pregnant pressure triceps classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;lgcl&gt;  &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;  &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  FALSE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.2734375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  FALSE   FALSE   FALSE  FALSE    FALSE    FALSE    FALSE    TRUE  0.3203125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:   TRUE    TRUE    TRUE  FALSE    FALSE     TRUE     TRUE   FALSE  0.2773438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:   TRUE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.2890625</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  FALSE   FALSE   FALSE  FALSE    FALSE     TRUE     TRUE   FALSE  0.3125000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  FALSE   FALSE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.2734375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  FALSE    TRUE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.2851562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:   TRUE    TRUE   FALSE   TRUE    FALSE    FALSE    FALSE   FALSE  0.2968750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  FALSE    TRUE   FALSE   TRUE     TRUE     TRUE    FALSE   FALSE  0.2851562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  FALSE   FALSE   FALSE  FALSE    FALSE     TRUE    FALSE   FALSE  0.3320312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     runtime_learners           timestamp batch_nr warnings errors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:            0.007 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:            0.005 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:            0.006 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:            0.007 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            0.006 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:            0.007 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:            0.007 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            0.006 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:            0.006 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:            0.005 2025-05-22 14:34:59        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                features n_features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                  &lt;list&gt;     &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: glucose,insulin,mass,pedigree,pregnant,pressure,...          7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                                             triceps          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:               age,glucose,insulin,pregnant,pressure          5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      age,glucose,insulin,mass,pedigree,pregnant,...          8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                                   pregnant,pressure          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:     insulin,mass,pedigree,pregnant,pressure,triceps          6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      glucose,insulin,mass,pregnant,pressure,triceps          6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:                                    age,glucose,mass          3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:                      glucose,mass,pedigree,pregnant          4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:                                            pregnant          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;  &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;  &lt;lgcl&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE   FALSE    TRUE   TRUE    FALSE    FALSE    FALSE   FALSE  0.3632812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE     TRUE   FALSE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.3476562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE    FALSE    TRUE  0.3710938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.005 2025-06-04 12:03:20        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.006 2025-06-04 12:03:20        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.007 2025-06-04 12:03:20        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.007 2025-06-04 12:03:20        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               features n_features  resample_result</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                        insulin,mass          2 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                   pedigree,pressure          2 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: age,mass,pedigree,pregnant,pressure          5 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:  age,mass,pedigree,pregnant,triceps          5 &lt;ResampleResult&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -277,7 +264,7 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

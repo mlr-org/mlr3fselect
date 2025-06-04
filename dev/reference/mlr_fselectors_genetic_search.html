@@ -152,46 +152,46 @@ If more iterations are needed, set <code>ìters</code> to a higher value in the 
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          features n_features classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: flipper_length          1  0.1913043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: flipper_length          1   0.226087</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     bill_depth bill_length body_mass flipper_length island    sex   year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:      FALSE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE   TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE   TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      FALSE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:      FALSE       FALSE      TRUE          FALSE  FALSE   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  8:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:       TRUE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  0.6000000            0.005 2025-05-22 14:35:09        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  0.6000000            0.005 2025-05-22 14:35:09        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  0.6000000            0.005 2025-05-22 14:35:09        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  0.6000000            0.005 2025-05-22 14:35:09        4        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  0.2347826            0.005 2025-05-22 14:35:09        5        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  0.2521739            0.005 2025-05-22 14:35:09        6        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  0.2521739            0.005 2025-05-22 14:35:09        7        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  0.2347826            0.005 2025-05-22 14:35:09        8        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  0.2260870            0.005 2025-05-22 14:35:09        9        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  0.1913043            0.005 2025-05-22 14:35:09       10        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              features n_features  resample_result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:               sex          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:              year          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:              year          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:               sex          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:            island          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:       bill_length          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:       bill_length          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:            island          1 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: bill_depth,island          2 &lt;ResampleResult&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:    flipper_length          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:  0.2521739            0.005 2025-06-04 12:03:33        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:  0.6173913            0.003 2025-06-04 12:03:33        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  0.2260870            0.005 2025-06-04 12:03:33        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:  0.2869565            0.005 2025-06-04 12:03:33        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  0.2869565            0.005 2025-06-04 12:03:33        5        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  0.3043478            0.006 2025-06-04 12:03:33        6        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  0.2260870            0.005 2025-06-04 12:03:33        7        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:  0.2521739            0.005 2025-06-04 12:03:33        8        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  0.2521739            0.005 2025-06-04 12:03:33        9        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:  0.2260870            0.005 2025-06-04 12:03:33       10        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           features n_features  resample_result</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:    island,year          2 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:           year          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: flipper_length          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      body_mass          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      body_mass          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:  body_mass,sex          2 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: flipper_length          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:         island          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:         island          1 &lt;ResampleResult&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: flipper_length          1 &lt;ResampleResult&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subset the task and fit the final model</span></span></span>
 <span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span></span>
@@ -208,7 +208,7 @@ If more iterations are needed, set <code>ìters</code> to a higher value in the 
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
