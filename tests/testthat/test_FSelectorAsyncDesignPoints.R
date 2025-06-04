@@ -3,6 +3,7 @@ test_that("FSelectorAsyncDesignPoints works", {
   skip_if_not_installed("rush")
   flush_redis()
 
+  on.exit(mirai::daemons(0))
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fsi_async(
@@ -10,7 +11,7 @@ test_that("FSelectorAsyncDesignPoints works", {
     learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("dummy"),
-    terminator = trm("none"),
+    terminator = trm("evals", n_evals = 2),
     store_benchmark_result = FALSE
   )
 

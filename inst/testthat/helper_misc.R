@@ -64,5 +64,4 @@ expect_rush_reset = function(rush, type = "kill") {
   if (!test_list(keys, len = 0)) {
     stopf("Found keys in redis after reset: %s", keys)
   }
-  mirai::daemons(0)
 }

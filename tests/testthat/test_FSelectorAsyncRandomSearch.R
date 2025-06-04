@@ -6,6 +6,7 @@ test_that("FSelectorAsyncRandomSearch works", {
   fselector = fs("async_random_search")
   expect_class(fselector, "FSelectorAsync")
 
+  on.exit(mirai::daemons(0))
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fsi_async(

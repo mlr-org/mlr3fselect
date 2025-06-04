@@ -25,6 +25,7 @@ test_that("async auto fselector works", {
   skip_if_not_installed("rush")
   flush_redis()
 
+  on.exit(mirai::daemons(0))
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
 
@@ -48,6 +49,7 @@ test_that("async auto fselector works with rush controller", {
   skip_if_not_installed("rush")
   flush_redis()
 
+  on.exit(mirai::daemons(0))
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   rush = rush::rsh(network_id = "fselect_network")

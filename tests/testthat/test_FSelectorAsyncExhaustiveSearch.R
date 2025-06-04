@@ -6,6 +6,7 @@ test_that("FSelectorAsyncExhaustiveSearch works", {
   fselector = fs("async_exhaustive_search")
   expect_class(fselector, "FSelectorAsync")
 
+  on.exit(mirai::daemons(0))
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fsi_async(
@@ -13,7 +14,7 @@ test_that("FSelectorAsyncExhaustiveSearch works", {
     learner = lrn("regr.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("dummy"),
-    terminator = trm("none")
+    terminator = trm("evals", n_evals = 15)
   )
 
   expect_data_table(fselector$optimize(instance), nrows = 1)
