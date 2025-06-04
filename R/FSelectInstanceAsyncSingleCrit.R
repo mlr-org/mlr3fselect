@@ -4,16 +4,6 @@
 #' The `FSelectInstanceAsyncSingleCrit` specifies a feature selection problem for a [FSelectorAsync].
 #' The function [fsi_async()] creates a [FSelectInstanceAsyncSingleCrit] and the function [fselect()] creates an instance internally.
 #'
-#' @details
-#' The instance contains an [ObjectiveFSelectAsync] object that encodes the black box objective function a [FSelector] has to optimize.
-#' The instance allows the basic operations of querying the objective at design points (`$eval_async()`).
-#' This operation is usually done by the [FSelector].
-#' Feature subsets are asynchronously sent to workers and evaluated by calling [mlr3::resample()].
-#' The evaluated feature subsets are stored in the [ArchiveAsyncFSelect] (`$archive`).
-#' Before a batch is evaluated, the [bbotk::Terminator] is queried for the remaining budget.
-#' If the available budget is exhausted, an exception is raised, and no further evaluations can be performed from this point on.
-#' The fselector is also supposed to store its final result, consisting of a selected feature subset and associated estimated performance values, by calling the method `instance$assign_result`.
-#'
 #' @inheritSection FSelectInstanceBatchSingleCrit Default Measures
 #' @inheritSection ArchiveAsyncFSelect Analysis
 #' @inheritSection FSelectInstanceBatchSingleCrit Resources

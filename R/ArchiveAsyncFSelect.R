@@ -12,16 +12,11 @@
 #'
 #' * One column for each feature of the search space (`$search_space`).
 #' * One column for each performance measure (`$codomain`).
-#' * `x_domain` (`list()`)\cr
-#'     Lists of (transformed) feature values that are passed to the learner.
 #' * `runtime_learners` (`numeric(1)`)\cr
 #'     Sum of training and predict times logged in learners per [mlr3::ResampleResult] / evaluation.
 #'     This does not include potential overhead time.
 #' * `timestamp` (`POSIXct`)\cr
 #'     Time stamp when the evaluation was logged into the archive.
-#' * `batch_nr` (`integer(1)`)\cr
-#'     Feature subsets are evaluated in batches.
-#'     Each batch has a unique batch number.
 #'
 #' @section Analysis:
 #' For analyzing the feature selection results, it is recommended to pass the [ArchiveAsyncFSelect] to `as.data.table()`.
@@ -232,6 +227,6 @@ as.data.table.ArchiveAsyncFSelect = function(x, ..., unnest = NULL, exclude_colu
     tab = cbind(tab, scores)
   }
 
-  setcolorder(tab, c(x$cols_x, x$cols_y, cols_y_extra, cols_x_domain, "runtime_learners", "timestamp_xs", "timestamp_ys"))
+  setcolorder(tab, c(x$cols_x, x$cols_y, cols_y_extra, "runtime_learners", "timestamp_xs", "timestamp_ys"))
   tab[, setdiff(names(tab), exclude_columns), with = FALSE]
 }

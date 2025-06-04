@@ -7,16 +7,6 @@
 The \code{FSelectInstanceAsyncSingleCrit} specifies a feature selection problem for a \link{FSelectorAsync}.
 The function \code{\link[=fsi_async]{fsi_async()}} creates a \link{FSelectInstanceAsyncSingleCrit} and the function \code{\link[=fselect]{fselect()}} creates an instance internally.
 }
-\details{
-The instance contains an \link{ObjectiveFSelectAsync} object that encodes the black box objective function a \link{FSelector} has to optimize.
-The instance allows the basic operations of querying the objective at design points (\verb{$eval_async()}).
-This operation is usually done by the \link{FSelector}.
-Feature subsets are asynchronously sent to workers and evaluated by calling \code{\link[mlr3:resample]{mlr3::resample()}}.
-The evaluated feature subsets are stored in the \link{ArchiveAsyncFSelect} (\verb{$archive}).
-Before a batch is evaluated, the \link[bbotk:Terminator]{bbotk::Terminator} is queried for the remaining budget.
-If the available budget is exhausted, an exception is raised, and no further evaluations can be performed from this point on.
-The fselector is also supposed to store its final result, consisting of a selected feature subset and associated estimated performance values, by calling the method \code{instance$assign_result}.
-}
 \section{Default Measures}{
 
 If no measure is passed, the default measure is used.

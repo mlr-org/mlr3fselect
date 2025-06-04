@@ -73,6 +73,9 @@ If there are multiple best feature sets with the same number of features, one is
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
 
+\item{rush}{(\code{Rush})\cr
+If a rush instance is supplied, the optimization runs without batches.}
+
 \item{id}{(\code{character(1)})\cr
 Identifier for the new instance.}
 }

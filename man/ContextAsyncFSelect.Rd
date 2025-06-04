@@ -25,6 +25,9 @@ The \link{AutoFSelector} instance.}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
+\item{\code{xs_objective}}{(\code{list()})\cr
+The feature subset currently evaluated.}
+
 \item{\code{resample_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The resample result of the feature subset currently evaluated.}
 

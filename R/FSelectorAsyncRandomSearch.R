@@ -6,11 +6,6 @@
 #' @description
 #' Feature selection using Asynchronous Random Search Algorithm.
 #'
-#' @details
-#' The feature sets are randomly drawn.
-#' The sets are evaluated asynchronously.
-#' The algorithm uses [bbotk::OptimizerAsyncRandomSearch] for optimization.
-#'
 #' @templateVar id async_random_search
 #' @template section_dictionary_fselectors
 #'
@@ -26,34 +21,6 @@
 #'
 #' @family FSelectorAsync
 #' @export
-#' @examples
-#' # Feature Selection
-#' \donttest{
-#'
-#' # retrieve task and load learner
-#' task = tsk("penguins")
-#' learner = lrn("classif.rpart")
-#'
-#' # run feature selection on the Palmer Penguins data set
-#' instance = fselect(
-#'   fselector = fs("async_random_search"),
-#'   task = task,
-#'   learner = learner,
-#'   resampling = rsmp("holdout"),
-#'   measure = msr("classif.ce"),
-#'   term_evals = 10
-#' )
-#'
-#' # best performing feature subset
-#' instance$result
-#'
-#' # all evaluated feature subsets
-#' as.data.table(instance$archive)
-#'
-#' # subset the task and fit the final model
-#' task$select(instance$result_feature_set)
-#' learner$train(task)
-#' }
 FSelectorAsyncRandomSearch = R6Class("FSelectorAsyncRandomSearch",
   inherit = FSelectorAsync,
   public = list(

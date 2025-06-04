@@ -29,6 +29,7 @@
   x$add("mlr3fselect.svm_rfe", load_callback_svm_rfe)
   x$add("mlr3fselect.one_se_rule", load_callback_one_se_rule)
   x$add("mlr3fselect.internal_tuning", load_callback_internal_tuning)
+  x$add("mlr3fselect.async_freeze_archive", load_callback_freeze_archive)
 
   assign("lg", lgr::get_logger("mlr3/bbotk"), envir = parent.env(environment()))
   if (Sys.getenv("IN_PKGDOWN") == "true") {

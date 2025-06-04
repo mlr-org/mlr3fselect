@@ -24,7 +24,6 @@
 #'
 #' @family FSelectorAsync
 #' @export
-#' @template example
 FSelectorAsyncExhaustiveSearch = R6Class("FSelectorAsyncExhaustiveSearch",
   inherit = FSelectorAsync,
   public = list(

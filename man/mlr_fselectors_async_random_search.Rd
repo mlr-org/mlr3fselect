@@ -35,35 +35,6 @@ By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 }
 }
 
-\examples{
-# Feature Selection
-\donttest{
-
-# retrieve task and load learner
-task = tsk("penguins")
-learner = lrn("classif.rpart")
-
-# run feature selection on the Palmer Penguins data set
-instance = fselect(
-  fselector = fs("async_random_search"),
-  task = task,
-  learner = learner,
-  resampling = rsmp("holdout"),
-  measure = msr("classif.ce"),
-  term_evals = 10
-)
-
-# best performing feature subset
-instance$result
-
-# all evaluated feature subsets
-as.data.table(instance$archive)
-
-# subset the task and fit the final model
-task$select(instance$result_feature_set)
-learner$train(task)
-}
-}
 \seealso{
 Other FSelectorAsync: 
 \code{\link{mlr_fselectors_async_design_points}},
