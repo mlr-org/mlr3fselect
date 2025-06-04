@@ -220,7 +220,8 @@ test_that("AutoFSelector works with async fselector", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   at = auto_fselector(
     fselector = fs("async_random_search"),
     learner = lrn("classif.rpart"),

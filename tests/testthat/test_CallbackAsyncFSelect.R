@@ -11,7 +11,8 @@ test_that("on_optimization_begin works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -178,7 +179,8 @@ test_that("on_eval_after_resample works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -205,7 +207,8 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -225,7 +228,8 @@ test_that("on_result_end in FSelectInstanceSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   callback = callback_async_fselect(id = "test",
     on_result_end = function(callback, context) {
       context$result$classif.ce = 0.7
@@ -256,7 +260,8 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
     }
   )}, "deprecated")
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -284,7 +289,8 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -310,7 +316,8 @@ test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -335,7 +342,8 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
     }
   )}, "deprecated")
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -368,7 +376,8 @@ test_that("on_resample_begin works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -401,7 +410,8 @@ test_that("on_resample_before_train works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -433,7 +443,8 @@ test_that("on_resample_before_predict works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -468,7 +479,8 @@ test_that("on_resample_end works", {
     }
   )
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),

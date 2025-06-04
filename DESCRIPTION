@@ -24,7 +24,7 @@ URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
 BugReports: https://github.com/mlr-org/mlr3fselect/issues
 Depends:
-    mlr3 (>= 0.23.0.9000),
+    mlr3 (>= 0.23.0),
     R (>= 3.1.0)
 Imports:
     bbotk (>= 1.5.0.9000),
@@ -38,16 +38,15 @@ Imports:
     stabm
 Suggests:
     e1071,
+    fastVoteR,
     genalg,
+    mirai,
     mlr3learners,
     mlr3pipelines,
     rpart,
+    rush,
     rush (>= 0.2.0),
-    fastVoteR,
     testthat (>= 3.0.0)
-Remotes:
-    mlr-org/mlr3,
-    mlr-org/bbotk
 Config/testthat/edition: 3
 Config/testthat/parallel: false
 Encoding: UTF-8

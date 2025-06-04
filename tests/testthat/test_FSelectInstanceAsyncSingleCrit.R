@@ -3,7 +3,8 @@ test_that("initializing FSelectInstanceAsyncSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -49,7 +50,8 @@ test_that("FSelectInstanceAsyncSingleCrit can be passed to a fselector", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -71,7 +73,8 @@ test_that("assigning a result to FSelectInstanceAsyncSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -95,7 +98,8 @@ test_that("saving the benchmark result with FSelectInstanceAsyncSingleCrit works
   skip_if_not_installed("rush")
   flush_redis()
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -120,7 +124,8 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  rush::rush_plan(n_workers = 2)
+  mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -146,7 +151,8 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
 #   skip_if_not_installed("rush")
 #   flush_redis()
 
-#   rush::rush_plan(n_workers = 2)
+#   mirai::daemons(2)
+  rush::rush_plan(n_workers = 2, worker_type = "remote")
 
 #   instance = fsi_async(
 #     task = tsk("pima"),
