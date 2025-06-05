@@ -89,7 +89,6 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       lg$debug("Aggregating performance")
 
       # aggregate performance scores
-      browser()
       private$.aggregated_performance = private$.aggregator(private$.benchmark_result, self$measures, self$codomain)
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
