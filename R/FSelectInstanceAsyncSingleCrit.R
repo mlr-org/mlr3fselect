@@ -19,6 +19,7 @@
 #' @template param_callbacks
 #' @template param_rush
 #' @template param_ties_method
+#' @template param_aggregate_fast
 #'
 #' @template param_xdt
 #' @template param_extra
@@ -41,7 +42,8 @@ FSelectInstanceAsyncSingleCrit = R6Class("FSelectInstanceAsyncSingleCrit",
       check_values = FALSE,
       callbacks = NULL,
       ties_method = "least_features",
-      rush = NULL
+      rush = NULL,
+      aggregate_fast = FALSE
       ) {
       require_namespaces("rush")
       learner = assert_learner(as_learner(learner, clone = TRUE))
@@ -71,7 +73,8 @@ FSelectInstanceAsyncSingleCrit = R6Class("FSelectInstanceAsyncSingleCrit",
         store_benchmark_result = store_benchmark_result,
         store_models = store_models,
         check_values = check_values,
-        callbacks = callbacks)
+        callbacks = callbacks,
+        aggregate_fast = aggregate_fast)
 
       super$initialize(
         objective,

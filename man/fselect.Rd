@@ -18,7 +18,8 @@ fselect(
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features",
-  rush = NULL
+  rush = NULL,
+  aggregate_fast = FALSE
 )
 }
 \arguments{
@@ -74,6 +75,12 @@ Ignored if multiple measures are used.}
 
 \item{rush}{(\code{Rush})\cr
 If a rush instance is supplied, the optimization runs without batches.}
+
+\item{aggregate_fast}{(\code{logical(1)})\cr
+If \code{TRUE}, the performance values are aggregated in a fast way.
+This is only supported for measures that do not require task, learner, model or train set.
+The archive does not contain warnings and errors.
+Default is \code{FALSE}.}
 }
 \value{
 \link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}

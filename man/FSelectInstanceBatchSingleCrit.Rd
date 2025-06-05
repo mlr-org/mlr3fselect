@@ -137,7 +137,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  ties_method = "least_features"
+  ties_method = "least_features",
+  aggregate_fast = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -181,6 +182,12 @@ The option \code{"least_features"} (default) selects the feature set with the le
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+
+\item{\code{aggregate_fast}}{(\code{logical(1)})\cr
+If \code{TRUE}, the performance values are aggregated in a fast way.
+This is only supported for measures that do not require task, learner, model or train set.
+The archive does not contain warnings and errors.
+Default is \code{FALSE}.}
 }
 \if{html}{\out{</div>}}
 }

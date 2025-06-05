@@ -42,6 +42,7 @@
 #' @template param_callbacks
 #' @template param_rush
 #' @template param_ties_method
+#' @template param_aggregate_fast
 #'
 #' @export
 #' @examples
@@ -82,7 +83,8 @@ fselect = function(
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features",
-  rush = NULL
+  rush = NULL,
+  aggregate_fast = FALSE
   ) {
   assert_fselector(fselector)
   terminator = terminator %??% terminator_selection(term_evals, term_time)
@@ -100,7 +102,8 @@ fselect = function(
         check_values = check_values,
         callbacks = callbacks,
         rush = rush,
-        ties_method = ties_method
+        ties_method = ties_method,
+        aggregate_fast = aggregate_fast
       )
     } else {
       FSelectInstanceAsyncMultiCrit$new(
@@ -128,7 +131,8 @@ fselect = function(
         store_models = store_models,
         check_values = check_values,
         callbacks = callbacks,
-        ties_method = ties_method
+        ties_method = ties_method,
+        aggregate_fast = aggregate_fast
       )
     } else {
       FSelectInstanceBatchMultiCrit$new(

@@ -12,6 +12,7 @@
 #' @template param_check_values
 #' @template param_store_benchmark_result
 #' @template param_callbacks
+#' @template param_aggregate_fast
 #'
 #' @export
 ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
@@ -36,10 +37,12 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       store_benchmark_result = TRUE,
       store_models = FALSE,
       archive = NULL,
-      callbacks = NULL
+      callbacks = NULL,
+      aggregate_fast = FALSE
       ) {
       self$archive = assert_r6(archive, "ArchiveBatchFSelect", null.ok = TRUE)
       if (is.null(self$archive)) store_benchmark_result = store_models = FALSE
+      assert_flag(aggregate_fast)
 
       super$initialize(
         task = task,
@@ -52,7 +55,11 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
         callbacks = callbacks
       )
 
-      private$.aggregator = if (all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures$properties) && self$codomain$length == 1) aggregator_fast else aggregator_default
+      if (aggregate_fast && any(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %in% self$measures$properties)) {
+        stopf("Fast aggregation is only supported for measures that do not require task, learner, model or train set")
+      }
+
+      private$.aggregator = if (aggregate_fast) aggregator_fast else aggregator_default
     }
   ),
 
@@ -82,6 +89,7 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       lg$debug("Aggregating performance")
 
       # aggregate performance scores
+      browser()
       private$.aggregated_performance = private$.aggregator(private$.benchmark_result, self$measures, self$codomain)
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
