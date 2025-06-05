@@ -132,3 +132,57 @@ test_that("objective contains no benchmark results", {
 
   expect_null(instance$objective$.__enclos_env__$private$.benchmark_result)
 })
+
+
+test_that("fast aggregation works", {
+
+  instance = fsi(
+    task = tsk("pima"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3),
+    aggregate_fast = TRUE
+  )
+
+  fselector = fs("random_search")
+  fselector$optimize(instance)
+
+  expect_names(names(instance$archive$data), disjunct.from = c("warnings", "errors"))
+  expect_data_table(instance$archive$data, min.rows = 3L)
+})
+
+test_that("fast aggregation and default produce the same results", {
+  with_seed(123, {
+    instance_fast = fsi(
+      task = tsk("pima"),
+      learner = lrn("classif.rpart"),
+      resampling = rsmp("cv", folds = 3),
+      measures = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 3),
+      aggregate_fast = TRUE
+    )
+
+    fselector = fs("random_search")
+    fselector$optimize(instance_fast)
+    scores_fast = instance_fast$archive$data$classif.ce
+  })
+
+  with_seed(123, {
+    instance_default = fsi(
+      task = tsk("pima"),
+      learner = lrn("classif.rpart"),
+      resampling = rsmp("cv", folds = 3),
+      measures = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 3),
+      aggregate_fast = FALSE
+    )
+
+    fselector = fs("random_search")
+    fselector$optimize(instance_default)
+    scores_default = instance_default$archive$data$classif.ce
+  })
+
+  expect_equal(scores_fast, scores_default)
+})
+
