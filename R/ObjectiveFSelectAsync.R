@@ -31,7 +31,6 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
       callbacks = NULL,
       aggregate_fast = FALSE
       ) {
-
       assert_flag(aggregate_fast)
       super$initialize(
         task = task,
@@ -48,7 +47,7 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
         stopf("Fast aggregation is only supported for measures that do not require task, learner, model or train set")
       }
 
-      private$.aggregator = if (aggregate_fast) aggregator_fast else aggregator_default
+      private$.aggregator = if (aggregate_fast) async_aggregator_fast else async_aggregator_default
     }
   ),
   private = list(
