@@ -81,8 +81,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features",
-  rush = NULL,
-  aggregate_fast = FALSE
+  rush = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -129,12 +128,6 @@ Ignored if multiple measures are used.}
 
 \item{\code{rush}}{(\code{Rush})\cr
 If a rush instance is supplied, the optimization runs without batches.}
-
-\item{\code{aggregate_fast}}{(\code{logical(1)})\cr
-If \code{TRUE}, the performance values are aggregated in a fast way.
-This is only supported for measures that do not require task, learner, model or train set.
-The archive does not contain warnings and errors.
-Default is \code{FALSE}.}
 }
 \if{html}{\out{</div>}}
 }

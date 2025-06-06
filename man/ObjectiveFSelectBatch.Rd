@@ -51,8 +51,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   store_benchmark_result = TRUE,
   store_models = FALSE,
   archive = NULL,
-  callbacks = NULL,
-  aggregate_fast = FALSE
+  callbacks = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -90,12 +89,6 @@ If \code{NULL} (default), benchmark result and models cannot be stored.}
 
 \item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
-
-\item{\code{aggregate_fast}}{(\code{logical(1)})\cr
-If \code{TRUE}, the performance values are aggregated in a fast way.
-This is only supported for measures that do not require task, learner, model or train set.
-The archive does not contain warnings and errors.
-Default is \code{FALSE}.}
 }
 \if{html}{\out{</div>}}
 }
