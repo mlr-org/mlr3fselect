@@ -39,8 +39,8 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
         check_values = check_values,
         callbacks = callbacks
       )
-
-      if (self$codomain$length == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures$properties)) {
+      measure_properties = unlist(map(self$measures, "properties"))
+      if (self$codomain$length == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% measure_properties)) {
         private$.aggregator = async_aggregator_fast
       } else {
         private$.aggregator = async_aggregator_default

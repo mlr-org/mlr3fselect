@@ -173,30 +173,6 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
 #   fselector$optimize(instance)
 # })
 
-test_that("fast aggregation works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-
-  on.exit(mirai::daemons(0))
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
-
-  instance = fsi_async(
-    task = tsk("pima"),
-    learner = lrn("classif.rpart"),
-    resampling = rsmp("cv", folds = 3),
-    measures = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 3),
-    aggregate_fast = TRUE
-  )
-
-  fselector = fs("async_random_search")
-  fselector$optimize(instance)
-
-  expect_data_table(instance$archive$data, min.rows = 3L)
-  expect_rush_reset(instance$rush, type = "kill")
-})
 
 test_that("fast aggregation and benchmark result produce the same scores", {
   skip_on_cran()
