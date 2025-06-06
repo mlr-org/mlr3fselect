@@ -19,7 +19,7 @@ measures_to_codomain = function(measures) {
 }
 
 extract_runtime = function(resample_result) {
-  runtimes = map_dbl(get_private(resample_result)$.data$learner_states(get_private(resample_result)$.view), function(state) {
+  runtimes = map_dbl(get_private(resample_result)$.data$learner_states(), function(state) {
     state$train_time + state$predict_time
   })
   sum(runtimes)

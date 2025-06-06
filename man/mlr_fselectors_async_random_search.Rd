@@ -13,11 +13,6 @@ Bergstra J, Bengio Y (2012).
 \description{
 Feature selection using Asynchronous Random Search Algorithm.
 }
-\details{
-The feature sets are randomly drawn.
-The sets are evaluated asynchronously.
-The algorithm uses \link[bbotk:mlr_optimizers_async_random_search]{bbotk::OptimizerAsyncRandomSearch} for optimization.
-}
 \section{Dictionary}{
 
 This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:

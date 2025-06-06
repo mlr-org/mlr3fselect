@@ -132,3 +132,48 @@ test_that("objective contains no benchmark results", {
 
   expect_null(instance$objective$.__enclos_env__$private$.benchmark_result)
 })
+
+test_that("fast aggregation and benchmark result produce the same scores", {
+  instance = fsi(
+    task = tsk("pima"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 6)
+  )
+
+  fselector = fs("random_search", batch_size = 2)
+  fselector$optimize(instance)
+
+  expect_equal(get_private(instance$objective)$.aggregator, aggregator_fast)
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+})
+
+test_that("fast aggregation and benchmark result produce the same conditions", {
+  learner = lrn("classif.debug", error_train = 0.5, warning_train = 0.5)
+  learner$encapsulate("callr", fallback = lrn("classif.debug"))
+
+  instance = fsi(
+    task = tsk("pima"),
+    learner = learner,
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 6)
+  )
+
+  fselector = fs("random_search", batch_size = 2)
+  fselector$optimize(instance)
+
+  expect_equal(get_private(instance$objective)$.aggregator, aggregator_fast)
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+})
