@@ -61,5 +61,5 @@ test_that("search is terminated by terminator works", {
   expect_equal(instance$search_space, domain)
   expect_equal(instance$objective$domain, domain)
   # check that task is restored
-  expect_equal(instance$objective$task, task)
+  suppressWarnings(expect_equal(instance$objective$task, task))
 })
