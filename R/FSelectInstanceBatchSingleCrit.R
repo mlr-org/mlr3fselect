@@ -54,7 +54,6 @@
 #' @template param_callbacks
 #' @template param_xdt
 #' @template param_ties_method
-#' @template param_aggregate_fast
 #'
 #' @export
 #' @examples
@@ -104,8 +103,7 @@ FSelectInstanceBatchSingleCrit = R6Class("FSelectInstanceBatchSingleCrit",
       store_models = FALSE,
       check_values = FALSE,
       callbacks = NULL,
-      ties_method = "least_features",
-      aggregate_fast = FALSE
+      ties_method = "least_features"
       ) {
       # initialized specialized fselect archive and objective
       archive = ArchiveBatchFSelect$new(
@@ -123,8 +121,7 @@ FSelectInstanceBatchSingleCrit = R6Class("FSelectInstanceBatchSingleCrit",
         store_models = store_models,
         check_values = check_values,
         archive = archive,
-        callbacks = callbacks,
-        aggregate_fast = aggregate_fast)
+        callbacks = callbacks)
 
       super$initialize(objective, objective$domain, terminator, callbacks = callbacks)
 

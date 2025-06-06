@@ -12,7 +12,6 @@
 #' @template param_check_values
 #' @template param_store_benchmark_result
 #' @template param_callbacks
-#' @template param_aggregate_fast
 #'
 #' @export
 ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
@@ -28,10 +27,8 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
       check_values = TRUE,
       store_benchmark_result = TRUE,
       store_models = FALSE,
-      callbacks = NULL,
-      aggregate_fast = FALSE
+      callbacks = NULL
       ) {
-      assert_flag(aggregate_fast)
       super$initialize(
         task = task,
         learner = learner,
@@ -43,11 +40,11 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
         callbacks = callbacks
       )
 
-      if (aggregate_fast && any(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %in% self$measures$properties)) {
-        stopf("Fast aggregation is only supported for measures that do not require task, learner, model or train set")
+      if (self$codomain$length == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures$properties)) {
+        private$.aggregator = async_aggregator_fast
+      } else {
+        private$.aggregator = async_aggregator_default
       }
-
-      private$.aggregator = if (aggregate_fast) async_aggregator_fast else async_aggregator_default
     }
   ),
   private = list(

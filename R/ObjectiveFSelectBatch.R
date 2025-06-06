@@ -12,7 +12,6 @@
 #' @template param_check_values
 #' @template param_store_benchmark_result
 #' @template param_callbacks
-#' @template param_aggregate_fast
 #'
 #' @export
 ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
@@ -37,12 +36,10 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       store_benchmark_result = TRUE,
       store_models = FALSE,
       archive = NULL,
-      callbacks = NULL,
-      aggregate_fast = FALSE
+      callbacks = NULL
       ) {
       self$archive = assert_r6(archive, "ArchiveBatchFSelect", null.ok = TRUE)
       if (is.null(self$archive)) store_benchmark_result = store_models = FALSE
-      assert_flag(aggregate_fast)
 
       super$initialize(
         task = task,
@@ -54,12 +51,12 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
         check_values = check_values,
         callbacks = callbacks
       )
-
-      if (aggregate_fast && any(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %in% self$measures$properties)) {
-        stopf("Fast aggregation is only supported for measures that do not require task, learner, model or train set")
+      measure_properties = unlist(map(self$measures, "properties"))
+      if (self$codomain$length == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% measure_properties)) {
+        private$.aggregator = aggregator_fast
+      } else {
+        private$.aggregator = aggregator_default
       }
-
-      private$.aggregator = if (aggregate_fast) aggregator_fast else aggregator_default
     }
   ),
 
@@ -93,12 +90,6 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
-      # add runtime to evaluations
-      time = map_dbl(private$.benchmark_result$resample_results$resample_result, function(rr) {
-        sum(map_dbl(get_private(rr)$.data$learner_states(get_private(rr)$.view), function(state) state$train_time + state$predict_time))
-      })
-      set(private$.aggregated_performance, j = "runtime_learners", value = time)
-
       # store benchmark result in archive
       if (self$store_benchmark_result) {
         lg$debug("Storing resample result")
@@ -121,9 +112,28 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
 )
 
 aggregator_default = function(benchmark_result, measures, codomain) {
-  benchmark_result$aggregate(measures, conditions = TRUE)[, c(codomain$target_ids, "warnings", "errors"), with = FALSE]
+  aggr = benchmark_result$aggregate(measures, conditions = TRUE)[, c(codomain$target_ids, "warnings", "errors"), with = FALSE]
+
+  # add runtime
+  data = get_private(benchmark_result)$.data$data
+  tab = data$fact[data$uhashes, c("uhash", "learner_state"), with = FALSE]
+  learner_state = NULL
+  runtime = tab[, sum(map_dbl(learner_state, function(s) sum(s$train_time + s$predict_time))), by = uhash]$V1
+  set(aggr, j = "runtime_learners", value = runtime)
+  aggr
 }
 
 aggregator_fast = function(benchmark_result, measures, codomain) {
-  mlr3::faggregate(benchmark_result, measures[[1]])
+  aggr = faggregate(benchmark_result, measures[[1]])
+
+  # add runtime and conditions
+  data = get_private(benchmark_result)$.data$data
+  tab = data$fact[data$uhashes, c("uhash", "learner_state"), with = FALSE]
+
+  learner_state = NULL
+  aggr[tab[, list(
+    errors = sum(map_int(learner_state, function(s) sum(s$log$class == "error"))),
+    warnings = sum(map_int(learner_state, function(s) sum(s$log$class == "warning"))),
+    runtime_learners = sum(map_dbl(learner_state, function(s) sum(s$train_time + s$predict_time)))
+  ), by = uhash], on = "uhash"]
 }

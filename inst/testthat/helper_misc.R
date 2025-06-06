@@ -37,7 +37,7 @@ MeasureDummy = R6Class("MeasureDummy", inherit = MeasureRegr,
         )
       }
       private$.score_design = score_design
-      super$initialize(id = "dummy", range = c(0, 4), minimize = minimize)
+      super$initialize(id = "dummy", range = c(0, 4), minimize = minimize, properties = c("requires_task", "requires_learner"))
     }
   ),
     private = list(

@@ -47,7 +47,6 @@ fss = function(.keys, ...) {
 #' @template param_check_values
 #' @template param_callbacks
 #' @template param_ties_method
-#' @template param_aggregate_fast
 #'
 #' @inheritSection FSelectInstanceBatchSingleCrit Resources
 #' @inheritSection FSelectInstanceBatchSingleCrit Default Measures
@@ -64,8 +63,7 @@ fsi = function(
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL,
-  ties_method = "least_features",
-  aggregate_fast = FALSE
+  ties_method = "least_features"
   ) {
   if (is.null(measures) || inherits(measures, "Measure")) {
     FSelectInstanceBatchSingleCrit$new(
@@ -78,8 +76,7 @@ fsi = function(
       store_models = store_models,
       check_values = check_values,
       callbacks = callbacks,
-      ties_method = ties_method,
-      aggregate_fast = aggregate_fast
+      ties_method = ties_method
     )
   } else {
     FSelectInstanceBatchMultiCrit$new(
@@ -114,7 +111,6 @@ fsi = function(
 #' @template param_callbacks
 #' @template param_rush
 #' @template param_ties_method
-#' @template param_aggregate_fast
 #'
 #' @inheritSection FSelectInstanceBatchSingleCrit Resources
 #' @inheritSection FSelectInstanceBatchSingleCrit Default Measures
@@ -132,8 +128,7 @@ fsi_async = function(
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features",
-  rush = NULL,
-  aggregate_fast = FALSE
+  rush = NULL
   ) {
   if (is.null(measures) || inherits(measures, "Measure")) {
     FSelectInstanceAsyncSingleCrit$new(
@@ -147,8 +142,7 @@ fsi_async = function(
       check_values = check_values,
       callbacks = callbacks,
       rush = rush,
-      ties_method = ties_method,
-      aggregate_fast = aggregate_fast)
+      ties_method = ties_method)
   } else {
     FSelectInstanceAsyncMultiCrit$new(
       task = task,
