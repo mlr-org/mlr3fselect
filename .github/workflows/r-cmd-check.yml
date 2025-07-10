@@ -1,5 +1,6 @@
-# r cmd check workflow of the mlr3 ecosystem v0.3.1
+# r cmd check workflow of the mlr3 ecosystem v0.4.0
 # https://github.com/mlr-org/actions
+# modified to use supercharge/redis-github-action@1.7.0
 on:
   workflow_dispatch:
     inputs:
@@ -50,6 +51,7 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          error-on: '"note"'
 
       - uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
@@ -59,4 +61,3 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--no-manual", "--as-cran")'
-
