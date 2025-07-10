@@ -529,7 +529,8 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># contains the benchmark result</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="va">benchmark_result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;BenchmarkResult&gt; of 4 rows with 2 resampling runs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;BenchmarkResult&gt;</span><span style="font-weight: bold;"> of </span><span style="color: #0000BB; font-weight: bold;">4</span><span style="font-weight: bold;"> rows with </span><span style="color: #0000BB; font-weight: bold;">2</span><span style="font-weight: bold;"> resampling run</span> <span style="color: #00BBBB;">───────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  nr task_id                    learner_id resampling_id iters warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1   sonar       classif.rpart.fselector   subsampling     2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   2   sonar classif.featureless.fselector   subsampling     2        0      0</span>
@@ -538,22 +539,22 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       learner_id resampling_iteration classif.acc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           &lt;char&gt;                &lt;int&gt;       &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       classif.rpart.fselector                    1   0.7101449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       classif.rpart.fselector                    2   0.7391304</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.featureless.fselector                    1   0.4782609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       classif.rpart.fselector                    1   0.6811594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       classif.rpart.fselector                    2   0.6811594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.featureless.fselector                    1   0.4637681</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4: classif.featureless.fselector                    2   0.5072464</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       features n_features classif.ce_inner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         &lt;list&gt;      &lt;int&gt;            &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: V10,V11,V12,V13,V14,V15,...         19        0.1802344</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: V10,V11,V12,V13,V15,V16,...         10        0.2958680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                      V22,V8          2        0.4383287</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                     V21,V25          2        0.4529756</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       17.33333,16.33333,15.00000,14.00000,12.00000,10.66667,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 10.000000, 8.333333, 7.333333, 6.666667, 5.666667, 5.000000,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                                               1.666667,1.333333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                                             2,1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          V10,V11,V12,V16,V9          5        0.2445267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: V10,V11,V12,V13,V14,V15,...         19        0.2584027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                      V22,V8          2        0.4320074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                     V21,V25          2        0.4526673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   importance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:              5.000000,4.000000,2.666667,1.666667,1.666667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 15.66667,14.66667,13.00000,12.33333,12.00000,11.33333,...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                                         1.666667,1.333333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                                       2,1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   task                                       learner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 &lt;list&gt;                                        &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;TaskClassif:sonar&gt;       &lt;AutoFSelector:classif.rpart.fselector&gt;</span>
@@ -569,27 +570,26 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns the stability of the selected features</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">stability</span><span class="op">(</span>stability_measure <span class="op">=</span> <span class="st">"jaccard"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1008772</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04385965</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns a ranking of all features</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">efsr</span><span class="op">$</span><span class="fu">feature_ranking</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: fastVoteR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    feature    score norm_score borda_score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;char&gt;    &lt;num&gt;      &lt;num&gt;       &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     V15 1.449275  0.5952381   1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     V10 1.449275  0.5952381   0.9830508</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     V16 1.449275  0.5952381   0.9661017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:     V36 1.449275  0.5952381   0.9491525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:     V17 1.449275  0.5952381   0.9322034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:     V11 1.449275  0.5952381   0.9152542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    feature     score norm_score borda_score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;char&gt;     &lt;num&gt;      &lt;num&gt;       &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     V10 1.3623188  0.5838509   1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     V16 1.3623188  0.5838509   0.9830508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     V11 1.3623188  0.5838509   0.9661017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      V9 1.3623188  0.5838509   0.9491525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:     V12 1.3623188  0.5838509   0.9322034</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:     V46 0.6811594  0.2919255   0.9152542</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns the empirical pareto front, i.e. n_features vs measure (error)</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">pareto_front</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    n_features classif.acc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;       &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2   0.4782609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2   0.4637681</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:          2   0.5072464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         10   0.7391304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:          5   0.6811594</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns the knee points (optimal trade-off between n_features and performance)</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">knee_points</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -604,10 +604,9 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">pareto_front</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    n_features classif.ce_inner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2        0.4529756</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:          2        0.4383287</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         10        0.2958680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         19        0.1802344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2        0.4526673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:          2        0.4320074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:          5        0.2445267</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
