@@ -28,7 +28,7 @@ Combines multiple \link{EnsembleFSResult} objects into a new \link{EnsembleFSRes
 }
 
 \examples{
-\dontshow{if (mlr3misc::require_namespaces("fastVoteR", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("fastVoteR")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontshow{\}) # examplesIf}
 \donttest{
   efsr = ensemble_fselect(

@@ -23,7 +23,7 @@
 #' `r format_bib("das1999", "meinshausen2010")`
 #'
 #' @export
-#' @examplesIf mlr3misc::require_namespaces("fastVoteR", quietly = TRUE)
+#' @examplesIf requireNamespace("fastVoteR")
 #' @examples
 #' \donttest{
 #'   efsr = ensemble_fselect(
