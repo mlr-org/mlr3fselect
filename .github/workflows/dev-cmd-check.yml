@@ -1,5 +1,6 @@
-# dev cmd check workflow of the mlr3 ecosystem v0.3.1
+# dev cmd check workflow of the mlr3 ecosystem v0.4.0
 # https://github.com/mlr-org/actions
+# modified to use supercharge/redis-github-action@1.7.0
 on:
   workflow_dispatch:
     inputs:
@@ -32,6 +33,7 @@ jobs:
         config:
           - {os: ubuntu-latest, r: 'release', dev-package: 'mlr-org/bbotk'}
           - {os: ubuntu-latest, r: 'release', dev-package: 'mlr-org/mlr3'}
+          - {os: ubuntu-latest, r: 'release', dev-package: 'mlr-org/mlr3misc'}
 
     steps:
       - uses: actions/checkout@v3
@@ -50,11 +52,12 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          error-on: '"note"'
 
       - name: Install dev versions
-        run: pak::pkg_install(c('${{ matrix.config.dev-package }}'))
+        run: pak::pkg_install('${{ matrix.config.dev-package }}')
         shell: Rscript {0}
-
+      
       - uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         with:
