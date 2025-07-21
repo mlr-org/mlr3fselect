@@ -13,6 +13,7 @@ This class is usually constructed internally by the \link{FSelectInstanceAsyncSi
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-ObjectiveFSelectAsync-new}{\code{ObjectiveFSelectAsync$new()}}
 \item \href{#method-ObjectiveFSelectAsync-clone}{\code{ObjectiveFSelectAsync$clone()}}
 }
 }
@@ -25,10 +26,61 @@ This class is usually constructed internally by the \link{FSelectInstanceAsyncSi
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="format"><a href='../../bbotk/html/Objective.html#method-Objective-format'><code>bbotk::Objective$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="help"><a href='../../bbotk/html/Objective.html#method-Objective-help'><code>bbotk::Objective$help()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Objective" data-id="print"><a href='../../bbotk/html/Objective.html#method-Objective-print'><code>bbotk::Objective$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="ObjectiveFSelect" data-id="initialize"><a href='../../mlr3fselect/html/ObjectiveFSelect.html#method-ObjectiveFSelect-initialize'><code>mlr3fselect::ObjectiveFSelect$initialize()</code></a></span></li>
 </ul>
 </details>
 }}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ObjectiveFSelectAsync-new"></a>}}
+\if{latex}{\out{\hypertarget{method-ObjectiveFSelectAsync-new}{}}}
+\subsection{Method \code{new()}}{
+Creates a new instance of this \link[R6:R6Class]{R6} class.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ObjectiveFSelectAsync$new(
+  task,
+  learner,
+  resampling,
+  measures,
+  check_values = TRUE,
+  store_benchmark_result = TRUE,
+  store_models = FALSE,
+  callbacks = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
+Task to operate on.}
+
+\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+Learner to optimize the feature subset for.}
+
+\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
+Resampling that is used to evaluated the performance of the feature subsets.
+Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
+Already instantiated resamplings are kept unchanged.}
+
+\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
+Measures to optimize.
+If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
+
+\item{\code{check_values}}{(\code{logical(1)})\cr
+Check the parameters before the evaluation and the results for
+validity?}
+
+\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+Store benchmark result in archive?}
+
+\item{\code{store_models}}{(\code{logical(1)}).
+Store models in benchmark result?}
+
+\item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
+List of callbacks.}
+}
+\if{html}{\out{</div>}}
+}
+}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ObjectiveFSelectAsync-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ObjectiveFSelectAsync-clone}{}}}
