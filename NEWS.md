@@ -1,4 +1,4 @@
-# mlr3fselect (development version)
+# mlr3fselect 1.4.0
 
 * feat: Add `max_nfeatures` argument in the `pareto_front()` and `knee_points()` methods of an `EnsembleFSResult()`
 

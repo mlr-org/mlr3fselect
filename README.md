@@ -1,7 +1,7 @@
 
 # mlr3fselect <img src="man/figures/logo.png" align="right" width = "120" />
 
-Package website: [release](https://mlr3fselect.mlr-org.com/) |
+Package website: [release](https://mlr3fselect.mlr-org.com/) \|
 [dev](https://mlr3fselect.mlr-org.com/dev/)
 
 <!-- badges: start -->
@@ -9,7 +9,6 @@ Package website: [release](https://mlr3fselect.mlr-org.com/) |
 [![r-cmd-check](https://github.com/mlr-org/mlr3fselect/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/mlr-org/mlr3fselect/actions/workflows/r-cmd-check.yml)
 [![CRAN
 Status](https://www.r-pkg.org/badges/version/mlr3fselect)](https://cran.r-project.org/package=mlr3fselect)
-[![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 [![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 <!-- badges: end -->
 
@@ -29,24 +28,24 @@ The package is built on the optimization framework
 There are several section about feature selection in the
 [mlr3book](https://mlr3book.mlr-org.com).
 
-  - Getting started with [wrapper feature
-    selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper).
-  - Do a [sequential forward
-    selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper-example)
-    Palmer Penguins data set.
-  - Optimize [multiple performance
-    measures](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-multicrit-featsel).
-  - Estimate Model Performance with [nested
-    resampling](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect).
+- Getting started with [wrapper feature
+  selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper).
+- Do a [sequential forward
+  selection](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-fs-wrapper-example)
+  Palmer Penguins data set.
+- Optimize [multiple performance
+  measures](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-multicrit-featsel).
+- Estimate Model Performance with [nested
+  resampling](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect).
 
 The [gallery](https://mlr-org.com/gallery.html) features a collection of
 case studies and demos about optimization.
 
-  - Utilize the built-in feature importance of models with [Recursive
-    Feature
-    Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
-  - Run a feature selection with [Shadow Variable
-    Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
+- Utilize the built-in feature importance of models with [Recursive
+  Feature
+  Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
+- Run a feature selection with [Shadow Variable
+  Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
 
 The [cheatsheet](https://cheatsheets.mlr-org.com/mlr3fselect.pdf)
 summarizes the most important functions of mlr3fselect.
@@ -76,16 +75,18 @@ library("mlr3verse")
 tsk("spam")
 ```
 
-    ## <TaskClassif:spam> (4601 x 58): HP Spam Detection
-    ## * Target: type
-    ## * Properties: twoclass
-    ## * Features (57):
-    ##   - dbl (57): address, addresses, all, business, capitalAve, capitalLong, capitalTotal,
-    ##     charDollar, charExclamation, charHash, charRoundbracket, charSemicolon,
-    ##     charSquarebracket, conference, credit, cs, data, direct, edu, email, font, free,
-    ##     george, hp, hpl, internet, lab, labs, mail, make, meeting, money, num000, num1999,
-    ##     num3d, num415, num650, num85, num857, order, original, our, over, parts, people, pm,
-    ##     project, re, receive, remove, report, table, technology, telnet, will, you, your
+    ## 
+    ## ── <TaskClassif> (4601x58): HP Spam Detection ──────────────────────────────────────────────────────
+    ## • Target: type
+    ## • Target classes: spam (positive class, 39%), nonspam (61%)
+    ## • Properties: twoclass
+    ## • Features (57):
+    ##   • dbl (57): address, addresses, all, business, capitalAve, capitalLong, capitalTotal, charDollar,
+    ##   charExclamation, charHash, charRoundbracket, charSemicolon, charSquarebracket, conference,
+    ##   credit, cs, data, direct, edu, email, font, free, george, hp, hpl, internet, lab, labs, mail,
+    ##   make, meeting, money, num000, num1999, num3d, num415, num650, num85, num857, order, original,
+    ##   our, over, parts, people, pm, project, re, receive, remove, report, table, technology, telnet,
+    ##   will, you, your
 
 We construct an instance with the `fsi()` function. The instance
 describes the optimization problem.
@@ -103,7 +104,7 @@ instance
 
     ## <FSelectInstanceBatchSingleCrit>
     ## * State:  Not optimized
-    ## * Objective: <ObjectiveFSelect:classif.svm_on_spam>
+    ## * Objective: <ObjectiveFSelectBatch:classif.svm_on_spam>
     ## * Terminator: <TerminatorEvals>
 
 We select a simple random search as the optimization algorithm.
@@ -132,19 +133,19 @@ instance.
 instance$result_feature_set
 ```
 
-    ##  [1] "address"           "addresses"         "all"               "business"
-    ##  [5] "capitalAve"        "capitalLong"       "capitalTotal"      "charDollar"
-    ##  [9] "charExclamation"   "charHash"          "charRoundbracket"  "charSemicolon"
-    ## [13] "charSquarebracket" "conference"        "credit"            "cs"
-    ## [17] "data"              "direct"            "edu"               "email"
-    ## [21] "font"              "free"              "george"            "hp"
-    ## [25] "internet"          "lab"               "labs"              "mail"
-    ## [29] "make"              "meeting"           "money"             "num000"
-    ## [33] "num1999"           "num3d"             "num415"            "num650"
-    ## [37] "num85"             "num857"            "order"             "our"
-    ## [41] "parts"             "people"            "pm"                "project"
-    ## [45] "re"                "receive"           "remove"            "report"
-    ## [49] "table"             "technology"        "telnet"            "will"
+    ##  [1] "address"           "addresses"         "all"               "business"         
+    ##  [5] "capitalAve"        "capitalLong"       "capitalTotal"      "charDollar"       
+    ##  [9] "charExclamation"   "charHash"          "charRoundbracket"  "charSemicolon"    
+    ## [13] "charSquarebracket" "conference"        "credit"            "cs"               
+    ## [17] "data"              "direct"            "edu"               "email"            
+    ## [21] "font"              "free"              "george"            "hp"               
+    ## [25] "internet"          "lab"               "labs"              "mail"             
+    ## [29] "make"              "meeting"           "money"             "num000"           
+    ## [33] "num1999"           "num3d"             "num415"            "num650"           
+    ## [37] "num85"             "num857"            "order"             "our"              
+    ## [41] "parts"             "people"            "pm"                "project"          
+    ## [45] "re"                "receive"           "remove"            "report"           
+    ## [49] "table"             "technology"        "telnet"            "will"             
     ## [53] "you"               "your"
 
 And the corresponding measured performance.
@@ -153,7 +154,7 @@ And the corresponding measured performance.
 instance$result_y
 ```
 
-    ## classif.ce
+    ## classif.ce 
     ## 0.07042005
 
 The archive contains all evaluated hyperparameter configurations.
@@ -162,19 +163,19 @@ The archive contains all evaluated hyperparameter configurations.
 as.data.table(instance$archive)
 ```
 
-    ##     address addresses   all business capitalAve capitalLong capitalTotal charDollar charExclamation
-    ##  1:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE            TRUE
-    ##  2:    TRUE      TRUE  TRUE    FALSE      FALSE        TRUE         TRUE       TRUE            TRUE
-    ##  3:    TRUE      TRUE FALSE    FALSE       TRUE        TRUE         TRUE       TRUE            TRUE
-    ##  4:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE            TRUE
-    ##  5:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE       TRUE           FALSE
-    ## ---
-    ## 16:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE      FALSE           FALSE
-    ## 17:   FALSE     FALSE FALSE     TRUE       TRUE        TRUE        FALSE      FALSE            TRUE
-    ## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE           FALSE
-    ## 19:    TRUE      TRUE  TRUE     TRUE      FALSE        TRUE         TRUE       TRUE            TRUE
-    ## 20:    TRUE     FALSE  TRUE    FALSE      FALSE        TRUE        FALSE       TRUE           FALSE
-    ## 56 variables not shown: [charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, edu, ...]
+    ##     address addresses   all business capitalAve capitalLong capitalTotal charDollar
+    ##  1:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE
+    ##  2:    TRUE      TRUE  TRUE    FALSE      FALSE        TRUE         TRUE       TRUE
+    ##  3:    TRUE      TRUE FALSE    FALSE       TRUE        TRUE         TRUE       TRUE
+    ##  4:    TRUE      TRUE  TRUE     TRUE       TRUE        TRUE         TRUE       TRUE
+    ##  5:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE       TRUE
+    ## ---                                                                                
+    ## 16:   FALSE     FALSE FALSE    FALSE      FALSE       FALSE        FALSE      FALSE
+    ## 17:   FALSE     FALSE FALSE     TRUE       TRUE        TRUE        FALSE      FALSE
+    ## 18:   FALSE     FALSE  TRUE     TRUE      FALSE       FALSE        FALSE       TRUE
+    ## 19:    TRUE      TRUE  TRUE     TRUE      FALSE        TRUE         TRUE       TRUE
+    ## 20:    TRUE     FALSE  TRUE    FALSE      FALSE        TRUE        FALSE       TRUE
+    ## 58 variables not shown: [charExclamation, charHash, charRoundbracket, charSemicolon, charSquarebracket, conference, credit, cs, data, direct, ...]
 
 We fit a final model with the optimized feature set to make predictions
 on new data.
