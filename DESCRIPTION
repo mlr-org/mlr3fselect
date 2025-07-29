@@ -38,29 +38,43 @@ Imports:
     stabm
 Suggests:
     e1071,
+    fastVoteR,
     genalg,
+    mirai,
     mlr3learners,
     mlr3pipelines,
     rpart,
-    fastVoteR,
+    rush,
+    rush (>= 0.2.0),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Config/testthat/parallel: true
+Config/testthat/parallel: false
 Encoding: UTF-8
 Language: en-US
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Collate:
+    'ArchiveAsyncFSelect.R'
+    'ArchiveAsyncFSelectFrozen.R'
     'ArchiveBatchFSelect.R'
     'AutoFSelector.R'
+    'CallbackAsyncFSelect.R'
     'CallbackBatchFSelect.R'
+    'ContextAsyncFSelect.R'
     'ContextBatchFSelect.R'
     'EnsembleFSResult.R'
+    'FSelectInstanceAsyncSingleCrit.R'
+    'FSelectInstanceAsyncMultiCrit.R'
     'FSelectInstanceBatchSingleCrit.R'
     'FSelectInstanceBatchMultiCrit.R'
     'mlr_fselectors.R'
     'FSelector.R'
+    'FSelectorAsync.R'
+    'FSelectorAsyncDesignPoints.R'
+    'FSelectorAsyncExhaustiveSearch.R'
+    'FSelectorAsyncFromOptimizerAsync.R'
+    'FSelectorAsyncRandomSearch.R'
     'FSelectorBatch.R'
     'FSelectorBatchDesignPoints.R'
     'FSelectorBatchExhaustiveSearch.R'
@@ -72,6 +86,7 @@ Collate:
     'FSelectorBatchSequential.R'
     'FSelectorBatchShadowVariableSearch.R'
     'ObjectiveFSelect.R'
+    'ObjectiveFSelectAsync.R'
     'ObjectiveFSelectBatch.R'
     'assertions.R'
     'auto_fselector.R'

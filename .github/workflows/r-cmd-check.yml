@@ -1,5 +1,6 @@
-# r cmd check workflow of the mlr3 ecosystem v0.3.1
+# r cmd check workflow of the mlr3 ecosystem v0.4.0
 # https://github.com/mlr-org/actions
+# modified to use supercharge/redis-github-action@1.7.0
 on:
   workflow_dispatch:
     inputs:
@@ -42,6 +43,10 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
+      - uses: supercharge/redis-github-action@1.7.0
+        with:
+          redis-version: 7
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
@@ -53,3 +58,6 @@ jobs:
           limit-access-to-actor: true
 
       - uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--as-cran")'
+          error-on: '"note"'

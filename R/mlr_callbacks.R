@@ -228,3 +228,25 @@ load_callback_internal_tuning = function() {
     }
   )
 }
+
+#' @title Freeze Archive Callback
+#'
+#' @include CallbackAsyncFSelect.R
+#' @name mlr3fselect.async_freeze_archive
+#'
+#' @description
+#' This [CallbackAsyncFSelect] freezes the [ArchiveAsyncFSelect] to [ArchiveAsyncFSelectFrozen] after the optimization has finished.
+#'
+#' @examples
+#' clbk("mlr3fselect.async_freeze_archive")
+NULL
+
+load_callback_freeze_archive = function() {
+  callback_async_fselect("mlr3fselect.async_freeze_archive",
+    label = "Archive Freeze Callback",
+    man = "mlr3fselect::mlr3fselect.async_freeze_archive",
+    on_optimization_end = function(callback, context) {
+      context$instance$archive = ArchiveAsyncFSelectFrozen$new(context$instance$archive)
+    }
+  )
+}

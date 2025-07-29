@@ -2,7 +2,7 @@
 % Please edit documentation in R/sugar.R
 \name{fsi}
 \alias{fsi}
-\title{Syntactic Sugar for Instance Construction}
+\title{Syntactic Sugar for Feature Selection Instance Construction}
 \usage{
 fsi(
   task,

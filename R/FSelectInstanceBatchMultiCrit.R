@@ -61,7 +61,17 @@ FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    initialize = function(task, learner, resampling, measures, terminator, store_benchmark_result = TRUE, store_models = FALSE, check_values = FALSE, callbacks = NULL) {
+    initialize = function(
+      task,
+      learner,
+      resampling,
+      measures,
+      terminator,
+      store_benchmark_result = TRUE,
+      store_models = FALSE,
+      check_values = FALSE,
+      callbacks = NULL
+      ) {
       # initialized specialized fselect archive and objective
       archive = ArchiveBatchFSelect$new(
         search_space = task_to_domain(assert_task(task)),
