@@ -58,8 +58,6 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
     .eval_many = function(xss, resampling) {
       private$.xss = xss
 
-     lg$trace("Evaluating hyperparameter configuration %s", as_short_string(xs))
-
       tasks = map(private$.xss, function(x) {
         state = self$task$feature_names[unlist(x)]
         task = self$task$clone()
