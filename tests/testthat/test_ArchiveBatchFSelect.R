@@ -12,7 +12,7 @@ test_that("ArchiveBatchFSelect access methods work", {
     expect_learner(instance$archive$learner(uhash = uhash))
   })
 
-  map(seq(nrow(instance$archive$data)), function(i) {
+  map(seq_row(instance$archive$data), function(i) {
     expect_learner(instance$archive$learner(i))
   })
 
@@ -22,7 +22,7 @@ test_that("ArchiveBatchFSelect access methods work", {
     expect_learner(instance$archive$learners(uhash = uhash)[[1]])
   })
 
-  map(seq(nrow(instance$archive$data)), function(i) {
+  map(seq_row(instance$archive$data), function(i) {
     expect_list(instance$archive$learners(i))
     expect_learner(instance$archive$learners(i)[[1]])
   })
@@ -33,21 +33,19 @@ test_that("ArchiveBatchFSelect access methods work", {
     expect_prediction(instance$archive$predictions(uhash = uhash)[[1]])
   })
 
-  map(seq(nrow(instance$archive$data)), function(i) {
+  map(seq_row(instance$archive$data), function(i) {
     expect_list(instance$archive$predictions(i))
     expect_prediction(instance$archive$predictions(i)[[1]])
   })
 
   # resample result
+  map(instance$archive$data$uhash, function(uhash) {
+    expect_resample_result(instance$archive$resample_result(uhash = uhash))
+  })
 
-# Issue https://github.com/mlr-org/mlr3/issues/893
-#  map(instance$archive$data$uhash, function(uhash) {
-#    expect_resample_result(instance$archive$resample_result(uhash = uhash))
-#  })
-#
-#  map(seq(nrow(instance$archive$data)), function(i) {
-#    expect_resample_result(instance$archive$resample_result(i))
-#  })
+  map(seq_row(instance$archive$data), function(i) {
+    expect_resample_result(instance$archive$resample_result(i))
+  })
 })
 
 test_that("ArchiveBatchFSelect as.data.table function works", {

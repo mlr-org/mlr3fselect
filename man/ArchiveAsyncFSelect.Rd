@@ -73,6 +73,7 @@ One of \code{"least_features"} (default) or \code{"random"}.}
 \item \href{#method-ArchiveAsyncFSelect-resample_result}{\code{ArchiveAsyncFSelect$resample_result()}}
 \item \href{#method-ArchiveAsyncFSelect-print}{\code{ArchiveAsyncFSelect$print()}}
 \item \href{#method-ArchiveAsyncFSelect-best}{\code{ArchiveAsyncFSelect$best()}}
+\item \href{#method-ArchiveAsyncFSelect-push_result}{\code{ArchiveAsyncFSelect$push_result()}}
 \item \href{#method-ArchiveAsyncFSelect-clone}{\code{ArchiveAsyncFSelect$clone()}}
 }
 }
@@ -87,7 +88,6 @@ One of \code{"least_features"} (default) or \code{"random"}.}
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="pop_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-pop_point'><code>bbotk::ArchiveAsync$pop_point()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_failed_point'><code>bbotk::ArchiveAsync$push_failed_point()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_points'><code>bbotk::ArchiveAsync$push_points()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_result"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_result'><code>bbotk::ArchiveAsync$push_result()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_running_point'><code>bbotk::ArchiveAsync$push_running_point()</code></a></span></li>
 </ul>
 </details>
@@ -269,6 +269,33 @@ If \code{n_select > 1L}, the tie method is ignored and the first point is return
 }
 \subsection{Returns}{
 \code{\link[data.table:data.table]{data.table::data.table()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ArchiveAsyncFSelect-push_result"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-push_result}{}}}
+\subsection{Method \code{push_result()}}{
+Push result to the archive.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$push_result(key, ys, x_domain, extra = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{(\code{character()})\cr
+Key of the point.}
+
+\item{\code{ys}}{(\code{list()})\cr
+Named list of results.}
+
+\item{\code{x_domain}}{(\code{list()})\cr
+Is ignored for feature selection.}
+
+\item{\code{extra}}{(\code{list()})\cr
+Named list of additional information.}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
