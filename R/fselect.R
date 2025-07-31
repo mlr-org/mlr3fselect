@@ -8,7 +8,7 @@
 #' It executes the feature selection with the [FSelector] (`fselector`) and returns the result with the feature selection instance (`$result`).
 #' The [ArchiveBatchFSelect] and [ArchiveAsyncFSelect] (`$archive`) stores all evaluated feature subsets and performance scores.
 #'
-#' You can find an overview of all feature selectors on our [website](https://mlr-org.com/feature-selectors.html).
+#' You can find an overview of all feature selectors on our [website](https://mlr-org.com/fselectors.html).
 #'
 #' @details
 #' The [mlr3::Task], [mlr3::Learner], [mlr3::Resampling], [mlr3::Measure] and [bbotk::Terminator] are used to construct a [FSelectInstanceBatchSingleCrit].

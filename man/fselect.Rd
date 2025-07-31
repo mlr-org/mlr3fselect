@@ -84,7 +84,7 @@ The function internally creates a \link{FSelectInstanceBatchSingleCrit} or \link
 It executes the feature selection with the \link{FSelector} (\code{fselector}) and returns the result with the feature selection instance (\verb{$result}).
 The \link{ArchiveBatchFSelect} and \link{ArchiveAsyncFSelect} (\verb{$archive}) stores all evaluated feature subsets and performance scores.
 
-You can find an overview of all feature selectors on our \href{https://mlr-org.com/feature-selectors.html}{website}.
+You can find an overview of all feature selectors on our \href{https://mlr-org.com/fselectors.html}{website}.
 }
 \details{
 The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link[bbotk:Terminator]{bbotk::Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
