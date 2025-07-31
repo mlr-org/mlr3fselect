@@ -45,3 +45,24 @@ test_that("fselect interface is equal to FSelectInstanceBatchMultiCrit", {
 
   expect_set_equal(fselect_args, instance_args)
 })
+
+test_that("fselect interface is equal to FSelectInstanceAsyncSingleCrit", {
+  fselect_args = formalArgs(fselect)
+  fselect_args = fselect_args[fselect_args %nin% c("fselector")]
+  fselect_args[fselect_args == "measures"] = "measure"
+
+  instance_args = formalArgs(FSelectInstanceAsyncSingleCrit$public_methods$initialize)
+  instance_args = c(instance_args, "term_evals", "term_time")
+
+  expect_set_equal(fselect_args, instance_args)
+})
+
+test_that("fselect interface is equal to FSelectInstanceAsyncMultiCrit", {
+  fselect_args = formalArgs(fselect)
+  fselect_args = fselect_args[fselect_args %nin% c("fselector", "ties_method")]
+
+  instance_args = formalArgs(FSelectInstanceAsyncMultiCrit$public_methods$initialize)
+  instance_args = c(instance_args, "term_evals", "term_time")
+
+  expect_set_equal(fselect_args, instance_args)
+})
