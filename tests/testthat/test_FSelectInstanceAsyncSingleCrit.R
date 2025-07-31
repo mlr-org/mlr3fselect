@@ -3,7 +3,10 @@ test_that("initializing FSelectInstanceAsyncSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
 
@@ -51,7 +54,10 @@ test_that("FSelectInstanceAsyncSingleCrit can be passed to a fselector", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
 
@@ -75,7 +81,10 @@ test_that("assigning a result to FSelectInstanceAsyncSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
 
@@ -101,7 +110,10 @@ test_that("saving the benchmark result with FSelectInstanceAsyncSingleCrit works
   skip_if_not_installed("rush")
   flush_redis()
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
 
@@ -128,7 +140,10 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
 
@@ -156,7 +171,10 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
 #   skip_if_not_installed("rush")
 #   flush_redis()
 
-#   on.exit(mirai::daemons(0))
+# #   on.exit({
+#     mirai::daemons(0)
+#     flush_redis()
+#   })
 #   mirai::daemons(2)
 #   rush::rush_plan(n_workers = 2, worker_type = "remote")
 
