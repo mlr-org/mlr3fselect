@@ -179,6 +179,22 @@ ArchiveAsyncFSelect = R6Class("ArchiveAsyncFSelect",
         ymat = self$codomain$direction * ymat
         tab[!is_dominated(ymat)]
       }
+    },
+
+    #' @description
+    #' Push result to the archive.
+    #'
+    #' @param key (`character()`)\cr
+    #' Key of the point.
+    #' @param ys (`list()`)\cr
+    #' Named list of results.
+    #' @param x_domain (`list()`)\cr
+    #' Is ignored for feature selection.
+    #' @param extra (`list()`)\cr
+    #' Named list of additional information.
+    push_result = function(key, ys, x_domain, extra = NULL) {
+      extra = c(list(timestamp_ys = Sys.time()), extra)
+      self$rush$push_results(key, list(ys), extra = list(extra))
     }
   ),
 

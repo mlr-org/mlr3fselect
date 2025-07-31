@@ -63,3 +63,4 @@ test_that("fsi and FSelectInstanceBatchMultiCrit are equal", {
 
     suppressWarnings(expect_equal(instance_1, instance_2))
 })
+

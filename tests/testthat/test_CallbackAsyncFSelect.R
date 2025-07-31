@@ -11,7 +11,10 @@ test_that("on_optimization_begin works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -39,7 +42,10 @@ test_that("on_optimization_end works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -70,7 +76,10 @@ test_that("on_worker_begin works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(1)
   rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
@@ -98,7 +107,10 @@ test_that("on_worker_end works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(1)
   rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
@@ -131,7 +143,10 @@ test_that("on_optimizer_before_eval and on_optimizer_after_eval works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(1)
   rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
@@ -162,7 +177,10 @@ test_that("on_eval_after_xs works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(1)
   rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
@@ -192,7 +210,10 @@ test_that("on_eval_after_resample works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -221,7 +242,10 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -243,7 +267,10 @@ test_that("on_result_end in FSelectInstanceSingleCrit works", {
   skip_if_not_installed("rush")
   flush_redis()
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   callback = callback_async_fselect(id = "test",
@@ -276,7 +303,10 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
     }
   )}, "deprecated")
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -306,7 +336,10 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -334,7 +367,10 @@ test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -361,7 +397,10 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
     }
   )}, "deprecated")
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -396,7 +435,10 @@ test_that("on_resample_begin works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -431,7 +473,10 @@ test_that("on_resample_before_train works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -465,7 +510,10 @@ test_that("on_resample_before_predict works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
@@ -502,7 +550,10 @@ test_that("on_resample_end works", {
     }
   )
 
-  on.exit(mirai::daemons(0))
+  on.exit({
+    mirai::daemons(0)
+    flush_redis()
+  })
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
