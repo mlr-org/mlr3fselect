@@ -64,23 +64,3 @@ test_that("fsi and FSelectInstanceBatchMultiCrit are equal", {
     suppressWarnings(expect_equal(instance_1, instance_2))
 })
 
-test_that("tune interface is equal to TuningInstanceAsyncSingleCrit", {
-  tune_args = formalArgs(tune)
-  tune_args = tune_args[tune_args %nin% c("tuner", "method", "...")]
-  tune_args[tune_args == "measures"] = "measure"
-
-  instance_args = formalArgs(TuningInstanceAsyncSingleCrit$public_methods$initialize)
-  instance_args = c(instance_args, "term_evals", "term_time")
-
-  expect_set_equal(tune_args, instance_args)
-})
-
-test_that("tune interface is equal to TuningInstanceAsyncMultiCrit", {
-  tune_args = formalArgs(tune)
-  tune_args = tune_args[tune_args %nin% c("tuner", "method", "...")]
-
-  instance_args = formalArgs(TuningInstanceAsyncMultiCrit$public_methods$initialize)
-  instance_args = c(instance_args, "term_evals", "term_time")
-
-  expect_set_equal(tune_args, instance_args)
-})
