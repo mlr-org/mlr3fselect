@@ -124,6 +124,7 @@ One of <code>"least_features"</code> (default) or <code>"random"</code>.</p></dd
 <li><p><a href="#method-ArchiveAsyncFSelect-resample_result"><code>ArchiveAsyncFSelect$resample_result()</code></a></p></li>
 <li><p><a href="#method-ArchiveAsyncFSelect-print"><code>ArchiveAsyncFSelect$print()</code></a></p></li>
 <li><p><a href="#method-ArchiveAsyncFSelect-best"><code>ArchiveAsyncFSelect$best()</code></a></p></li>
+<li><p><a href="#method-ArchiveAsyncFSelect-push_result"><code>ArchiveAsyncFSelect$push_result()</code></a></p></li>
 <li><p><a href="#method-ArchiveAsyncFSelect-clone"><code>ArchiveAsyncFSelect$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-format"><code>bbotk::Archive$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-help"><code>bbotk::Archive$help()</code></a></span></li>
@@ -133,7 +134,6 @@ One of <code>"least_features"</code> (default) or <code>"random"</code>.</p></dd
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="pop_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-pop_point"><code>bbotk::ArchiveAsync$pop_point()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_failed_point"><code>bbotk::ArchiveAsync$push_failed_point()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_points"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_points"><code>bbotk::ArchiveAsync$push_points()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_result"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_result"><code>bbotk::ArchiveAsync$push_result()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_running_point"><code>bbotk::ArchiveAsync$push_running_point()</code></a></span></li>
 </ul></details></p><hr><a id="method-ArchiveAsyncFSelect-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -326,15 +326,47 @@ If <code>n_select &gt; 1L</code>, the tie method is ignored and the first point 
 <p><code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code></p>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-ArchiveAsyncFSelect-push_result"></a><div class="section">
+<h3 id="method-push-result-">Method <code>push_result()</code><a class="anchor" aria-label="anchor" href="#method-push-result-"></a></h3>
+<p>Push result to the archive.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">push_result</span><span class="op">(</span><span class="va">key</span>, <span class="va">ys</span>, <span class="va">x_domain</span>, extra <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>key</code></dt>
+<dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
+Key of the point.</p></dd>
+
+
+<dt><code>ys</code></dt>
+<dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
+Named list of results.</p></dd>
+
+
+<dt><code>x_domain</code></dt>
+<dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
+Is ignored for feature selection.</p></dd>
+
+
+<dt><code>extra</code></dt>
+<dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
+Named list of additional information.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-ArchiveAsyncFSelect-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
