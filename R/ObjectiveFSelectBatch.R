@@ -51,6 +51,12 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
         check_values = check_values,
         callbacks = callbacks
       )
+      measure_properties = unlist(map(self$measures, "properties"))
+      if (self$codomain$length == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% measure_properties)) {
+        private$.aggregator = aggregator_fast
+      } else {
+        private$.aggregator = aggregator_default
+      }
     }
   ),
 
@@ -80,15 +86,9 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       lg$debug("Aggregating performance")
 
       # aggregate performance scores
-      private$.aggregated_performance = private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+      private$.aggregated_performance = private$.aggregator(private$.benchmark_result, self$measures, self$codomain)
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
-
-      # add runtime to evaluations
-      time = map_dbl(private$.benchmark_result$resample_results$resample_result, function(rr) {
-        sum(map_dbl(get_private(rr)$.data$learner_states(get_private(rr)$.view), function(state) state$train_time + state$predict_time))
-      })
-      set(private$.aggregated_performance, j = "runtime_learners", value = time)
 
       # store benchmark result in archive
       if (self$store_benchmark_result) {
@@ -106,6 +106,34 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
     .design = NULL,
     .benchmark_result = NULL,
     .aggregated_performance = NULL,
-    .model_required = FALSE
+    .model_required = FALSE,
+    .aggregator = NULL
   )
 )
+
+aggregator_default = function(benchmark_result, measures, codomain) {
+  aggr = benchmark_result$aggregate(measures, conditions = TRUE)[, c(codomain$target_ids, "warnings", "errors"), with = FALSE]
+
+  # add runtime
+  data = get_private(benchmark_result)$.data$data
+  tab = data$fact[data$uhashes, c("uhash", "learner_state"), with = FALSE]
+  learner_state = NULL
+  runtime = tab[, sum(map_dbl(learner_state, function(s) sum(s$train_time + s$predict_time))), by = uhash]$V1
+  set(aggr, j = "runtime_learners", value = runtime)
+  aggr
+}
+
+aggregator_fast = function(benchmark_result, measures, codomain) {
+  aggr = faggregate(benchmark_result, measures[[1]])
+
+  # add runtime and conditions
+  data = get_private(benchmark_result)$.data$data
+  tab = data$fact[data$uhashes, c("uhash", "learner_state"), with = FALSE]
+
+  learner_state = NULL
+  aggr[tab[, list(
+    errors = sum(map_int(learner_state, function(s) sum(s$log$class == "error"))),
+    warnings = sum(map_int(learner_state, function(s) sum(s$log$class == "warning"))),
+    runtime_learners = sum(map_dbl(learner_state, function(s) sum(s$train_time + s$predict_time)))
+  ), by = uhash], on = "uhash"]
+}

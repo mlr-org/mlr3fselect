@@ -43,7 +43,7 @@ test_that("fsi and FSelectInstanceBatchSingleCrit are equal", {
 
 test_that("fsi and FSelectInstanceBatchMultiCrit are equal", {
     fsi_args = formalArgs(fsi)
-    fsi_args = fsi_args[fsi_args != "ties_method"]
+    fsi_args = fsi_args[fsi_args %nin% c("ties_method", "aggregate_fast")]
 
     expect_equal(fsi_args, formalArgs(FSelectInstanceBatchMultiCrit$public_methods$initialize))
 

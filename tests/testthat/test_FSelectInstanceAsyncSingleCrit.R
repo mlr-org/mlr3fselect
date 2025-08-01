@@ -190,3 +190,66 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
 
 #   fselector$optimize(instance)
 # })
+
+
+test_that("fast aggregation and benchmark result produce the same scores", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+
+  instance = fsi_async(
+    task = tsk("pima"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 6)
+  )
+
+  fselector = fs("async_random_search")
+  fselector$optimize(instance)
+
+  expect_equal(get_private(instance$objective)$.aggregator, async_aggregator_fast)
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+})
+
+test_that("fast aggregation and benchmark result produce the same conditions", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+
+
+  learner = lrn("classif.debug", error_train = 0.5, warning_train = 0.5)
+  learner$encapsulate("callr", fallback = lrn("classif.debug"))
+
+  instance = fsi_async(
+    task = tsk("pima"),
+    learner = learner,
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 6)
+  )
+
+  fselector = fs("async_random_search")
+  fselector$optimize(instance)
+
+  expect_equal(get_private(instance$objective)$.aggregator, async_aggregator_fast)
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+})
