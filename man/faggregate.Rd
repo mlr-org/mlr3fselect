@@ -7,12 +7,18 @@
 faggregate(obj, measure, conditions = FALSE)
 }
 \arguments{
-\item{obj}{(\link{ResampleResult} | \link{BenchmarkResult}).}
+\item{obj}{(\link[mlr3:ResampleResult]{mlr3::ResampleResult} | \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}).}
 
-\item{measure}{(\link{Measure}).}
+\item{measure}{(\link[mlr3:Measure]{mlr3::Measure}).}
+
+\item{conditions}{(\code{logical(1)})\cr
+If \code{TRUE}, the function returns the number of warnings and the number of errors.}
+}
+\value{
+(\code{\link[data.table:data.table]{data.table::data.table()}})
 }
 \description{
-Aggregates a \link{BenchmarkResult} for a single simple measure.
+Aggregates a \link[mlr3:ResampleResult]{mlr3::ResampleResult} or \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} for a single simple measure.
 Returns the aggregated score for each resample result.
 }
 \details{

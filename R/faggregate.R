@@ -8,8 +8,14 @@
 #' This function is faster than `$aggregate()` because it does not reassemble the resampling results.
 #' It only works on simple measures which do not require the task, learner, model or train set to be available.
 #'
-#' @param obj ([ResampleResult] | [BenchmarkResult]).
-#' @param measure ([Measure]).
+#' @param obj ([mlr3::ResampleResult] | [mlr3::BenchmarkResult]).
+#' @param measure ([mlr3::Measure]).
+#' @param conditions (`logical(1)`)\cr
+#' If `TRUE`, the function returns the number of warnings and the number of errors.
+#'
+#' @return ([data.table::data.table()])
+#'
+#' @export
 faggregate = function(obj, measure, conditions = FALSE) {
   tab = fscore(obj, measure, conditions = conditions)
   aggregator = measure$aggregator %??% mean
