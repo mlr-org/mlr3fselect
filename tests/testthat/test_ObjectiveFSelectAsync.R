@@ -93,6 +93,10 @@ test_that("rush objective with multiple measures works", {
 })
 
 test_that("fast aggregation works", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
   task = tsk("pima")
   learner = lrn("classif.rpart")
   resampling = rsmp("cv", folds = 3)
@@ -153,6 +157,10 @@ test_that("fast aggregation works", {
 })
 
 test_that("fast aggregation conditions work", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
   task = tsk("pima")
   learner = lrn("classif.debug", error_train = 0.1, warning_train = 0.1, error_predict = 0.1, warning_predict = 0.1)
   learner$encapsulate("evaluate", fallback = lrn("classif.featureless"))
