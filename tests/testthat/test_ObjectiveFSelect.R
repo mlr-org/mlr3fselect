@@ -107,3 +107,27 @@ test_that("fast aggregation works", {
   expect_equal(ce_fast, ce_slow)
 })
 
+test_that("fast aggregation conditions work", {
+  task = tsk("pima")
+  learner = lrn("classif.debug", error_train = 0.1, warning_train = 0.1, error_predict = 0.1, warning_predict = 0.1)
+  learner$encapsulate("evaluate", fallback = lrn("classif.featureless"))
+  resampling = rsmp("cv", folds = 3)
+
+  instance = fselect(
+    fselector = fs("random_search", batch_size = 5),
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = msr("classif.ce"),
+    term_evals = 30
+  )
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+})
