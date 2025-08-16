@@ -71,6 +71,15 @@ test_that("fast aggregation works", {
     )
   })
 
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+
   ce_fast = instance$archive$data$classif.ce
 
   with_seed(123, {
@@ -83,6 +92,15 @@ test_that("fast aggregation works", {
       term_evals = 30
     )
   })
+
+  expect_equal(instance$archive$data$classif.ce,
+   instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
 
   ce_slow = instance$archive$data$classif.ce
 

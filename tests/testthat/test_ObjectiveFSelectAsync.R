@@ -114,6 +114,7 @@ test_that("fast aggregation works", {
 
   ce_fast = instance$archive$data$classif.ce
 
+  mirai::daemons(0)
   on.exit(mirai::daemons(0))
   mirai::daemons(1, seed = 123, dispatcher = FALSE)
   rush::rush_plan(n_workers = 1, worker_type = "remote")
