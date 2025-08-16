@@ -38,7 +38,15 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
       lg$debug("Aggregating performance")
 
       # aggregate performance
-      private$.aggregated_performance = as.list(private$.resample_result$aggregate(self$measures))
+      private$.aggregated_performance = if (length(self$measures) == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures[[1]]$properties)) {
+        lg$debug("Fast aggregation on measure %s", self$measures[[1]]$id)
+
+        as.list(faggregate(private$.resample_result, self$measures[[1]], conditions = FALSE))
+      } else {
+        lg$debug("Slow aggregation on measures %s", paste(map(self$measures, "id"), collapse = ", "))
+
+        as.list(private$.resample_result$aggregate(self$measures))
+      }
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 

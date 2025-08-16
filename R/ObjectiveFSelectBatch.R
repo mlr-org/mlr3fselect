@@ -80,7 +80,15 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       lg$debug("Aggregating performance")
 
       # aggregate performance scores
-      private$.aggregated_performance = private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+      private$.aggregated_performance = if (length(self$measures) == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures[[1]]$properties)) {
+        lg$debug("Fast aggregation on measure %s", self$measures[[1]]$id)
+
+        faggregate(private$.benchmark_result, self$measures[[1]], conditions = TRUE)
+      } else {
+        lg$debug("Slow aggregation on measures %s", paste(map(self$measures, "id"), collapse = ", "))
+
+        private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+      }
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 

@@ -91,3 +91,45 @@ test_that("rush objective with multiple measures works", {
   expect_number(y$warnings)
   expect_number(y$errors)
 })
+
+test_that("fast aggregation works", {
+  task = tsk("pima")
+  learner = lrn("classif.rpart")
+  resampling = rsmp("cv", folds = 3)
+
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1, seed = 123, dispatcher = FALSE)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+
+  set.seed(123)
+
+  instance = fselect(
+    fselector = fs("async_random_search"),
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = msr("classif.ce"),
+    term_evals = 30
+  )
+
+  ce_fast = instance$archive$data$classif.ce
+
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1, seed = 123, dispatcher = FALSE)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+
+  set.seed(123)
+
+  instance = fselect(
+    fselector = fs("async_random_search"),
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = msrs(c("classif.ce", "classif.acc")),
+    term_evals = 30
+  )
+
+  ce_slow = instance$archive$data$classif.ce
+
+  expect_equal(ce_fast, ce_slow)
+})

@@ -95,6 +95,7 @@ Collate:
     'ensemble_fselect.R'
     'extract_inner_fselect_archives.R'
     'extract_inner_fselect_results.R'
+    'faggregate.R'
     'fselect.R'
     'fselect_nested.R'
     'helper.R'

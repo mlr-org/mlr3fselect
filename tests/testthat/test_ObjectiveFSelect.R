@@ -42,7 +42,7 @@ test_that("ObjectiveFSelectBatch works with store_models", {
   resampling = rsmp("holdout")
   measures = msr("dummy")
 
-   archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
+  archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
   obj = ObjectiveFSelectBatch$new(task = task, learner = learner,
     resampling = resampling, measures = measures, archive = archive,
     store_models = TRUE)
@@ -54,3 +54,38 @@ test_that("ObjectiveFSelectBatch works with store_models", {
   z = obj$eval_many(xss)
   expect_class(obj$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
 })
+
+test_that("fast aggregation works", {
+  task = tsk("pima")
+  learner = lrn("classif.rpart")
+  resampling = rsmp("cv", folds = 3)
+
+  with_seed(123, {
+    instance = fselect(
+      fselector = fs("random_search", batch_size = 5),
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = msr("classif.ce"),
+      term_evals = 30
+    )
+  })
+
+  ce_fast = instance$archive$data$classif.ce
+
+  with_seed(123, {
+    instance = fselect(
+      fselector = fs("random_search", batch_size = 5),
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = msrs(c("classif.ce", "classif.acc")),
+      term_evals = 30
+    )
+  })
+
+  ce_slow = instance$archive$data$classif.ce
+
+  expect_equal(ce_fast, ce_slow)
+})
+
