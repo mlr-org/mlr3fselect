@@ -91,3 +91,100 @@ test_that("rush objective with multiple measures works", {
   expect_number(y$warnings)
   expect_number(y$errors)
 })
+
+test_that("fast aggregation works", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
+  task = tsk("pima")
+  learner = lrn("classif.rpart")
+  resampling = rsmp("cv", folds = 3)
+
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1, seed = 123, dispatcher = FALSE)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+
+  with_seed(123, {
+    instance = fselect(
+      fselector = fs("async_random_search"),
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = msr("classif.ce"),
+      term_evals = 30
+  )})
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+
+  ce_fast = instance$archive$data$classif.ce
+
+  mirai::daemons(0)
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1, seed = 123, dispatcher = FALSE)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+
+  with_seed(123, {
+    instance = fselect(
+      fselector = fs("async_random_search"),
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = msrs(c("classif.ce", "classif.acc")),
+      term_evals = 30
+  )})
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+
+
+  ce_slow = instance$archive$data$classif.ce
+
+  expect_equal(ce_fast, ce_slow)
+})
+
+test_that("fast aggregation conditions work", {
+  skip_on_cran()
+  skip_if_not_installed("rush")
+  flush_redis()
+
+  task = tsk("pima")
+  learner = lrn("classif.debug", error_train = 0.1, warning_train = 0.1, error_predict = 0.1, warning_predict = 0.1)
+  learner$encapsulate("evaluate", fallback = lrn("classif.featureless"))
+  resampling = rsmp("cv", folds = 3)
+
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1, seed = 123, dispatcher = FALSE)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+
+  instance = fselect(
+    fselector = fs("async_random_search"),
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = msr("classif.ce"),
+    term_evals = 30
+  )
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+})

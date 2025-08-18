@@ -42,7 +42,7 @@ test_that("ObjectiveFSelectBatch works with store_models", {
   resampling = rsmp("holdout")
   measures = msr("dummy")
 
-   archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
+  archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
   obj = ObjectiveFSelectBatch$new(task = task, learner = learner,
     resampling = resampling, measures = measures, archive = archive,
     store_models = TRUE)
@@ -53,4 +53,81 @@ test_that("ObjectiveFSelectBatch works with store_models", {
 
   z = obj$eval_many(xss)
   expect_class(obj$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
+})
+
+test_that("fast aggregation works", {
+  task = tsk("pima")
+  learner = lrn("classif.rpart")
+  resampling = rsmp("cv", folds = 3)
+
+  with_seed(123, {
+    instance = fselect(
+      fselector = fs("random_search", batch_size = 5),
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = msr("classif.ce"),
+      term_evals = 30
+    )
+  })
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+
+  ce_fast = instance$archive$data$classif.ce
+
+  with_seed(123, {
+    instance = fselect(
+      fselector = fs("random_search", batch_size = 5),
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = msrs(c("classif.ce", "classif.acc")),
+      term_evals = 30
+    )
+  })
+
+  expect_equal(instance$archive$data$classif.ce,
+   instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+
+  ce_slow = instance$archive$data$classif.ce
+
+  expect_equal(ce_fast, ce_slow)
+})
+
+test_that("fast aggregation conditions work", {
+  task = tsk("pima")
+  learner = lrn("classif.debug", error_train = 0.1, warning_train = 0.1, error_predict = 0.1, warning_predict = 0.1)
+  learner$encapsulate("evaluate", fallback = lrn("classif.featureless"))
+  resampling = rsmp("cv", folds = 3)
+
+  instance = fselect(
+    fselector = fs("random_search", batch_size = 5),
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = msr("classif.ce"),
+    term_evals = 30
+  )
+
+  expect_equal(instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+
+  expect_equal(instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+
+  expect_equal(instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
 })
