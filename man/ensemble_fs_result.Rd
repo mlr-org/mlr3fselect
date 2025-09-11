@@ -29,7 +29,6 @@ Combines multiple \link{EnsembleFSResult} objects into a new \link{EnsembleFSRes
 
 \examples{
 \dontshow{if (mlr3misc::require_namespaces("fastVoteR", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontshow{\}) # examplesIf}
 \donttest{
   efsr = ensemble_fselect(
     fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
@@ -66,6 +65,7 @@ Combines multiple \link{EnsembleFSResult} objects into a new \link{EnsembleFSRes
   # Pareto front is calculated on the inner measure
   efsr$pareto_front()
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 Das, I (1999).
