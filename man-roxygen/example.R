@@ -1,4 +1,8 @@
+<% if (id == "genetic_search") { -%>
+#' @examplesIf mlr3misc::require_namespaces("genalg", quietly = TRUE)
+<% } else { -%>
 #' @examples
+<% } -%>
 #' # Feature Selection
 #' \donttest{
 #'
