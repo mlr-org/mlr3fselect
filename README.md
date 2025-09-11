@@ -41,6 +41,8 @@ There are several section about feature selection in the
 The [gallery](https://mlr-org.com/gallery.html) features a collection of
 case studies and demos about optimization.
 
+- Perform wrapper-based [Ensemble Feature
+  Selection](https://mlr-org.com/gallery/technical/2025-01-12-efs/).
 - Utilize the built-in feature importance of models with [Recursive
   Feature
   Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
@@ -61,7 +63,8 @@ install.packages("mlr3fselect")
 Install the development version from GitHub:
 
 ``` r
-remotes::install_github("mlr-org/mlr3fselect")
+# install.packages("pak")
+pak::pak("mlr-org/mlr3fselect")
 ```
 
 ## Example
@@ -187,3 +190,19 @@ learner = lrn("classif.svm", type = "C-classification")
 task$select(instance$result_feature_set)
 learner$train(task)
 ```
+
+## Citation
+
+If you use **mlr3fselect** in your work, please cite the package:
+
+> Becker M, Schratz P, Lang M, Bischl B, Zobolas J (2025). mlr3fselect:
+> Feature Selection for ‘mlr3’. R package version 1.4.0,
+> <https://github.com/mlr-org/mlr3fselect>
+
+The **ensemble feature selection** components (hEFS) are described in
+the following study:
+
+> Zobolas, J., George, A.-M., López, A., Fischer, S., Becker, M., &
+> Aittokallio, T. (2025). Optimizing prognostic biomarker discovery in
+> pancreatic cancer through hybrid ensemble feature selection and
+> multi-omics data. arXiv. <https://arxiv.org/pdf/2509.02648>
