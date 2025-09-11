@@ -24,7 +24,6 @@
 #'
 #' @export
 #' @examplesIf mlr3misc::require_namespaces("fastVoteR", quietly = TRUE)
-#' @examples
 #' \donttest{
 #'   efsr = ensemble_fselect(
 #'     fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
