@@ -44,7 +44,6 @@ Suggests:
     mlr3learners,
     mlr3pipelines,
     rpart,
-    rush,
     rush (>= 0.2.0),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
