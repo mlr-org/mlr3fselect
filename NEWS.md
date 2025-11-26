@@ -1,4 +1,4 @@
-# mlr3fselect (development version)
+# mlr3fselect 1.5.0
 
 # mlr3fselect 1.4.0
 
