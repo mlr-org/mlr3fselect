@@ -2,11 +2,6 @@ test_that("ArchiveAsyncFSelect access methods work", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -56,11 +51,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -117,11 +107,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works without resample res
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -148,11 +133,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works with empty archive",
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -175,11 +155,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works with multi-crit", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -206,11 +181,6 @@ test_that("ArchiveAsyncFSelect stores models if requested", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")

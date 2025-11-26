@@ -27,7 +27,7 @@ Depends:
     mlr3 (>= 1.0.1),
     R (>= 3.1.0)
 Imports:
-    bbotk (>= 1.6.0),
+    bbotk (>= 1.8.1),
     checkmate (>= 2.0.0),
     cli,
     data.table,
@@ -44,7 +44,7 @@ Suggests:
     mlr3learners,
     mlr3pipelines,
     rpart,
-    rush (>= 0.2.0),
+    rush (>= 0.4.1),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/testthat/parallel: false
