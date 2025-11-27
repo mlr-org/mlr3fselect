@@ -1,4 +1,7 @@
-# mlr3fselect (development version)
+# mlr3fselect 1.5.0
+
+* fix: Add `always_included` column role to all registered tasks.
+* perf: Add fast aggregation for `ResampleResult` and `BenchmarkResult` objects to speed up objective function evaluation.
 
 # mlr3fselect 1.4.0
 

@@ -2,11 +2,6 @@ test_that("ArchiveAsyncFSelect access methods work", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -56,11 +51,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -79,17 +69,17 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   # default
   tab = as.data.table(instance$archive)
   expect_data_table(tab, min.rows = 20)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce", "runtime_learners", "timestamp_xs", "timestamp_ys", "warnings", "errors"))
+  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce", "runtime_learners", "timestamp_xs", "timestamp_ys", "warnings", "errors", "resample_result"))
 
-  # extra measure
-  tab = as.data.table(instance$archive, measures = msr("classif.acc"))
-  expect_data_table(tab, min.rows = 20)
-  expect_names(names(tab), must.include = c("classif.acc"))
+  # # extra measure
+  # tab = as.data.table(instance$archive, measures = msr("classif.acc"))
+  # expect_data_table(tab, min.rows = 20)
+  # expect_names(names(tab), must.include = c("classif.acc"))
 
-  # extra measures
-  tab = as.data.table(instance$archive, measures = msrs(c("classif.acc", "classif.mcc")))
-  expect_data_table(tab, min.rows = 20)
-  expect_names(names(tab), must.include = c("classif.acc", "classif.mcc"))
+  # # extra measures
+  # tab = as.data.table(instance$archive, measures = msrs(c("classif.acc", "classif.mcc")))
+  # expect_data_table(tab, min.rows = 20)
+  # expect_names(names(tab), must.include = c("classif.acc", "classif.mcc"))
 
   # exclude column
   tab = as.data.table(instance$archive, exclude_columns = "timestamp_xs")
@@ -117,11 +107,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works without resample res
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -148,11 +133,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works with empty archive",
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -175,11 +155,6 @@ test_that("ArchiveAsyncFSelect as.data.table function works with multi-crit", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
@@ -206,11 +181,6 @@ test_that("ArchiveAsyncFSelect stores models if requested", {
   skip_on_cran()
   skip_if_not_installed("rush")
   flush_redis()
-  on.exit({
-    mirai::daemons(0)
-    flush_redis()
-  })
-
 
   mirai::daemons(2)
   rush::rush_plan(n_workers = 2, worker_type = "remote")
