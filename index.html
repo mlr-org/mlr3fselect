@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.4.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,6 +89,7 @@
 </ul>
 <p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p>
 <ul>
+<li>Perform wrapper-based <a href="https://mlr-org.com/gallery/technical/2025-01-12-efs/" class="external-link">Ensemble Feature Selection</a>.</li>
 <li>Utilize the built-in feature importance of models with <a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</li>
 <li>Run a feature selection with <a href="https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/" class="external-link">Shadow Variable Search</a>.</li>
 </ul>
@@ -102,7 +103,8 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mlr3fselect"</span><span class="op">)</span></span></code></pre></div>
 <p>Install the development version from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mlr-org/mlr3fselect"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3fselect"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -195,6 +197,18 @@
 <span><span class="va">task</span><span class="op">$</span><span class="fu">select</span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">result_feature_set</span><span class="op">)</span></span>
 <span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>If you use <strong>mlr3fselect</strong> in your work, please cite the package:</p>
+<blockquote>
+<p>Becker M, Schratz P, Lang M, Bischl B, Zobolas J (2025). mlr3fselect: Feature Selection for ‘mlr3’. R package version 1.4.0, <a href="https://github.com/mlr-org/mlr3fselect" class="external-link uri">https://github.com/mlr-org/mlr3fselect</a></p>
+</blockquote>
+<p>The <strong>ensemble feature selection</strong> components (hEFS) are described in the following study:</p>
+<blockquote>
+<p>Zobolas, J., George, A.-M., López, A., Fischer, S., Becker, M., &amp; Aittokallio, T. (2025). Optimizing prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data. arXiv. <a href="https://arxiv.org/pdf/2509.02648" class="external-link uri">https://arxiv.org/pdf/2509.02648</a></p>
+</blockquote>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
@@ -242,7 +256,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
