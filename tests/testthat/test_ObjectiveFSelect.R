@@ -60,7 +60,10 @@ test_that("fast aggregation works", {
   learner = lrn("classif.rpart")
   resampling = rsmp("cv", folds = 3)
 
-  with_seed(123, {
+  # draw seed to make fast and slow aggregation comparable
+  seed = sample(1000, 1)
+
+  with_seed(seed, {
     instance = fselect(
       fselector = fs("random_search", batch_size = 5),
       task = task,
@@ -82,7 +85,7 @@ test_that("fast aggregation works", {
 
   ce_fast = instance$archive$data$classif.ce
 
-  with_seed(123, {
+  with_seed(seed, {
     instance = fselect(
       fselector = fs("random_search", batch_size = 5),
       task = task,
