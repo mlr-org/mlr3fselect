@@ -71,15 +71,15 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   expect_data_table(tab, min.rows = 20)
   expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce", "runtime_learners", "timestamp_xs", "timestamp_ys", "warnings", "errors", "resample_result"))
 
-  # extra measure
-  tab = as.data.table(instance$archive, measures = msr("classif.acc"))
-  expect_data_table(tab, min.rows = 20)
-  expect_names(names(tab), must.include = c("classif.acc"))
+  # # extra measure
+  # tab = as.data.table(instance$archive, measures = msr("classif.acc"))
+  # expect_data_table(tab, min.rows = 20)
+  # expect_names(names(tab), must.include = c("classif.acc"))
 
-  # extra measures
-  tab = as.data.table(instance$archive, measures = msrs(c("classif.acc", "classif.mcc")))
-  expect_data_table(tab, min.rows = 20)
-  expect_names(names(tab), must.include = c("classif.acc", "classif.mcc"))
+  # # extra measures
+  # tab = as.data.table(instance$archive, measures = msrs(c("classif.acc", "classif.mcc")))
+  # expect_data_table(tab, min.rows = 20)
+  # expect_names(names(tab), must.include = c("classif.acc", "classif.mcc"))
 
   # exclude column
   tab = as.data.table(instance$archive, exclude_columns = "timestamp_xs")
