@@ -237,24 +237,14 @@ fselector = fs("random_search", batch_size = 2)
 fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE
-#> 2:      FALSE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE
-#> 3:       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE   TRUE
+#> 1:       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE   TRUE
 #>                                 features n_features classif.ce  time_train
 #>                                   <list>      <int>      <num>       <num>
-#> 1:                             body_mass          1 0.27887109 0.002666667
-#> 2:                                   sex          1 0.55797101 0.002333333
-#> 3: bill_depth,bill_length,body_mass,year          1 0.07556573 0.003000000
+#> 1: bill_depth,bill_length,body_mass,year          4 0.07556573 0.002333333
 
 # Optimal feature sets
 instance$result_feature_set
 #> [[1]]
-#> [1] "body_mass"
-#> 
-#> [[2]]
-#> [1] "sex"
-#> 
-#> [[3]]
 #> [1] "bill_depth"  "bill_length" "body_mass"   "year"       
 #> 
 
@@ -268,10 +258,10 @@ as.data.table(instance$archive)
 #> 4:       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE   TRUE
 #>    classif.ce  time_train runtime_learners           timestamp batch_nr
 #>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.17165014 0.003333333            0.016 2025-11-27 11:00:52        1
-#> 2: 0.27887109 0.002666667            0.013 2025-11-27 11:00:52        1
-#> 3: 0.55797101 0.002333333            0.013 2025-11-27 11:00:53        2
-#> 4: 0.07556573 0.003000000            0.015 2025-11-27 11:00:53        2
+#> 1: 0.17165014 0.003000000            0.015 2025-11-27 11:03:22        1
+#> 2: 0.27887109 0.002333333            0.011 2025-11-27 11:03:22        1
+#> 3: 0.55797101 0.007666667            0.029 2025-11-27 11:03:22        2
+#> 4: 0.07556573 0.002333333            0.013 2025-11-27 11:03:22        2
 #>    warnings errors                                        features n_features
 #>       <int>  <int>                                          <list>     <list>
 #> 1:        0      0 bill_depth,body_mass,flipper_length,island,year          5
