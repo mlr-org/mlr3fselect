@@ -46,7 +46,7 @@ Implemented for mlr3::ResampleResult and mlr3::BenchmarkResult."><meta property=
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Extract Inner Feature Selection Results</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/v1.5.0/R/extract_inner_fselect_results.R" class="external-link"><code>R/extract_inner_fselect_results.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3fselect/blob/main/R/extract_inner_fselect_results.R" class="external-link"><code>R/extract_inner_fselect_results.R</code></a></small>
       <div class="d-none name"><code>extract_inner_fselect_results.Rd</code></div>
     </div>
 
@@ -125,12 +125,12 @@ Vector of selected feature set.</p></li>
 <span class="r-in"><span><span class="fu">extract_inner_fselect_results</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;       &lt;lgcl&gt;      &lt;lgcl&gt;       &lt;lgcl&gt;      &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1         TRUE       FALSE         TRUE        TRUE          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2        FALSE        TRUE        FALSE       FALSE          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1        FALSE        TRUE        FALSE       FALSE          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2         TRUE       FALSE         TRUE        TRUE          0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 features n_features task_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                   &lt;list&gt;      &lt;int&gt;  &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Petal.Length,Sepal.Length,Sepal.Width          3    iris</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                           Petal.Width          1    iris</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                           Petal.Width          1    iris</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Petal.Length,Sepal.Length,Sepal.Width          3    iris</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     &lt;char&gt;        &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: classif.rpart.fselector            cv</span>

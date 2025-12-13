@@ -545,14 +545,14 @@ rr = resample(task, afs, resampling_outer, store_models = TRUE)
 extract_inner_fselect_results(rr)
 #>    iteration bill_depth bill_length body_mass flipper_length island    sex
 #>        <int>     <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl>
-#> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE
-#> 2:         2       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE
-#> 3:         3      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE
+#> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE
+#> 2:         2      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE
+#> 3:         3       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE
 #>      year classif.ce                                  features n_features
 #>    <lgcl>      <num>                                    <list>      <int>
-#> 1:  FALSE 0.10526316         bill_depth,bill_length,island,sex          4
-#> 2:   TRUE 0.05263158        bill_depth,bill_length,island,year          4
-#> 3:   TRUE 0.02597403 bill_length,body_mass,flipper_length,year          4
+#> 1:   TRUE 0.05263158        bill_depth,bill_length,island,year          4
+#> 2:   TRUE 0.02597403 bill_length,body_mass,flipper_length,year          4
+#> 3:  FALSE 0.10526316         bill_depth,bill_length,island,sex          4
 #>     task_id              learner_id resampling_id
 #>      <char>                  <char>        <char>
 #> 1: penguins classif.rpart.fselector            cv

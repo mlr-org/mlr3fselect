@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/mlr-org/mlr3fselect/blob/v1.5.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/mlr-org/mlr3fselect/blob/main/DESCRIPTION)
 
 Becker M, Schratz P, Lang M, Bischl B, Zobolas J (2025). *mlr3fselect:
 Feature Selection for 'mlr3'*. R package version 1.5.0,
