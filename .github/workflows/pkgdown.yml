@@ -17,6 +17,16 @@ name: pkgdown
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
 
     concurrency:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}

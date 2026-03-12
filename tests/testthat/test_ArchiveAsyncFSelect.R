@@ -1,10 +1,12 @@
-test_that("ArchiveAsyncFSelect access methods work", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+skip_if_not_installed("rush")
+skip_if_no_redis()
 
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
+test_that("ArchiveAsyncFSelect access methods work", {
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -12,7 +14,8 @@ test_that("ArchiveAsyncFSelect access methods work", {
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 20),
-    store_benchmark_result = TRUE
+    store_benchmark_result = TRUE,
+    rush = rush
   )
 
   fselector = fs("async_random_search")
@@ -43,17 +46,14 @@ test_that("ArchiveAsyncFSelect access methods work", {
   expect_benchmark_result(instance$archive$benchmark_result)
   expect_gte(instance$archive$benchmark_result$n_resample_results, 20L)
   expect_null(instance$archive$resample_result(1)$learners[[1]]$model)
-
-  expect_rush_reset(instance$rush)
 })
 
 test_that("ArchiveAsyncFSelect as.data.table function works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -61,7 +61,8 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 20),
-    store_benchmark_result = TRUE
+    store_benchmark_result = TRUE,
+    rush = rush
   )
   fselector = fs("async_random_search")
   fselector$optimize(instance)
@@ -99,17 +100,14 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   # no unnest
   tab = as.data.table(instance$archive, unnest = NULL)
   expect_data_table(tab, min.rows = 20)
-
-  expect_rush_reset(instance$rush)
 })
 
 test_that("ArchiveAsyncFSelect as.data.table function works without resample result", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -117,7 +115,8 @@ test_that("ArchiveAsyncFSelect as.data.table function works without resample res
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 20),
-    store_benchmark_result = FALSE
+    store_benchmark_result = FALSE,
+    rush = rush
   )
   fselector = fs("async_random_search")
   fselector$optimize(instance)
@@ -125,17 +124,14 @@ test_that("ArchiveAsyncFSelect as.data.table function works without resample res
   tab = as.data.table(instance$archive)
   expect_data_table(tab, min.rows = 20)
   expect_false("resample_result" %in% names(tab))
-
-  expect_rush_reset(instance$rush)
 })
 
 test_that("ArchiveAsyncFSelect as.data.table function works with empty archive", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -143,21 +139,19 @@ test_that("ArchiveAsyncFSelect as.data.table function works with empty archive",
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 20),
-    store_benchmark_result = FALSE
+    store_benchmark_result = FALSE,
+    rush = rush
   )
 
   expect_data_table(as.data.table(instance$archive), nrows = 0, ncols = 0)
-
-  expect_rush_reset(instance$rush)
 })
 
 test_that("ArchiveAsyncFSelect as.data.table function works with multi-crit", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -165,7 +159,8 @@ test_that("ArchiveAsyncFSelect as.data.table function works with multi-crit", {
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
     terminator = trm("evals", n_evals = 20),
-    store_benchmark_result = TRUE
+    store_benchmark_result = TRUE,
+    rush = rush
   )
   fselector = fs("async_random_search")
   fselector$optimize(instance)
@@ -173,17 +168,14 @@ test_that("ArchiveAsyncFSelect as.data.table function works with multi-crit", {
   tab = as.data.table(instance$archive)
   expect_data_table(tab, min.rows = 20)
   expect_names(names(tab), must.include = c("classif.ce", "classif.acc"))
-
-  expect_rush_reset(instance$rush)
 })
 
 test_that("ArchiveAsyncFSelect stores models if requested", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   instance = fsi_async(
     task = tsk("pima"),
@@ -192,7 +184,8 @@ test_that("ArchiveAsyncFSelect stores models if requested", {
     measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 3),
     store_benchmark_result = TRUE,
-    store_models = TRUE
+    store_models = TRUE,
+    rush = rush
   )
   fselector = fs("async_random_search")
   fselector$optimize(instance)
@@ -200,6 +193,4 @@ test_that("ArchiveAsyncFSelect stores models if requested", {
   expect_benchmark_result(instance$archive$benchmark_result)
   expect_gte(instance$archive$benchmark_result$n_resample_results, 3L)
   expect_class(instance$archive$resample_result(1)$learners[[1]]$model, "rpart")
-
-  expect_rush_reset(instance$rush)
 })
