@@ -100,11 +100,11 @@ test_that("fast aggregation works", {
   learner = lrn("classif.rpart")
   resampling = rsmp("cv", folds = 3)
 
-  rush = start_rush(n_workers = 1)
-  on.exit({
-    rush$reset()
-    mirai::daemons(0)
-  })
+  config = redis_configuration()
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1, seed = 123, dispatcher = FALSE)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+  rush = rush::rsh(config = config)
 
   with_seed(123, {
     instance = fselect(
@@ -131,11 +131,11 @@ test_that("fast aggregation works", {
   rush$reset()
   mirai::daemons(0)
 
-  rush2 = start_rush(n_workers = 1)
-  on.exit({
-    rush2$reset()
-    mirai::daemons(0)
-  })
+  config = redis_configuration()
+  on.exit(mirai::daemons(0))
+  mirai::daemons(1, seed = 123, dispatcher = FALSE)
+  rush::rush_plan(n_workers = 1, worker_type = "remote")
+  rush2 = rush::rsh(config = config)
 
   with_seed(123, {
     instance = fselect(
