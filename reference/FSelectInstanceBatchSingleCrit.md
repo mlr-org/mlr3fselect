@@ -219,7 +219,7 @@ here. For internal use.
 
 - `xdt`:
 
-  ([`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html))  
   x values as `data.table`. Each row is one point. Contains the value in
   the *search space* of the
   [FSelectInstanceBatchMultiCrit](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceBatchMultiCrit.md)
@@ -232,7 +232,7 @@ here. For internal use.
 
 - `extra`:
 
-  ([`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html))  
   Additional information.
 
 - `...`:
@@ -303,7 +303,7 @@ fselector$optimize(instance)
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex          6
 #>    classif.ce
 #>         <num>
-#> 1:  0.0725909
+#> 1: 0.06112382
 
 # Subset task to optimal feature set
 task$select(instance$result_feature_set)
@@ -321,10 +321,10 @@ as.data.table(instance$archive)
 #> 4:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1:  0.1598271            0.017 2025-12-13 15:56:15        1        0      0
-#> 2:  0.1917874            0.013 2025-12-13 15:56:15        1        0      0
-#> 3:  0.0725909            0.014 2025-12-13 15:56:15        2        0      0
-#> 4:  0.2295449            0.013 2025-12-13 15:56:15        2        0      0
+#> 1: 0.15400458            0.017 2026-03-17 17:30:51        1        0      0
+#> 2: 0.19768624            0.015 2026-03-17 17:30:51        1        0      0
+#> 3: 0.06112382            0.016 2026-03-17 17:30:51        2        0      0
+#> 4: 0.18893974            0.016 2026-03-17 17:30:51        2        0      0
 #>                                                      features n_features
 #>                                                        <list>     <list>
 #> 1:                  bill_depth,flipper_length,island,sex,year          5

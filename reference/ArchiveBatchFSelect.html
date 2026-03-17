@@ -55,7 +55,7 @@
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The ArchiveBatchFSelect is a container around a <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>.
+    <p>The ArchiveBatchFSelect is a container around a <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>.
 Each row corresponds to a single evaluation of a feature set.
 See the section on Data Structure for more information.
 The archive stores additionally a <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a> (<code>$benchmark_result</code>) that records the resampling experiments.
@@ -98,7 +98,7 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 
 <ul><li><p><code>as.data.table.ArchiveBatchFSelect(x, exclude_columns = "uhash", measures = NULL)</code><br>
 Returns a tabular view of all evaluated feature sets.<br>
-ArchiveBatchFSelect -&gt; <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code><br></p><ul><li><p><code>x</code> (ArchiveBatchFSelect)</p></li>
+ArchiveBatchFSelect -&gt; <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code><br></p><ul><li><p><code>x</code> (ArchiveBatchFSelect)</p></li>
 <li><p><code>exclude_columns</code> (<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
 Exclude columns from table. Set to <code>NULL</code> if no column should be excluded.</p></li>
 <li><p><code>measures</code> (list of <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
@@ -200,7 +200,7 @@ Ignored if multiple measures are used.</p></dd>
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>xdt</code></dt>
-<dd><p>(<code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
+<dd><p>(<code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
 x values as <code>data.table</code>. Each row is one point. Contains the value in
 the <em>search space</em> of the <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> object. Can contain
 additional columns for extra information.</p></dd>
@@ -212,7 +212,7 @@ Ignored in feature selection.</p></dd>
 
 
 <dt><code>ydt</code></dt>
-<dd><p>(<code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
+<dd><p>(<code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
 Optimal outcome.</p></dd>
 
 
@@ -358,7 +358,7 @@ The <code>random</code> method returns a random feature set from the best featur
 </div>
 <div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
-<p><code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code></p>
 </div>
 
 </div><p></p><hr><a id="method-ArchiveBatchFSelect-clone"></a><div class="section">

@@ -161,19 +161,19 @@ values here. For internal use.
 
 - `xdt`:
 
-  ([`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html))  
   x values as `data.table`. Each row is one point. Contains the value in
   the *search space* of the FSelectInstanceBatchMultiCrit object. Can
   contain additional columns for extra information.
 
 - `ydt`:
 
-  ([`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html))  
   Optimal outcomes, e.g. the Pareto front.
 
 - `extra`:
 
-  ([`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html))  
   Additional information.
 
 - `...`:
@@ -237,47 +237,53 @@ fselector = fs("random_search", batch_size = 2)
 fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:      FALSE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE
-#> 2:       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE   TRUE
-#>                                 features n_features classif.ce  time_train
-#>                                   <list>      <int>      <num>       <num>
-#> 1:                                   sex          1 0.55797101 0.002000000
-#> 2: bill_depth,bill_length,body_mass,year          1 0.07556573 0.002666667
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 2:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#>                                                             features n_features
+#>                                                               <list>      <int>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#>    classif.ce time_train
+#>         <num>      <num>
+#> 1: 0.07261632      0.003
+#> 2: 0.07261632      0.003
 
 # Optimal feature sets
 instance$result_feature_set
 #> [[1]]
-#> [1] "sex"
+#> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"
+#> [5] "island"         "sex"            "year"          
 #> 
 #> [[2]]
-#> [1] "bill_depth"  "bill_length" "body_mass"   "year"       
+#> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"
+#> [5] "island"         "sex"            "year"          
 #> 
 
 # Inspect all evaluated sets
 as.data.table(instance$archive)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE       FALSE      TRUE           TRUE   TRUE  FALSE   TRUE
-#> 2:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE
-#> 3:      FALSE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE
-#> 4:       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE   TRUE
-#>    classif.ce  time_train runtime_learners           timestamp batch_nr
-#>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.17165014 0.003000000            0.015 2025-12-13 15:56:14        1
-#> 2: 0.27887109 0.002666667            0.014 2025-12-13 15:56:14        1
-#> 3: 0.55797101 0.002000000            0.011 2025-12-13 15:56:15        2
-#> 4: 0.07556573 0.002666667            0.014 2025-12-13 15:56:15        2
-#>    warnings errors                                        features n_features
-#>       <int>  <int>                                          <list>     <list>
-#> 1:        0      0 bill_depth,body_mass,flipper_length,island,year          5
-#> 2:        0      0                                       body_mass          1
-#> 3:        0      0                                             sex          1
-#> 4:        0      0           bill_depth,bill_length,body_mass,year          4
-#>     resample_result
-#>              <list>
-#> 1: <ResampleResult>
-#> 2: <ResampleResult>
-#> 3: <ResampleResult>
-#> 4: <ResampleResult>
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 2:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 3:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
+#> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#>    classif.ce time_train runtime_learners           timestamp batch_nr warnings
+#>         <num>      <num>            <num>              <POSc>    <int>    <int>
+#> 1: 0.07261632      0.003            0.017 2026-03-17 17:30:50        1        0
+#> 2: 0.07261632      0.003            0.018 2026-03-17 17:30:50        1        0
+#> 3: 0.25858124      0.003            0.015 2026-03-17 17:30:50        2        0
+#> 4: 0.19471142      0.003            0.016 2026-03-17 17:30:50        2        0
+#>    errors                                                          features
+#>     <int>                                                            <list>
+#> 1:      0 bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]
+#> 2:      0 bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]
+#> 3:      0                                                       bill_length
+#> 4:      0                                                    flipper_length
+#>    n_features  resample_result
+#>        <list>           <list>
+#> 1:          7 <ResampleResult>
+#> 2:          7 <ResampleResult>
+#> 3:          1 <ResampleResult>
+#> 4:          1 <ResampleResult>
 # }
 ```

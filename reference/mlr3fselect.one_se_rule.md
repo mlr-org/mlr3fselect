@@ -32,8 +32,8 @@ instance = fselect(
 instance$result
 #>       age glucose insulin   mass pedigree pregnant pressure triceps
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>
-#> 1:   TRUE    TRUE    TRUE  FALSE    FALSE    FALSE     TRUE    TRUE
-#>                                features n_features classif.ce
-#>                                  <list>     <list>      <num>
-#> 1: age,glucose,insulin,pressure,triceps          5  0.2669271
+#> 1:   TRUE    TRUE   FALSE  FALSE     TRUE     TRUE    FALSE    TRUE
+#>                                 features n_features classif.ce
+#>                                   <list>     <list>      <num>
+#> 1: age,glucose,pedigree,pregnant,triceps          5  0.2630208
 ```

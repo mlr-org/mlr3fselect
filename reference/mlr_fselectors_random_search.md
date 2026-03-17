@@ -122,61 +122,61 @@ instance = fselect(
 instance$result
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE   TRUE
-#>                                 features n_features classif.ce
-#>                                   <list>      <int>      <num>
-#> 1: bill_depth,bill_length,body_mass,year          4 0.06086957
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE  FALSE
+#>                                                  features n_features classif.ce
+#>                                                    <list>      <int>      <num>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island          5 0.08695652
 
 # all evaluated feature subsets
 as.data.table(instance$archive)
 #>     bill_depth bill_length body_mass flipper_length island    sex   year
 #>         <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#>  1:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE   TRUE
-#>  2:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#>  3:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE  FALSE
-#>  4:       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE   TRUE
-#>  5:      FALSE       FALSE      TRUE          FALSE   TRUE  FALSE  FALSE
-#>  6:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
-#>  7:       TRUE        TRUE      TRUE          FALSE  FALSE  FALSE   TRUE
-#>  8:       TRUE       FALSE     FALSE          FALSE  FALSE  FALSE  FALSE
-#>  9:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 10:       TRUE       FALSE     FALSE          FALSE  FALSE  FALSE  FALSE
+#>  1:      FALSE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE
+#>  2:       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE  FALSE
+#>  3:       TRUE        TRUE     FALSE           TRUE   TRUE   TRUE   TRUE
+#>  4:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#>  5:      FALSE       FALSE      TRUE           TRUE   TRUE   TRUE  FALSE
+#>  6:      FALSE        TRUE      TRUE           TRUE   TRUE   TRUE  FALSE
+#>  7:      FALSE       FALSE      TRUE          FALSE   TRUE   TRUE   TRUE
+#>  8:       TRUE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE
+#>  9:       TRUE       FALSE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 10:       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE   TRUE
 #>     classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>          <num>            <num>              <POSc>    <int>    <int>  <int>
-#>  1: 0.21739130            0.005 2025-12-13 15:56:47        1        0      0
-#>  2: 0.08695652            0.006 2025-12-13 15:56:47        1        0      0
-#>  3: 0.08695652            0.005 2025-12-13 15:56:47        1        0      0
-#>  4: 0.08695652            0.006 2025-12-13 15:56:47        1        0      0
-#>  5: 0.30434783            0.004 2025-12-13 15:56:47        1        0      0
-#>  6: 0.07826087            0.005 2025-12-13 15:56:47        1        0      0
-#>  7: 0.06086957            0.005 2025-12-13 15:56:47        1        0      0
-#>  8: 0.20000000            0.003 2025-12-13 15:56:47        1        0      0
-#>  9: 0.36521739            0.004 2025-12-13 15:56:47        1        0      0
-#> 10: 0.20000000            0.003 2025-12-13 15:56:47        1        0      0
-#>                                                           features n_features
-#>                                                             <list>     <list>
-#>  1:                                               bill_length,year          2
-#>  2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7
-#>  3:     bill_depth,bill_length,body_mass,flipper_length,island,sex          6
-#>  4:    bill_depth,bill_length,body_mass,flipper_length,island,year          6
-#>  5:                                               body_mass,island          2
-#>  6:                                     bill_length,flipper_length          2
-#>  7:                          bill_depth,bill_length,body_mass,year          4
-#>  8:                                                     bill_depth          1
-#>  9:                                                         island          1
-#> 10:                                                     bill_depth          1
-#>      resample_result
-#>               <list>
-#>  1: <ResampleResult>
-#>  2: <ResampleResult>
-#>  3: <ResampleResult>
-#>  4: <ResampleResult>
-#>  5: <ResampleResult>
-#>  6: <ResampleResult>
-#>  7: <ResampleResult>
-#>  8: <ResampleResult>
-#>  9: <ResampleResult>
-#> 10: <ResampleResult>
+#>  1: 0.54782609            0.005 2026-03-17 17:31:26        1        0      0
+#>  2: 0.08695652            0.005 2026-03-17 17:31:26        1        0      0
+#>  3: 0.08695652            0.006 2026-03-17 17:31:26        1        0      0
+#>  4: 0.08695652            0.007 2026-03-17 17:31:26        1        0      0
+#>  5: 0.25217391            0.006 2026-03-17 17:31:26        1        0      0
+#>  6: 0.08695652            0.005 2026-03-17 17:31:26        1        0      0
+#>  7: 0.31304348            0.006 2026-03-17 17:31:26        1        0      0
+#>  8: 0.26956522            0.005 2026-03-17 17:31:26        1        0      0
+#>  9: 0.25217391            0.006 2026-03-17 17:31:26        1        0      0
+#> 10: 0.08695652            0.005 2026-03-17 17:31:26        1        0      0
+#>                                                              features
+#>                                                                <list>
+#>  1:                                                               sex
+#>  2:            bill_depth,bill_length,body_mass,flipper_length,island
+#>  3:             bill_depth,bill_length,flipper_length,island,sex,year
+#>  4: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]
+#>  5:                               body_mass,flipper_length,island,sex
+#>  6:                   bill_length,body_mass,flipper_length,island,sex
+#>  7:                                         body_mass,island,sex,year
+#>  8:                                              bill_depth,body_mass
+#>  9:               bill_depth,body_mass,flipper_length,island,sex,year
+#> 10:       bill_depth,bill_length,body_mass,flipper_length,island,year
+#>     n_features  resample_result
+#>         <list>           <list>
+#>  1:          1 <ResampleResult>
+#>  2:          5 <ResampleResult>
+#>  3:          6 <ResampleResult>
+#>  4:          7 <ResampleResult>
+#>  5:          4 <ResampleResult>
+#>  6:          5 <ResampleResult>
+#>  7:          4 <ResampleResult>
+#>  8:          2 <ResampleResult>
+#>  9:          6 <ResampleResult>
+#> 10:          6 <ResampleResult>
 
 # subset the task and fit the final model
 task$select(instance$result_feature_set)

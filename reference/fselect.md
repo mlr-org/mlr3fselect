@@ -240,20 +240,20 @@ learner$train(task)
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:   TRUE    TRUE   FALSE  FALSE     TRUE    FALSE     TRUE   FALSE  0.2890625
-#> 2:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE    FALSE   FALSE  0.3750000
-#> 3:  FALSE    TRUE   FALSE   TRUE     TRUE    FALSE     TRUE    TRUE  0.2617188
-#> 4:   TRUE    TRUE    TRUE   TRUE     TRUE     TRUE     TRUE    TRUE  0.2460938
+#> 1:  FALSE   FALSE    TRUE   TRUE    FALSE    FALSE    FALSE   FALSE  0.3632812
+#> 2:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE     TRUE   FALSE  0.3710938
+#> 3:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.3476562
+#> 4:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE    FALSE    TRUE  0.3710938
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.007 2025-12-13 15:56:34        1        0      0
-#> 2:            0.005 2025-12-13 15:56:34        1        0      0
-#> 3:            0.007 2025-12-13 15:56:34        2        0      0
-#> 4:            0.007 2025-12-13 15:56:34        2        0      0
-#>                                          features n_features  resample_result
-#>                                            <list>     <list>           <list>
-#> 1:                  age,glucose,pedigree,pressure          4 <ResampleResult>
-#> 2:                                       pedigree          1 <ResampleResult>
-#> 3:         glucose,mass,pedigree,pressure,triceps          5 <ResampleResult>
-#> 4: age,glucose,insulin,mass,pedigree,pregnant,...          8 <ResampleResult>
+#> 1:            0.007 2026-03-17 17:31:13        1        0      0
+#> 2:            0.008 2026-03-17 17:31:13        1        0      0
+#> 3:            0.008 2026-03-17 17:31:13        2        0      0
+#> 4:            0.008 2026-03-17 17:31:13        2        0      0
+#>                               features n_features  resample_result
+#>                                 <list>     <list>           <list>
+#> 1:                        insulin,mass          2 <ResampleResult>
+#> 2:                   pedigree,pressure          2 <ResampleResult>
+#> 3: age,mass,pedigree,pregnant,pressure          5 <ResampleResult>
+#> 4:  age,mass,pedigree,pregnant,triceps          5 <ResampleResult>
 ```

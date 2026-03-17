@@ -38,7 +38,7 @@ for each feature subset evaluation.
 - `as.data.table.ArchiveFSelect(x, unnest = "x_domain", exclude_columns = "uhash", measures = NULL)`  
   Returns a tabular view of all evaluated feature subsets.  
   ArchiveAsyncFSelect -\>
-  [`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)  
+  [`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html)  
 
   - `x` (ArchiveAsyncFSelect)
 
@@ -307,7 +307,7 @@ multi-crit optimization, the Pareto set / front.
 
 #### Returns
 
-[`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+[`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html)
 
 ------------------------------------------------------------------------
 

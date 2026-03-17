@@ -3,7 +3,7 @@
 Freezes the Redis data base of an
 [ArchiveAsyncFSelect](https://mlr3fselect.mlr-org.com/reference/ArchiveAsyncFSelect.md)
 to a
-[`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+[`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html).
 No further points can be added to the archive but the data can be
 accessed and analyzed. Useful when the Redis data base is not
 permanently available. Use the callback
@@ -14,7 +14,7 @@ to freeze the archive after the optimization has finished.
 
 - `as.data.table(archive)`  
   ArchiveAsyncFSelectFrozen -\>
-  [`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)  
+  [`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html)  
   Returns a tabular view of all performed function calls of the
   Objective.
 

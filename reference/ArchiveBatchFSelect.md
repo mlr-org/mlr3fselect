@@ -6,7 +6,7 @@ performance scores.
 ## Details
 
 The ArchiveBatchFSelect is a container around a
-[`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+[`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html).
 Each row corresponds to a single evaluation of a feature set. See the
 section on Data Structure for more information. The archive stores
 additionally a
@@ -62,7 +62,7 @@ supplied to `as.data.table()`.
 - `as.data.table.ArchiveBatchFSelect(x, exclude_columns = "uhash", measures = NULL)`  
   Returns a tabular view of all evaluated feature sets.  
   ArchiveBatchFSelect -\>
-  [`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)  
+  [`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html)  
 
   - `x` (ArchiveBatchFSelect)
 
@@ -188,7 +188,7 @@ Adds function evaluations to the archive table.
 
 - `xdt`:
 
-  ([`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html))  
   x values as `data.table`. Each row is one point. Contains the value in
   the *search space* of the
   [FSelectInstanceBatchMultiCrit](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceBatchMultiCrit.md)
@@ -201,7 +201,7 @@ Adds function evaluations to the archive table.
 
 - `ydt`:
 
-  ([`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html))  
   Optimal outcome.
 
 ------------------------------------------------------------------------
@@ -351,7 +351,7 @@ Returns the best scoring feature sets.
 
 #### Returns
 
-[`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+[`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html)
 
 ------------------------------------------------------------------------
 

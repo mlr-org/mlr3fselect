@@ -109,46 +109,46 @@ instance$result
 #> 1:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>          features n_features classif.ce
 #>            <list>      <int>      <num>
-#> 1: flipper_length          1  0.1478261
+#> 1: flipper_length          1   0.226087
 
 # all evaluated feature sets
 as.data.table(instance$archive)
 #>     bill_depth bill_length body_mass flipper_length island    sex   year
 #>         <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#>  1:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
-#>  2:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE
-#>  3:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE
-#>  4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#>  1:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE   TRUE
+#>  2:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE   TRUE
+#>  3:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#>  4:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE
 #>  5:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE
-#>  6:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE   TRUE
-#>  7:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE   TRUE
-#>  8:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE
-#>  9:      FALSE       FALSE     FALSE          FALSE  FALSE   TRUE  FALSE
-#> 10:      FALSE       FALSE      TRUE          FALSE  FALSE  FALSE  FALSE
+#>  6:      FALSE       FALSE      TRUE          FALSE  FALSE   TRUE  FALSE
+#>  7:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#>  8:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE
+#>  9:      FALSE       FALSE     FALSE          FALSE   TRUE  FALSE  FALSE
+#> 10:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>     classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>          <num>            <num>              <POSc>    <int>    <int>  <int>
-#>  1:  0.1478261            0.004 2025-12-13 15:56:45        1        0      0
-#>  2:  0.2521739            0.022 2025-12-13 15:56:45        2        0      0
-#>  3:  0.2521739            0.004 2025-12-13 15:56:45        3        0      0
-#>  4:  0.1478261            0.005 2025-12-13 15:56:45        4        0      0
-#>  5:  0.2521739            0.003 2025-12-13 15:56:46        5        0      0
-#>  6:  0.5826087            0.004 2025-12-13 15:56:46        6        0      0
-#>  7:  0.5826087            0.004 2025-12-13 15:56:46        7        0      0
-#>  8:  0.2521739            0.004 2025-12-13 15:56:46        8        0      0
-#>  9:  0.5826087            0.004 2025-12-13 15:56:46        9        0      0
-#> 10:  0.2521739            0.003 2025-12-13 15:56:46       10        0      0
+#>  1:  0.2521739            0.023 2026-03-17 17:31:25        1        0      0
+#>  2:  0.6173913            0.005 2026-03-17 17:31:25        2        0      0
+#>  3:  0.2260870            0.005 2026-03-17 17:31:25        3        0      0
+#>  4:  0.2869565            0.005 2026-03-17 17:31:25        4        0      0
+#>  5:  0.2869565            0.006 2026-03-17 17:31:25        5        0      0
+#>  6:  0.3043478            0.005 2026-03-17 17:31:25        6        0      0
+#>  7:  0.2260870            0.006 2026-03-17 17:31:25        7        0      0
+#>  8:  0.2521739            0.005 2026-03-17 17:31:25        8        0      0
+#>  9:  0.2521739            0.005 2026-03-17 17:31:25        9        0      0
+#> 10:  0.2260870            0.006 2026-03-17 17:31:25       10        0      0
 #>           features n_features  resample_result
 #>             <list>     <list>           <list>
-#>  1: flipper_length          1 <ResampleResult>
-#>  2:         island          1 <ResampleResult>
-#>  3:         island          1 <ResampleResult>
-#>  4: flipper_length          1 <ResampleResult>
+#>  1:    island,year          2 <ResampleResult>
+#>  2:           year          1 <ResampleResult>
+#>  3: flipper_length          1 <ResampleResult>
+#>  4:      body_mass          1 <ResampleResult>
 #>  5:      body_mass          1 <ResampleResult>
-#>  6:           year          1 <ResampleResult>
-#>  7:           year          1 <ResampleResult>
-#>  8:      body_mass          1 <ResampleResult>
-#>  9:            sex          1 <ResampleResult>
-#> 10:      body_mass          1 <ResampleResult>
+#>  6:  body_mass,sex          2 <ResampleResult>
+#>  7: flipper_length          1 <ResampleResult>
+#>  8:         island          1 <ResampleResult>
+#>  9:         island          1 <ResampleResult>
+#> 10: flipper_length          1 <ResampleResult>
 
 # subset the task and fit the final model
 task$select(instance$result_feature_set)

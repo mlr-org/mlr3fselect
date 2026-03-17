@@ -132,12 +132,12 @@ rr = fselect_nested(
 rr$score()
 #>     task_id              learner_id resampling_id iteration classif.ce
 #>      <char>                  <char>        <char>     <int>      <num>
-#> 1: penguins classif.rpart.fselector            cv         1 0.08139535
+#> 1: penguins classif.rpart.fselector            cv         1 0.04651163
 #> 2: penguins classif.rpart.fselector            cv         2 0.06395349
 #> Hidden columns: task, learner, resampling, prediction_test
 
 # Unbiased performance of the final model trained on the full data set
 rr$aggregate()
 #> classif.ce 
-#> 0.07267442 
+#> 0.05523256 
 ```

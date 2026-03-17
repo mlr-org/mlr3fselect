@@ -40,7 +40,7 @@ to the archive. Any number of columns can be added.
 
 - `design`:
 
-  ([data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html))  
   The benchmark design of the latest batch.
 
 - `benchmark_result`:
@@ -50,7 +50,7 @@ to the archive. Any number of columns can be added.
 
 - `aggregated_performance`:
 
-  ([data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html))  
   Aggregated performance scores and training time of the latest batch.
   This data table is passed to the archive. A callback can add
   additional columns which are also written to the archive.

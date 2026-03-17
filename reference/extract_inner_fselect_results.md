@@ -32,14 +32,14 @@ extract_inner_fselect_results(x, fselect_instance, ...)
 
 ## Value
 
-[`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+[`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html).
 
 ## Details
 
 The function iterates over the
 [AutoFSelector](https://mlr3fselect.mlr-org.com/reference/AutoFSelector.md)
 objects and binds the feature selection results to a
-[`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+[`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html).
 [AutoFSelector](https://mlr3fselect.mlr-org.com/reference/AutoFSelector.md)
 must be initialized with `store_fselect_instance = TRUE` and
 `resample()` or `benchmark()` must be called with `store_models = TRUE`.
@@ -88,12 +88,12 @@ rr = resample(tsk("iris"), at, resampling_outer, store_models = TRUE)
 extract_inner_fselect_results(rr)
 #>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #>        <int>       <lgcl>      <lgcl>       <lgcl>      <lgcl>      <num>
-#> 1:         1        FALSE        TRUE        FALSE       FALSE          0
-#> 2:         2         TRUE       FALSE         TRUE        TRUE          0
+#> 1:         1         TRUE       FALSE         TRUE        TRUE       0.04
+#> 2:         2        FALSE        TRUE        FALSE       FALSE       0.00
 #>                                 features n_features task_id
 #>                                   <list>      <int>  <char>
-#> 1:                           Petal.Width          1    iris
-#> 2: Petal.Length,Sepal.Length,Sepal.Width          3    iris
+#> 1: Petal.Length,Sepal.Length,Sepal.Width          3    iris
+#> 2:                           Petal.Width          1    iris
 #>                 learner_id resampling_id
 #>                     <char>        <char>
 #> 1: classif.rpart.fselector            cv

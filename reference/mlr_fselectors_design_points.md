@@ -26,7 +26,7 @@ can be instantiated with the associated sugar function
 
 - `design`:
 
-  [data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html)  
+  [data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html)  
   Design points to try in search, one per row.
 
 ## See also
@@ -128,22 +128,22 @@ instance$result
 #> 1:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE
 #>                     features n_features classif.ce
 #>                       <list>      <int>      <num>
-#> 1: age,glucose,mass,pregnant          4    0.21875
+#> 1: age,glucose,mass,pregnant          4  0.2578125
 
 # all evaluated feature sets
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.2812500
-#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2187500
-#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.3046875
-#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3125000
+#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.3085938
+#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2578125
+#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2929688
+#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3085938
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.007 2025-12-13 15:56:44        1        0      0
-#> 2:            0.006 2025-12-13 15:56:44        2        0      0
-#> 3:            0.006 2025-12-13 15:56:44        3        0      0
-#> 4:            0.006 2025-12-13 15:56:44        4        0      0
+#> 1:            0.008 2026-03-17 17:31:23        1        0      0
+#> 2:            0.007 2026-03-17 17:31:23        2        0      0
+#> 3:            0.008 2026-03-17 17:31:23        3        0      0
+#> 4:            0.009 2026-03-17 17:31:23        4        0      0
 #>                                      features n_features  resample_result
 #>                                        <list>     <list>           <list>
 #> 1:          age,insulin,mass,pregnant,triceps          5 <ResampleResult>

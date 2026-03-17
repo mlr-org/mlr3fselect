@@ -15,7 +15,7 @@ return an object of this class.
 - `as.data.table.EnsembleFSResult(x, benchmark_result = TRUE)`  
   Returns a tabular view of the ensemble feature selection.  
   EnsembleFSResult -\>
-  [`data.table::data.table()`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)  
+  [`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html)  
 
   - `x` (EnsembleFSResult)
 
@@ -56,7 +56,7 @@ Methodology*, **72**(4), 417–473. ISSN 1369-7412,
 
 - `result`:
 
-  ([data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html))  
   Returns the result of the ensemble feature selection.
 
 - `n_learners`:
@@ -138,7 +138,7 @@ Creates a new instance of this
 
 - `result`:
 
-  ([data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html))  
   The result of the ensemble feature selection. Mandatory column names
   should include `"resampling_iteration"`, `"learner_id"`, `"features"`
   and `"n_features"`. A column named as `{measure$id}` (scores on the
@@ -347,7 +347,7 @@ between the different feature ranking methods and for reproducibility.
 #### Returns
 
 A
-[data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+[data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html)
 listing all the features, ordered by decreasing scores (depends on the
 `"method"`). Columns are as follows:
 
@@ -467,7 +467,7 @@ maximum out of all learners and resamplings included.
 #### Returns
 
 A
-[data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+[data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html)
 with columns the number of features and the performance that together
 form the Pareto front.
 
@@ -523,7 +523,7 @@ The available KPI methods are:
 #### Returns
 
 A
-[data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+[data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html)
 with the knee point(s) of the Pareto front.
 
 ------------------------------------------------------------------------
@@ -569,22 +569,22 @@ The objects of this class are cloneable with this method.
   efsr$result
 #>                       learner_id resampling_iteration classif.acc
 #>                           <char>                <int>       <num>
-#> 1:       classif.rpart.fselector                    1   0.6811594
-#> 2:       classif.rpart.fselector                    2   0.6811594
-#> 3: classif.featureless.fselector                    1   0.4637681
+#> 1:       classif.rpart.fselector                    1   0.7101449
+#> 2:       classif.rpart.fselector                    2   0.7391304
+#> 3: classif.featureless.fselector                    1   0.4782609
 #> 4: classif.featureless.fselector                    2   0.5072464
-#>                       features n_features classif.ce_inner
-#>                         <list>      <int>            <num>
-#> 1:          V10,V11,V12,V16,V9          5        0.2445267
-#> 2: V10,V11,V12,V13,V14,V15,...         19        0.2584027
-#> 3:                      V22,V8          2        0.4320074
-#> 4:                     V21,V25          2        0.4526673
-#>                                                   importance
-#>                                                       <list>
-#> 1:              5.000000,4.000000,2.666667,1.666667,1.666667
-#> 2: 15.66667,14.66667,13.00000,12.33333,12.00000,11.33333,...
-#> 3:                                         1.666667,1.333333
-#> 4:                                                       2,1
+#>                           features n_features classif.ce_inner
+#>                             <list>      <int>            <num>
+#> 1: V10,V11,V12,V13,V14,V15,...[19]         19        0.1802344
+#> 2: V10,V11,V12,V13,V15,V16,...[10]         10        0.2958680
+#> 3:                          V22,V8          2        0.4383287
+#> 4:                         V21,V25          2        0.4529756
+#>                                                             importance
+#>                                                                 <list>
+#> 1:       17.33333,16.33333,15.00000,14.00000,12.00000,10.66667,...[19]
+#> 2: 10.000000, 8.333333, 7.333333, 6.666667, 5.666667, 5.000000,...[10]
+#> 3:                                                   1.666667,1.333333
+#> 4:                                                                 2,1
 #>                   task                                       learner
 #>                 <list>                                        <list>
 #> 1: <TaskClassif:sonar>       <AutoFSelector:classif.rpart.fselector>
@@ -600,26 +600,26 @@ The objects of this class are cloneable with this method.
 
   # returns the stability of the selected features
   efsr$stability(stability_measure = "jaccard")
-#> [1] 0.04385965
+#> [1] 0.1008772
 
   # returns a ranking of all features
   head(efsr$feature_ranking())
-#>    feature     score norm_score borda_score
-#>     <char>     <num>      <num>       <num>
-#> 1:     V10 1.3623188  0.5838509   1.0000000
-#> 2:     V16 1.3623188  0.5838509   0.9830508
-#> 3:     V11 1.3623188  0.5838509   0.9661017
-#> 4:      V9 1.3623188  0.5838509   0.9491525
-#> 5:     V12 1.3623188  0.5838509   0.9322034
-#> 6:     V46 0.6811594  0.2919255   0.9152542
+#>    feature    score norm_score borda_score
+#>     <char>    <num>      <num>       <num>
+#> 1:     V15 1.449275  0.5952381   1.0000000
+#> 2:     V10 1.449275  0.5952381   0.9830508
+#> 3:     V16 1.449275  0.5952381   0.9661017
+#> 4:     V36 1.449275  0.5952381   0.9491525
+#> 5:     V17 1.449275  0.5952381   0.9322034
+#> 6:     V11 1.449275  0.5952381   0.9152542
 
   # returns the empirical pareto front, i.e. n_features vs measure (error)
   efsr$pareto_front()
 #>    n_features classif.acc
 #>         <num>       <num>
-#> 1:          2   0.4637681
+#> 1:          2   0.4782609
 #> 2:          2   0.5072464
-#> 3:          5   0.6811594
+#> 3:         10   0.7391304
 
   # returns the knee points (optimal trade-off between n_features and performance)
   efsr$knee_points()
@@ -634,8 +634,9 @@ The objects of this class are cloneable with this method.
   efsr$pareto_front()
 #>    n_features classif.ce_inner
 #>         <num>            <num>
-#> 1:          2        0.4526673
-#> 2:          2        0.4320074
-#> 3:          5        0.2445267
+#> 1:          2        0.4529756
+#> 2:          2        0.4383287
+#> 3:         10        0.2958680
+#> 4:         19        0.1802344
 # }
 ```

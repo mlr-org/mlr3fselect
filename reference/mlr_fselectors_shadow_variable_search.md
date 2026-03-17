@@ -105,7 +105,7 @@ Returns the optimization path.
 
 #### Returns
 
-[data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+[data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html)
 
 ------------------------------------------------------------------------
 
@@ -146,10 +146,10 @@ instance = fselect(
 instance$result
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#>              features n_features classif.ce
-#>                <list>      <int>      <num>
-#> 1: bill_length,island          2 0.02608696
+#> 1:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#>                                 features n_features classif.ce
+#>                                   <list>      <int>      <num>
+#> 1: bill_depth,bill_length,flipper_length          3 0.04347826
 
 # all evaluated feature subsets
 as.data.table(instance$archive)
@@ -169,96 +169,118 @@ as.data.table(instance$archive)
 #> 12:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE  FALSE
 #> 13:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE  FALSE
 #> 14:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 15:       TRUE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 16:      FALSE        TRUE      TRUE          FALSE  FALSE  FALSE  FALSE
-#> 17:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
-#> 18:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 19:      FALSE        TRUE     FALSE          FALSE  FALSE   TRUE  FALSE
-#> 20:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE   TRUE
-#> 21:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 22:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 23:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 24:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 25:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 26:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 27:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 28:       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 29:      FALSE        TRUE      TRUE          FALSE   TRUE  FALSE  FALSE
+#> 15:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 16:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 17:      FALSE       FALSE      TRUE           TRUE  FALSE  FALSE  FALSE
+#> 18:      FALSE       FALSE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 19:      FALSE       FALSE     FALSE           TRUE  FALSE   TRUE  FALSE
+#> 20:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE
+#> 21:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 22:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 23:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 24:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 25:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 26:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 27:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 28:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 29:      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE  FALSE
 #> 30:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
-#> 31:      FALSE        TRUE     FALSE          FALSE   TRUE   TRUE  FALSE
-#> 32:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 33:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 34:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 35:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 36:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 37:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 38:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 39:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 40:       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 41:      FALSE        TRUE      TRUE          FALSE   TRUE  FALSE   TRUE
-#> 42:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE
-#> 43:      FALSE        TRUE     FALSE          FALSE   TRUE   TRUE   TRUE
-#> 44:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 45:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 46:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 47:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 48:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 49:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
-#> 50:      FALSE        TRUE     FALSE          FALSE   TRUE  FALSE   TRUE
+#> 31:      FALSE        TRUE     FALSE           TRUE  FALSE   TRUE  FALSE
+#> 32:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE   TRUE
+#> 33:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 34:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 35:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 36:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 37:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 38:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 39:      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 40:       TRUE        TRUE      TRUE           TRUE  FALSE  FALSE  FALSE
+#> 41:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 42:       TRUE        TRUE     FALSE           TRUE  FALSE   TRUE  FALSE
+#> 43:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE   TRUE
+#> 44:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 45:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 46:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 47:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 48:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 49:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 50:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 51:       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE  FALSE
+#> 52:       TRUE        TRUE     FALSE           TRUE   TRUE   TRUE  FALSE
+#> 53:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE   TRUE
+#> 54:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 55:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 56:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 57:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 58:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 59:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 60:       TRUE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
 #>     bill_depth bill_length body_mass flipper_length island    sex   year
+#>         <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
 #>     classif.ce runtime_learners           timestamp batch_nr
 #>          <num>            <num>              <POSc>    <int>
-#>  1: 0.28695652            0.013 2025-12-13 15:56:50        1
-#>  2: 0.19130435            0.013 2025-12-13 15:56:50        1
-#>  3: 0.35652174            0.012 2025-12-13 15:56:50        1
-#>  4: 0.21739130            0.017 2025-12-13 15:56:50        1
-#>  5: 0.33043478            0.020 2025-12-13 15:56:50        1
-#>  6: 0.53913043            0.012 2025-12-13 15:56:50        1
-#>  7: 0.53913043            0.014 2025-12-13 15:56:50        1
-#>  8: 0.59130435            0.010 2025-12-13 15:56:50        1
-#>  9: 0.57391304            0.011 2025-12-13 15:56:50        1
-#> 10: 0.60869565            0.010 2025-12-13 15:56:50        1
-#> 11: 0.59130435            0.011 2025-12-13 15:56:50        1
-#> 12: 0.53913043            0.009 2025-12-13 15:56:50        1
-#> 13: 0.53913043            0.024 2025-12-13 15:56:50        1
-#> 14: 0.53913043            0.016 2025-12-13 15:56:50        1
-#> 15: 0.04347826            0.013 2025-12-13 15:56:51        2
-#> 16: 0.10434783            0.012 2025-12-13 15:56:51        2
-#> 17: 0.04347826            0.012 2025-12-13 15:56:51        2
-#> 18: 0.02608696            0.012 2025-12-13 15:56:51        2
-#> 19: 0.23478261            0.013 2025-12-13 15:56:51        2
-#> 20: 0.17391304            0.013 2025-12-13 15:56:51        2
-#> 21: 0.25217391            0.012 2025-12-13 15:56:51        2
-#> 22: 0.24347826            0.012 2025-12-13 15:56:51        2
-#> 23: 0.19130435            0.011 2025-12-13 15:56:51        2
-#> 24: 0.16521739            0.011 2025-12-13 15:56:51        2
-#> 25: 0.19130435            0.012 2025-12-13 15:56:51        2
-#> 26: 0.19130435            0.013 2025-12-13 15:56:51        2
-#> 27: 0.19130435            0.011 2025-12-13 15:56:51        2
-#> 28: 0.02608696            0.013 2025-12-13 15:56:51        3
-#> 29: 0.02608696            0.012 2025-12-13 15:56:51        3
-#> 30: 0.03478261            0.013 2025-12-13 15:56:51        3
-#> 31: 0.02608696            0.013 2025-12-13 15:56:51        3
-#> 32: 0.02608696            0.012 2025-12-13 15:56:51        3
-#> 33: 0.02608696            0.013 2025-12-13 15:56:51        3
-#> 34: 0.02608696            0.012 2025-12-13 15:56:51        3
-#> 35: 0.02608696            0.012 2025-12-13 15:56:51        3
-#> 36: 0.02608696            0.012 2025-12-13 15:56:51        3
-#> 37: 0.02608696            0.013 2025-12-13 15:56:51        3
-#> 38: 0.02608696            0.012 2025-12-13 15:56:51        3
-#> 39: 0.02608696            0.013 2025-12-13 15:56:51        3
-#> 40: 0.02608696            0.013 2025-12-13 15:56:51        4
-#> 41: 0.02608696            0.013 2025-12-13 15:56:51        4
-#> 42: 0.03478261            0.012 2025-12-13 15:56:51        4
-#> 43: 0.02608696            0.012 2025-12-13 15:56:51        4
-#> 44: 0.02608696            0.013 2025-12-13 15:56:51        4
-#> 45: 0.02608696            0.013 2025-12-13 15:56:51        4
-#> 46: 0.02608696            0.013 2025-12-13 15:56:51        4
-#> 47: 0.02608696            0.012 2025-12-13 15:56:51        4
-#> 48: 0.02608696            0.014 2025-12-13 15:56:51        4
-#> 49: 0.02608696            0.013 2025-12-13 15:56:51        4
-#> 50: 0.02608696            0.013 2025-12-13 15:56:51        4
+#>  1: 0.29565217            0.016 2026-03-17 17:31:30        1
+#>  2: 0.29565217            0.016 2026-03-17 17:31:30        1
+#>  3: 0.29565217            0.016 2026-03-17 17:31:30        1
+#>  4: 0.26956522            0.015 2026-03-17 17:31:30        1
+#>  5: 0.32173913            0.015 2026-03-17 17:31:30        1
+#>  6: 0.56521739            0.037 2026-03-17 17:31:30        1
+#>  7: 0.56521739            0.015 2026-03-17 17:31:30        1
+#>  8: 0.56521739            0.013 2026-03-17 17:31:30        1
+#>  9: 0.65217391            0.012 2026-03-17 17:31:30        1
+#> 10: 0.67826087            0.013 2026-03-17 17:31:30        1
+#> 11: 0.58260870            0.014 2026-03-17 17:31:30        1
+#> 12: 0.65217391            0.014 2026-03-17 17:31:30        1
+#> 13: 0.56521739            0.013 2026-03-17 17:31:30        1
+#> 14: 0.56521739            0.013 2026-03-17 17:31:30        1
+#> 15: 0.21739130            0.016 2026-03-17 17:31:31        2
+#> 16: 0.10434783            0.016 2026-03-17 17:31:31        2
+#> 17: 0.28695652            0.015 2026-03-17 17:31:31        2
+#> 18: 0.20869565            0.036 2026-03-17 17:31:31        2
+#> 19: 0.21739130            0.019 2026-03-17 17:31:31        2
+#> 20: 0.26956522            0.014 2026-03-17 17:31:31        2
+#> 21: 0.26956522            0.015 2026-03-17 17:31:31        2
+#> 22: 0.26956522            0.016 2026-03-17 17:31:31        2
+#> 23: 0.33043478            0.015 2026-03-17 17:31:31        2
+#> 24: 0.26086957            0.015 2026-03-17 17:31:31        2
+#> 25: 0.26956522            0.015 2026-03-17 17:31:31        2
+#> 26: 0.26956522            0.015 2026-03-17 17:31:31        2
+#> 27: 0.26956522            0.015 2026-03-17 17:31:31        2
+#> 28: 0.05217391            0.015 2026-03-17 17:31:31        3
+#> 29: 0.10434783            0.016 2026-03-17 17:31:31        3
+#> 30: 0.09565217            0.038 2026-03-17 17:31:31        3
+#> 31: 0.05217391            0.016 2026-03-17 17:31:31        3
+#> 32: 0.10434783            0.015 2026-03-17 17:31:31        3
+#> 33: 0.10434783            0.015 2026-03-17 17:31:31        3
+#> 34: 0.09565217            0.017 2026-03-17 17:31:31        3
+#> 35: 0.10434783            0.015 2026-03-17 17:31:31        3
+#> 36: 0.10434783            0.015 2026-03-17 17:31:31        3
+#> 37: 0.10434783            0.015 2026-03-17 17:31:31        3
+#> 38: 0.10434783            0.015 2026-03-17 17:31:31        3
+#> 39: 0.10434783            0.015 2026-03-17 17:31:31        3
+#> 40: 0.05217391            0.016 2026-03-17 17:31:32        4
+#> 41: 0.04347826            0.016 2026-03-17 17:31:32        4
+#> 42: 0.05217391            0.023 2026-03-17 17:31:32        4
+#> 43: 0.05217391            0.015 2026-03-17 17:31:32        4
+#> 44: 0.05217391            0.015 2026-03-17 17:31:32        4
+#> 45: 0.04347826            0.015 2026-03-17 17:31:32        4
+#> 46: 0.05217391            0.016 2026-03-17 17:31:32        4
+#> 47: 0.05217391            0.017 2026-03-17 17:31:32        4
+#> 48: 0.05217391            0.016 2026-03-17 17:31:32        4
+#> 49: 0.05217391            0.015 2026-03-17 17:31:32        4
+#> 50: 0.05217391            0.014 2026-03-17 17:31:32        4
+#> 51: 0.04347826            0.016 2026-03-17 17:31:32        5
+#> 52: 0.04347826            0.015 2026-03-17 17:31:32        5
+#> 53: 0.04347826            0.016 2026-03-17 17:31:32        5
+#> 54: 0.04347826            0.022 2026-03-17 17:31:32        5
+#> 55: 0.04347826            0.015 2026-03-17 17:31:32        5
+#> 56: 0.04347826            0.015 2026-03-17 17:31:32        5
+#> 57: 0.04347826            0.015 2026-03-17 17:31:32        5
+#> 58: 0.04347826            0.017 2026-03-17 17:31:32        5
+#> 59: 0.04347826            0.016 2026-03-17 17:31:32        5
+#> 60: 0.04347826            0.016 2026-03-17 17:31:32        5
 #>     classif.ce runtime_learners           timestamp batch_nr
+#>          <num>            <num>              <POSc>    <int>
 #>     permuted__bill_depth permuted__bill_length permuted__body_mass
 #>                   <lgcl>                <lgcl>              <lgcl>
 #>  1:                FALSE                 FALSE               FALSE
@@ -311,7 +333,18 @@ as.data.table(instance$archive)
 #> 48:                FALSE                 FALSE               FALSE
 #> 49:                FALSE                 FALSE               FALSE
 #> 50:                FALSE                 FALSE               FALSE
+#> 51:                FALSE                 FALSE               FALSE
+#> 52:                FALSE                 FALSE               FALSE
+#> 53:                FALSE                 FALSE               FALSE
+#> 54:                 TRUE                 FALSE               FALSE
+#> 55:                FALSE                  TRUE               FALSE
+#> 56:                FALSE                 FALSE                TRUE
+#> 57:                FALSE                 FALSE               FALSE
+#> 58:                FALSE                 FALSE               FALSE
+#> 59:                FALSE                 FALSE               FALSE
+#> 60:                FALSE                 FALSE               FALSE
 #>     permuted__bill_depth permuted__bill_length permuted__body_mass
+#>                   <lgcl>                <lgcl>              <lgcl>
 #>     permuted__flipper_length permuted__island permuted__sex permuted__year
 #>                       <lgcl>           <lgcl>        <lgcl>         <lgcl>
 #>  1:                    FALSE            FALSE         FALSE          FALSE
@@ -364,113 +397,146 @@ as.data.table(instance$archive)
 #> 48:                    FALSE             TRUE         FALSE          FALSE
 #> 49:                    FALSE            FALSE          TRUE          FALSE
 #> 50:                    FALSE            FALSE         FALSE           TRUE
+#> 51:                    FALSE            FALSE         FALSE          FALSE
+#> 52:                    FALSE            FALSE         FALSE          FALSE
+#> 53:                    FALSE            FALSE         FALSE          FALSE
+#> 54:                    FALSE            FALSE         FALSE          FALSE
+#> 55:                    FALSE            FALSE         FALSE          FALSE
+#> 56:                    FALSE            FALSE         FALSE          FALSE
+#> 57:                     TRUE            FALSE         FALSE          FALSE
+#> 58:                    FALSE             TRUE         FALSE          FALSE
+#> 59:                    FALSE            FALSE          TRUE          FALSE
+#> 60:                    FALSE            FALSE         FALSE           TRUE
 #>     permuted__flipper_length permuted__island permuted__sex permuted__year
-#>     warnings errors                               features n_features
-#>        <int>  <int>                                 <list>     <list>
-#>  1:        0      0                             bill_depth          1
-#>  2:        0      0                            bill_length          1
-#>  3:        0      0                              body_mass          1
-#>  4:        0      0                         flipper_length          1
-#>  5:        0      0                                 island          1
-#>  6:        0      0                                    sex          1
-#>  7:        0      0                                   year          1
-#>  8:        0      0                                                 0
-#>  9:        0      0                                                 0
-#> 10:        0      0                                                 0
-#> 11:        0      0                                                 0
-#> 12:        0      0                                                 0
-#> 13:        0      0                                                 0
-#> 14:        0      0                                                 0
-#> 15:        0      0                 bill_depth,bill_length          2
-#> 16:        0      0                  bill_length,body_mass          2
-#> 17:        0      0             bill_length,flipper_length          2
-#> 18:        0      0                     bill_length,island          2
-#> 19:        0      0                        bill_length,sex          2
-#> 20:        0      0                       bill_length,year          2
-#> 21:        0      0                            bill_length          1
-#> 22:        0      0                            bill_length          1
-#> 23:        0      0                            bill_length          1
-#> 24:        0      0                            bill_length          1
-#> 25:        0      0                            bill_length          1
-#> 26:        0      0                            bill_length          1
-#> 27:        0      0                            bill_length          1
-#> 28:        0      0          bill_depth,bill_length,island          3
-#> 29:        0      0           bill_length,body_mass,island          3
-#> 30:        0      0      bill_length,flipper_length,island          3
-#> 31:        0      0                 bill_length,island,sex          3
-#> 32:        0      0                bill_length,island,year          3
-#> 33:        0      0                     bill_length,island          2
-#> 34:        0      0                     bill_length,island          2
-#> 35:        0      0                     bill_length,island          2
-#> 36:        0      0                     bill_length,island          2
-#> 37:        0      0                     bill_length,island          2
-#> 38:        0      0                     bill_length,island          2
-#> 39:        0      0                     bill_length,island          2
-#> 40:        0      0     bill_depth,bill_length,island,year          4
-#> 41:        0      0      bill_length,body_mass,island,year          4
-#> 42:        0      0 bill_length,flipper_length,island,year          4
-#> 43:        0      0            bill_length,island,sex,year          4
-#> 44:        0      0                bill_length,island,year          3
-#> 45:        0      0                bill_length,island,year          3
-#> 46:        0      0                bill_length,island,year          3
-#> 47:        0      0                bill_length,island,year          3
-#> 48:        0      0                bill_length,island,year          3
-#> 49:        0      0                bill_length,island,year          3
-#> 50:        0      0                bill_length,island,year          3
-#>     warnings errors                               features n_features
-#>      resample_result
-#>               <list>
-#>  1: <ResampleResult>
-#>  2: <ResampleResult>
-#>  3: <ResampleResult>
-#>  4: <ResampleResult>
-#>  5: <ResampleResult>
-#>  6: <ResampleResult>
-#>  7: <ResampleResult>
-#>  8: <ResampleResult>
-#>  9: <ResampleResult>
-#> 10: <ResampleResult>
-#> 11: <ResampleResult>
-#> 12: <ResampleResult>
-#> 13: <ResampleResult>
-#> 14: <ResampleResult>
-#> 15: <ResampleResult>
-#> 16: <ResampleResult>
-#> 17: <ResampleResult>
-#> 18: <ResampleResult>
-#> 19: <ResampleResult>
-#> 20: <ResampleResult>
-#> 21: <ResampleResult>
-#> 22: <ResampleResult>
-#> 23: <ResampleResult>
-#> 24: <ResampleResult>
-#> 25: <ResampleResult>
-#> 26: <ResampleResult>
-#> 27: <ResampleResult>
-#> 28: <ResampleResult>
-#> 29: <ResampleResult>
-#> 30: <ResampleResult>
-#> 31: <ResampleResult>
-#> 32: <ResampleResult>
-#> 33: <ResampleResult>
-#> 34: <ResampleResult>
-#> 35: <ResampleResult>
-#> 36: <ResampleResult>
-#> 37: <ResampleResult>
-#> 38: <ResampleResult>
-#> 39: <ResampleResult>
-#> 40: <ResampleResult>
-#> 41: <ResampleResult>
-#> 42: <ResampleResult>
-#> 43: <ResampleResult>
-#> 44: <ResampleResult>
-#> 45: <ResampleResult>
-#> 46: <ResampleResult>
-#> 47: <ResampleResult>
-#> 48: <ResampleResult>
-#> 49: <ResampleResult>
-#> 50: <ResampleResult>
-#>      resample_result
+#>                       <lgcl>           <lgcl>        <lgcl>         <lgcl>
+#>     warnings errors                                               features
+#>        <int>  <int>                                                 <list>
+#>  1:        0      0                                             bill_depth
+#>  2:        0      0                                            bill_length
+#>  3:        0      0                                              body_mass
+#>  4:        0      0                                         flipper_length
+#>  5:        0      0                                                 island
+#>  6:        0      0                                                    sex
+#>  7:        0      0                                                   year
+#>  8:        0      0                                                       
+#>  9:        0      0                                                       
+#> 10:        0      0                                                       
+#> 11:        0      0                                                       
+#> 12:        0      0                                                       
+#> 13:        0      0                                                       
+#> 14:        0      0                                                       
+#> 15:        0      0                              bill_depth,flipper_length
+#> 16:        0      0                             bill_length,flipper_length
+#> 17:        0      0                               body_mass,flipper_length
+#> 18:        0      0                                  flipper_length,island
+#> 19:        0      0                                     flipper_length,sex
+#> 20:        0      0                                    flipper_length,year
+#> 21:        0      0                                         flipper_length
+#> 22:        0      0                                         flipper_length
+#> 23:        0      0                                         flipper_length
+#> 24:        0      0                                         flipper_length
+#> 25:        0      0                                         flipper_length
+#> 26:        0      0                                         flipper_length
+#> 27:        0      0                                         flipper_length
+#> 28:        0      0                  bill_depth,bill_length,flipper_length
+#> 29:        0      0                   bill_length,body_mass,flipper_length
+#> 30:        0      0                      bill_length,flipper_length,island
+#> 31:        0      0                         bill_length,flipper_length,sex
+#> 32:        0      0                        bill_length,flipper_length,year
+#> 33:        0      0                             bill_length,flipper_length
+#> 34:        0      0                             bill_length,flipper_length
+#> 35:        0      0                             bill_length,flipper_length
+#> 36:        0      0                             bill_length,flipper_length
+#> 37:        0      0                             bill_length,flipper_length
+#> 38:        0      0                             bill_length,flipper_length
+#> 39:        0      0                             bill_length,flipper_length
+#> 40:        0      0        bill_depth,bill_length,body_mass,flipper_length
+#> 41:        0      0           bill_depth,bill_length,flipper_length,island
+#> 42:        0      0              bill_depth,bill_length,flipper_length,sex
+#> 43:        0      0             bill_depth,bill_length,flipper_length,year
+#> 44:        0      0                  bill_depth,bill_length,flipper_length
+#> 45:        0      0                  bill_depth,bill_length,flipper_length
+#> 46:        0      0                  bill_depth,bill_length,flipper_length
+#> 47:        0      0                  bill_depth,bill_length,flipper_length
+#> 48:        0      0                  bill_depth,bill_length,flipper_length
+#> 49:        0      0                  bill_depth,bill_length,flipper_length
+#> 50:        0      0                  bill_depth,bill_length,flipper_length
+#> 51:        0      0 bill_depth,bill_length,body_mass,flipper_length,island
+#> 52:        0      0       bill_depth,bill_length,flipper_length,island,sex
+#> 53:        0      0      bill_depth,bill_length,flipper_length,island,year
+#> 54:        0      0           bill_depth,bill_length,flipper_length,island
+#> 55:        0      0           bill_depth,bill_length,flipper_length,island
+#> 56:        0      0           bill_depth,bill_length,flipper_length,island
+#> 57:        0      0           bill_depth,bill_length,flipper_length,island
+#> 58:        0      0           bill_depth,bill_length,flipper_length,island
+#> 59:        0      0           bill_depth,bill_length,flipper_length,island
+#> 60:        0      0           bill_depth,bill_length,flipper_length,island
+#>     warnings errors                                               features
+#>        <int>  <int>                                                 <list>
+#>     n_features  resample_result
+#>         <list>           <list>
+#>  1:          1 <ResampleResult>
+#>  2:          1 <ResampleResult>
+#>  3:          1 <ResampleResult>
+#>  4:          1 <ResampleResult>
+#>  5:          1 <ResampleResult>
+#>  6:          1 <ResampleResult>
+#>  7:          1 <ResampleResult>
+#>  8:          0 <ResampleResult>
+#>  9:          0 <ResampleResult>
+#> 10:          0 <ResampleResult>
+#> 11:          0 <ResampleResult>
+#> 12:          0 <ResampleResult>
+#> 13:          0 <ResampleResult>
+#> 14:          0 <ResampleResult>
+#> 15:          2 <ResampleResult>
+#> 16:          2 <ResampleResult>
+#> 17:          2 <ResampleResult>
+#> 18:          2 <ResampleResult>
+#> 19:          2 <ResampleResult>
+#> 20:          2 <ResampleResult>
+#> 21:          1 <ResampleResult>
+#> 22:          1 <ResampleResult>
+#> 23:          1 <ResampleResult>
+#> 24:          1 <ResampleResult>
+#> 25:          1 <ResampleResult>
+#> 26:          1 <ResampleResult>
+#> 27:          1 <ResampleResult>
+#> 28:          3 <ResampleResult>
+#> 29:          3 <ResampleResult>
+#> 30:          3 <ResampleResult>
+#> 31:          3 <ResampleResult>
+#> 32:          3 <ResampleResult>
+#> 33:          2 <ResampleResult>
+#> 34:          2 <ResampleResult>
+#> 35:          2 <ResampleResult>
+#> 36:          2 <ResampleResult>
+#> 37:          2 <ResampleResult>
+#> 38:          2 <ResampleResult>
+#> 39:          2 <ResampleResult>
+#> 40:          4 <ResampleResult>
+#> 41:          4 <ResampleResult>
+#> 42:          4 <ResampleResult>
+#> 43:          4 <ResampleResult>
+#> 44:          3 <ResampleResult>
+#> 45:          3 <ResampleResult>
+#> 46:          3 <ResampleResult>
+#> 47:          3 <ResampleResult>
+#> 48:          3 <ResampleResult>
+#> 49:          3 <ResampleResult>
+#> 50:          3 <ResampleResult>
+#> 51:          5 <ResampleResult>
+#> 52:          5 <ResampleResult>
+#> 53:          5 <ResampleResult>
+#> 54:          4 <ResampleResult>
+#> 55:          4 <ResampleResult>
+#> 56:          4 <ResampleResult>
+#> 57:          4 <ResampleResult>
+#> 58:          4 <ResampleResult>
+#> 59:          4 <ResampleResult>
+#> 60:          4 <ResampleResult>
+#>     n_features  resample_result
+#>         <list>           <list>
 
 # subset the task and fit the final model
 task$select(instance$result_feature_set)

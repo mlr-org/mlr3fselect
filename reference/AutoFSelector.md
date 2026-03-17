@@ -100,7 +100,7 @@ here.
 
 - `fselect_result`:
 
-  ([data.table::data.table](https://rdatatable.gitlab.io/data.table/reference/data.table.html))  
+  ([data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html))  
   Short-cut to `$result` from
   [FSelectInstanceBatchSingleCrit](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceBatchSingleCrit.md).
 
@@ -399,21 +399,18 @@ afs$predict(task, row_ids = split$test)
 #>        2    Adelie    Adelie
 #>        9    Adelie    Adelie
 #>      ---       ---       ---
-#>      319 Chinstrap Chinstrap
-#>      337 Chinstrap Chinstrap
-#>      339 Chinstrap Chinstrap
+#>      318 Chinstrap Chinstrap
+#>      334 Chinstrap Chinstrap
+#>      338 Chinstrap Chinstrap
 
 # show result
 afs$fselect_result
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#>                                                          features n_features
-#>                                                            <list>      <int>
-#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7
-#>    classif.ce
-#>         <num>
-#> 1: 0.04347826
+#> 1:      FALSE        TRUE     FALSE          FALSE   TRUE   TRUE   TRUE
+#>                       features n_features classif.ce
+#>                         <list>      <int>      <num>
+#> 1: bill_length,island,sex,year          4 0.06521739
 
 # model slot contains trained learner and fselect instance
 afs$model
@@ -431,8 +428,7 @@ afs$model
 #> • Other settings: use_weights = 'use'
 #> 
 #> $features
-#> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"
-#> [5] "island"         "sex"            "year"          
+#> [1] "bill_length" "island"      "sex"         "year"       
 #> 
 #> $fselect_instance
 #> 
@@ -443,10 +439,10 @@ afs$model
 #> • Result:
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 1:      FALSE        TRUE     FALSE          FALSE   TRUE   TRUE   TRUE
 #>    classif.ce
 #>         <num>
-#> 1: 0.04347826
+#> 1: 0.06521739
 #> • Archive:
 #>     bill_depth bill_length body_mass flipper_length island    sex   year
 #>         <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
@@ -462,16 +458,16 @@ afs$model
 #> 10:       TRUE       FALSE      TRUE          FALSE  FALSE   TRUE  FALSE
 #>     classif.ce
 #>          <num>
-#>  1: 0.04347826
+#>  1: 0.09782609
 #>  2: 0.06521739
-#>  3: 0.22826087
-#>  4: 0.04347826
-#>  5: 0.11956522
-#>  6: 0.11956522
-#>  7: 0.04347826
-#>  8: 0.05434783
-#>  9: 0.30434783
-#> 10: 0.27173913
+#>  3: 0.25000000
+#>  4: 0.09782609
+#>  5: 0.09782609
+#>  6: 0.09782609
+#>  7: 0.09782609
+#>  8: 0.07608696
+#>  9: 0.29347826
+#> 10: 0.20652174
 #> 
 
 # shortcut trained learner
@@ -498,10 +494,10 @@ afs$fselect_instance
 #> • Result:
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 1:      FALSE        TRUE     FALSE          FALSE   TRUE   TRUE   TRUE
 #>    classif.ce
 #>         <num>
-#> 1: 0.04347826
+#> 1: 0.06521739
 #> • Archive:
 #>     bill_depth bill_length body_mass flipper_length island    sex   year
 #>         <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
@@ -517,16 +513,16 @@ afs$fselect_instance
 #> 10:       TRUE       FALSE      TRUE          FALSE  FALSE   TRUE  FALSE
 #>     classif.ce
 #>          <num>
-#>  1: 0.04347826
+#>  1: 0.09782609
 #>  2: 0.06521739
-#>  3: 0.22826087
-#>  4: 0.04347826
-#>  5: 0.11956522
-#>  6: 0.11956522
-#>  7: 0.04347826
-#>  8: 0.05434783
-#>  9: 0.30434783
-#> 10: 0.27173913
+#>  3: 0.25000000
+#>  4: 0.09782609
+#>  5: 0.09782609
+#>  6: 0.09782609
+#>  7: 0.09782609
+#>  8: 0.07608696
+#>  9: 0.29347826
+#> 10: 0.20652174
 
 
 # Nested Resampling
@@ -545,14 +541,14 @@ rr = resample(task, afs, resampling_outer, store_models = TRUE)
 extract_inner_fselect_results(rr)
 #>    iteration bill_depth bill_length body_mass flipper_length island    sex
 #>        <int>     <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl>
-#> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE
-#> 2:         2      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE
-#> 3:         3       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE
+#> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE
+#> 2:         2      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE
+#> 3:         3      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE
 #>      year classif.ce                                  features n_features
 #>    <lgcl>      <num>                                    <list>      <int>
-#> 1:   TRUE 0.05263158        bill_depth,bill_length,island,year          4
-#> 2:   TRUE 0.02597403 bill_length,body_mass,flipper_length,year          4
-#> 3:  FALSE 0.10526316         bill_depth,bill_length,island,sex          4
+#> 1:  FALSE 0.09210526         bill_depth,bill_length,island,sex          4
+#> 2:  FALSE 0.03947368                bill_length,flipper_length          2
+#> 3:   TRUE 0.06493506 bill_length,body_mass,flipper_length,year          4
 #>     task_id              learner_id resampling_id
 #>      <char>                  <char>        <char>
 #> 1: penguins classif.rpart.fselector            cv
@@ -563,14 +559,14 @@ extract_inner_fselect_results(rr)
 rr$score()
 #>     task_id              learner_id resampling_id iteration classif.ce
 #>      <char>                  <char>        <char>     <int>      <num>
-#> 1: penguins classif.rpart.fselector            cv         1 0.08695652
-#> 2: penguins classif.rpart.fselector            cv         2 0.07826087
-#> 3: penguins classif.rpart.fselector            cv         3 0.06140351
+#> 1: penguins classif.rpart.fselector            cv         1 0.06086957
+#> 2: penguins classif.rpart.fselector            cv         2 0.05217391
+#> 3: penguins classif.rpart.fselector            cv         3 0.07894737
 #> Hidden columns: task, learner, resampling, prediction_test
 
 # unbiased performance of the final model trained on the full data set
 rr$aggregate()
 #> classif.ce 
-#>  0.0755403 
+#> 0.06399695 
 # }
 ```

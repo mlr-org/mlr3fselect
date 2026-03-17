@@ -189,10 +189,16 @@ instance = fselect(
 instance$result
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
-#>    importance                              features n_features classif.ce
-#>        <list>                                <list>      <int>      <num>
-#> 1:      3,2,1 bill_depth,bill_length,flipper_length          3 0.03478261
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#>            importance
+#>                <list>
+#> 1: 7,6,5,4,3,2,...[7]
+#>                                                             features n_features
+#>                                                               <list>      <int>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#>    classif.ce
+#>         <num>
+#> 1: 0.07826087
 
 # all evaluated feature subsets
 as.data.table(instance$archive)
@@ -202,16 +208,16 @@ as.data.table(instance$archive)
 #> 2:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.03478261            0.006 2025-12-13 15:56:47        1        0      0
-#> 2: 0.03478261            0.005 2025-12-13 15:56:47        2        0      0
-#>         importance
-#>             <list>
-#> 1: 7,6,5,4,3,2,...
-#> 2:           3,2,1
-#>                                                          features n_features
-#>                                                            <list>     <list>
-#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...          7
-#> 2:                          bill_depth,bill_length,flipper_length          3
+#> 1: 0.07826087            0.005 2026-03-17 17:31:27        1        0      0
+#> 2: 0.08695652            0.006 2026-03-17 17:31:27        2        0      0
+#>            importance
+#>                <list>
+#> 1: 7,6,5,4,3,2,...[7]
+#> 2:              3,2,1
+#>                                                             features n_features
+#>                                                               <list>     <list>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#> 2:                             bill_depth,bill_length,flipper_length          3
 #>     resample_result
 #>              <list>
 #> 1: <ResampleResult>
