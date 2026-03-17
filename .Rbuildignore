@@ -25,3 +25,4 @@ man-roxygen
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
 ^revdep$
+.claude

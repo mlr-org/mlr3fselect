@@ -105,12 +105,14 @@ test_that("internal tuning callback works with AutoFSelector", {
 # async freeze archive callback ------------------------------------------------
 
 test_that("async freeze archive callback works", {
-  skip_on_cran()
   skip_if_not_installed("rush")
-  flush_redis()
+  skip_if_no_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fsi_async(
     task = tsk("pima"),
     learner = lrn("classif.rpart"),
@@ -118,7 +120,8 @@ test_that("async freeze archive callback works", {
     measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 20),
     store_benchmark_result = TRUE,
-    callbacks = clbk("mlr3fselect.async_freeze_archive")
+    callbacks = clbk("mlr3fselect.async_freeze_archive"),
+    rush = rush
   )
   fselector = fs("async_random_search")
   fselector$optimize(instance)
@@ -138,5 +141,4 @@ test_that("async freeze archive callback works", {
   expect_number(frozen_archive$n_evals)
 
   expect_data_table(as.data.table(frozen_archive))
-  expect_rush_reset(instance$rush)
 })

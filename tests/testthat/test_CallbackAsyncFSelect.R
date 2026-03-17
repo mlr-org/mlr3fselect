@@ -1,9 +1,14 @@
+skip_if_not_installed("rush")
+skip_if_no_redis()
+
 # stages in $optimize() --------------------------------------------------------
 
 test_that("on_optimization_begin works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_optimization_begin = function(callback, context) {
@@ -11,9 +16,6 @@ test_that("on_optimization_begin works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -21,17 +23,19 @@ test_that("on_optimization_begin works", {
     resampling = rsmp("holdout"),
     measures = msr("regr.mse"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$terminator$param_set$values$n_evals, 20)
-  expect_rush_reset(instance$rush, type = "kill")
 })
 
 test_that("on_optimization_end works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_optimization_end = function(callback, context) {
@@ -39,9 +43,6 @@ test_that("on_optimization_end works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -49,19 +50,21 @@ test_that("on_optimization_end works", {
     resampling = rsmp("holdout"),
     measures = msr("regr.mse"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$terminator$param_set$values$n_evals, 20)
-  expect_rush_reset(instance$rush, type = "kill")
 })
 
 # stager in worker_loop() ------------------------------------------------------
 
 test_that("on_worker_begin works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush(n_workers = 1)
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_worker_begin = function(callback, context) {
@@ -70,9 +73,6 @@ test_that("on_worker_begin works", {
     }
   )
 
-
-  mirai::daemons(1)
-  rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -80,16 +80,18 @@ test_that("on_worker_begin works", {
     resampling = rsmp("holdout"),
     measures = msr("regr.mse"),
     term_evals = 1,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE]))
-  expect_rush_reset(instance$rush, type = "kill")
 })
 
 test_that("on_worker_end works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush(n_workers = 1)
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_worker_end = function(callback, context) {
@@ -98,9 +100,6 @@ test_that("on_worker_end works", {
     }
   )
 
-
-  mirai::daemons(1)
-  rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -108,18 +107,20 @@ test_that("on_worker_end works", {
     resampling = rsmp("holdout"),
     measures = msr("regr.mse"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[nrow(instance$archive$data), c("x1", "x2", "x3", "x4"), with = FALSE]))
-  expect_rush_reset(instance$rush, type = "kill")
 })
 
 # stages in $.eval_point() -----------------------------------------------------
 
 test_that("on_optimizer_before_eval and on_optimizer_after_eval works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush(n_workers = 1)
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_optimizer_before_eval = function(callback, context) {
@@ -131,9 +132,6 @@ test_that("on_optimizer_before_eval and on_optimizer_after_eval works", {
     }
   )
 
-
-  mirai::daemons(1)
-  rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -141,20 +139,21 @@ test_that("on_optimizer_before_eval and on_optimizer_after_eval works", {
     resampling = rsmp("holdout"),
     measures = msr("regr.mse"),
     term_evals = 1,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE]))
   expect_equal(0, instance$archive$data$regr.mse)
-  expect_rush_reset(instance$rush, type = "kill")
 })
 
 # stages in $eval() ------------------------------------------------------------
 
 test_that("on_eval_after_xs works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
-  options(bbotk_local = TRUE)
+  rush = start_rush(n_workers = 1)
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_eval_after_xs = function(callback, context) {
@@ -162,9 +161,6 @@ test_that("on_eval_after_xs works", {
     }
   )
 
-
-  mirai::daemons(1)
-  rush::rush_plan(n_workers = 1, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -172,15 +168,18 @@ test_that("on_eval_after_xs works", {
     resampling = rsmp("holdout"),
     measures = msr("regr.mse"),
     term_evals = 1,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_equal(instance$archive$benchmark_result$resample_result(1)$learners[[1]]$state$feature_names, c("x1", "x3"))
 })
 
 test_that("on_eval_after_resample works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_eval_after_resample = function(callback, context) {
@@ -192,9 +191,6 @@ test_that("on_eval_after_resample works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -202,7 +198,8 @@ test_that("on_eval_after_resample works", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_names(names(instance$archive$data), must.include = c("classif.ce", "classif.acc"))
 })
@@ -210,9 +207,11 @@ test_that("on_eval_after_resample works", {
 # stages in $assign_result() in FSelectInstanceAsyncSingleCrit ------------------
 
 test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_fselect_result_begin = function(callback, context) {
@@ -221,9 +220,6 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -231,7 +227,8 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
     resampling = rsmp("holdout"),
     measures = msr("regr.mse"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result_x_search_space, data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
@@ -239,13 +236,12 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
 })
 
 test_that("on_result_end in FSelectInstanceSingleCrit works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   callback = callback_async_fselect(id = "test",
     on_result_end = function(callback, context) {
       context$result$classif.ce = 0.7
@@ -259,16 +255,19 @@ test_that("on_result_end in FSelectInstanceSingleCrit works", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result$classif.ce, 0.7)
 })
 
 test_that("on_result in FSelectInstanceSingleCrit works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   expect_warning({callback = callback_async_fselect(id = "test",
     on_result = function(callback, context) {
@@ -276,9 +275,6 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
     }
   )}, "deprecated")
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -286,7 +282,8 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result$classif.ce, 0.7)
@@ -295,9 +292,11 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
 # stages in $assign_result() in FSelectInstanceBatchMultiCrit -------------------
 
 test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_fselect_result_begin = function(callback, context) {
@@ -306,9 +305,6 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = TEST_MAKE_TSK(),
@@ -316,7 +312,8 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
     resampling = rsmp("holdout"),
     measures = msrs(c("regr.mse", "regr.rmse")),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result_x_search_space, data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
@@ -324,9 +321,11 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
 })
 
 test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect(id = "test",
     on_result_end = function(callback, context) {
@@ -334,9 +333,6 @@ test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -344,16 +340,19 @@ test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
     resampling = rsmp("holdout"),
     measures = msrs(c("classif.ce", "classif.acc")),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(unique(instance$result$classif.ce), 0.7)
 })
 
 test_that("on_result in FSelectInstanceBatchMultiCrit works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   expect_warning({callback = callback_async_fselect(id = "test",
     on_result = function(callback, context) {
@@ -361,9 +360,6 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
     }
   )}, "deprecated")
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -371,7 +367,8 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
     resampling = rsmp("holdout"),
     measures = msrs(c("classif.ce", "classif.acc")),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(unique(instance$result$classif.ce), 0.7)
@@ -380,9 +377,11 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
 # stages in mlr3 workhorse -----------------------------------------------------
 
 test_that("on_resample_begin works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect("test",
     on_resample_begin = function(callback, context) {
@@ -396,9 +395,6 @@ test_that("on_resample_begin works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -406,7 +402,8 @@ test_that("on_resample_begin works", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 
@@ -416,9 +413,11 @@ test_that("on_resample_begin works", {
 })
 
 test_that("on_resample_before_train works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect("test",
     on_resample_before_train = function(callback, context) {
@@ -431,9 +430,6 @@ test_that("on_resample_before_train works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -441,7 +437,8 @@ test_that("on_resample_before_train works", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 
@@ -451,9 +448,11 @@ test_that("on_resample_before_train works", {
 })
 
 test_that("on_resample_before_predict works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect("test",
     on_resample_before_predict = function(callback, context) {
@@ -465,9 +464,6 @@ test_that("on_resample_before_predict works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -475,7 +471,8 @@ test_that("on_resample_before_predict works", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 
@@ -485,9 +482,11 @@ test_that("on_resample_before_predict works", {
 })
 
 test_that("on_resample_end works", {
-  skip_on_cran()
-  skip_if_not_installed("rush")
-  flush_redis()
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   callback = callback_async_fselect("test",
     on_resample_end = function(callback, context) {
@@ -502,9 +501,6 @@ test_that("on_resample_end works", {
     }
   )
 
-
-  mirai::daemons(2)
-  rush::rush_plan(n_workers = 2, worker_type = "remote")
   instance = fselect(
     fselector = fs("async_random_search"),
     task = tsk("pima"),
@@ -512,7 +508,8 @@ test_that("on_resample_end works", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     term_evals = 2,
-    callbacks = callback)
+    callbacks = callback,
+    rush = rush)
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 

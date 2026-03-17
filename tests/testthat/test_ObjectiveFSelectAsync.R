@@ -93,17 +93,18 @@ test_that("rush objective with multiple measures works", {
 })
 
 test_that("fast aggregation works", {
-  skip_on_cran()
   skip_if_not_installed("rush")
-  flush_redis()
+  skip_if_no_redis()
 
   task = tsk("pima")
   learner = lrn("classif.rpart")
   resampling = rsmp("cv", folds = 3)
 
+  config = redis_configuration()
   on.exit(mirai::daemons(0))
   mirai::daemons(1, seed = 123, dispatcher = FALSE)
   rush::rush_plan(n_workers = 1, worker_type = "remote")
+  rush = rush::rsh(config = config)
 
   with_seed(123, {
     instance = fselect(
@@ -112,7 +113,8 @@ test_that("fast aggregation works", {
       learner = learner,
       resampling = resampling,
       measures = msr("classif.ce"),
-      term_evals = 30
+      term_evals = 30,
+      rush = rush
   )})
 
   expect_equal(instance$archive$data$classif.ce,
@@ -126,10 +128,14 @@ test_that("fast aggregation works", {
 
   ce_fast = instance$archive$data$classif.ce
 
+  rush$reset()
   mirai::daemons(0)
+
+  config = redis_configuration()
   on.exit(mirai::daemons(0))
   mirai::daemons(1, seed = 123, dispatcher = FALSE)
   rush::rush_plan(n_workers = 1, worker_type = "remote")
+  rush2 = rush::rsh(config = config)
 
   with_seed(123, {
     instance = fselect(
@@ -138,7 +144,8 @@ test_that("fast aggregation works", {
       learner = learner,
       resampling = resampling,
       measures = msrs(c("classif.ce", "classif.acc")),
-      term_evals = 30
+      term_evals = 30,
+      rush = rush2
   )})
 
   expect_equal(instance$archive$data$classif.ce,
@@ -157,18 +164,19 @@ test_that("fast aggregation works", {
 })
 
 test_that("fast aggregation conditions work", {
-  skip_on_cran()
   skip_if_not_installed("rush")
-  flush_redis()
+  skip_if_no_redis()
 
   task = tsk("pima")
   learner = lrn("classif.debug", error_train = 0.1, warning_train = 0.1, error_predict = 0.1, warning_predict = 0.1)
   learner$encapsulate("evaluate", fallback = lrn("classif.featureless"))
   resampling = rsmp("cv", folds = 3)
 
-  on.exit(mirai::daemons(0))
-  mirai::daemons(1, seed = 123, dispatcher = FALSE)
-  rush::rush_plan(n_workers = 1, worker_type = "remote")
+  rush = start_rush(n_workers = 1)
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -176,7 +184,8 @@ test_that("fast aggregation conditions work", {
     learner = learner,
     resampling = resampling,
     measures = msr("classif.ce"),
-    term_evals = 30
+    term_evals = 30,
+    rush = rush
   )
 
   expect_equal(instance$archive$data$classif.ce,
