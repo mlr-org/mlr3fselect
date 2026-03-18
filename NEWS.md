@@ -1,5 +1,7 @@
 # mlr3fselect (development version)
 
+* refactor: Remove rush backward compatibility.
+
 # mlr3fselect 1.5.1
 
 * compatibility: rush 1.0.0
