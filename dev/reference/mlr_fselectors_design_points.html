@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@ It is not necessary to set a termination criterion.</p>
 Maximum number of configurations to try in a batch.</p></dd>
 
 <dt><code>design</code></dt>
-<dd><p><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a><br>
+<dd><p><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a><br>
 Design points to try in search, one per row.</p></dd>
 
 
@@ -172,22 +172,22 @@ Design points to try in search, one per row.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     features n_features classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       &lt;list&gt;      &lt;int&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant          4    0.21875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pregnant          4  0.2578125</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all evaluated feature sets</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">instance</span><span class="op">$</span><span class="va">archive</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;  &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;  &lt;lgcl&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.2812500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2187500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.3046875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3125000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.3085938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2578125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2929688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3085938</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.007 2025-09-11 21:35:44        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.006 2025-09-11 21:35:44        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.005 2025-09-11 21:35:44        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.007 2025-09-11 21:35:44        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.008 2026-03-18 09:00:09        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.008 2026-03-18 09:00:09        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.008 2026-03-18 09:00:09        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.009 2026-03-18 09:00:09        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                      features n_features  resample_result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                        &lt;list&gt;     &lt;list&gt;           &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:          age,insulin,mass,pregnant,triceps          5 &lt;ResampleResult&gt;</span>
@@ -210,7 +210,7 @@ Design points to try in search, one per row.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

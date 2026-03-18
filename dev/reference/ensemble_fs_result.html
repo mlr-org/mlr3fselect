@@ -17,7 +17,7 @@ Both functions ensemble_fselect() and embedded_ensemble_fselect() return an obje
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@ It includes methods for evaluating the stability of the feature selection proces
 
 <ul><li><p><code>as.data.table.EnsembleFSResult(x, benchmark_result = TRUE)</code><br>
 Returns a tabular view of the ensemble feature selection.<br>
-EnsembleFSResult -&gt; <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code><br></p><ul><li><p><code>x</code> (EnsembleFSResult)</p></li>
+EnsembleFSResult -&gt; <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code><br></p><ul><li><p><code>x</code> (EnsembleFSResult)</p></li>
 <li><p><code>benchmark_result</code> (<code>logical(1)</code>)<br>
 Whether to add the learner, task and resampling information from the benchmark result.</p></li>
 </ul></li>
@@ -102,7 +102,7 @@ Manual page for this object.</p></dd>
     <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
     <p></p><div class="r6-active-bindings"><dl><dt><code>result</code></dt>
-<dd><p>(<a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a>)<br>
+<dd><p>(<a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a>)<br>
 Returns the result of the ensemble feature selection.</p></dd>
 
 
@@ -165,7 +165,7 @@ Returns the number of times the task was initially resampled in the ensemble fea
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>result</code></dt>
-<dd><p>(<a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a>)<br>
+<dd><p>(<a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a>)<br>
 The result of the ensemble feature selection.
 Mandatory column names should include <code>"resampling_iteration"</code>, <code>"learner_id"</code>,
 <code>"features"</code> and <code>"n_features"</code>.
@@ -354,7 +354,7 @@ Users should set the same <code>seed</code> for consistent comparison between th
 
 <div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A <a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a> listing all the features, ordered by decreasing scores (depends on the <code>"method"</code>). Columns are as follows:</p><ul><li><p><code>"feature"</code>: Feature names.</p></li>
+<p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> listing all the features, ordered by decreasing scores (depends on the <code>"method"</code>). Columns are as follows:</p><ul><li><p><code>"feature"</code>: Feature names.</p></li>
 <li><p><code>"score"</code>: Scores assigned to each feature based on the selected method (if applicable).</p></li>
 <li><p><code>"norm_score"</code>: Normalized scores (if applicable), scaled to the range \([0,1]\), which can be loosely interpreted as <strong>selection probabilities</strong> (Meinshausen et al. (2010)).</p></li>
 <li><p><code>"borda_score"</code>: Borda scores for method-agnostic comparison, ranging in \([0,1]\), where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
@@ -444,7 +444,7 @@ If <code>max_nfeatures</code> is not provided, it defaults to the maximum number
 
 <div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
-<p>A <a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a> with columns the number of features and the performance that together form the Pareto front.</p>
+<p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> with columns the number of features and the performance that together form the Pareto front.</p>
 </div>
 
 </div><p></p><hr><a id="method-EnsembleFSResult-knee_points"></a><div class="section">
@@ -490,7 +490,7 @@ The knee point is determined as the Pareto point with the maximum distance from 
 
 <div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>A <a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a> with the knee point(s) of the Pareto front.</p>
+<p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> with the knee point(s) of the Pareto front.</p>
 </div>
 
 </div><p></p><hr><a id="method-EnsembleFSResult-clone"></a><div class="section">
@@ -539,22 +539,22 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       learner_id resampling_iteration classif.acc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           &lt;char&gt;                &lt;int&gt;       &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       classif.rpart.fselector                    1   0.6811594</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       classif.rpart.fselector                    2   0.6811594</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.featureless.fselector                    1   0.4637681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       classif.rpart.fselector                    1   0.7101449</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:       classif.rpart.fselector                    2   0.7391304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: classif.featureless.fselector                    1   0.4782609</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4: classif.featureless.fselector                    2   0.5072464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       features n_features classif.ce_inner</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         &lt;list&gt;      &lt;int&gt;            &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          V10,V11,V12,V16,V9          5        0.2445267</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: V10,V11,V12,V13,V14,V15,...         19        0.2584027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                      V22,V8          2        0.4320074</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                     V21,V25          2        0.4526673</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   importance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       &lt;list&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:              5.000000,4.000000,2.666667,1.666667,1.666667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 15.66667,14.66667,13.00000,12.33333,12.00000,11.33333,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                                         1.666667,1.333333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                                       2,1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           features n_features classif.ce_inner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             &lt;list&gt;      &lt;int&gt;            &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: V10,V11,V12,V13,V14,V15,...[19]         19        0.1802344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: V10,V11,V12,V13,V15,V16,...[10]         10        0.2958680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                          V22,V8          2        0.4383287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                         V21,V25          2        0.4529756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             importance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                 &lt;list&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:       17.33333,16.33333,15.00000,14.00000,12.00000,10.66667,...[19]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 10.000000, 8.333333, 7.333333, 6.666667, 5.666667, 5.000000,...[10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                                                   1.666667,1.333333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                                                                 2,1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   task                                       learner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 &lt;list&gt;                                        &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;TaskClassif:sonar&gt;       &lt;AutoFSelector:classif.rpart.fselector&gt;</span>
@@ -570,26 +570,26 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns the stability of the selected features</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">stability</span><span class="op">(</span>stability_measure <span class="op">=</span> <span class="st">"jaccard"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04385965</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1008772</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns a ranking of all features</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">efsr</span><span class="op">$</span><span class="fu">feature_ranking</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    feature     score norm_score borda_score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;char&gt;     &lt;num&gt;      &lt;num&gt;       &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     V10 1.3623188  0.5838509   1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     V16 1.3623188  0.5838509   0.9830508</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     V11 1.3623188  0.5838509   0.9661017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      V9 1.3623188  0.5838509   0.9491525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:     V12 1.3623188  0.5838509   0.9322034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:     V46 0.6811594  0.2919255   0.9152542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    feature    score norm_score borda_score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;char&gt;    &lt;num&gt;      &lt;num&gt;       &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     V15 1.449275  0.5952381   1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     V10 1.449275  0.5952381   0.9830508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     V16 1.449275  0.5952381   0.9661017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:     V36 1.449275  0.5952381   0.9491525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:     V17 1.449275  0.5952381   0.9322034</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:     V11 1.449275  0.5952381   0.9152542</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns the empirical pareto front, i.e. n_features vs measure (error)</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">pareto_front</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    n_features classif.acc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;       &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2   0.4637681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2   0.4782609</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:          2   0.5072464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:          5   0.6811594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         10   0.7391304</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns the knee points (optimal trade-off between n_features and performance)</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">knee_points</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -604,9 +604,10 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">pareto_front</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    n_features classif.ce_inner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2        0.4526673</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:          2        0.4320074</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:          5        0.2445267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          2        0.4529756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:          2        0.4383287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         10        0.2958680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:         19        0.1802344</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -619,7 +620,7 @@ The knee point is determined as the Pareto point with the maximum distance from 
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
