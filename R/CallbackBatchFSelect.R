@@ -4,7 +4,8 @@
 #' Specialized [bbotk::CallbackBatch] for feature selection.
 #' Callbacks allow customizing the behavior of processes in mlr3fselect.
 #' The [callback_batch_fselect()] function creates a [CallbackBatchFSelect].
-#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved with [clbk()].
+#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved
+#' with [clbk()].
 #' For more information on callbacks see [callback_batch_fselect()].
 #'
 #' @examples
@@ -14,10 +15,10 @@
 #'     saveRDS(context$instance$archive, "archive.rds")
 #'   }
 #' )
-CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
+CallbackBatchFSelect = R6Class(
+  "CallbackBatchFSelect",
   inherit = CallbackBatch,
   public = list(
-
     #' @field on_eval_after_design (`function()`)\cr
     #'   Stage called after design is created.
     #'   Called in `ObjectiveFSelectBatch$eval_many()`.
@@ -36,7 +37,8 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
     #' @field on_auto_fselector_before_final_model (`function()`)\cr
     #' Stage called before the final model is trained.
     #' Called in `AutoFSelector$train()`.
-    #' This stage is called after the optimization has finished and the final model is trained with the best feature set found.
+    #' This stage is called after the optimization has finished and the final model is trained with the best feature set
+    #' found.
     on_auto_fselector_before_final_model = NULL,
 
     #' @field on_auto_fselector_after_final_model (`function()`)\cr
@@ -51,7 +53,8 @@ CallbackBatchFSelect = R6Class("CallbackBatchFSelect",
 #'
 #' @description
 #' Function to create a [CallbackBatchFSelect].
-#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved with [clbk()].
+#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved
+#' with [clbk()].
 #'
 #' Feature selection callbacks can be called from different stages of feature selection.
 #' The stages are prefixed with `on_*`.
@@ -138,31 +141,40 @@ callback_batch_fselect = function(
   on_optimizer_after_eval = NULL,
   on_result = NULL,
   on_optimization_end = NULL,
+  #nolint next: object_length_linter.
   on_auto_fselector_before_final_model = NULL,
+  #nolint next: object_length_linter.
   on_auto_fselector_after_final_model = NULL
-  ) {
-  stages = discard(set_names(list(
-    on_optimization_begin,
-    on_optimizer_before_eval,
-    on_eval_after_design,
-    on_eval_after_benchmark,
-    on_eval_before_archive,
-    on_optimizer_after_eval,
-    on_result,
-    on_optimization_end,
-    on_auto_fselector_before_final_model,
-    on_auto_fselector_after_final_model),
-    c(
-      "on_optimization_begin",
-      "on_optimizer_before_eval",
-      "on_eval_after_design",
-      "on_eval_after_benchmark",
-      "on_eval_before_archive",
-      "on_optimizer_after_eval",
-      "on_result",
-      "on_optimization_end",
-      "on_auto_fselector_before_final_model",
-      "on_auto_fselector_after_final_model")), is.null)
+) {
+  stages = discard(
+    set_names(
+      list(
+        on_optimization_begin,
+        on_optimizer_before_eval,
+        on_eval_after_design,
+        on_eval_after_benchmark,
+        on_eval_before_archive,
+        on_optimizer_after_eval,
+        on_result,
+        on_optimization_end,
+        on_auto_fselector_before_final_model,
+        on_auto_fselector_after_final_model
+      ),
+      c(
+        "on_optimization_begin",
+        "on_optimizer_before_eval",
+        "on_eval_after_design",
+        "on_eval_after_benchmark",
+        "on_eval_before_archive",
+        "on_optimizer_after_eval",
+        "on_result",
+        "on_optimization_end",
+        "on_auto_fselector_before_final_model",
+        "on_auto_fselector_after_final_model"
+      )
+    ),
+    is.null
+  )
   walk(stages, function(stage) assert_function(stage, args = c("callback", "context")))
   callback = CallbackBatchFSelect$new(id, label, man)
   iwalk(stages, function(stage, name) callback[[name]] = stage)

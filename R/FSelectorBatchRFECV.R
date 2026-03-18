@@ -6,17 +6,23 @@
 #' @description
 #' Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
 #' See [FSelectorBatchRFE] for a description of the base algorithm.
-#' RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
-#' Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
-#' The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
-#' Only works with [mlr3::Learner]s that can calculate importance scores (see the section on optional extractors in [mlr3::Learner]).
+#' RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number
+#' of features.
+#' Then a recursive feature elimination is run again on the complete dataset
+#' with the optimal number of features as the final feature set size.
+#' The performance of the optimal feature set is calculated on the complete data set
+#' and should not be reported as the performance of the final model.
+#' Only works with [mlr3::Learner]s that can calculate importance scores
+#' (see the section on optional extractors in [mlr3::Learner]).
 #'
 #' @details
 #' The resampling strategy is changed during the feature selection.
 #' The resampling strategy passed to the instance (`resampling`) is used to determine the optimal number of features.
-#' Usually, a cross-validation strategy is used and a recursive feature elimination is run in each iteration of the cross-validation.
+#' Usually, a cross-validation strategy is used
+#' and a recursive feature elimination is run in each iteration of the cross-validation.
 #' Internally, [mlr3::ResamplingCustom] is used to emulate this part of the algorithm.
-#' In the final recursive feature elimination run the resampling strategy is changed to [mlr3::ResamplingInsample] i.e. the complete data set is used for training and testing.
+#' In the final recursive feature elimination run the resampling strategy is changed to [mlr3::ResamplingInsample]
+#' i.e. the complete data set is used for training and testing.
 #'
 #' The feature selection terminates itself when the optimal number of features is reached.
 #' It is not necessary to set a termination criterion.
@@ -31,7 +37,9 @@
 #' @section Resources:
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'
-#' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
+#' * Utilize the built-in feature importance of models with
+#nolint next line_length_linter
+#'   [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
 #'
 #' @templateVar id rfe
 #' @template section_dictionary_fselectors
@@ -85,19 +93,19 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorBatchRFECV = R6Class("FSelectorBatchRFECV",
+FSelectorBatchRFECV = R6Class(
+  "FSelectorBatchRFECV",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        n_features       = p_int(lower = 1),
+        n_features = p_int(lower = 1),
         feature_fraction = p_dbl(lower = 0, upper = 1 - 1e-6, default = 0.5),
-        feature_number   = p_int(lower = 1),
-        subset_sizes     = p_uty(),
-        recursive        = p_lgl(default = TRUE)
+        feature_number = p_int(lower = 1),
+        subset_sizes = p_uty(),
+        recursive = p_lgl(default = TRUE)
       )
       ps$values = list(recursive = TRUE)
 
@@ -112,9 +120,12 @@ FSelectorBatchRFECV = R6Class("FSelectorBatchRFECV",
   ),
   private = list(
     .optimize = function(inst) {
-
       if ("importance" %nin% inst$objective$learner$properties) {
-        stopf("%s does not work with %s. Only learners that can calculate importance scores are supported.", format(self), format(inst$objective$learner))
+        stopf(
+          "%s does not work with %s. Only learners that can calculate importance scores are supported.",
+          format(self),
+          format(inst$objective$learner)
+        )
       }
 
       pars = self$param_set$values
@@ -126,7 +137,9 @@ FSelectorBatchRFECV = R6Class("FSelectorBatchRFECV",
       recursive = pars$recursive
       archive = inst$archive
 
-      if (is.null(n_features)) n_features = floor(n / 2)
+      if (is.null(n_features)) {
+        n_features = floor(n / 2)
+      }
 
       if (is.null(feature_fraction) && is.null(feature_number) && is.null(subset_sizes)) {
         feature_fraction = 0.5
@@ -164,7 +177,6 @@ FSelectorBatchRFECV = R6Class("FSelectorBatchRFECV",
       subsets = rfe_subsets(n, n_features, feature_number, subset_sizes, feature_fraction)
       rfe_workhorse(inst, subsets, recursive)
     },
-
 
     .assign_result = function(inst) {
       assert_multi_class(inst, c("FSelectInstanceBatchSingleCrit", "FSelectInstanceBatchMultiCrit"))

@@ -11,12 +11,16 @@
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
 #'
+#nolint next: line_length_linter.
 #' * Learn more about [fselectors](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#the-fselector-class).
 #'
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'
-#' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
-#' * Run a feature selection with [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
+#' * Utilize the built-in feature importance of models with
+#nolint next: line_length_linter.
+#'   [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
+#' * Run a feature selection with
+#'   [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
 #'
 #' @family FSelector
 #' @template field_id
@@ -29,9 +33,9 @@
 #' @template param_man
 #'
 #' @export
-FSelector = R6Class("FSelector",
+FSelector = R6Class(
+  "FSelector",
   public = list(
-
     id = NULL,
 
     #' @description
@@ -43,7 +47,7 @@ FSelector = R6Class("FSelector",
       packages = character(),
       label = NA_character_,
       man = NA_character_
-      ) {
+    ) {
       self$id = assert_string(id, min.chars = 1L)
       private$.param_set = assert_param_set(param_set)
       private$.properties = assert_subset(properties, bbotk_reflections$optimizer_properties, empty.ok = FALSE)
@@ -51,7 +55,10 @@ FSelector = R6Class("FSelector",
       private$.label = assert_string(label, na.ok = TRUE)
       private$.man = assert_string(man, na.ok = TRUE)
 
-      check_packages_installed(self$packages, msg = sprintf("Package '%%s' required but not installed for FSelector '%s'", format(self)))
+      check_packages_installed(
+        self$packages,
+        msg = sprintf("Package '%%s' required but not installed for FSelector '%s'", format(self))
+      )
     },
 
     #' @description
@@ -85,7 +92,6 @@ FSelector = R6Class("FSelector",
   ),
 
   active = list(
-
     #' @field param_set [paradox::ParamSet]\cr
     #' Set of control parameters.
     param_set = function(rhs) {

@@ -22,7 +22,8 @@ test_that("FSelectorAsyncDesignPoints works", {
     x1 = c(TRUE, FALSE),
     x2 = c(TRUE, FALSE),
     x3 = c(FALSE, TRUE),
-    x4 = c(FALSE, TRUE))
+    x4 = c(FALSE, TRUE)
+  )
 
   fselector = fs("async_design_points", design = design)
   expect_data_table(fselector$optimize(instance), nrows = 1)

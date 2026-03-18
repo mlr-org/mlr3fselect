@@ -9,7 +9,8 @@
 #' @details
 #' The feature sets are randomly drawn.
 #' The sets are evaluated in batches of size `batch_size`.
-#' Larger batches mean we can parallelize more, smaller batches imply a more fine-grained checking of termination criteria.
+#' Larger batches mean we can parallelize more,
+#' smaller batches imply a more fine-grained checking of termination criteria.
 #'
 #' @templateVar id random_search
 #' @template section_dictionary_fselectors
@@ -56,10 +57,10 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorBatchRandomSearch = R6Class("FSelectorBatchRandomSearch",
+FSelectorBatchRandomSearch = R6Class(
+  "FSelectorBatchRandomSearch",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {

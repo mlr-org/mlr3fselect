@@ -89,14 +89,17 @@ test_that("learner without importance method throw an error", {
   learner = lrn("classif.rpart")
   learner$properties = setdiff(learner$properties, "importance")
 
-  expect_error(fselect(
-    fselector = fs("rfe"),
-    task = tsk("pima"),
-    learner = learner,
-    resampling = rsmp("holdout"),
-    measures = msr("classif.ce"),
-    store_models = TRUE
-  ), "does not work with")
+  expect_error(
+    fselect(
+      fselector = fs("rfe"),
+      task = tsk("pima"),
+      learner = learner,
+      resampling = rsmp("holdout"),
+      measures = msr("classif.ce"),
+      store_models = TRUE
+    ),
+    "does not work with"
+  )
 })
 
 test_that("fix_importance function works", {
@@ -198,8 +201,9 @@ test_that("works without storing models", {
 #})
 
 test_that("optimal features are selected with rank", {
-
-  LearnerRegrDebugImportance = R6Class("LearnerRegrDebugImportance", inherit = LearnerRegrDebug,
+  LearnerRegrDebugImportance = R6Class(
+    "LearnerRegrDebugImportance",
+    inherit = LearnerRegrDebug,
     public = list(
       importance = function() {
         c(x2 = 1.4, x1 = 0.8, x3 = 1.2, x4 = 1.1)
@@ -216,7 +220,9 @@ test_that("optimal features are selected with rank", {
       c("x1", "x2", "x3", "x4"),
       c("x2", "x3", "x4"),
       c("x2", "x3"),
-      "x2"))
+      "x2"
+    )
+  )
 
   measure = msr("dummy", score_design = score_design)
 
@@ -255,8 +261,9 @@ test_that("optimal features are selected with rank", {
 })
 
 test_that("optimal features are selected with mean", {
-
-  LearnerRegrDebugImportance = R6Class("LearnerRegrDebugImportance", inherit = LearnerRegrDebug,
+  LearnerRegrDebugImportance = R6Class(
+    "LearnerRegrDebugImportance",
+    inherit = LearnerRegrDebug,
     public = list(
       importance = function() {
         c(x2 = 1.4, x1 = 0.8, x3 = 1.2, x4 = 1.1)
@@ -273,7 +280,9 @@ test_that("optimal features are selected with mean", {
       c("x1", "x2", "x3", "x4"),
       c("x2", "x3", "x4"),
       c("x2", "x3"),
-      "x2"))
+      "x2"
+    )
+  )
 
   measure = msr("dummy", score_design = score_design)
 

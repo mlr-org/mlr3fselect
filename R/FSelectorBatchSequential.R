@@ -7,8 +7,10 @@
 #' Feature selection using Sequential Search Algorithm.
 #'
 #' @details
-#' Sequential forward selection (`strategy = fsf`) extends the feature set in each iteration with the feature that increases the model's performance the most.
-#' Sequential backward selection (`strategy = fsb`) follows the same idea but starts with all features and removes features from the set.
+#' Sequential forward selection (`strategy = fsf`) extends the feature set in each iteration
+#' with the feature that increases the model's performance the most.
+#' Sequential backward selection (`strategy = fsb`) follows the same idea but starts with all features and removes
+#' features from the set.
 #'
 #' The feature selection terminates itself when `min_features` or `max_features` is reached.
 #' It is not necessary to set a termination criterion.
@@ -29,10 +31,10 @@
 #' @family FSelector
 #' @export
 #' @template example
-FSelectorBatchSequential = R6Class("FSelectorBatchSequential",
+FSelectorBatchSequential = R6Class(
+  "FSelectorBatchSequential",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.`
     initialize = function() {
@@ -73,7 +75,6 @@ FSelectorBatchSequential = R6Class("FSelectorBatchSequential",
   ),
   private = list(
     .optimize = function(inst) {
-
       pars = self$param_set$values
       archive = inst$archive
       feature_names = inst$archive$cols_x
@@ -83,7 +84,7 @@ FSelectorBatchSequential = R6Class("FSelectorBatchSequential",
       }
 
       # Initialize states for first batch
-      m  = if (self$param_set$values$strategy == "sfs") pars$min_features else pars$max_features
+      m = if (self$param_set$values$strategy == "sfs") pars$min_features else pars$max_features
       combinations = combn(length(feature_names), m)
       states = map_dtr(seq_len(ncol(combinations)), function(j) {
         state = rep(FALSE, length(feature_names))
@@ -93,27 +94,31 @@ FSelectorBatchSequential = R6Class("FSelectorBatchSequential",
 
       inst$eval_batch(states)
 
-      repeat({
-        if (archive$n_batch == pars$max_features - pars$min_features + 1) break
-
-        res = archive$best(batch = archive$n_batch)
-        best_state = as.logical(res[, feature_names, with = FALSE])
-
-        # Generate new states based on best feature set
-        x = ifelse(pars$strategy == "sfs", FALSE, TRUE)
-        y = ifelse(pars$strategy == "sfs", TRUE, FALSE)
-        z = if (pars$strategy == "sfs") !best_state else best_state
-
-        states = map_dtr(seq_along(best_state)[z], function(i) {
-          if (best_state[i] == x) {
-            new_state = best_state
-            new_state[i] = y
-            set_names(as.list(new_state), feature_names)
+      repeat {
+        ({
+          if (archive$n_batch == pars$max_features - pars$min_features + 1) {
+            break
           }
-        })
 
-        inst$eval_batch(states)
-      })
+          res = archive$best(batch = archive$n_batch)
+          best_state = as.logical(res[, feature_names, with = FALSE])
+
+          # Generate new states based on best feature set
+          x = ifelse(pars$strategy == "sfs", FALSE, TRUE)
+          y = ifelse(pars$strategy == "sfs", TRUE, FALSE)
+          z = if (pars$strategy == "sfs") !best_state else best_state
+
+          states = map_dtr(seq_along(best_state)[z], function(i) {
+            if (best_state[i] == x) {
+              new_state = best_state
+              new_state[i] = y
+              set_names(as.list(new_state), feature_names)
+            }
+          })
+
+          inst$eval_batch(states)
+        })
+      }
     }
   )
 )

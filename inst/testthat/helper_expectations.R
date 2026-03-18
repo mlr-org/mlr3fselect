@@ -1,7 +1,10 @@
 expect_fselector = function(fselector) {
-  expect_r6(fselector, "FSelector",
+  expect_r6(
+    fselector,
+    "FSelector",
     public = c("optimize", "param_set", "properties", "packages"),
-    private = c(".optimize", ".assign_result"))
+    private = c(".optimize", ".assign_result")
+  )
 }
 
 expect_best_features = function(res, features) {

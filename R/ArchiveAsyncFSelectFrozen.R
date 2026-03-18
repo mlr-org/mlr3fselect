@@ -12,10 +12,10 @@
 #'   Returns a tabular view of all performed function calls of the Objective.
 #'
 #' @export
-ArchiveAsyncFSelectFrozen = R6Class("ArchiveAsyncFSelectFrozen",
+ArchiveAsyncFSelectFrozen = R6Class(
+  "ArchiveAsyncFSelectFrozen",
   inherit = bbotk::ArchiveAsyncFrozen,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
@@ -85,15 +85,23 @@ ArchiveAsyncFSelectFrozen = R6Class("ArchiveAsyncFSelectFrozen",
     #' @param ... (ignored).
     print = function() {
       cat_cli(cli_h1("{.cls {class(self)[1L]}} with {.val {self$n_evals}} evaluations"))
-      print(as.data.table(self, unnest = NULL, exclude_columns = c(
-        "timestamp_xs",
-        "timestamp_ys",
-        "runtime_learners",
-        "resample_result",
-        "worker_id",
-        "keys",
-        "pid",
-        "state")), digits = 2)
+      print(
+        as.data.table(
+          self,
+          unnest = NULL,
+          exclude_columns = c(
+            "timestamp_xs",
+            "timestamp_ys",
+            "runtime_learners",
+            "resample_result",
+            "worker_id",
+            "keys",
+            "pid",
+            "state"
+          )
+        ),
+        digits = 2
+      )
     }
   ),
 
@@ -113,7 +121,9 @@ ArchiveAsyncFSelectFrozen = R6Class("ArchiveAsyncFSelectFrozen",
 #' @export
 as.data.table.ArchiveAsyncFSelectFrozen = function(x, ..., unnest = NULL, exclude_columns = NULL, measures = NULL) {
   data = copy(x$data)
-  if (!nrow(data)) return(data.table())
+  if (!nrow(data)) {
+    return(data.table())
+  }
 
   # unnest columns
   cols = intersect(unnest, names(data))

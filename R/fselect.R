@@ -4,14 +4,18 @@
 #'
 #' @description
 #' Function to optimize the features of a [mlr3::Learner].
-#' The function internally creates a [FSelectInstanceBatchSingleCrit] or [FSelectInstanceBatchMultiCrit] which describes the feature selection problem.
-#' It executes the feature selection with the [FSelector] (`fselector`) and returns the result with the feature selection instance (`$result`).
-#' The [ArchiveBatchFSelect] and [ArchiveAsyncFSelect] (`$archive`) stores all evaluated feature subsets and performance scores.
+#' The function internally creates a [FSelectInstanceBatchSingleCrit] or [FSelectInstanceBatchMultiCrit] which describes
+#' the feature selection problem.
+#' It executes the feature selection with the [FSelector] (`fselector`) and returns the result with the feature
+#' selection instance (`$result`).
+#' The [ArchiveBatchFSelect] and [ArchiveAsyncFSelect] (`$archive`) stores all evaluated feature subsets and
+#' performance scores.
 #'
 #' You can find an overview of all feature selectors on our [website](https://mlr-org.com/fselectors.html).
 #'
 #' @details
-#' The [mlr3::Task], [mlr3::Learner], [mlr3::Resampling], [mlr3::Measure] and [bbotk::Terminator] are used to construct a [FSelectInstanceBatchSingleCrit].
+#' The [mlr3::Task], [mlr3::Learner], [mlr3::Resampling], [mlr3::Measure]
+#' and [bbotk::Terminator] are used to construct a [FSelectInstanceBatchSingleCrit].
 #' If multiple performance [mlr3::Measure]s are supplied, a [FSelectInstanceBatchMultiCrit] is created.
 #' The parameter `term_evals` and `term_time` are shortcuts to create a [bbotk::Terminator].
 #' If both parameters are passed, a [bbotk::TerminatorCombo] is constructed.
@@ -24,7 +28,8 @@
 #' @inheritSection ArchiveBatchFSelect Analysis
 #'
 #' @param measures ([mlr3::Measure] or list of [mlr3::Measure])\cr
-#'   A single measure creates a [FSelectInstanceBatchSingleCrit] and multiple measures a [FSelectInstanceBatchMultiCrit].
+#'   A single measure creates a [FSelectInstanceBatchSingleCrit]
+#'   and multiple measures a [FSelectInstanceBatchMultiCrit].
 #'   If `NULL`, default measure is used.
 #'
 #' @return [FSelectInstanceBatchSingleCrit] | [FSelectInstanceBatchMultiCrit]
@@ -83,7 +88,7 @@ fselect = function(
   callbacks = NULL,
   ties_method = "least_features",
   rush = NULL
-  ) {
+) {
   assert_fselector(fselector)
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
@@ -140,7 +145,8 @@ fselect = function(
         store_benchmark_result = store_benchmark_result,
         store_models = store_models,
         check_values = check_values,
-        callbacks = callbacks)
+        callbacks = callbacks
+      )
     }
   }
   fselector$optimize(instance)

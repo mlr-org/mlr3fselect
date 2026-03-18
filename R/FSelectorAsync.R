@@ -6,7 +6,8 @@
 #' The [FSelectorAsync] implements the asynchronous optimization algorithm.
 #'
 #' @details
-#' [FSelectorAsync] is an abstract base class that implements the base functionality each asynchronous fselector must provide.
+#' [FSelectorAsync] is an abstract base class that implements the base functionality each asynchronous fselector must
+#' provide.
 #'
 #' @inheritSection FSelector Resources
 #'
@@ -18,13 +19,15 @@
 #' @template param_man
 #'
 #' @export
-FSelectorAsync = R6Class("FSelectorAsync",
+FSelectorAsync = R6Class(
+  "FSelectorAsync",
   inherit = FSelector,
   public = list(
-
     #' @description
-    #' Performs the feature selection on a [FSelectInstanceAsyncSingleCrit] or [FSelectInstanceAsyncMultiCrit] until termination.
-    #' The single evaluations will be written into the [ArchiveAsyncFSelect] that resides in the [FSelectInstanceAsyncSingleCrit]/[FSelectInstanceAsyncMultiCrit].
+    #' Performs the feature selection on a [FSelectInstanceAsyncSingleCrit] or
+    #' [FSelectInstanceAsyncMultiCrit] until termination.
+    #' The single evaluations will be written into the [ArchiveAsyncFSelect]
+    #' that resides in the [FSelectInstanceAsyncSingleCrit]/[FSelectInstanceAsyncMultiCrit].
     #' The result will be written into the instance object.
     #'
     #' @param inst ([FSelectInstanceAsyncSingleCrit] | [FSelectInstanceAsyncMultiCrit]).

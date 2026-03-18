@@ -28,21 +28,24 @@
 #' as.data.table(mlr_fselectors)
 #' mlr_fselectors$get("random_search")
 #' fs("random_search")
-mlr_fselectors = R6Class("DictionaryFSelector",
-  inherit = Dictionary,
-  cloneable = FALSE
-)$new()
+mlr_fselectors = R6Class("DictionaryFSelector", inherit = Dictionary, cloneable = FALSE)$new()
 
 #' @export
 as.data.table.DictionaryFSelector = function(x, ..., objects = FALSE) {
   assert_flag(objects)
 
-  setkeyv(map_dtr(x$keys(), function(key) {
-    t = withCallingHandlers(x$get(key),
-      packageNotFoundWarning = function(w) invokeRestart("muffleWarning"))
-    insert_named(
-      list(key = key, label = t$label, properties = list(t$properties), packages = list(t$packages)),
-      if (objects) list(object = list(t))
-    )
-  }, .fill = TRUE), "key")[]
+  setkeyv(
+    map_dtr(
+      x$keys(),
+      function(key) {
+        t = withCallingHandlers(x$get(key), packageNotFoundWarning = function(w) invokeRestart("muffleWarning"))
+        insert_named(
+          list(key = key, label = t$label, properties = list(t$properties), packages = list(t$packages)),
+          if (objects) list(object = list(t))
+        )
+      },
+      .fill = TRUE
+    ),
+    "key"
+  )[]
 }

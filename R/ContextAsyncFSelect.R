@@ -12,21 +12,21 @@
 #' @template param_fselector
 #'
 #' @export
-ContextAsyncFSelect = R6Class("ContextAsyncFSelect",
+ContextAsyncFSelect = R6Class(
+  "ContextAsyncFSelect",
   inherit = ContextAsync,
   public = list(
-
     #' @field auto_fselector ([AutoFSelector])\cr
     #' The [AutoFSelector] instance.
     auto_fselector = NULL
   ),
 
   active = list(
-
     #' @field xs_objective (`list()`)\cr
     #' The feature subset currently evaluated.
     xs_objective = function(rhs) {
       if (missing(rhs)) {
+        #nolint next: return_linter
         return(get_private(self$instance$objective)$.xs)
       } else {
         self$instance$objective$.__enclos_env__$private$.xs = rhs
@@ -37,6 +37,7 @@ ContextAsyncFSelect = R6Class("ContextAsyncFSelect",
     #' The resample result of the feature subset currently evaluated.
     resample_result = function(rhs) {
       if (missing(rhs)) {
+        #nolint next: return_linter
         return(get_private(self$instance$objective)$.resample_result)
       } else {
         self$instance$objective$.__enclos_env__$private$.resample_result = rhs
@@ -49,6 +50,7 @@ ContextAsyncFSelect = R6Class("ContextAsyncFSelect",
     #' A callback can add additional elements which are also written to the archive.
     aggregated_performance = function(rhs) {
       if (missing(rhs)) {
+        #nolint next: return_linter
         return(get_private(self$instance$objective)$.aggregated_performance)
       } else {
         self$instance$objective$.__enclos_env__$private$.aggregated_performance = rhs
@@ -59,6 +61,7 @@ ContextAsyncFSelect = R6Class("ContextAsyncFSelect",
     #' The feature set passed to `instance$assign_result()`.
     result_feature_set = function(rhs) {
       if (missing(rhs)) {
+        #nolint next: return_linter
         return(get_private(self$instance)$.result_feature_set)
       } else {
         self$instance$.__enclos_env__$private$.result_feature_set = rhs

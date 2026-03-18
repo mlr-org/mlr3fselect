@@ -2,7 +2,8 @@
 #'
 #' @description
 #' Stores the objective function that estimates the performance of feature subsets.
-#' This class is usually constructed internally by the [FSelectInstanceAsyncSingleCrit] or [FSelectInstanceAsyncMultiCrit].
+#' This class is usually constructed internally by the [FSelectInstanceAsyncSingleCrit] or
+#' [FSelectInstanceAsyncMultiCrit].
 #'
 #' @template param_task
 #' @template param_learner
@@ -14,7 +15,8 @@
 #' @template param_callbacks
 #'
 #' @export
-ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
+ObjectiveFSelectAsync = R6Class(
+  "ObjectiveFSelectAsync",
   inherit = ObjectiveFSelect,
   private = list(
     .eval = function(xs, resampling) {
@@ -32,13 +34,26 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
       lg$debug("Resampling feature subset")
 
       # resample feature subset
-      private$.resample_result = resample(self$task, self$learner, self$resampling, store_models = self$store_models, clone = character(0), callbacks = self$callbacks)
+      private$.resample_result = resample(
+        self$task,
+        self$learner,
+        self$resampling,
+        store_models = self$store_models,
+        clone = character(0),
+        callbacks = self$callbacks
+      )
       call_back("on_eval_after_resample", self$callbacks, self$context)
 
       lg$debug("Aggregating performance")
 
       # aggregate performance
-      private$.aggregated_performance = if (length(self$measures) == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures[[1]]$properties)) {
+      private$.aggregated_performance = if (
+        length(self$measures) == 1 &&
+          all(
+            c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin%
+              self$measures[[1]]$properties
+          )
+      ) {
         lg$debug("Fast aggregation on measure %s", self$measures[[1]]$id)
 
         as.list(faggregate(private$.resample_result, self$measures[[1]], conditions = FALSE))
@@ -51,16 +66,26 @@ ObjectiveFSelectAsync = R6Class("ObjectiveFSelectAsync",
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
       # add runtime, errors and warnings
-      warnings = sum(map_int(get_private(private$.resample_result)$.data$learner_states(), function(s) sum(s$log$class == "warning")))
-      errors = sum(map_int(get_private(private$.resample_result)$.data$learner_states(), function(s) sum(s$log$class == "error")))
+      warnings = sum(map_int(get_private(private$.resample_result)$.data$learner_states(), function(s) {
+        sum(s$log$class == "warning")
+      }))
+      errors = sum(map_int(get_private(private$.resample_result)$.data$learner_states(), function(s) {
+        sum(s$log$class == "error")
+      }))
       runtime_learners = extract_runtime(private$.resample_result)
 
-      private$.aggregated_performance = c(private$.aggregated_performance, list(runtime_learners = runtime_learners, warnings = warnings, errors = errors))
+      private$.aggregated_performance = c(
+        private$.aggregated_performance,
+        list(runtime_learners = runtime_learners, warnings = warnings, errors = errors)
+      )
 
       # add benchmark result and models
       if (self$store_benchmark_result) {
         lg$debug("Storing resample result")
-        private$.aggregated_performance = c(private$.aggregated_performance, list(resample_result = list(private$.resample_result)))
+        private$.aggregated_performance = c(
+          private$.aggregated_performance,
+          list(resample_result = list(private$.resample_result))
+        )
       }
 
       call_back("on_eval_before_archive", self$callbacks, self$context)

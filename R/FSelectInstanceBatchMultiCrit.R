@@ -4,7 +4,8 @@
 #'
 #' @description
 #' The [FSelectInstanceBatchMultiCrit] specifies a feature selection problem for a [FSelector].
-#' The function [fsi()] creates a [FSelectInstanceBatchMultiCrit] and the function [fselect()] creates an instance internally.
+#' The function [fsi()] creates a [FSelectInstanceBatchMultiCrit] and the function [fselect()] creates an instance
+#' internally.
 #'
 #' @inherit FSelectInstanceBatchSingleCrit details
 #' @inheritSection ArchiveBatchFSelect Analysis
@@ -12,6 +13,7 @@
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
 #'
+#nolint next: line_length_linter.
 #'  * Learn about [multi-objective optimization](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-multicrit-featsel).
 #'
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
@@ -55,10 +57,10 @@
 #' # Inspect all evaluated sets
 #' as.data.table(instance$archive)
 #' }
-FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
+FSelectInstanceBatchMultiCrit = R6Class(
+  "FSelectInstanceBatchMultiCrit",
   inherit = OptimInstanceBatchMultiCrit,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function(
@@ -71,12 +73,13 @@ FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
       store_models = FALSE,
       check_values = FALSE,
       callbacks = NULL
-      ) {
+    ) {
       # initialized specialized fselect archive and objective
       archive = ArchiveBatchFSelect$new(
         search_space = task_to_domain(assert_task(task)),
         codomain = measures_to_codomain(assert_measures(measures)),
-        check_values = check_values)
+        check_values = check_values
+      )
 
       objective = ObjectiveFSelectBatch$new(
         task = task,
@@ -87,7 +90,8 @@ FSelectInstanceBatchMultiCrit = R6Class("FSelectInstanceBatchMultiCrit",
         store_models = store_models,
         check_values = check_values,
         archive = archive,
-        callbacks = callbacks)
+        callbacks = callbacks
+      )
 
       super$initialize(objective, objective$domain, terminator, callbacks = callbacks)
 

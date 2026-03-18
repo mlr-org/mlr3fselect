@@ -19,7 +19,8 @@
 #'     Time stamp when the evaluation was logged into the archive.
 #'
 #' @section Analysis:
-#' For analyzing the feature selection results, it is recommended to pass the [ArchiveAsyncFSelect] to `as.data.table()`.
+#' For analyzing the feature selection results,
+#' it is recommended to pass the [ArchiveAsyncFSelect] to `as.data.table()`.
 #' The returned data table contains the [mlr3::ResampleResult] for each feature subset evaluation.
 #'
 #' @section S3 Methods:
@@ -40,10 +41,10 @@
 #' @template param_ties_method
 #'
 #' @export
-ArchiveAsyncFSelect = R6Class("ArchiveAsyncFSelect",
+ArchiveAsyncFSelect = R6Class(
+  "ArchiveAsyncFSelect",
   inherit = bbotk::ArchiveAsync,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
@@ -54,11 +55,12 @@ ArchiveAsyncFSelect = R6Class("ArchiveAsyncFSelect",
       codomain,
       rush,
       ties_method = "least_features"
-      ) {
+    ) {
       super$initialize(
         search_space = search_space,
         codomain = codomain,
-        rush = rush)
+        rush = rush
+      )
 
       private$.benchmark_result = BenchmarkResult$new()
       private$.ties_method = assert_choice(ties_method, c("least_features", "random"))
@@ -123,16 +125,24 @@ ArchiveAsyncFSelect = R6Class("ArchiveAsyncFSelect",
     #' @param ... (ignored).
     print = function() {
       cat_cli(cli_h1("{format(self)} with {.val {self$n_evals}} evaluations"))
-      print(as.data.table(self, unnest = NULL, exclude_columns = c(
-        "x_domain",
-        "timestamp_xs",
-        "timestamp_ys",
-        "runtime_learners",
-        "resample_result",
-        "worker_id",
-        "keys",
-        "pid",
-        "state")), digits = 2)
+      print(
+        as.data.table(
+          self,
+          unnest = NULL,
+          exclude_columns = c(
+            "x_domain",
+            "timestamp_xs",
+            "timestamp_ys",
+            "runtime_learners",
+            "resample_result",
+            "worker_id",
+            "keys",
+            "pid",
+            "state"
+          )
+        ),
+        digits = 2
+      )
     },
 
     #' @description
@@ -228,7 +238,9 @@ ArchiveAsyncFSelect = R6Class("ArchiveAsyncFSelect",
 #' @export
 as.data.table.ArchiveAsyncFSelect = function(x, ..., unnest = NULL, exclude_columns = NULL, measures = NULL) {
   data = x$data_with_state()
-  if (!nrow(data)) return(data.table())
+  if (!nrow(data)) {
+    return(data.table())
+  }
 
   # unnest columns
   cols = intersect(unnest, names(data))

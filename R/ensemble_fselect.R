@@ -4,31 +4,39 @@
 #'
 #' @description
 #' Ensemble feature selection using multiple learners.
-#' The ensemble feature selection method is designed to identify the most predictive features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+#' The ensemble feature selection method is designed to identify the most predictive features from a given dataset
+#' by leveraging multiple machine learning models and resampling techniques.
 #' Returns an [EnsembleFSResult].
 #'
 #' @details
-#' The method begins by applying an initial resampling technique specified by the user, to create **multiple subsamples** from the original dataset (train/test splits).
+#' The method begins by applying an initial resampling technique specified by the user,
+#' to create **multiple subsamples** from the original dataset (train/test splits).
 #' This resampling process helps in generating diverse subsets of data for robust feature selection.
 #'
-#' For each subsample (train set) generated in the previous step, the method performs **wrapped-based feature selection** ([auto_fselector]) using each provided learner, the given inner resampling method, inner performance measure and optimization algorithm.
-#' This process generates 1) the best feature subset and 2) a final trained model using these best features, for each combination of subsample and learner.
+#' For each subsample (train set) generated in the previous step, the method performs
+#' **wrapped-based feature selection** ([auto_fselector]) using each provided learner,
+#' the given inner resampling method, inner performance measure, and optimization algorithm.
+#' This process generates 1) the best feature subset and 2) a final trained model using these best features,
+#' for each combination of subsample and learner.
 #' The final models are then scored on their ability to predict on the resampled test sets.
 #'
 #' Results are stored in an [EnsembleFSResult].
 #'
-#' The result object also includes the performance scores calculated during the inner resampling of the training sets, using models with the best feature subsets.
+#' The result object also includes the performance scores calculated during the inner resampling of the training sets,
+#' using models with the best feature subsets.
 #' These scores are stored in a column named `{measure_id}_inner`.
 #'
 #' @note
 #' The **active measure** of performance is the one applied to the test sets.
-#' This is preferred, as inner resampling scores on the training sets are likely to be overestimated when using the final models.
+#' This is preferred, as inner resampling scores on the training sets are likely to be overestimated
+#' when using the final models.
 #' Users can change the active measure by using the `set_active_measure()` method of the [EnsembleFSResult].
 #'
 #' @param learners (list of [mlr3::Learner])\cr
 #'  The learners to be used for feature selection.
 #' @param init_resampling ([mlr3::Resampling])\cr
-#'  The initial resampling strategy of the data, from which each train set will be passed on to the [auto_fselector] to optimize the learners and perform feature selection.
+#'  The initial resampling strategy of the data, from which each train set will be passed on to the [auto_fselector]
+#'  to optimize the learners and perform feature selection.
 #'  Each test set will be used for prediction on the final models returned by [auto_fselector].
 #'  Can only be [mlr3::ResamplingSubsampling] or [mlr3::ResamplingBootstrap].
 #' @param inner_resampling ([mlr3::Resampling])\cr
@@ -80,7 +88,7 @@ ensemble_fselect = function(
   callbacks = NULL,
   store_benchmark_result = TRUE,
   store_models = FALSE
-  ) {
+) {
   assert_task(task)
   assert_learners(as_learners(learners), task = task)
   assert_resampling(init_resampling)
@@ -89,7 +97,9 @@ ensemble_fselect = function(
   assert_measure(inner_measure, task = task)
   assert_measure(measure, task = task)
   callbacks = map(callbacks, function(callbacks) assert_callbacks(as_callbacks(callbacks)))
-  if (length(callbacks)) assert_names(names(callbacks), subset.of = map_chr(learners, "id"))
+  if (length(callbacks)) {
+    assert_names(names(callbacks), subset.of = map_chr(learners, "id"))
+  }
   assert_flag(store_benchmark_result)
   assert_flag(store_models)
 

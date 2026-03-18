@@ -115,16 +115,23 @@ test_that("fast aggregation works", {
       measures = msr("classif.ce"),
       term_evals = 30,
       rush = rush
-  )})
+    )
+  })
 
-  expect_equal(instance$archive$data$classif.ce,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+  expect_equal(
+    instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce
+  )
 
-  expect_equal(instance$archive$data$errors,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+  expect_equal(
+    instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors
+  )
 
-  expect_equal(instance$archive$data$warnings,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+  expect_equal(
+    instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings
+  )
 
   ce_fast = instance$archive$data$classif.ce
 
@@ -146,17 +153,23 @@ test_that("fast aggregation works", {
       measures = msrs(c("classif.ce", "classif.acc")),
       term_evals = 30,
       rush = rush2
-  )})
+    )
+  })
 
-  expect_equal(instance$archive$data$classif.ce,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+  expect_equal(
+    instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce
+  )
 
-  expect_equal(instance$archive$data$errors,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+  expect_equal(
+    instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors
+  )
 
-  expect_equal(instance$archive$data$warnings,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
-
+  expect_equal(
+    instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings
+  )
 
   ce_slow = instance$archive$data$classif.ce
 
@@ -188,12 +201,18 @@ test_that("fast aggregation conditions work", {
     rush = rush
   )
 
-  expect_equal(instance$archive$data$classif.ce,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+  expect_equal(
+    instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce
+  )
 
-  expect_equal(instance$archive$data$errors,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+  expect_equal(
+    instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors
+  )
 
-  expect_equal(instance$archive$data$warnings,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+  expect_equal(
+    instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings
+  )
 })

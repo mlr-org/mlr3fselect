@@ -7,7 +7,8 @@
 #' The [ArchiveBatchFSelect] is a container around a [data.table::data.table()].
 #' Each row corresponds to a single evaluation of a feature set.
 #' See the section on Data Structure for more information.
-#' The archive stores additionally a [mlr3::BenchmarkResult] (`$benchmark_result`) that records the resampling experiments.
+#' The archive stores additionally a [mlr3::BenchmarkResult] (`$benchmark_result`) that records the resampling
+#' experiments.
 #' Each experiment corresponds to a single evaluation of a feature set.
 #' The table (`$data`) and the benchmark result (`$benchmark_result`) are linked by the `uhash` column.
 #' If the archive is passed to `as.data.table()`, both are joined automatically.
@@ -30,7 +31,8 @@
 #'
 #' @section Analysis:
 #' For analyzing the feature selection results, it is recommended to pass the archive to `as.data.table()`.
-#' The returned data table is joined with the benchmark result which adds the [mlr3::ResampleResult] for each feature set.
+#' The returned data table is joined with the benchmark result which adds the [mlr3::ResampleResult] for each feature
+#' set.
 #'
 #' The archive provides various getters (e.g. `$learners()`) to ease the access.
 #' All getters extract by position (`i`) or unique hash (`uhash`).
@@ -55,11 +57,11 @@
 #' @template param_ydt
 #'
 #' @export
-ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
+ArchiveBatchFSelect = R6Class(
+  "ArchiveBatchFSelect",
   inherit = ArchiveBatch,
 
   public = list(
-
     #' @field benchmark_result ([mlr3::BenchmarkResult])\cr
     #' Benchmark result.
     benchmark_result = NULL,
@@ -78,7 +80,7 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
       codomain,
       check_values = TRUE,
       ties_method = "least_features"
-      ) {
+    ) {
       super$initialize(search_space, codomain, check_values)
       self$ties_method = ties_method
 
@@ -124,9 +126,8 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
     },
 
     #' @description
-    #' Retrieve list of [mlr3::Prediction] objects of the i-th evaluation, by
-    #' position or by unique hash `uhash`. `i` and `uhash` are mutually
-    #' exclusive.
+    #' Retrieve list of [mlr3::Prediction] objects of the i-th evaluation, by position or by unique hash `uhash`.
+    #' `i` and `uhash` are mutually exclusive.
     #'
     #' @param i (`integer(1)`)\cr
     #' The iteration value to filter for.
@@ -156,7 +157,7 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
     #' @param ... (ignored).
     print = function() {
       cat_cli(cli_h1("{.cls {class(self)[1]}}"))
-      print(self$data[, setdiff(names(self$data), "uhash"), with = FALSE], digits=2)
+      print(self$data[, setdiff(names(self$data), "uhash"), with = FALSE], digits = 2)
     },
 
     #' @description
@@ -176,7 +177,9 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
     best = function(batch = NULL, ties_method = NULL) {
       ties_method = assert_choice(ties_method, c("least_features", "random"), null.ok = TRUE) %??% self$ties_method
       assert_subset(batch, seq_len(self$n_batch))
-      if (self$n_batch == 0L) return(data.table())
+      if (self$n_batch == 0L) {
+        return(data.table())
+      }
 
       tab = if (is.null(batch)) self$data else self$data[list(batch), , on = "batch_nr"]
 
@@ -200,7 +203,6 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
   ),
 
   active = list(
-
     #' @field ties_method (`character(1)`)\cr
     #' Method to handle ties.
     ties_method = function(rhs) {
@@ -220,9 +222,13 @@ ArchiveBatchFSelect = R6Class("ArchiveBatchFSelect",
 
 #' @export
 as.data.table.ArchiveBatchFSelect = function(x, ..., exclude_columns = "uhash", measures = NULL) {
-  if (nrow(x$data) == 0) return(data.table())
+  if (nrow(x$data) == 0) {
+    return(data.table())
+  }
   # default value for exclude_columns might be not present in archive
-  if (!x$benchmark_result$n_resample_results) exclude_columns = exclude_columns[exclude_columns %nin% "uhash"]
+  if (!x$benchmark_result$n_resample_results) {
+    exclude_columns = exclude_columns[exclude_columns %nin% "uhash"]
+  }
   cols_y_extra = NULL
   tab = copy(x$data)
 
@@ -238,7 +244,12 @@ as.data.table.ArchiveBatchFSelect = function(x, ..., exclude_columns = "uhash", 
       tab = cbind(tab, x$benchmark_result$aggregate(measures)[, cols_y_extra, with = FALSE])
     }
     # add resample results
-    tab = merge(tab, x$benchmark_result$resample_results[, c("uhash", "resample_result"), with = FALSE], by = "uhash", sort = FALSE)
+    tab = merge(
+      tab,
+      x$benchmark_result$resample_results[, c("uhash", "resample_result"), with = FALSE],
+      by = "uhash",
+      sort = FALSE
+    )
   }
   setcolorder(tab, c(x$cols_x, x$cols_y, cols_y_extra, "runtime_learners", "timestamp", "batch_nr"))
   assert_subset(exclude_columns, names(tab))

@@ -46,9 +46,10 @@ test_that("embedded efs works", {
 
   # data.table conversion
   tab = as.data.table(efsr)
-  expect_equal(names(tab), c("learner_id", "resampling_iteration", "classif.ce",
-                             "features", "n_features",
-                             "task", "learner", "resampling"))
+  expect_equal(
+    names(tab),
+    c("learner_id", "resampling_iteration", "classif.ce", "features", "n_features", "task", "learner", "resampling")
+  )
 
   # cannot change to use inner_measure
   expect_error(efsr$set_active_measure(which = "inner"), "No inner_measure was defined")

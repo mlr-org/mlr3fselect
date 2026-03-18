@@ -6,11 +6,18 @@ test_that("ObjectiveFSelectBatch", {
 
   archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
 
-  obj = ObjectiveFSelectBatch$new(task = task, learner = learner, resampling = resampling, measures = measures, archive = archive)
+  obj = ObjectiveFSelectBatch$new(
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = measures,
+    archive = archive
+  )
 
   xss = list(
     list("x1" = TRUE, "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
-    list("x1" = FALSE, "x2" = TRUE, "x3" = TRUE, "x4" = TRUE))
+    list("x1" = FALSE, "x2" = TRUE, "x3" = TRUE, "x4" = TRUE)
+  )
 
   z = obj$eval_many(xss)
   expect_data_table(z, nrows = 2, ncols = 5)
@@ -26,11 +33,18 @@ test_that("ObjectiveFSelectBatch works with multiple measures", {
   measures = msrs(c("regr.mse", "regr.rmse"))
 
   archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
-  obj = ObjectiveFSelectBatch$new(task = task, learner = learner, resampling = resampling, measures = measures, archive = archive)
+  obj = ObjectiveFSelectBatch$new(
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = measures,
+    archive = archive
+  )
 
   xss = list(
     list("x1" = TRUE, "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
-    list("x1" = FALSE, "x2" = TRUE, "x3" = TRUE, "x4" = TRUE))
+    list("x1" = FALSE, "x2" = TRUE, "x3" = TRUE, "x4" = TRUE)
+  )
 
   z = obj$eval_many(xss)
   expect_data_table(z, nrows = 2, ncols = 6)
@@ -43,13 +57,19 @@ test_that("ObjectiveFSelectBatch works with store_models", {
   measures = msr("dummy")
 
   archive = ArchiveBatchFSelect$new(search_space = task_to_domain(task), codomain = measures_to_codomain(measures))
-  obj = ObjectiveFSelectBatch$new(task = task, learner = learner,
-    resampling = resampling, measures = measures, archive = archive,
-    store_models = TRUE)
+  obj = ObjectiveFSelectBatch$new(
+    task = task,
+    learner = learner,
+    resampling = resampling,
+    measures = measures,
+    archive = archive,
+    store_models = TRUE
+  )
 
   xss = list(
     list("x1" = TRUE, "x2" = FALSE, "x3" = TRUE, "x4" = TRUE),
-    list("x1" = FALSE, "x2" = TRUE, "x3" = TRUE, "x4" = TRUE))
+    list("x1" = FALSE, "x2" = TRUE, "x3" = TRUE, "x4" = TRUE)
+  )
 
   z = obj$eval_many(xss)
   expect_class(obj$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
@@ -74,14 +94,20 @@ test_that("fast aggregation works", {
     )
   })
 
-  expect_equal(instance$archive$data$classif.ce,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+  expect_equal(
+    instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce
+  )
 
-  expect_equal(instance$archive$data$errors,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+  expect_equal(
+    instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors
+  )
 
-  expect_equal(instance$archive$data$warnings,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+  expect_equal(
+    instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings
+  )
 
   ce_fast = instance$archive$data$classif.ce
 
@@ -96,14 +122,20 @@ test_that("fast aggregation works", {
     )
   })
 
-  expect_equal(instance$archive$data$classif.ce,
-   instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+  expect_equal(
+    instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce
+  )
 
-  expect_equal(instance$archive$data$errors,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+  expect_equal(
+    instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors
+  )
 
-  expect_equal(instance$archive$data$warnings,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+  expect_equal(
+    instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings
+  )
 
   ce_slow = instance$archive$data$classif.ce
 
@@ -125,12 +157,18 @@ test_that("fast aggregation conditions work", {
     term_evals = 30
   )
 
-  expect_equal(instance$archive$data$classif.ce,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce)
+  expect_equal(
+    instance$archive$data$classif.ce,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"))$classif.ce
+  )
 
-  expect_equal(instance$archive$data$errors,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors)
+  expect_equal(
+    instance$archive$data$errors,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$errors
+  )
 
-  expect_equal(instance$archive$data$warnings,
-    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings)
+  expect_equal(
+    instance$archive$data$warnings,
+    instance$archive$benchmark_result$aggregate(msr("classif.ce"), conditions = TRUE)$warnings
+  )
 })

@@ -5,7 +5,8 @@ test_that("ArchiveBatchFSelect access methods work", {
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
-    term_evals = 4)
+    term_evals = 4
+  )
 
   # learner
   map(instance$archive$data$uhash, function(uhash) {
@@ -55,49 +56,193 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
-    term_evals = 4)
+    term_evals = 4
+  )
 
   # default
   tab = as.data.table(instance$archive)
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "runtime_learners", "timestamp", "batch_nr", "warnings", "errors", "features", "n_features", "resample_result"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "runtime_learners",
+      "timestamp",
+      "batch_nr",
+      "warnings",
+      "errors",
+      "features",
+      "n_features",
+      "resample_result"
+    )
+  )
 
   # extra measure
   tab = as.data.table(instance$archive, measures = msr("classif.acc"))
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "classif.acc", "runtime_learners", "timestamp", "batch_nr",  "warnings", "errors", "features", "n_features", "resample_result"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "classif.acc",
+      "runtime_learners",
+      "timestamp",
+      "batch_nr",
+      "warnings",
+      "errors",
+      "features",
+      "n_features",
+      "resample_result"
+    )
+  )
 
   # extra measures
   tab = as.data.table(instance$archive, measures = msrs(c("classif.acc", "classif.mcc")))
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "classif.acc", "classif.mcc", "runtime_learners", "timestamp", "batch_nr", "warnings", "errors", "features", "n_features", "resample_result"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "classif.acc",
+      "classif.mcc",
+      "runtime_learners",
+      "timestamp",
+      "batch_nr",
+      "warnings",
+      "errors",
+      "features",
+      "n_features",
+      "resample_result"
+    )
+  )
 
   # exclude column
   tab = as.data.table(instance$archive, exclude_columns = "timestamp")
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "runtime_learners", "batch_nr", "uhash", "warnings", "errors", "features", "n_features", "resample_result"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "runtime_learners",
+      "batch_nr",
+      "uhash",
+      "warnings",
+      "errors",
+      "features",
+      "n_features",
+      "resample_result"
+    )
+  )
 
   # exclude columns
   tab = as.data.table(instance$archive, exclude_columns = c("timestamp", "uhash"))
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "runtime_learners", "batch_nr",  "warnings", "errors", "features", "n_features", "resample_result"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "runtime_learners",
+      "batch_nr",
+      "warnings",
+      "errors",
+      "features",
+      "n_features",
+      "resample_result"
+    )
+  )
 
   # no exclude
   tab = as.data.table(instance$archive, exclude_columns = NULL)
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "runtime_learners", "timestamp", "batch_nr",  "uhash", "warnings", "errors", "features", "n_features", "resample_result"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "runtime_learners",
+      "timestamp",
+      "batch_nr",
+      "uhash",
+      "warnings",
+      "errors",
+      "features",
+      "n_features",
+      "resample_result"
+    )
+  )
 
   # no unnest
   tab = as.data.table(instance$archive, unnest = NULL)
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "runtime_learners", "timestamp", "batch_nr",  "warnings", "errors", "features", "n_features", "resample_result"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "runtime_learners",
+      "timestamp",
+      "batch_nr",
+      "warnings",
+      "errors",
+      "features",
+      "n_features",
+      "resample_result"
+    )
+  )
 
   # without benchmark result
   instance = FSelectInstanceBatchSingleCrit$new(
@@ -106,14 +251,34 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 4),
-    store_benchmark_result = FALSE)
+    store_benchmark_result = FALSE
+  )
   fselector = fs("random_search", batch_size = 4)
   fselector$optimize(instance)
 
   tab = as.data.table(instance$archive)
   expect_data_table(tab, nrows = 4)
-  expect_names(names(tab), must.include = c("age", "glucose", "insulin", "mass", "pedigree", "pregnant", "pressure", "triceps", "classif.ce",
-    "runtime_learners", "timestamp", "batch_nr", "warnings", "errors", "features", "n_features"))
+  expect_names(
+    names(tab),
+    must.include = c(
+      "age",
+      "glucose",
+      "insulin",
+      "mass",
+      "pedigree",
+      "pregnant",
+      "pressure",
+      "triceps",
+      "classif.ce",
+      "runtime_learners",
+      "timestamp",
+      "batch_nr",
+      "warnings",
+      "errors",
+      "features",
+      "n_features"
+    )
+  )
 
   # empty archive
   instance = FSelectInstanceBatchSingleCrit$new(
@@ -121,7 +286,8 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 4))
+    terminator = trm("evals", n_evals = 4)
+  )
 
   expect_data_table(as.data.table(instance$archive), nrows = 0, ncols = 0)
 
@@ -132,7 +298,8 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
-    term_evals = 10)
+    term_evals = 10
+  )
 
   tab = as.data.table(instance$archive)
   expect_equal(tab$batch_nr, 1:10)
@@ -140,11 +307,26 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
 
 test_that("global ties method works", {
   design = mlr3misc::rowwise_table(
-    ~x1,   ~x2,   ~x3,    ~x4,
-    FALSE, TRUE,  FALSE,  TRUE,
-    TRUE,  FALSE, FALSE,  TRUE,
-    TRUE,  FALSE, FALSE,  FALSE,
-    FALSE, TRUE,  FALSE,  FALSE
+    ~x1,
+    ~x2,
+    ~x3,
+    ~x4,
+    FALSE,
+    TRUE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE
   )
 
   score_design = data.table(
@@ -180,13 +362,27 @@ test_that("global ties method works", {
 })
 
 test_that("local ties method works when maximize measure", {
-
   design = mlr3misc::rowwise_table(
-    ~x1,   ~x2,   ~x3,    ~x4,
-    FALSE, TRUE,  FALSE,  TRUE,
-    TRUE,  FALSE, FALSE,  TRUE,
-    TRUE,  FALSE, FALSE,  FALSE,
-    FALSE, TRUE,  FALSE,  FALSE
+    ~x1,
+    ~x2,
+    ~x3,
+    ~x4,
+    FALSE,
+    TRUE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE
   )
 
   score_design = data.table(
@@ -208,13 +404,27 @@ test_that("local ties method works when maximize measure", {
 })
 
 test_that("local ties method works when minimize measure", {
-
   design = mlr3misc::rowwise_table(
-    ~x1,   ~x2,   ~x3,    ~x4,
-    TRUE,  FALSE, FALSE,  TRUE,
-    TRUE,  FALSE, FALSE,  FALSE,
-    FALSE, TRUE,  FALSE,  FALSE,
-    FALSE, TRUE,  FALSE,  TRUE
+    ~x1,
+    ~x2,
+    ~x3,
+    ~x4,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    FALSE,
+    TRUE
   )
 
   score_design = data.table(
@@ -236,13 +446,27 @@ test_that("local ties method works when minimize measure", {
 })
 
 test_that("local ties method works with batches", {
-
   design = mlr3misc::rowwise_table(
-    ~x1,   ~x2,   ~x3,    ~x4,
-    TRUE,  FALSE, FALSE,  TRUE,
-    TRUE,  FALSE, FALSE,  FALSE,
-    FALSE, TRUE,  TRUE,   FALSE,
-    FALSE, TRUE,  FALSE,  FALSE
+    ~x1,
+    ~x2,
+    ~x3,
+    ~x4,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE
   )
 
   score_design = data.table(
@@ -259,6 +483,12 @@ test_that("local ties method works with batches", {
     measures = measure
   )
 
-  expect_features(instance$archive$best(batch = c(1, 2), ties_method = "random")[, list(x1, x2, x3, x4)], must_include = "x1")
-  expect_features(instance$archive$best(batch = c(2, 3), ties_method = "least_features")[, list(x1, x2, x3, x4)], identical_to = "x1")
+  expect_features(
+    instance$archive$best(batch = c(1, 2), ties_method = "random")[, list(x1, x2, x3, x4)],
+    must_include = "x1"
+  )
+  expect_features(
+    instance$archive$best(batch = c(2, 3), ties_method = "least_features")[, list(x1, x2, x3, x4)],
+    identical_to = "x1"
+  )
 })

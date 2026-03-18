@@ -57,7 +57,7 @@ fselect_nested = function(
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features"
-  ) {
+) {
   assert_task(task)
   assert_resampling(inner_resampling)
   assert_resampling(outer_resampling)
@@ -74,7 +74,8 @@ fselect_nested = function(
     store_models = store_models,
     check_values = check_values,
     callbacks = callbacks,
-    ties_method = ties_method)
+    ties_method = ties_method
+  )
 
   resample(task, afs, outer_resampling, store_models = TRUE)
 }

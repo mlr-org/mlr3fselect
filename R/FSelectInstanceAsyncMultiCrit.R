@@ -4,7 +4,8 @@
 #'
 #' @description
 #' The `FSelectInstanceAsyncMultiCrit` specifies a feature selection problem for a [FSelectorAsync].
-#' The function [fsi_async()] creates a [FSelectInstanceAsyncMultiCrit] and the function [fselect()] creates an instance internally.
+#' The function [fsi_async()] creates a [FSelectInstanceAsyncMultiCrit] and the function [fselect()] creates an instance
+#' internally.
 #'
 #' @inheritSection FSelectInstanceBatchSingleCrit Default Measures
 #' @inheritSection ArchiveAsyncFSelect Analysis
@@ -25,10 +26,10 @@
 #' @template param_extra
 #'
 #' @export
-FSelectInstanceAsyncMultiCrit = R6Class("FSelectInstanceAsyncMultiCrit",
+FSelectInstanceAsyncMultiCrit = R6Class(
+  "FSelectInstanceAsyncMultiCrit",
   inherit = OptimInstanceAsyncMultiCrit,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function(
@@ -42,12 +43,14 @@ FSelectInstanceAsyncMultiCrit = R6Class("FSelectInstanceAsyncMultiCrit",
       check_values = FALSE,
       callbacks = NULL,
       rush = NULL
-      ) {
+    ) {
       require_namespaces("rush")
       learner = assert_learner(as_learner(learner, clone = TRUE))
       callbacks = assert_async_fselect_callbacks(as_callbacks(callbacks))
 
-      if (is.null(rush)) rush = rush::rsh()
+      if (is.null(rush)) {
+        rush = rush::rsh()
+      }
 
       # create codomain from measures
       measures = assert_measures(as_measures(measures, task_type = task$task_type), task = task, learner = learner)
@@ -70,7 +73,8 @@ FSelectInstanceAsyncMultiCrit = R6Class("FSelectInstanceAsyncMultiCrit",
         store_benchmark_result = store_benchmark_result,
         store_models = store_models,
         check_values = check_values,
-        callbacks = callbacks)
+        callbacks = callbacks
+      )
 
       super$initialize(
         objective = objective,
@@ -78,11 +82,13 @@ FSelectInstanceAsyncMultiCrit = R6Class("FSelectInstanceAsyncMultiCrit",
         terminator = terminator,
         callbacks = callbacks,
         archive = archive,
-        rush = rush)
+        rush = rush
+      )
     },
 
     #' @description
-    #' The [FSelectorAsync] object writes the best found points and estimated performance values here (probably the Pareto set / front).
+    #' The [FSelectorAsync] object writes the best found points and estimated performance values here
+    #' (probably the Pareto set / front).
     #' For internal use.
     #'
     #' @param ydt (`numeric()`)\cr

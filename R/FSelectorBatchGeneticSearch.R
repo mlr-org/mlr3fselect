@@ -18,20 +18,20 @@
 #' @family FSelector
 #' @export
 #' @template example
-FSelectorBatchGeneticSearch = R6Class("FSelectorBatchGeneticSearch",
+FSelectorBatchGeneticSearch = R6Class(
+  "FSelectorBatchGeneticSearch",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        suggestion     = p_uty(),
-        popSize        = p_int(lower = 5L, default = 200L),
+        suggestion = p_uty(),
+        popSize = p_int(lower = 5L, default = 200L),
         mutationChance = p_dbl(lower = 0, upper = 1),
-        elitism        = p_int(lower = 1L),
+        elitism = p_int(lower = 1L),
         zeroToOneRatio = p_int(lower = 1, default = 10L),
-        iters          = p_int(lower = 1, default = 100000L)
+        iters = p_int(lower = 1, default = 100000L)
       )
       ps$values$iters = 100000L
 
@@ -48,8 +48,12 @@ FSelectorBatchGeneticSearch = R6Class("FSelectorBatchGeneticSearch",
   private = list(
     .optimize = function(inst) {
       pars = self$param_set$values
-      if (is.null(pars$mutationChance)) pars$mutationChance = NA
-      if (is.null(pars$elitism)) pars$elitism = NA
+      if (is.null(pars$mutationChance)) {
+        pars$mutationChance = NA
+      }
+      if (is.null(pars$elitism)) {
+        pars$elitism = NA
+      }
       n = inst$objective$domain$length
 
       mlr3misc::invoke(genalg::rbga.bin, size = n, evalFunc = inst$objective_function, .args = pars)

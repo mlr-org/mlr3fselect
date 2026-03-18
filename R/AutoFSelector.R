@@ -5,10 +5,12 @@
 #' The [auto_fselector()] function creates an [AutoFSelector] object.
 #'
 #' @details
-#' The [AutoFSelector] is a [mlr3::Learner] which wraps another [mlr3::Learner] and performs the following steps during `$train()`:
+#' The [AutoFSelector] is a [mlr3::Learner] which wraps another [mlr3::Learner] and performs the following steps
+#' during `$train()`:
 #'
 #' 1. The wrapped (inner) learner is trained on the feature subsets via resampling.
-#'    The feature selection can be specified by providing a [FSelector], a [bbotk::Terminator], a [mlr3::Resampling] and a [mlr3::Measure].
+#'    The feature selection can be specified by providing a [FSelector], a [bbotk::Terminator], a [mlr3::Resampling],
+#'    and a [mlr3::Measure].
 #' 2. A final model is fit on the complete training data with the best-found feature subset.
 #'
 #' During `$predict()` the [AutoFSelector] just calls the predict method of the wrapped (inner) learner.
@@ -16,14 +18,17 @@
 #' @section Resources:
 #' There are several sections about feature selection in the [mlr3book](https://mlr3book.mlr-org.com).
 #'
-#' * Estimate Model Performance with [nested resampling](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect).
+#' * Estimate Model Performance with
+#'   [nested resampling](https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect).
 #'
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'
 #' @section Nested Resampling:
 #' Nested resampling can be performed by passing an [AutoFSelector] object to [mlr3::resample()] or [mlr3::benchmark()].
-#' To access the inner resampling results, set `store_fselect_instance = TRUE` and execute [mlr3::resample()] or [mlr3::benchmark()] with `store_models = TRUE` (see examples).
-#' The [mlr3::Resampling] passed to the [AutoFSelector] is meant to be the inner resampling, operating on the training set of an arbitrary outer resampling.
+#' To access the inner resampling results, set `store_fselect_instance = TRUE` and execute [mlr3::resample()] or
+#' [mlr3::benchmark()] with `store_models = TRUE` (see examples).
+#' The [mlr3::Resampling] passed to the [AutoFSelector] is meant to be the inner resampling,
+#' operating on the training set of an arbitrary outer resampling.
 #' For this reason it is not feasible to pass an instantiated [mlr3::Resampling] here.
 #'
 #' @template param_fselector
@@ -97,10 +102,10 @@
 #' # unbiased performance of the final model trained on the full data set
 #' rr$aggregate()
 #' }
-AutoFSelector = R6Class("AutoFSelector",
+AutoFSelector = R6Class(
+  "AutoFSelector",
   inherit = Learner,
   public = list(
-
     #' @field instance_args (`list()`)\cr
     #' All arguments from construction to create the [FSelectInstanceBatchSingleCrit].
     instance_args = NULL,
@@ -128,12 +133,14 @@ AutoFSelector = R6Class("AutoFSelector",
       ties_method = "least_features",
       rush = NULL,
       id = NULL
-      ) {
+    ) {
       ia = list()
       self$fselector = assert_r6(fselector, "FSelector")$clone()
       ia$learner = assert_learner(as_learner(learner, clone = TRUE))
       ia$resampling = assert_resampling(resampling, instantiated = FALSE)$clone()
-      if (!is.null(measure)) ia$measure = assert_measure(as_measure(measure), learner = learner)
+      if (!is.null(measure)) {
+        ia$measure = assert_measure(as_measure(measure), learner = learner)
+      }
       ia$terminator = assert_terminator(terminator)$clone()
 
       ia$store_models = assert_flag(store_models)
@@ -142,7 +149,9 @@ AutoFSelector = R6Class("AutoFSelector",
 
       ia$check_values = assert_flag(check_values)
       ia$callbacks = assert_callbacks(as_callbacks(callbacks))
-      if (!is.null(rush)) ia$rush = assert_class(rush, "Rush")
+      if (!is.null(rush)) {
+        ia$rush = assert_class(rush, "Rush")
+      }
       ia$ties_method = assert_choice(ties_method, c("least_features", "random"))
       self$instance_args = ia
 
@@ -237,7 +246,7 @@ AutoFSelector = R6Class("AutoFSelector",
     #' Printer.
     #' @param ... (ignored).
     print = function() {
-      msg_h =  if (is.null(self$label) || is.na(self$label)) "" else paste0(": ", self$label)
+      msg_h = if (is.null(self$label) || is.na(self$label)) "" else paste0(": ", self$label)
       model = if (is.null(self$model)) "-" else class(self$model)[1L]
 
       cat_cli({
@@ -261,7 +270,6 @@ AutoFSelector = R6Class("AutoFSelector",
   ),
 
   active = list(
-
     #' @field archive ([ArchiveBatchFSelect)\cr
     #' Returns [FSelectInstanceBatchSingleCrit] archive.
     archive = function() self$fselect_instance$archive,
@@ -297,9 +305,12 @@ AutoFSelector = R6Class("AutoFSelector",
       }
 
       # Catches 'Error: Field/Binding is read-only' bug
-      tryCatch({
-        self$model$learner$predict_type = rhs
-      }, error = function(cond){})
+      tryCatch(
+        {
+          self$model$learner$predict_type = rhs
+        },
+        error = function(cond) {}
+      )
 
       private$.predict_type = rhs
     },
@@ -308,11 +319,23 @@ AutoFSelector = R6Class("AutoFSelector",
     #' Hash (unique identifier) for this object.
     hash = function(rhs) {
       assert_ro_binding(rhs)
-      calculate_hash(class(self), self$id, self$param_set$values, private$.predict_type, self$fallback$hash, self$parallel_predict, self$fselector, self$instance_args, private$.store_fselect_instance)
+      calculate_hash(
+        class(self),
+        self$id,
+        self$param_set$values,
+        private$.predict_type,
+        self$fallback$hash,
+        self$parallel_predict,
+        self$fselector,
+        self$instance_args,
+        private$.store_fselect_instance
+      )
     },
 
     #' @field phash (`character(1)`)\cr
-    #' Hash (unique identifier) for this partial object, excluding some components which are varied systematically during tuning (parameter values) or feature selection (feature names).
+    #' Hash (unique identifier) for this partial object,
+    #' excluding some components which are varied systematically during tuning (parameter values)
+    #' or feature selection (feature names).
     phash = function(rhs) {
       assert_ro_binding(rhs)
       self$hash
@@ -329,18 +352,34 @@ AutoFSelector = R6Class("AutoFSelector",
       if (ia$resampling$is_instantiated) {
         imap(ia$resampling$instance$train, function(x, i) {
           if (!test_subset(x, task$row_ids)) {
-            stopf("Train set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}", i, ia$resampling$id, task$id, paste(setdiff(x, task$row_ids), collapse = ", "))
+            stopf(
+              "Train set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
+              i,
+              ia$resampling$id,
+              task$id,
+              paste(setdiff(x, task$row_ids), collapse = ", ")
+            )
           }
         })
 
         imap(ia$resampling$instance$test, function(x, i) {
           if (!test_subset(x, task$row_ids)) {
-            stopf("Test set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}", i, ia$resampling$id, task$id, paste(setdiff(x, task$row_ids), collapse = ", "))
+            stopf(
+              "Test set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
+              i,
+              ia$resampling$id,
+              task$id,
+              paste(setdiff(x, task$row_ids), collapse = ", ")
+            )
           }
         })
       }
 
-      FSelectInstance = if (inherits(self$fselector, "FSelectorAsync")) FSelectInstanceAsyncSingleCrit else FSelectInstanceBatchSingleCrit
+      FSelectInstance = if (inherits(self$fselector, "FSelectorAsync")) {
+        FSelectInstanceAsyncSingleCrit
+      } else {
+        FSelectInstanceBatchSingleCrit
+      }
       instance = do.call(FSelectInstance$new, args = ia)
 
       # optimize feature selection
@@ -366,7 +405,9 @@ AutoFSelector = R6Class("AutoFSelector",
 
       # the return model is a list of "learner", "features" and "fselect_instance"
       result_model = list(learner = learner, features = feat)
-      if (private$.store_fselect_instance) result_model$fselect_instance = instance
+      if (private$.store_fselect_instance) {
+        result_model$fselect_instance = instance
+      }
 
       result_model
     },

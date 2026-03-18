@@ -14,7 +14,8 @@ test_that("fsi_async function creates a FSelectInstanceAsyncSingleCrit", {
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
     terminator = trm("evals", n_evals = 2),
-    rush = rush)
+    rush = rush
+  )
   expect_class(instance, "FSelectInstanceAsyncSingleCrit")
 })
 
@@ -31,7 +32,8 @@ test_that("fsi_async function creates a FSelectInstanceAsyncMultiCrit", {
     resampling = rsmp("holdout"),
     measures = msrs(c("classif.ce", "classif.acc")),
     terminator = trm("evals", n_evals = 2),
-    rush = rush)
+    rush = rush
+  )
   expect_class(instance, "FSelectInstanceAsyncMultiCrit")
 })
 

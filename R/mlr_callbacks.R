@@ -21,16 +21,21 @@
 NULL
 
 load_callback_backup = function() {
-  callback_batch_fselect("mlr3fselect.backup",
+  callback_batch_fselect(
+    "mlr3fselect.backup",
     label = "Backup Benchmark Result Callback",
     man = "mlr3fselect::mlr3fselect.backup",
     on_optimization_begin = function(callback, context) {
-      if (is.null(callback$state$path)) callback$state$path = "bmr.rds"
+      if (is.null(callback$state$path)) {
+        callback$state$path = "bmr.rds"
+      }
       assert_path_for_output(callback$state$path)
     },
 
     on_optimizer_after_eval = function(callback, context) {
-      if (file.exists(callback$state$path)) unlink(callback$state$path)
+      if (file.exists(callback$state$path)) {
+        unlink(callback$state$path)
+      }
       saveRDS(context$instance$archive$benchmark_result, callback$state$path)
     }
   )
@@ -71,7 +76,8 @@ load_callback_backup = function() {
 NULL
 
 load_callback_svm_rfe = function() {
-  callback_batch_fselect("mlr3fselect.svm_rfe",
+  callback_batch_fselect(
+    "mlr3fselect.svm_rfe",
     label = "SVM-RFE Callback",
     man = "mlr3fselect::mlr3fselect.svm_rfe",
     on_optimization_begin = function(callback, context) {
@@ -84,7 +90,9 @@ load_callback_svm_rfe = function() {
         stop("Only SVMs with `type = 'C-classification'` and `kernel = 'linear'` are supported.")
       }
 
-      LearnerClassifSVMRFE = R6Class("LearnerClassifSVMRFE", inherit = mlr3learners::LearnerClassifSVM,
+      LearnerClassifSVMRFE = R6Class(
+        "LearnerClassifSVMRFE",
+        inherit = mlr3learners::LearnerClassifSVM,
         public = list(
           initialize = function() {
             super$initialize()
@@ -95,8 +103,9 @@ load_callback_svm_rfe = function() {
             w = t(self$model$coefs) %*% self$model$SV
             x = w * w
             sort(x[1, ], decreasing = TRUE)
-           }
-      ))
+          }
+        )
+      )
       learner_rfe = LearnerClassifSVMRFE$new()
       learner_rfe$param_set$values = params
       learner_rfe$id = learner$id
@@ -149,7 +158,8 @@ load_callback_svm_rfe = function() {
 NULL
 
 load_callback_one_se_rule = function() {
-  callback = callback_batch_fselect("mlr3fselect.one_se_rule",
+  callback = callback_batch_fselect(
+    "mlr3fselect.one_se_rule",
     label = "One Standard Error Rule Callback",
     man = "mlr3fselect::mlr3fselect.one_se_rule",
 
@@ -166,7 +176,7 @@ load_callback_one_se_rule = function() {
       if (se == 0) {
         # select smallest future set when all scores are the same
         context$instance$.__enclos_env__$private$.result =
-          data[,columns_to_keep, with = FALSE][which.min(n_features)]
+          data[, columns_to_keep, with = FALSE][which.min(n_features)]
       } else {
         # select smallest future set within one standard error of the best
         best_y = context$instance$result_y
@@ -192,16 +202,23 @@ load_callback_one_se_rule = function() {
 NULL
 
 load_callback_internal_tuning = function() {
-  callback_batch_fselect("mlr3fselect.internal_tuning",
+  callback_batch_fselect(
+    "mlr3fselect.internal_tuning",
     label = "Internal Tuning",
     man = "mlr3fselect::mlr3fselect.internal_tuning",
 
     on_eval_before_archive = function(callback, context) {
       # extract internal tuned values and aggregate folds
-      internal_tuned_values = mlr3misc::map(context$benchmark_result$resample_results$resample_result, function(resample_result) {
-        internal_tuned_values = mlr3misc::transpose_list(mlr3misc::map(mlr3misc::get_private(resample_result)$.data$learner_states(mlr3misc::get_private(resample_result)$.view), "internal_tuned_values"))
-        callback$state$internal_search_space$aggr_internal_tuned_values(internal_tuned_values)
-      })
+      internal_tuned_values = mlr3misc::map(
+        context$benchmark_result$resample_results$resample_result,
+        function(resample_result) {
+          internal_tuned_values = mlr3misc::transpose_list(mlr3misc::map(
+            mlr3misc::get_private(resample_result)$.data$learner_states(mlr3misc::get_private(resample_result)$.view),
+            "internal_tuned_values"
+          ))
+          callback$state$internal_search_space$aggr_internal_tuned_values(internal_tuned_values)
+        }
+      )
 
       data.table::set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
     },
@@ -235,14 +252,16 @@ load_callback_internal_tuning = function() {
 #' @name mlr3fselect.async_freeze_archive
 #'
 #' @description
-#' This [CallbackAsyncFSelect] freezes the [ArchiveAsyncFSelect] to [ArchiveAsyncFSelectFrozen] after the optimization has finished.
+#' This [CallbackAsyncFSelect] freezes the [ArchiveAsyncFSelect] to [ArchiveAsyncFSelectFrozen] after the optimization
+#' has finished.
 #'
 #' @examples
 #' clbk("mlr3fselect.async_freeze_archive")
 NULL
 
 load_callback_freeze_archive = function() {
-  callback_async_fselect("mlr3fselect.async_freeze_archive",
+  callback_async_fselect(
+    "mlr3fselect.async_freeze_archive",
     label = "Archive Freeze Callback",
     man = "mlr3fselect::mlr3fselect.async_freeze_archive",
     on_optimization_end = function(callback, context) {
