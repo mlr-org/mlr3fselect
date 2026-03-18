@@ -7,10 +7,11 @@
 #'
 #' @keywords internal
 #' @export
-FSelectorAsyncFromOptimizerAsync = R6Class("FSelectorAsyncFromOptimizerAsync",
+#nolint next: object_length_linter.
+FSelectorAsyncFromOptimizerAsync = R6Class(
+  "FSelectorAsyncFromOptimizerAsync",
   inherit = FSelectorAsync,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
@@ -33,9 +34,9 @@ FSelectorAsyncFromOptimizerAsync = R6Class("FSelectorAsyncFromOptimizerAsync",
 
     #' @description
     #' Performs the feature selection on a [FSelectInstanceAsyncSingleCrit] /
-    #' [FSelectInstanceAsyncMultiCrit] until termination. The single evaluations and
-    #' the final results will be written into the [ArchiveAsyncFSelect] that
-    #' resides in the [FSelectInstanceAsyncSingleCrit]/[FSelectInstanceAsyncMultiCrit].
+    #' [FSelectInstanceAsyncMultiCrit] until termination.
+    #' The single evaluations and the final results will be written into the [ArchiveAsyncFSelect]
+    #' that resides in the [FSelectInstanceAsyncSingleCrit]/[FSelectInstanceAsyncMultiCrit].
     #' The final result is returned.
     #'
     #' @param inst ([FSelectInstanceAsyncSingleCrit] | [FSelectInstanceAsyncMultiCrit]).
@@ -48,7 +49,6 @@ FSelectorAsyncFromOptimizerAsync = R6Class("FSelectorAsyncFromOptimizerAsync",
   ),
 
   active = list(
-
     #' @field param_set ([paradox::ParamSet])\cr
     #' Set of control parameters.
     param_set = function(rhs) {
@@ -63,5 +63,3 @@ FSelectorAsyncFromOptimizerAsync = R6Class("FSelectorAsyncFromOptimizerAsync",
     .optimizer = NULL
   )
 )
-
-

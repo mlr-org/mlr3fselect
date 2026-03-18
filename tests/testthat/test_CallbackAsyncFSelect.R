@@ -10,11 +10,9 @@ test_that("on_optimization_begin works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_optimization_begin = function(callback, context) {
-      context$instance$terminator$param_set$values$n_evals = 20
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_optimization_begin = function(callback, context) {
+    context$instance$terminator$param_set$values$n_evals = 20
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -24,7 +22,8 @@ test_that("on_optimization_begin works", {
     measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$terminator$param_set$values$n_evals, 20)
@@ -37,11 +36,9 @@ test_that("on_optimization_end works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_optimization_end = function(callback, context) {
-      context$instance$terminator$param_set$values$n_evals = 20
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_optimization_end = function(callback, context) {
+    context$instance$terminator$param_set$values$n_evals = 20
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -51,7 +48,8 @@ test_that("on_optimization_end works", {
     measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$terminator$param_set$values$n_evals, 20)
@@ -66,12 +64,10 @@ test_that("on_worker_begin works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_worker_begin = function(callback, context) {
-      instance = context$instance
-      mlr3misc::get_private(instance)$.eval_point(list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_worker_begin = function(callback, context) {
+    instance = context$instance
+    mlr3misc::get_private(instance)$.eval_point(list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -81,9 +77,13 @@ test_that("on_worker_begin works", {
     measures = msr("regr.mse"),
     term_evals = 1,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
-  expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE]))
+  expect_equal(
+    c(TRUE, FALSE, TRUE, FALSE),
+    as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE])
+  )
 })
 
 test_that("on_worker_end works", {
@@ -93,12 +93,10 @@ test_that("on_worker_end works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_worker_end = function(callback, context) {
-      instance = context$instance
-      mlr3misc::get_private(instance)$.eval_point(list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_worker_end = function(callback, context) {
+    instance = context$instance
+    mlr3misc::get_private(instance)$.eval_point(list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -108,9 +106,13 @@ test_that("on_worker_end works", {
     measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
-  expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[nrow(instance$archive$data), c("x1", "x2", "x3", "x4"), with = FALSE]))
+  expect_equal(
+    c(TRUE, FALSE, TRUE, FALSE),
+    as.logical(instance$archive$data[nrow(instance$archive$data), c("x1", "x2", "x3", "x4"), with = FALSE])
+  )
 })
 
 # stages in $.eval_point() -----------------------------------------------------
@@ -122,7 +124,8 @@ test_that("on_optimizer_before_eval and on_optimizer_after_eval works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
+  callback = callback_async_fselect(
+    id = "test",
     on_optimizer_before_eval = function(callback, context) {
       context$xs = list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
     },
@@ -140,9 +143,13 @@ test_that("on_optimizer_before_eval and on_optimizer_after_eval works", {
     measures = msr("regr.mse"),
     term_evals = 1,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
-  expect_equal(c(TRUE, FALSE, TRUE, FALSE), as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE]))
+  expect_equal(
+    c(TRUE, FALSE, TRUE, FALSE),
+    as.logical(instance$archive$data[, c("x1", "x2", "x3", "x4"), with = FALSE])
+  )
   expect_equal(0, instance$archive$data$regr.mse)
 })
 
@@ -155,11 +162,9 @@ test_that("on_eval_after_xs works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_eval_after_xs = function(callback, context) {
-      context$xs_objective = list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_eval_after_xs = function(callback, context) {
+    context$xs_objective = list(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -169,7 +174,8 @@ test_that("on_eval_after_xs works", {
     measures = msr("regr.mse"),
     term_evals = 1,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_equal(instance$archive$benchmark_result$resample_result(1)$learners[[1]]$state$feature_names, c("x1", "x3"))
 })
@@ -181,7 +187,8 @@ test_that("on_eval_after_resample works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
+  callback = callback_async_fselect(
+    id = "test",
     on_eval_after_resample = function(callback, context) {
       callback$state$extra_performance = context$resample_result$aggregate(msr("classif.acc"))
     },
@@ -199,7 +206,8 @@ test_that("on_eval_after_resample works", {
     measures = msr("classif.ce"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_names(names(instance$archive$data), must.include = c("classif.ce", "classif.acc"))
 })
@@ -213,12 +221,10 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_fselect_result_begin = function(callback, context) {
-      context$result_xdt = data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
-      context$result_y = c(regr.mse = 0.7)
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_fselect_result_begin = function(callback, context) {
+    context$result_xdt = data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
+    context$result_y = c(regr.mse = 0.7)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -228,7 +234,8 @@ test_that("on_fselect_result_begin in FSelectInstanceSingleCrit works", {
     measures = msr("regr.mse"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result_x_search_space, data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
@@ -242,11 +249,9 @@ test_that("on_result_end in FSelectInstanceSingleCrit works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_result_end = function(callback, context) {
-      context$result$classif.ce = 0.7
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_result_end = function(callback, context) {
+    context$result$classif.ce = 0.7
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -256,7 +261,8 @@ test_that("on_result_end in FSelectInstanceSingleCrit works", {
     measures = msr("classif.ce"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result$classif.ce, 0.7)
@@ -269,11 +275,14 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
     mirai::daemons(0)
   })
 
-  expect_warning({callback = callback_async_fselect(id = "test",
-    on_result = function(callback, context) {
-      context$result$classif.ce = 0.7
-    }
-  )}, "deprecated")
+  expect_warning(
+    {
+      callback = callback_async_fselect(id = "test", on_result = function(callback, context) {
+        context$result$classif.ce = 0.7
+      })
+    },
+    "deprecated"
+  )
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -283,7 +292,8 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
     measures = msr("classif.ce"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result$classif.ce, 0.7)
@@ -298,12 +308,10 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_fselect_result_begin = function(callback, context) {
-      context$result_xdt = data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
-      context$result_ydt = data.table(regr.mse = 0.7, regr.rmse = 0.8)
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_fselect_result_begin = function(callback, context) {
+    context$result_xdt = data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE)
+    context$result_ydt = data.table(regr.mse = 0.7, regr.rmse = 0.8)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -313,7 +321,8 @@ test_that("on_fselect_result_begin in FSelectInstanceBatchMultiCrit works", {
     measures = msrs(c("regr.mse", "regr.rmse")),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(instance$result_x_search_space, data.table(x1 = TRUE, x2 = FALSE, x3 = TRUE, x4 = FALSE))
@@ -327,11 +336,9 @@ test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect(id = "test",
-    on_result_end = function(callback, context) {
-      set(context$result, j = "classif.ce", value = 0.7)
-    }
-  )
+  callback = callback_async_fselect(id = "test", on_result_end = function(callback, context) {
+    set(context$result, j = "classif.ce", value = 0.7)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -341,7 +348,8 @@ test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
     measures = msrs(c("classif.ce", "classif.acc")),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(unique(instance$result$classif.ce), 0.7)
@@ -354,11 +362,14 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
     mirai::daemons(0)
   })
 
-  expect_warning({callback = callback_async_fselect(id = "test",
-    on_result = function(callback, context) {
-      set(context$result, j = "classif.ce", value = 0.7)
-    }
-  )}, "deprecated")
+  expect_warning(
+    {
+      callback = callback_async_fselect(id = "test", on_result = function(callback, context) {
+        set(context$result, j = "classif.ce", value = 0.7)
+      })
+    },
+    "deprecated"
+  )
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -368,7 +379,8 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
     measures = msrs(c("classif.ce", "classif.acc")),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
   expect_equal(unique(instance$result$classif.ce), 0.7)
@@ -383,17 +395,15 @@ test_that("on_resample_begin works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect("test",
-    on_resample_begin = function(callback, context) {
-      # expect_* does not work
-      assert_task(context$task)
-      assert_learner(context$learner)
-      assert_resampling(context$resampling)
-      checkmate::assert_number(context$iteration)
-      checkmate::assert_null(context$pdatas)
-      context$data_extra = list(success = TRUE)
-    }
-  )
+  callback = callback_async_fselect("test", on_resample_begin = function(callback, context) {
+    # expect_* does not work
+    assert_task(context$task)
+    assert_learner(context$learner)
+    assert_resampling(context$resampling)
+    checkmate::assert_number(context$iteration)
+    checkmate::assert_null(context$pdatas)
+    context$data_extra = list(success = TRUE)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -403,7 +413,8 @@ test_that("on_resample_begin works", {
     measures = msr("classif.ce"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 
@@ -419,16 +430,14 @@ test_that("on_resample_before_train works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect("test",
-    on_resample_before_train = function(callback, context) {
-      assert_task(context$task)
-      assert_learner(context$learner)
-      assert_resampling(context$resampling)
-      checkmate::assert_number(context$iteration)
-      checkmate::assert_null(context$pdatas)
-      context$data_extra = list(success = TRUE)
-    }
-  )
+  callback = callback_async_fselect("test", on_resample_before_train = function(callback, context) {
+    assert_task(context$task)
+    assert_learner(context$learner)
+    assert_resampling(context$resampling)
+    checkmate::assert_number(context$iteration)
+    checkmate::assert_null(context$pdatas)
+    context$data_extra = list(success = TRUE)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -438,7 +447,8 @@ test_that("on_resample_before_train works", {
     measures = msr("classif.ce"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 
@@ -454,15 +464,13 @@ test_that("on_resample_before_predict works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect("test",
-    on_resample_before_predict = function(callback, context) {
-      assert_task(context$task)
-      assert_learner(context$learner)
-      assert_resampling(context$resampling)
-      checkmate::assert_null(context$pdatas)
-      context$data_extra = list(success = TRUE)
-    }
-  )
+  callback = callback_async_fselect("test", on_resample_before_predict = function(callback, context) {
+    assert_task(context$task)
+    assert_learner(context$learner)
+    assert_resampling(context$resampling)
+    checkmate::assert_null(context$pdatas)
+    context$data_extra = list(success = TRUE)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -472,7 +480,8 @@ test_that("on_resample_before_predict works", {
     measures = msr("classif.ce"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 
@@ -488,18 +497,16 @@ test_that("on_resample_end works", {
     mirai::daemons(0)
   })
 
-  callback = callback_async_fselect("test",
-    on_resample_end = function(callback, context) {
-      # expect_* does not work
-      assert_task(context$task)
-      assert_learner(context$learner)
-      assert_resampling(context$resampling)
-      checkmate::assert_number(context$iteration)
-      checkmate::assert_class(context$pdatas$test, "PredictionData")
-      context$learner$state = mlr3misc::insert_named(context$learner$state, list(state_success = TRUE))
-      context$data_extra = list(success = TRUE)
-    }
-  )
+  callback = callback_async_fselect("test", on_resample_end = function(callback, context) {
+    # expect_* does not work
+    assert_task(context$task)
+    assert_learner(context$learner)
+    assert_resampling(context$resampling)
+    checkmate::assert_number(context$iteration)
+    checkmate::assert_class(context$pdatas$test, "PredictionData")
+    context$learner$state = mlr3misc::insert_named(context$learner$state, list(state_success = TRUE))
+    context$data_extra = list(success = TRUE)
+  })
 
   instance = fselect(
     fselector = fs("async_random_search"),
@@ -509,7 +516,8 @@ test_that("on_resample_end works", {
     measures = msr("classif.ce"),
     term_evals = 2,
     callbacks = callback,
-    rush = rush)
+    rush = rush
+  )
 
   expect_class(instance$objective$context, "ContextAsyncFSelect")
 

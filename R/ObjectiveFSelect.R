@@ -2,7 +2,8 @@
 #'
 #' @description
 #' Stores the objective function that estimates the performance of feature subsets.
-#' This class is usually constructed internally by the [FSelectInstanceBatchSingleCrit] / [FSelectInstanceBatchMultiCrit].
+#' This class is usually constructed internally by the [FSelectInstanceBatchSingleCrit] or
+#' [FSelectInstanceBatchMultiCrit].
 #'
 #' @template param_task
 #' @template param_learner
@@ -14,10 +15,10 @@
 #' @template param_callbacks
 #'
 #' @export
-ObjectiveFSelect = R6Class("ObjectiveFSelect",
+ObjectiveFSelect = R6Class(
+  "ObjectiveFSelect",
   inherit = Objective,
   public = list(
-
     #' @field task ([mlr3::Task]).
     task = NULL,
 
@@ -50,7 +51,7 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
       store_benchmark_result = TRUE,
       store_models = FALSE,
       callbacks = NULL
-      ) {
+    ) {
       self$task = assert_task(as_task(task, clone = TRUE))
       self$learner = assert_learner(as_learner(learner, clone = TRUE), task = self$task)
       self$measures = assert_measures(as_measures(measures, clone = TRUE), task = self$task, learner = self$learner)
@@ -64,11 +65,14 @@ ObjectiveFSelect = R6Class("ObjectiveFSelect",
         domain = task_to_domain(self$task),
         codomain = measures_to_codomain(self$measures),
         constants = ps(resampling = p_uty()),
-        check_values = check_values)
+        check_values = check_values
+      )
 
       # set resamplings in constants
       resampling = assert_resampling(as_resampling(resampling, clone = TRUE))
-      if (!resampling$is_instantiated) resampling$instantiate(task)
+      if (!resampling$is_instantiated) {
+        resampling$instantiate(task)
+      }
       self$resampling = resampling
       self$constants$values$resampling = list(resampling)
     }

@@ -3,7 +3,8 @@ test_that("default parameters work", {
     x1 = c(TRUE, FALSE),
     x2 = c(TRUE, FALSE),
     x3 = c(FALSE, TRUE),
-    x4 = c(FALSE, TRUE))
+    x4 = c(FALSE, TRUE)
+  )
 
   z = test_fselector("design_points", design = design)
   a = z$inst$archive$data
@@ -15,7 +16,8 @@ test_that("multi-crit works", {
     x1 = c(TRUE, FALSE),
     x2 = c(TRUE, FALSE),
     x3 = c(FALSE, TRUE),
-    x4 = c(FALSE, TRUE))
+    x4 = c(FALSE, TRUE)
+  )
 
   z = test_fselector_2D("design_points", design = design)
   a = z$inst$archive$data

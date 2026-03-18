@@ -33,31 +33,43 @@ assert_fselector_batch = function(fselector) {
 }
 
 #' @export
-#' @param inst ([FSelectInstanceBatchSingleCrit] | [FSelectInstanceBatchMultiCrit] | `FSelectInstanceAsyncSingleCrit` | `FSelectInstanceAsyncMultiCrit`).
+#' @param inst ([FSelectInstanceBatchSingleCrit] | [FSelectInstanceBatchMultiCrit] | `FSelectInstanceAsyncSingleCrit` |
+#'   `FSelectInstanceAsyncMultiCrit`).
 #' @rdname mlr3fselect_assertions
 assert_fselect_instance = function(inst) {
-  assert_multi_class(inst, c(
-    "FSelectInstanceBatchSingleCrit",
-    "FSelectInstanceBatchMultiCrit",
-    "FSelectInstanceAsyncSingleCrit",
-    "FSelectInstanceAsyncMultiCrit"))
+  assert_multi_class(
+    inst,
+    c(
+      "FSelectInstanceBatchSingleCrit",
+      "FSelectInstanceBatchMultiCrit",
+      "FSelectInstanceAsyncSingleCrit",
+      "FSelectInstanceAsyncMultiCrit"
+    )
+  )
 }
 
 #' @export
 #' @param inst (`FSelectInstanceAsyncSingleCrit` | `FSelectInstanceAsyncMultiCrit`).
 #' @rdname mlr3fselect_assertions
 assert_fselect_instance_async = function(inst) {
-  assert_multi_class(inst, c(
-    "FSelectInstanceAsyncSingleCrit",
-    "FSelectInstanceAsyncMultiCrit"))
+  assert_multi_class(
+    inst,
+    c(
+      "FSelectInstanceAsyncSingleCrit",
+      "FSelectInstanceAsyncMultiCrit"
+    )
+  )
 }
 
 #' @export
 #' @param inst ([FSelectInstanceBatchSingleCrit] | [FSelectInstanceBatchMultiCrit]).
 #' @rdname mlr3fselect_assertions
 assert_fselect_instance_batch = function(inst) {
-  assert_multi_class(inst, c(
-    "FSelectInstanceBatchSingleCrit",
-    "FSelectInstanceBatchMultiCrit"))
+  assert_multi_class(
+    inst,
+    c(
+      "FSelectInstanceBatchSingleCrit",
+      "FSelectInstanceBatchMultiCrit"
+    )
+  )
 }
-

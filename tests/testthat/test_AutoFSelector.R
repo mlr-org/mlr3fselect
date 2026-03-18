@@ -68,51 +68,93 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
   ms = msr("classif.ce")
   fselector = fs("random_search")
 
-  at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
-    fselector = fselector, store_fselect_instance = TRUE, store_benchmark_result = TRUE,
-    store_models = TRUE)
+  at = AutoFSelector$new(
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    ms,
+    te,
+    fselector = fselector,
+    store_fselect_instance = TRUE,
+    store_benchmark_result = TRUE,
+    store_models = TRUE
+  )
   at$train(task)
 
   expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
   expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
 
-  at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
-    fselector = fselector, store_fselect_instance = TRUE, store_benchmark_result = TRUE,
-    store_models = FALSE)
+  at = AutoFSelector$new(
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    ms,
+    te,
+    fselector = fselector,
+    store_fselect_instance = TRUE,
+    store_benchmark_result = TRUE,
+    store_models = FALSE
+  )
   at$train(task)
 
   expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
   expect_null(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model)
 
-  at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
-    fselector = fselector, store_fselect_instance = TRUE, store_benchmark_result = FALSE,
-    store_models = FALSE)
+  at = AutoFSelector$new(
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    ms,
+    te,
+    fselector = fselector,
+    store_fselect_instance = TRUE,
+    store_benchmark_result = FALSE,
+    store_models = FALSE
+  )
   at$train(task)
 
   expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_equal(at$fselect_instance$archive$benchmark_result$n_resample_results, 0L)
 
-  at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
-    fselector = fselector, store_fselect_instance = FALSE, store_benchmark_result = FALSE,
-    store_models = FALSE)
+  at = AutoFSelector$new(
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    ms,
+    te,
+    fselector = fselector,
+    store_fselect_instance = FALSE,
+    store_benchmark_result = FALSE,
+    store_models = FALSE
+  )
   at$train(task)
 
   expect_null(at$fselect_instance)
 
-  at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
-    fselector = fselector, store_fselect_instance = FALSE, store_benchmark_result = FALSE,
-    store_models = TRUE)
+  at = AutoFSelector$new(
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    ms,
+    te,
+    fselector = fselector,
+    store_fselect_instance = FALSE,
+    store_benchmark_result = FALSE,
+    store_models = TRUE
+  )
   at$train(task)
 
   expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
   expect_benchmark_result(at$fselect_instance$archive$benchmark_result)
   expect_class(at$fselect_instance$archive$benchmark_result$resample_result(1)$learners[[1]]$model, "rpart")
 
-  at = AutoFSelector$new(lrn("classif.rpart"), rsmp("holdout"), ms, te,
-    fselector = fselector, store_fselect_instance = FALSE, store_benchmark_result = TRUE,
-    store_models = FALSE)
+  at = AutoFSelector$new(
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    ms,
+    te,
+    fselector = fselector,
+    store_fselect_instance = FALSE,
+    store_benchmark_result = TRUE,
+    store_models = FALSE
+  )
   at$train(task)
 
   expect_r6(at$fselect_instance, "FSelectInstanceBatchSingleCrit")
@@ -125,7 +167,7 @@ test_that("AutoFSelector works with GraphLearner", {
   library("mlr3pipelines")
 
   task = TEST_MAKE_TSK()
-  graph =  po("imputemedian") %>>% lrn("regr.rpart")
+  graph = po("imputemedian") %>>% lrn("regr.rpart")
   learner = GraphLearner$new(graph)
   resampling = rsmp("holdout")
   measures = msr("dummy")
@@ -148,7 +190,7 @@ test_that("AutoFSelector works with GraphLearner", {
   expect_prediction(prd)
   expect_equal(at$model$features, "x1")
   # Check for clone
-  expect_equal(task$feature_names, c("x1", "x2", "x3" ,"x4"))
+  expect_equal(task$feature_names, c("x1", "x2", "x3", "x4"))
 })
 
 test_that("AutoFSelector get_base_learner method works", {
@@ -162,7 +204,8 @@ test_that("AutoFSelector get_base_learner method works", {
     learner = learner,
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 1))
+    terminator = trm("evals", n_evals = 1)
+  )
   afs$train(tsk("pima"))
 
   expect_learner(afs$base_learner())
@@ -178,7 +221,8 @@ test_that("AutoFSelector get_base_learner method works", {
     learner = learner,
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 1))
+    terminator = trm("evals", n_evals = 1)
+  )
   afs$train(tsk("pima"))
 
   expect_learner(afs$base_learner(recursive = 0))
@@ -195,7 +239,8 @@ test_that("AutoFSelector hash works #647 in mlr3", {
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 4),
     fselector = fs("random_search"),
-    store_benchmark_result = FALSE)
+    store_benchmark_result = FALSE
+  )
 
   afs_2 = AutoFSelector$new(
     id = "afs_2",
@@ -204,7 +249,8 @@ test_that("AutoFSelector hash works #647 in mlr3", {
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 4),
     fselector = fs("random_search"),
-    store_benchmark_result = TRUE)
+    store_benchmark_result = TRUE
+  )
 
   resampling_outer = rsmp("holdout")
   grid = benchmark_grid(tsk("iris"), list(afs_1, afs_2), resampling_outer)

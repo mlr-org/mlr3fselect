@@ -4,7 +4,8 @@
 #' Extract inner feature selection archives of nested resampling.
 #' Implemented for [mlr3::ResampleResult] and [mlr3::BenchmarkResult].
 #' The function iterates over the [AutoFSelector] objects and binds the archives to a [data.table::data.table()].
-#' [AutoFSelector] must be initialized with `store_fselect_instance = TRUE` and `resample()` or `benchmark()` must be called with `store_models = TRUE`.
+#' [AutoFSelector] must be initialized with `store_fselect_instance = TRUE` and `resample()` or `benchmark()`
+#' must be called with `store_models = TRUE`.
 #'
 #' @section Data structure:
 #'
@@ -17,9 +18,8 @@
 #' * One column for each feature of the task.
 #' * One column for each performance measure.
 #' * `runtime_learners` (`numeric(1)`)\cr
-#'   Sum of training and predict times logged in learners per
-#'   [mlr3::ResampleResult] / evaluation. This does not include potential
-#'   overhead time.
+#'   Sum of training and predict times logged in learners per [mlr3::ResampleResult] / evaluation.
+#'   This does not include potential overhead time.
 #' * `timestamp` (`POSIXct`)\cr
 #'   Time stamp when the evaluation was logged into the archive.
 #' * `batch_nr` (`integer(1)`)\cr
@@ -54,8 +54,8 @@
 #'
 #' # extract inner archives
 #' extract_inner_fselect_archives(rr)
-extract_inner_fselect_archives = function (x, exclude_columns = "uhash") {
-   UseMethod("extract_inner_fselect_archives")
+extract_inner_fselect_archives = function(x, exclude_columns = "uhash") {
+  UseMethod("extract_inner_fselect_archives")
 }
 
 #' @export
@@ -80,15 +80,23 @@ extract_inner_fselect_archives.ResampleResult = function(x, exclude_columns = "u
 #' @export
 extract_inner_fselect_archives.BenchmarkResult = function(x, exclude_columns = "uhash") {
   bmr = assert_benchmark_result(x)
-  tab = imap_dtr(bmr$resample_results$resample_result, function(rr, i) {
-     data = extract_inner_fselect_archives(rr, exclude_columns)
-     if (nrow(data) > 0) set(data, j = "experiment", value = i)
-  }, .fill = TRUE)
+  tab = imap_dtr(
+    bmr$resample_results$resample_result,
+    function(rr, i) {
+      data = extract_inner_fselect_archives(rr, exclude_columns)
+      if (nrow(data) > 0) set(data, j = "experiment", value = i)
+    },
+    .fill = TRUE
+  )
 
   if (nrow(tab) > 0) {
     # reorder dt
-    cols_x = unique(unlist(map(unique(tab$experiment), function(i) bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_x)))
-    cols_y = unique(unlist(map(unique(tab$experiment), function(i) bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_y)))
+    cols_x = unique(unlist(map(unique(tab$experiment), function(i) {
+      bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_x
+    })))
+    cols_y = unique(unlist(map(unique(tab$experiment), function(i) {
+      bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_y
+    })))
     setcolorder(tab, c("experiment", "iteration", cols_x, cols_y))
   }
   tab

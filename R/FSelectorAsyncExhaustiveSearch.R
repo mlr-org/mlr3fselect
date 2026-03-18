@@ -24,10 +24,10 @@
 #'
 #' @family FSelectorAsync
 #' @export
-FSelectorAsyncExhaustiveSearch = R6Class("FSelectorAsyncExhaustiveSearch",
+FSelectorAsyncExhaustiveSearch = R6Class(
+  "FSelectorAsyncExhaustiveSearch",
   inherit = FSelectorAsync,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
@@ -41,7 +41,8 @@ FSelectorAsyncExhaustiveSearch = R6Class("FSelectorAsyncExhaustiveSearch",
         properties = c("single-crit", "multi-crit", "async"),
         packages = "rush",
         label = "Asynchronous Exhaustive Search",
-        man = "mlr3fselect::mlr_fselectors_async_exhaustive_search")
+        man = "mlr3fselect::mlr_fselectors_async_exhaustive_search"
+      )
     },
 
     #' @description
@@ -59,9 +60,15 @@ FSelectorAsyncExhaustiveSearch = R6Class("FSelectorAsyncExhaustiveSearch",
         as.list(state)
       }
 
-      states = set_col_names(rbindlist(unlist(map(seq(pars$max_features %??% n_features), function(n) {
-        combn(n_features, n, fun, simplify = FALSE, state = logical(n_features))
-      }), recursive = FALSE)), feature_names)
+      states = set_col_names(
+        rbindlist(unlist(
+          map(seq(pars$max_features %??% n_features), function(n) {
+            combn(n_features, n, fun, simplify = FALSE, state = logical(n_features))
+          }),
+          recursive = FALSE
+        )),
+        feature_names
+      )
 
       optimize_async_default(inst, self, states)
     }

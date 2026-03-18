@@ -20,13 +20,22 @@ faggregate = function(obj, measure, conditions = FALSE) {
   tab = fscore(obj, measure, conditions = conditions)
   aggregator = measure$aggregator %??% mean
   if (conditions) {
-    set_names(tab[, list(
-     score = aggregator(get(measure$id)),
-     warnings = sum(warnings),
-     errors = sum(errors)),
-     by = "uhash"], c("uhash", measure$id, "warnings", "errors"))[, -c("uhash"), with = FALSE]
+    set_names(
+      tab[,
+        list(
+          score = aggregator(get(measure$id)),
+          warnings = sum(warnings),
+          errors = sum(errors)
+        ),
+        by = "uhash"
+      ],
+      c("uhash", measure$id, "warnings", "errors")
+    )[, -c("uhash"), with = FALSE]
   } else {
-    set_names(tab[, list(score = aggregator(get(measure$id))), by = "uhash"], c("uhash", measure$id))[, -c("uhash"), with = FALSE]
+    set_names(tab[, list(score = aggregator(get(measure$id))), by = "uhash"], c("uhash", measure$id))[,
+      -c("uhash"),
+      with = FALSE
+    ]
   }
 }
 
@@ -71,5 +80,9 @@ fscore_single_measure = function(prediction, measure) {
     return(NaN)
   }
 
-  get_private(measure)$.score(prediction = prediction, task = NULL, weights = if (measure$use_weights == "use") prediction$weights)
+  get_private(measure)$.score(
+    prediction = prediction,
+    task = NULL,
+    weights = if (measure$use_weights == "use") prediction$weights
+  )
 }

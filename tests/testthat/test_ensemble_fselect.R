@@ -61,9 +61,20 @@ test_that("efs works", {
 
   # data.table conversion
   tab = as.data.table(efsr)
-  expect_equal(names(tab), c("learner_id", "resampling_iteration", "classif.ce",
-                             "features", "n_features", "classif.ce_inner",
-                             "task", "learner", "resampling"))
+  expect_equal(
+    names(tab),
+    c(
+      "learner_id",
+      "resampling_iteration",
+      "classif.ce",
+      "features",
+      "n_features",
+      "classif.ce_inner",
+      "task",
+      "learner",
+      "resampling"
+    )
+  )
   # scores on train and test sets are different (even though same measure used)
   assert_true(all(tab$classif.ce != tab$classif.ce_inner))
 
@@ -157,9 +168,21 @@ test_that("efs works with rfe", {
 
   # data.table conversion
   tab = as.data.table(efsr)
-  expect_equal(names(tab), c("learner_id", "resampling_iteration", "classif.acc",
-                             "features", "n_features", "classif.ce_inner",
-                             "importance", "task", "learner", "resampling"))
+  expect_equal(
+    names(tab),
+    c(
+      "learner_id",
+      "resampling_iteration",
+      "classif.acc",
+      "features",
+      "n_features",
+      "classif.ce_inner",
+      "importance",
+      "task",
+      "learner",
+      "resampling"
+    )
+  )
 
   # default feature ranking
   skip_if_not_installed("fastVoteR")
@@ -171,8 +194,7 @@ test_that("efs works with rfe", {
 test_that("EnsembleFSResult initialization", {
   result = data.table(a = 1, b = 3)
   # `result` doesn't have mandatory columns
-  expect_error(EnsembleFSResult$new(result = result, features = LETTERS,
-                                    measure = msr("classif.ce")), "is missing")
+  expect_error(EnsembleFSResult$new(result = result, features = LETTERS, measure = msr("classif.ce")), "is missing")
 
   errors = c(0.13, 0.24, 0.16, 0.11, 0.25, 0.18, 0.15, 0.1, 0.16)
   result = data.table(
@@ -188,26 +210,46 @@ test_that("EnsembleFSResult initialization", {
       c("V11", "V18", "V9", "V2"),
       c("V2"),
       c("V4", "V12"),
-      c("V6", "V15", "V19", "V7")),
+      c("V6", "V15", "V19", "V7")
+    ),
     classif.ce = errors,
     classif.acc_inner = 1 - errors # inner measure has the `_inner` end-fix
   )
 
   # a feature set includes "V20" which is not included in input "features"
-  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:19), measure = msr("classif.ce")), "Must be a subset of")
+  expect_error(
+    EnsembleFSResult$new(result = result, features = paste0("V", 1:19), measure = msr("classif.ce")),
+    "Must be a subset of"
+  )
   # `inner_measure` is not a `Measure`
-  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
-                                    measure = msr("classif.ce"), inner_measure = "measure"))
+  expect_error(EnsembleFSResult$new(
+    result = result,
+    features = paste0("V", 1:20),
+    measure = msr("classif.ce"),
+    inner_measure = "measure"
+  ))
   # `inner_measure` id is not a column name in the `result`
-  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
-                                    measure = msr("classif.ce"), inner_measure = msr("classif.ce")))
+  expect_error(EnsembleFSResult$new(
+    result = result,
+    features = paste0("V", 1:20),
+    measure = msr("classif.ce"),
+    inner_measure = msr("classif.ce")
+  ))
   # both `inner_measure` and `measure` ids are missing from the `result`'s column names
-  expect_error(EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
-                                    measure = msr("classif.acc"), inner_measure = msr("classif.ce")))
+  expect_error(EnsembleFSResult$new(
+    result = result,
+    features = paste0("V", 1:20),
+    measure = msr("classif.acc"),
+    inner_measure = msr("classif.ce")
+  ))
 
   # works without benchmark result object
-  efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:20),
-                              measure = msr("classif.ce"), inner_measure = msr("classif.acc"))
+  efsr = EnsembleFSResult$new(
+    result = result,
+    features = paste0("V", 1:20),
+    measure = msr("classif.ce"),
+    inner_measure = msr("classif.acc")
+  )
   expect_class(efsr, "EnsembleFSResult")
   expect_equal(efsr$n_learners, 3)
   expect_equal(efsr$n_resamples, 3)
@@ -218,8 +260,10 @@ test_that("EnsembleFSResult initialization", {
   expect_equal(efsr$active_measure, "outer")
   tab = as.data.table(efsr)
   expect_data_table(tab)
-  expect_equal(names(tab), c("resampling_iteration", "learner_id", "n_features",
-                             "features", "classif.ce", "classif.acc_inner"))
+  expect_equal(
+    names(tab),
+    c("resampling_iteration", "learner_id", "n_features", "features", "classif.ce", "classif.acc_inner")
+  )
   # change active measure
   efsr$set_active_measure(which = "inner")
   expect_equal(efsr$active_measure, "inner")
@@ -340,11 +384,9 @@ test_that("combining EnsembleFSResult objects", {
 })
 
 test_that("different callbacks can be set", {
-  callback_test = callback_batch_fselect("mlr3fselect.test",
-    on_eval_before_archive = function(callback, context) {
-      context$aggregated_performance[, callback_active := context$instance$objective$learner$id == "classif.rpart"]
-    }
-  )
+  callback_test = callback_batch_fselect("mlr3fselect.test", on_eval_before_archive = function(callback, context) {
+    context$aggregated_performance[, callback_active := context$instance$objective$learner$id == "classif.rpart"]
+  })
 
   efsr = ensemble_fselect(
     fselector = fs("rfe", subset_sizes = c(60, 20, 10, 5)),

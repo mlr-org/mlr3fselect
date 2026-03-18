@@ -6,12 +6,14 @@
 #' @description
 #' Feature selection using the Recursive Feature Elimination (RFE) algorithm.
 #' Recursive feature elimination iteratively removes features with a low importance score.
-#' Only works with [mlr3::Learner]s that can calculate importance scores (see the section on optional extractors in [mlr3::Learner]).
+#' Only works with [mlr3::Learner]s that can calculate importance scores
+#' (see the section on optional extractors in [mlr3::Learner]).
 #'
 #' @details
 #' The learner is trained on all features at the start and importance scores are calculated for each feature.
 #' Then the least important feature is removed and the learner is trained on the reduced feature set.
-#' The importance scores are calculated again and the procedure is repeated until the desired number of features is reached.
+#' The importance scores are calculated again and the procedure is repeated until the desired number of features is
+#' reached.
 #' The non-recursive option (`recursive = FALSE`) only uses the importance scores calculated in the first iteration.
 #'
 #' The feature selection terminates itself when `n_features` is reached.
@@ -19,8 +21,10 @@
 #'
 #' When using a cross-validation resampling strategy, the importance scores of the resampling iterations are aggregated.
 #' The parameter `aggregation` determines how the importance scores are aggregated.
-#' By default (`"rank"`), the importance score vector of each fold is ranked and the feature with the lowest average rank is removed.
-#' The option `"mean"` averages the score of each feature across the resampling iterations and removes the feature with the lowest average score.
+#' By default (`"rank"`), the importance score vector of each fold is ranked and the feature with the lowest average
+#' rank is removed.
+#' The option `"mean"` averages the score of each feature across the resampling iterations and removes the feature
+#' with the lowest average score.
 #' Averaging the scores is not appropriate for most importance measures.
 #'
 #' @section Archive:
@@ -31,7 +35,9 @@
 #' @section Resources:
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'
-#' * Utilize the built-in feature importance of models with [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
+#' * Utilize the built-in feature importance of models with
+#nolint next line_length_linter
+#'   [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
 #'
 #' @templateVar id rfe
 #' @template section_dictionary_fselectors
@@ -91,20 +97,20 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorBatchRFE = R6Class("FSelectorBatchRFE",
+FSelectorBatchRFE = R6Class(
+  "FSelectorBatchRFE",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        n_features       = p_int(lower = 1),
+        n_features = p_int(lower = 1),
         feature_fraction = p_dbl(lower = 0, upper = 1 - 1e-6, default = 0.5),
-        feature_number   = p_int(lower = 1),
-        subset_sizes     = p_uty(),
-        recursive        = p_lgl(default = TRUE),
-        aggregation      = p_fct(c("mean", "rank"), default = "rank")
+        feature_number = p_int(lower = 1),
+        subset_sizes = p_uty(),
+        recursive = p_lgl(default = TRUE),
+        aggregation = p_fct(c("mean", "rank"), default = "rank")
       )
       ps$values = list(recursive = TRUE, aggregation = "rank")
 
@@ -119,9 +125,12 @@ FSelectorBatchRFE = R6Class("FSelectorBatchRFE",
   ),
   private = list(
     .optimize = function(inst) {
-
       if ("importance" %nin% inst$objective$learner$properties) {
-        stopf("%s does not work with %s. Only learners that can calculate importance scores are supported.", format(self), format(inst$objective$learner))
+        stopf(
+          "%s does not work with %s. Only learners that can calculate importance scores are supported.",
+          format(self),
+          format(inst$objective$learner)
+        )
       }
 
       pars = self$param_set$values
@@ -133,12 +142,11 @@ FSelectorBatchRFE = R6Class("FSelectorBatchRFE",
       feature_number = pars$feature_number
       subset_sizes = pars$subset_sizes
       recursive = pars$recursive
-      aggregation = switch(pars$aggregation,
-        "mean" = average_importance,
-        "rank" = rank_importance
-      )
+      aggregation = switch(pars$aggregation, "mean" = average_importance, "rank" = rank_importance)
 
-      if (is.null(n_features)) n_features = floor(n / 2)
+      if (is.null(n_features)) {
+        n_features = floor(n / 2)
+      }
 
       if (is.null(feature_fraction) && is.null(feature_number) && is.null(subset_sizes)) {
         feature_fraction = 0.5
@@ -173,9 +181,12 @@ FSelectorBatchRFE = R6Class("FSelectorBatchRFE",
 fix_importance = function(learners, features) {
   map(learners, function(learner) {
     importance = learner$base_learner()$importance()
-    set_names(map_dbl(features, function(feature) {
-      if (feature %in% names(importance)) importance[[feature]] else 0
-    }), features)
+    set_names(
+      map_dbl(features, function(feature) {
+        if (feature %in% names(importance)) importance[[feature]] else 0
+      }),
+      features
+    )
   })
 }
 
@@ -201,11 +212,12 @@ rank_importance = function(learners, features) {
 
 # Returns the sizes of the feature subsets
 rfe_subsets = function(n, n_features, feature_number, subset_sizes, feature_fraction) {
-
   subsets = if (!is.null(feature_number)) {
     seq(from = n, to = n_features, by = -feature_number)
   } else if (!is.null(subset_sizes)) {
-    if (subset_sizes[1] != n) subset_sizes = c(n, subset_sizes)
+    if (subset_sizes[1] != n) {
+      subset_sizes = c(n, subset_sizes)
+    }
     subset_sizes
   } else if (!is.null(feature_fraction)) {
     unique(floor(cumprod(c(n, rep(feature_fraction, log(n_features / n) / log(feature_fraction))))))
@@ -235,7 +247,9 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
   })
 
   # discard models if requested by the user
-  if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)
+  if (!inst$objective$store_models) {
+    inst$archive$benchmark_result$discard(models = TRUE)
+  }
 
   # Log importance and fold to archive
   archive$data[list(archive$n_batch), "importance" := importances, on = "batch_nr"]
@@ -266,7 +280,9 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
       set(archive$data, archive$n_evals, "importance", map(importances, function(x) x[seq(j)]))
     }
   }
-  if (folds > 1) set(archive$data, j = "iteration", value = rep(seq(folds), length(subsets)))
+  if (folds > 1) {
+    set(archive$data, j = "iteration", value = rep(seq(folds), length(subsets)))
+  }
 
   # discard models if requested by the user
   if (!inst$objective$store_models) inst$archive$benchmark_result$discard(models = TRUE)

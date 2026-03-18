@@ -2,7 +2,8 @@
 #'
 #' @description
 #' Stores the objective function that estimates the performance of feature subsets.
-#' This class is usually constructed internally by the [FSelectInstanceBatchSingleCrit] / [FSelectInstanceBatchMultiCrit].
+#' This class is usually constructed internally by the [FSelectInstanceBatchSingleCrit] or
+#' [FSelectInstanceBatchMultiCrit].
 #'
 #' @template param_task
 #' @template param_learner
@@ -14,10 +15,10 @@
 #' @template param_callbacks
 #'
 #' @export
-ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
+ObjectiveFSelectBatch = R6Class(
+  "ObjectiveFSelectBatch",
   inherit = ObjectiveFSelect,
   public = list(
-
     #' @field archive ([ArchiveBatchFSelect]).
     archive = NULL,
 
@@ -37,9 +38,11 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       store_models = FALSE,
       archive = NULL,
       callbacks = NULL
-      ) {
+    ) {
       self$archive = assert_r6(archive, "ArchiveBatchFSelect", null.ok = TRUE)
-      if (is.null(self$archive)) store_benchmark_result = store_models = FALSE
+      if (is.null(self$archive)) {
+        store_benchmark_result = store_models = FALSE
+      }
 
       super$initialize(
         task = task,
@@ -74,27 +77,42 @@ ObjectiveFSelectBatch = R6Class("ObjectiveFSelectBatch",
       lg$debug("Resampling feature subsets")
 
       # learner is already cloned, task is internally cloned by PipeOpSelect, and resampling is not changed
-      private$.benchmark_result = benchmark(private$.design, store_models = self$store_models || private$.model_required, clone = character())
+      private$.benchmark_result = benchmark(
+        private$.design,
+        store_models = self$store_models || private$.model_required,
+        clone = character()
+      )
       call_back("on_eval_after_benchmark", self$callbacks, self$context)
 
       lg$debug("Aggregating performance")
 
       # aggregate performance scores
-      private$.aggregated_performance = if (length(self$measures) == 1 && all(c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin% self$measures[[1]]$properties)) {
+      private$.aggregated_performance = if (
+        length(self$measures) == 1 &&
+          all(
+            c("requires_task", "requires_learner", "requires_model", "requires_train_set") %nin%
+              self$measures[[1]]$properties
+          )
+      ) {
         lg$debug("Fast aggregation on measure %s", self$measures[[1]]$id)
 
         faggregate(private$.benchmark_result, self$measures[[1]], conditions = TRUE)
       } else {
         lg$debug("Slow aggregation on measures %s", paste(map(self$measures, "id"), collapse = ", "))
 
-        private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[, c(self$codomain$target_ids, "warnings", "errors"), with = FALSE]
+        private$.benchmark_result$aggregate(self$measures, conditions = TRUE)[,
+          c(self$codomain$target_ids, "warnings", "errors"),
+          with = FALSE
+        ]
       }
 
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
       # add runtime to evaluations
       time = map_dbl(private$.benchmark_result$resample_results$resample_result, function(rr) {
-        sum(map_dbl(get_private(rr)$.data$learner_states(get_private(rr)$.view), function(state) state$train_time + state$predict_time))
+        sum(map_dbl(get_private(rr)$.data$learner_states(get_private(rr)$.view), function(state) {
+          state$train_time + state$predict_time
+        }))
       })
       set(private$.aggregated_performance, j = "runtime_learners", value = time)
 

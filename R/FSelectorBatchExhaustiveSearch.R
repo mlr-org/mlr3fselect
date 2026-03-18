@@ -24,10 +24,10 @@
 #' @family FSelector
 #' @export
 #' @template example
-FSelectorBatchExhaustiveSearch = R6Class("FSelectorBatchExhaustiveSearch",
+FSelectorBatchExhaustiveSearch = R6Class(
+  "FSelectorBatchExhaustiveSearch",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
@@ -42,7 +42,8 @@ FSelectorBatchExhaustiveSearch = R6Class("FSelectorBatchExhaustiveSearch",
         param_set = ps,
         properties = c("single-crit", "multi-crit"),
         label = "Exhaustive Search",
-        man = "mlr3fselect::mlr_fselectors_exhaustive_search")
+        man = "mlr3fselect::mlr_fselectors_exhaustive_search"
+      )
     }
   ),
   private = list(
@@ -56,9 +57,15 @@ FSelectorBatchExhaustiveSearch = R6Class("FSelectorBatchExhaustiveSearch",
         as.list(state)
       }
 
-      states = set_col_names(rbindlist(unlist(map(seq(pars$max_features %??% n_features), function(n) {
-        combn(n_features, n, fun, simplify = FALSE, state = logical(n_features))
-      }), recursive = FALSE)), feature_names)
+      states = set_col_names(
+        rbindlist(unlist(
+          map(seq(pars$max_features %??% n_features), function(n) {
+            combn(n_features, n, fun, simplify = FALSE, state = logical(n_features))
+          }),
+          recursive = FALSE
+        )),
+        feature_names
+      )
 
       chunks = split(seq_row(states), ceiling(seq_along(seq_row(states)) / pars$batch_size))
       walk(chunks, function(row_ids) inst$eval_batch(states[row_ids]))

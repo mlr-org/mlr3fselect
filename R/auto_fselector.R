@@ -49,7 +49,7 @@ auto_fselector = function(
   ties_method = "least_features",
   rush = NULL,
   id = NULL
-  ) {
+) {
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
   AutoFSelector$new(
@@ -65,5 +65,6 @@ auto_fselector = function(
     callbacks = callbacks,
     ties_method = ties_method,
     rush = rush,
-    id = id)
+    id = id
+  )
 }

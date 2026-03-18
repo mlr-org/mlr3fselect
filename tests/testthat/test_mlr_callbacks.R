@@ -36,7 +36,6 @@ test_that("svm_rfe callbacks works", {
 })
 
 test_that("one_se_rule callback works", {
-
   score_design = data.table(
     score = c(0.1, 0.1, 0.58, 0.6),
     features = list("x1", c("x1", "x2"), c("x1", "x2", "x3"), c("x1", "x2", "x3", "x4"))

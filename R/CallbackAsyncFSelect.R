@@ -4,14 +4,15 @@
 #' Specialized [bbotk::CallbackAsync] for asynchronous feature selection.
 #' Callbacks allow to customize the behavior of processes in mlr3fselect.
 #' The [callback_async_fselect()] function creates a [CallbackAsyncFSelect].
-#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved with [clbk()].
+#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved
+#' with [clbk()].
 #' For more information on feature selection callbacks see [callback_async_fselect()].
 #'
 #' @export
-CallbackAsyncFSelect = R6Class("CallbackAsyncFSelect",
+CallbackAsyncFSelect = R6Class(
+  "CallbackAsyncFSelect",
   inherit = CallbackAsync,
   public = list(
-
     #' @field on_eval_after_xs (`function()`)\cr
     #' Stage called after xs is passed.
     #' Called in `ObjectiveFSelectAsync$eval()`.
@@ -58,7 +59,8 @@ CallbackAsyncFSelect = R6Class("CallbackAsyncFSelect",
 #'
 #' @description
 #' Function to create a [CallbackAsyncFSelect].
-#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved with [clbk()].
+#' Predefined callbacks are stored in the [dictionary][mlr3misc::Dictionary] [mlr_callbacks] and can be retrieved
+#' with [clbk()].
 #'
 #' Feature selection callbacks can be called from different stages of the feature selection process.
 #' The stages are prefixed with `on_*`.
@@ -211,43 +213,50 @@ callback_async_fselect = function(
   on_result_end = NULL,
   on_result = NULL,
   on_optimization_end = NULL
-  ) {
-  stages = discard(set_names(list(
-    on_optimization_begin,
-    on_worker_begin,
-    on_optimizer_before_eval,
-    on_eval_after_xs,
-    on_resample_begin,
-    on_resample_before_train,
-    on_resample_before_predict,
-    on_resample_end,
-    on_eval_after_resample,
-    on_eval_before_archive,
-    on_optimizer_after_eval,
-    on_worker_end,
-    on_fselect_result_begin,
-    on_result_begin,
-    on_result_end,
-    on_result,
-    on_optimization_end),
-    c(
-      "on_optimization_begin",
-      "on_worker_begin",
-      "on_optimizer_before_eval",
-      "on_eval_after_xs",
-      "on_resample_begin",
-      "on_resample_before_train",
-      "on_resample_before_predict",
-      "on_resample_end",
-      "on_eval_after_resample",
-      "on_eval_before_archive",
-      "on_optimizer_after_eval",
-      "on_worker_end",
-      "on_fselect_result_begin",
-      "on_result_begin",
-      "on_result_end",
-      "on_result",
-      "on_optimization_end")), is.null)
+) {
+  stages = discard(
+    set_names(
+      list(
+        on_optimization_begin,
+        on_worker_begin,
+        on_optimizer_before_eval,
+        on_eval_after_xs,
+        on_resample_begin,
+        on_resample_before_train,
+        on_resample_before_predict,
+        on_resample_end,
+        on_eval_after_resample,
+        on_eval_before_archive,
+        on_optimizer_after_eval,
+        on_worker_end,
+        on_fselect_result_begin,
+        on_result_begin,
+        on_result_end,
+        on_result,
+        on_optimization_end
+      ),
+      c(
+        "on_optimization_begin",
+        "on_worker_begin",
+        "on_optimizer_before_eval",
+        "on_eval_after_xs",
+        "on_resample_begin",
+        "on_resample_before_train",
+        "on_resample_before_predict",
+        "on_resample_end",
+        "on_eval_after_resample",
+        "on_eval_before_archive",
+        "on_optimizer_after_eval",
+        "on_worker_end",
+        "on_fselect_result_begin",
+        "on_result_begin",
+        "on_result_end",
+        "on_result",
+        "on_optimization_end"
+      )
+    ),
+    is.null
+  )
 
   if ("on_result" %in% names(stages)) {
     .Deprecated(old = "on_result", new = "on_result_end")
@@ -273,7 +282,9 @@ callback_async_fselect = function(
 #' @return [CallbackAsyncFSelect | List of [CallbackAsyncFSelect]s.
 #' @export
 assert_async_fselect_callback = function(callback, null_ok = FALSE) {
-  if (null_ok && is.null(callback)) return(invisible(NULL))
+  if (null_ok && is.null(callback)) {
+    return(invisible(NULL))
+  }
   assert_class(callback, "CallbackAsyncFSelect")
   invisible(callback)
 }

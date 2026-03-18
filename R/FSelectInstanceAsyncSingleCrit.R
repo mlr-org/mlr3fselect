@@ -2,7 +2,8 @@
 #'
 #' @description
 #' The `FSelectInstanceAsyncSingleCrit` specifies a feature selection problem for a [FSelectorAsync].
-#' The function [fsi_async()] creates a [FSelectInstanceAsyncSingleCrit] and the function [fselect()] creates an instance internally.
+#' The function [fsi_async()] creates a [FSelectInstanceAsyncSingleCrit]
+#' and the function [fselect()] creates an instance internally.
 #'
 #' @inheritSection FSelectInstanceBatchSingleCrit Default Measures
 #' @inheritSection ArchiveAsyncFSelect Analysis
@@ -24,10 +25,10 @@
 #' @template param_extra
 #'
 #' @export
-FSelectInstanceAsyncSingleCrit = R6Class("FSelectInstanceAsyncSingleCrit",
+FSelectInstanceAsyncSingleCrit = R6Class(
+  "FSelectInstanceAsyncSingleCrit",
   inherit = OptimInstanceAsyncSingleCrit,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function(
@@ -42,12 +43,14 @@ FSelectInstanceAsyncSingleCrit = R6Class("FSelectInstanceAsyncSingleCrit",
       callbacks = NULL,
       ties_method = "least_features",
       rush = NULL
-      ) {
+    ) {
       require_namespaces("rush")
       learner = assert_learner(as_learner(learner, clone = TRUE))
       callbacks = assert_async_fselect_callbacks(as_callbacks(callbacks))
 
-      if (is.null(rush)) rush = rush::rsh()
+      if (is.null(rush)) {
+        rush = rush::rsh()
+      }
 
       # create codomain from measure
       measures = assert_measures(as_measures(measure, task_type = task$task_type), task = task, learner = learner)
@@ -71,7 +74,8 @@ FSelectInstanceAsyncSingleCrit = R6Class("FSelectInstanceAsyncSingleCrit",
         store_benchmark_result = store_benchmark_result,
         store_models = store_models,
         check_values = check_values,
-        callbacks = callbacks)
+        callbacks = callbacks
+      )
 
       super$initialize(
         objective,
@@ -79,7 +83,8 @@ FSelectInstanceAsyncSingleCrit = R6Class("FSelectInstanceAsyncSingleCrit",
         terminator,
         callbacks = callbacks,
         rush = rush,
-        archive = archive)
+        archive = archive
+      )
     },
 
     #' @description

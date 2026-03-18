@@ -5,8 +5,10 @@
 #' Implemented for [mlr3::ResampleResult] and [mlr3::BenchmarkResult].
 #'
 #' @details
-#' The function iterates over the [AutoFSelector] objects and binds the feature selection results to a [data.table::data.table()].
-#' [AutoFSelector] must be initialized with `store_fselect_instance = TRUE` and `resample()` or `benchmark()` must be called with `store_models = TRUE`.
+#' The function iterates over the [AutoFSelector] objects
+#' and binds the feature selection results to a [data.table::data.table()].
+#' [AutoFSelector] must be initialized with `store_fselect_instance = TRUE` and `resample()` or `benchmark()`
+#' must be called with `store_models = TRUE`.
 #' Optionally, the instance can be added for each iteration.
 #'
 #' @section Data structure:
@@ -50,8 +52,8 @@
 #'
 #' # extract inner results
 #' extract_inner_fselect_results(rr)
-extract_inner_fselect_results = function (x, fselect_instance, ...) {
-   UseMethod("extract_inner_fselect_results", x)
+extract_inner_fselect_results = function(x, fselect_instance, ...) {
+  UseMethod("extract_inner_fselect_results", x)
 }
 
 #' @export
@@ -63,7 +65,9 @@ extract_inner_fselect_results.ResampleResult = function(x, fselect_instance = FA
   tab = imap_dtr(rr$learners, function(learner, i) {
     data = setalloccol(learner$fselect_result)
     set(data, j = "iteration", value = i)
-    if (fselect_instance) set(data, j = "fselect_instance", value = list(learner$fselect_instance))
+    if (fselect_instance) {
+      set(data, j = "fselect_instance", value = list(learner$fselect_instance))
+    }
     data
   })
   tab[, "task_id" := rr$task$id]
@@ -78,14 +82,22 @@ extract_inner_fselect_results.ResampleResult = function(x, fselect_instance = FA
 #' @export
 extract_inner_fselect_results.BenchmarkResult = function(x, fselect_instance = FALSE, ...) {
   bmr = assert_benchmark_result(x)
-  tab = imap_dtr(bmr$resample_results$resample_result, function(rr, i) {
-     data = extract_inner_fselect_results(rr, fselect_instance = fselect_instance)
-     if (nrow(data) > 0) set(data, j = "experiment", value = i)
-  }, .fill = TRUE)
+  tab = imap_dtr(
+    bmr$resample_results$resample_result,
+    function(rr, i) {
+      data = extract_inner_fselect_results(rr, fselect_instance = fselect_instance)
+      if (nrow(data) > 0) set(data, j = "experiment", value = i)
+    },
+    .fill = TRUE
+  )
   # reorder dt
   if (nrow(tab) > 0) {
-    cols_x = unique(unlist(map(unique(tab$experiment), function(i) bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_x)))
-    cols_y = unique(unlist(map(unique(tab$experiment), function(i) bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_y)))
+    cols_x = unique(unlist(map(unique(tab$experiment), function(i) {
+      bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_x
+    })))
+    cols_y = unique(unlist(map(unique(tab$experiment), function(i) {
+      bmr$resample_results$resample_result[[i]]$learners[[1]]$archive$cols_y
+    })))
     setcolorder(tab, unique(c("experiment", "iteration", cols_x, cols_y)))
   }
   tab

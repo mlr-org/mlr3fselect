@@ -14,7 +14,7 @@ test_that("max_features parameter works", {
   z = test_fselector("exhaustive_search", max_features = 2)
   a = z$inst$archive$data
 
-  expect_max_features(a[,list(x1, x2, x3, x4)], n = 2)
+  expect_max_features(a[, list(x1, x2, x3, x4)], n = 2)
   r = z$inst$result_x_search_space
   expect_equal(r, data.table(x1 = TRUE, x2 = TRUE, x3 = FALSE, x4 = FALSE))
 })

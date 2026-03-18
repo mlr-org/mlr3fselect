@@ -14,7 +14,8 @@
 #' @section Resources:
 #' The [gallery](https://mlr-org.com/gallery.html) features a collection of case studies and demos about optimization.
 #'
-#' * Run a feature selection with [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
+#' * Run a feature selection with
+#'   [Shadow Variable Search](https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/).
 #'
 #' @templateVar id shadow_variable_search
 #' @template section_dictionary_fselectors
@@ -51,20 +52,21 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorBatchShadowVariableSearch = R6Class("FSelectorBatchShadowVariableSearch",
+#nolint next: object_length_linter.
+FSelectorBatchShadowVariableSearch = R6Class(
+  "FSelectorBatchShadowVariableSearch",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.`
     initialize = function() {
-    super$initialize(
-      id = "shadow_variable_search",
-      param_set = ps(),
-      properties = "single-crit",
-      label = "Shadow Variable Search",
-      man = "mlr3fselect::mlr_fselectors_shadow_variable_search"
-    )
+      super$initialize(
+        id = "shadow_variable_search",
+        param_set = ps(),
+        properties = "single-crit",
+        label = "Shadow Variable Search",
+        man = "mlr3fselect::mlr_fselectors_shadow_variable_search"
+      )
     },
 
     #' @description
@@ -88,13 +90,12 @@ FSelectorBatchShadowVariableSearch = R6Class("FSelectorBatchShadowVariableSearch
 
   private = list(
     .optimize = function(inst) {
-
       # save initial state
       task = inst$objective$task
       private$.task = suppressWarnings(task$clone(deep = TRUE))
       private$.domain = inst$objective$domain$clone()
 
-       # add shadow variables to task
+      # add shadow variables to task
       data = map_dtc(task$data(cols = task$feature_names), shuffle)
       shadow_variables = sprintf("permuted__%s", colnames(data))
       setnames(data, shadow_variables)
@@ -107,8 +108,8 @@ FSelectorBatchShadowVariableSearch = R6Class("FSelectorBatchShadowVariableSearch
       inst$objective$domain = do.call(ps, params)
 
       # add shadow variables to search_space
-      inst$archive$search_space =  inst$objective$domain
-      inst$search_space =  inst$objective$domain
+      inst$archive$search_space = inst$objective$domain
+      inst$search_space = inst$objective$domain
 
       pars = self$param_set$values
       archive = inst$archive
@@ -119,31 +120,34 @@ FSelectorBatchShadowVariableSearch = R6Class("FSelectorBatchShadowVariableSearch
 
       inst$eval_batch(states)
 
-      repeat({
-        res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
+      repeat {
+        ({
+          res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
 
-        # check if any shadow variable was selected
-        if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
+          # check if any shadow variable was selected
+          if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
+            # stop if the first selected feature is a shadow variable
+            if (archive$n_batch == 1) {
+              stop("The first selected feature is a shadow variable.")
+            }
 
-          # stop if the first selected feature is a shadow variable
-          if (archive$n_batch == 1) stop("The first selected feature is a shadow variable.")
-
-          # remove last batch with selected shadow variable from archive
-          archive = inst$archive
-          archive$data = archive$data[get("batch_nr") != archive$n_batch, ]
-          break
-        }
-
-        best_state = as.logical(res)
-        states = map_dtr(seq_along(best_state)[!best_state], function(i) {
-          if (!best_state[i]) {
-            new_state = best_state
-            new_state[i] = TRUE
-            set_names(as.list(new_state), feature_names)
+            # remove last batch with selected shadow variable from archive
+            archive = inst$archive
+            archive$data = archive$data[get("batch_nr") != archive$n_batch, ]
+            break
           }
+
+          best_state = as.logical(res)
+          states = map_dtr(seq_along(best_state)[!best_state], function(i) {
+            if (!best_state[i]) {
+              new_state = best_state
+              new_state[i] = TRUE
+              set_names(as.list(new_state), feature_names)
+            }
+          })
+          inst$eval_batch(states)
         })
-        inst$eval_batch(states)
-      })
+      }
     },
 
     .assign_result = function(inst) {

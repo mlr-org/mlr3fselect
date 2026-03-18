@@ -21,10 +21,10 @@
 #'
 #' @family FSelectorAsync
 #' @export
-FSelectorAsyncRandomSearch = R6Class("FSelectorAsyncRandomSearch",
+FSelectorAsyncRandomSearch = R6Class(
+  "FSelectorAsyncRandomSearch",
   inherit = FSelectorAsync,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {

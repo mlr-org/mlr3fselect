@@ -7,10 +7,11 @@
 #'
 #' @keywords internal
 #' @export
-FSelectorBatchFromOptimizerBatch= R6Class("FSelectorBatchFromOptimizerBatch",
+#nolint next: object_length_linter.
+FSelectorBatchFromOptimizerBatch = R6Class(
+  "FSelectorBatchFromOptimizerBatch",
   inherit = FSelectorBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
@@ -28,7 +29,7 @@ FSelectorBatchFromOptimizerBatch= R6Class("FSelectorBatchFromOptimizerBatch",
         packages = packages,
         label = optimizer$label,
         man = man
-       )
+      )
     },
 
     #' @description
@@ -48,7 +49,7 @@ FSelectorBatchFromOptimizerBatch= R6Class("FSelectorBatchFromOptimizerBatch",
       inst$objective$.__enclos_env__$private$.design = NULL
       inst$objective$.__enclos_env__$private$.benchmark_result = NULL
       inst$objective$.__enclos_env__$private$.aggregated_performance = NULL
-      return(result)
+      result
     }
   ),
 

@@ -14,9 +14,15 @@ test_that("task is permuted", {
   fselector$optimize(instance)
 
   task_permuted = as.data.table(instance$archive)$resample_result[[1]]$task
-  expect_set_equal(task_permuted$backend$colnames, c("y", "x1", "x2", "x3", "x4", "..row_id", "permuted__x1", "permuted__x2", "permuted__x3", "permuted__x4"))
+  expect_set_equal(
+    task_permuted$backend$colnames,
+    c("y", "x1", "x2", "x3", "x4", "..row_id", "permuted__x1", "permuted__x2", "permuted__x3", "permuted__x4")
+  )
   expect_equal(task_permuted$data(cols = c("y", "x1", "x2", "x3", "x4"))[, 1:5], task$data())
-  expect_false(isTRUE(all.equal(task_permuted$data(cols = c("permuted__x1", "permuted__x2", "permuted__x3", "permuted__x4")), task$data()[, 2:5])))
+  expect_false(isTRUE(all.equal(
+    task_permuted$data(cols = c("permuted__x1", "permuted__x2", "permuted__x3", "permuted__x4")),
+    task$data()[, 2:5]
+  )))
 })
 
 test_that("first selected feature is a shadow variable works", {

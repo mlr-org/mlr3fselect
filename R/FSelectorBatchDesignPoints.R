@@ -55,10 +55,10 @@
 #' task$select(instance$result_feature_set)
 #' learner$train(task)
 #' }
-FSelectorBatchDesignPoints = R6Class("FSelectorBatchDesignPoints",
+FSelectorBatchDesignPoints = R6Class(
+  "FSelectorBatchDesignPoints",
   inherit = FSelectorBatchFromOptimizerBatch,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
