@@ -19,13 +19,13 @@ Source:
 [`DESCRIPTION`](https://github.com/mlr-org/mlr3fselect/blob/main/DESCRIPTION)
 
 Becker M, Schratz P, Lang M, Bischl B, Zobolas J (2026). *mlr3fselect:
-Feature Selection for 'mlr3'*. R package version 1.5.0,
+Feature Selection for 'mlr3'*. R package version 1.5.1,
 <https://mlr3fselect.mlr-org.com>.
 
     @Manual{,
       title = {mlr3fselect: Feature Selection for 'mlr3'},
       author = {Marc Becker and Patrick Schratz and Michel Lang and Bernd Bischl and John Zobolas},
       year = {2026},
-      note = {R package version 1.5.0},
+      note = {R package version 1.5.1},
       url = {https://mlr3fselect.mlr-org.com},
     }

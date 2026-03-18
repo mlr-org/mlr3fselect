@@ -1,5 +1,9 @@
 # Changelog
 
+## mlr3fselect 1.5.1
+
+- compatibility: rush 1.0.0
+
 ## mlr3fselect 1.5.0
 
 CRAN release: 2025-11-27
