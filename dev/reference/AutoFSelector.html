@@ -423,7 +423,7 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: importance, missings, multiclass, selected_features, twoclass,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use', predict_raw = 'FALSE'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "bill_length" "island"      "sex"         "year"       </span>
@@ -480,7 +480,7 @@ Printer.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: importance, missings, multiclass, selected_features, twoclass,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use', predict_raw = 'FALSE'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># shortcut fselect instance</span></span></span>
 <span class="r-in"><span><span class="va">afs</span><span class="op">$</span><span class="va">fselect_instance</span></span></span>
@@ -539,14 +539,14 @@ Printer.</p>
 <span class="r-in"><span><span class="fu"><a href="extract_inner_fselect_results.html">extract_inner_fselect_results</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iteration bill_depth bill_length body_mass flipper_length island    sex</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;     &lt;lgcl&gt;      &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:         2      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:         3      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      year classif.ce                                  features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;      &lt;num&gt;                                    &lt;list&gt;      &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE 0.03947368                bill_length,flipper_length          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   TRUE 0.06493506 bill_length,body_mass,flipper_length,year          4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  FALSE 0.09210526         bill_depth,bill_length,island,sex          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  FALSE 0.09210526         bill_depth,bill_length,island,sex          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  FALSE 0.03947368                bill_length,flipper_length          2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   TRUE 0.06493506 bill_length,body_mass,flipper_length,year          4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     task_id              learner_id resampling_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      &lt;char&gt;                  &lt;char&gt;        &lt;char&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: penguins classif.rpart.fselector            cv</span>
