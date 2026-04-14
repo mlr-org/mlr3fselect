@@ -7,7 +7,8 @@
 Specialized \link[bbotk:CallbackAsync]{bbotk::CallbackAsync} for asynchronous feature selection.
 Callbacks allow to customize the behavior of processes in mlr3fselect.
 The \code{\link[=callback_async_fselect]{callback_async_fselect()}} function creates a \link{CallbackAsyncFSelect}.
-Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_callbacks} and can be retrieved with \code{\link[=clbk]{clbk()}}.
+Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_callbacks} and can be retrieved
+with \code{\link[=clbk]{clbk()}}.
 For more information on feature selection callbacks see \code{\link[=callback_async_fselect]{callback_async_fselect()}}.
 }
 \section{Super classes}{

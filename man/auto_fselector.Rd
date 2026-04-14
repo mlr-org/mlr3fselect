@@ -87,10 +87,12 @@ The \link{AutoFSelector} wraps a \link[mlr3:Learner]{mlr3::Learner} and augments
 The \code{\link[=auto_fselector]{auto_fselector()}} function creates an \link{AutoFSelector} object.
 }
 \details{
-The \link{AutoFSelector} is a \link[mlr3:Learner]{mlr3::Learner} which wraps another \link[mlr3:Learner]{mlr3::Learner} and performs the following steps during \verb{$train()}:
+The \link{AutoFSelector} is a \link[mlr3:Learner]{mlr3::Learner} which wraps another \link[mlr3:Learner]{mlr3::Learner} and performs the following steps
+during \verb{$train()}:
 \enumerate{
 \item The wrapped (inner) learner is trained on the feature subsets via resampling.
-The feature selection can be specified by providing a \link{FSelector}, a \link[bbotk:Terminator]{bbotk::Terminator}, a \link[mlr3:Resampling]{mlr3::Resampling} and a \link[mlr3:Measure]{mlr3::Measure}.
+The feature selection can be specified by providing a \link{FSelector}, a \link[bbotk:Terminator]{bbotk::Terminator}, a \link[mlr3:Resampling]{mlr3::Resampling},
+and a \link[mlr3:Measure]{mlr3::Measure}.
 \item A final model is fit on the complete training data with the best-found feature subset.
 }
 
@@ -100,7 +102,8 @@ During \verb{$predict()} the \link{AutoFSelector} just calls the predict method 
 
 There are several sections about feature selection in the \href{https://mlr3book.mlr-org.com}{mlr3book}.
 \itemize{
-\item Estimate Model Performance with \href{https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect}{nested resampling}.
+\item Estimate Model Performance with
+\href{https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect}{nested resampling}.
 }
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
@@ -109,8 +112,10 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 \section{Nested Resampling}{
 
 Nested resampling can be performed by passing an \link{AutoFSelector} object to \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}}.
-To access the inner resampling results, set \code{store_fselect_instance = TRUE} and execute \code{\link[mlr3:resample]{mlr3::resample()}} or \code{\link[mlr3:benchmark]{mlr3::benchmark()}} with \code{store_models = TRUE} (see examples).
-The \link[mlr3:Resampling]{mlr3::Resampling} passed to the \link{AutoFSelector} is meant to be the inner resampling, operating on the training set of an arbitrary outer resampling.
+To access the inner resampling results, set \code{store_fselect_instance = TRUE} and execute \code{\link[mlr3:resample]{mlr3::resample()}} or
+\code{\link[mlr3:benchmark]{mlr3::benchmark()}} with \code{store_models = TRUE} (see examples).
+The \link[mlr3:Resampling]{mlr3::Resampling} passed to the \link{AutoFSelector} is meant to be the inner resampling,
+operating on the training set of an arbitrary outer resampling.
 For this reason it is not feasible to pass an instantiated \link[mlr3:Resampling]{mlr3::Resampling} here.
 }
 

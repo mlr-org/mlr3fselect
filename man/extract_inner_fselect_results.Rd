@@ -23,8 +23,10 @@ Extract inner feature selection results of nested resampling.
 Implemented for \link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
 }
 \details{
-The function iterates over the \link{AutoFSelector} objects and binds the feature selection results to a \code{\link[data.table:data.table]{data.table::data.table()}}.
-\link{AutoFSelector} must be initialized with \code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be called with \code{store_models = TRUE}.
+The function iterates over the \link{AutoFSelector} objects
+and binds the feature selection results to a \code{\link[data.table:data.table]{data.table::data.table()}}.
+\link{AutoFSelector} must be initialized with \code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()}
+must be called with \code{store_models = TRUE}.
 Optionally, the instance can be added for each iteration.
 }
 \section{Data structure}{

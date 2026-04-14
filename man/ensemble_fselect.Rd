@@ -18,6 +18,11 @@ Pes, Barbara (2020).
 \dQuote{Ensemble feature selection for high-dimensional data: a stability analysis across multiple domains.}
 \emph{Neural Computing and Applications}, \bold{32}(10), 5951--5973.
 ISSN 14333058, \doi{10.1007/s00521-019-04082-3}.
+
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
+\dQuote{Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.}
+\emph{BioData Mining}.
+ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}.
 }
 \usage{
 ensemble_fselect(
@@ -45,7 +50,8 @@ Task to operate on.}
 The learners to be used for feature selection.}
 
 \item{init_resampling}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
-The initial resampling strategy of the data, from which each train set will be passed on to the \link{auto_fselector} to optimize the learners and perform feature selection.
+The initial resampling strategy of the data, from which each train set will be passed on to the \link{auto_fselector}
+to optimize the learners and perform feature selection.
 Each test set will be used for prediction on the final models returned by \link{auto_fselector}.
 Can only be \link[mlr3:mlr_resamplings_subsampling]{mlr3::ResamplingSubsampling} or \link[mlr3:mlr_resamplings_bootstrap]{mlr3::ResamplingBootstrap}.}
 
@@ -76,25 +82,32 @@ an \link{EnsembleFSResult} object.
 }
 \description{
 Ensemble feature selection using multiple learners.
-The ensemble feature selection method is designed to identify the most predictive features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+The ensemble feature selection method is designed to identify the most predictive features from a given dataset
+by leveraging multiple machine learning models and resampling techniques.
 Returns an \link{EnsembleFSResult}.
 }
 \details{
-The method begins by applying an initial resampling technique specified by the user, to create \strong{multiple subsamples} from the original dataset (train/test splits).
+The method begins by applying an initial resampling technique specified by the user,
+to create \strong{multiple subsamples} from the original dataset (train/test splits).
 This resampling process helps in generating diverse subsets of data for robust feature selection.
 
-For each subsample (train set) generated in the previous step, the method performs \strong{wrapped-based feature selection} (\link{auto_fselector}) using each provided learner, the given inner resampling method, inner performance measure and optimization algorithm.
-This process generates 1) the best feature subset and 2) a final trained model using these best features, for each combination of subsample and learner.
+For each subsample (train set) generated in the previous step, the method performs
+\strong{wrapped-based feature selection} (\link{auto_fselector}) using each provided learner,
+the given inner resampling method, inner performance measure, and optimization algorithm.
+This process generates 1) the best feature subset and 2) a final trained model using these best features,
+for each combination of subsample and learner.
 The final models are then scored on their ability to predict on the resampled test sets.
 
 Results are stored in an \link{EnsembleFSResult}.
 
-The result object also includes the performance scores calculated during the inner resampling of the training sets, using models with the best feature subsets.
+The result object also includes the performance scores calculated during the inner resampling of the training sets,
+using models with the best feature subsets.
 These scores are stored in a column named \verb{\{measure_id\}_inner}.
 }
 \note{
 The \strong{active measure} of performance is the one applied to the test sets.
-This is preferred, as inner resampling scores on the training sets are likely to be overestimated when using the final models.
+This is preferred, as inner resampling scores on the training sets are likely to be overestimated
+when using the final models.
 Users can change the active measure by using the \code{set_active_measure()} method of the \link{EnsembleFSResult}.
 }
 \examples{

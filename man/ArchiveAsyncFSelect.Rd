@@ -26,7 +26,8 @@ Time stamp when the evaluation was logged into the archive.
 
 \section{Analysis}{
 
-For analyzing the feature selection results, it is recommended to pass the \link{ArchiveAsyncFSelect} to \code{as.data.table()}.
+For analyzing the feature selection results,
+it is recommended to pass the \link{ArchiveAsyncFSelect} to \code{as.data.table()}.
 The returned data table contains the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature subset evaluation.
 }
 

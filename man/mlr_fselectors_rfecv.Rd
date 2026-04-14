@@ -7,17 +7,23 @@
 \description{
 Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
 See \link{FSelectorBatchRFE} for a description of the base algorithm.
-RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
-Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
-The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
-Only works with \link[mlr3:Learner]{mlr3::Learner}s that can calculate importance scores (see the section on optional extractors in \link[mlr3:Learner]{mlr3::Learner}).
+RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number
+of features.
+Then a recursive feature elimination is run again on the complete dataset
+with the optimal number of features as the final feature set size.
+The performance of the optimal feature set is calculated on the complete data set
+and should not be reported as the performance of the final model.
+Only works with \link[mlr3:Learner]{mlr3::Learner}s that can calculate importance scores
+(see the section on optional extractors in \link[mlr3:Learner]{mlr3::Learner}).
 }
 \details{
 The resampling strategy is changed during the feature selection.
 The resampling strategy passed to the instance (\code{resampling}) is used to determine the optimal number of features.
-Usually, a cross-validation strategy is used and a recursive feature elimination is run in each iteration of the cross-validation.
+Usually, a cross-validation strategy is used
+and a recursive feature elimination is run in each iteration of the cross-validation.
 Internally, \link[mlr3:mlr_resamplings_custom]{mlr3::ResamplingCustom} is used to emulate this part of the algorithm.
-In the final recursive feature elimination run the resampling strategy is changed to \link[mlr3:mlr_resamplings_insample]{mlr3::ResamplingInsample} i.e. the complete data set is used for training and testing.
+In the final recursive feature elimination run the resampling strategy is changed to \link[mlr3:mlr_resamplings_insample]{mlr3::ResamplingInsample}
+i.e. the complete data set is used for training and testing.
 
 The feature selection terminates itself when the optimal number of features is reached.
 It is not necessary to set a termination criterion.
@@ -37,7 +43,8 @@ The importance score vector of the feature subset.
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
 \itemize{
-\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+\item Utilize the built-in feature importance of models with
+\href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
 }
 }
 
