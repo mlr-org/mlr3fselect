@@ -142,6 +142,11 @@
 - [`assert_async_fselect_callback()`](https://mlr3fselect.mlr-org.com/dev/reference/assert_async_fselect_callback.md)
   [`assert_async_fselect_callbacks()`](https://mlr3fselect.mlr-org.com/dev/reference/assert_async_fselect_callback.md)
   : Assertions for Callbacks
+
+## Miscellaneous
+
+- [`faggregate()`](https://mlr3fselect.mlr-org.com/dev/reference/faggregate.md)
+  : Fast Aggregation of ResampleResults and BenchmarkResults
 - [`assert_fselectors()`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.md)
   [`assert_fselector_async()`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.md)
   [`assert_fselector_batch()`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.md)
@@ -149,11 +154,6 @@
   [`assert_fselect_instance_async()`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.md)
   [`assert_fselect_instance_batch()`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect_assertions.md)
   : Assertion for mlr3fselect objects
-
-## Miscellaneous
-
-- [`faggregate()`](https://mlr3fselect.mlr-org.com/dev/reference/faggregate.md)
-  : Fast Aggregation of ResampleResults and BenchmarkResults
 
 ## Package
 
