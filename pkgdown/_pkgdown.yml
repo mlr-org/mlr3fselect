@@ -37,3 +37,46 @@ navbar:
     rss:
       icon: fa-rss
       href: https://mlr-org.com/
+
+reference:
+  - title: Feature Selection Instances
+    contents:
+      - starts_with("FSelectInstance")
+      - starts_with("fsi")
+      - starts_with("ObjectiveFSelect")
+      - starts_with("Archive")
+      - fselect
+  - title: FSelectors
+    contents:
+      - starts_with("FSelector")
+      - starts_with("mlr_fselectors")
+      - fs
+      - AutoFSelector
+      - auto_fselector
+  - title: Terminators
+    contents:
+      - reexports
+  - title: Nested Resampling
+    contents:
+      - fselect_nested
+      - extract_inner_fselect_archives
+      - extract_inner_fselect_results
+  - title: Ensemble Feature Selection
+    contents:
+      - ensemble_fselect
+      - embedded_ensemble_fselect
+      - ensemble_fs_result
+  - title: Callbacks
+    contents:
+      - starts_with("Callback")
+      - starts_with("Context")
+      - starts_with("callback")
+      - starts_with("mlr3fselect.")
+      - assert_async_fselect_callback
+      - mlr3fselect_assertions
+  - title: Miscellaneous
+    contents:
+      - faggregate
+  - title: Package
+    contents:
+      - mlr3fselect-package
