@@ -126,15 +126,24 @@ bibentries = c(
   ),
   hedou2024 = bibentry("article",
     #nolint next
-    author = "Hedou, Julien and Maric, Ivana and Bellan, Gregoire and Einhaus, Jakob and Gaudilliere, Dyani K. and Ladant, Francois Xavier and Verdonk, Franck and Stelzer, Ina A. and Feyaerts, Dorien and Tsai, Amy S. and Ganio, Edward A. and Sabayev, Maximilian and Gillard, Joshua and Amar, Jonas and Cambriel, Amelie and Oskotsky, Tomiko T. and Roldan, Alennie and Golob, Jonathan L. and Sirota, Marina and Bonham, Thomas A. and Sato, Masaki and Diop, Maigane and Durand, Xavier and Angst, Martin S. and Stevenson, David K. and Aghaeepour, Nima and Montanari, Andrea and Gaudilliere, Brice",
-    doi = "10.1038/s41587-023-02033-x",
-    issn = "1546-1696",
-    journal = "Nature Biotechnology 2024",
-    month = "jan",
-    pages = "1--13",
+    author    = "Hedou, Julien and Maric, Ivana and Bellan, Gregoire and Einhaus, Jakob and Gaudilliere, Dyani K. and Ladant, Francois Xavier and Verdonk, Franck and Stelzer, Ina A. and Feyaerts, Dorien and Tsai, Amy S. and Ganio, Edward A. and Sabayev, Maximilian and Gillard, Joshua and Amar, Jonas and Cambriel, Amelie and Oskotsky, Tomiko T. and Roldan, Alennie and Golob, Jonathan L. and Sirota, Marina and Bonham, Thomas A. and Sato, Masaki and Diop, Maigane and Durand, Xavier and Angst, Martin S. and Stevenson, David K. and Aghaeepour, Nima and Montanari, Andrea and Gaudilliere, Brice",
+    doi       = "10.1038/s41587-023-02033-x",
+    issn      = "1546-1696",
+    journal   = "Nature Biotechnology 2024",
+    month     = "jan",
+    pages     = "1--13",
     publisher = "Nature Publishing Group",
-    title = "Discovery of sparse, reliable omic biomarkers with Stabl",
-    url = "https://www.nature.com/articles/s41587-023-02033-x",
-    year = "2024"
+    title     = "Discovery of sparse, reliable omic biomarkers with Stabl",
+    url       = "https://www.nature.com/articles/s41587-023-02033-x",
+    year      = "2024"
+  ),
+  zobolas2026 = bibentry("article",
+    author  = "Zobolas, John and George, Anne-Marie and López, Alberto and Fischer, Sebastian and Becker, Marc and Aittokallio, Tero",
+    doi     = "10.1186/s13040-026-00546-0",
+    issn    = "1756-0381",
+    journal = "BioData Mining",
+    title   = "Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data",
+    url     = "https://doi.org/10.1186/s13040-026-00546-0",
+    year    = "2026"
   )
 )

@@ -21,7 +21,7 @@
 #'   Combines multiple [EnsembleFSResult] objects into a new [EnsembleFSResult].
 #'
 #' @references
-#' `r format_bib("das1999", "meinshausen2010")`
+#' `r format_bib("das1999", "meinshausen2010", "zobolas2026")`
 #'
 #' @export
 #' @examplesIf mlr3misc::require_namespaces("fastVoteR", quietly = TRUE)
