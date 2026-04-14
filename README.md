@@ -105,10 +105,11 @@ instance = fsi(
 instance
 ```
 
-    ## <FSelectInstanceBatchSingleCrit>
-    ## * State:  Not optimized
-    ## * Objective: <ObjectiveFSelectBatch:classif.svm_on_spam>
-    ## * Terminator: <TerminatorEvals>
+    ## 
+    ## ── <FSelectInstanceBatchSingleCrit> ────────────────────────────────────────────────────────────────
+    ## • State: Not optimized
+    ## • Objective: <ObjectiveFSelectBatch> (classif.svm_on_spam)
+    ## • Terminator: <TerminatorEvals>
 
 We select a simple random search as the optimization algorithm.
 
@@ -117,10 +118,11 @@ fselector = fs("random_search", batch_size = 5)
 fselector
 ```
 
-    ## <FSelectorBatchRandomSearch>: Random Search
-    ## * Parameters: batch_size=5
-    ## * Properties: single-crit, multi-crit
-    ## * Packages: mlr3fselect
+    ## 
+    ## ── <FSelectorBatchRandomSearch>: Random Search ─────────────────────────────────────────────────────
+    ## • Parameters: batch_size=5
+    ## • Properties: single-crit and multi-crit
+    ## • Packages: mlr3fselect
 
 To start the feature selection, we simply pass the instance to the
 fselector.
@@ -202,7 +204,7 @@ If you use **mlr3fselect** in your work, please cite the package:
 The **ensemble feature selection** components (hEFS) are described in
 the following study:
 
-> Zobolas, J., George, A.-M., López, A., Fischer, S., Becker, M., &
-> Aittokallio, T. (2025). Optimizing prognostic biomarker discovery in
-> pancreatic cancer through hybrid ensemble feature selection and
-> multi-omics data. arXiv. <https://arxiv.org/pdf/2509.02648>
+> Zobolas, J., George, AM., López, A., Fischer, S., Becker, M., &
+> Aittokallio, T. Prognostic biomarker discovery in pancreatic cancer
+> through hybrid ensemble feature selection and multi-omics data.
+> BioData Mining (2026). <https://doi.org/10.1186/s13040-026-00546-0>
