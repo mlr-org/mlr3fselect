@@ -138,7 +138,7 @@ bibentries = c(
     year      = "2024"
   ),
   zobolas2026 = bibentry("article",
-    author  = "Zobolas, John and George, Anne-Marie and López, Alberto and Fischer, Sebastian and Becker, Marc and Aittokallio, Tero",
+    author  = "Zobolas, John and George, Anne-Marie and Lopez, Alberto and Fischer, Sebastian and Becker, Marc and Aittokallio, Tero",
     doi     = "10.1186/s13040-026-00546-0",
     issn    = "1756-0381",
     journal = "BioData Mining",
