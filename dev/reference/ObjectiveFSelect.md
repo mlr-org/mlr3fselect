@@ -3,7 +3,7 @@
 Stores the objective function that estimates the performance of feature
 subsets. This class is usually constructed internally by the
 [FSelectInstanceBatchSingleCrit](https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchSingleCrit.md)
-/
+or
 [FSelectInstanceBatchMultiCrit](https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchMultiCrit.md).
 
 ## Super class

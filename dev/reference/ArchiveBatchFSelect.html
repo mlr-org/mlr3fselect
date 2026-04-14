@@ -58,7 +58,8 @@
     <p>The ArchiveBatchFSelect is a container around a <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>.
 Each row corresponds to a single evaluation of a feature set.
 See the section on Data Structure for more information.
-The archive stores additionally a <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a> (<code>$benchmark_result</code>) that records the resampling experiments.
+The archive stores additionally a <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a> (<code>$benchmark_result</code>) that records the resampling
+experiments.
 Each experiment corresponds to a single evaluation of a feature set.
 The table (<code>$data</code>) and the benchmark result (<code>$benchmark_result</code>) are linked by the <code>uhash</code> column.
 If the archive is passed to <code>as.data.table()</code>, both are joined automatically.</p>
@@ -85,7 +86,8 @@ Connects each feature set to the resampling experiment stored in the <a href="ht
 
 
 <p>For analyzing the feature selection results, it is recommended to pass the archive to <code>as.data.table()</code>.
-The returned data table is joined with the benchmark result which adds the <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> for each feature set.</p>
+The returned data table is joined with the benchmark result which adds the <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> for each feature
+set.</p>
 <p>The archive provides various getters (e.g. <code>$learners()</code>) to ease the access.
 All getters extract by position (<code>i</code>) or unique hash (<code>uhash</code>).
 For a complete list of all getters see the methods section.</p>
@@ -269,9 +271,8 @@ The <code>uhash</code> value to filter for.</p></dd>
 
 </div><p></p><hr><a id="method-ArchiveBatchFSelect-predictions"></a><div class="section">
 <h3 id="method-predictions-">Method <code>predictions()</code><a class="anchor" aria-label="anchor" href="#method-predictions-"></a></h3>
-<p>Retrieve list of <a href="https://mlr3.mlr-org.com/reference/Prediction.html" class="external-link">mlr3::Prediction</a> objects of the i-th evaluation, by
-position or by unique hash <code>uhash</code>. <code>i</code> and <code>uhash</code> are mutually
-exclusive.</p><div class="section">
+<p>Retrieve list of <a href="https://mlr3.mlr-org.com/reference/Prediction.html" class="external-link">mlr3::Prediction</a> objects of the i-th evaluation, by position or by unique hash <code>uhash</code>.
+<code>i</code> and <code>uhash</code> are mutually exclusive.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveBatchFSelect</span><span class="op">$</span><span class="fu">predictions</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>

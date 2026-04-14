@@ -6,9 +6,11 @@
     }
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Embedded Ensemble Feature Selection — embedded_ensemble_fselect"><meta name="description" content="Ensemble feature selection using multiple learners.
-The ensemble feature selection method is designed to identify the most predictive features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+The ensemble feature selection method is designed to identify the most predictive features from a given dataset
+by leveraging multiple machine learning models and resampling techniques.
 Returns an EnsembleFSResult."><meta property="og:description" content="Ensemble feature selection using multiple learners.
-The ensemble feature selection method is designed to identify the most predictive features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+The ensemble feature selection method is designed to identify the most predictive features from a given dataset
+by leveraging multiple machine learning models and resampling techniques.
 Returns an EnsembleFSResult."><meta property="og:image" content="https://mlr3fselect.mlr-org.com/logo.png"><meta name="robots" content="noindex"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -54,7 +56,8 @@ Returns an EnsembleFSResult."><meta property="og:image" content="https://mlr3fse
 
     <div class="ref-description section level2">
     <p>Ensemble feature selection using multiple learners.
-The ensemble feature selection method is designed to identify the most predictive features from a given dataset by leveraging multiple machine learning models and resampling techniques.
+The ensemble feature selection method is designed to identify the most predictive features from a given dataset
+by leveraging multiple machine learning models and resampling techniques.
 Returns an <a href="ensemble_fs_result.html">EnsembleFSResult</a>.</p>
     </div>
 
@@ -81,6 +84,11 @@ ISSN 1369-7412, <a href="https://doi.org/10.1111/J.1467-9868.2010.00740.X" class
 <em>Nature Biotechnology 2024</em>, 1–13.
 ISSN 1546-1696, <a href="https://doi.org/10.1038/s41587-023-02033-x" class="external-link">doi:10.1038/s41587-023-02033-x</a>
 , <a href="https://www.nature.com/articles/s41587-023-02033-x" class="external-link">https://www.nature.com/articles/s41587-023-02033-x</a>.</p>
+<p>Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
+“Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.”
+<em>BioData Mining</em>.
+ISSN 1756-0381, <a href="https://doi.org/10.1186/s13040-026-00546-0" class="external-link">doi:10.1186/s13040-026-00546-0</a>
+.</p>
     </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
@@ -101,15 +109,13 @@ embedded feature selection (e.g. regularized models).</p></dd>
 <dt id="arg-init-resampling">init_resampling<a class="anchor" aria-label="anchor" href="#arg-init-resampling"></a></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 The initial resampling strategy of the data, from which each train set
-will be passed on to the learners and each test set will be used for
-prediction.
+will be passed on to the learners and each test set will be used for prediction.
 Can only be <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_subsampling.html" class="external-link">mlr3::ResamplingSubsampling</a> or <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_bootstrap.html" class="external-link">mlr3::ResamplingBootstrap</a>.</p></dd>
 
 
 <dt id="arg-measure">measure<a class="anchor" aria-label="anchor" href="#arg-measure"></a></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
-The measure used to score each learner on the test sets generated by
-<code>init_resampling</code>.
+The measure used to score each learner on the test sets generated by <code>init_resampling</code>.
 If <code>NULL</code>, default measure is used.</p></dd>
 
 
@@ -124,13 +130,13 @@ Whether to store the benchmark result in <a href="ensemble_fs_result.html">Ensem
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The method begins by applying an initial resampling technique specified by the user, to create <strong>multiple subsamples</strong> from the original dataset (train/test splits).
+    <p>The method begins by applying an initial resampling technique specified by the user,
+to create <strong>multiple subsamples</strong> from the original dataset (train/test splits).
 This resampling process helps in generating diverse subsets of data for robust feature selection.</p>
 <p>For each subsample (train set) generated in the previous step, the method applies learners
 that support <strong>embedded feature selection</strong>.
 These learners are then scored on their ability to predict on the resampled
-test sets, storing the selected features during training, for each
-combination of subsample and learner.</p>
+test sets, storing the selected features during training, for each combination of subsample and learner.</p>
 <p>Results are stored in an <a href="ensemble_fs_result.html">EnsembleFSResult</a>.</p>
     </div>
 

@@ -137,18 +137,20 @@
 <span>  terminator <span class="op">=</span> <span class="fu"><a href="https://bbotk.mlr-org.com/reference/trm.html" class="external-link">trm</a></span><span class="op">(</span><span class="st">"evals"</span>, n_evals <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">instance</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## &lt;FSelectInstanceBatchSingleCrit&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="do">## * State:  Not optimized</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">## * Objective: &lt;ObjectiveFSelectBatch:classif.svm_on_spam&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">## * Terminator: &lt;TerminatorEvals&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="do">## ── &lt;FSelectInstanceBatchSingleCrit&gt; ────────────────────────────────────────────────────────────────</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">## • State: Not optimized</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">## • Objective: &lt;ObjectiveFSelectBatch&gt; (classif.svm_on_spam)</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="do">## • Terminator: &lt;TerminatorEvals&gt;</span></span></code></pre></div>
 <p>We select a simple random search as the optimization algorithm.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fselector</span> <span class="op">=</span> <span class="fu"><a href="reference/fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span>, batch_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">fselector</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## &lt;FSelectorBatchRandomSearch&gt;: Random Search</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">## * Parameters: batch_size=5</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">## * Properties: single-crit, multi-crit</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">## * Packages: mlr3fselect</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">## ── &lt;FSelectorBatchRandomSearch&gt;: Random Search ─────────────────────────────────────────────────────</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">## • Parameters: batch_size=5</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">## • Properties: single-crit and multi-crit</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">## • Packages: mlr3fselect</span></span></code></pre></div>
 <p>To start the feature selection, we simply pass the instance to the fselector.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fselector</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">instance</span><span class="op">)</span></span></code></pre></div>
@@ -207,7 +209,7 @@
 </blockquote>
 <p>The <strong>ensemble feature selection</strong> components (hEFS) are described in the following study:</p>
 <blockquote>
-<p>Zobolas, J., George, A.-M., López, A., Fischer, S., Becker, M., &amp; Aittokallio, T. (2025). Optimizing prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data. arXiv. <a href="https://arxiv.org/pdf/2509.02648" class="external-link uri">https://arxiv.org/pdf/2509.02648</a></p>
+<p>Zobolas, J., George, AM., López, A., Fischer, S., Becker, M., &amp; Aittokallio, T. Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data. BioData Mining (2026). <a href="https://doi.org/10.1186/s13040-026-00546-0" class="external-link uri">https://doi.org/10.1186/s13040-026-00546-0</a></p>
 </blockquote>
 </div>
 </div>

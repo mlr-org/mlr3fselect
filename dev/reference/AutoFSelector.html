@@ -58,8 +58,10 @@ The <code><a href="auto_fselector.html">auto_fselector()</a></code> function cre
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The AutoFSelector is a <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> which wraps another <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> and performs the following steps during <code>$train()</code>:</p><ol><li><p>The wrapped (inner) learner is trained on the feature subsets via resampling.
-The feature selection can be specified by providing a <a href="FSelector.html">FSelector</a>, a <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>, a <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> and a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>.</p></li>
+    <p>The AutoFSelector is a <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> which wraps another <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> and performs the following steps
+during <code>$train()</code>:</p><ol><li><p>The wrapped (inner) learner is trained on the feature subsets via resampling.
+The feature selection can be specified by providing a <a href="FSelector.html">FSelector</a>, a <a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>, a <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>,
+and a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>.</p></li>
 <li><p>A final model is fit on the complete training data with the best-found feature subset.</p></li>
 </ol><p>During <code>$predict()</code> the AutoFSelector just calls the predict method of the wrapped (inner) learner.</p>
     </div>
@@ -67,7 +69,8 @@ The feature selection can be specified by providing a <a href="FSelector.html">F
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
 
 
-<p>There are several sections about feature selection in the <a href="https://mlr3book.mlr-org.com" class="external-link">mlr3book</a>.</p><ul><li><p>Estimate Model Performance with <a href="https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect" class="external-link">nested resampling</a>.</p></li>
+<p>There are several sections about feature selection in the <a href="https://mlr3book.mlr-org.com" class="external-link">mlr3book</a>.</p><ul><li><p>Estimate Model Performance with
+<a href="https://mlr3book.mlr-org.com/chapters/chapter6/feature_selection.html#sec-autofselect" class="external-link">nested resampling</a>.</p></li>
 </ul><p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p>
     </div>
     <div class="section level2">
@@ -75,8 +78,10 @@ The feature selection can be specified by providing a <a href="FSelector.html">F
 
 
 <p>Nested resampling can be performed by passing an AutoFSelector object to <code><a href="https://mlr3.mlr-org.com/reference/resample.html" class="external-link">mlr3::resample()</a></code> or <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">mlr3::benchmark()</a></code>.
-To access the inner resampling results, set <code>store_fselect_instance = TRUE</code> and execute <code><a href="https://mlr3.mlr-org.com/reference/resample.html" class="external-link">mlr3::resample()</a></code> or <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">mlr3::benchmark()</a></code> with <code>store_models = TRUE</code> (see examples).
-The <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> passed to the AutoFSelector is meant to be the inner resampling, operating on the training set of an arbitrary outer resampling.
+To access the inner resampling results, set <code>store_fselect_instance = TRUE</code> and execute <code><a href="https://mlr3.mlr-org.com/reference/resample.html" class="external-link">mlr3::resample()</a></code> or
+<code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">mlr3::benchmark()</a></code> with <code>store_models = TRUE</code> (see examples).
+The <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> passed to the AutoFSelector is meant to be the inner resampling,
+operating on the training set of an arbitrary outer resampling.
 For this reason it is not feasible to pass an instantiated <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a> here.</p>
     </div>
     <div class="section level2">
@@ -132,7 +137,9 @@ Hash (unique identifier) for this object.</p></dd>
 
 <dt><code>phash</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
-Hash (unique identifier) for this partial object, excluding some components which are varied systematically during tuning (parameter values) or feature selection (feature names).</p></dd>
+Hash (unique identifier) for this partial object,
+excluding some components which are varied systematically during tuning (parameter values)
+or feature selection (feature names).</p></dd>
 
 
 </dl><p></p></div>

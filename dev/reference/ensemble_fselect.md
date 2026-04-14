@@ -45,6 +45,13 @@ and Applications*, **32**(10), 5951–5973. ISSN 14333058,
 [doi:10.1007/s00521-019-04082-3](https://doi.org/10.1007/s00521-019-04082-3)
 .
 
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian,
+Becker, Marc, Aittokallio, Tero (2026). “Prognostic biomarker discovery
+in pancreatic cancer through hybrid ensemble feature selection and
+multi-omics data.” *BioData Mining*. ISSN 1756-0381,
+[doi:10.1186/s13040-026-00546-0](https://doi.org/10.1186/s13040-026-00546-0)
+.
+
 ## Arguments
 
 - fselector:
@@ -138,7 +145,7 @@ For each subsample (train set) generated in the previous step, the
 method performs **wrapped-based feature selection**
 ([auto_fselector](https://mlr3fselect.mlr-org.com/dev/reference/auto_fselector.md))
 using each provided learner, the given inner resampling method, inner
-performance measure and optimization algorithm. This process
+performance measure, and optimization algorithm. This process
 generates 1) the best feature subset and 2) a final trained model using
 these best features, for each combination of subsample and learner. The
 final models are then scored on their ability to predict on the

@@ -38,6 +38,13 @@ ISSN 1546-1696,
 [doi:10.1038/s41587-023-02033-x](https://doi.org/10.1038/s41587-023-02033-x)
 , <https://www.nature.com/articles/s41587-023-02033-x>.
 
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian,
+Becker, Marc, Aittokallio, Tero (2026). “Prognostic biomarker discovery
+in pancreatic cancer through hybrid ensemble feature selection and
+multi-omics data.” *BioData Mining*. ISSN 1756-0381,
+[doi:10.1186/s13040-026-00546-0](https://doi.org/10.1186/s13040-026-00546-0)
+.
+
 ## Arguments
 
 - task:

@@ -87,6 +87,8 @@ supplied to `as.data.table()`.
 
 ## Super classes
 
+[`bbotk::EvalInstance`](https://bbotk.mlr-org.com/reference/EvalInstance.html)
+-\>
 [`bbotk::OptimInstance`](https://bbotk.mlr-org.com/reference/OptimInstance.html)
 -\>
 [`bbotk::OptimInstanceBatch`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html)
@@ -115,8 +117,8 @@ supplied to `as.data.table()`.
 
 Inherited methods
 
+- [`bbotk::EvalInstance$format()`](https://bbotk.mlr-org.com/reference/EvalInstance.html#method-format)
 - [`bbotk::OptimInstance$clear()`](https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear)
-- [`bbotk::OptimInstance$format()`](https://bbotk.mlr-org.com/reference/OptimInstance.html#method-format)
 - [`bbotk::OptimInstanceBatch$eval_batch()`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-eval_batch)
 - [`bbotk::OptimInstanceBatch$objective_function()`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-objective_function)
 
@@ -323,10 +325,10 @@ as.data.table(instance$archive)
 #> 4:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.15400458            0.064 2026-04-14 15:22:43        1        0      0
-#> 2: 0.19768624            0.016 2026-04-14 15:22:43        1        0      0
-#> 3: 0.06112382            0.017 2026-04-14 15:22:44        2        0      0
-#> 4: 0.18893974            0.016 2026-04-14 15:22:44        2        0      0
+#> 1: 0.15400458            0.066 2026-04-14 16:23:34        1        0      0
+#> 2: 0.19768624            0.018 2026-04-14 16:23:34        1        0      0
+#> 3: 0.06112382            0.020 2026-04-14 16:23:35        2        0      0
+#> 4: 0.18893974            0.020 2026-04-14 16:23:35        2        0      0
 #>                                                      features n_features
 #>                                                        <list>     <list>
 #> 1:                  bill_depth,flipper_length,island,sex,year          5

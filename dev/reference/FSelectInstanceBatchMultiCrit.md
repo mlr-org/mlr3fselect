@@ -38,6 +38,8 @@ supplied to `as.data.table()`.
 
 ## Super classes
 
+[`bbotk::EvalInstance`](https://bbotk.mlr-org.com/reference/EvalInstance.html)
+-\>
 [`bbotk::OptimInstance`](https://bbotk.mlr-org.com/reference/OptimInstance.html)
 -\>
 [`bbotk::OptimInstanceBatch`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html)
@@ -66,8 +68,8 @@ supplied to `as.data.table()`.
 
 Inherited methods
 
+- [`bbotk::EvalInstance$format()`](https://bbotk.mlr-org.com/reference/EvalInstance.html#method-format)
 - [`bbotk::OptimInstance$clear()`](https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear)
-- [`bbotk::OptimInstance$format()`](https://bbotk.mlr-org.com/reference/OptimInstance.html#method-format)
 - [`bbotk::OptimInstanceBatch$eval_batch()`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-eval_batch)
 - [`bbotk::OptimInstanceBatch$objective_function()`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-objective_function)
 
@@ -240,15 +242,15 @@ fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
 #> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#> 2:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 2:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>                                                             features n_features
 #>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#>    classif.ce time_train
-#>         <num>      <num>
-#> 1: 0.07261632      0.003
-#> 2: 0.07261632      0.003
+#> 2:                                                    flipper_length          7
+#>    classif.ce  time_train
+#>         <num>       <num>
+#> 1: 0.07261632 0.003666667
+#> 2: 0.19471142 0.003000000
 
 # Optimal feature sets
 instance$result_feature_set
@@ -257,8 +259,7 @@ instance$result_feature_set
 #> [5] "island"         "sex"            "year"          
 #> 
 #> [[2]]
-#> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"
-#> [5] "island"         "sex"            "year"          
+#> [1] "flipper_length"
 #> 
 
 # Inspect all evaluated sets
@@ -269,23 +270,29 @@ as.data.table(instance$archive)
 #> 2:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
 #> 3:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
 #> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
-#>    classif.ce time_train runtime_learners           timestamp batch_nr warnings
-#>         <num>      <num>            <num>              <POSc>    <int>    <int>
-#> 1: 0.07261632      0.003            0.035 2026-04-14 15:22:43        1        0
-#> 2: 0.07261632      0.003            0.017 2026-04-14 15:22:43        1        0
-#> 3: 0.25858124      0.003            0.015 2026-04-14 15:22:43        2        0
-#> 4: 0.19471142      0.003            0.034 2026-04-14 15:22:43        2        0
-#>    errors                                                          features
-#>     <int>                                                            <list>
-#> 1:      0 bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]
-#> 2:      0 bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]
-#> 3:      0                                                       bill_length
-#> 4:      0                                                    flipper_length
-#>    n_features  resample_result
-#>        <list>           <list>
-#> 1:          7 <ResampleResult>
-#> 2:          7 <ResampleResult>
-#> 3:          1 <ResampleResult>
-#> 4:          1 <ResampleResult>
+#>    classif.ce  time_train runtime_learners           timestamp batch_nr
+#>         <num>       <num>            <num>              <POSc>    <int>
+#> 1: 0.07261632 0.003666667            0.021 2026-04-14 16:23:34        1
+#> 2: 0.07261632 0.004000000            0.021 2026-04-14 16:23:34        1
+#> 3: 0.25858124 0.003000000            0.015 2026-04-14 16:23:34        2
+#> 4: 0.19471142 0.003000000            0.032 2026-04-14 16:23:34        2
+#>    warnings errors
+#>       <int>  <int>
+#> 1:        0      0
+#> 2:        0      0
+#> 3:        0      0
+#> 4:        0      0
+#>                                                             features n_features
+#>                                                               <list>     <list>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#> 3:                                                       bill_length          1
+#> 4:                                                    flipper_length          1
+#>     resample_result
+#>              <list>
+#> 1: <ResampleResult>
+#> 2: <ResampleResult>
+#> 3: <ResampleResult>
+#> 4: <ResampleResult>
 # }
 ```

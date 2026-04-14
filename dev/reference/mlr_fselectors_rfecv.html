@@ -7,15 +7,23 @@
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Feature Selection with Recursive Feature Elimination with Cross Validation — mlr_fselectors_rfecv"><meta name="description" content="Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
 See FSelectorBatchRFE for a description of the base algorithm.
-RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
-Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
-The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
-Only works with mlr3::Learners that can calculate importance scores (see the section on optional extractors in mlr3::Learner)."><meta property="og:description" content="Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
+RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number
+of features.
+Then a recursive feature elimination is run again on the complete dataset
+with the optimal number of features as the final feature set size.
+The performance of the optimal feature set is calculated on the complete data set
+and should not be reported as the performance of the final model.
+Only works with mlr3::Learners that can calculate importance scores
+(see the section on optional extractors in mlr3::Learner)."><meta property="og:description" content="Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
 See FSelectorBatchRFE for a description of the base algorithm.
-RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
-Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
-The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
-Only works with mlr3::Learners that can calculate importance scores (see the section on optional extractors in mlr3::Learner)."><meta property="og:image" content="https://mlr3fselect.mlr-org.com/logo.png"><meta name="robots" content="noindex"></head><body>
+RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number
+of features.
+Then a recursive feature elimination is run again on the complete dataset
+with the optimal number of features as the final feature set size.
+The performance of the optimal feature set is calculated on the complete data set
+and should not be reported as the performance of the final model.
+Only works with mlr3::Learners that can calculate importance scores
+(see the section on optional extractors in mlr3::Learner)."><meta property="og:image" content="https://mlr3fselect.mlr-org.com/logo.png"><meta name="robots" content="noindex"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -61,10 +69,14 @@ Only works with mlr3::Learners that can calculate importance scores (see the sec
     <div class="ref-description section level2">
     <p>Feature selection using the Recursive Feature Elimination with Cross-Validation (RFE-CV) algorithm.
 See <a href="mlr_fselectors_rfe.html">FSelectorBatchRFE</a> for a description of the base algorithm.
-RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number of features.
-Then a recursive feature elimination is run again on the complete dataset with the optimal number of features as the final feature set size.
-The performance of the optimal feature set is calculated on the complete data set and should not be reported as the performance of the final model.
-Only works with <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>s that can calculate importance scores (see the section on optional extractors in <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>).</p>
+RFE-CV runs a recursive feature elimination in each iteration of a cross-validation to determine the optimal number
+of features.
+Then a recursive feature elimination is run again on the complete dataset
+with the optimal number of features as the final feature set size.
+The performance of the optimal feature set is calculated on the complete data set
+and should not be reported as the performance of the final model.
+Only works with <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>s that can calculate importance scores
+(see the section on optional extractors in <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>).</p>
     </div>
 
 
@@ -72,9 +84,11 @@ Only works with <a href="https://mlr3.mlr-org.com/reference/Learner.html" class=
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The resampling strategy is changed during the feature selection.
 The resampling strategy passed to the instance (<code>resampling</code>) is used to determine the optimal number of features.
-Usually, a cross-validation strategy is used and a recursive feature elimination is run in each iteration of the cross-validation.
+Usually, a cross-validation strategy is used
+and a recursive feature elimination is run in each iteration of the cross-validation.
 Internally, <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_custom.html" class="external-link">mlr3::ResamplingCustom</a> is used to emulate this part of the algorithm.
-In the final recursive feature elimination run the resampling strategy is changed to <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_insample.html" class="external-link">mlr3::ResamplingInsample</a> i.e. the complete data set is used for training and testing.</p>
+In the final recursive feature elimination run the resampling strategy is changed to <a href="https://mlr3.mlr-org.com/reference/mlr_resamplings_insample.html" class="external-link">mlr3::ResamplingInsample</a>
+i.e. the complete data set is used for training and testing.</p>
 <p>The feature selection terminates itself when the optimal number of features is reached.
 It is not necessary to set a termination criterion.</p>
     </div>
@@ -91,7 +105,8 @@ The importance score vector of the feature subset.</p></li>
     <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
 
 
-<p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p><ul><li><p>Utilize the built-in feature importance of models with <a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</p></li>
+<p>The <a href="https://mlr-org.com/gallery.html" class="external-link">gallery</a> features a collection of case studies and demos about optimization.</p><ul><li><p>Utilize the built-in feature importance of models with
+<a href="https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/" class="external-link">Recursive Feature Elimination</a>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
@@ -229,14 +244,14 @@ If <code>TRUE</code> (default), the feature importance is calculated in each ite
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classif.ce runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;num&gt;            &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.08695652            0.006 2026-04-14 15:23:19        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.04347826            0.006 2026-04-14 15:23:19        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.07017544            0.005 2026-04-14 15:23:19        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.08695652            0.006 2026-04-14 15:23:19        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.05217391            0.005 2026-04-14 15:23:19        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.07017544            0.005 2026-04-14 15:23:19        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.007 2026-04-14 15:23:19        3        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.03779070            0.005 2026-04-14 15:23:20        4        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 0.08695652            0.007 2026-04-14 16:24:14        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 0.04347826            0.006 2026-04-14 16:24:14        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 0.07017544            0.006 2026-04-14 16:24:14        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 0.08695652            0.006 2026-04-14 16:24:14        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 0.05217391            0.005 2026-04-14 16:24:14        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 0.07017544            0.005 2026-04-14 16:24:14        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: 0.03488372            0.006 2026-04-14 16:24:14        3        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: 0.03779070            0.007 2026-04-14 16:24:14        4        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            importance iteration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                &lt;list&gt;     &lt;int&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:       91.03050,79.32583,65.55837,60.87563,49.73684, 0.00000,...[7]         1</span>
