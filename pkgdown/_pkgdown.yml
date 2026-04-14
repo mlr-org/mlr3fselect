@@ -73,10 +73,10 @@ reference:
       - starts_with("callback")
       - starts_with("mlr3fselect.")
       - assert_async_fselect_callback
-      - mlr3fselect_assertions
   - title: Miscellaneous
     contents:
       - faggregate
+      - mlr3fselect_assertions
   - title: Package
     contents:
       - mlr3fselect-package
