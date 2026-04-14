@@ -16,7 +16,8 @@ Feature selection using Random Search Algorithm.
 \details{
 The feature sets are randomly drawn.
 The sets are evaluated in batches of size \code{batch_size}.
-Larger batches mean we can parallelize more, smaller batches imply a more fine-grained checking of termination criteria.
+Larger batches mean we can parallelize more,
+smaller batches imply a more fine-grained checking of termination criteria.
 }
 \section{Dictionary}{
 

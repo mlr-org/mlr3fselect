@@ -5,16 +5,20 @@
 \title{Class for Single Criterion Feature Selection}
 \description{
 The \link{FSelectInstanceBatchSingleCrit} specifies a feature selection problem for a \link{FSelector}.
-The function \code{\link[=fsi]{fsi()}} creates a \link{FSelectInstanceBatchSingleCrit} and the function \code{\link[=fselect]{fselect()}} creates an instance internally.
+The function \code{\link[=fsi]{fsi()}} creates a \link{FSelectInstanceBatchSingleCrit} and the function \code{\link[=fselect]{fselect()}} creates an instance
+internally.
 
-The instance contains an \link{ObjectiveFSelectBatch} object that encodes the black box objective function a \link{FSelector} has to optimize.
+The instance contains an \link{ObjectiveFSelectBatch} object that encodes the black box objective function a \link{FSelector}
+has to optimize.
 The instance allows the basic operations of querying the objective at design points (\verb{$eval_batch()}).
 This operation is usually done by the \link{FSelector}.
 Evaluations of feature subsets are performed in batches by calling \code{\link[mlr3:benchmark]{mlr3::benchmark()}} internally.
 The evaluated feature subsets are stored in the \link[=ArchiveBatchFSelect]{Archive} (\verb{$archive}).
 Before a batch is evaluated, the \link[bbotk:Terminator]{bbotk::Terminator} is queried for the remaining budget.
-If the available budget is exhausted, an exception is raised, and no further evaluations can be performed from this point on.
-The \link{FSelector} is also supposed to store its final result, consisting of a selected feature subset and associated estimated performance values, by calling the method \code{instance$assign_result()}.
+If the available budget is exhausted, an exception is raised,
+and no further evaluations can be performed from this point on.
+The \link{FSelector} is also supposed to store its final result, consisting of a selected feature subset and associated
+estimated performance values, by calling the method \code{instance$assign_result()}.
 }
 \section{Default Measures}{
 
@@ -49,7 +53,8 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 \section{Analysis}{
 
 For analyzing the feature selection results, it is recommended to pass the archive to \code{as.data.table()}.
-The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature set.
+The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature
+set.
 
 The archive provides various getters (e.g. \verb{$learners()}) to ease the access.
 All getters extract by position (\code{i}) or unique hash (\code{uhash}).
@@ -92,7 +97,7 @@ as.data.table(instance$archive)
 }
 }
 \section{Super classes}{
-\code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceBatch]{bbotk::OptimInstanceBatch}} -> \code{\link[bbotk:OptimInstanceBatchSingleCrit]{bbotk::OptimInstanceBatchSingleCrit}} -> \code{FSelectInstanceBatchSingleCrit}
+\code{\link[bbotk:EvalInstance]{bbotk::EvalInstance}} -> \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceBatch]{bbotk::OptimInstanceBatch}} -> \code{\link[bbotk:OptimInstanceBatchSingleCrit]{bbotk::OptimInstanceBatchSingleCrit}} -> \code{FSelectInstanceBatchSingleCrit}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -114,8 +119,8 @@ Feature set for task subsetting.}
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-clear'><code>bbotk::OptimInstance$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-format'><code>bbotk::OptimInstance$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="eval_batch"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-eval_batch'><code>bbotk::OptimInstanceBatch$eval_batch()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="objective_function"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-objective_function'><code>bbotk::OptimInstanceBatch$objective_function()</code></a></span></li>
 </ul>

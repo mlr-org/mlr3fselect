@@ -13,12 +13,14 @@ ISSN 1573-0565, \doi{10.1023/A:1012487302797}.
 \description{
 Feature selection using the Recursive Feature Elimination (RFE) algorithm.
 Recursive feature elimination iteratively removes features with a low importance score.
-Only works with \link[mlr3:Learner]{mlr3::Learner}s that can calculate importance scores (see the section on optional extractors in \link[mlr3:Learner]{mlr3::Learner}).
+Only works with \link[mlr3:Learner]{mlr3::Learner}s that can calculate importance scores
+(see the section on optional extractors in \link[mlr3:Learner]{mlr3::Learner}).
 }
 \details{
 The learner is trained on all features at the start and importance scores are calculated for each feature.
 Then the least important feature is removed and the learner is trained on the reduced feature set.
-The importance scores are calculated again and the procedure is repeated until the desired number of features is reached.
+The importance scores are calculated again and the procedure is repeated until the desired number of features is
+reached.
 The non-recursive option (\code{recursive = FALSE}) only uses the importance scores calculated in the first iteration.
 
 The feature selection terminates itself when \code{n_features} is reached.
@@ -26,8 +28,10 @@ It is not necessary to set a termination criterion.
 
 When using a cross-validation resampling strategy, the importance scores of the resampling iterations are aggregated.
 The parameter \code{aggregation} determines how the importance scores are aggregated.
-By default (\code{"rank"}), the importance score vector of each fold is ranked and the feature with the lowest average rank is removed.
-The option \code{"mean"} averages the score of each feature across the resampling iterations and removes the feature with the lowest average score.
+By default (\code{"rank"}), the importance score vector of each fold is ranked and the feature with the lowest average
+rank is removed.
+The option \code{"mean"} averages the score of each feature across the resampling iterations and removes the feature
+with the lowest average score.
 Averaging the scores is not appropriate for most importance measures.
 }
 \section{Archive}{
@@ -43,7 +47,8 @@ The importance score vector of the feature subset.
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
 \itemize{
-\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+\item Utilize the built-in feature importance of models with
+\href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
 }
 }
 

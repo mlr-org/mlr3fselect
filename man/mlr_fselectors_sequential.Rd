@@ -8,8 +8,10 @@
 Feature selection using Sequential Search Algorithm.
 }
 \details{
-Sequential forward selection (\code{strategy = fsf}) extends the feature set in each iteration with the feature that increases the model's performance the most.
-Sequential backward selection (\code{strategy = fsb}) follows the same idea but starts with all features and removes features from the set.
+Sequential forward selection (\code{strategy = fsf}) extends the feature set in each iteration
+with the feature that increases the model's performance the most.
+Sequential backward selection (\code{strategy = fsb}) follows the same idea but starts with all features and removes
+features from the set.
 
 The feature selection terminates itself when \code{min_features} or \code{max_features} is reached.
 It is not necessary to set a termination criterion.

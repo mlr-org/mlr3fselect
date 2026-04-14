@@ -37,7 +37,8 @@ Uninstantiated resamplings are instantiated during construction so that all feat
 Already instantiated resamplings are kept unchanged.}
 
 \item{measures}{(\link[mlr3:Measure]{mlr3::Measure} or list of \link[mlr3:Measure]{mlr3::Measure})\cr
-A single measure creates a \link{FSelectInstanceBatchSingleCrit} and multiple measures a \link{FSelectInstanceBatchMultiCrit}.
+A single measure creates a \link{FSelectInstanceBatchSingleCrit}
+and multiple measures a \link{FSelectInstanceBatchMultiCrit}.
 If \code{NULL}, default measure is used.}
 
 \item{term_evals}{(\code{integer(1)})\cr
@@ -80,14 +81,18 @@ If a rush instance is supplied, the optimization runs without batches.}
 }
 \description{
 Function to optimize the features of a \link[mlr3:Learner]{mlr3::Learner}.
-The function internally creates a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit} which describes the feature selection problem.
-It executes the feature selection with the \link{FSelector} (\code{fselector}) and returns the result with the feature selection instance (\verb{$result}).
-The \link{ArchiveBatchFSelect} and \link{ArchiveAsyncFSelect} (\verb{$archive}) stores all evaluated feature subsets and performance scores.
+The function internally creates a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit} which describes
+the feature selection problem.
+It executes the feature selection with the \link{FSelector} (\code{fselector}) and returns the result with the feature
+selection instance (\verb{$result}).
+The \link{ArchiveBatchFSelect} and \link{ArchiveAsyncFSelect} (\verb{$archive}) stores all evaluated feature subsets and
+performance scores.
 
 You can find an overview of all feature selectors on our \href{https://mlr-org.com/fselectors.html}{website}.
 }
 \details{
-The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure} and \link[bbotk:Terminator]{bbotk::Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
+The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3:Resampling]{mlr3::Resampling}, \link[mlr3:Measure]{mlr3::Measure}
+and \link[bbotk:Terminator]{bbotk::Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
 If multiple performance \link[mlr3:Measure]{mlr3::Measure}s are supplied, a \link{FSelectInstanceBatchMultiCrit} is created.
 The parameter \code{term_evals} and \code{term_time} are shortcuts to create a \link[bbotk:Terminator]{bbotk::Terminator}.
 If both parameters are passed, a \link[bbotk:mlr_terminators_combo]{bbotk::TerminatorCombo} is constructed.
@@ -127,7 +132,8 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 \section{Analysis}{
 
 For analyzing the feature selection results, it is recommended to pass the archive to \code{as.data.table()}.
-The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature set.
+The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature
+set.
 
 The archive provides various getters (e.g. \verb{$learners()}) to ease the access.
 All getters extract by position (\code{i}) or unique hash (\code{uhash}).

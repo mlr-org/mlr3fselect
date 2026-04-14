@@ -62,9 +62,9 @@ The referenced help package can be opened via method \verb{$help()}.}
 \if{latex}{\out{\hypertarget{method-FSelectorAsyncFromOptimizerAsync-optimize}{}}}
 \subsection{Method \code{optimize()}}{
 Performs the feature selection on a \link{FSelectInstanceAsyncSingleCrit} /
-\link{FSelectInstanceAsyncMultiCrit} until termination. The single evaluations and
-the final results will be written into the \link{ArchiveAsyncFSelect} that
-resides in the \link{FSelectInstanceAsyncSingleCrit}/\link{FSelectInstanceAsyncMultiCrit}.
+\link{FSelectInstanceAsyncMultiCrit} until termination.
+The single evaluations and the final results will be written into the \link{ArchiveAsyncFSelect}
+that resides in the \link{FSelectInstanceAsyncSingleCrit}/\link{FSelectInstanceAsyncMultiCrit}.
 The final result is returned.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncFromOptimizerAsync$optimize(inst)}\if{html}{\out{</div>}}

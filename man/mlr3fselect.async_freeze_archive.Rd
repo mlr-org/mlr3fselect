@@ -4,7 +4,8 @@
 \alias{mlr3fselect.async_freeze_archive}
 \title{Freeze Archive Callback}
 \description{
-This \link{CallbackAsyncFSelect} freezes the \link{ArchiveAsyncFSelect} to \link{ArchiveAsyncFSelectFrozen} after the optimization has finished.
+This \link{CallbackAsyncFSelect} freezes the \link{ArchiveAsyncFSelect} to \link{ArchiveAsyncFSelectFrozen} after the optimization
+has finished.
 }
 \examples{
 clbk("mlr3fselect.async_freeze_archive")

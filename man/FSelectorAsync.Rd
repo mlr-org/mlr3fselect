@@ -7,7 +7,8 @@
 The \link{FSelectorAsync} implements the asynchronous optimization algorithm.
 }
 \details{
-\link{FSelectorAsync} is an abstract base class that implements the base functionality each asynchronous fselector must provide.
+\link{FSelectorAsync} is an abstract base class that implements the base functionality each asynchronous fselector must
+provide.
 }
 \section{Resources}{
 
@@ -18,8 +19,10 @@ There are several sections about feature selection in the \href{https://mlr3book
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
 \itemize{
-\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
-\item Run a feature selection with \href{https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/}{Shadow Variable Search}.
+\item Utilize the built-in feature importance of models with
+\href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+\item Run a feature selection with
+\href{https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/}{Shadow Variable Search}.
 }
 }
 
@@ -47,8 +50,10 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 \if{html}{\out{<a id="method-FSelectorAsync-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorAsync-optimize}{}}}
 \subsection{Method \code{optimize()}}{
-Performs the feature selection on a \link{FSelectInstanceAsyncSingleCrit} or \link{FSelectInstanceAsyncMultiCrit} until termination.
-The single evaluations will be written into the \link{ArchiveAsyncFSelect} that resides in the \link{FSelectInstanceAsyncSingleCrit}/\link{FSelectInstanceAsyncMultiCrit}.
+Performs the feature selection on a \link{FSelectInstanceAsyncSingleCrit} or
+\link{FSelectInstanceAsyncMultiCrit} until termination.
+The single evaluations will be written into the \link{ArchiveAsyncFSelect}
+that resides in the \link{FSelectInstanceAsyncSingleCrit}/\link{FSelectInstanceAsyncMultiCrit}.
 The result will be written into the instance object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectorAsync$optimize(inst)}\if{html}{\out{</div>}}

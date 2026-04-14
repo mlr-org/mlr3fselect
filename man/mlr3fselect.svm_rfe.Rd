@@ -14,7 +14,7 @@ Runs a recursive feature elimination with a \link[mlr3learners:mlr_learners_clas
 The SVM must be configured with \code{type = "C-classification"} and \code{kernel = "linear"}.
 }
 \examples{
-\dontshow{if (requireNamespace("mlr3learners", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("mlr3learners", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 clbk("mlr3fselect.svm_rfe")
 
 library(mlr3learners)

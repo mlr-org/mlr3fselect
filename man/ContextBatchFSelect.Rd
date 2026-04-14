@@ -4,7 +4,8 @@
 \alias{ContextBatchFSelect}
 \title{Evaluation Context}
 \description{
-The \link{ContextBatchFSelect} allows \link{CallbackBatchFSelect}s to access and modify data while a batch of feature sets is evaluated.
+The \link{ContextBatchFSelect} allows \link{CallbackBatchFSelect}s to access and modify data while a batch of feature sets is
+evaluated.
 See the section on active bindings for a list of modifiable objects.
 See \code{\link[=callback_batch_fselect]{callback_batch_fselect()}} for a list of stages that access \link{ContextBatchFSelect}.
 }
