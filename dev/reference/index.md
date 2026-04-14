@@ -82,17 +82,6 @@
 - [`auto_fselector()`](https://mlr3fselect.mlr-org.com/dev/reference/auto_fselector.md)
   : Function for Automatic Feature Selection
 
-## Terminators
-
-- [`reexports`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
-  [`mlr_terminators`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
-  [`trm`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
-  [`trms`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
-  [`mlr_callbacks`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
-  [`clbk`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
-  [`clbks`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
-  : Objects exported from other packages
-
 ## Nested Resampling
 
 - [`fselect_nested()`](https://mlr3fselect.mlr-org.com/dev/reference/fselect_nested.md)
@@ -126,9 +115,6 @@
   : Create Asynchronous Feature Selection Callback
 - [`callback_batch_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/callback_batch_fselect.md)
   : Create Feature Selection Callback
-- [`mlr3fselect`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect-package.md)
-  [`mlr3fselect-package`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect-package.md)
-  : mlr3fselect: Feature Selection for 'mlr3'
 - [`mlr3fselect.async_freeze_archive`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.async_freeze_archive.md)
   : Freeze Archive Callback
 - [`mlr3fselect.backup`](https://mlr3fselect.mlr-org.com/dev/reference/mlr3fselect.backup.md)
@@ -142,6 +128,17 @@
 - [`assert_async_fselect_callback()`](https://mlr3fselect.mlr-org.com/dev/reference/assert_async_fselect_callback.md)
   [`assert_async_fselect_callbacks()`](https://mlr3fselect.mlr-org.com/dev/reference/assert_async_fselect_callback.md)
   : Assertions for Callbacks
+
+## Reexports
+
+- [`reexports`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
+  [`mlr_terminators`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
+  [`trm`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
+  [`trms`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
+  [`mlr_callbacks`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
+  [`clbk`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
+  [`clbks`](https://mlr3fselect.mlr-org.com/dev/reference/reexports.md)
+  : Objects exported from other packages
 
 ## Miscellaneous
 
