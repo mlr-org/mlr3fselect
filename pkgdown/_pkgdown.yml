@@ -53,9 +53,6 @@ reference:
       - fs
       - AutoFSelector
       - auto_fselector
-  - title: Terminators
-    contents:
-      - reexports
   - title: Nested Resampling
     contents:
       - fselect_nested
@@ -71,8 +68,11 @@ reference:
       - starts_with("Callback")
       - starts_with("Context")
       - starts_with("callback")
-      - starts_with("mlr3fselect.")
+      - starts_with("mlr3fselect\\.")
       - assert_async_fselect_callback
+  - title: Reexports
+    contents:
+      - reexports
   - title: Miscellaneous
     contents:
       - faggregate
