@@ -143,7 +143,6 @@ bibentries = c(
     issn    = "1756-0381",
     journal = "BioData Mining",
     title   = "Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data",
-    url     = "https://doi.org/10.1186/s13040-026-00546-0",
     year    = "2026"
   )
 )

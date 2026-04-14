@@ -14,10 +14,10 @@ Hedou, Julien, Maric, Ivana, Bellan, Gregoire, Einhaus, Jakob, Gaudilliere, K. D
 \emph{Nature Biotechnology 2024}, 1--13.
 ISSN 1546-1696, \doi{10.1038/s41587-023-02033-x}, \url{https://www.nature.com/articles/s41587-023-02033-x}.
 
-Zobolas, John, George, Anne-Marie, López, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
 \dQuote{Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.}
 \emph{BioData Mining}.
-ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}, \url{https://doi.org/10.1186/s13040-026-00546-0}.
+ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}.
 }
 \usage{
 embedded_ensemble_fselect(

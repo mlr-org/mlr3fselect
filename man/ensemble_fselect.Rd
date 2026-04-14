@@ -19,10 +19,10 @@ Pes, Barbara (2020).
 \emph{Neural Computing and Applications}, \bold{32}(10), 5951--5973.
 ISSN 14333058, \doi{10.1007/s00521-019-04082-3}.
 
-Zobolas, John, George, Anne-Marie, López, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
 \dQuote{Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.}
 \emph{BioData Mining}.
-ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}, \url{https://doi.org/10.1186/s13040-026-00546-0}.
+ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}.
 }
 \usage{
 ensemble_fselect(

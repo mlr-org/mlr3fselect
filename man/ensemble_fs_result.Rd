@@ -79,10 +79,10 @@ Meinshausen, Nicolai, Buhlmann, Peter (2010).
 \emph{Journal of the Royal Statistical Society Series B: Statistical Methodology}, \bold{72}(4), 417--473.
 ISSN 1369-7412, \doi{10.1111/J.1467-9868.2010.00740.X}, 0809.2932.
 
-Zobolas, John, George, Anne-Marie, López, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
 \dQuote{Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.}
 \emph{BioData Mining}.
-ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}, \url{https://doi.org/10.1186/s13040-026-00546-0}.
+ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
