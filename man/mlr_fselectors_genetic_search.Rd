@@ -24,7 +24,7 @@ If more iterations are needed, set \code{ìters} to a higher value in the parame
 }
 
 \examples{
-\dontshow{if (mlr3misc::require_namespaces("genalg", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (mlr3misc::require_namespaces("genalg", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Feature Selection
 \donttest{
 

@@ -31,7 +31,8 @@ Uninstantiated resamplings are instantiated during construction so that all feat
 Already instantiated resamplings are kept unchanged.}
 
 \item{measures}{(\link[mlr3:Measure]{mlr3::Measure} or list of \link[mlr3:Measure]{mlr3::Measure})\cr
-A single measure creates a \link{FSelectInstanceAsyncSingleCrit} and multiple measures a \link{FSelectInstanceAsyncMultiCrit}.
+A single measure creates a \link{FSelectInstanceAsyncSingleCrit}
+and multiple measures a \link{FSelectInstanceAsyncMultiCrit}.
 If \code{NULL}, default measure is used.}
 
 \item{terminator}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr

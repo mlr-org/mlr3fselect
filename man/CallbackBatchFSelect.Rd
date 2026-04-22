@@ -7,7 +7,8 @@
 Specialized \link[bbotk:CallbackBatch]{bbotk::CallbackBatch} for feature selection.
 Callbacks allow customizing the behavior of processes in mlr3fselect.
 The \code{\link[=callback_batch_fselect]{callback_batch_fselect()}} function creates a \link{CallbackBatchFSelect}.
-Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_callbacks} and can be retrieved with \code{\link[=clbk]{clbk()}}.
+Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_callbacks} and can be retrieved
+with \code{\link[=clbk]{clbk()}}.
 For more information on callbacks see \code{\link[=callback_batch_fselect]{callback_batch_fselect()}}.
 }
 \examples{
@@ -39,7 +40,8 @@ Called in \code{ObjectiveFSelectBatch$eval_many()}.}
 \item{\code{on_auto_fselector_before_final_model}}{(\verb{function()})\cr
 Stage called before the final model is trained.
 Called in \code{AutoFSelector$train()}.
-This stage is called after the optimization has finished and the final model is trained with the best feature set found.}
+This stage is called after the optimization has finished and the final model is trained with the best feature set
+found.}
 
 \item{\code{on_auto_fselector_after_final_model}}{(\verb{function()})\cr
 Stage called after the final model is trained.

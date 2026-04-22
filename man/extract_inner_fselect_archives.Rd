@@ -20,7 +20,8 @@ excluded.}
 Extract inner feature selection archives of nested resampling.
 Implemented for \link[mlr3:ResampleResult]{mlr3::ResampleResult} and \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
 The function iterates over the \link{AutoFSelector} objects and binds the archives to a \code{\link[data.table:data.table]{data.table::data.table()}}.
-\link{AutoFSelector} must be initialized with \code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()} must be called with \code{store_models = TRUE}.
+\link{AutoFSelector} must be initialized with \code{store_fselect_instance = TRUE} and \code{resample()} or \code{benchmark()}
+must be called with \code{store_models = TRUE}.
 }
 \section{Data structure}{
 
@@ -34,9 +35,8 @@ Iteration of the outer resampling.
 \item One column for each feature of the task.
 \item One column for each performance measure.
 \item \code{runtime_learners} (\code{numeric(1)})\cr
-Sum of training and predict times logged in learners per
-\link[mlr3:ResampleResult]{mlr3::ResampleResult} / evaluation. This does not include potential
-overhead time.
+Sum of training and predict times logged in learners per \link[mlr3:ResampleResult]{mlr3::ResampleResult} / evaluation.
+This does not include potential overhead time.
 \item \code{timestamp} (\code{POSIXct})\cr
 Time stamp when the evaluation was logged into the archive.
 \item \code{batch_nr} (\code{integer(1)})\cr

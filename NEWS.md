@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * refactor: Remove rush backward compatibility.
+* docs: add hEFS reference.
 
 # mlr3fselect 1.5.1
 

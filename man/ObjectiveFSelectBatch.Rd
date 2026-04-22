@@ -5,7 +5,8 @@
 \title{Class for Feature Selection Objective}
 \description{
 Stores the objective function that estimates the performance of feature subsets.
-This class is usually constructed internally by the \link{FSelectInstanceBatchSingleCrit} / \link{FSelectInstanceBatchMultiCrit}.
+This class is usually constructed internally by the \link{FSelectInstanceBatchSingleCrit} or
+\link{FSelectInstanceBatchMultiCrit}.
 }
 \section{Super classes}{
 \code{\link[bbotk:Objective]{bbotk::Objective}} -> \code{\link[mlr3fselect:ObjectiveFSelect]{mlr3fselect::ObjectiveFSelect}} -> \code{ObjectiveFSelectBatch}

@@ -137,4 +137,4 @@ If you use **mlr3fselect** in your work, please cite the package:
 
 The **ensemble feature selection** components (hEFS) are described in the following study:
 
-> Zobolas, J., George, A.-M., López, A., Fischer, S., Becker, M., & Aittokallio, T. (2025). Optimizing prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data. arXiv. https://arxiv.org/pdf/2509.02648
+> Zobolas, J., George, AM., López, A., Fischer, S., Becker, M., & Aittokallio, T. Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data. BioData Mining (2026). https://doi.org/10.1186/s13040-026-00546-0

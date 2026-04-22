@@ -13,14 +13,21 @@ A subclass is implemented in the following way:
 \item Inherit from FSelectorBatch.
 \item Specify the private abstract method \verb{$.optimize()} and use it to call into your optimizer.
 \item You need to call \code{instance$eval_batch()} to evaluate design points.
-\item The batch evaluation is requested at the \link{FSelectInstanceBatchSingleCrit}/\link{FSelectInstanceBatchMultiCrit} object \code{instance}, so each batch is possibly executed in parallel via \code{\link[mlr3:benchmark]{mlr3::benchmark()}}, and all evaluations are stored inside of \code{instance$archive}.
-\item Before the batch evaluation, the \link[bbotk:Terminator]{bbotk::Terminator} is checked, and if it is positive, an exception of class \code{"terminated_error"} is generated.
-In the latter case the current batch of evaluations is still stored in \code{instance}, but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
+\item The batch evaluation is requested at the \link{FSelectInstanceBatchSingleCrit}/\link{FSelectInstanceBatchMultiCrit} object
+\code{instance}, so each batch is possibly executed in parallel via \code{\link[mlr3:benchmark]{mlr3::benchmark()}},
+and all evaluations are stored inside of \code{instance$archive}.
+\item Before the batch evaluation, the \link[bbotk:Terminator]{bbotk::Terminator} is checked, and if it is positive,
+an exception of class \code{"terminated_error"} is generated.
+In the latter case the current batch of evaluations is still stored in \code{instance},
+but the numeric scores are not sent back to the handling optimizer as it has lost execution control.
 \item After such an exception was caught we select the best set from \code{instance$archive} and return it.
-\item Note that therefore more points than specified by the \link[bbotk:Terminator]{bbotk::Terminator} may be evaluated, as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
+\item Note that therefore more points than specified by the \link[bbotk:Terminator]{bbotk::Terminator} may be evaluated,
+as the Terminator is only checked before a batch evaluation, and not in-between evaluation in a batch.
 How many more depends on the setting of the batch size.
-\item Overwrite the private super-method \code{.assign_result()} if you want to decide how to estimate the final set in the instance and its estimated performance.
-The default behavior is: We pick the best resample experiment, regarding the given measure, then assign its set and aggregated performance to the instance.
+\item Overwrite the private super-method \code{.assign_result()} if you want to decide how to estimate the final set
+in the instance and its estimated performance.
+The default behavior is: We pick the best resample experiment, regarding the given measure,
+then assign its set and aggregated performance to the instance.
 }
 }
 \section{Private Methods}{
@@ -44,8 +51,10 @@ There are several sections about feature selection in the \href{https://mlr3book
 
 The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of case studies and demos about optimization.
 \itemize{
-\item Utilize the built-in feature importance of models with \href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
-\item Run a feature selection with \href{https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/}{Shadow Variable Search}.
+\item Utilize the built-in feature importance of models with
+\href{https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/}{Recursive Feature Elimination}.
+\item Run a feature selection with
+\href{https://mlr-org.com/gallery/optimization/2023-02-01-shadow-variable-search/}{Shadow Variable Search}.
 }
 }
 
@@ -117,8 +126,10 @@ The referenced help package can be opened via method \verb{$help()}.}
 \if{html}{\out{<a id="method-FSelectorBatch-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatch-optimize}{}}}
 \subsection{Method \code{optimize()}}{
-Performs the feature selection on a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit} until termination.
-The single evaluations will be written into the \link{ArchiveBatchFSelect} that resides in the \link{FSelectInstanceBatchSingleCrit} / \link{FSelectInstanceBatchMultiCrit}.
+Performs the feature selection on a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit}
+until termination.
+The single evaluations will be written into the \link{ArchiveBatchFSelect}
+that resides in the \link{FSelectInstanceBatchSingleCrit} / \link{FSelectInstanceBatchMultiCrit}.
 The result will be written into the instance object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{FSelectorBatch$optimize(inst)}\if{html}{\out{</div>}}

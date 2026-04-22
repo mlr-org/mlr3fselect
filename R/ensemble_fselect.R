@@ -60,7 +60,7 @@
 #' @returns an [EnsembleFSResult] object.
 #'
 #' @source
-#' `r format_bib("saeys2008", "abeel2010", "pes2020")`
+#' `r format_bib("saeys2008", "abeel2010", "pes2020", "zobolas2026")`
 #' @export
 #' @examples
 #' \donttest{

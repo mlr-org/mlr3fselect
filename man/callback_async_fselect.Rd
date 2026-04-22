@@ -137,7 +137,8 @@ Called in \code{Optimizer$optimize()}.}
 }
 \description{
 Function to create a \link{CallbackAsyncFSelect}.
-Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_callbacks} and can be retrieved with \code{\link[=clbk]{clbk()}}.
+Predefined callbacks are stored in the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_callbacks} and can be retrieved
+with \code{\link[=clbk]{clbk()}}.
 
 Feature selection callbacks can be called from different stages of the feature selection process.
 The stages are prefixed with \verb{on_*}.

@@ -5,7 +5,8 @@
 \title{Single Criterion Feature Selection with Rush}
 \description{
 The \code{FSelectInstanceAsyncSingleCrit} specifies a feature selection problem for a \link{FSelectorAsync}.
-The function \code{\link[=fsi_async]{fsi_async()}} creates a \link{FSelectInstanceAsyncSingleCrit} and the function \code{\link[=fselect]{fselect()}} creates an instance internally.
+The function \code{\link[=fsi_async]{fsi_async()}} creates a \link{FSelectInstanceAsyncSingleCrit}
+and the function \code{\link[=fselect]{fselect()}} creates an instance internally.
 }
 \section{Default Measures}{
 
@@ -24,7 +25,8 @@ The default measure depends on the task type.\tabular{lll}{
 
 \section{Analysis}{
 
-For analyzing the feature selection results, it is recommended to pass the \link{ArchiveAsyncFSelect} to \code{as.data.table()}.
+For analyzing the feature selection results,
+it is recommended to pass the \link{ArchiveAsyncFSelect} to \code{as.data.table()}.
 The returned data table contains the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature subset evaluation.
 }
 
@@ -44,7 +46,7 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 }
 
 \section{Super classes}{
-\code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceAsync]{bbotk::OptimInstanceAsync}} -> \code{\link[bbotk:OptimInstanceAsyncSingleCrit]{bbotk::OptimInstanceAsyncSingleCrit}} -> \code{FSelectInstanceAsyncSingleCrit}
+\code{\link[bbotk:EvalInstance]{bbotk::EvalInstance}} -> \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceAsync]{bbotk::OptimInstanceAsync}} -> \code{\link[bbotk:OptimInstanceAsyncSingleCrit]{bbotk::OptimInstanceAsyncSingleCrit}} -> \code{FSelectInstanceAsyncSingleCrit}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -57,7 +59,7 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="format"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-format'><code>bbotk::OptimInstance$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="clear"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-clear'><code>bbotk::OptimInstanceAsync$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="print"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-print'><code>bbotk::OptimInstanceAsync$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="reconnect"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-reconnect'><code>bbotk::OptimInstanceAsync$reconnect()</code></a></span></li>

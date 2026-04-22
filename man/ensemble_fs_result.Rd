@@ -6,7 +6,8 @@
 \title{Ensemble Feature Selection Result}
 \description{
 The \code{EnsembleFSResult} stores the results of ensemble feature selection.
-It includes methods for evaluating the stability of the feature selection process and for ranking the selected features among others.
+It includes methods for evaluating the stability of the feature selection process and
+for ranking the selected features among others.
 
 Both functions \code{\link[=ensemble_fselect]{ensemble_fselect()}} and \code{\link[=embedded_ensemble_fselect]{embedded_ensemble_fselect()}} return an object of this class.
 }
@@ -28,7 +29,7 @@ Combines multiple \link{EnsembleFSResult} objects into a new \link{EnsembleFSRes
 }
 
 \examples{
-\dontshow{if (mlr3misc::require_namespaces("fastVoteR", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (mlr3misc::require_namespaces("fastVoteR", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   efsr = ensemble_fselect(
     fselector = fs("rfe", n_features = 2, feature_fraction = 0.8),
@@ -77,6 +78,11 @@ Meinshausen, Nicolai, Buhlmann, Peter (2010).
 \dQuote{Stability Selection.}
 \emph{Journal of the Royal Statistical Society Series B: Statistical Methodology}, \bold{72}(4), 417--473.
 ISSN 1369-7412, \doi{10.1111/J.1467-9868.2010.00740.X}, 0809.2932.
+
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
+\dQuote{Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.}
+\emph{BioData Mining}.
+ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -104,11 +110,13 @@ Returns the 'active' measure that is used in methods of this object.}
 \item{\code{active_measure}}{(\code{character(1)})\cr
 Indicates the type of the active performance measure.
 
-During the ensemble feature selection process, the dataset is split into \strong{multiple subsamples} (train/test splits) using an initial resampling scheme.
+During the ensemble feature selection process, the dataset is split into \strong{multiple subsamples}
+(train/test splits) using an initial resampling scheme.
 So, performance can be evaluated using one of two measures:
 \itemize{
 \item \code{"outer"}: measure used to evaluate the performance on the test sets.
-\item \code{"inner"}: measure used for optimization and to compute performance during inner resampling on the training sets.
+\item \code{"inner"}: measure used for optimization and
+to compute performance during inner resampling on the training sets.
 }}
 
 \item{\code{n_resamples}}{(\code{character(1)})\cr
@@ -157,8 +165,7 @@ Mandatory column names should include \code{"resampling_iteration"}, \code{"lear
 A column named as \code{{measure$id}} (scores on the test sets) must also be
 always present.
 The column with the performance scores on the inner resampling of the train sets is not mandatory,
-but note that it should be named as \verb{\{inner_measure$id\}_inner} to distinguish from
-the \code{{measure$id}}.}
+but note that it should be named as \verb{\{inner_measure$id\}_inner} to distinguish from the \code{{measure$id}}.}
 
 \item{\code{features}}{(\code{character()})\cr
 The vector of features of the task that was used in the ensemble feature
@@ -174,7 +181,8 @@ By default, this serves as the 'active' measure for the methods of this object.
 The active measure can be updated using the \verb{$set_active_measure()} method.}
 
 \item{\code{inner_measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
-The performance measure used to optimize and evaluate the learners during the inner resampling process of the training sets, generated as part of the ensemble feature selection procedure.}
+The performance measure used to optimize and evaluate the learners during the inner resampling
+process of the training sets, generated as part of the ensemble feature selection procedure.}
 }
 \if{html}{\out{</div>}}
 }
@@ -252,7 +260,8 @@ Combines a second \link{EnsembleFSResult} into the current object, modifying it 
 If the second \link{EnsembleFSResult} (\code{efsr}) is \code{NULL}, the method returns the object unmodified.
 
 Both objects must have the same task features and \code{measure}.
-If the \code{inner_measure} differs between the objects or is \code{NULL} in either, it will be set to \code{NULL} in the combined object.
+If the \code{inner_measure} differs between the objects or is \code{NULL} in either,
+it will be set to \code{NULL} in the combined object.
 Additionally, the \code{importance} column will be removed if it is missing in either object.
 If both objects contain a \code{benchmark_result}, these will be combined.
 Otherwise, the combined object will have a \code{NULL} value for \code{benchmark_result}.
@@ -314,31 +323,40 @@ Whether to shuffle the task features randomly before computing the ranking.
 Shuffling ensures consistent random tie-breaking across methods and prevents
 deterministic biases when features with equal scores are encountered.
 Default is \code{TRUE} and it's advised to set a seed before running this function.
-Set to \code{FALSE} if deterministic ordering of features is preferred (same as
-during initialization).}
+Set to \code{FALSE} if deterministic ordering of features is preferred (same as during initialization).}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Details}{
-The feature ranking process is built on the following framework: models act as \emph{voters}, features act as \emph{candidates}, and voters select certain candidates (features).
-The primary objective is to compile these selections into a consensus ranked list of features, effectively forming a committee.
+The feature ranking process is built on the following framework: models act as \emph{voters},
+features act as \emph{candidates}, and voters select certain candidates (features).
+The primary objective is to compile these selections into a consensus ranked list of features,
+effectively forming a committee.
 
 For every feature a score is calculated, which depends on the \code{"method"} argument.
 The higher the score, the higher the ranking of the feature.
-Note that some methods output a feature ranking instead of a score per feature, so we always include \strong{Borda's score}, which is method-agnostic, i.e. it can be used to compare the feature rankings across different methods.
+Note that some methods output a feature ranking instead of a score per feature,
+so we always include \strong{Borda's score}, which is method-agnostic,
+i.e. it can be used to compare the feature rankings across different methods.
 
 We shuffle the input candidates/features so that we enforce random tie-breaking.
-Users should set the same \code{seed} for consistent comparison between the different feature ranking methods and for reproducibility.
+Users should set the same \code{seed} for consistent comparison between the different feature ranking methods
+and for reproducibility.
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores (depends on the \code{"method"}). Columns are as follows:
+A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores
+(depends on the \code{"method"}).
+Columns are as follows:
 \itemize{
 \item \code{"feature"}: Feature names.
 \item \code{"score"}: Scores assigned to each feature based on the selected method (if applicable).
-\item \code{"norm_score"}: Normalized scores (if applicable), scaled to the range \eqn{[0,1]}, which can be loosely interpreted as \strong{selection probabilities} (Meinshausen et al. (2010)).
-\item \code{"borda_score"}: Borda scores for method-agnostic comparison, ranging in \eqn{[0,1]}, where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
-This column is always included so that feature ranking methods that output only rankings have also a feature-wise score.
+\item \code{"norm_score"}: Normalized scores (if applicable), scaled to the range \eqn{[0,1]},
+which can be loosely interpreted as \strong{selection probabilities} (Meinshausen et al. (2010)).
+\item \code{"borda_score"}: Borda scores for method-agnostic comparison, ranging in \eqn{[0,1]},
+where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
+This column is always included so that feature ranking methods that output only rankings
+have also a feature-wise score.
 }
 }
 }
@@ -411,24 +429,33 @@ is determined by the ensemble feature selection process.}
 Two options are available for the Pareto front:
 \itemize{
 \item \code{"empirical"} (default): returns the empirical Pareto front.
-\item \code{"estimated"}: the Pareto front points are estimated by fitting a linear model with the inversed of the number of features (\eqn{1/x}) as input and the associated performance scores as output.
+\item \code{"estimated"}: the Pareto front points are estimated by fitting a linear model
+with the inversed of the number of features (\eqn{1/x}) as input
+and the associated performance scores as output.
 }
 
-This method is useful when the Pareto points are sparse and the front assumes a convex shape if better performance corresponds to lower measure values (e.g. classification error), or a concave shape otherwise (e.g. classification accuracy).
+This method is useful when the Pareto points are sparse and the front assumes a convex shape if better
+performance corresponds to lower measure values (e.g. classification error),
+or a concave shape otherwise (e.g. classification accuracy).
 
-When \code{type = "estimated"}, the estimated Pareto front includes points with the number of features ranging from 1 up to \code{max_nfeatures}.
-If \code{max_nfeatures} is not provided, it defaults to the maximum number of features available in the ensemble feature selection \code{result}, i.e. the maximum out of all learners and resamplings included.
+When \code{type = "estimated"}, the estimated Pareto front includes points with the number of features ranging
+from 1 up to \code{max_nfeatures}.
+If \code{max_nfeatures} is not provided, it defaults to the maximum number of features available
+in the ensemble feature selection \code{result}, i.e. the maximum out of all learners and resamplings included.
 }
 
 \subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} with columns the number of features and the performance that together form the Pareto front.
+A \link[data.table:data.table]{data.table::data.table} with columns the number of features and the performance
+that together form the Pareto front.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-knee_points"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-knee_points}{}}}
 \subsection{Method \code{knee_points()}}{
-This function implements various \emph{knee} point identification (KPI) methods, which select points in the Pareto front, such that an optimal trade-off between performance and number of features is achieved.
+This function implements various \emph{knee} point identification (KPI) methods,
+which select points in the Pareto front,
+such that an optimal trade-off between performance and number of features is achieved.
 In most cases, only one such point is returned.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(
@@ -459,7 +486,9 @@ See \code{pareto_front()} method for more details.}
 \subsection{Details}{
 The available KPI methods are:
 \itemize{
-\item \code{"NBI"} (default): The \strong{Normal-Boundary Intersection} method is a geometry-based method which calculates the perpendicular distance of each point from the line connecting the first and last points of the Pareto front.
+\item \code{"NBI"} (default): The \strong{Normal-Boundary Intersection} method is a geometry-based method which calculates
+the perpendicular distance of each point from the line connecting the first and last points of the Pareto
+front.
 The knee point is determined as the Pareto point with the maximum distance from this line, see Das (1999).
 }
 }

@@ -10,7 +10,8 @@ The \link{ArchiveBatchFSelect} stores all evaluated feature sets and performance
 The \link{ArchiveBatchFSelect} is a container around a \code{\link[data.table:data.table]{data.table::data.table()}}.
 Each row corresponds to a single evaluation of a feature set.
 See the section on Data Structure for more information.
-The archive stores additionally a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} (\verb{$benchmark_result}) that records the resampling experiments.
+The archive stores additionally a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} (\verb{$benchmark_result}) that records the resampling
+experiments.
 Each experiment corresponds to a single evaluation of a feature set.
 The table (\verb{$data}) and the benchmark result (\verb{$benchmark_result}) are linked by the \code{uhash} column.
 If the archive is passed to \code{as.data.table()}, both are joined automatically.
@@ -37,7 +38,8 @@ Connects each feature set to the resampling experiment stored in the \link[mlr3:
 \section{Analysis}{
 
 For analyzing the feature selection results, it is recommended to pass the archive to \code{as.data.table()}.
-The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature set.
+The returned data table is joined with the benchmark result which adds the \link[mlr3:ResampleResult]{mlr3::ResampleResult} for each feature
+set.
 
 The archive provides various getters (e.g. \verb{$learners()}) to ease the access.
 All getters extract by position (\code{i}) or unique hash (\code{uhash}).
@@ -221,9 +223,8 @@ The \code{uhash} value to filter for.}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-predictions"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-predictions}{}}}
 \subsection{Method \code{predictions()}}{
-Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by
-position or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually
-exclusive.
+Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by position or by unique hash \code{uhash}.
+\code{i} and \code{uhash} are mutually exclusive.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$predictions(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
 }
