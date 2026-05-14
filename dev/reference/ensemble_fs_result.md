@@ -611,13 +611,14 @@ The objects of this class are cloneable with this method.
 
   # returns a ranking of all features
   head(efsr$feature_ranking())
-#>   feature    score norm_score borda_score
-#> 1     V15 1.449275  0.5952381   1.0000000
-#> 2     V10 1.449275  0.5952381   0.9830508
-#> 3     V16 1.449275  0.5952381   0.9661017
-#> 4     V36 1.449275  0.5952381   0.9491525
-#> 5     V17 1.449275  0.5952381   0.9322034
-#> 6     V11 1.449275  0.5952381   0.9152542
+#>    feature    score norm_score borda_score
+#>     <char>    <num>      <num>       <num>
+#> 1:     V15 1.449275  0.5952381   1.0000000
+#> 2:     V10 1.449275  0.5952381   0.9830508
+#> 3:     V16 1.449275  0.5952381   0.9661017
+#> 4:     V36 1.449275  0.5952381   0.9491525
+#> 5:     V17 1.449275  0.5952381   0.9322034
+#> 6:     V11 1.449275  0.5952381   0.9152542
 
   # returns the empirical pareto front, i.e. n_features vs measure (error)
   efsr$pareto_front()

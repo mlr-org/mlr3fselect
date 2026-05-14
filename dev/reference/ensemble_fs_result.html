@@ -605,13 +605,14 @@ The knee point is determined as the Pareto point with the maximum distance from 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns a ranking of all features</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">efsr</span><span class="op">$</span><span class="fu">feature_ranking</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   feature    score norm_score borda_score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     V15 1.449275  0.5952381   1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     V10 1.449275  0.5952381   0.9830508</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     V16 1.449275  0.5952381   0.9661017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     V36 1.449275  0.5952381   0.9491525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     V17 1.449275  0.5952381   0.9322034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     V11 1.449275  0.5952381   0.9152542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    feature    score norm_score borda_score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;char&gt;    &lt;num&gt;      &lt;num&gt;       &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     V15 1.449275  0.5952381   1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     V10 1.449275  0.5952381   0.9830508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     V16 1.449275  0.5952381   0.9661017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:     V36 1.449275  0.5952381   0.9491525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:     V17 1.449275  0.5952381   0.9322034</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:     V11 1.449275  0.5952381   0.9152542</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># returns the empirical pareto front, i.e. n_features vs measure (error)</span></span></span>
 <span class="r-in"><span>  <span class="va">efsr</span><span class="op">$</span><span class="fu">pareto_front</span><span class="op">(</span><span class="op">)</span></span></span>
