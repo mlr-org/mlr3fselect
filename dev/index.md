@@ -48,12 +48,14 @@ summarizes the most important functions of mlr3fselect.
 Install the last release from CRAN:
 
 ``` r
+
 install.packages("mlr3fselect")
 ```
 
 Install the development version from GitHub:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("mlr-org/mlr3fselect")
 ```
@@ -64,6 +66,7 @@ We run a feature selection for a support vector machine on the
 [Spam](https://mlr3.mlr-org.com/reference/mlr_tasks_spam.html) data set.
 
 ``` r
+
 library("mlr3verse")
 
 tsk("spam")
@@ -89,6 +92,7 @@ We construct an instance with the
 function. The instance describes the optimization problem.
 
 ``` r
+
 instance = fsi(
   task = tsk("spam"),
   learner = lrn("classif.svm", type = "C-classification"),
@@ -110,6 +114,7 @@ instance
 We select a simple random search as the optimization algorithm.
 
 ``` r
+
 fselector = fs("random_search", batch_size = 5)
 fselector
 ```
@@ -126,6 +131,7 @@ To start the feature selection, we simply pass the instance to the
 fselector.
 
 ``` r
+
 fselector$optimize(instance)
 ```
 
@@ -133,6 +139,7 @@ The fselector writes the best hyperparameter configuration to the
 instance.
 
 ``` r
+
 instance$result_feature_set
 ```
 
@@ -156,6 +163,7 @@ instance$result_feature_set
 And the corresponding measured performance.
 
 ``` r
+
 instance$result_y
 ```
 
@@ -167,6 +175,7 @@ instance$result_y
 The archive contains all evaluated hyperparameter configurations.
 
 ``` r
+
 as.data.table(instance$archive)
 ```
 
@@ -190,6 +199,7 @@ We fit a final model with the optimized feature set to make predictions
 on new data.
 
 ``` r
+
 task = tsk("spam")
 learner = lrn("classif.svm", type = "C-classification")
 
