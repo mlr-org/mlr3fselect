@@ -1,7 +1,9 @@
 # mlr3fselect (development version)
 
 * refactor: Remove rush backward compatibility.
-* docs: add hEFS reference.
+* docs: Add hEFS reference.
+* compatibility: `fastVoteR` 0.0.3
+* feat: Add `$rm_zero_features()` method in `EnsembleFSResult` to remove result rows where no features were selected.
 
 # mlr3fselect 1.5.1
 
