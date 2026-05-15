@@ -383,6 +383,27 @@ test_that("combining EnsembleFSResult objects", {
   expect_null(get_private(comb_all)$.inner_measure$id)
 })
 
+test_that("EnsembleFSResult can remove zero-feature results", {
+  result = data.table(
+    resampling_iteration = c(1L, 2L, 3L),
+    learner_id = c("lrn1", "lrn1", "lrn2"),
+    n_features = c(0L, 2L, 0L),
+    features = list(character(), c("V1", "V2"), character()),
+    classif.ce = c(0.5, 0.2, 0.4)
+  )
+  efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:2), measure = msr("classif.ce"))
+
+  suppressMessages(efsr$rm_zero_features())
+
+  expect_data_table(efsr$result, nrows = 1L)
+  expect_equal(efsr$result$resampling_iteration, 2L)
+  expect_equal(efsr$result$learner_id, "lrn1")
+  expect_equal(efsr$result$n_features, 2L)
+  expect_equal(efsr$result$features[[1L]], c("V1", "V2"))
+  expect_equal(efsr$n_learners, 1L)
+  expect_equal(efsr$n_resamples, 1L)
+})
+
 test_that("different callbacks can be set", {
   callback_test = callback_batch_fselect("mlr3fselect.test", on_eval_before_archive = function(callback, context) {
     context$aggregated_performance[, callback_active := context$instance$objective$learner$id == "classif.rpart"]

@@ -153,6 +153,55 @@ EnsembleFSResult = R6Class(
     },
 
     #' @description
+    #' Removes rows from the ensemble feature selection result where no features were selected.
+    #'
+    #' If a benchmark result is stored, the corresponding resampling iterations are removed as well.
+    #' The stability measures are reset and need to be recalculated after this operation.
+    #'
+    #' This method modifies the object by reference.
+    #' To preserve the original state, explicitly `$clone()` the object beforehand.
+    #'
+    #' @return
+    #' Returns the object itself, but modified **by reference**.
+    rm_zero_features = function() {
+      keep = private$.result$n_features > 0L
+      n_removed = sum(!keep)
+
+      if (n_removed > 0L) {
+        if (!is.null(self$benchmark_result)) {
+          # filter the resample results of the benchmark result
+          resample_results = self$benchmark_result$resample_results$resample_result
+          filtered_resample_results = list()
+          keep_rows = which(keep)
+          row_start = 0L
+
+          for (rr in resample_results) {
+            row_end = row_start + rr$iters
+            iters = keep_rows[keep_rows > row_start & keep_rows <= row_end] - row_start
+            row_start = row_end
+
+            if (length(iters)) {
+              rr$filter(iters = iters)
+              filtered_resample_results = c(filtered_resample_results, list(rr))
+            }
+          }
+
+          self$benchmark_result = if (length(filtered_resample_results)) {
+            do.call(c, filtered_resample_results)
+          } else {
+            NULL
+          }
+        }
+        private$.result = private$.result[keep]
+        private$.stability_global = NULL
+        private$.stability_learner = NULL
+        print(sprintf("%s results with zero selected features have been removed.", n_removed))
+      }
+
+      invisible(self)
+    },
+
+    #' @description
     #' Use this function to change the active measure.
     #'
     #' @param which (`character(1)`)\cr

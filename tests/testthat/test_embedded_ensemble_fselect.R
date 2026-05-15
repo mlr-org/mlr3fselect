@@ -62,6 +62,15 @@ test_that("embedded efs works", {
   feature_ranking = efsr$feature_ranking()
   expect_data_table(feature_ranking, nrows = length(task$feature_names))
   expect_equal(names(feature_ranking), c("feature", "score", "norm_score", "borda_score"))
+
+  # remove zero features (all rows with the featureless learner should be removed)
+  efsr_zero = efsr$clone(deep = TRUE)
+  suppressMessages(efsr_zero$rm_zero_features())
+  expect_data_table(efsr_zero$result, nrows = 5L)
+  expect_true(all(efsr_zero$result$n_features > 0L))
+  expect_equal(efsr_zero$n_learners, 1L)
+  expect_equal(efsr_zero$n_resamples, 5L)
+  expect_equal(efsr_zero$benchmark_result$n_resample_results, 1L)
 })
 
 test_that("combine embedded efs results", {
