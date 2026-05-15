@@ -259,8 +259,8 @@ EnsembleFSResult = R6Class(
     #' i.e. it can be used to compare the feature rankings across different methods.
     #'
     #' We shuffle the input candidates/features so that we enforce random tie-breaking.
-    #' Users should set the same `seed` for consistent comparison between the different feature ranking methods
-    #' and for reproducibility.
+    #' Users should set the same `seed` for consistent comparison between the different
+    #' feature ranking methods and for reproducibility.
     #'
     #' @param method (`character(1)`)\cr
     #' The method to calculate the feature ranking. See [fastVoteR::rank_candidates()]
@@ -269,12 +269,14 @@ EnsembleFSResult = R6Class(
     #' @param use_weights (`logical(1)`)\cr
     #' The default value (`TRUE`) uses weights equal to the performance scores
     #' of each voter/model (or the inverse scores if the measure is minimized).
-    #' If `FALSE`, we treat all voters as equal and assign them all a weight equal to 1.
+    #' Note that the performance scores need to be non-negative for the weights
+    #' to be meaningful. If the scores can be negative, it is recommended to set
+    #' `use_weights = FALSE`, which treats all voters as equal and assigns them
+    #' the same weight equal to 1.
     #' @param committee_size (`integer(1)`)\cr
-    #' Number of top selected features in the output ranking.
-    #' This parameter can be used to speed-up methods that build a committee sequentially
-    #' (`"seq_pav"`), by requesting only the top N selected candidates/features
-    #' and not the complete feature ranking.
+    #' The number of top-ranked features to return.
+    #' This can speed up methods that build a committee sequentially (e.g., `"seq_pav"`)
+    #' by computing only the top N candidates rather than the full ranking.
     #' @param shuffle_features (`logical(1)`)\cr
     #' Whether to shuffle the task features randomly before computing the ranking.
     #' Shuffling ensures consistent random tie-breaking across methods and prevents
@@ -293,7 +295,6 @@ EnsembleFSResult = R6Class(
     #'   where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
     #'   This column is always included so that feature ranking methods that output only rankings
     #'   have also a feature-wise score.
-    #'
     feature_ranking = function(method = "av", use_weights = TRUE, committee_size = NULL, shuffle_features = TRUE) {
       requireNamespace("fastVoteR")
 
@@ -315,14 +316,16 @@ EnsembleFSResult = R6Class(
       }
 
       # get consensus feature ranking
-      res = fastVoteR::rank_candidates(
-        voters = voters,
-        candidates = candidates,
-        weights = weights,
-        committee_size = committee_size,
-        method = method,
-        borda_score = TRUE,
-        shuffle_candidates = shuffle_features
+      res = as.data.table(
+        fastVoteR::rank_candidates(
+          voters = voters,
+          candidates = candidates,
+          weights = weights,
+          committee_size = committee_size,
+          method = method,
+          borda_score = TRUE,
+          shuffle_candidates = shuffle_features
+        )
       )
 
       setnames(res, "candidate", "feature")

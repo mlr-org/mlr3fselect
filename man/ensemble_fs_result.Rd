@@ -310,13 +310,15 @@ Approval voting (\code{"av"}) is the default method.}
 \item{\code{use_weights}}{(\code{logical(1)})\cr
 The default value (\code{TRUE}) uses weights equal to the performance scores
 of each voter/model (or the inverse scores if the measure is minimized).
-If \code{FALSE}, we treat all voters as equal and assign them all a weight equal to 1.}
+Note that the performance scores need to be non-negative for the weights
+to be meaningful. If the scores can be negative, it is recommended to set
+\code{use_weights = FALSE}, which treats all voters as equal and assigns them
+the same weight equal to 1.}
 
 \item{\code{committee_size}}{(\code{integer(1)})\cr
-Number of top selected features in the output ranking.
-This parameter can be used to speed-up methods that build a committee sequentially
-(\code{"seq_pav"}), by requesting only the top N selected candidates/features
-and not the complete feature ranking.}
+The number of top-ranked features to return.
+This can speed up methods that build a committee sequentially (e.g., \code{"seq_pav"})
+by computing only the top N candidates rather than the full ranking.}
 
 \item{\code{shuffle_features}}{(\code{logical(1)})\cr
 Whether to shuffle the task features randomly before computing the ranking.
@@ -340,8 +342,8 @@ so we always include \strong{Borda's score}, which is method-agnostic,
 i.e. it can be used to compare the feature rankings across different methods.
 
 We shuffle the input candidates/features so that we enforce random tie-breaking.
-Users should set the same \code{seed} for consistent comparison between the different feature ranking methods
-and for reproducibility.
+Users should set the same \code{seed} for consistent comparison between the different
+feature ranking methods and for reproducibility.
 }
 
 \subsection{Returns}{
