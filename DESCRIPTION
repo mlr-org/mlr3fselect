@@ -49,7 +49,7 @@ Suggests:
     rush (>= 1.0.0),
     testthat (>= 3.0.0)
 Remotes:
-    bblodfon/fastVoteR@rm_data_table
+    bblodfon/fastVoteR
 Config/testthat/edition: 3
 Config/testthat/parallel: false
 Encoding: UTF-8
