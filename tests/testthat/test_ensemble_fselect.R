@@ -393,8 +393,7 @@ test_that("EnsembleFSResult can remove zero-feature results", {
   )
   efsr = EnsembleFSResult$new(result = result, features = paste0("V", 1:2), measure = msr("classif.ce"))
 
-  suppressMessages(efsr$rm_zero_features())
-
+  efsr$rm_zero_features()
   expect_data_table(efsr$result, nrows = 1L)
   expect_equal(efsr$result$resampling_iteration, 2L)
   expect_equal(efsr$result$learner_id, "lrn1")

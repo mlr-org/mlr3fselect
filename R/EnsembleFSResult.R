@@ -195,7 +195,7 @@ EnsembleFSResult = R6Class(
         private$.result = private$.result[keep]
         private$.stability_global = NULL
         private$.stability_learner = NULL
-        print(sprintf("%s results with zero selected features have been removed.", n_removed))
+        lg$info(sprintf("%s results with zero selected features have been removed.", n_removed))
       }
 
       invisible(self)

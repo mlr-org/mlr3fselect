@@ -65,7 +65,7 @@ test_that("embedded efs works", {
 
   # remove zero features (all rows with the featureless learner should be removed)
   efsr_zero = efsr$clone(deep = TRUE)
-  suppressMessages(efsr_zero$rm_zero_features())
+  efsr_zero$rm_zero_features()
   expect_data_table(efsr_zero$result, nrows = 5L)
   expect_true(all(efsr_zero$result$n_features > 0L))
   expect_equal(efsr_zero$n_learners, 1L)
