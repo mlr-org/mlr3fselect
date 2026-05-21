@@ -38,7 +38,7 @@ Imports:
     stabm
 Suggests:
     e1071,
-    fastVoteR,
+    fastVoteR (>= 0.0.3),
     genalg,
     mirai,
     mlr3learners,
@@ -48,8 +48,6 @@ Suggests:
     rpart,
     rush (>= 1.0.0),
     testthat (>= 3.0.0)
-Remotes:
-    bblodfon/fastVoteR
 Config/testthat/edition: 3
 Config/testthat/parallel: false
 Encoding: UTF-8
