@@ -38,7 +38,7 @@ Imports:
     stabm
 Suggests:
     e1071,
-    fastVoteR,
+    fastVoteR (>= 0.0.3),
     genalg,
     mirai,
     mlr3learners,
