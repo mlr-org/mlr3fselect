@@ -2,6 +2,10 @@
 
 ## mlr3fselect (development version)
 
+## mlr3fselect 1.6.0
+
+CRAN release: 2026-05-21
+
 - refactor: Remove rush backward compatibility.
 - docs: Add hEFS reference.
 - compatibility: `fastVoteR` 0.0.3
