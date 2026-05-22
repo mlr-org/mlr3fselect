@@ -40,6 +40,13 @@ Methodology*, **72**(4), 417–473. ISSN 1369-7412,
 [doi:10.1111/J.1467-9868.2010.00740.X](https://doi.org/10.1111/J.1467-9868.2010.00740.X)
 , 0809.2932.
 
+Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian,
+Becker, Marc, Aittokallio, Tero (2026). “Prognostic biomarker discovery
+in pancreatic cancer through hybrid ensemble feature selection and
+multi-omics data.” *BioData Mining*. ISSN 1756-0381,
+[doi:10.1186/s13040-026-00546-0](https://doi.org/10.1186/s13040-026-00546-0)
+.
+
 ## Public fields
 
 - `benchmark_result`:
@@ -304,16 +311,17 @@ Calculates the feature ranking via
   (`logical(1)`)  
   The default value (`TRUE`) uses weights equal to the performance
   scores of each voter/model (or the inverse scores if the measure is
-  minimized). If `FALSE`, we treat all voters as equal and assign them
-  all a weight equal to 1.
+  minimized). Note that the performance scores need to be non-negative
+  for the weights to be meaningful. If the scores can be negative, it is
+  recommended to set `use_weights = FALSE`, which treats all voters as
+  equal and assigns them the same weight equal to 1.
 
 - `committee_size`:
 
   (`integer(1)`)  
-  Number of top selected features in the output ranking. This parameter
-  can be used to speed-up methods that build a committee sequentially
-  (`"seq_pav"`), by requesting only the top N selected
-  candidates/features and not the complete feature ranking.
+  The number of top-ranked features to return. This can speed up methods
+  that build a committee sequentially (e.g., `"seq_pav"`) by computing
+  only the top N candidates rather than the full ranking.
 
 - `shuffle_features`:
 

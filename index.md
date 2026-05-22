@@ -48,12 +48,14 @@ summarizes the most important functions of mlr3fselect.
 Install the last release from CRAN:
 
 ``` r
+
 install.packages("mlr3fselect")
 ```
 
 Install the development version from GitHub:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("mlr-org/mlr3fselect")
 ```
@@ -64,6 +66,7 @@ We run a feature selection for a support vector machine on the
 [Spam](https://mlr3.mlr-org.com/reference/mlr_tasks_spam.html) data set.
 
 ``` r
+
 library("mlr3verse")
 
 tsk("spam")
@@ -89,6 +92,7 @@ We construct an instance with the
 The instance describes the optimization problem.
 
 ``` r
+
 instance = fsi(
   task = tsk("spam"),
   learner = lrn("classif.svm", type = "C-classification"),
@@ -100,30 +104,34 @@ instance
 ```
 
 ``` R
-## <FSelectInstanceBatchSingleCrit>
-## * State:  Not optimized
-## * Objective: <ObjectiveFSelectBatch:classif.svm_on_spam>
-## * Terminator: <TerminatorEvals>
+## 
+## ── <FSelectInstanceBatchSingleCrit> ────────────────────────────────────────────────────────────────
+## • State: Not optimized
+## • Objective: <ObjectiveFSelectBatch> (classif.svm_on_spam)
+## • Terminator: <TerminatorEvals>
 ```
 
 We select a simple random search as the optimization algorithm.
 
 ``` r
+
 fselector = fs("random_search", batch_size = 5)
 fselector
 ```
 
 ``` R
-## <FSelectorBatchRandomSearch>: Random Search
-## * Parameters: batch_size=5
-## * Properties: single-crit, multi-crit
-## * Packages: mlr3fselect
+## 
+## ── <FSelectorBatchRandomSearch>: Random Search ─────────────────────────────────────────────────────
+## • Parameters: batch_size=5
+## • Properties: single-crit and multi-crit
+## • Packages: mlr3fselect
 ```
 
 To start the feature selection, we simply pass the instance to the
 fselector.
 
 ``` r
+
 fselector$optimize(instance)
 ```
 
@@ -131,6 +139,7 @@ The fselector writes the best hyperparameter configuration to the
 instance.
 
 ``` r
+
 instance$result_feature_set
 ```
 
@@ -154,6 +163,7 @@ instance$result_feature_set
 And the corresponding measured performance.
 
 ``` r
+
 instance$result_y
 ```
 
@@ -165,6 +175,7 @@ instance$result_y
 The archive contains all evaluated hyperparameter configurations.
 
 ``` r
+
 as.data.table(instance$archive)
 ```
 
@@ -188,6 +199,7 @@ We fit a final model with the optimized feature set to make predictions
 on new data.
 
 ``` r
+
 task = tsk("spam")
 learner = lrn("classif.svm", type = "C-classification")
 
@@ -206,7 +218,7 @@ If you use **mlr3fselect** in your work, please cite the package:
 The **ensemble feature selection** components (hEFS) are described in
 the following study:
 
-> Zobolas, J., George, A.-M., López, A., Fischer, S., Becker, M., &
-> Aittokallio, T. (2025). Optimizing prognostic biomarker discovery in
-> pancreatic cancer through hybrid ensemble feature selection and
-> multi-omics data. arXiv. <https://arxiv.org/pdf/2509.02648>
+> Zobolas, J., George, AM., López, A., Fischer, S., Becker, M., &
+> Aittokallio, T. Prognostic biomarker discovery in pancreatic cancer
+> through hybrid ensemble feature selection and multi-omics data.
+> BioData Mining (2026). <https://doi.org/10.1186/s13040-026-00546-0>

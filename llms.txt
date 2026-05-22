@@ -48,12 +48,14 @@ summarizes the most important functions of mlr3fselect.
 Install the last release from CRAN:
 
 ``` r
+
 install.packages("mlr3fselect")
 ```
 
 Install the development version from GitHub:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("mlr-org/mlr3fselect")
 ```
@@ -64,6 +66,7 @@ We run a feature selection for a support vector machine on the
 [Spam](https://mlr3.mlr-org.com/reference/mlr_tasks_spam.html) data set.
 
 ``` r
+
 library("mlr3verse")
 
 tsk("spam")
@@ -89,6 +92,7 @@ We construct an instance with the
 The instance describes the optimization problem.
 
 ``` r
+
 instance = fsi(
   task = tsk("spam"),
   learner = lrn("classif.svm", type = "C-classification"),
@@ -100,30 +104,34 @@ instance
 ```
 
 ``` R
-## <FSelectInstanceBatchSingleCrit>
-## * State:  Not optimized
-## * Objective: <ObjectiveFSelectBatch:classif.svm_on_spam>
-## * Terminator: <TerminatorEvals>
+## 
+## ── <FSelectInstanceBatchSingleCrit> ────────────────────────────────────────────────────────────────
+## • State: Not optimized
+## • Objective: <ObjectiveFSelectBatch> (classif.svm_on_spam)
+## • Terminator: <TerminatorEvals>
 ```
 
 We select a simple random search as the optimization algorithm.
 
 ``` r
+
 fselector = fs("random_search", batch_size = 5)
 fselector
 ```
 
 ``` R
-## <FSelectorBatchRandomSearch>: Random Search
-## * Parameters: batch_size=5
-## * Properties: single-crit, multi-crit
-## * Packages: mlr3fselect
+## 
+## ── <FSelectorBatchRandomSearch>: Random Search ─────────────────────────────────────────────────────
+## • Parameters: batch_size=5
+## • Properties: single-crit and multi-crit
+## • Packages: mlr3fselect
 ```
 
 To start the feature selection, we simply pass the instance to the
 fselector.
 
 ``` r
+
 fselector$optimize(instance)
 ```
 
@@ -131,6 +139,7 @@ The fselector writes the best hyperparameter configuration to the
 instance.
 
 ``` r
+
 instance$result_feature_set
 ```
 
@@ -154,6 +163,7 @@ instance$result_feature_set
 And the corresponding measured performance.
 
 ``` r
+
 instance$result_y
 ```
 
@@ -165,6 +175,7 @@ instance$result_y
 The archive contains all evaluated hyperparameter configurations.
 
 ``` r
+
 as.data.table(instance$archive)
 ```
 
@@ -188,6 +199,7 @@ We fit a final model with the optimized feature set to make predictions
 on new data.
 
 ``` r
+
 task = tsk("spam")
 learner = lrn("classif.svm", type = "C-classification")
 
@@ -206,31 +218,15 @@ If you use **mlr3fselect** in your work, please cite the package:
 The **ensemble feature selection** components (hEFS) are described in
 the following study:
 
-> Zobolas, J., George, A.-M., López, A., Fischer, S., Becker, M., &
-> Aittokallio, T. (2025). Optimizing prognostic biomarker discovery in
-> pancreatic cancer through hybrid ensemble feature selection and
-> multi-omics data. arXiv. <https://arxiv.org/pdf/2509.02648>
+> Zobolas, J., George, AM., López, A., Fischer, S., Becker, M., &
+> Aittokallio, T. Prognostic biomarker discovery in pancreatic cancer
+> through hybrid ensemble feature selection and multi-omics data.
+> BioData Mining (2026). <https://doi.org/10.1186/s13040-026-00546-0>
 
 # Package index
 
-## All functions
+## Feature Selection Instances
 
-- [`ArchiveAsyncFSelect`](https://mlr3fselect.mlr-org.com/reference/ArchiveAsyncFSelect.md)
-  : Rush Data Storage
-- [`ArchiveAsyncFSelectFrozen`](https://mlr3fselect.mlr-org.com/reference/ArchiveAsyncFSelectFrozen.md)
-  : Frozen Rush Data Storage
-- [`ArchiveBatchFSelect`](https://mlr3fselect.mlr-org.com/reference/ArchiveBatchFSelect.md)
-  : Class for Logging Evaluated Feature Sets
-- [`AutoFSelector`](https://mlr3fselect.mlr-org.com/reference/AutoFSelector.md)
-  : Class for Automatic Feature Selection
-- [`CallbackAsyncFSelect`](https://mlr3fselect.mlr-org.com/reference/CallbackAsyncFSelect.md)
-  : Asynchronous Feature Selection Callback
-- [`CallbackBatchFSelect`](https://mlr3fselect.mlr-org.com/reference/CallbackBatchFSelect.md)
-  : Create Feature Selection Callback
-- [`ContextAsyncFSelect`](https://mlr3fselect.mlr-org.com/reference/ContextAsyncFSelect.md)
-  : Asynchronous Feature Selection Context
-- [`ContextBatchFSelect`](https://mlr3fselect.mlr-org.com/reference/ContextBatchFSelect.md)
-  : Evaluation Context
 - [`FSelectInstanceAsyncMultiCrit`](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceAsyncMultiCrit.md)
   : Multi-Criteria Feature Selection with Rush
 - [`FSelectInstanceAsyncSingleCrit`](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceAsyncSingleCrit.md)
@@ -239,67 +235,34 @@ the following study:
   : Class for Multi Criteria Feature Selection
 - [`FSelectInstanceBatchSingleCrit`](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceBatchSingleCrit.md)
   : Class for Single Criterion Feature Selection
-- [`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
-  : FSelector
-- [`FSelectorAsync`](https://mlr3fselect.mlr-org.com/reference/FSelectorAsync.md)
-  : Class for Asynchronous Feature Selection Algorithms
-- [`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
-  : Class for Batch Feature Selection Algorithms
+- [`fsi()`](https://mlr3fselect.mlr-org.com/reference/fsi.md) :
+  Syntactic Sugar for Feature Selection Instance Construction
+- [`fsi_async()`](https://mlr3fselect.mlr-org.com/reference/fsi_async.md)
+  : Syntactic Sugar for Asynchronous Feature Selection Instance
+  Construction
 - [`ObjectiveFSelect`](https://mlr3fselect.mlr-org.com/reference/ObjectiveFSelect.md)
   : Class for Feature Selection Objective
 - [`ObjectiveFSelectAsync`](https://mlr3fselect.mlr-org.com/reference/ObjectiveFSelectAsync.md)
   : Class for Feature Selection Objective
 - [`ObjectiveFSelectBatch`](https://mlr3fselect.mlr-org.com/reference/ObjectiveFSelectBatch.md)
   : Class for Feature Selection Objective
-- [`assert_async_fselect_callback()`](https://mlr3fselect.mlr-org.com/reference/assert_async_fselect_callback.md)
-  [`assert_async_fselect_callbacks()`](https://mlr3fselect.mlr-org.com/reference/assert_async_fselect_callback.md)
-  : Assertions for Callbacks
-- [`auto_fselector()`](https://mlr3fselect.mlr-org.com/reference/auto_fselector.md)
-  : Function for Automatic Feature Selection
-- [`callback_async_fselect()`](https://mlr3fselect.mlr-org.com/reference/callback_async_fselect.md)
-  : Create Asynchronous Feature Selection Callback
-- [`callback_batch_fselect()`](https://mlr3fselect.mlr-org.com/reference/callback_batch_fselect.md)
-  : Create Feature Selection Callback
-- [`embedded_ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/embedded_ensemble_fselect.md)
-  : Embedded Ensemble Feature Selection
-- [`ensemble_fs_result`](https://mlr3fselect.mlr-org.com/reference/ensemble_fs_result.md)
-  [`EnsembleFSResult`](https://mlr3fselect.mlr-org.com/reference/ensemble_fs_result.md)
-  : Ensemble Feature Selection Result
-- [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/ensemble_fselect.md)
-  : Wrapper-based Ensemble Feature Selection
-- [`extract_inner_fselect_archives()`](https://mlr3fselect.mlr-org.com/reference/extract_inner_fselect_archives.md)
-  : Extract Inner Feature Selection Archives
-- [`extract_inner_fselect_results()`](https://mlr3fselect.mlr-org.com/reference/extract_inner_fselect_results.md)
-  : Extract Inner Feature Selection Results
-- [`faggregate()`](https://mlr3fselect.mlr-org.com/reference/faggregate.md)
-  : Fast Aggregation of ResampleResults and BenchmarkResults
-- [`fs()`](https://mlr3fselect.mlr-org.com/reference/fs.md)
-  [`fss()`](https://mlr3fselect.mlr-org.com/reference/fs.md) : Syntactic
-  Sugar for Feature Selection Objects Construction
+- [`ArchiveAsyncFSelect`](https://mlr3fselect.mlr-org.com/reference/ArchiveAsyncFSelect.md)
+  : Rush Data Storage
+- [`ArchiveAsyncFSelectFrozen`](https://mlr3fselect.mlr-org.com/reference/ArchiveAsyncFSelectFrozen.md)
+  : Frozen Rush Data Storage
+- [`ArchiveBatchFSelect`](https://mlr3fselect.mlr-org.com/reference/ArchiveBatchFSelect.md)
+  : Class for Logging Evaluated Feature Sets
 - [`fselect()`](https://mlr3fselect.mlr-org.com/reference/fselect.md) :
   Function for Feature Selection
-- [`fselect_nested()`](https://mlr3fselect.mlr-org.com/reference/fselect_nested.md)
-  : Function for Nested Resampling
-- [`fsi()`](https://mlr3fselect.mlr-org.com/reference/fsi.md) :
-  Syntactic Sugar for Feature Selection Instance Construction
-- [`fsi_async()`](https://mlr3fselect.mlr-org.com/reference/fsi_async.md)
-  : Syntactic Sugar for Asynchronous Feature Selection Instance
-  Construction
-- [`mlr3fselect`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect-package.md)
-  [`mlr3fselect-package`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect-package.md)
-  : mlr3fselect: Feature Selection for 'mlr3'
-- [`mlr3fselect.async_freeze_archive`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.async_freeze_archive.md)
-  : Freeze Archive Callback
-- [`mlr3fselect.backup`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.backup.md)
-  : Backup Benchmark Result Callback
-- [`mlr3fselect.internal_tuning`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.internal_tuning.md)
-  : Internal Tuning Callback
-- [`mlr3fselect.one_se_rule`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.one_se_rule.md)
-  : One Standard Error Rule Callback
-- [`mlr3fselect.svm_rfe`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.svm_rfe.md)
-  : SVM-RFE Callback
-- [`mlr_fselectors`](https://mlr3fselect.mlr-org.com/reference/mlr_fselectors.md)
-  : Dictionary of FSelectors
+
+## FSelectors
+
+- [`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+  : FSelector
+- [`FSelectorAsync`](https://mlr3fselect.mlr-org.com/reference/FSelectorAsync.md)
+  : Class for Asynchronous Feature Selection Algorithms
+- [`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
+  : Class for Batch Feature Selection Algorithms
 - [`mlr_fselectors_async_design_points`](https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_async_design_points.md)
   [`FSelectorAsyncDesignPoints`](https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_async_design_points.md)
   : Feature Selection with Asynchronous Design Points
@@ -334,4 +297,89 @@ the following study:
 - [`mlr_fselectors_shadow_variable_search`](https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_shadow_variable_search.md)
   [`FSelectorBatchShadowVariableSearch`](https://mlr3fselect.mlr-org.com/reference/mlr_fselectors_shadow_variable_search.md)
   : Feature Selection with Shadow Variable Search
+- [`mlr_fselectors`](https://mlr3fselect.mlr-org.com/reference/mlr_fselectors.md)
+  : Dictionary of FSelectors
+- [`fs()`](https://mlr3fselect.mlr-org.com/reference/fs.md)
+  [`fss()`](https://mlr3fselect.mlr-org.com/reference/fs.md) : Syntactic
+  Sugar for Feature Selection Objects Construction
+- [`AutoFSelector`](https://mlr3fselect.mlr-org.com/reference/AutoFSelector.md)
+  : Class for Automatic Feature Selection
+- [`auto_fselector()`](https://mlr3fselect.mlr-org.com/reference/auto_fselector.md)
+  : Function for Automatic Feature Selection
+
+## Nested Resampling
+
+- [`fselect_nested()`](https://mlr3fselect.mlr-org.com/reference/fselect_nested.md)
+  : Function for Nested Resampling
+- [`extract_inner_fselect_archives()`](https://mlr3fselect.mlr-org.com/reference/extract_inner_fselect_archives.md)
+  : Extract Inner Feature Selection Archives
+- [`extract_inner_fselect_results()`](https://mlr3fselect.mlr-org.com/reference/extract_inner_fselect_results.md)
+  : Extract Inner Feature Selection Results
+
+## Ensemble Feature Selection
+
+- [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/ensemble_fselect.md)
+  : Wrapper-based Ensemble Feature Selection
+- [`embedded_ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/embedded_ensemble_fselect.md)
+  : Embedded Ensemble Feature Selection
+- [`ensemble_fs_result`](https://mlr3fselect.mlr-org.com/reference/ensemble_fs_result.md)
+  [`EnsembleFSResult`](https://mlr3fselect.mlr-org.com/reference/ensemble_fs_result.md)
+  : Ensemble Feature Selection Result
+
+## Callbacks
+
+- [`CallbackAsyncFSelect`](https://mlr3fselect.mlr-org.com/reference/CallbackAsyncFSelect.md)
+  : Asynchronous Feature Selection Callback
+- [`CallbackBatchFSelect`](https://mlr3fselect.mlr-org.com/reference/CallbackBatchFSelect.md)
+  : Create Feature Selection Callback
+- [`ContextAsyncFSelect`](https://mlr3fselect.mlr-org.com/reference/ContextAsyncFSelect.md)
+  : Asynchronous Feature Selection Context
+- [`ContextBatchFSelect`](https://mlr3fselect.mlr-org.com/reference/ContextBatchFSelect.md)
+  : Evaluation Context
+- [`callback_async_fselect()`](https://mlr3fselect.mlr-org.com/reference/callback_async_fselect.md)
+  : Create Asynchronous Feature Selection Callback
+- [`callback_batch_fselect()`](https://mlr3fselect.mlr-org.com/reference/callback_batch_fselect.md)
+  : Create Feature Selection Callback
+- [`mlr3fselect.async_freeze_archive`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.async_freeze_archive.md)
+  : Freeze Archive Callback
+- [`mlr3fselect.backup`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.backup.md)
+  : Backup Benchmark Result Callback
+- [`mlr3fselect.internal_tuning`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.internal_tuning.md)
+  : Internal Tuning Callback
+- [`mlr3fselect.one_se_rule`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.one_se_rule.md)
+  : One Standard Error Rule Callback
+- [`mlr3fselect.svm_rfe`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect.svm_rfe.md)
+  : SVM-RFE Callback
+- [`assert_async_fselect_callback()`](https://mlr3fselect.mlr-org.com/reference/assert_async_fselect_callback.md)
+  [`assert_async_fselect_callbacks()`](https://mlr3fselect.mlr-org.com/reference/assert_async_fselect_callback.md)
+  : Assertions for Callbacks
+
+## Reexports
+
+- [`reexports`](https://mlr3fselect.mlr-org.com/reference/reexports.md)
+  [`mlr_terminators`](https://mlr3fselect.mlr-org.com/reference/reexports.md)
+  [`trm`](https://mlr3fselect.mlr-org.com/reference/reexports.md)
+  [`trms`](https://mlr3fselect.mlr-org.com/reference/reexports.md)
+  [`mlr_callbacks`](https://mlr3fselect.mlr-org.com/reference/reexports.md)
+  [`clbk`](https://mlr3fselect.mlr-org.com/reference/reexports.md)
+  [`clbks`](https://mlr3fselect.mlr-org.com/reference/reexports.md) :
+  Objects exported from other packages
+
+## Miscellaneous
+
+- [`faggregate()`](https://mlr3fselect.mlr-org.com/reference/faggregate.md)
+  : Fast Aggregation of ResampleResults and BenchmarkResults
+- [`assert_fselectors()`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect_assertions.md)
+  [`assert_fselector_async()`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect_assertions.md)
+  [`assert_fselector_batch()`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect_assertions.md)
+  [`assert_fselect_instance()`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect_assertions.md)
+  [`assert_fselect_instance_async()`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect_assertions.md)
+  [`assert_fselect_instance_batch()`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect_assertions.md)
+  : Assertion for mlr3fselect objects
+
+## Package
+
+- [`mlr3fselect`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect-package.md)
+  [`mlr3fselect-package`](https://mlr3fselect.mlr-org.com/reference/mlr3fselect-package.md)
+  : mlr3fselect: Feature Selection for 'mlr3'
 

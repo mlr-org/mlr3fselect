@@ -139,7 +139,7 @@ performs the following steps during `$train()`:
     a
     [bbotk::Terminator](https://bbotk.mlr-org.com/reference/Terminator.html),
     a
-    [mlr3::Resampling](https://mlr3.mlr-org.com/reference/Resampling.html)
+    [mlr3::Resampling](https://mlr3.mlr-org.com/reference/Resampling.html),
     and a
     [mlr3::Measure](https://mlr3.mlr-org.com/reference/Measure.html).
 

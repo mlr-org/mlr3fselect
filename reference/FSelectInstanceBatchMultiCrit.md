@@ -37,6 +37,8 @@ supplied to `as.data.table()`.
 
 ## Super classes
 
+[`bbotk::EvalInstance`](https://bbotk.mlr-org.com/reference/EvalInstance.html)
+-\>
 [`bbotk::OptimInstance`](https://bbotk.mlr-org.com/reference/OptimInstance.html)
 -\>
 [`bbotk::OptimInstanceBatch`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html)
@@ -65,8 +67,8 @@ supplied to `as.data.table()`.
 
 Inherited methods
 
+- [`bbotk::EvalInstance$format()`](https://bbotk.mlr-org.com/reference/EvalInstance.html#method-format)
 - [`bbotk::OptimInstance$clear()`](https://bbotk.mlr-org.com/reference/OptimInstance.html#method-clear)
-- [`bbotk::OptimInstance$format()`](https://bbotk.mlr-org.com/reference/OptimInstance.html#method-format)
 - [`bbotk::OptimInstanceBatch$eval_batch()`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-eval_batch)
 - [`bbotk::OptimInstanceBatch$objective_function()`](https://bbotk.mlr-org.com/reference/OptimInstanceBatch.html#method-objective_function)
 
@@ -238,18 +240,24 @@ fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
 #> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 2:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>                                                             features n_features
 #>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#>    classif.ce time_train
-#>         <num>      <num>
-#> 1: 0.07261632      0.003
+#> 2:                                                    flipper_length          7
+#>    classif.ce  time_train
+#>         <num>       <num>
+#> 1: 0.07261632 0.003000000
+#> 2: 0.19471142 0.002333333
 
 # Optimal feature sets
 instance$result_feature_set
 #> [[1]]
 #> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"
 #> [5] "island"         "sex"            "year"          
+#> 
+#> [[2]]
+#> [1] "flipper_length"
 #> 
 
 # Inspect all evaluated sets
@@ -262,10 +270,10 @@ as.data.table(instance$archive)
 #> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce  time_train runtime_learners           timestamp batch_nr
 #>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.07261632 0.003666667            0.020 2026-03-18 08:56:20        1
-#> 2: 0.07261632 0.003000000            0.017 2026-03-18 08:56:20        1
-#> 3: 0.25858124 0.003000000            0.017 2026-03-18 08:56:20        2
-#> 4: 0.19471142 0.003000000            0.015 2026-03-18 08:56:20        2
+#> 1: 0.07261632 0.004333333            0.023 2026-05-22 08:09:33        1
+#> 2: 0.07261632 0.003000000            0.018 2026-05-22 08:09:33        1
+#> 3: 0.25858124 0.003000000            0.016 2026-05-22 08:09:33        2
+#> 4: 0.19471142 0.002333333            0.013 2026-05-22 08:09:33        2
 #>    warnings errors
 #>       <int>  <int>
 #> 1:        0      0

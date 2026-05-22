@@ -123,16 +123,16 @@ case studies and demos about optimization.
 If no measure is passed, the default measure is used. The default
 measure depends on the task type.
 
-|                |                  |                                                               |
-|----------------|------------------|---------------------------------------------------------------|
-| Task           | Default Measure  | Package                                                       |
-| `"classif"`    | `"classif.ce"`   | [mlr3](https://CRAN.R-project.org/package=mlr3)               |
-| `"regr"`       | `"regr.mse"`     | [mlr3](https://CRAN.R-project.org/package=mlr3)               |
-| `"surv"`       | `"surv.cindex"`  | [mlr3proba](https://CRAN.R-project.org/package=mlr3proba)     |
-| `"dens"`       | `"dens.logloss"` | [mlr3proba](https://CRAN.R-project.org/package=mlr3proba)     |
-| `"classif_st"` | `"classif.ce"`   | [mlr3spatial](https://CRAN.R-project.org/package=mlr3spatial) |
-| `"regr_st"`    | `"regr.mse"`     | [mlr3spatial](https://CRAN.R-project.org/package=mlr3spatial) |
-| `"clust"`      | `"clust.dunn"`   | [mlr3cluster](https://CRAN.R-project.org/package=mlr3cluster) |
+|  |  |  |
+|----|----|----|
+| Task | Default Measure | Package |
+| `"classif"` | `"classif.ce"` | [mlr3](https://CRAN.R-project.org/package=mlr3) |
+| `"regr"` | `"regr.mse"` | [mlr3](https://CRAN.R-project.org/package=mlr3) |
+| `"surv"` | `"surv.cindex"` | [mlr3proba](https://CRAN.R-project.org/package=mlr3proba) |
+| `"dens"` | `"dens.logloss"` | [mlr3proba](https://CRAN.R-project.org/package=mlr3proba) |
+| `"classif_st"` | `"classif.ce"` | [mlr3spatial](https://CRAN.R-project.org/package=mlr3spatial) |
+| `"regr_st"` | `"regr.mse"` | [mlr3spatial](https://CRAN.R-project.org/package=mlr3spatial) |
+| `"clust"` | `"clust.dunn"` | [mlr3cluster](https://CRAN.R-project.org/package=mlr3cluster) |
 
 ## Examples
 
@@ -183,10 +183,10 @@ as.data.table(instance$archive)
 #> 4:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE   TRUE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.07561658            0.020 2026-03-18 08:56:47        1        0      0
-#> 2: 0.25570811            0.016 2026-03-18 08:56:47        1        0      0
-#> 3: 0.58126112            0.034 2026-03-18 08:56:48        2        0      0
-#> 4: 0.07851513            0.020 2026-03-18 08:56:48        2        0      0
+#> 1: 0.07561658            0.021 2026-05-22 08:09:58        1        0      0
+#> 2: 0.25570811            0.015 2026-05-22 08:09:58        1        0      0
+#> 3: 0.58126112            0.015 2026-05-22 08:09:58        2        0      0
+#> 4: 0.07851513            0.019 2026-05-22 08:09:58        2        0      0
 #>                                                             features n_features
 #>                                                               <list>     <list>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7

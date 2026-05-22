@@ -20,7 +20,7 @@ performs the following steps during `$train()`:
     a
     [bbotk::Terminator](https://bbotk.mlr-org.com/reference/Terminator.html),
     a
-    [mlr3::Resampling](https://mlr3.mlr-org.com/reference/Resampling.html)
+    [mlr3::Resampling](https://mlr3.mlr-org.com/reference/Resampling.html),
     and a
     [mlr3::Measure](https://mlr3.mlr-org.com/reference/Measure.html).
 
@@ -425,7 +425,7 @@ afs$model
 #> • Encapsulation: none (fallback: -)
 #> • Properties: importance, missings, multiclass, selected_features, twoclass,
 #> and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 #> 
 #> $features
 #> [1] "bill_length" "island"      "sex"         "year"       
@@ -482,7 +482,7 @@ afs$learner
 #> • Encapsulation: none (fallback: -)
 #> • Properties: importance, missings, multiclass, selected_features, twoclass,
 #> and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # shortcut fselect instance
 afs$fselect_instance

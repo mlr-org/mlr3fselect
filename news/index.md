@@ -1,6 +1,18 @@
 # Changelog
 
+## mlr3fselect 1.6.0
+
+CRAN release: 2026-05-21
+
+- refactor: Remove rush backward compatibility.
+- docs: Add hEFS reference.
+- compatibility: `fastVoteR` 0.0.3
+- feat: Add `$rm_zero_features()` method in `EnsembleFSResult` to remove
+  result rows where no features were selected.
+
 ## mlr3fselect 1.5.1
+
+CRAN release: 2026-03-18
 
 - compatibility: rush 1.0.0
 
