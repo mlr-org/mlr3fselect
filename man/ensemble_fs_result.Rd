@@ -131,6 +131,7 @@ Returns the number of times the task was initially resampled in the ensemble fea
 \item \href{#method-EnsembleFSResult-format}{\code{EnsembleFSResult$format()}}
 \item \href{#method-EnsembleFSResult-print}{\code{EnsembleFSResult$print()}}
 \item \href{#method-EnsembleFSResult-help}{\code{EnsembleFSResult$help()}}
+\item \href{#method-EnsembleFSResult-rm_zero_features}{\code{EnsembleFSResult$rm_zero_features()}}
 \item \href{#method-EnsembleFSResult-set_active_measure}{\code{EnsembleFSResult$set_active_measure()}}
 \item \href{#method-EnsembleFSResult-combine}{\code{EnsembleFSResult$combine()}}
 \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
@@ -230,6 +231,25 @@ Opens the corresponding help page referenced by field \verb{$man}.
 \if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$help()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-EnsembleFSResult-rm_zero_features"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-rm_zero_features}{}}}
+\subsection{Method \code{rm_zero_features()}}{
+Removes rows from the ensemble feature selection result where no features were selected.
+
+If a benchmark result is stored, the corresponding resampling iterations are removed as well.
+The stability measures are reset and need to be recalculated after this operation.
+
+This method modifies the object by reference.
+To preserve the original state, explicitly \verb{$clone()} the object beforehand.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$rm_zero_features()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns the object itself, but modified \strong{by reference}.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-set_active_measure"></a>}}
