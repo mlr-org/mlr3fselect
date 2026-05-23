@@ -110,6 +110,8 @@ multi-omics data.” *BioData Mining*. ISSN 1756-0381,
 
 - [`EnsembleFSResult$help()`](#method-EnsembleFSResult-help)
 
+- [`EnsembleFSResult$rm_zero_features()`](#method-EnsembleFSResult-rm_zero_features)
+
 - [`EnsembleFSResult$set_active_measure()`](#method-EnsembleFSResult-set_active_measure)
 
 - [`EnsembleFSResult$combine()`](#method-EnsembleFSResult-combine)
@@ -222,6 +224,28 @@ Opens the corresponding help page referenced by field `$man`.
 #### Usage
 
     EnsembleFSResult$help()
+
+------------------------------------------------------------------------
+
+### Method `rm_zero_features()`
+
+Removes rows from the ensemble feature selection result where no
+features were selected.
+
+If a benchmark result is stored, the corresponding resampling iterations
+are removed as well. The stability measures are reset and need to be
+recalculated after this operation.
+
+This method modifies the object by reference. To preserve the original
+state, explicitly `$clone()` the object beforehand.
+
+#### Usage
+
+    EnsembleFSResult$rm_zero_features()
+
+#### Returns
+
+Returns the object itself, but modified **by reference**.
 
 ------------------------------------------------------------------------
 
