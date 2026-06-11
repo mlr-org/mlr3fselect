@@ -11,6 +11,7 @@ bibentries
 bibtex
 Bischl
 borda
+Borda's
 cheatsheet
 cindex
 Classif
