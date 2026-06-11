@@ -21,8 +21,8 @@ The resampling strategy is changed during the feature selection.
 The resampling strategy passed to the instance (\code{resampling}) is used to determine the optimal number of features.
 Usually, a cross-validation strategy is used
 and a recursive feature elimination is run in each iteration of the cross-validation.
-Internally, \link[mlr3:mlr_resamplings_custom]{mlr3::ResamplingCustom} is used to emulate this part of the algorithm.
-In the final recursive feature elimination run the resampling strategy is changed to \link[mlr3:mlr_resamplings_insample]{mlr3::ResamplingInsample}
+Internally, \link[mlr3:ResamplingCustom]{mlr3::ResamplingCustom} is used to emulate this part of the algorithm.
+In the final recursive feature elimination run the resampling strategy is changed to \link[mlr3:ResamplingInsample]{mlr3::ResamplingInsample}
 i.e. the complete data set is used for training and testing.
 
 The feature selection terminates itself when the optimal number of features is reached.
@@ -107,7 +107,7 @@ learner$train(task)
 }
 }
 \seealso{
-Other FSelector: 
+Other FSelector:
 \code{\link{FSelector}},
 \code{\link{mlr_fselectors}},
 \code{\link{mlr_fselectors_design_points}},
@@ -120,50 +120,52 @@ Other FSelector:
 }
 \concept{FSelector}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{mlr3fselect::FSelectorBatch}} -> \code{FSelectorBatchRFECV}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{FSelectorBatch}} -> \code{FSelectorBatchRFECV}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorBatchRFECV-new}{\code{FSelectorBatchRFECV$new()}}
-\item \href{#method-FSelectorBatchRFECV-clone}{\code{FSelectorBatchRFECV$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorBatchRFECV-initialize}{\code{FSelectorBatchRFECV$new()}}
+    \item \href{#method-FSelectorBatchRFECV-clone}{\code{FSelectorBatchRFECV$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>mlr3fselect::FSelectorBatch$optimize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>FSelectorBatch$optimize()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorBatchRFECV-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorBatchRFECV-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchRFECV$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorBatchRFECV-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorBatchRFECV-initialize}{}}}
+\subsection{\code{FSelectorBatchRFECV$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchRFECV$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchRFECV-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchRFECV-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchRFECV$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatchRFECV$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchRFECV$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

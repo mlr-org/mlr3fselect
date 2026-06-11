@@ -59,108 +59,107 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 }
 
 \section{Super class}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorBatch}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{FSelectorBatch}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorBatch-new}{\code{FSelectorBatch$new()}}
-\item \href{#method-FSelectorBatch-optimize}{\code{FSelectorBatch$optimize()}}
-\item \href{#method-FSelectorBatch-clone}{\code{FSelectorBatch$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorBatch-initialize}{\code{FSelectorBatch$new()}}
+    \item \href{#method-FSelectorBatch-optimize}{\code{FSelectorBatch$optimize()}}
+    \item \href{#method-FSelectorBatch-clone}{\code{FSelectorBatch$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorBatch-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorBatch-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatch$new(
+\if{html}{\out{<a id="method-FSelectorBatch-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorBatch-initialize}{}}}
+\subsection{\code{FSelectorBatch$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatch$new(
   id = "fselector_batch",
   param_set,
   properties,
   packages = character(),
   label = NA_character_,
   man = NA_character_
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{id}}{(\code{character(1)})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{(\code{character(1)})\cr
 Identifier for the new instance.}
-
-\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
+      \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
 Set of control parameters.}
-
-\item{\code{properties}}{(\code{character()})\cr
+      \item{\code{properties}}{(\code{character()})\cr
 Set of properties of the fselector.
 Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$fselect_properties}}.}
-
-\item{\code{packages}}{(\code{character()})\cr
+      \item{\code{packages}}{(\code{character()})\cr
 Set of required packages.
 Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.}
-
-\item{\code{label}}{(\code{character(1)})\cr
+      \item{\code{label}}{(\code{character(1)})\cr
 Label for this object.
 Can be used in tables, plot and text output instead of the ID.}
-
-\item{\code{man}}{(\code{character(1)})\cr
+      \item{\code{man}}{(\code{character(1)})\cr
 String in the format \verb{[pkg]::[topic]} pointing to a manual page for this object.
 The referenced help package can be opened via method \verb{$help()}.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatch-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatch-optimize}{}}}
-\subsection{Method \code{optimize()}}{
-Performs the feature selection on a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit}
+\subsection{\code{FSelectorBatch$optimize()}}{
+  Performs the feature selection on a \link{FSelectInstanceBatchSingleCrit} or \link{FSelectInstanceBatchMultiCrit}
 until termination.
 The single evaluations will be written into the \link{ArchiveBatchFSelect}
 that resides in the \link{FSelectInstanceBatchSingleCrit} / \link{FSelectInstanceBatchMultiCrit}.
 The result will be written into the instance object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatch$optimize(inst)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatch$optimize(inst)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}).}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{\link[data.table:data.table]{data.table::data.table()}}.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{\link[data.table:data.table]{data.table::data.table()}}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatch-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatch-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatch$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatch$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatch$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -64,39 +64,38 @@ as.data.table(instance$archive)
 \code{\link[bbotk:EvalInstance]{bbotk::EvalInstance}} -> \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceBatch]{bbotk::OptimInstanceBatch}} -> \code{\link[bbotk:OptimInstanceBatchMultiCrit]{bbotk::OptimInstanceBatchMultiCrit}} -> \code{FSelectInstanceBatchMultiCrit}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{result_feature_set}}{(list of \code{character()})\cr
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{result_feature_set}}{(list of \code{character()})\cr
 Feature sets for task subsetting.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectInstanceBatchMultiCrit-new}{\code{FSelectInstanceBatchMultiCrit$new()}}
-\item \href{#method-FSelectInstanceBatchMultiCrit-assign_result}{\code{FSelectInstanceBatchMultiCrit$assign_result()}}
-\item \href{#method-FSelectInstanceBatchMultiCrit-print}{\code{FSelectInstanceBatchMultiCrit$print()}}
-\item \href{#method-FSelectInstanceBatchMultiCrit-clone}{\code{FSelectInstanceBatchMultiCrit$clone()}}
+  \itemize{
+    \item \href{#method-FSelectInstanceBatchMultiCrit-initialize}{\code{FSelectInstanceBatchMultiCrit$new()}}
+    \item \href{#method-FSelectInstanceBatchMultiCrit-assign_result}{\code{FSelectInstanceBatchMultiCrit$assign_result()}}
+    \item \href{#method-FSelectInstanceBatchMultiCrit-print}{\code{FSelectInstanceBatchMultiCrit$print()}}
+    \item \href{#method-FSelectInstanceBatchMultiCrit-clone}{\code{FSelectInstanceBatchMultiCrit$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-clear'><code>bbotk::OptimInstance$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="eval_batch"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-eval_batch'><code>bbotk::OptimInstanceBatch$eval_batch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="objective_function"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-objective_function'><code>bbotk::OptimInstanceBatch$objective_function()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-clear'><code>bbotk::OptimInstance$clear()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="eval_batch"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-eval_batch'><code>bbotk::OptimInstanceBatch$eval_batch()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="objective_function"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-objective_function'><code>bbotk::OptimInstanceBatch$objective_function()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectInstanceBatchMultiCrit-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectInstanceBatchMultiCrit-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchMultiCrit$new(
+\if{html}{\out{<a id="method-FSelectInstanceBatchMultiCrit-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectInstanceBatchMultiCrit-initialize}{}}}
+\subsection{\code{FSelectInstanceBatchMultiCrit$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchMultiCrit$new(
   task,
   learner,
   resampling,
@@ -106,108 +105,104 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   store_models = FALSE,
   check_values = FALSE,
   callbacks = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
-
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+      \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Learner to optimize the feature subset for.}
-
-\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
+      \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.}
-
-\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
+      \item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
 Measures to optimize.
 If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
-
-\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
+      \item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
-
-\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+      \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
 Store benchmark result in archive?}
-
-\item{\code{store_models}}{(\code{logical(1)}).
+      \item{\code{store_models}}{(\code{logical(1)}).
 Store models in benchmark result?}
-
-\item{\code{check_values}}{(\code{logical(1)})\cr
+      \item{\code{check_values}}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
-
-\item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
+      \item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceBatchMultiCrit-assign_result"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceBatchMultiCrit-assign_result}{}}}
-\subsection{Method \code{assign_result()}}{
-The \link{FSelector} object writes the best found feature subsets and estimated performance values here.
+\subsection{\code{FSelectInstanceBatchMultiCrit$assign_result()}}{
+  The \link{FSelector} object writes the best found feature subsets and estimated performance values here.
 For internal use.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchMultiCrit$assign_result(xdt, ydt, extra = NULL, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{xdt}}{(\code{data.table::data.table()})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchMultiCrit$assign_result(xdt, ydt, extra = NULL, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{xdt}}{(\code{data.table::data.table()})\cr
 x values as \code{data.table}. Each row is one point. Contains the value in
 the \emph{search space} of the \link{FSelectInstanceBatchMultiCrit} object. Can contain
 additional columns for extra information.}
-
-\item{\code{ydt}}{(\code{data.table::data.table()})\cr
+      \item{\code{ydt}}{(\code{data.table::data.table()})\cr
 Optimal outcomes, e.g. the Pareto front.}
-
-\item{\code{extra}}{(\code{data.table::data.table()})\cr
+      \item{\code{extra}}{(\code{data.table::data.table()})\cr
 Additional information.}
-
-\item{\code{...}}{(\code{any})\cr
+      \item{\code{...}}{(\code{any})\cr
 ignored.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceBatchMultiCrit-print"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceBatchMultiCrit-print}{}}}
-\subsection{Method \code{print()}}{
-Printer.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchMultiCrit$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectInstanceBatchMultiCrit$print()}}{
+  Printer.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchMultiCrit$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceBatchMultiCrit-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceBatchMultiCrit-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchMultiCrit$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectInstanceBatchMultiCrit$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchMultiCrit$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

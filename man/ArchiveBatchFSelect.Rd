@@ -69,261 +69,260 @@ Score feature sets on additional measures.
 \code{\link[bbotk:Archive]{bbotk::Archive}} -> \code{\link[bbotk:ArchiveBatch]{bbotk::ArchiveBatch}} -> \code{ArchiveBatchFSelect}
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 Benchmark result.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{ties_method}}{(\code{character(1)})\cr
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{ties_method}}{(\code{character(1)})\cr
 Method to handle ties.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ArchiveBatchFSelect-new}{\code{ArchiveBatchFSelect$new()}}
-\item \href{#method-ArchiveBatchFSelect-add_evals}{\code{ArchiveBatchFSelect$add_evals()}}
-\item \href{#method-ArchiveBatchFSelect-learner}{\code{ArchiveBatchFSelect$learner()}}
-\item \href{#method-ArchiveBatchFSelect-learners}{\code{ArchiveBatchFSelect$learners()}}
-\item \href{#method-ArchiveBatchFSelect-predictions}{\code{ArchiveBatchFSelect$predictions()}}
-\item \href{#method-ArchiveBatchFSelect-resample_result}{\code{ArchiveBatchFSelect$resample_result()}}
-\item \href{#method-ArchiveBatchFSelect-print}{\code{ArchiveBatchFSelect$print()}}
-\item \href{#method-ArchiveBatchFSelect-best}{\code{ArchiveBatchFSelect$best()}}
-\item \href{#method-ArchiveBatchFSelect-clone}{\code{ArchiveBatchFSelect$clone()}}
+  \itemize{
+    \item \href{#method-ArchiveBatchFSelect-initialize}{\code{ArchiveBatchFSelect$new()}}
+    \item \href{#method-ArchiveBatchFSelect-add_evals}{\code{ArchiveBatchFSelect$add_evals()}}
+    \item \href{#method-ArchiveBatchFSelect-learner}{\code{ArchiveBatchFSelect$learner()}}
+    \item \href{#method-ArchiveBatchFSelect-learners}{\code{ArchiveBatchFSelect$learners()}}
+    \item \href{#method-ArchiveBatchFSelect-predictions}{\code{ArchiveBatchFSelect$predictions()}}
+    \item \href{#method-ArchiveBatchFSelect-resample_result}{\code{ArchiveBatchFSelect$resample_result()}}
+    \item \href{#method-ArchiveBatchFSelect-print}{\code{ArchiveBatchFSelect$print()}}
+    \item \href{#method-ArchiveBatchFSelect-best}{\code{ArchiveBatchFSelect$best()}}
+    \item \href{#method-ArchiveBatchFSelect-clone}{\code{ArchiveBatchFSelect$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href='../../bbotk/html/Archive.html#method-Archive-help'><code>bbotk::Archive$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="clear"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-clear'><code>bbotk::ArchiveBatch$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="nds_selection"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-nds_selection'><code>bbotk::ArchiveBatch$nds_selection()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href='../../bbotk/html/Archive.html#method-Archive-help'><code>bbotk::Archive$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="clear"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-clear'><code>bbotk::ArchiveBatch$clear()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveBatch" data-id="nds_selection"><a href='../../bbotk/html/ArchiveBatch.html#method-ArchiveBatch-nds_selection'><code>bbotk::ArchiveBatch$nds_selection()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ArchiveBatchFSelect-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$new(
+\if{html}{\out{<a id="method-ArchiveBatchFSelect-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-initialize}{}}}
+\subsection{\code{ArchiveBatchFSelect$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$new(
   search_space,
   codomain,
   check_values = TRUE,
   ties_method = "least_features"
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{search_space}}{(\link[paradox:ParamSet]{paradox::ParamSet})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{search_space}}{(\link[paradox:ParamSet]{paradox::ParamSet})\cr
 Search space.
 Internally created from provided \link[mlr3:Task]{mlr3::Task} by instance.}
-
-\item{\code{codomain}}{(\link[bbotk:Codomain]{bbotk::Codomain})\cr
+      \item{\code{codomain}}{(\link[bbotk:Codomain]{bbotk::Codomain})\cr
 Specifies codomain of objective function i.e. a set of performance measures.
 Internally created from provided \link[mlr3:Measure]{mlr3::Measure}s by instance.}
-
-\item{\code{check_values}}{(\code{logical(1)})\cr
+      \item{\code{check_values}}{(\code{logical(1)})\cr
 If \code{TRUE} (default), hyperparameter configurations are check for validity.}
-
-\item{\code{ties_method}}{(\code{character(1)})\cr
+      \item{\code{ties_method}}{(\code{character(1)})\cr
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be \code{"least_features"} or \code{"random"}.
 The option \code{"least_features"} (default) selects the feature set with the least features.
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-add_evals"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-add_evals}{}}}
-\subsection{Method \code{add_evals()}}{
-Adds function evaluations to the archive table.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$add_evals(xdt, xss_trafoed = NULL, ydt)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{xdt}}{(\code{data.table::data.table()})\cr
+\subsection{\code{ArchiveBatchFSelect$add_evals()}}{
+  Adds function evaluations to the archive table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$add_evals(xdt, xss_trafoed = NULL, ydt)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{xdt}}{(\code{data.table::data.table()})\cr
 x values as \code{data.table}. Each row is one point. Contains the value in
 the \emph{search space} of the \link{FSelectInstanceBatchMultiCrit} object. Can contain
 additional columns for extra information.}
-
-\item{\code{xss_trafoed}}{(\code{list()})\cr
+      \item{\code{xss_trafoed}}{(\code{list()})\cr
 Ignored in feature selection.}
-
-\item{\code{ydt}}{(\code{\link[data.table:data.table]{data.table::data.table()}})\cr
+      \item{\code{ydt}}{(\code{\link[data.table:data.table]{data.table::data.table()}})\cr
 Optimal outcome.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-learner"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-learner}{}}}
-\subsection{Method \code{learner()}}{
-Retrieve \link[mlr3:Learner]{mlr3::Learner} of the i-th evaluation, by position or by unique hash \code{uhash}.
+\subsection{\code{ArchiveBatchFSelect$learner()}}{
+  Retrieve \link[mlr3:Learner]{mlr3::Learner} of the i-th evaluation, by position or by unique hash \code{uhash}.
 \code{i} and \code{uhash} are mutually exclusive.
 Learner does not contain a model. Use \verb{$learners()} to get learners with models.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$learner(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$learner(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-learners"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-learners}{}}}
-\subsection{Method \code{learners()}}{
-Retrieve list of trained \link[mlr3:Learner]{mlr3::Learner} objects of the i-th evaluation,
+\subsection{\code{ArchiveBatchFSelect$learners()}}{
+  Retrieve list of trained \link[mlr3:Learner]{mlr3::Learner} objects of the i-th evaluation,
 by position or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually
 exclusive.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$learners(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$learners(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-predictions"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-predictions}{}}}
-\subsection{Method \code{predictions()}}{
-Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by position or by unique hash \code{uhash}.
+\subsection{\code{ArchiveBatchFSelect$predictions()}}{
+  Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by position or by unique hash \code{uhash}.
 \code{i} and \code{uhash} are mutually exclusive.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$predictions(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$predictions(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-resample_result"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-resample_result}{}}}
-\subsection{Method \code{resample_result()}}{
-Retrieve \link[mlr3:ResampleResult]{mlr3::ResampleResult} of the i-th evaluation, by position
+\subsection{\code{ArchiveBatchFSelect$resample_result()}}{
+  Retrieve \link[mlr3:ResampleResult]{mlr3::ResampleResult} of the i-th evaluation, by position
 or by unique hash \code{uhash}. \code{i} and \code{uhash} are mutually exclusive.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$resample_result(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$resample_result(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-print"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-print}{}}}
-\subsection{Method \code{print()}}{
-Printer.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$print()}\if{html}{\out{</div>}}
+\subsection{\code{ArchiveBatchFSelect$print()}}{
+  Printer.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-best"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-best}{}}}
-\subsection{Method \code{best()}}{
-Returns the best scoring feature sets.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$best(batch = NULL, ties_method = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{batch}}{(\code{integer()})\cr
+\subsection{\code{ArchiveBatchFSelect$best()}}{
+  Returns the best scoring feature sets.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$best(batch = NULL, ties_method = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{batch}}{(\code{integer()})\cr
 The batch number(s) to limit the best results to.
 Default is all batches.}
-
-\item{\code{ties_method}}{(\code{character(1)})\cr
+      \item{\code{ties_method}}{(\code{character(1)})\cr
 Method to handle ties.
 If \code{NULL} (default), the global ties method set during initialization is used.
 The default global ties method is \code{least_features} which selects the feature set with the least features.
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{\link[data.table:data.table]{data.table::data.table()}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{\link[data.table:data.table]{data.table::data.table()}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveBatchFSelect-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveBatchFSelect-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveBatchFSelect$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ArchiveBatchFSelect$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveBatchFSelect$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

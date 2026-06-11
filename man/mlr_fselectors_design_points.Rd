@@ -71,7 +71,7 @@ learner$train(task)
 }
 }
 \seealso{
-Other FSelector: 
+Other FSelector:
 \code{\link{FSelector}},
 \code{\link{mlr_fselectors}},
 \code{\link{mlr_fselectors_exhaustive_search}},
@@ -84,50 +84,52 @@ Other FSelector:
 }
 \concept{FSelector}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{mlr3fselect::FSelectorBatch}} -> \code{\link[mlr3fselect:FSelectorBatchFromOptimizerBatch]{mlr3fselect::FSelectorBatchFromOptimizerBatch}} -> \code{FSelectorBatchDesignPoints}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{FSelectorBatch}} -> \code{\link[mlr3fselect:FSelectorBatchFromOptimizerBatch]{FSelectorBatchFromOptimizerBatch}} -> \code{FSelectorBatchDesignPoints}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorBatchDesignPoints-new}{\code{FSelectorBatchDesignPoints$new()}}
-\item \href{#method-FSelectorBatchDesignPoints-clone}{\code{FSelectorBatchDesignPoints$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorBatchDesignPoints-initialize}{\code{FSelectorBatchDesignPoints$new()}}
+    \item \href{#method-FSelectorBatchDesignPoints-clone}{\code{FSelectorBatchDesignPoints$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatchFromOptimizerBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatchFromOptimizerBatch.html#method-FSelectorBatchFromOptimizerBatch-optimize'><code>mlr3fselect::FSelectorBatchFromOptimizerBatch$optimize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatchFromOptimizerBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatchFromOptimizerBatch.html#method-FSelectorBatchFromOptimizerBatch-optimize'><code>FSelectorBatchFromOptimizerBatch$optimize()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorBatchDesignPoints-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorBatchDesignPoints-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchDesignPoints$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorBatchDesignPoints-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorBatchDesignPoints-initialize}{}}}
+\subsection{\code{FSelectorBatchDesignPoints$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchDesignPoints$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchDesignPoints-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchDesignPoints-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchDesignPoints$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatchDesignPoints$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchDesignPoints$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

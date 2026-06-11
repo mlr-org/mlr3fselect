@@ -69,7 +69,7 @@ learner$train(task)
 }
 }
 \seealso{
-Other FSelector: 
+Other FSelector:
 \code{\link{FSelector}},
 \code{\link{mlr_fselectors}},
 \code{\link{mlr_fselectors_design_points}},
@@ -82,72 +82,76 @@ Other FSelector:
 }
 \concept{FSelector}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{mlr3fselect::FSelectorBatch}} -> \code{FSelectorBatchShadowVariableSearch}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{FSelectorBatch}} -> \code{FSelectorBatchShadowVariableSearch}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorBatchShadowVariableSearch-new}{\code{FSelectorBatchShadowVariableSearch$new()}}
-\item \href{#method-FSelectorBatchShadowVariableSearch-optimization_path}{\code{FSelectorBatchShadowVariableSearch$optimization_path()}}
-\item \href{#method-FSelectorBatchShadowVariableSearch-clone}{\code{FSelectorBatchShadowVariableSearch$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorBatchShadowVariableSearch-initialize}{\code{FSelectorBatchShadowVariableSearch$new()}}
+    \item \href{#method-FSelectorBatchShadowVariableSearch-optimization_path}{\code{FSelectorBatchShadowVariableSearch$optimization_path()}}
+    \item \href{#method-FSelectorBatchShadowVariableSearch-clone}{\code{FSelectorBatchShadowVariableSearch$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>mlr3fselect::FSelectorBatch$optimize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>FSelectorBatch$optimize()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorBatchShadowVariableSearch-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorBatchShadowVariableSearch-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.`
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchShadowVariableSearch$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorBatchShadowVariableSearch-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorBatchShadowVariableSearch-initialize}{}}}
+\subsection{\code{FSelectorBatchShadowVariableSearch$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.`
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchShadowVariableSearch$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchShadowVariableSearch-optimization_path"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchShadowVariableSearch-optimization_path}{}}}
-\subsection{Method \code{optimization_path()}}{
-Returns the optimization path.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchShadowVariableSearch$optimization_path(inst)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatchShadowVariableSearch$optimization_path()}}{
+  Returns the optimization path.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchShadowVariableSearch$optimization_path(inst)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit})\cr
+Instance optimized with \link{FSelectorBatchShadowVariableSearch}.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \link[data.table:data.table]{data.table::data.table}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit})\cr
-Instance optimized with \link{FSelectorBatchShadowVariableSearch}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchShadowVariableSearch-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchShadowVariableSearch-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchShadowVariableSearch$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatchShadowVariableSearch$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchShadowVariableSearch$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
