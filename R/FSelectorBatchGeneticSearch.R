@@ -12,8 +12,8 @@
 #' @section Control Parameters:
 #' For the meaning of the control parameters, see [genalg::rbga.bin()].
 #' [genalg::rbga.bin()] internally terminates after `iters` iteration.
-#' We set `ìters = 100000`  to allow the termination via our terminators.
-#' If more iterations are needed, set `ìters` to a higher value in the parameter set.
+#' We set `iters = 100000`  to allow the termination via our terminators.
+#' If more iterations are needed, set `iters` to a higher value in the parameter set.
 #'
 #' @family FSelector
 #' @export
