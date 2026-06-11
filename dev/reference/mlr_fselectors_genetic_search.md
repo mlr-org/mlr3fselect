@@ -17,9 +17,9 @@ can be instantiated with the associated sugar function
 For the meaning of the control parameters, see
 [`genalg::rbga.bin()`](https://rdrr.io/pkg/genalg/man/rbga.bin.html).
 [`genalg::rbga.bin()`](https://rdrr.io/pkg/genalg/man/rbga.bin.html)
-internally terminates after `iters` iteration. We set `ìters = 100000`
+internally terminates after `iters` iteration. We set `iters = 100000`
 to allow the termination via our terminators. If more iterations are
-needed, set `ìters` to a higher value in the parameter set.
+needed, set `iters` to a higher value in the parameter set.
 
 ## See also
 
@@ -128,16 +128,16 @@ as.data.table(instance$archive)
 #> 10:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>     classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>          <num>            <num>              <POSc>    <int>    <int>  <int>
-#>  1:  0.2521739            0.006 2026-06-11 06:35:50        1        0      0
-#>  2:  0.6173913            0.005 2026-06-11 06:35:50        2        0      0
-#>  3:  0.2260870            0.005 2026-06-11 06:35:50        3        0      0
-#>  4:  0.2869565            0.006 2026-06-11 06:35:50        4        0      0
-#>  5:  0.2869565            0.005 2026-06-11 06:35:50        5        0      0
-#>  6:  0.3043478            0.005 2026-06-11 06:35:50        6        0      0
-#>  7:  0.2260870            0.006 2026-06-11 06:35:50        7        0      0
-#>  8:  0.2521739            0.006 2026-06-11 06:35:50        8        0      0
-#>  9:  0.2521739            0.005 2026-06-11 06:35:50        9        0      0
-#> 10:  0.2260870            0.005 2026-06-11 06:35:50       10        0      0
+#>  1:  0.2521739            0.006 2026-06-11 10:43:45        1        0      0
+#>  2:  0.6173913            0.005 2026-06-11 10:43:45        2        0      0
+#>  3:  0.2260870            0.006 2026-06-11 10:43:45        3        0      0
+#>  4:  0.2869565            0.006 2026-06-11 10:43:45        4        0      0
+#>  5:  0.2869565            0.005 2026-06-11 10:43:45        5        0      0
+#>  6:  0.3043478            0.009 2026-06-11 10:43:45        6        0      0
+#>  7:  0.2260870            0.007 2026-06-11 10:43:45        7        0      0
+#>  8:  0.2521739            0.006 2026-06-11 10:43:45        8        0      0
+#>  9:  0.2521739            0.006 2026-06-11 10:43:45        9        0      0
+#> 10:  0.2260870            0.006 2026-06-11 10:43:45       10        0      0
 #>           features n_features  resample_result
 #>             <list>     <list>           <list>
 #>  1:    island,year          2 <ResampleResult>
