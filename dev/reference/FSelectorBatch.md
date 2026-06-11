@@ -74,14 +74,14 @@ case studies and demos about optimization.
 
 ## Super class
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
 -\> `FSelectorBatch`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatch$new()`](#method-FSelectorBatch-new)
+- [`FSelectorBatch$new()`](#method-FSelectorBatch-initialize)
 
 - [`FSelectorBatch$optimize()`](#method-FSelectorBatch-optimize)
 
@@ -89,13 +89,13 @@ case studies and demos about optimization.
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatch$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -151,7 +151,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method [`optimize()`](https://rdrr.io/r/stats/optimize.html)
+### `FSelectorBatch$optimize()`
 
 Performs the feature selection on a
 [FSelectInstanceBatchSingleCrit](https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchSingleCrit.md)
@@ -183,7 +183,7 @@ The result will be written into the instance object.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatch$clone()`
 
 The objects of this class are cloneable with this method.
 

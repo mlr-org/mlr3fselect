@@ -27,7 +27,7 @@ case studies and demos about optimization.
 
 ## Super class
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
 -\> `FSelectorAsync`
 
 ## Methods
@@ -40,14 +40,14 @@ case studies and demos about optimization.
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$initialize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-initialize)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
+- [`FSelector$initialize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-initialize)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method [`optimize()`](https://rdrr.io/r/stats/optimize.html)
+### `FSelectorAsync$optimize()`
 
 Performs the feature selection on a
 [FSelectInstanceAsyncSingleCrit](https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceAsyncSingleCrit.md)
@@ -77,7 +77,7 @@ The result will be written into the instance object.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorAsync$clone()`
 
 The objects of this class are cloneable with this method.
 

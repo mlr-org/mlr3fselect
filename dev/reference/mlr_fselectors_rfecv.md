@@ -109,29 +109,29 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.md)
 -\> `FSelectorBatchRFECV`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchRFECV$new()`](#method-FSelectorBatchRFECV-new)
+- [`FSelectorBatchRFECV$new()`](#method-FSelectorBatchRFECV-initialize)
 
 - [`FSelectorBatchRFECV$clone()`](#method-FSelectorBatchRFECV-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
+- [`FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchRFECV$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -142,7 +142,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchRFECV$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -199,14 +199,14 @@ as.data.table(instance$archive)
 #> 8:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.08695652            0.007 2026-06-11 10:46:38        1        0      0
-#> 2: 0.04347826            0.007 2026-06-11 10:46:38        1        0      0
-#> 3: 0.07017544            0.006 2026-06-11 10:46:38        1        0      0
-#> 4: 0.08695652            0.005 2026-06-11 10:46:38        2        0      0
-#> 5: 0.05217391            0.006 2026-06-11 10:46:38        2        0      0
-#> 6: 0.07017544            0.005 2026-06-11 10:46:38        2        0      0
-#> 7: 0.03488372            0.007 2026-06-11 10:46:39        3        0      0
-#> 8: 0.03779070            0.007 2026-06-11 10:46:39        4        0      0
+#> 1: 0.08695652            0.006 2026-06-11 10:50:32        1        0      0
+#> 2: 0.04347826            0.005 2026-06-11 10:50:32        1        0      0
+#> 3: 0.07017544            0.005 2026-06-11 10:50:32        1        0      0
+#> 4: 0.08695652            0.005 2026-06-11 10:50:32        2        0      0
+#> 5: 0.05217391            0.005 2026-06-11 10:50:32        2        0      0
+#> 6: 0.07017544            0.004 2026-06-11 10:50:32        2        0      0
+#> 7: 0.03488372            0.005 2026-06-11 10:50:32        3        0      0
+#> 8: 0.03779070            0.005 2026-06-11 10:50:32        4        0      0
 #>                                                            importance iteration
 #>                                                                <list>     <int>
 #> 1:       91.03050,79.32583,65.55837,60.87563,49.73684, 0.00000,...[7]         1

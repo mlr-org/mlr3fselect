@@ -45,31 +45,31 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.md)
 -\>
-[`mlr3fselect::FSelectorBatchFromOptimizerBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatchFromOptimizerBatch.md)
+[`FSelectorBatchFromOptimizerBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatchFromOptimizerBatch.md)
 -\> `FSelectorBatchDesignPoints`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchDesignPoints$new()`](#method-FSelectorBatchDesignPoints-new)
+- [`FSelectorBatchDesignPoints$new()`](#method-FSelectorBatchDesignPoints-initialize)
 
 - [`FSelectorBatchDesignPoints$clone()`](#method-FSelectorBatchDesignPoints-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatchFromOptimizerBatch$optimize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatchFromOptimizerBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
+- [`FSelectorBatchFromOptimizerBatch$optimize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatchFromOptimizerBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchDesignPoints$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -80,7 +80,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchDesignPoints$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -141,10 +141,10 @@ as.data.table(instance$archive)
 #> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3085938
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.009 2026-06-11 10:46:34        1        0      0
-#> 2:            0.007 2026-06-11 10:46:34        2        0      0
-#> 3:            0.008 2026-06-11 10:46:34        3        0      0
-#> 4:            0.008 2026-06-11 10:46:34        4        0      0
+#> 1:            0.007 2026-06-11 10:50:28        1        0      0
+#> 2:            0.005 2026-06-11 10:50:28        2        0      0
+#> 3:            0.005 2026-06-11 10:50:28        3        0      0
+#> 4:            0.007 2026-06-11 10:50:28        4        0      0
 #>                                      features n_features  resample_result
 #>                                        <list>     <list>           <list>
 #> 1:          age,insulin,mass,pregnant,triceps          5 <ResampleResult>

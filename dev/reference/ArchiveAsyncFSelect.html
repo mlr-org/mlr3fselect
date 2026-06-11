@@ -104,7 +104,7 @@ Score feature subsets on additional measures.</p></li>
 Benchmark result.</p></dd>
 
 
-<dt><code>ties_method</code></dt>
+    <dt><code>ties_method</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Method to handle ties in the archive.
 One of <code>"least_features"</code> (default) or <code>"random"</code>.</p></dd>
@@ -117,8 +117,7 @@ One of <code>"least_features"</code> (default) or <code>"random"</code>.</p></dd
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-ArchiveAsyncFSelect-new"><code>ArchiveAsyncFSelect$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-ArchiveAsyncFSelect-initialize"><code>ArchiveAsyncFSelect$new()</code></a></p></li>
 <li><p><a href="#method-ArchiveAsyncFSelect-learner"><code>ArchiveAsyncFSelect$learner()</code></a></p></li>
 <li><p><a href="#method-ArchiveAsyncFSelect-learners"><code>ArchiveAsyncFSelect$learners()</code></a></p></li>
 <li><p><a href="#method-ArchiveAsyncFSelect-predictions"><code>ArchiveAsyncFSelect$predictions()</code></a></p></li>
@@ -128,16 +127,16 @@ One of <code>"least_features"</code> (default) or <code>"random"</code>.</p></dd
 <li><p><a href="#method-ArchiveAsyncFSelect-push_result"><code>ArchiveAsyncFSelect$push_result()</code></a></p></li>
 <li><p><a href="#method-ArchiveAsyncFSelect-clone"><code>ArchiveAsyncFSelect$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-format"><code>bbotk::Archive$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-help"><code>bbotk::Archive$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-clear"><code>bbotk::ArchiveAsync$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="data_with_state"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-data_with_state"><code>bbotk::ArchiveAsync$data_with_state()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="nds_selection"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-nds_selection"><code>bbotk::ArchiveAsync$nds_selection()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="pop_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-pop_point"><code>bbotk::ArchiveAsync$pop_point()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_failed_point"><code>bbotk::ArchiveAsync$push_failed_point()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_points"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_points"><code>bbotk::ArchiveAsync$push_points()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_running_point"><code>bbotk::ArchiveAsync$push_running_point()</code></a></span></li>
-</ul></details></p><hr><a id="method-ArchiveAsyncFSelect-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href="https://bbotk.mlr-org.com/reference/Archive.html#method-help"><code>bbotk::Archive$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-clear"><code>bbotk::ArchiveAsync$clear()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="data_with_state"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-data_with_state"><code>bbotk::ArchiveAsync$data_with_state()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="nds_selection"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-nds_selection"><code>bbotk::ArchiveAsync$nds_selection()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="pop_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-pop_point"><code>bbotk::ArchiveAsync$pop_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_failed_point"><code>bbotk::ArchiveAsync$push_failed_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_points"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_points"><code>bbotk::ArchiveAsync$push_points()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_point"><a href="https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_running_point"><code>bbotk::ArchiveAsync$push_running_point()</code></a></span></li>
+</ul></details></p><hr><a id="method-ArchiveAsyncFSelect-initialize"></a><div class="section">
+<h3 id="archiveasyncfselect-new-"><code>ArchiveAsyncFSelect$new()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ArchiveAsyncFSelect.html">ArchiveAsyncFSelect</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
@@ -146,29 +145,24 @@ One of <code>"least_features"</code> (default) or <code>"random"</code>.</p></dd
 <span>  <span class="va">rush</span>,</span>
 <span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>search_space</code></dt>
 <dd><p>(<a href="https://paradox.mlr-org.com/reference/ParamSet.html" class="external-link">paradox::ParamSet</a>)<br>
 Search space.
 Internally created from provided <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a> by instance.</p></dd>
 
-
-<dt><code>codomain</code></dt>
+      <dt><code>codomain</code></dt>
 <dd><p>(<a href="https://paradox.mlr-org.com/reference/ParamSet.html" class="external-link">paradox::ParamSet</a>)<br>
 Specifies codomain of function.
 Most importantly the tags of each output "Parameter" define whether it should
 be minimized or maximized.  The default is to minimize each component.</p></dd>
 
-
-<dt><code>rush</code></dt>
+      <dt><code>rush</code></dt>
 <dd><p>(<code>Rush</code>)<br>
 If a rush instance is supplied, the optimization runs without batches.</p></dd>
 
-
-<dt><code>ties_method</code></dt>
+      <dt><code>ties_method</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be <code>"least_features"</code> or <code>"random"</code>.
@@ -177,8 +171,7 @@ If there are multiple best feature sets with the same number of features, one is
 The <code>random</code> method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.</p></dd>
 
-
-<dt><code>check_values</code></dt>
+      <dt><code>check_values</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 If <code>TRUE</code> (default), feature subsets are check for validity.</p></dd>
 
@@ -186,23 +179,22 @@ If <code>TRUE</code> (default), feature subsets are check for validity.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-learner"></a><div class="section">
-<h3 id="method-learner-">Method <code>learner()</code><a class="anchor" aria-label="anchor" href="#method-learner-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ArchiveAsyncFSelect-learner"></a><div class="section">
+<h3 id="archiveasyncfselect-learner-"><code>ArchiveAsyncFSelect$learner()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-learner-"></a></h3>
 <p>Retrieve <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> of the i-th evaluation, by position or by unique hash <code>uhash</code>.
 <code>i</code> and <code>uhash</code> are mutually exclusive.
 Learner does not contain a model. Use <code>$learners()</code> to get learners with models.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">learner</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>i</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 The iteration value to filter for.</p></dd>
 
-
-<dt><code>uhash</code></dt>
+      <dt><code>uhash</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 The <code>uhash</code> value to filter for.</p></dd>
 
@@ -210,22 +202,21 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-learners"></a><div class="section">
-<h3 id="method-learners-">Method <code>learners()</code><a class="anchor" aria-label="anchor" href="#method-learners-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ArchiveAsyncFSelect-learners"></a><div class="section">
+<h3 id="archiveasyncfselect-learners-"><code>ArchiveAsyncFSelect$learners()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-learners-"></a></h3>
 <p>Retrieve list of trained <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> objects of the i-th evaluation, by position or by unique hash <code>uhash</code>.
 <code>i</code> and <code>uhash</code> are mutually exclusive.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">learners</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>i</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 The iteration value to filter for.</p></dd>
 
-
-<dt><code>uhash</code></dt>
+      <dt><code>uhash</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 The <code>uhash</code> value to filter for.</p></dd>
 
@@ -233,22 +224,21 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-predictions"></a><div class="section">
-<h3 id="method-predictions-">Method <code>predictions()</code><a class="anchor" aria-label="anchor" href="#method-predictions-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ArchiveAsyncFSelect-predictions"></a><div class="section">
+<h3 id="archiveasyncfselect-predictions-"><code>ArchiveAsyncFSelect$predictions()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-predictions-"></a></h3>
 <p>Retrieve list of <a href="https://mlr3.mlr-org.com/reference/Prediction.html" class="external-link">mlr3::Prediction</a> objects of the i-th evaluation, by position or by unique hash <code>uhash</code>.
 <code>i</code> and <code>uhash</code> are mutually exclusive.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">predictions</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>i</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 The iteration value to filter for.</p></dd>
 
-
-<dt><code>uhash</code></dt>
+      <dt><code>uhash</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 The <code>uhash</code> value to filter for.</p></dd>
 
@@ -256,22 +246,21 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-resample_result"></a><div class="section">
-<h3 id="method-resample-result-">Method <code>resample_result()</code><a class="anchor" aria-label="anchor" href="#method-resample-result-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ArchiveAsyncFSelect-resample_result"></a><div class="section">
+<h3 id="archiveasyncfselect-resample-result-"><code>ArchiveAsyncFSelect$resample_result()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-resample-result-"></a></h3>
 <p>Retrieve <a href="https://mlr3.mlr-org.com/reference/ResampleResult.html" class="external-link">mlr3::ResampleResult</a> of the i-th evaluation, by position or by unique hash <code>uhash</code>.
 <code>i</code> and <code>uhash</code> are mutually exclusive.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">resample_result</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span>, uhash <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>i</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 The iteration value to filter for.</p></dd>
 
-
-<dt><code>uhash</code></dt>
+      <dt><code>uhash</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 The <code>uhash</code> value to filter for.</p></dd>
 
@@ -279,40 +268,32 @@ The <code>uhash</code> value to filter for.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-print"></a><div class="section">
-<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ArchiveAsyncFSelect-print"></a><div class="section">
+<h3 id="archiveasyncfselect-print-"><code>ArchiveAsyncFSelect$print()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-print-"></a></h3>
 <p>Printer.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
-<div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>...</code></dt>
-<dd><p>(ignored).</p></dd>
-
-
-</dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-best"></a><div class="section">
-<h3 id="method-best-">Method <code>best()</code><a class="anchor" aria-label="anchor" href="#method-best-"></a></h3>
+<p></p><hr><a id="method-ArchiveAsyncFSelect-best"></a><div class="section">
+<h3 id="archiveasyncfselect-best-"><code>ArchiveAsyncFSelect$best()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-best-"></a></h3>
 <p>Returns the best scoring feature set(s).
 For single-crit optimization, the solution that minimizes / maximizes the objective function.
 For multi-crit optimization, the Pareto set / front.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">best</span><span class="op">(</span>n_select <span class="op">=</span> <span class="fl">1</span>, ties_method <span class="op">=</span> <span class="st">"least_features"</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+</div><p></p><div class="section">
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>n_select</code></dt>
 <dd><p>(<code>integer(1L)</code>)<br>
 Amount of points to select.
 Ignored for multi-crit optimization.</p></dd>
 
-
-<dt><code>ties_method</code></dt>
+      <dt><code>ties_method</code></dt>
 <dd><p>(<code>character(1L)</code>)<br>
 Method to break ties when multiple points have the same score.
 Either <code>"least_features"</code> (default) or <code>"random"</code>.
@@ -321,37 +302,33 @@ If <code>n_select &gt; 1L</code>, the tie method is ignored and the first point 
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p><code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code></p>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-push_result"></a><div class="section">
-<h3 id="method-push-result-">Method <code>push_result()</code><a class="anchor" aria-label="anchor" href="#method-push-result-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ArchiveAsyncFSelect-push_result"></a><div class="section">
+<h3 id="archiveasyncfselect-push-result-"><code>ArchiveAsyncFSelect$push_result()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-push-result-"></a></h3>
 <p>Push result to the archive.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">push_result</span><span class="op">(</span><span class="va">key</span>, <span class="va">ys</span>, <span class="va">x_domain</span>, extra <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+</div><p></p><div class="section">
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>key</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
 Key of the point.</p></dd>
 
-
-<dt><code>ys</code></dt>
+      <dt><code>ys</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
 Named list of results.</p></dd>
 
-
-<dt><code>x_domain</code></dt>
+      <dt><code>x_domain</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
 Is ignored for feature selection.</p></dd>
 
-
-<dt><code>extra</code></dt>
+      <dt><code>extra</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
 Named list of additional information.</p></dd>
 
@@ -359,15 +336,15 @@ Named list of additional information.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ArchiveAsyncFSelect-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ArchiveAsyncFSelect-clone"></a><div class="section">
+<h3 id="archiveasyncfselect-clone-"><code>ArchiveAsyncFSelect$clone()</code><a class="anchor" aria-label="anchor" href="#archiveasyncfselect-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+</div><p></p><div class="section">
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
@@ -376,6 +353,7 @@ Named list of additional information.</p></dd>
 </div>
 
 </div>
+
 
     </div>
 

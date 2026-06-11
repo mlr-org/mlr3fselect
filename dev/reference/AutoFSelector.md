@@ -126,7 +126,7 @@ here.
 
 ### Public methods
 
-- [`AutoFSelector$new()`](#method-AutoFSelector-new)
+- [`AutoFSelector$new()`](#method-AutoFSelector-initialize)
 
 - [`AutoFSelector$base_learner()`](#method-AutoFSelector-base_learner)
 
@@ -155,7 +155,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `AutoFSelector$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -260,7 +260,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `base_learner()`
+### `AutoFSelector$base_learner()`
 
 Extracts the base learner from nested learner objects like
 `GraphLearner` in
@@ -284,7 +284,7 @@ Extracts the base learner from nested learner objects like
 
 ------------------------------------------------------------------------
 
-### Method `importance()`
+### `AutoFSelector$importance()`
 
 The importance scores of the final model.
 
@@ -298,7 +298,7 @@ Named [`numeric()`](https://rdrr.io/r/base/numeric.html).
 
 ------------------------------------------------------------------------
 
-### Method `selected_features()`
+### `AutoFSelector$selected_features()`
 
 The selected features of the final model. These features are selected
 internally by the learner.
@@ -313,7 +313,7 @@ internally by the learner.
 
 ------------------------------------------------------------------------
 
-### Method `oob_error()`
+### `AutoFSelector$oob_error()`
 
 The out-of-bag error of the final model.
 
@@ -327,7 +327,7 @@ The out-of-bag error of the final model.
 
 ------------------------------------------------------------------------
 
-### Method `loglik()`
+### `AutoFSelector$loglik()`
 
 The log-likelihood of the final model.
 
@@ -341,21 +341,15 @@ The log-likelihood of the final model.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `AutoFSelector$print()`
 
 #### Usage
 
     AutoFSelector$print()
 
-#### Arguments
-
-- `...`:
-
-  (ignored).
-
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `AutoFSelector$clone()`
 
 The objects of this class are cloneable with this method.
 

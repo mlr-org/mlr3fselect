@@ -10,7 +10,7 @@ or
 
 [`bbotk::Objective`](https://bbotk.mlr-org.com/reference/Objective.html)
 -\>
-[`mlr3fselect::ObjectiveFSelect`](https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.md)
+[`ObjectiveFSelect`](https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.md)
 -\> `ObjectiveFSelectBatch`
 
 ## Public fields
@@ -23,7 +23,7 @@ or
 
 ### Public methods
 
-- [`ObjectiveFSelectBatch$new()`](#method-ObjectiveFSelectBatch-new)
+- [`ObjectiveFSelectBatch$new()`](#method-ObjectiveFSelectBatch-initialize)
 
 - [`ObjectiveFSelectBatch$clone()`](#method-ObjectiveFSelectBatch-clone)
 
@@ -38,7 +38,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ObjectiveFSelectBatch$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -117,7 +117,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ObjectiveFSelectBatch$clone()`
 
 The objects of this class are cloneable with this method.
 

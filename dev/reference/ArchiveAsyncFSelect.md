@@ -78,7 +78,7 @@ for each feature subset evaluation.
 
 ### Public methods
 
-- [`ArchiveAsyncFSelect$new()`](#method-ArchiveAsyncFSelect-new)
+- [`ArchiveAsyncFSelect$new()`](#method-ArchiveAsyncFSelect-initialize)
 
 - [`ArchiveAsyncFSelect$learner()`](#method-ArchiveAsyncFSelect-learner)
 
@@ -110,7 +110,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ArchiveAsyncFSelect$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -163,7 +163,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `learner()`
+### `ArchiveAsyncFSelect$learner()`
 
 Retrieve
 [mlr3::Learner](https://mlr3.mlr-org.com/reference/Learner.html) of the
@@ -189,7 +189,7 @@ are mutually exclusive. Learner does not contain a model. Use
 
 ------------------------------------------------------------------------
 
-### Method `learners()`
+### `ArchiveAsyncFSelect$learners()`
 
 Retrieve list of trained
 [mlr3::Learner](https://mlr3.mlr-org.com/reference/Learner.html) objects
@@ -214,7 +214,7 @@ of the i-th evaluation, by position or by unique hash `uhash`. `i` and
 
 ------------------------------------------------------------------------
 
-### Method `predictions()`
+### `ArchiveAsyncFSelect$predictions()`
 
 Retrieve list of
 [mlr3::Prediction](https://mlr3.mlr-org.com/reference/Prediction.html)
@@ -239,7 +239,7 @@ objects of the i-th evaluation, by position or by unique hash `uhash`.
 
 ------------------------------------------------------------------------
 
-### Method `resample_result()`
+### `ArchiveAsyncFSelect$resample_result()`
 
 Retrieve
 [mlr3::ResampleResult](https://mlr3.mlr-org.com/reference/ResampleResult.html)
@@ -264,7 +264,7 @@ of the i-th evaluation, by position or by unique hash `uhash`. `i` and
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `ArchiveAsyncFSelect$print()`
 
 Printer.
 
@@ -272,15 +272,9 @@ Printer.
 
     ArchiveAsyncFSelect$print()
 
-#### Arguments
-
-- `...`:
-
-  (ignored).
-
 ------------------------------------------------------------------------
 
-### Method `best()`
+### `ArchiveAsyncFSelect$best()`
 
 Returns the best scoring feature set(s). For single-crit optimization,
 the solution that minimizes / maximizes the objective function. For
@@ -311,7 +305,7 @@ multi-crit optimization, the Pareto set / front.
 
 ------------------------------------------------------------------------
 
-### Method `push_result()`
+### `ArchiveAsyncFSelect$push_result()`
 
 Push result to the archive.
 
@@ -343,7 +337,7 @@ Push result to the archive.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ArchiveAsyncFSelect$clone()`
 
 The objects of this class are cloneable with this method.
 

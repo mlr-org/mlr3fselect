@@ -71,7 +71,7 @@ case studies and demos about optimization.
 
 ### Public methods
 
-- [`FSelectInstanceAsyncSingleCrit$new()`](#method-FSelectInstanceAsyncSingleCrit-new)
+- [`FSelectInstanceAsyncSingleCrit$new()`](#method-FSelectInstanceAsyncSingleCrit-initialize)
 
 - [`FSelectInstanceAsyncSingleCrit$assign_result()`](#method-FSelectInstanceAsyncSingleCrit-assign_result)
 
@@ -86,7 +86,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectInstanceAsyncSingleCrit$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -176,7 +176,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `assign_result()`
+### `FSelectInstanceAsyncSingleCrit$assign_result()`
 
 The
 [FSelectorAsync](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorAsync.md)
@@ -214,7 +214,7 @@ For internal use.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectInstanceAsyncSingleCrit$clone()`
 
 The objects of this class are cloneable with this method.
 

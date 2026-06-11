@@ -95,7 +95,7 @@ For this reason it is not feasible to pass an instantiated <a href="https://mlr3
 All arguments from construction to create the <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>.</p></dd>
 
 
-<dt><code>fselector</code></dt>
+    <dt><code>fselector</code></dt>
 <dd><p>(<a href="FSelector.html">FSelector</a>)<br>
 Optimization algorithm.</p></dd>
 
@@ -109,33 +109,33 @@ Optimization algorithm.</p></dd>
 Returns <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a> archive.</p></dd>
 
 
-<dt><code>learner</code></dt>
+    <dt><code>learner</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 Trained learner.</p></dd>
 
 
-<dt><code>fselect_instance</code></dt>
+    <dt><code>fselect_instance</code></dt>
 <dd><p>(<a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>)<br>
 Internally created feature selection instance with all intermediate results.</p></dd>
 
 
-<dt><code>fselect_result</code></dt>
+    <dt><code>fselect_result</code></dt>
 <dd><p>(<a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a>)<br>
 Short-cut to <code>$result</code> from <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a>.</p></dd>
 
 
-<dt><code>predict_type</code></dt>
+    <dt><code>predict_type</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Stores the currently active predict type, e.g. <code>"response"</code>.
 Must be an element of <code>$predict_types</code>.</p></dd>
 
 
-<dt><code>hash</code></dt>
+    <dt><code>hash</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Hash (unique identifier) for this object.</p></dd>
 
 
-<dt><code>phash</code></dt>
+    <dt><code>phash</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Hash (unique identifier) for this partial object,
 excluding some components which are varied systematically during tuning (parameter values)
@@ -149,8 +149,7 @@ or feature selection (feature names).</p></dd>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-AutoFSelector-new"><code>AutoFSelector$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-AutoFSelector-initialize"><code>AutoFSelector$new()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-base_learner"><code>AutoFSelector$base_learner()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-importance"><code>AutoFSelector$importance()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-selected_features"><code>AutoFSelector$selected_features()</code></a></p></li>
@@ -159,15 +158,15 @@ or feature selection (feature names).</p></dd>
 <li><p><a href="#method-AutoFSelector-print"><code>AutoFSelector$print()</code></a></p></li>
 <li><p><a href="#method-AutoFSelector-clone"><code>AutoFSelector$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
-</ul></details></p><hr><a id="method-AutoFSelector-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+</ul></details></p><hr><a id="method-AutoFSelector-initialize"></a><div class="section">
+<h3 id="autofselector-new-"><code>AutoFSelector$new()</code><a class="anchor" aria-label="anchor" href="#autofselector-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/AutoFSelector.html">AutoFSelector</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
@@ -185,65 +184,53 @@ or feature selection (feature names).</p></dd>
 <span>  rush <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  id <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>fselector</code></dt>
 <dd><p>(<a href="FSelector.html">FSelector</a>)<br>
 Optimization algorithm.</p></dd>
 
-
-<dt><code>learner</code></dt>
+      <dt><code>learner</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 Learner to optimize the feature subset for.</p></dd>
 
-
-<dt><code>resampling</code></dt>
+      <dt><code>resampling</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.</p></dd>
 
-
-<dt><code>measure</code></dt>
+      <dt><code>measure</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
-
-<dt><code>terminator</code></dt>
+      <dt><code>terminator</code></dt>
 <dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
 Stop criterion of the feature selection.</p></dd>
 
-
-<dt><code>store_fselect_instance</code></dt>
+      <dt><code>store_fselect_instance</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 If <code>TRUE</code> (default), stores the internally created <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a> with all intermediate results in slot <code>$fselect_instance</code>.
 Is set to <code>TRUE</code>, if <code>store_models = TRUE</code></p></dd>
 
-
-<dt><code>store_benchmark_result</code></dt>
+      <dt><code>store_benchmark_result</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 Store benchmark result in archive?</p></dd>
 
-
-<dt><code>store_models</code></dt>
+      <dt><code>store_models</code></dt>
 <dd><p>(<code>logical(1)</code>).
 Store models in benchmark result?</p></dd>
 
-
-<dt><code>check_values</code></dt>
+      <dt><code>check_values</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 Check the parameters before the evaluation and the results for
 validity?</p></dd>
 
-
-<dt><code>callbacks</code></dt>
+      <dt><code>callbacks</code></dt>
 <dd><p>(list of <a href="CallbackBatchFSelect.html">CallbackBatchFSelect</a>)<br>
 List of callbacks.</p></dd>
 
-
-<dt><code>ties_method</code></dt>
+      <dt><code>ties_method</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be <code>"least_features"</code> or <code>"random"</code>.
@@ -252,13 +239,11 @@ If there are multiple best feature sets with the same number of features, one is
 The <code>random</code> method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.</p></dd>
 
-
-<dt><code>rush</code></dt>
+      <dt><code>rush</code></dt>
 <dd><p>(<code>Rush</code>)<br>
 If a rush instance is supplied, the optimization runs without batches.</p></dd>
 
-
-<dt><code>id</code></dt>
+      <dt><code>id</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Identifier for the new instance.</p></dd>
 
@@ -266,15 +251,15 @@ Identifier for the new instance.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-AutoFSelector-base_learner"></a><div class="section">
-<h3 id="method-base-learner-">Method <code>base_learner()</code><a class="anchor" aria-label="anchor" href="#method-base-learner-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-AutoFSelector-base_learner"></a><div class="section">
+<h3 id="autofselector-base-learner-"><code>AutoFSelector$base_learner()</code><a class="anchor" aria-label="anchor" href="#autofselector-base-learner-"></a></h3>
 <p>Extracts the base learner from nested learner objects like <code>GraphLearner</code> in <a href="https://CRAN.R-project.org/package=mlr3pipelines" class="external-link"><span class="pkg">mlr3pipelines</span></a>.
 If <code>recursive = 0</code>, the (tuned) learner is returned.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AutoFSelector</span><span class="op">$</span><span class="fu">base_learner</span><span class="op">(</span>recursive <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recursive</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
@@ -282,88 +267,79 @@ Depth of recursion for multiple nested objects.</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>.</p>
 </div>
 
-</div><p></p><hr><a id="method-AutoFSelector-importance"></a><div class="section">
-<h3 id="method-importance-">Method <code>importance()</code><a class="anchor" aria-label="anchor" href="#method-importance-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-AutoFSelector-importance"></a><div class="section">
+<h3 id="autofselector-importance-"><code>AutoFSelector$importance()</code><a class="anchor" aria-label="anchor" href="#autofselector-importance-"></a></h3>
 <p>The importance scores of the final model.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AutoFSelector</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>Named <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-AutoFSelector-selected_features"></a><div class="section">
-<h3 id="method-selected-features-">Method <code>selected_features()</code><a class="anchor" aria-label="anchor" href="#method-selected-features-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-AutoFSelector-selected_features"></a><div class="section">
+<h3 id="autofselector-selected-features-"><code>AutoFSelector$selected_features()</code><a class="anchor" aria-label="anchor" href="#autofselector-selected-features-"></a></h3>
 <p>The selected features of the final model.
 These features are selected internally by the learner.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AutoFSelector</span><span class="op">$</span><span class="fu">selected_features</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-AutoFSelector-oob_error"></a><div class="section">
-<h3 id="method-oob-error-">Method <code>oob_error()</code><a class="anchor" aria-label="anchor" href="#method-oob-error-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-AutoFSelector-oob_error"></a><div class="section">
+<h3 id="autofselector-oob-error-"><code>AutoFSelector$oob_error()</code><a class="anchor" aria-label="anchor" href="#autofselector-oob-error-"></a></h3>
 <p>The out-of-bag error of the final model.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AutoFSelector</span><span class="op">$</span><span class="fu">oob_error</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
 <p><code>numeric(1)</code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-AutoFSelector-loglik"></a><div class="section">
-<h3 id="method-loglik-">Method <code>loglik()</code><a class="anchor" aria-label="anchor" href="#method-loglik-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-AutoFSelector-loglik"></a><div class="section">
+<h3 id="autofselector-loglik-"><code>AutoFSelector$loglik()</code><a class="anchor" aria-label="anchor" href="#autofselector-loglik-"></a></h3>
 <p>The log-likelihood of the final model.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AutoFSelector</span><span class="op">$</span><span class="fu">loglik</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
 <p><code>logLik</code>.
 Printer.</p>
 </div>
 
-</div><p></p><hr><a id="method-AutoFSelector-print"></a><div class="section">
-<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+</div>
 
-<div class="section">
+<p></p><hr><a id="method-AutoFSelector-print"></a><div class="section">
+<h3 id="autofselector-print-"><code>AutoFSelector$print()</code><a class="anchor" aria-label="anchor" href="#autofselector-print-"></a></h3>
+<p></p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AutoFSelector</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
-<div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>...</code></dt>
-<dd><p>(ignored).</p></dd>
-
-
-</dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-AutoFSelector-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p></p><hr><a id="method-AutoFSelector-clone"></a><div class="section">
+<h3 id="autofselector-clone-"><code>AutoFSelector$clone()</code><a class="anchor" aria-label="anchor" href="#autofselector-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AutoFSelector</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+</div><p></p><div class="section">
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
@@ -372,6 +348,7 @@ Printer.</p>
 </div>
 
 </div>
+
 
     </div>
 

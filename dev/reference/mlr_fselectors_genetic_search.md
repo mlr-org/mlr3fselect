@@ -36,29 +36,29 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.md)
 -\> `FSelectorBatchGeneticSearch`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchGeneticSearch$new()`](#method-FSelectorBatchGeneticSearch-new)
+- [`FSelectorBatchGeneticSearch$new()`](#method-FSelectorBatchGeneticSearch-initialize)
 
 - [`FSelectorBatchGeneticSearch$clone()`](#method-FSelectorBatchGeneticSearch-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
+- [`FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchGeneticSearch$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -69,7 +69,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchGeneticSearch$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -128,16 +128,16 @@ as.data.table(instance$archive)
 #> 10:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>     classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>          <num>            <num>              <POSc>    <int>    <int>  <int>
-#>  1:  0.2521739            0.005 2026-06-11 10:46:35        1        0      0
-#>  2:  0.6173913            0.006 2026-06-11 10:46:35        2        0      0
-#>  3:  0.2260870            0.006 2026-06-11 10:46:35        3        0      0
-#>  4:  0.2869565            0.005 2026-06-11 10:46:36        4        0      0
-#>  5:  0.2869565            0.007 2026-06-11 10:46:36        5        0      0
-#>  6:  0.3043478            0.006 2026-06-11 10:46:36        6        0      0
-#>  7:  0.2260870            0.005 2026-06-11 10:46:36        7        0      0
-#>  8:  0.2521739            0.006 2026-06-11 10:46:36        8        0      0
-#>  9:  0.2521739            0.006 2026-06-11 10:46:36        9        0      0
-#> 10:  0.2260870            0.005 2026-06-11 10:46:36       10        0      0
+#>  1:  0.2521739            0.005 2026-06-11 10:50:30        1        0      0
+#>  2:  0.6173913            0.004 2026-06-11 10:50:30        2        0      0
+#>  3:  0.2260870            0.006 2026-06-11 10:50:30        3        0      0
+#>  4:  0.2869565            0.005 2026-06-11 10:50:30        4        0      0
+#>  5:  0.2869565            0.005 2026-06-11 10:50:30        5        0      0
+#>  6:  0.3043478            0.005 2026-06-11 10:50:30        6        0      0
+#>  7:  0.2260870            0.005 2026-06-11 10:50:30        7        0      0
+#>  8:  0.2521739            0.004 2026-06-11 10:50:30        8        0      0
+#>  9:  0.2521739            0.005 2026-06-11 10:50:30        9        0      0
+#> 10:  0.2260870            0.004 2026-06-11 10:50:30       10        0      0
 #>           features n_features  resample_result
 #>             <list>     <list>           <list>
 #>  1:    island,year          2 <ResampleResult>

@@ -22,9 +22,9 @@ embedded_ensemble_fselect(
 
 Meinshausen, Nicolai, Buhlmann, Peter (2010). “Stability Selection.”
 *Journal of the Royal Statistical Society Series B: Statistical
-Methodology*, **72**(4), 417–473. ISSN 1369-7412,
+Methodology*, **72**(4), 417–473. ISSN 1369-7412.
 [doi:10.1111/J.1467-9868.2010.00740.X](https://doi.org/10.1111/J.1467-9868.2010.00740.X)
-, 0809.2932.
+. 0809.2932.
 
 Hedou, Julien, Maric, Ivana, Bellan, Gregoire, Einhaus, Jakob,
 Gaudilliere, K. D, Ladant, Xavier F, Verdonk, Franck, Stelzer, A. I,
@@ -34,14 +34,14 @@ Golob, L. J, Sirota, Marina, Bonham, A. T, Sato, Masaki, Diop, Maigane,
 Durand, Xavier, Angst, S. M, Stevenson, K. D, Aghaeepour, Nima,
 Montanari, Andrea, Gaudilliere, Brice (2024). “Discovery of sparse,
 reliable omic biomarkers with Stabl.” *Nature Biotechnology 2024*, 1–13.
-ISSN 1546-1696,
+ISSN 1546-1696.
 [doi:10.1038/s41587-023-02033-x](https://doi.org/10.1038/s41587-023-02033-x)
-, <https://www.nature.com/articles/s41587-023-02033-x>.
+. <https://www.nature.com/articles/s41587-023-02033-x>.
 
 Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian,
 Becker, Marc, Aittokallio, Tero (2026). “Prognostic biomarker discovery
 in pancreatic cancer through hybrid ensemble feature selection and
-multi-omics data.” *BioData Mining*. ISSN 1756-0381,
+multi-omics data.” *BioData Mining*. ISSN 1756-0381.
 [doi:10.1186/s13040-026-00546-0](https://doi.org/10.1186/s13040-026-00546-0)
 .
 

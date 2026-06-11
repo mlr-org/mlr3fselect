@@ -70,22 +70,21 @@ provide.</p>
 </ul></div>
     <div class="section level2">
     <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
-    <p><code><a href="FSelector.html">mlr3fselect::FSelector</a></code> -&gt; <code>FSelectorAsync</code></p>
+    <p><code><a href="FSelector.html">FSelector</a></code> -&gt; <code>FSelectorAsync</code></p>
     </div>
     <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-FSelectorAsync-optimize"><code>FSelectorAsync$optimize()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-FSelectorAsync-optimize"><code>FSelectorAsync$optimize()</code></a></p></li>
 <li><p><a href="#method-FSelectorAsync-clone"><code>FSelectorAsync$clone()</code></a></p></li>
-</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="initialize"><a href="FSelector.html#method-initialize"><code>mlr3fselect::FSelector$initialize()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>mlr3fselect::FSelector$print()</code></a></span></li>
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="initialize"><a href="FSelector.html#method-initialize"><code>FSelector$initialize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>FSelector$print()</code></a></span></li>
 </ul></details></p><hr><a id="method-FSelectorAsync-optimize"></a><div class="section">
-<h3 id="method-optimize-">Method <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code><a class="anchor" aria-label="anchor" href="#method-optimize-"></a></h3>
+<h3 id="fselectorasync-optimize-"><code>FSelectorAsync$optimize()</code><a class="anchor" aria-label="anchor" href="#fselectorasync-optimize-"></a></h3>
 <p>Performs the feature selection on a <a href="FSelectInstanceAsyncSingleCrit.html">FSelectInstanceAsyncSingleCrit</a> or
 <a href="FSelectInstanceAsyncMultiCrit.html">FSelectInstanceAsyncMultiCrit</a> until termination.
 The single evaluations will be written into the <a href="ArchiveAsyncFSelect.html">ArchiveAsyncFSelect</a>
@@ -93,29 +92,26 @@ that resides in the <a href="FSelectInstanceAsyncSingleCrit.html">FSelectInstanc
 The result will be written into the instance object.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectorAsync</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">inst</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>inst</code></dt>
 <dd><p>(<a href="FSelectInstanceAsyncSingleCrit.html">FSelectInstanceAsyncSingleCrit</a> | <a href="FSelectInstanceAsyncMultiCrit.html">FSelectInstanceAsyncMultiCrit</a>).</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p><code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code></p>
 </div>
 
-</div><p></p><hr><a id="method-FSelectorAsync-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-FSelectorAsync-clone"></a><div class="section">
+<h3 id="fselectorasync-clone-"><code>FSelectorAsync$clone()</code><a class="anchor" aria-label="anchor" href="#fselectorasync-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectorAsync</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -125,6 +121,7 @@ The result will be written into the instance object.</p><div class="section">
 </div>
 
 </div>
+
 
     </div>
 

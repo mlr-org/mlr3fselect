@@ -98,22 +98,21 @@ See technical details sections.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
-    <p><code><a href="FSelector.html">mlr3fselect::FSelector</a></code> -&gt; <code>FSelectorBatch</code></p>
+    <p><code><a href="FSelector.html">FSelector</a></code> -&gt; <code>FSelectorBatch</code></p>
     </div>
     <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-FSelectorBatch-new"><code>FSelectorBatch$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-FSelectorBatch-initialize"><code>FSelectorBatch$new()</code></a></p></li>
 <li><p><a href="#method-FSelectorBatch-optimize"><code>FSelectorBatch$optimize()</code></a></p></li>
 <li><p><a href="#method-FSelectorBatch-clone"><code>FSelectorBatch$clone()</code></a></p></li>
-</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>mlr3fselect::FSelector$print()</code></a></span></li>
-</ul></details></p><hr><a id="method-FSelectorBatch-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href="FSelector.html#method-format"><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href="FSelector.html#method-help"><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href="FSelector.html#method-print"><code>FSelector$print()</code></a></span></li>
+</ul></details></p><hr><a id="method-FSelectorBatch-initialize"></a><div class="section">
+<h3 id="fselectorbatch-new-"><code>FSelectorBatch$new()</code><a class="anchor" aria-label="anchor" href="#fselectorbatch-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/FSelectorBatch.html">FSelectorBatch</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
@@ -124,39 +123,32 @@ See technical details sections.</p></li>
 <span>  label <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
 <span>  man <span class="op">=</span> <span class="cn">NA_character_</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Identifier for the new instance.</p></dd>
 
-
-<dt><code>param_set</code></dt>
+      <dt><code>param_set</code></dt>
 <dd><p><a href="https://paradox.mlr-org.com/reference/ParamSet.html" class="external-link">paradox::ParamSet</a><br>
 Set of control parameters.</p></dd>
 
-
-<dt><code>properties</code></dt>
+      <dt><code>properties</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
 Set of properties of the fselector.
 Must be a subset of <code><a href="https://mlr3.mlr-org.com/reference/mlr_reflections.html" class="external-link">mlr_reflections$fselect_properties</a></code>.</p></dd>
 
-
-<dt><code>packages</code></dt>
+      <dt><code>packages</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
 Set of required packages.
 Note that these packages will be loaded via <code><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace()</a></code>, and are not attached.</p></dd>
 
-
-<dt><code>label</code></dt>
+      <dt><code>label</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Label for this object.
 Can be used in tables, plot and text output instead of the ID.</p></dd>
 
-
-<dt><code>man</code></dt>
+      <dt><code>man</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 String in the format <code>[pkg]::[topic]</code> pointing to a manual page for this object.
 The referenced help package can be opened via method <code>$help()</code>.</p></dd>
@@ -165,8 +157,10 @@ The referenced help package can be opened via method <code>$help()</code>.</p></
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-FSelectorBatch-optimize"></a><div class="section">
-<h3 id="method-optimize-">Method <code><a href="https://rdrr.io/r/stats/optimize.html" class="external-link">optimize()</a></code><a class="anchor" aria-label="anchor" href="#method-optimize-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-FSelectorBatch-optimize"></a><div class="section">
+<h3 id="fselectorbatch-optimize-"><code>FSelectorBatch$optimize()</code><a class="anchor" aria-label="anchor" href="#fselectorbatch-optimize-"></a></h3>
 <p>Performs the feature selection on a <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a> or <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a>
 until termination.
 The single evaluations will be written into the <a href="ArchiveBatchFSelect.html">ArchiveBatchFSelect</a>
@@ -174,29 +168,26 @@ that resides in the <a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanc
 The result will be written into the instance object.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectorBatch</span><span class="op">$</span><span class="fu">optimize</span><span class="op">(</span><span class="va">inst</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>inst</code></dt>
 <dd><p>(<a href="FSelectInstanceBatchSingleCrit.html">FSelectInstanceBatchSingleCrit</a> | <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a>).</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p><code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-FSelectorBatch-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-FSelectorBatch-clone"></a><div class="section">
+<h3 id="fselectorbatch-clone-"><code>FSelectorBatch$clone()</code><a class="anchor" aria-label="anchor" href="#fselectorbatch-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectorBatch</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -206,6 +197,7 @@ The result will be written into the instance object.</p><div class="section">
 </div>
 
 </div>
+
 
     </div>
 

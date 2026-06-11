@@ -10,7 +10,7 @@ or
 
 [`bbotk::Objective`](https://bbotk.mlr-org.com/reference/Objective.html)
 -\>
-[`mlr3fselect::ObjectiveFSelect`](https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.md)
+[`ObjectiveFSelect`](https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.md)
 -\> `ObjectiveFSelectAsync`
 
 ## Methods
@@ -27,11 +27,11 @@ Inherited methods
 - [`bbotk::Objective$format()`](https://bbotk.mlr-org.com/reference/Objective.html#method-format)
 - [`bbotk::Objective$help()`](https://bbotk.mlr-org.com/reference/Objective.html#method-help)
 - [`bbotk::Objective$print()`](https://bbotk.mlr-org.com/reference/Objective.html#method-print)
-- [`mlr3fselect::ObjectiveFSelect$initialize()`](https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.html#method-initialize)
+- [`ObjectiveFSelect$initialize()`](https://mlr3fselect.mlr-org.com/dev/reference/ObjectiveFSelect.html#method-initialize)
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ObjectiveFSelectAsync$clone()`
 
 The objects of this class are cloneable with this method.
 

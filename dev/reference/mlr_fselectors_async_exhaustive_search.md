@@ -34,16 +34,16 @@ Other FSelectorAsync:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorAsync`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorAsync.md)
+[`FSelectorAsync`](https://mlr3fselect.mlr-org.com/dev/reference/FSelectorAsync.md)
 -\> `FSelectorAsyncExhaustiveSearch`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorAsyncExhaustiveSearch$new()`](#method-FSelectorAsyncExhaustiveSearch-new)
+- [`FSelectorAsyncExhaustiveSearch$new()`](#method-FSelectorAsyncExhaustiveSearch-initialize)
 
 - [`FSelectorAsyncExhaustiveSearch$optimize()`](#method-FSelectorAsyncExhaustiveSearch-optimize)
 
@@ -51,13 +51,13 @@ Other FSelectorAsync:
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorAsyncExhaustiveSearch$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -68,7 +68,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method [`optimize()`](https://rdrr.io/r/stats/optimize.html)
+### `FSelectorAsyncExhaustiveSearch$optimize()`
 
 Starts the asynchronous optimization.
 
@@ -90,7 +90,7 @@ Starts the asynchronous optimization.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorAsyncExhaustiveSearch$clone()`
 
 The objects of this class are cloneable with this method.
 

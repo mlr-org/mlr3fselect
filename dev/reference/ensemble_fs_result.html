@@ -85,12 +85,15 @@ ISSN 09344373.</p>
 <p>Meinshausen, Nicolai, Buhlmann, Peter (2010).
 “Stability Selection.”
 <em>Journal of the Royal Statistical Society Series B: Statistical Methodology</em>, <b>72</b>(4), 417–473.
-ISSN 1369-7412, <a href="https://doi.org/10.1111/J.1467-9868.2010.00740.X" class="external-link">doi:10.1111/J.1467-9868.2010.00740.X</a>
-, 0809.2932.</p>
+ISSN 1369-7412.
+<a href="https://doi.org/10.1111/J.1467-9868.2010.00740.X" class="external-link">doi:10.1111/J.1467-9868.2010.00740.X</a>
+.
+0809.2932.</p>
 <p>Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
 “Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.”
 <em>BioData Mining</em>.
-ISSN 1756-0381, <a href="https://doi.org/10.1186/s13040-026-00546-0" class="external-link">doi:10.1186/s13040-026-00546-0</a>
+ISSN 1756-0381.
+<a href="https://doi.org/10.1186/s13040-026-00546-0" class="external-link">doi:10.1186/s13040-026-00546-0</a>
 .</p>
     </div>
     <div class="section level2">
@@ -100,7 +103,7 @@ ISSN 1756-0381, <a href="https://doi.org/10.1186/s13040-026-00546-0" class="exte
 The benchmark result.</p></dd>
 
 
-<dt><code>man</code></dt>
+    <dt><code>man</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Manual page for this object.</p></dd>
 
@@ -114,17 +117,17 @@ Manual page for this object.</p></dd>
 Returns the result of the ensemble feature selection.</p></dd>
 
 
-<dt><code>n_learners</code></dt>
+    <dt><code>n_learners</code></dt>
 <dd><p>(<code>numeric(1)</code>)<br>
 Returns the number of learners used in the ensemble feature selection.</p></dd>
 
 
-<dt><code>measure</code></dt>
+    <dt><code>measure</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 Returns the 'active' measure that is used in methods of this object.</p></dd>
 
 
-<dt><code>active_measure</code></dt>
+    <dt><code>active_measure</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Indicates the type of the active performance measure.</p>
 <p>During the ensemble feature selection process, the dataset is split into <strong>multiple subsamples</strong>
@@ -135,7 +138,7 @@ to compute performance during inner resampling on the training sets.</p></li>
 </ul></dd>
 
 
-<dt><code>n_resamples</code></dt>
+    <dt><code>n_resamples</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Returns the number of times the task was initially resampled in the ensemble feature selection process.</p></dd>
 
@@ -147,8 +150,7 @@ Returns the number of times the task was initially resampled in the ensemble fea
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-EnsembleFSResult-new"><code>EnsembleFSResult$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-EnsembleFSResult-initialize"><code>EnsembleFSResult$new()</code></a></p></li>
 <li><p><a href="#method-EnsembleFSResult-format"><code>EnsembleFSResult$format()</code></a></p></li>
 <li><p><a href="#method-EnsembleFSResult-print"><code>EnsembleFSResult$print()</code></a></p></li>
 <li><p><a href="#method-EnsembleFSResult-help"><code>EnsembleFSResult$help()</code></a></p></li>
@@ -160,8 +162,8 @@ Returns the number of times the task was initially resampled in the ensemble fea
 <li><p><a href="#method-EnsembleFSResult-pareto_front"><code>EnsembleFSResult$pareto_front()</code></a></p></li>
 <li><p><a href="#method-EnsembleFSResult-knee_points"><code>EnsembleFSResult$knee_points()</code></a></p></li>
 <li><p><a href="#method-EnsembleFSResult-clone"><code>EnsembleFSResult$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-EnsembleFSResult-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+</ul></div><p></p><hr><a id="method-EnsembleFSResult-initialize"></a><div class="section">
+<h3 id="ensemblefsresult-new-"><code>EnsembleFSResult$new()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ensemble_fs_result.html">EnsembleFSResult</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
@@ -171,9 +173,7 @@ Returns the number of times the task was initially resampled in the ensemble fea
 <span>  <span class="va">measure</span>,</span>
 <span>  inner_measure <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>result</code></dt>
 <dd><p>(<a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a>)<br>
@@ -185,27 +185,23 @@ always present.
 The column with the performance scores on the inner resampling of the train sets is not mandatory,
 but note that it should be named as <code>{inner_measure$id}_inner</code> to distinguish from the <code>{measure$id}</code>.</p></dd>
 
-
-<dt><code>features</code></dt>
+      <dt><code>features</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
 The vector of features of the task that was used in the ensemble feature
 selection.</p></dd>
 
-
-<dt><code>benchmark_result</code></dt>
+      <dt><code>benchmark_result</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a>)<br>
 The benchmark result object.</p></dd>
 
-
-<dt><code>measure</code></dt>
+      <dt><code>measure</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 The performance measure used to evaluate the learners on the test sets generated
 during the ensemble feature selection process.
 By default, this serves as the 'active' measure for the methods of this object.
 The active measure can be updated using the <code>$set_active_measure()</code> method.</p></dd>
 
-
-<dt><code>inner_measure</code></dt>
+      <dt><code>inner_measure</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 The performance measure used to optimize and evaluate the learners during the inner resampling
 process of the training sets, generated as part of the ensemble feature selection procedure.</p></dd>
@@ -214,14 +210,14 @@ process of the training sets, generated as part of the ensemble feature selectio
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-format"></a><div class="section">
-<h3 id="method-format-">Method <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code><a class="anchor" aria-label="anchor" href="#method-format-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-format"></a><div class="section">
+<h3 id="ensemblefsresult-format-"><code>EnsembleFSResult$format()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-format-"></a></h3>
 <p>Helper for print outputs.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">format</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>(ignored).</p></dd>
@@ -230,14 +226,14 @@ process of the training sets, generated as part of the ensemble feature selectio
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-print"></a><div class="section">
-<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-print"></a><div class="section">
+<h3 id="ensemblefsresult-print-"><code>EnsembleFSResult$print()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-print-"></a></h3>
 <p>Printer.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>(ignored).</p></dd>
@@ -246,16 +242,19 @@ process of the training sets, generated as part of the ensemble feature selectio
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-help"></a><div class="section">
-<h3 id="method-help-">Method <code><a href="https://rdrr.io/r/utils/help.html" class="external-link">help()</a></code><a class="anchor" aria-label="anchor" href="#method-help-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-help"></a><div class="section">
+<h3 id="ensemblefsresult-help-"><code>EnsembleFSResult$help()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-help-"></a></h3>
 <p>Opens the corresponding help page referenced by field <code>$man</code>.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">help</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+</div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-rm_zero_features"></a><div class="section">
-<h3 id="method-rm-zero-features-">Method <code>rm_zero_features()</code><a class="anchor" aria-label="anchor" href="#method-rm-zero-features-"></a></h3>
+<p></p><hr><a id="method-EnsembleFSResult-rm_zero_features"></a><div class="section">
+<h3 id="ensemblefsresult-rm-zero-features-"><code>EnsembleFSResult$rm_zero_features()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-rm-zero-features-"></a></h3>
 <p>Removes rows from the ensemble feature selection result where no features were selected.</p>
 <p>If a benchmark result is stored, the corresponding resampling iterations are removed as well.
 The stability measures are reset and need to be recalculated after this operation.</p>
@@ -263,21 +262,19 @@ The stability measures are reset and need to be recalculated after this operatio
 To preserve the original state, explicitly <code>$clone()</code> the object beforehand.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">rm_zero_features</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p>Returns the object itself, but modified <strong>by reference</strong>.</p>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-set_active_measure"></a><div class="section">
-<h3 id="method-set-active-measure-">Method <code>set_active_measure()</code><a class="anchor" aria-label="anchor" href="#method-set-active-measure-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-set_active_measure"></a><div class="section">
+<h3 id="ensemblefsresult-set-active-measure-"><code>EnsembleFSResult$set_active_measure()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-set-active-measure-"></a></h3>
 <p>Use this function to change the active measure.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">set_active_measure</span><span class="op">(</span>which <span class="op">=</span> <span class="st">"outer"</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>which</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
@@ -290,8 +287,10 @@ or <code>"outer"</code> (measure used in test sets, default value).</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-combine"></a><div class="section">
-<h3 id="method-combine-">Method <code>combine()</code><a class="anchor" aria-label="anchor" href="#method-combine-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-combine"></a><div class="section">
+<h3 id="ensemblefsresult-combine-"><code>EnsembleFSResult$combine()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-combine-"></a></h3>
 <p>Combines a second EnsembleFSResult into the current object, modifying it <strong>in-place</strong>.
 If the second EnsembleFSResult (<code>efsr</code>) is <code>NULL</code>, the method returns the object unmodified.</p>
 <p>Both objects must have the same task features and <code>measure</code>.
@@ -305,9 +304,7 @@ To preserve the original state, explicitly <code>$clone()</code> the object befo
 Alternatively, you can use the <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> function, which internally calls this method.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">combine</span><span class="op">(</span><span class="va">efsr</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>efsr</code></dt>
 <dd><p>(EnsembleFSResult)<br>
@@ -315,14 +312,15 @@ A second EnsembleFSResult object to combine with the current object.</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>Returns the object itself, but modified <strong>by reference</strong>.</p>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-feature_ranking"></a><div class="section">
-<h3 id="method-feature-ranking-">Method <code>feature_ranking()</code><a class="anchor" aria-label="anchor" href="#method-feature-ranking-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-feature_ranking"></a><div class="section">
+<h3 id="ensemblefsresult-feature-ranking-"><code>EnsembleFSResult$feature_ranking()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-feature-ranking-"></a></h3>
 <p>Calculates the feature ranking via <code><a href="https://bblodfon.github.io/fastVoteR/reference/rank_candidates.html" class="external-link">fastVoteR::rank_candidates()</a></code>.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">feature_ranking</span><span class="op">(</span></span>
@@ -331,9 +329,7 @@ A second EnsembleFSResult object to combine with the current object.</p></dd>
 <span>  committee_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  shuffle_features <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>method</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
@@ -341,8 +337,7 @@ The method to calculate the feature ranking. See <code><a href="https://bblodfon
 for a complete list of available methods.
 Approval voting (<code>"av"</code>) is the default method.</p></dd>
 
-
-<dt><code>use_weights</code></dt>
+      <dt><code>use_weights</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 The default value (<code>TRUE</code>) uses weights equal to the performance scores
 of each voter/model (or the inverse scores if the measure is minimized).
@@ -351,15 +346,13 @@ to be meaningful. If the scores can be negative, it is recommended to set
 <code>use_weights = FALSE</code>, which treats all voters as equal and assigns them
 the same weight equal to 1.</p></dd>
 
-
-<dt><code>committee_size</code></dt>
+      <dt><code>committee_size</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 The number of top-ranked features to return.
 This can speed up methods that build a committee sequentially (e.g., <code>"seq_pav"</code>)
 by computing only the top N candidates rather than the full ranking.</p></dd>
 
-
-<dt><code>shuffle_features</code></dt>
+      <dt><code>shuffle_features</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 Whether to shuffle the task features randomly before computing the ranking.
 Shuffling ensures consistent random tie-breaking across methods and prevents
@@ -369,8 +362,7 @@ Set to <code>FALSE</code> if deterministic ordering of features is preferred (sa
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h4>
 <p>The feature ranking process is built on the following framework: models act as <em>voters</em>,
 features act as <em>candidates</em>, and voters select certain candidates (features).
@@ -384,9 +376,7 @@ i.e. it can be used to compare the feature rankings across different methods.</p
 <p>We shuffle the input candidates/features so that we enforce random tie-breaking.
 Users should set the same <code>seed</code> for consistent comparison between the different
 feature ranking methods and for reproducibility.</p>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> listing all the features, ordered by decreasing scores
 (depends on the <code>"method"</code>).
@@ -398,10 +388,13 @@ which can be loosely interpreted as <strong>selection probabilities</strong> (Me
 where the top feature receives a score of 1 and the lowest-ranked feature receives a score of 0.
 This column is always included so that feature ranking methods that output only rankings
 have also a feature-wise score.</p></li>
-</ul></div>
+</ul><p></p>
+</div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-stability"></a><div class="section">
-<h3 id="method-stability-">Method <code>stability()</code><a class="anchor" aria-label="anchor" href="#method-stability-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-stability"></a><div class="section">
+<h3 id="ensemblefsresult-stability-"><code>EnsembleFSResult$stability()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-stability-"></a></h3>
 <p>Calculates the stability of the selected features with the <a href="https://CRAN.R-project.org/package=stabm" class="external-link"><span class="pkg">stabm</span></a> package.
 The results are cached.
 When the same stability measure is requested again with different arguments, the cache must be reset.</p><div class="section">
@@ -412,9 +405,7 @@ When the same stability measure is requested again with different arguments, the
 <span>  global <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reset_cache <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>stability_measure</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
@@ -422,47 +413,42 @@ The stability measure to be used.
 One of the measures returned by <code><a href="https://bommert.github.io/stabm/reference/listStabilityMeasures.html" class="external-link">stabm::listStabilityMeasures()</a></code> in lower case.
 Default is <code>"jaccard"</code>.</p></dd>
 
-
-<dt><code>stability_args</code></dt>
+      <dt><code>stability_args</code></dt>
 <dd><p>(<code>list</code>)<br>
 Additional arguments passed to the stability measure function.</p></dd>
 
-
-<dt><code>global</code></dt>
+      <dt><code>global</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 Whether to calculate the stability globally or for each learner.</p></dd>
 
-
-<dt><code>reset_cache</code></dt>
+      <dt><code>reset_cache</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 If <code>TRUE</code>, the cached results are ignored.</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
 <p>A <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code> value representing the stability of the selected features.
 Or a <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code> vector with the stability of the selected features for each learner.</p>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-pareto_front"></a><div class="section">
-<h3 id="method-pareto-front-">Method <code>pareto_front()</code><a class="anchor" aria-label="anchor" href="#method-pareto-front-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-pareto_front"></a><div class="section">
+<h3 id="ensemblefsresult-pareto-front-"><code>EnsembleFSResult$pareto_front()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-pareto-front-"></a></h3>
 <p>This function identifies the <strong>Pareto front</strong> of the ensemble feature
 selection process, i.e., the set of points that represent the trade-off
 between the number of features and performance (e.g. classification error).</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">pareto_front</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"empirical"</span>, max_nfeatures <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>type</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Specifies the type of Pareto front to return. See details.</p></dd>
 
-
-<dt><code>max_nfeatures</code></dt>
+      <dt><code>max_nfeatures</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 Specifies the maximum number of features for which the estimated Pareto
 front is computed. Applicable only when <code>type = "estimated"</code>.
@@ -471,8 +457,7 @@ is determined by the ensemble feature selection process.</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="details-1">Details<a class="anchor" aria-label="anchor" href="#details-1"></a></h4>
 <p>Two options are available for the Pareto front:</p><ul><li><p><code>"empirical"</code> (default): returns the empirical Pareto front.</p></li>
 <li><p><code>"estimated"</code>: the Pareto front points are estimated by fitting a linear model
@@ -485,16 +470,16 @@ or a concave shape otherwise (e.g. classification accuracy).</p>
 from 1 up to <code>max_nfeatures</code>.
 If <code>max_nfeatures</code> is not provided, it defaults to the maximum number of features available
 in the ensemble feature selection <code>result</code>, i.e. the maximum out of all learners and resamplings included.</p>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
 <p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> with columns the number of features and the performance
 that together form the Pareto front.</p>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-knee_points"></a><div class="section">
-<h3 id="method-knee-points-">Method <code>knee_points()</code><a class="anchor" aria-label="anchor" href="#method-knee-points-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-knee_points"></a><div class="section">
+<h3 id="ensemblefsresult-knee-points-"><code>EnsembleFSResult$knee_points()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-knee-points-"></a></h3>
 <p>This function implements various <em>knee</em> point identification (KPI) methods,
 which select points in the Pareto front,
 such that an optimal trade-off between performance and number of features is achieved.
@@ -505,21 +490,17 @@ In most cases, only one such point is returned.</p><div class="section">
 <span>  type <span class="op">=</span> <span class="st">"empirical"</span>,</span>
 <span>  max_nfeatures <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>method</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Type of method to use to identify the knee point.</p></dd>
 
-
-<dt><code>type</code></dt>
+      <dt><code>type</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 Specifies the type of Pareto front to use for the identification of the knee point.</p></dd>
 
-
-<dt><code>max_nfeatures</code></dt>
+      <dt><code>max_nfeatures</code></dt>
 <dd><p>(<code>integer(1)</code>)<br>
 Specifies the maximum number of features for which the estimated Pareto
 front is computed. Applicable only when <code>type = "estimated"</code>.
@@ -529,28 +510,26 @@ See <code>pareto_front()</code> method for more details.</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="details-2">Details<a class="anchor" aria-label="anchor" href="#details-2"></a></h4>
 <p>The available KPI methods are:</p><ul><li><p><code>"NBI"</code> (default): The <strong>Normal-Boundary Intersection</strong> method is a geometry-based method which calculates
 the perpendicular distance of each point from the line connecting the first and last points of the Pareto
 front.
 The knee point is determined as the Pareto point with the maximum distance from this line, see Das (1999).</p></li>
-</ul></div>
-
-<div class="section">
+</ul><p></p>
+</div><p></p><div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
 <p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> with the knee point(s) of the Pareto front.</p>
 </div>
 
-</div><p></p><hr><a id="method-EnsembleFSResult-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-EnsembleFSResult-clone"></a><div class="section">
+<h3 id="ensemblefsresult-clone-"><code>EnsembleFSResult$clone()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -560,6 +539,7 @@ The knee point is determined as the Pareto point with the maximum distance from 
 </div>
 
 </div>
+
 
     </div>
 

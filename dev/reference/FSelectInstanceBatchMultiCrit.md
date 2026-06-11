@@ -58,7 +58,7 @@ supplied to `as.data.table()`.
 
 ### Public methods
 
-- [`FSelectInstanceBatchMultiCrit$new()`](#method-FSelectInstanceBatchMultiCrit-new)
+- [`FSelectInstanceBatchMultiCrit$new()`](#method-FSelectInstanceBatchMultiCrit-initialize)
 
 - [`FSelectInstanceBatchMultiCrit$assign_result()`](#method-FSelectInstanceBatchMultiCrit-assign_result)
 
@@ -75,7 +75,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectInstanceBatchMultiCrit$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -150,7 +150,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `assign_result()`
+### `FSelectInstanceBatchMultiCrit$assign_result()`
 
 The
 [FSelector](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md)
@@ -187,7 +187,7 @@ values here. For internal use.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `FSelectInstanceBatchMultiCrit$print()`
 
 Printer.
 
@@ -203,7 +203,7 @@ Printer.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectInstanceBatchMultiCrit$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -242,18 +242,15 @@ fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
 #> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#> 2:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 3:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 2:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>                                                             features n_features
 #>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#> 2:                                                       bill_length          7
-#> 3:                                                    flipper_length          7
+#> 2:                                                    flipper_length          7
 #>    classif.ce  time_train
 #>         <num>       <num>
-#> 1: 0.07261632 0.003333333
-#> 2: 0.25858124 0.002333333
-#> 3: 0.19471142 0.003000000
+#> 1: 0.07261632 0.002333333
+#> 2: 0.19471142 0.002000000
 
 # Optimal feature sets
 instance$result_feature_set
@@ -262,9 +259,6 @@ instance$result_feature_set
 #> [5] "island"         "sex"            "year"          
 #> 
 #> [[2]]
-#> [1] "bill_length"
-#> 
-#> [[3]]
 #> [1] "flipper_length"
 #> 
 
@@ -278,10 +272,10 @@ as.data.table(instance$archive)
 #> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce  time_train runtime_learners           timestamp batch_nr
 #>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.07261632 0.003333333            0.016 2026-06-11 10:46:01        1
-#> 2: 0.07261632 0.003333333            0.018 2026-06-11 10:46:01        1
-#> 3: 0.25858124 0.002333333            0.014 2026-06-11 10:46:02        2
-#> 4: 0.19471142 0.003000000            0.016 2026-06-11 10:46:02        2
+#> 1: 0.07261632 0.002333333            0.015 2026-06-11 10:50:01        1
+#> 2: 0.07261632 0.002666667            0.015 2026-06-11 10:50:01        1
+#> 3: 0.25858124 0.002000000            0.011 2026-06-11 10:50:01        2
+#> 4: 0.19471142 0.002000000            0.010 2026-06-11 10:50:01        2
 #>    warnings errors
 #>       <int>  <int>
 #> 1:        0      0

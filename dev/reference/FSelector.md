@@ -82,7 +82,7 @@ Other FSelector:
 
 ### Public methods
 
-- [`FSelector$new()`](#method-FSelector-new)
+- [`FSelector$new()`](#method-FSelector-initialize)
 
 - [`FSelector$format()`](#method-FSelector-format)
 
@@ -94,7 +94,7 @@ Other FSelector:
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelector$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -150,7 +150,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method [`format()`](https://rdrr.io/r/base/format.html)
+### `FSelector$format()`
 
 Helper for print outputs.
 
@@ -170,7 +170,7 @@ Helper for print outputs.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `FSelector$print()`
 
 Print method.
 
@@ -184,7 +184,7 @@ Print method.
 
 ------------------------------------------------------------------------
 
-### Method [`help()`](https://rdrr.io/r/utils/help.html)
+### `FSelector$help()`
 
 Opens the corresponding help page referenced by field `$man`.
 
@@ -194,7 +194,7 @@ Opens the corresponding help page referenced by field `$man`.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelector$clone()`
 
 The objects of this class are cloneable with this method.
 

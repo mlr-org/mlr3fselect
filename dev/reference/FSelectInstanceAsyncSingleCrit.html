@@ -91,16 +91,15 @@ The returned data table contains the <a href="https://mlr3.mlr-org.com/reference
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-FSelectInstanceAsyncSingleCrit-new"><code>FSelectInstanceAsyncSingleCrit$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-FSelectInstanceAsyncSingleCrit-initialize"><code>FSelectInstanceAsyncSingleCrit$new()</code></a></p></li>
 <li><p><a href="#method-FSelectInstanceAsyncSingleCrit-assign_result"><code>FSelectInstanceAsyncSingleCrit$assign_result()</code></a></p></li>
 <li><p><a href="#method-FSelectInstanceAsyncSingleCrit-clone"><code>FSelectInstanceAsyncSingleCrit$clone()</code></a></p></li>
 </ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href="https://bbotk.mlr-org.com/reference/EvalInstance.html#method-format"><code>bbotk::EvalInstance$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceAsync.html#method-clear"><code>bbotk::OptimInstanceAsync$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="print"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceAsync.html#method-print"><code>bbotk::OptimInstanceAsync$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="reconnect"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceAsync.html#method-reconnect"><code>bbotk::OptimInstanceAsync$reconnect()</code></a></span></li>
-</ul></details></p><hr><a id="method-FSelectInstanceAsyncSingleCrit-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="clear"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceAsync.html#method-clear"><code>bbotk::OptimInstanceAsync$clear()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="print"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceAsync.html#method-print"><code>bbotk::OptimInstanceAsync$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="reconnect"><a href="https://bbotk.mlr-org.com/reference/OptimInstanceAsync.html#method-reconnect"><code>bbotk::OptimInstanceAsync$reconnect()</code></a></span></li>
+</ul></details></p><hr><a id="method-FSelectInstanceAsyncSingleCrit-initialize"></a><div class="section">
+<h3 id="fselectinstanceasyncsinglecrit-new-"><code>FSelectInstanceAsyncSingleCrit$new()</code><a class="anchor" aria-label="anchor" href="#fselectinstanceasyncsinglecrit-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/FSelectInstanceAsyncSingleCrit.html">FSelectInstanceAsyncSingleCrit</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
@@ -116,59 +115,48 @@ The returned data table contains the <a href="https://mlr3.mlr-org.com/reference
 <span>  ties_method <span class="op">=</span> <span class="st">"least_features"</span>,</span>
 <span>  rush <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>task</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">mlr3::Task</a>)<br>
 Task to operate on.</p></dd>
 
-
-<dt><code>learner</code></dt>
+      <dt><code>learner</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>)<br>
 Learner to optimize the feature subset for.</p></dd>
 
-
-<dt><code>resampling</code></dt>
+      <dt><code>resampling</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">mlr3::Resampling</a>)<br>
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.</p></dd>
 
-
-<dt><code>measure</code></dt>
+      <dt><code>measure</code></dt>
 <dd><p>(<a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>)<br>
 Measure to optimize. If <code>NULL</code>, default measure is used.</p></dd>
 
-
-<dt><code>terminator</code></dt>
+      <dt><code>terminator</code></dt>
 <dd><p>(<a href="https://bbotk.mlr-org.com/reference/Terminator.html" class="external-link">bbotk::Terminator</a>)<br>
 Stop criterion of the feature selection.</p></dd>
 
-
-<dt><code>store_benchmark_result</code></dt>
+      <dt><code>store_benchmark_result</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 Store benchmark result in archive?</p></dd>
 
-
-<dt><code>store_models</code></dt>
+      <dt><code>store_models</code></dt>
 <dd><p>(<code>logical(1)</code>).
 Store models in benchmark result?</p></dd>
 
-
-<dt><code>check_values</code></dt>
+      <dt><code>check_values</code></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 Check the parameters before the evaluation and the results for
 validity?</p></dd>
 
-
-<dt><code>callbacks</code></dt>
+      <dt><code>callbacks</code></dt>
 <dd><p>(list of <a href="CallbackBatchFSelect.html">CallbackBatchFSelect</a>)<br>
 List of callbacks.</p></dd>
 
-
-<dt><code>ties_method</code></dt>
+      <dt><code>ties_method</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be <code>"least_features"</code> or <code>"random"</code>.
@@ -177,8 +165,7 @@ If there are multiple best feature sets with the same number of features, one is
 The <code>random</code> method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.</p></dd>
 
-
-<dt><code>rush</code></dt>
+      <dt><code>rush</code></dt>
 <dd><p>(<code>Rush</code>)<br>
 If a rush instance is supplied, the optimization runs without batches.</p></dd>
 
@@ -186,15 +173,15 @@ If a rush instance is supplied, the optimization runs without batches.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-FSelectInstanceAsyncSingleCrit-assign_result"></a><div class="section">
-<h3 id="method-assign-result-">Method <code>assign_result()</code><a class="anchor" aria-label="anchor" href="#method-assign-result-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-FSelectInstanceAsyncSingleCrit-assign_result"></a><div class="section">
+<h3 id="fselectinstanceasyncsinglecrit-assign-result-"><code>FSelectInstanceAsyncSingleCrit$assign_result()</code><a class="anchor" aria-label="anchor" href="#fselectinstanceasyncsinglecrit-assign-result-"></a></h3>
 <p>The <a href="FSelectorAsync.html">FSelectorAsync</a> object writes the best found point and estimated performance value here.
 For internal use.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceAsyncSingleCrit</span><span class="op">$</span><span class="fu">assign_result</span><span class="op">(</span><span class="va">xdt</span>, <span class="va">y</span>, extra <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>xdt</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
@@ -202,18 +189,15 @@ x values as <code>data.table</code>. Each row is one point. Contains the value i
 the <em>search space</em> of the <a href="FSelectInstanceBatchMultiCrit.html">FSelectInstanceBatchMultiCrit</a> object. Can contain
 additional columns for extra information.</p></dd>
 
-
-<dt><code>y</code></dt>
+      <dt><code>y</code></dt>
 <dd><p>(<code>numeric(1)</code>)<br>
 Optimal outcome.</p></dd>
 
-
-<dt><code>extra</code></dt>
+      <dt><code>extra</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>)<br>
 Additional information.</p></dd>
 
-
-<dt><code>...</code></dt>
+      <dt><code>...</code></dt>
 <dd><p>(<code>any</code>)<br>
 ignored.</p></dd>
 
@@ -221,14 +205,14 @@ ignored.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-FSelectInstanceAsyncSingleCrit-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-FSelectInstanceAsyncSingleCrit-clone"></a><div class="section">
+<h3 id="fselectinstanceasyncsinglecrit-clone-"><code>FSelectInstanceAsyncSingleCrit$clone()</code><a class="anchor" aria-label="anchor" href="#fselectinstanceasyncsinglecrit-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">FSelectInstanceAsyncSingleCrit</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -238,6 +222,7 @@ ignored.</p></dd>
 </div>
 
 </div>
+
 
     </div>
 

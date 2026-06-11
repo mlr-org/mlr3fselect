@@ -69,7 +69,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ContextBatchFSelect$clone()`
 
 The objects of this class are cloneable with this method.
 
