@@ -31,56 +31,58 @@ By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 }
 
 \seealso{
-Other FSelectorAsync: 
+Other FSelectorAsync:
 \code{\link{mlr_fselectors_async_design_points}},
 \code{\link{mlr_fselectors_async_exhaustive_search}}
 }
 \concept{FSelectorAsync}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorAsync]{mlr3fselect::FSelectorAsync}} -> \code{FSelectorAsyncRandomSearch}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorAsync]{FSelectorAsync}} -> \code{FSelectorAsyncRandomSearch}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorAsyncRandomSearch-new}{\code{FSelectorAsyncRandomSearch$new()}}
-\item \href{#method-FSelectorAsyncRandomSearch-clone}{\code{FSelectorAsyncRandomSearch$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorAsyncRandomSearch-initialize}{\code{FSelectorAsyncRandomSearch$new()}}
+    \item \href{#method-FSelectorAsyncRandomSearch-clone}{\code{FSelectorAsyncRandomSearch$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorAsync" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorAsync.html#method-FSelectorAsync-optimize'><code>mlr3fselect::FSelectorAsync$optimize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorAsync" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorAsync.html#method-FSelectorAsync-optimize'><code>FSelectorAsync$optimize()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorAsyncRandomSearch-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorAsyncRandomSearch-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncRandomSearch$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorAsyncRandomSearch-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorAsyncRandomSearch-initialize}{}}}
+\subsection{\code{FSelectorAsyncRandomSearch$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsyncRandomSearch$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorAsyncRandomSearch-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorAsyncRandomSearch-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncRandomSearch$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorAsyncRandomSearch$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsyncRandomSearch$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

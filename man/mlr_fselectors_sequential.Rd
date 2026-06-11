@@ -66,7 +66,7 @@ learner$train(task)
 }
 }
 \seealso{
-Other FSelector: 
+Other FSelector:
 \code{\link{FSelector}},
 \code{\link{mlr_fselectors}},
 \code{\link{mlr_fselectors_design_points}},
@@ -79,75 +79,78 @@ Other FSelector:
 }
 \concept{FSelector}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{mlr3fselect::FSelectorBatch}} -> \code{FSelectorBatchSequential}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{FSelectorBatch}} -> \code{FSelectorBatchSequential}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorBatchSequential-new}{\code{FSelectorBatchSequential$new()}}
-\item \href{#method-FSelectorBatchSequential-optimization_path}{\code{FSelectorBatchSequential$optimization_path()}}
-\item \href{#method-FSelectorBatchSequential-clone}{\code{FSelectorBatchSequential$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorBatchSequential-initialize}{\code{FSelectorBatchSequential$new()}}
+    \item \href{#method-FSelectorBatchSequential-optimization_path}{\code{FSelectorBatchSequential$optimization_path()}}
+    \item \href{#method-FSelectorBatchSequential-clone}{\code{FSelectorBatchSequential$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>mlr3fselect::FSelectorBatch$optimize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>FSelectorBatch$optimize()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorBatchSequential-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorBatchSequential-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.`
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchSequential$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorBatchSequential-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorBatchSequential-initialize}{}}}
+\subsection{\code{FSelectorBatchSequential$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.`
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchSequential$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchSequential-optimization_path"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchSequential-optimization_path}{}}}
-\subsection{Method \code{optimization_path()}}{
-Returns the optimization path.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchSequential$optimization_path(inst, include_uhash = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit})\cr
+\subsection{\code{FSelectorBatchSequential$optimization_path()}}{
+  Returns the optimization path.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchSequential$optimization_path(inst, include_uhash = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit})\cr
 Instance optimized with \link{FSelectorBatchSequential}.}
-
-\item{\code{include_uhash}}{(\code{logical(1)})\cr
+      \item{\code{include_uhash}}{(\code{logical(1)})\cr
 Include \code{uhash} column?}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{\link[data.table:data.table]{data.table::data.table()}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{\link[data.table:data.table]{data.table::data.table()}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchSequential-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchSequential-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchSequential$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatchSequential$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchSequential$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

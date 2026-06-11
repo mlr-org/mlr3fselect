@@ -12,17 +12,20 @@ Saeys, Yvan, Abeel, Thomas, Van De Peer, Yves (2008).
 Abeel, Thomas, Helleputte, Thibault, Van de Peer, Yves, Dupont, Pierre, Saeys, Yvan (2010).
 \dQuote{Robust biomarker identification for cancer diagnosis with ensemble feature selection methods.}
 \emph{Bioinformatics}, \bold{26}, 392--398.
-ISSN 1367-4803, \doi{10.1093/BIOINFORMATICS/BTP630}.
+ISSN 1367-4803.
+\doi{10.1093/BIOINFORMATICS/BTP630}.
 
 Pes, Barbara (2020).
 \dQuote{Ensemble feature selection for high-dimensional data: a stability analysis across multiple domains.}
 \emph{Neural Computing and Applications}, \bold{32}(10), 5951--5973.
-ISSN 14333058, \doi{10.1007/s00521-019-04082-3}.
+ISSN 14333058.
+\doi{10.1007/s00521-019-04082-3}.
 
 Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
 \dQuote{Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.}
 \emph{BioData Mining}.
-ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}.
+ISSN 1756-0381.
+\doi{10.1186/s13040-026-00546-0}.
 }
 \usage{
 ensemble_fselect(
@@ -53,7 +56,7 @@ The learners to be used for feature selection.}
 The initial resampling strategy of the data, from which each train set will be passed on to the \link{auto_fselector}
 to optimize the learners and perform feature selection.
 Each test set will be used for prediction on the final models returned by \link{auto_fselector}.
-Can only be \link[mlr3:mlr_resamplings_subsampling]{mlr3::ResamplingSubsampling} or \link[mlr3:mlr_resamplings_bootstrap]{mlr3::ResamplingBootstrap}.}
+Can only be \link[mlr3:ResamplingSubsampling]{mlr3::ResamplingSubsampling} or \link[mlr3:ResamplingBootstrap]{mlr3::ResamplingBootstrap}.}
 
 \item{inner_resampling}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 The inner resampling strategy used by the \link{FSelector}.}

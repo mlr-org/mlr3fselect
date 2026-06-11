@@ -95,7 +95,7 @@ The \link[mlr3:Task]{mlr3::Task}, \link[mlr3:Learner]{mlr3::Learner}, \link[mlr3
 and \link[bbotk:Terminator]{bbotk::Terminator} are used to construct a \link{FSelectInstanceBatchSingleCrit}.
 If multiple performance \link[mlr3:Measure]{mlr3::Measure}s are supplied, a \link{FSelectInstanceBatchMultiCrit} is created.
 The parameter \code{term_evals} and \code{term_time} are shortcuts to create a \link[bbotk:Terminator]{bbotk::Terminator}.
-If both parameters are passed, a \link[bbotk:mlr_terminators_combo]{bbotk::TerminatorCombo} is constructed.
+If both parameters are passed, a \link[bbotk:TerminatorCombo]{bbotk::TerminatorCombo} is constructed.
 For other \link[bbotk:Terminator]{Terminators}, pass one with \code{terminator}.
 If no termination criterion is needed, set \code{term_evals}, \code{term_time} and \code{terminator} to \code{NULL}.
 }

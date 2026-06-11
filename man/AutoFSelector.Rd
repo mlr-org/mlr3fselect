@@ -101,79 +101,78 @@ rr$aggregate()
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{AutoFSelector}
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{instance_args}}{(\code{list()})\cr
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{instance_args}}{(\code{list()})\cr
 All arguments from construction to create the \link{FSelectInstanceBatchSingleCrit}.}
 
-\item{\code{fselector}}{(\link{FSelector})\cr
+    \item{\code{fselector}}{(\link{FSelector})\cr
 Optimization algorithm.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{archive}}{([ArchiveBatchFSelect)\cr
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{archive}}{([ArchiveBatchFSelect)\cr
 Returns \link{FSelectInstanceBatchSingleCrit} archive.}
 
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+    \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Trained learner.}
 
-\item{\code{fselect_instance}}{(\link{FSelectInstanceBatchSingleCrit})\cr
+    \item{\code{fselect_instance}}{(\link{FSelectInstanceBatchSingleCrit})\cr
 Internally created feature selection instance with all intermediate results.}
 
-\item{\code{fselect_result}}{(\link[data.table:data.table]{data.table::data.table})\cr
+    \item{\code{fselect_result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 Short-cut to \verb{$result} from \link{FSelectInstanceBatchSingleCrit}.}
 
-\item{\code{predict_type}}{(\code{character(1)})\cr
+    \item{\code{predict_type}}{(\code{character(1)})\cr
 Stores the currently active predict type, e.g. \code{"response"}.
 Must be an element of \verb{$predict_types}.}
 
-\item{\code{hash}}{(\code{character(1)})\cr
+    \item{\code{hash}}{(\code{character(1)})\cr
 Hash (unique identifier) for this object.}
 
-\item{\code{phash}}{(\code{character(1)})\cr
+    \item{\code{phash}}{(\code{character(1)})\cr
 Hash (unique identifier) for this partial object,
 excluding some components which are varied systematically during tuning (parameter values)
 or feature selection (feature names).}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-AutoFSelector-new}{\code{AutoFSelector$new()}}
-\item \href{#method-AutoFSelector-base_learner}{\code{AutoFSelector$base_learner()}}
-\item \href{#method-AutoFSelector-importance}{\code{AutoFSelector$importance()}}
-\item \href{#method-AutoFSelector-selected_features}{\code{AutoFSelector$selected_features()}}
-\item \href{#method-AutoFSelector-oob_error}{\code{AutoFSelector$oob_error()}}
-\item \href{#method-AutoFSelector-loglik}{\code{AutoFSelector$loglik()}}
-\item \href{#method-AutoFSelector-print}{\code{AutoFSelector$print()}}
-\item \href{#method-AutoFSelector-clone}{\code{AutoFSelector$clone()}}
+  \itemize{
+    \item \href{#method-AutoFSelector-initialize}{\code{AutoFSelector$new()}}
+    \item \href{#method-AutoFSelector-base_learner}{\code{AutoFSelector$base_learner()}}
+    \item \href{#method-AutoFSelector-importance}{\code{AutoFSelector$importance()}}
+    \item \href{#method-AutoFSelector-selected_features}{\code{AutoFSelector$selected_features()}}
+    \item \href{#method-AutoFSelector-oob_error}{\code{AutoFSelector$oob_error()}}
+    \item \href{#method-AutoFSelector-loglik}{\code{AutoFSelector$loglik()}}
+    \item \href{#method-AutoFSelector-print}{\code{AutoFSelector$print()}}
+    \item \href{#method-AutoFSelector-clone}{\code{AutoFSelector$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-AutoFSelector-new"></a>}}
-\if{latex}{\out{\hypertarget{method-AutoFSelector-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$new(
+\if{html}{\out{<a id="method-AutoFSelector-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-AutoFSelector-initialize}{}}}
+\subsection{\code{AutoFSelector$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$new(
   fselector,
   learner,
   resampling,
@@ -187,170 +186,166 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   ties_method = "least_features",
   rush = NULL,
   id = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{fselector}}{(\link{FSelector})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{fselector}}{(\link{FSelector})\cr
 Optimization algorithm.}
-
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+      \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Learner to optimize the feature subset for.}
-
-\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
+      \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.}
-
-\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+      \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Measure to optimize. If \code{NULL}, default measure is used.}
-
-\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
+      \item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
-
-\item{\code{store_fselect_instance}}{(\code{logical(1)})\cr
+      \item{\code{store_fselect_instance}}{(\code{logical(1)})\cr
 If \code{TRUE} (default), stores the internally created \link{FSelectInstanceBatchSingleCrit} with all intermediate results in slot \verb{$fselect_instance}.
 Is set to \code{TRUE}, if \code{store_models = TRUE}}
-
-\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+      \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
 Store benchmark result in archive?}
-
-\item{\code{store_models}}{(\code{logical(1)}).
+      \item{\code{store_models}}{(\code{logical(1)}).
 Store models in benchmark result?}
-
-\item{\code{check_values}}{(\code{logical(1)})\cr
+      \item{\code{check_values}}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
-
-\item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
+      \item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
-
-\item{\code{ties_method}}{(\code{character(1)})\cr
+      \item{\code{ties_method}}{(\code{character(1)})\cr
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be \code{"least_features"} or \code{"random"}.
 The option \code{"least_features"} (default) selects the feature set with the least features.
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
-
-\item{\code{rush}}{(\code{Rush})\cr
+      \item{\code{rush}}{(\code{Rush})\cr
 If a rush instance is supplied, the optimization runs without batches.}
-
-\item{\code{id}}{(\code{character(1)})\cr
+      \item{\code{id}}{(\code{character(1)})\cr
 Identifier for the new instance.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AutoFSelector-base_learner"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-base_learner}{}}}
-\subsection{Method \code{base_learner()}}{
-Extracts the base learner from nested learner objects like \code{GraphLearner} in \CRANpkg{mlr3pipelines}.
+\subsection{\code{AutoFSelector$base_learner()}}{
+  Extracts the base learner from nested learner objects like \code{GraphLearner} in \CRANpkg{mlr3pipelines}.
 If \code{recursive = 0}, the (tuned) learner is returned.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$base_learner(recursive = Inf)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$base_learner(recursive = Inf)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{recursive}}{(\code{integer(1)})\cr
+Depth of recursion for multiple nested objects.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \link[mlr3:Learner]{mlr3::Learner}.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{recursive}}{(\code{integer(1)})\cr
-Depth of recursion for multiple nested objects.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\link[mlr3:Learner]{mlr3::Learner}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AutoFSelector-importance"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-importance}{}}}
-\subsection{Method \code{importance()}}{
-The importance scores of the final model.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$importance()}\if{html}{\out{</div>}}
+\subsection{\code{AutoFSelector$importance()}}{
+  The importance scores of the final model.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$importance()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Named \code{numeric()}.
+  }
 }
 
-\subsection{Returns}{
-Named \code{numeric()}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AutoFSelector-selected_features"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-selected_features}{}}}
-\subsection{Method \code{selected_features()}}{
-The selected features of the final model.
+\subsection{\code{AutoFSelector$selected_features()}}{
+  The selected features of the final model.
 These features are selected internally by the learner.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$selected_features()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$selected_features()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{character()}.
+  }
 }
 
-\subsection{Returns}{
-\code{character()}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AutoFSelector-oob_error"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-oob_error}{}}}
-\subsection{Method \code{oob_error()}}{
-The out-of-bag error of the final model.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$oob_error()}\if{html}{\out{</div>}}
+\subsection{\code{AutoFSelector$oob_error()}}{
+  The out-of-bag error of the final model.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$oob_error()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{numeric(1)}.
+  }
 }
 
-\subsection{Returns}{
-\code{numeric(1)}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AutoFSelector-loglik"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-loglik}{}}}
-\subsection{Method \code{loglik()}}{
-The log-likelihood of the final model.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$loglik()}\if{html}{\out{</div>}}
+\subsection{\code{AutoFSelector$loglik()}}{
+  The log-likelihood of the final model.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$loglik()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{logLik}.
+Printer.
+  }
 }
 
-\subsection{Returns}{
-\code{logLik}.
-Printer.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AutoFSelector-print"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-print}{}}}
-\subsection{Method \code{print()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$print()}\if{html}{\out{</div>}}
+\subsection{\code{AutoFSelector$print()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AutoFSelector-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutoFSelector$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{AutoFSelector$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{AutoFSelector$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

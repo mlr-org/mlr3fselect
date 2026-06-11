@@ -77,37 +77,40 @@ ISSN 09344373.
 Meinshausen, Nicolai, Buhlmann, Peter (2010).
 \dQuote{Stability Selection.}
 \emph{Journal of the Royal Statistical Society Series B: Statistical Methodology}, \bold{72}(4), 417--473.
-ISSN 1369-7412, \doi{10.1111/J.1467-9868.2010.00740.X}, 0809.2932.
+ISSN 1369-7412.
+\doi{10.1111/J.1467-9868.2010.00740.X}.
+0809.2932.
 
 Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian, Becker, Marc, Aittokallio, Tero (2026).
 \dQuote{Prognostic biomarker discovery in pancreatic cancer through hybrid ensemble feature selection and multi-omics data.}
 \emph{BioData Mining}.
-ISSN 1756-0381, \doi{10.1186/s13040-026-00546-0}.
+ISSN 1756-0381.
+\doi{10.1186/s13040-026-00546-0}.
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result.}
 
-\item{\code{man}}{(\code{character(1)})\cr
+    \item{\code{man}}{(\code{character(1)})\cr
 Manual page for this object.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 Returns the result of the ensemble feature selection.}
 
-\item{\code{n_learners}}{(\code{numeric(1)})\cr
+    \item{\code{n_learners}}{(\code{numeric(1)})\cr
 Returns the number of learners used in the ensemble feature selection.}
 
-\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+    \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Returns the 'active' measure that is used in methods of this object.}
 
-\item{\code{active_measure}}{(\code{character(1)})\cr
+    \item{\code{active_measure}}{(\code{character(1)})\cr
 Indicates the type of the active performance measure.
 
 During the ensemble feature selection process, the dataset is split into \strong{multiple subsamples}
@@ -119,47 +122,48 @@ So, performance can be evaluated using one of two measures:
 to compute performance during inner resampling on the training sets.
 }}
 
-\item{\code{n_resamples}}{(\code{character(1)})\cr
+    \item{\code{n_resamples}}{(\code{character(1)})\cr
 Returns the number of times the task was initially resampled in the ensemble feature selection process.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-EnsembleFSResult-new}{\code{EnsembleFSResult$new()}}
-\item \href{#method-EnsembleFSResult-format}{\code{EnsembleFSResult$format()}}
-\item \href{#method-EnsembleFSResult-print}{\code{EnsembleFSResult$print()}}
-\item \href{#method-EnsembleFSResult-help}{\code{EnsembleFSResult$help()}}
-\item \href{#method-EnsembleFSResult-rm_zero_features}{\code{EnsembleFSResult$rm_zero_features()}}
-\item \href{#method-EnsembleFSResult-set_active_measure}{\code{EnsembleFSResult$set_active_measure()}}
-\item \href{#method-EnsembleFSResult-combine}{\code{EnsembleFSResult$combine()}}
-\item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
-\item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
-\item \href{#method-EnsembleFSResult-pareto_front}{\code{EnsembleFSResult$pareto_front()}}
-\item \href{#method-EnsembleFSResult-knee_points}{\code{EnsembleFSResult$knee_points()}}
-\item \href{#method-EnsembleFSResult-clone}{\code{EnsembleFSResult$clone()}}
-}
+  \itemize{
+    \item \href{#method-EnsembleFSResult-initialize}{\code{EnsembleFSResult$new()}}
+    \item \href{#method-EnsembleFSResult-format}{\code{EnsembleFSResult$format()}}
+    \item \href{#method-EnsembleFSResult-print}{\code{EnsembleFSResult$print()}}
+    \item \href{#method-EnsembleFSResult-help}{\code{EnsembleFSResult$help()}}
+    \item \href{#method-EnsembleFSResult-rm_zero_features}{\code{EnsembleFSResult$rm_zero_features()}}
+    \item \href{#method-EnsembleFSResult-set_active_measure}{\code{EnsembleFSResult$set_active_measure()}}
+    \item \href{#method-EnsembleFSResult-combine}{\code{EnsembleFSResult$combine()}}
+    \item \href{#method-EnsembleFSResult-feature_ranking}{\code{EnsembleFSResult$feature_ranking()}}
+    \item \href{#method-EnsembleFSResult-stability}{\code{EnsembleFSResult$stability()}}
+    \item \href{#method-EnsembleFSResult-pareto_front}{\code{EnsembleFSResult$pareto_front()}}
+    \item \href{#method-EnsembleFSResult-knee_points}{\code{EnsembleFSResult$knee_points()}}
+    \item \href{#method-EnsembleFSResult-clone}{\code{EnsembleFSResult$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-EnsembleFSResult-new"></a>}}
-\if{latex}{\out{\hypertarget{method-EnsembleFSResult-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$new(
+\if{html}{\out{<a id="method-EnsembleFSResult-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-EnsembleFSResult-initialize}{}}}
+\subsection{\code{EnsembleFSResult$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$new(
   result,
   features,
   benchmark_result = NULL,
   measure,
   inner_measure = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{result}}{(\link[data.table:data.table]{data.table::data.table})\cr
 The result of the ensemble feature selection.
 Mandatory column names should include \code{"resampling_iteration"}, \code{"learner_id"},
 \code{"features"} and \code{"n_features"}.
@@ -167,116 +171,123 @@ A column named as \code{{measure$id}} (scores on the test sets) must also be
 always present.
 The column with the performance scores on the inner resampling of the train sets is not mandatory,
 but note that it should be named as \verb{\{inner_measure$id\}_inner} to distinguish from the \code{{measure$id}}.}
-
-\item{\code{features}}{(\code{character()})\cr
+      \item{\code{features}}{(\code{character()})\cr
 The vector of features of the task that was used in the ensemble feature
 selection.}
-
-\item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
+      \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 The benchmark result object.}
-
-\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+      \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 The performance measure used to evaluate the learners on the test sets generated
 during the ensemble feature selection process.
 By default, this serves as the 'active' measure for the methods of this object.
 The active measure can be updated using the \verb{$set_active_measure()} method.}
-
-\item{\code{inner_measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+      \item{\code{inner_measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 The performance measure used to optimize and evaluate the learners during the inner resampling
 process of the training sets, generated as part of the ensemble feature selection procedure.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-format"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-format}{}}}
-\subsection{Method \code{format()}}{
-Helper for print outputs.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$format(...)}\if{html}{\out{</div>}}
+\subsection{\code{EnsembleFSResult$format()}}{
+  Helper for print outputs.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$format(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-print"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-print}{}}}
-\subsection{Method \code{print()}}{
-Printer.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{EnsembleFSResult$print()}}{
+  Printer.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-help"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-help}{}}}
-\subsection{Method \code{help()}}{
-Opens the corresponding help page referenced by field \verb{$man}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$help()}\if{html}{\out{</div>}}
+\subsection{\code{EnsembleFSResult$help()}}{
+  Opens the corresponding help page referenced by field \verb{$man}.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$help()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-rm_zero_features"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-rm_zero_features}{}}}
-\subsection{Method \code{rm_zero_features()}}{
-Removes rows from the ensemble feature selection result where no features were selected.
+\subsection{\code{EnsembleFSResult$rm_zero_features()}}{
+  Removes rows from the ensemble feature selection result where no features were selected.
 
 If a benchmark result is stored, the corresponding resampling iterations are removed as well.
 The stability measures are reset and need to be recalculated after this operation.
 
 This method modifies the object by reference.
 To preserve the original state, explicitly \verb{$clone()} the object beforehand.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$rm_zero_features()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$rm_zero_features()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Returns the object itself, but modified \strong{by reference}.
+  }
 }
 
-\subsection{Returns}{
-Returns the object itself, but modified \strong{by reference}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-set_active_measure"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-set_active_measure}{}}}
-\subsection{Method \code{set_active_measure()}}{
-Use this function to change the active measure.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$set_active_measure(which = "outer")}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{which}}{(\code{character(1)})\cr
+\subsection{\code{EnsembleFSResult$set_active_measure()}}{
+  Use this function to change the active measure.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$set_active_measure(which = "outer")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{which}}{(\code{character(1)})\cr
 Which \link[mlr3:Measure]{measure} from the ensemble feature selection result
 to use in methods of this object.
 Should be either \code{"inner"} (optimization measure used in training sets)
 or \code{"outer"} (measure used in test sets, default value).}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-combine"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-combine}{}}}
-\subsection{Method \code{combine()}}{
-Combines a second \link{EnsembleFSResult} into the current object, modifying it \strong{in-place}.
+\subsection{\code{EnsembleFSResult$combine()}}{
+  Combines a second \link{EnsembleFSResult} into the current object, modifying it \strong{in-place}.
 If the second \link{EnsembleFSResult} (\code{efsr}) is \code{NULL}, the method returns the object unmodified.
 
 Both objects must have the same task features and \code{measure}.
@@ -289,68 +300,68 @@ Otherwise, the combined object will have a \code{NULL} value for \code{benchmark
 This method modifies the object by reference.
 To preserve the original state, explicitly \verb{$clone()} the object beforehand.
 Alternatively, you can use the \code{\link[=c]{c()}} function, which internally calls this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$combine(efsr)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$combine(efsr)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{efsr}}{(\link{EnsembleFSResult})\cr
+A second \link{EnsembleFSResult} object to combine with the current object.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Returns the object itself, but modified \strong{by reference}.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{efsr}}{(\link{EnsembleFSResult})\cr
-A second \link{EnsembleFSResult} object to combine with the current object.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Returns the object itself, but modified \strong{by reference}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-feature_ranking"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-feature_ranking}{}}}
-\subsection{Method \code{feature_ranking()}}{
-Calculates the feature ranking via \code{\link[fastVoteR:rank_candidates]{fastVoteR::rank_candidates()}}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$feature_ranking(
+\subsection{\code{EnsembleFSResult$feature_ranking()}}{
+  Calculates the feature ranking via \code{\link[fastVoteR:rank_candidates]{fastVoteR::rank_candidates()}}.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$feature_ranking(
   method = "av",
   use_weights = TRUE,
   committee_size = NULL,
   shuffle_features = TRUE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{method}}{(\code{character(1)})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{method}}{(\code{character(1)})\cr
 The method to calculate the feature ranking. See \code{\link[fastVoteR:rank_candidates]{fastVoteR::rank_candidates()}}
 for a complete list of available methods.
 Approval voting (\code{"av"}) is the default method.}
-
-\item{\code{use_weights}}{(\code{logical(1)})\cr
+      \item{\code{use_weights}}{(\code{logical(1)})\cr
 The default value (\code{TRUE}) uses weights equal to the performance scores
 of each voter/model (or the inverse scores if the measure is minimized).
 Note that the performance scores need to be non-negative for the weights
 to be meaningful. If the scores can be negative, it is recommended to set
 \code{use_weights = FALSE}, which treats all voters as equal and assigns them
 the same weight equal to 1.}
-
-\item{\code{committee_size}}{(\code{integer(1)})\cr
+      \item{\code{committee_size}}{(\code{integer(1)})\cr
 The number of top-ranked features to return.
 This can speed up methods that build a committee sequentially (e.g., \code{"seq_pav"})
 by computing only the top N candidates rather than the full ranking.}
-
-\item{\code{shuffle_features}}{(\code{logical(1)})\cr
+      \item{\code{shuffle_features}}{(\code{logical(1)})\cr
 Whether to shuffle the task features randomly before computing the ranking.
 Shuffling ensures consistent random tie-breaking across methods and prevents
 deterministic biases when features with equal scores are encountered.
 Default is \code{TRUE} and it's advised to set a seed before running this function.
 Set to \code{FALSE} if deterministic ordering of features is preferred (same as during initialization).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Details}{
-The feature ranking process is built on the following framework: models act as \emph{voters},
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Details}{
+    The feature ranking process is built on the following framework: models act as \emph{voters},
 features act as \emph{candidates}, and voters select certain candidates (features).
 The primary objective is to compile these selections into a consensus ranked list of features,
 effectively forming a committee.
@@ -364,10 +375,9 @@ i.e. it can be used to compare the feature rankings across different methods.
 We shuffle the input candidates/features so that we enforce random tie-breaking.
 Users should set the same \code{seed} for consistent comparison between the different
 feature ranking methods and for reproducibility.
-}
-
-\subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores
+  }
+  \subsection{Returns}{
+    A \link[data.table:data.table]{data.table::data.table} listing all the features, ordered by decreasing scores
 (depends on the \code{"method"}).
 Columns are as follows:
 \itemize{
@@ -380,75 +390,75 @@ where the top feature receives a score of 1 and the lowest-ranked feature receiv
 This column is always included so that feature ranking methods that output only rankings
 have also a feature-wise score.
 }
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-stability"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-stability}{}}}
-\subsection{Method \code{stability()}}{
-Calculates the stability of the selected features with the \CRANpkg{stabm} package.
+\subsection{\code{EnsembleFSResult$stability()}}{
+  Calculates the stability of the selected features with the \CRANpkg{stabm} package.
 The results are cached.
 When the same stability measure is requested again with different arguments, the cache must be reset.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$stability(
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$stability(
   stability_measure = "jaccard",
   stability_args = NULL,
   global = TRUE,
   reset_cache = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{stability_measure}}{(\code{character(1)})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{stability_measure}}{(\code{character(1)})\cr
 The stability measure to be used.
 One of the measures returned by \code{\link[stabm:listStabilityMeasures]{stabm::listStabilityMeasures()}} in lower case.
 Default is \code{"jaccard"}.}
-
-\item{\code{stability_args}}{(\code{list})\cr
+      \item{\code{stability_args}}{(\code{list})\cr
 Additional arguments passed to the stability measure function.}
-
-\item{\code{global}}{(\code{logical(1)})\cr
+      \item{\code{global}}{(\code{logical(1)})\cr
 Whether to calculate the stability globally or for each learner.}
-
-\item{\code{reset_cache}}{(\code{logical(1)})\cr
+      \item{\code{reset_cache}}{(\code{logical(1)})\cr
 If \code{TRUE}, the cached results are ignored.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{numeric()} value representing the stability of the selected features.
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{numeric()} value representing the stability of the selected features.
 Or a \code{numeric()} vector with the stability of the selected features for each learner.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-pareto_front"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-pareto_front}{}}}
-\subsection{Method \code{pareto_front()}}{
-This function identifies the \strong{Pareto front} of the ensemble feature
+\subsection{\code{EnsembleFSResult$pareto_front()}}{
+  This function identifies the \strong{Pareto front} of the ensemble feature
 selection process, i.e., the set of points that represent the trade-off
 between the number of features and performance (e.g. classification error).
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$pareto_front(type = "empirical", max_nfeatures = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{type}}{(\code{character(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$pareto_front(type = "empirical", max_nfeatures = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{type}}{(\code{character(1)})\cr
 Specifies the type of Pareto front to return. See details.}
-
-\item{\code{max_nfeatures}}{(\code{integer(1)})\cr
+      \item{\code{max_nfeatures}}{(\code{integer(1)})\cr
 Specifies the maximum number of features for which the estimated Pareto
 front is computed. Applicable only when \code{type = "estimated"}.
 If \code{NULL} (default), the maximum number of features
 is determined by the ensemble feature selection process.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Details}{
-Two options are available for the Pareto front:
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Details}{
+    Two options are available for the Pareto front:
 \itemize{
 \item \code{"empirical"} (default): returns the empirical Pareto front.
 \item \code{"estimated"}: the Pareto front points are estimated by fitting a linear model
@@ -464,76 +474,77 @@ When \code{type = "estimated"}, the estimated Pareto front includes points with 
 from 1 up to \code{max_nfeatures}.
 If \code{max_nfeatures} is not provided, it defaults to the maximum number of features available
 in the ensemble feature selection \code{result}, i.e. the maximum out of all learners and resamplings included.
+  }
+  \subsection{Returns}{
+    A \link[data.table:data.table]{data.table::data.table} with columns the number of features and the performance
+that together form the Pareto front.
+  }
 }
 
-\subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} with columns the number of features and the performance
-that together form the Pareto front.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-knee_points"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-knee_points}{}}}
-\subsection{Method \code{knee_points()}}{
-This function implements various \emph{knee} point identification (KPI) methods,
+\subsection{\code{EnsembleFSResult$knee_points()}}{
+  This function implements various \emph{knee} point identification (KPI) methods,
 which select points in the Pareto front,
 such that an optimal trade-off between performance and number of features is achieved.
 In most cases, only one such point is returned.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$knee_points(
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$knee_points(
   method = "NBI",
   type = "empirical",
   max_nfeatures = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{method}}{(\code{character(1)})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{method}}{(\code{character(1)})\cr
 Type of method to use to identify the knee point.}
-
-\item{\code{type}}{(\code{character(1)})\cr
+      \item{\code{type}}{(\code{character(1)})\cr
 Specifies the type of Pareto front to use for the identification of the knee point.}
-
-\item{\code{max_nfeatures}}{(\code{integer(1)})\cr
+      \item{\code{max_nfeatures}}{(\code{integer(1)})\cr
 Specifies the maximum number of features for which the estimated Pareto
 front is computed. Applicable only when \code{type = "estimated"}.
 If \code{NULL} (default), the maximum number of features
 is determined by the ensemble feature selection process.
 See \code{pareto_front()} method for more details.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Details}{
-The available KPI methods are:
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Details}{
+    The available KPI methods are:
 \itemize{
 \item \code{"NBI"} (default): The \strong{Normal-Boundary Intersection} method is a geometry-based method which calculates
 the perpendicular distance of each point from the line connecting the first and last points of the Pareto
 front.
 The knee point is determined as the Pareto point with the maximum distance from this line, see Das (1999).
 }
+  }
+  \subsection{Returns}{
+    A \link[data.table:data.table]{data.table::data.table} with the knee point(s) of the Pareto front.
+  }
 }
 
-\subsection{Returns}{
-A \link[data.table:data.table]{data.table::data.table} with the knee point(s) of the Pareto front.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-EnsembleFSResult-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-EnsembleFSResult-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{EnsembleFSResult$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{EnsembleFSResult$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{EnsembleFSResult$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

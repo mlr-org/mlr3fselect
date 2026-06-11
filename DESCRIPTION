@@ -54,7 +54,6 @@ Encoding: UTF-8
 Language: en-US
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Collate:
     'ArchiveAsyncFSelect.R'
     'ArchiveAsyncFSelectFrozen.R'
@@ -104,3 +103,4 @@ Collate:
     'reexports.R'
     'sugar.R'
     'zzz.R'
+Config/roxygen2/version: 8.0.0.9000

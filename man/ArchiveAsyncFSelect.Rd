@@ -53,267 +53,264 @@ Score feature subsets on additional measures.
 \code{\link[bbotk:Archive]{bbotk::Archive}} -> \code{\link[bbotk:ArchiveAsync]{bbotk::ArchiveAsync}} -> \code{ArchiveAsyncFSelect}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{benchmark_result}}{(\link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult})\cr
 Benchmark result.}
 
-\item{\code{ties_method}}{(\code{character(1)})\cr
+    \item{\code{ties_method}}{(\code{character(1)})\cr
 Method to handle ties in the archive.
 One of \code{"least_features"} (default) or \code{"random"}.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ArchiveAsyncFSelect-new}{\code{ArchiveAsyncFSelect$new()}}
-\item \href{#method-ArchiveAsyncFSelect-learner}{\code{ArchiveAsyncFSelect$learner()}}
-\item \href{#method-ArchiveAsyncFSelect-learners}{\code{ArchiveAsyncFSelect$learners()}}
-\item \href{#method-ArchiveAsyncFSelect-predictions}{\code{ArchiveAsyncFSelect$predictions()}}
-\item \href{#method-ArchiveAsyncFSelect-resample_result}{\code{ArchiveAsyncFSelect$resample_result()}}
-\item \href{#method-ArchiveAsyncFSelect-print}{\code{ArchiveAsyncFSelect$print()}}
-\item \href{#method-ArchiveAsyncFSelect-best}{\code{ArchiveAsyncFSelect$best()}}
-\item \href{#method-ArchiveAsyncFSelect-push_result}{\code{ArchiveAsyncFSelect$push_result()}}
-\item \href{#method-ArchiveAsyncFSelect-clone}{\code{ArchiveAsyncFSelect$clone()}}
+  \itemize{
+    \item \href{#method-ArchiveAsyncFSelect-initialize}{\code{ArchiveAsyncFSelect$new()}}
+    \item \href{#method-ArchiveAsyncFSelect-learner}{\code{ArchiveAsyncFSelect$learner()}}
+    \item \href{#method-ArchiveAsyncFSelect-learners}{\code{ArchiveAsyncFSelect$learners()}}
+    \item \href{#method-ArchiveAsyncFSelect-predictions}{\code{ArchiveAsyncFSelect$predictions()}}
+    \item \href{#method-ArchiveAsyncFSelect-resample_result}{\code{ArchiveAsyncFSelect$resample_result()}}
+    \item \href{#method-ArchiveAsyncFSelect-print}{\code{ArchiveAsyncFSelect$print()}}
+    \item \href{#method-ArchiveAsyncFSelect-best}{\code{ArchiveAsyncFSelect$best()}}
+    \item \href{#method-ArchiveAsyncFSelect-push_result}{\code{ArchiveAsyncFSelect$push_result()}}
+    \item \href{#method-ArchiveAsyncFSelect-clone}{\code{ArchiveAsyncFSelect$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href='../../bbotk/html/Archive.html#method-Archive-help'><code>bbotk::Archive$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="clear"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-clear'><code>bbotk::ArchiveAsync$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="data_with_state"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-data_with_state'><code>bbotk::ArchiveAsync$data_with_state()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="nds_selection"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-nds_selection'><code>bbotk::ArchiveAsync$nds_selection()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="pop_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-pop_point'><code>bbotk::ArchiveAsync$pop_point()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_failed_point'><code>bbotk::ArchiveAsync$push_failed_point()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_points'><code>bbotk::ArchiveAsync$push_points()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_running_point'><code>bbotk::ArchiveAsync$push_running_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="format"><a href='../../bbotk/html/Archive.html#method-Archive-format'><code>bbotk::Archive$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href='../../bbotk/html/Archive.html#method-Archive-help'><code>bbotk::Archive$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="clear"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-clear'><code>bbotk::ArchiveAsync$clear()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="data_with_state"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-data_with_state'><code>bbotk::ArchiveAsync$data_with_state()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="nds_selection"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-nds_selection'><code>bbotk::ArchiveAsync$nds_selection()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="pop_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-pop_point'><code>bbotk::ArchiveAsync$pop_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_failed_point'><code>bbotk::ArchiveAsync$push_failed_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_points'><code>bbotk::ArchiveAsync$push_points()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_running_point'><code>bbotk::ArchiveAsync$push_running_point()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ArchiveAsyncFSelect-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$new(
+\if{html}{\out{<a id="method-ArchiveAsyncFSelect-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-initialize}{}}}
+\subsection{\code{ArchiveAsyncFSelect$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$new(
   search_space,
   codomain,
   rush,
   ties_method = "least_features"
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{search_space}}{(\link[paradox:ParamSet]{paradox::ParamSet})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{search_space}}{(\link[paradox:ParamSet]{paradox::ParamSet})\cr
 Search space.
 Internally created from provided \link[mlr3:Task]{mlr3::Task} by instance.}
-
-\item{\code{codomain}}{(\link[paradox:ParamSet]{paradox::ParamSet})\cr
+      \item{\code{codomain}}{(\link[paradox:ParamSet]{paradox::ParamSet})\cr
 Specifies codomain of function.
 Most importantly the tags of each output "Parameter" define whether it should
 be minimized or maximized.  The default is to minimize each component.}
-
-\item{\code{rush}}{(\code{Rush})\cr
+      \item{\code{rush}}{(\code{Rush})\cr
 If a rush instance is supplied, the optimization runs without batches.}
-
-\item{\code{ties_method}}{(\code{character(1)})\cr
+      \item{\code{ties_method}}{(\code{character(1)})\cr
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be \code{"least_features"} or \code{"random"}.
 The option \code{"least_features"} (default) selects the feature set with the least features.
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
-
-\item{\code{check_values}}{(\code{logical(1)})\cr
+      \item{\code{check_values}}{(\code{logical(1)})\cr
 If \code{TRUE} (default), feature subsets are check for validity.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-learner"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-learner}{}}}
-\subsection{Method \code{learner()}}{
-Retrieve \link[mlr3:Learner]{mlr3::Learner} of the i-th evaluation, by position or by unique hash \code{uhash}.
+\subsection{\code{ArchiveAsyncFSelect$learner()}}{
+  Retrieve \link[mlr3:Learner]{mlr3::Learner} of the i-th evaluation, by position or by unique hash \code{uhash}.
 \code{i} and \code{uhash} are mutually exclusive.
 Learner does not contain a model. Use \verb{$learners()} to get learners with models.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$learner(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$learner(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-learners"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-learners}{}}}
-\subsection{Method \code{learners()}}{
-Retrieve list of trained \link[mlr3:Learner]{mlr3::Learner} objects of the i-th evaluation, by position or by unique hash \code{uhash}.
+\subsection{\code{ArchiveAsyncFSelect$learners()}}{
+  Retrieve list of trained \link[mlr3:Learner]{mlr3::Learner} objects of the i-th evaluation, by position or by unique hash \code{uhash}.
 \code{i} and \code{uhash} are mutually exclusive.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$learners(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$learners(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-predictions"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-predictions}{}}}
-\subsection{Method \code{predictions()}}{
-Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by position or by unique hash \code{uhash}.
+\subsection{\code{ArchiveAsyncFSelect$predictions()}}{
+  Retrieve list of \link[mlr3:Prediction]{mlr3::Prediction} objects of the i-th evaluation, by position or by unique hash \code{uhash}.
 \code{i} and \code{uhash} are mutually exclusive.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$predictions(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$predictions(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-resample_result"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-resample_result}{}}}
-\subsection{Method \code{resample_result()}}{
-Retrieve \link[mlr3:ResampleResult]{mlr3::ResampleResult} of the i-th evaluation, by position or by unique hash \code{uhash}.
+\subsection{\code{ArchiveAsyncFSelect$resample_result()}}{
+  Retrieve \link[mlr3:ResampleResult]{mlr3::ResampleResult} of the i-th evaluation, by position or by unique hash \code{uhash}.
 \code{i} and \code{uhash} are mutually exclusive.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$resample_result(i = NULL, uhash = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{i}}{(\code{integer(1)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$resample_result(i = NULL, uhash = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{i}}{(\code{integer(1)})\cr
 The iteration value to filter for.}
-
-\item{\code{uhash}}{(\code{logical(1)})\cr
+      \item{\code{uhash}}{(\code{logical(1)})\cr
 The \code{uhash} value to filter for.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-print"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-print}{}}}
-\subsection{Method \code{print()}}{
-Printer.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$print()}\if{html}{\out{</div>}}
+\subsection{\code{ArchiveAsyncFSelect$print()}}{
+  Printer.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-best"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-best}{}}}
-\subsection{Method \code{best()}}{
-Returns the best scoring feature set(s).
+\subsection{\code{ArchiveAsyncFSelect$best()}}{
+  Returns the best scoring feature set(s).
 For single-crit optimization, the solution that minimizes / maximizes the objective function.
 For multi-crit optimization, the Pareto set / front.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$best(n_select = 1, ties_method = "least_features")}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{n_select}}{(\code{integer(1L)})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$best(n_select = 1, ties_method = "least_features")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{n_select}}{(\code{integer(1L)})\cr
 Amount of points to select.
 Ignored for multi-crit optimization.}
-
-\item{\code{ties_method}}{(\code{character(1L)})\cr
+      \item{\code{ties_method}}{(\code{character(1L)})\cr
 Method to break ties when multiple points have the same score.
 Either \code{"least_features"} (default) or \code{"random"}.
 Ignored for multi-crit optimization.
 If \code{n_select > 1L}, the tie method is ignored and the first point is returned.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{\link[data.table:data.table]{data.table::data.table()}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{\link[data.table:data.table]{data.table::data.table()}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-push_result"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-push_result}{}}}
-\subsection{Method \code{push_result()}}{
-Push result to the archive.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$push_result(key, ys, x_domain, extra = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{key}}{(\code{character()})\cr
+\subsection{\code{ArchiveAsyncFSelect$push_result()}}{
+  Push result to the archive.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$push_result(key, ys, x_domain, extra = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{key}}{(\code{character()})\cr
 Key of the point.}
-
-\item{\code{ys}}{(\code{list()})\cr
+      \item{\code{ys}}{(\code{list()})\cr
 Named list of results.}
-
-\item{\code{x_domain}}{(\code{list()})\cr
+      \item{\code{x_domain}}{(\code{list()})\cr
 Is ignored for feature selection.}
-
-\item{\code{extra}}{(\code{list()})\cr
+      \item{\code{extra}}{(\code{list()})\cr
 Named list of additional information.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ArchiveAsyncFSelect-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ArchiveAsyncFSelect-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ArchiveAsyncFSelect$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ArchiveAsyncFSelect$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ArchiveAsyncFSelect$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
