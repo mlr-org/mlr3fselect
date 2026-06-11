@@ -17,7 +17,7 @@ Wu Y, Boos DD, Stefanski LA (2007).
 }
 \description{
 Feature selection using the Shadow Variable Search Algorithm.
-Shadow variable search creates for each feature a permutated copy and stops when one of them is selected.
+Shadow variable search creates for each feature a permuted copy and stops when one of them is selected.
 }
 \details{
 The feature selection terminates itself when the first shadow variable is selected.

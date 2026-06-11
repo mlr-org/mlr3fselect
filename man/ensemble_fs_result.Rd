@@ -452,7 +452,7 @@ Two options are available for the Pareto front:
 \itemize{
 \item \code{"empirical"} (default): returns the empirical Pareto front.
 \item \code{"estimated"}: the Pareto front points are estimated by fitting a linear model
-with the inversed of the number of features (\eqn{1/x}) as input
+with the inverse of the number of features (\eqn{1/x}) as input
 and the associated performance scores as output.
 }
 

@@ -19,8 +19,8 @@ This \link{FSelector} can be instantiated with the associated sugar function \co
 
 For the meaning of the control parameters, see \code{\link[genalg:rbga.bin]{genalg::rbga.bin()}}.
 \code{\link[genalg:rbga.bin]{genalg::rbga.bin()}} internally terminates after \code{iters} iteration.
-We set \code{ìters = 100000}  to allow the termination via our terminators.
-If more iterations are needed, set \code{ìters} to a higher value in the parameter set.
+We set \code{iters = 100000}  to allow the termination via our terminators.
+If more iterations are needed, set \code{iters} to a higher value in the parameter set.
 }
 
 \examples{
