@@ -204,7 +204,7 @@ ArchiveAsyncFSelect = R6Class(
     #' Named list of additional information.
     push_result = function(key, ys, x_domain, extra = NULL) {
       extra = c(list(timestamp_ys = Sys.time()), extra)
-      self$rush$push_results(key, list(ys), extra = list(extra))
+      self$rush$finish_tasks(key, list(ys), extra = list(extra))
     }
   ),
 
