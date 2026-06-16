@@ -2,6 +2,9 @@
 
 ## mlr3fselect (development version)
 
+- fix: `ArchiveAsyncFSelect` pushed results with the removed
+  `rush::Rush$push_results()` method.
+
 ## mlr3fselect 1.6.0
 
 CRAN release: 2026-05-21
