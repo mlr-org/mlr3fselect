@@ -8,83 +8,86 @@ Internally used to transform \link[bbotk:Optimizer]{bbotk::Optimizer} to \link{F
 }
 \keyword{internal}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{mlr3fselect::FSelectorBatch}} -> \code{FSelectorBatchFromOptimizerBatch}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{FSelectorBatch}} -> \code{FSelectorBatchFromOptimizerBatch}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorBatchFromOptimizerBatch-new}{\code{FSelectorBatchFromOptimizerBatch$new()}}
-\item \href{#method-FSelectorBatchFromOptimizerBatch-optimize}{\code{FSelectorBatchFromOptimizerBatch$optimize()}}
-\item \href{#method-FSelectorBatchFromOptimizerBatch-clone}{\code{FSelectorBatchFromOptimizerBatch$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorBatchFromOptimizerBatch-initialize}{\code{FSelectorBatchFromOptimizerBatch$new()}}
+    \item \href{#method-FSelectorBatchFromOptimizerBatch-optimize}{\code{FSelectorBatchFromOptimizerBatch$optimize()}}
+    \item \href{#method-FSelectorBatchFromOptimizerBatch-clone}{\code{FSelectorBatchFromOptimizerBatch$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorBatchFromOptimizerBatch-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorBatchFromOptimizerBatch-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchFromOptimizerBatch$new(optimizer, man = NA_character_)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{optimizer}}{\link[bbotk:Optimizer]{bbotk::Optimizer}\cr
+\if{html}{\out{<a id="method-FSelectorBatchFromOptimizerBatch-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorBatchFromOptimizerBatch-initialize}{}}}
+\subsection{\code{FSelectorBatchFromOptimizerBatch$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchFromOptimizerBatch$new(optimizer, man = NA_character_)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{optimizer}}{\link[bbotk:Optimizer]{bbotk::Optimizer}\cr
 Optimizer that is called.}
-
-\item{\code{man}}{(\code{character(1)})\cr
+      \item{\code{man}}{(\code{character(1)})\cr
 String in the format \verb{[pkg]::[topic]} pointing to a manual page for this object.
 The referenced help package can be opened via method \verb{$help()}.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchFromOptimizerBatch-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchFromOptimizerBatch-optimize}{}}}
-\subsection{Method \code{optimize()}}{
-Performs the feature selection on a \link{FSelectInstanceBatchSingleCrit} /
+\subsection{\code{FSelectorBatchFromOptimizerBatch$optimize()}}{
+  Performs the feature selection on a \link{FSelectInstanceBatchSingleCrit} /
 \link{FSelectInstanceBatchMultiCrit} until termination.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchFromOptimizerBatch$optimize(inst)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchFromOptimizerBatch$optimize(inst)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}).}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \link[data.table:data.table]{data.table::data.table}.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inst}}{(\link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchFromOptimizerBatch-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchFromOptimizerBatch-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchFromOptimizerBatch$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatchFromOptimizerBatch$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchFromOptimizerBatch$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

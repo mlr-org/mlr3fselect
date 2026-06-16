@@ -26,7 +26,7 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 }
 
 \seealso{
-Other FSelector: 
+Other FSelector:
 \code{\link{mlr_fselectors}},
 \code{\link{mlr_fselectors_design_points}},
 \code{\link{mlr_fselectors_exhaustive_search}},
@@ -39,150 +39,155 @@ Other FSelector:
 }
 \concept{FSelector}
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{id}}{(\code{character(1)})\cr
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{id}}{(\code{character(1)})\cr
 Identifier of the object.
 Used in tables, plot and text output.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
 Set of control parameters.}
 
-\item{\code{properties}}{(\code{character()})\cr
+    \item{\code{properties}}{(\code{character()})\cr
 Set of properties of the fselector.
 Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$fselect_properties}}.}
 
-\item{\code{packages}}{(\code{character()})\cr
+    \item{\code{packages}}{(\code{character()})\cr
 Set of required packages.
 Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.}
 
-\item{\code{label}}{(\code{character(1)})\cr
+    \item{\code{label}}{(\code{character(1)})\cr
 Label for this object.
 Can be used in tables, plot and text output instead of the ID.}
 
-\item{\code{man}}{(\code{character(1)})\cr
+    \item{\code{man}}{(\code{character(1)})\cr
 String in the format \verb{[pkg]::[topic]} pointing to a manual page for this object.
 The referenced help package can be opened via method \verb{$help()}.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelector-new}{\code{FSelector$new()}}
-\item \href{#method-FSelector-format}{\code{FSelector$format()}}
-\item \href{#method-FSelector-print}{\code{FSelector$print()}}
-\item \href{#method-FSelector-help}{\code{FSelector$help()}}
-\item \href{#method-FSelector-clone}{\code{FSelector$clone()}}
-}
+  \itemize{
+    \item \href{#method-FSelector-initialize}{\code{FSelector$new()}}
+    \item \href{#method-FSelector-format}{\code{FSelector$format()}}
+    \item \href{#method-FSelector-print}{\code{FSelector$print()}}
+    \item \href{#method-FSelector-help}{\code{FSelector$help()}}
+    \item \href{#method-FSelector-clone}{\code{FSelector$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelector-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelector-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$new(
+\if{html}{\out{<a id="method-FSelector-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelector-initialize}{}}}
+\subsection{\code{FSelector$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelector$new(
   id = "fselector",
   param_set,
   properties,
   packages = character(),
   label = NA_character_,
   man = NA_character_
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{id}}{(\code{character(1)})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{(\code{character(1)})\cr
 Identifier for the new instance.}
-
-\item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
+      \item{\code{param_set}}{\link[paradox:ParamSet]{paradox::ParamSet}\cr
 Set of control parameters.}
-
-\item{\code{properties}}{(\code{character()})\cr
+      \item{\code{properties}}{(\code{character()})\cr
 Set of properties of the fselector.
 Must be a subset of \code{\link[mlr3:mlr_reflections]{mlr_reflections$fselect_properties}}.}
-
-\item{\code{packages}}{(\code{character()})\cr
+      \item{\code{packages}}{(\code{character()})\cr
 Set of required packages.
 Note that these packages will be loaded via \code{\link[=requireNamespace]{requireNamespace()}}, and are not attached.}
-
-\item{\code{label}}{(\code{character(1)})\cr
+      \item{\code{label}}{(\code{character(1)})\cr
 Label for this object.
 Can be used in tables, plot and text output instead of the ID.}
-
-\item{\code{man}}{(\code{character(1)})\cr
+      \item{\code{man}}{(\code{character(1)})\cr
 String in the format \verb{[pkg]::[topic]} pointing to a manual page for this object.
 The referenced help package can be opened via method \verb{$help()}.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelector-format"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelector-format}{}}}
-\subsection{Method \code{format()}}{
-Helper for print outputs.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$format(...)}\if{html}{\out{</div>}}
+\subsection{\code{FSelector$format()}}{
+  Helper for print outputs.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelector$format(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    (\code{character()}).
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-(\code{character()}).
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelector-print"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelector-print}{}}}
-\subsection{Method \code{print()}}{
-Print method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$print()}\if{html}{\out{</div>}}
+\subsection{\code{FSelector$print()}}{
+  Print method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelector$print()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    (\code{character()}).
+  }
 }
 
-\subsection{Returns}{
-(\code{character()}).
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelector-help"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelector-help}{}}}
-\subsection{Method \code{help()}}{
-Opens the corresponding help page referenced by field \verb{$man}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$help()}\if{html}{\out{</div>}}
+\subsection{\code{FSelector$help()}}{
+  Opens the corresponding help page referenced by field \verb{$man}.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelector$help()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelector-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelector-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelector$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelector$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelector$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

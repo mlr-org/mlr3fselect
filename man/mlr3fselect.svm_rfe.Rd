@@ -7,10 +7,11 @@
 Guyon I, Weston J, Barnhill S, Vapnik V (2002).
 \dQuote{Gene Selection for Cancer Classification using Support Vector Machines.}
 \emph{Machine Learning}, \bold{46}(1), 389--422.
-ISSN 1573-0565, \doi{10.1023/A:1012487302797}.
+ISSN 1573-0565.
+\doi{10.1023/A:1012487302797}.
 }
 \description{
-Runs a recursive feature elimination with a \link[mlr3learners:mlr_learners_classif.svm]{mlr3learners::LearnerClassifSVM}.
+Runs a recursive feature elimination with a \link[mlr3learners:LearnerClassifSVM]{mlr3learners::LearnerClassifSVM}.
 The SVM must be configured with \code{type = "C-classification"} and \code{kernel = "linear"}.
 }
 \examples{

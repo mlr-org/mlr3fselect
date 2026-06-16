@@ -50,29 +50,28 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectInstanceAsyncMultiCrit-new}{\code{FSelectInstanceAsyncMultiCrit$new()}}
-\item \href{#method-FSelectInstanceAsyncMultiCrit-assign_result}{\code{FSelectInstanceAsyncMultiCrit$assign_result()}}
-\item \href{#method-FSelectInstanceAsyncMultiCrit-clone}{\code{FSelectInstanceAsyncMultiCrit$clone()}}
+  \itemize{
+    \item \href{#method-FSelectInstanceAsyncMultiCrit-initialize}{\code{FSelectInstanceAsyncMultiCrit$new()}}
+    \item \href{#method-FSelectInstanceAsyncMultiCrit-assign_result}{\code{FSelectInstanceAsyncMultiCrit$assign_result()}}
+    \item \href{#method-FSelectInstanceAsyncMultiCrit-clone}{\code{FSelectInstanceAsyncMultiCrit$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="clear"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-clear'><code>bbotk::OptimInstanceAsync$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="print"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-print'><code>bbotk::OptimInstanceAsync$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="reconnect"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-reconnect'><code>bbotk::OptimInstanceAsync$reconnect()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="clear"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-clear'><code>bbotk::OptimInstanceAsync$clear()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="print"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-print'><code>bbotk::OptimInstanceAsync$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceAsync" data-id="reconnect"><a href='../../bbotk/html/OptimInstanceAsync.html#method-OptimInstanceAsync-reconnect'><code>bbotk::OptimInstanceAsync$reconnect()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectInstanceAsyncMultiCrit-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectInstanceAsyncMultiCrit-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceAsyncMultiCrit$new(
+\if{html}{\out{<a id="method-FSelectInstanceAsyncMultiCrit-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectInstanceAsyncMultiCrit-initialize}{}}}
+\subsection{\code{FSelectInstanceAsyncMultiCrit$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceAsyncMultiCrit$new(
   task,
   learner,
   resampling,
@@ -83,95 +82,88 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   check_values = FALSE,
   callbacks = NULL,
   rush = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
-
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+      \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Learner to optimize the feature subset for.}
-
-\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
+      \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.}
-
-\item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
+      \item{\code{measures}}{(list of \link[mlr3:Measure]{mlr3::Measure})\cr
 Measures to optimize.
 If \code{NULL}, \CRANpkg{mlr3}'s default measure is used.}
-
-\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
+      \item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
-
-\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+      \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
 Store benchmark result in archive?}
-
-\item{\code{store_models}}{(\code{logical(1)}).
+      \item{\code{store_models}}{(\code{logical(1)}).
 Store models in benchmark result?}
-
-\item{\code{check_values}}{(\code{logical(1)})\cr
+      \item{\code{check_values}}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
-
-\item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
+      \item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
-
-\item{\code{rush}}{(\code{Rush})\cr
+      \item{\code{rush}}{(\code{Rush})\cr
 If a rush instance is supplied, the optimization runs without batches.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceAsyncMultiCrit-assign_result"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceAsyncMultiCrit-assign_result}{}}}
-\subsection{Method \code{assign_result()}}{
-The \link{FSelectorAsync} object writes the best found points and estimated performance values here
+\subsection{\code{FSelectInstanceAsyncMultiCrit$assign_result()}}{
+  The \link{FSelectorAsync} object writes the best found points and estimated performance values here
 (probably the Pareto set / front).
 For internal use.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceAsyncMultiCrit$assign_result(xdt, ydt, extra = NULL, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{xdt}}{(\code{data.table::data.table()})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceAsyncMultiCrit$assign_result(xdt, ydt, extra = NULL, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{xdt}}{(\code{data.table::data.table()})\cr
 x values as \code{data.table}. Each row is one point. Contains the value in
 the \emph{search space} of the \link{FSelectInstanceBatchMultiCrit} object. Can contain
 additional columns for extra information.}
-
-\item{\code{ydt}}{(\code{numeric()})\cr
+      \item{\code{ydt}}{(\code{numeric()})\cr
 Optimal outcomes, e.g. the Pareto front.}
-
-\item{\code{extra}}{(\code{data.table::data.table()})\cr
+      \item{\code{extra}}{(\code{data.table::data.table()})\cr
 Additional information.}
-
-\item{\code{...}}{(\code{any})\cr
+      \item{\code{...}}{(\code{any})\cr
 ignored.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceAsyncMultiCrit-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceAsyncMultiCrit-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceAsyncMultiCrit$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectInstanceAsyncMultiCrit$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceAsyncMultiCrit$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

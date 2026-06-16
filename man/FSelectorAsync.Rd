@@ -27,64 +27,66 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 }
 
 \section{Super class}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{FSelectorAsync}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{FSelectorAsync}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorAsync-optimize}{\code{FSelectorAsync$optimize()}}
-\item \href{#method-FSelectorAsync-clone}{\code{FSelectorAsync$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorAsync-optimize}{\code{FSelectorAsync$optimize()}}
+    \item \href{#method-FSelectorAsync-clone}{\code{FSelectorAsync$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="initialize"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-initialize'><code>mlr3fselect::FSelector$initialize()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="initialize"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-initialize'><code>FSelector$initialize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorAsync-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorAsync-optimize}{}}}
-\subsection{Method \code{optimize()}}{
-Performs the feature selection on a \link{FSelectInstanceAsyncSingleCrit} or
+\subsection{\code{FSelectorAsync$optimize()}}{
+  Performs the feature selection on a \link{FSelectInstanceAsyncSingleCrit} or
 \link{FSelectInstanceAsyncMultiCrit} until termination.
 The single evaluations will be written into the \link{ArchiveAsyncFSelect}
 that resides in the \link{FSelectInstanceAsyncSingleCrit}/\link{FSelectInstanceAsyncMultiCrit}.
 The result will be written into the instance object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsync$optimize(inst)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsync$optimize(inst)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inst}}{(\link{FSelectInstanceAsyncSingleCrit} | \link{FSelectInstanceAsyncMultiCrit}).}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{\link[data.table:data.table]{data.table::data.table()}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inst}}{(\link{FSelectInstanceAsyncSingleCrit} | \link{FSelectInstanceAsyncMultiCrit}).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{\link[data.table:data.table]{data.table::data.table()}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorAsync-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorAsync-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsync$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorAsync$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsync$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

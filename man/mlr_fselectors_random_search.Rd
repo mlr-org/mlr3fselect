@@ -68,7 +68,7 @@ learner$train(task)
 }
 }
 \seealso{
-Other FSelector: 
+Other FSelector:
 \code{\link{FSelector}},
 \code{\link{mlr_fselectors}},
 \code{\link{mlr_fselectors_design_points}},
@@ -81,50 +81,52 @@ Other FSelector:
 }
 \concept{FSelector}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{mlr3fselect::FSelectorBatch}} -> \code{FSelectorBatchRandomSearch}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorBatch]{FSelectorBatch}} -> \code{FSelectorBatchRandomSearch}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorBatchRandomSearch-new}{\code{FSelectorBatchRandomSearch$new()}}
-\item \href{#method-FSelectorBatchRandomSearch-clone}{\code{FSelectorBatchRandomSearch$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorBatchRandomSearch-initialize}{\code{FSelectorBatchRandomSearch$new()}}
+    \item \href{#method-FSelectorBatchRandomSearch-clone}{\code{FSelectorBatchRandomSearch$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>mlr3fselect::FSelectorBatch$optimize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorBatch" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorBatch.html#method-FSelectorBatch-optimize'><code>FSelectorBatch$optimize()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorBatchRandomSearch-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorBatchRandomSearch-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchRandomSearch$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorBatchRandomSearch-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorBatchRandomSearch-initialize}{}}}
+\subsection{\code{FSelectorBatchRandomSearch$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchRandomSearch$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorBatchRandomSearch-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorBatchRandomSearch-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorBatchRandomSearch$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorBatchRandomSearch$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorBatchRandomSearch$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

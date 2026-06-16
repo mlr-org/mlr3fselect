@@ -23,65 +23,65 @@ callback_batch_fselect("mlr3fselect.backup",
 \code{\link[mlr3misc:Callback]{mlr3misc::Callback}} -> \code{\link[bbotk:CallbackBatch]{bbotk::CallbackBatch}} -> \code{CallbackBatchFSelect}
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{on_eval_after_design}}{(\verb{function()})\cr
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{on_eval_after_design}}{(\verb{function()})\cr
 Stage called after design is created.
 Called in \code{ObjectiveFSelectBatch$eval_many()}.}
 
-\item{\code{on_eval_after_benchmark}}{(\verb{function()})\cr
+    \item{\code{on_eval_after_benchmark}}{(\verb{function()})\cr
 Stage called after feature sets are evaluated.
 Called in \code{ObjectiveFSelectBatch$eval_many()}.}
 
-\item{\code{on_eval_before_archive}}{(\verb{function()})\cr
+    \item{\code{on_eval_before_archive}}{(\verb{function()})\cr
 Stage called before performance values are written to the archive.
 Called in \code{ObjectiveFSelectBatch$eval_many()}.}
 
-\item{\code{on_auto_fselector_before_final_model}}{(\verb{function()})\cr
+    \item{\code{on_auto_fselector_before_final_model}}{(\verb{function()})\cr
 Stage called before the final model is trained.
 Called in \code{AutoFSelector$train()}.
 This stage is called after the optimization has finished and the final model is trained with the best feature set
 found.}
 
-\item{\code{on_auto_fselector_after_final_model}}{(\verb{function()})\cr
+    \item{\code{on_auto_fselector_after_final_model}}{(\verb{function()})\cr
 Stage called after the final model is trained.
 Called in \code{AutoFSelector$train()}.
 This stage is called after the final model is trained with the best feature set found.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-CallbackBatchFSelect-clone}{\code{CallbackBatchFSelect$clone()}}
+  \itemize{
+    \item \href{#method-CallbackBatchFSelect-clone}{\code{CallbackBatchFSelect$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="call"><a href='../../mlr3misc/html/Callback.html#method-Callback-call'><code>mlr3misc::Callback$call()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="format"><a href='../../mlr3misc/html/Callback.html#method-Callback-format'><code>mlr3misc::Callback$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="help"><a href='../../mlr3misc/html/Callback.html#method-Callback-help'><code>mlr3misc::Callback$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="initialize"><a href='../../mlr3misc/html/Callback.html#method-Callback-initialize'><code>mlr3misc::Callback$initialize()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="print"><a href='../../mlr3misc/html/Callback.html#method-Callback-print'><code>mlr3misc::Callback$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="call"><a href='../../mlr3misc/html/Callback.html#method-Callback-call'><code>mlr3misc::Callback$call()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="format"><a href='../../mlr3misc/html/Callback.html#method-Callback-format'><code>mlr3misc::Callback$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="help"><a href='../../mlr3misc/html/Callback.html#method-Callback-help'><code>mlr3misc::Callback$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="initialize"><a href='../../mlr3misc/html/Callback.html#method-Callback-initialize'><code>mlr3misc::Callback$initialize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3misc" data-topic="Callback" data-id="print"><a href='../../mlr3misc/html/Callback.html#method-Callback-print'><code>mlr3misc::Callback$print()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CallbackBatchFSelect-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-CallbackBatchFSelect-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CallbackBatchFSelect$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{CallbackBatchFSelect$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CallbackBatchFSelect$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

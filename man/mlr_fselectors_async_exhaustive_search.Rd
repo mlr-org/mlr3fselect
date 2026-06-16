@@ -31,76 +31,80 @@ By default, number of features in \link[mlr3:Task]{mlr3::Task}.}
 }
 
 \seealso{
-Other FSelectorAsync: 
+Other FSelectorAsync:
 \code{\link{mlr_fselectors_async_design_points}},
 \code{\link{mlr_fselectors_async_random_search}}
 }
 \concept{FSelectorAsync}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorAsync]{mlr3fselect::FSelectorAsync}} -> \code{FSelectorAsyncExhaustiveSearch}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorAsync]{FSelectorAsync}} -> \code{FSelectorAsyncExhaustiveSearch}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorAsyncExhaustiveSearch-new}{\code{FSelectorAsyncExhaustiveSearch$new()}}
-\item \href{#method-FSelectorAsyncExhaustiveSearch-optimize}{\code{FSelectorAsyncExhaustiveSearch$optimize()}}
-\item \href{#method-FSelectorAsyncExhaustiveSearch-clone}{\code{FSelectorAsyncExhaustiveSearch$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorAsyncExhaustiveSearch-initialize}{\code{FSelectorAsyncExhaustiveSearch$new()}}
+    \item \href{#method-FSelectorAsyncExhaustiveSearch-optimize}{\code{FSelectorAsyncExhaustiveSearch$optimize()}}
+    \item \href{#method-FSelectorAsyncExhaustiveSearch-clone}{\code{FSelectorAsyncExhaustiveSearch$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorAsyncExhaustiveSearch-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorAsyncExhaustiveSearch-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncExhaustiveSearch$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorAsyncExhaustiveSearch-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorAsyncExhaustiveSearch-initialize}{}}}
+\subsection{\code{FSelectorAsyncExhaustiveSearch$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsyncExhaustiveSearch$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorAsyncExhaustiveSearch-optimize"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorAsyncExhaustiveSearch-optimize}{}}}
-\subsection{Method \code{optimize()}}{
-Starts the asynchronous optimization.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncExhaustiveSearch$optimize(inst)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorAsyncExhaustiveSearch$optimize()}}{
+  Starts the asynchronous optimization.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsyncExhaustiveSearch$optimize(inst)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inst}}{(\link{FSelectInstanceAsyncSingleCrit} | \link{FSelectInstanceAsyncMultiCrit}).}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \link[data.table:data.table]{data.table::data.table}.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inst}}{(\link{FSelectInstanceAsyncSingleCrit} | \link{FSelectInstanceAsyncMultiCrit}).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\link[data.table:data.table]{data.table::data.table}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorAsyncExhaustiveSearch-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorAsyncExhaustiveSearch-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncExhaustiveSearch$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorAsyncExhaustiveSearch$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsyncExhaustiveSearch$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -26,56 +26,58 @@ Design points to try in search, one per row.}
 }
 
 \seealso{
-Other FSelectorAsync: 
+Other FSelectorAsync:
 \code{\link{mlr_fselectors_async_exhaustive_search}},
 \code{\link{mlr_fselectors_async_random_search}}
 }
 \concept{FSelectorAsync}
 \section{Super classes}{
-\code{\link[mlr3fselect:FSelector]{mlr3fselect::FSelector}} -> \code{\link[mlr3fselect:FSelectorAsync]{mlr3fselect::FSelectorAsync}} -> \code{\link[mlr3fselect:FSelectorAsyncFromOptimizerAsync]{mlr3fselect::FSelectorAsyncFromOptimizerAsync}} -> \code{FSelectorAsyncDesignPoints}
+\code{\link[mlr3fselect:FSelector]{FSelector}} -> \code{\link[mlr3fselect:FSelectorAsync]{FSelectorAsync}} -> \code{\link[mlr3fselect:FSelectorAsyncFromOptimizerAsync]{FSelectorAsyncFromOptimizerAsync}} -> \code{FSelectorAsyncDesignPoints}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectorAsyncDesignPoints-new}{\code{FSelectorAsyncDesignPoints$new()}}
-\item \href{#method-FSelectorAsyncDesignPoints-clone}{\code{FSelectorAsyncDesignPoints$clone()}}
+  \itemize{
+    \item \href{#method-FSelectorAsyncDesignPoints-initialize}{\code{FSelectorAsyncDesignPoints$new()}}
+    \item \href{#method-FSelectorAsyncDesignPoints-clone}{\code{FSelectorAsyncDesignPoints$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>mlr3fselect::FSelector$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>mlr3fselect::FSelector$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>mlr3fselect::FSelector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorAsyncFromOptimizerAsync" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorAsyncFromOptimizerAsync.html#method-FSelectorAsyncFromOptimizerAsync-optimize'><code>mlr3fselect::FSelectorAsyncFromOptimizerAsync$optimize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="format"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-format'><code>FSelector$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="help"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-help'><code>FSelector$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelector" data-id="print"><a href='../../mlr3fselect/html/FSelector.html#method-FSelector-print'><code>FSelector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3fselect" data-topic="FSelectorAsyncFromOptimizerAsync" data-id="optimize"><a href='../../mlr3fselect/html/FSelectorAsyncFromOptimizerAsync.html#method-FSelectorAsyncFromOptimizerAsync-optimize'><code>FSelectorAsyncFromOptimizerAsync$optimize()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectorAsyncDesignPoints-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectorAsyncDesignPoints-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncDesignPoints$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-FSelectorAsyncDesignPoints-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectorAsyncDesignPoints-initialize}{}}}
+\subsection{\code{FSelectorAsyncDesignPoints$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsyncDesignPoints$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectorAsyncDesignPoints-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectorAsyncDesignPoints-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectorAsyncDesignPoints$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectorAsyncDesignPoints$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectorAsyncDesignPoints$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

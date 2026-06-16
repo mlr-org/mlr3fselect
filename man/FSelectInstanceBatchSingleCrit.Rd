@@ -100,39 +100,38 @@ as.data.table(instance$archive)
 \code{\link[bbotk:EvalInstance]{bbotk::EvalInstance}} -> \code{\link[bbotk:OptimInstance]{bbotk::OptimInstance}} -> \code{\link[bbotk:OptimInstanceBatch]{bbotk::OptimInstanceBatch}} -> \code{\link[bbotk:OptimInstanceBatchSingleCrit]{bbotk::OptimInstanceBatchSingleCrit}} -> \code{FSelectInstanceBatchSingleCrit}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{result_feature_set}}{(\code{character()})\cr
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{result_feature_set}}{(\code{character()})\cr
 Feature set for task subsetting.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-FSelectInstanceBatchSingleCrit-new}{\code{FSelectInstanceBatchSingleCrit$new()}}
-\item \href{#method-FSelectInstanceBatchSingleCrit-assign_result}{\code{FSelectInstanceBatchSingleCrit$assign_result()}}
-\item \href{#method-FSelectInstanceBatchSingleCrit-print}{\code{FSelectInstanceBatchSingleCrit$print()}}
-\item \href{#method-FSelectInstanceBatchSingleCrit-clone}{\code{FSelectInstanceBatchSingleCrit$clone()}}
+  \itemize{
+    \item \href{#method-FSelectInstanceBatchSingleCrit-initialize}{\code{FSelectInstanceBatchSingleCrit$new()}}
+    \item \href{#method-FSelectInstanceBatchSingleCrit-assign_result}{\code{FSelectInstanceBatchSingleCrit$assign_result()}}
+    \item \href{#method-FSelectInstanceBatchSingleCrit-print}{\code{FSelectInstanceBatchSingleCrit$print()}}
+    \item \href{#method-FSelectInstanceBatchSingleCrit-clone}{\code{FSelectInstanceBatchSingleCrit$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-clear'><code>bbotk::OptimInstance$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="eval_batch"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-eval_batch'><code>bbotk::OptimInstanceBatch$eval_batch()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="objective_function"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-objective_function'><code>bbotk::OptimInstanceBatch$objective_function()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="EvalInstance" data-id="format"><a href='../../bbotk/html/EvalInstance.html#method-EvalInstance-format'><code>bbotk::EvalInstance$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstance" data-id="clear"><a href='../../bbotk/html/OptimInstance.html#method-OptimInstance-clear'><code>bbotk::OptimInstance$clear()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="eval_batch"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-eval_batch'><code>bbotk::OptimInstanceBatch$eval_batch()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="OptimInstanceBatch" data-id="objective_function"><a href='../../bbotk/html/OptimInstanceBatch.html#method-OptimInstanceBatch-objective_function'><code>bbotk::OptimInstanceBatch$objective_function()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-FSelectInstanceBatchSingleCrit-new"></a>}}
-\if{latex}{\out{\hypertarget{method-FSelectInstanceBatchSingleCrit-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchSingleCrit$new(
+\if{html}{\out{<a id="method-FSelectInstanceBatchSingleCrit-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-FSelectInstanceBatchSingleCrit-initialize}{}}}
+\subsection{\code{FSelectInstanceBatchSingleCrit$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchSingleCrit$new(
   task,
   learner,
   resampling,
@@ -143,115 +142,110 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   check_values = FALSE,
   callbacks = NULL,
   ties_method = "least_features"
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{task}}{(\link[mlr3:Task]{mlr3::Task})\cr
 Task to operate on.}
-
-\item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
+      \item{\code{learner}}{(\link[mlr3:Learner]{mlr3::Learner})\cr
 Learner to optimize the feature subset for.}
-
-\item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
+      \item{\code{resampling}}{(\link[mlr3:Resampling]{mlr3::Resampling})\cr
 Resampling that is used to evaluated the performance of the feature subsets.
 Uninstantiated resamplings are instantiated during construction so that all feature subsets are evaluated on the same data splits.
 Already instantiated resamplings are kept unchanged.}
-
-\item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
+      \item{\code{measure}}{(\link[mlr3:Measure]{mlr3::Measure})\cr
 Measure to optimize. If \code{NULL}, default measure is used.}
-
-\item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
+      \item{\code{terminator}}{(\link[bbotk:Terminator]{bbotk::Terminator})\cr
 Stop criterion of the feature selection.}
-
-\item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
+      \item{\code{store_benchmark_result}}{(\code{logical(1)})\cr
 Store benchmark result in archive?}
-
-\item{\code{store_models}}{(\code{logical(1)}).
+      \item{\code{store_models}}{(\code{logical(1)}).
 Store models in benchmark result?}
-
-\item{\code{check_values}}{(\code{logical(1)})\cr
+      \item{\code{check_values}}{(\code{logical(1)})\cr
 Check the parameters before the evaluation and the results for
 validity?}
-
-\item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
+      \item{\code{callbacks}}{(list of \link{CallbackBatchFSelect})\cr
 List of callbacks.}
-
-\item{\code{ties_method}}{(\code{character(1)})\cr
+      \item{\code{ties_method}}{(\code{character(1)})\cr
 The method to break ties when selecting sets while optimizing and when selecting the best set.
 Can be \code{"least_features"} or \code{"random"}.
 The option \code{"least_features"} (default) selects the feature set with the least features.
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceBatchSingleCrit-assign_result"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceBatchSingleCrit-assign_result}{}}}
-\subsection{Method \code{assign_result()}}{
-The \link{FSelector} writes the best found feature subset and estimated performance value here.
+\subsection{\code{FSelectInstanceBatchSingleCrit$assign_result()}}{
+  The \link{FSelector} writes the best found feature subset and estimated performance value here.
 For internal use.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchSingleCrit$assign_result(xdt, y, extra = NULL, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{xdt}}{(\code{data.table::data.table()})\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchSingleCrit$assign_result(xdt, y, extra = NULL, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{xdt}}{(\code{data.table::data.table()})\cr
 x values as \code{data.table}. Each row is one point. Contains the value in
 the \emph{search space} of the \link{FSelectInstanceBatchMultiCrit} object. Can contain
 additional columns for extra information.}
-
-\item{\code{y}}{(\code{numeric(1)})\cr
+      \item{\code{y}}{(\code{numeric(1)})\cr
 Optimal outcome.}
-
-\item{\code{extra}}{(\code{data.table::data.table()})\cr
+      \item{\code{extra}}{(\code{data.table::data.table()})\cr
 Additional information.}
-
-\item{\code{...}}{(\code{any})\cr
+      \item{\code{...}}{(\code{any})\cr
 ignored.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceBatchSingleCrit-print"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceBatchSingleCrit-print}{}}}
-\subsection{Method \code{print()}}{
-Printer.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchSingleCrit$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectInstanceBatchSingleCrit$print()}}{
+  Printer.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchSingleCrit$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{(ignored).}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-FSelectInstanceBatchSingleCrit-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-FSelectInstanceBatchSingleCrit-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{FSelectInstanceBatchSingleCrit$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{FSelectInstanceBatchSingleCrit$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{FSelectInstanceBatchSingleCrit$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
