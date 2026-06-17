@@ -103,7 +103,7 @@ test_that("fast aggregation works", {
   config = redis_configuration()
   on.exit(mirai::daemons(0))
   mirai::daemons(1, seed = 123, dispatcher = FALSE)
-  rush::rush_plan(n_workers = 1, worker_type = "remote")
+  rush::rush_plan(n_workers = 1, worker_type = "mirai")
   rush = rush::rsh(config = config)
 
   with_seed(123, {
@@ -141,7 +141,7 @@ test_that("fast aggregation works", {
   config = redis_configuration()
   on.exit(mirai::daemons(0))
   mirai::daemons(1, seed = 123, dispatcher = FALSE)
-  rush::rush_plan(n_workers = 1, worker_type = "remote")
+  rush::rush_plan(n_workers = 1, worker_type = "mirai")
   rush2 = rush::rsh(config = config)
 
   with_seed(123, {
