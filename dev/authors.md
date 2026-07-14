@@ -16,16 +16,17 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/mlr-org/mlr3fselect/blob/main/DESCRIPTION)
+[`inst/CITATION`](https://github.com/mlr-org/mlr3fselect/blob/main/inst/CITATION)
 
 Becker M, Schratz P, Lang M, Bischl B, Zobolas J (2026). *mlr3fselect:
-Feature Selection for 'mlr3'*. R package version 1.6.0.9000,
-<https://mlr3fselect.mlr-org.com>.
+Feature Selection for mlr3*.
+[doi:10.5281/zenodo.16673301](https://doi.org/10.5281/zenodo.16673301).
+<https://doi.org/10.5281/zenodo.16673301>.
 
     @Manual{,
-      title = {mlr3fselect: Feature Selection for 'mlr3'},
+      title = {mlr3fselect: Feature Selection for mlr3},
+      url = {https://doi.org/10.5281/zenodo.16673301},
       author = {Marc Becker and Patrick Schratz and Michel Lang and Bernd Bischl and John Zobolas},
       year = {2026},
-      note = {R package version 1.6.0.9000},
-      url = {https://mlr3fselect.mlr-org.com},
+      doi = {10.5281/zenodo.16673301},
     }

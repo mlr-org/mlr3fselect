@@ -76,7 +76,6 @@ tsk("spam")
 ## 
 ## ── <TaskClassif> (4601x58): HP Spam Detection ──────────────────────────────────────────────────────
 ## • Target: type
-## • Target classes: spam (positive class, 39%), nonspam (61%)
 ## • Properties: twoclass
 ## • Features (57):
 ##   • dbl (57): address, addresses, all, business, capitalAve, capitalLong, capitalTotal, charDollar,
@@ -85,6 +84,7 @@ tsk("spam")
 ##   make, meeting, money, num000, num1999, num3d, num415, num650, num85, num857, order, original,
 ##   our, over, parts, people, pm, project, re, receive, remove, report, table, technology, telnet,
 ##   will, you, your
+## • Target classes: spam (positive class, 39%), nonspam (61%)
 ```
 
 We construct an instance with the
