@@ -209,11 +209,21 @@ learner$train(task)
 
 ## Citation
 
-If you use **mlr3fselect** in your work, please cite the package:
+If you use mlr3fselect in your work, please cite it.
 
-> Becker M, Schratz P, Lang M, Bischl B, Zobolas J (2025). mlr3fselect:
-> Feature Selection for ‘mlr3’. R package version 1.4.0,
-> <https://github.com/mlr-org/mlr3fselect>
+> Becker M, Schratz P, Lang M, Bischl B, Zobolas J (2026). *mlr3fselect:
+> Feature Selection for mlr3*. <doi:10.5281/zenodo.16673301>,
+> <https://doi.org/10.5281/zenodo.16673301>.
+
+``` R
+@Manual{becker2026mlr3fselect,
+  title = {mlr3fselect: Feature Selection for mlr3},
+  url = {https://doi.org/10.5281/zenodo.16673301},
+  author = {Marc Becker and Patrick Schratz and Michel Lang and Bernd Bischl and John Zobolas},
+  year = {2026},
+  doi = {10.5281/zenodo.16673301},
+}
+```
 
 The **ensemble feature selection** components (hEFS) are described in
 the following study:

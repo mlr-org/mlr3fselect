@@ -23,7 +23,7 @@ Feature Selection for mlr3*.
 [doi:10.5281/zenodo.16673301](https://doi.org/10.5281/zenodo.16673301).
 <https://doi.org/10.5281/zenodo.16673301>.
 
-    @Manual{,
+    @Manual{becker2026mlr3fselect,
       title = {mlr3fselect: Feature Selection for mlr3},
       url = {https://doi.org/10.5281/zenodo.16673301},
       author = {Marc Becker and Patrick Schratz and Michel Lang and Bernd Bischl and John Zobolas},
