@@ -1,0 +1,14 @@
+bibentry(
+  bibtype = "Manual",
+  title = "mlr3fselect: Feature Selection for mlr3",
+  url = "https://doi.org/10.5281/zenodo.16673301",
+  author = c(
+    person("Marc", "Becker"),
+    person("Patrick", "Schratz"),
+    person("Michel", "Lang"),
+    person("Bernd", "Bischl"),
+    person("John", "Zobolas")
+  ),
+  year = 2026,
+  doi = "10.5281/zenodo.16673301"
+)

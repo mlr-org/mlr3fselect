@@ -22,6 +22,7 @@ Package website: [release](https://mlr3fselect.mlr-org.com/) | [dev](https://mlr
 
 <!-- badges: start -->
 [![r-cmd-check](https://github.com/mlr-org/mlr3fselect/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/mlr-org/mlr3fselect/actions/workflows/r-cmd-check.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16673301.svg)](https://doi.org/10.5281/zenodo.16673301)
 [![CRAN Status](https://www.r-pkg.org/badges/version/mlr3fselect)](https://cran.r-project.org/package=mlr3fselect)
 [![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 <!-- badges: end -->
