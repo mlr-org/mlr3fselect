@@ -75,7 +75,7 @@ test_that("learner without importance method throw an error", {
   expect_error(
     fselect(
       fselector = fs("rfecv"),
-      task = tsk("pima"),
+      task = tsk("sonar")$select(paste0("V", 1:8)),
       learner = learner,
       resampling = rsmp("holdout"),
       measures = msr("classif.ce"),

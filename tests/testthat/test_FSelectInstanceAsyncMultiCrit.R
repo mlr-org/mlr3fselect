@@ -9,7 +9,7 @@ test_that("initializing FSelectInstanceAsyncMultiCrit works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -34,7 +34,7 @@ test_that("rush controller can be passed to FSelectInstanceAsyncMultiCrit", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -54,7 +54,7 @@ test_that("FSelectInstanceAsyncMultiCrit can be passed to a fselector", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -76,7 +76,7 @@ test_that("assigning a result to FSelectInstanceAsyncMultiCrit works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -99,7 +99,7 @@ test_that("saving the benchmark result with FSelectInstanceAsyncMultiCrit works"
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -124,7 +124,7 @@ test_that("saving the models with FSelectInstanceAsyncMultiCrit works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),

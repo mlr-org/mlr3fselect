@@ -76,7 +76,7 @@ test_that("ObjectiveFSelectBatch works with store_models", {
 })
 
 test_that("fast aggregation works", {
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   learner = lrn("classif.rpart")
   resampling = rsmp("cv", folds = 3)
 
@@ -143,7 +143,7 @@ test_that("fast aggregation works", {
 })
 
 test_that("fast aggregation conditions work", {
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   learner = lrn("classif.debug", error_train = 0.1, warning_train = 0.1, error_predict = 0.1, warning_predict = 0.1)
   learner$encapsulate("evaluate", fallback = lrn("classif.featureless"))
   resampling = rsmp("cv", folds = 3)

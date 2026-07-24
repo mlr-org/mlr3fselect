@@ -206,7 +206,7 @@ test_that("AutoFSelector get_base_learner method works", {
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 1)
   )
-  afs$train(tsk("pima"))
+  afs$train(tsk("sonar")$select(paste0("V", 1:8)))
 
   expect_learner(afs$base_learner())
   expect_equal(afs$base_learner()$id, "classif.rpart")
@@ -223,7 +223,7 @@ test_that("AutoFSelector get_base_learner method works", {
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 1)
   )
-  afs$train(tsk("pima"))
+  afs$train(tsk("sonar")$select(paste0("V", 1:8)))
 
   expect_learner(afs$base_learner(recursive = 0))
   expect_equal(afs$base_learner(recursive = 0)$id, "graphlearner.classif.rpart")
@@ -279,7 +279,7 @@ test_that("AutoFSelector works with async fselector", {
     rush = rush
   )
 
-  at$train(tsk("pima"))
+  at$train(tsk("sonar")$select(paste0("V", 1:8)))
 
   expect_data_table(at$fselect_instance$result, nrows = 1)
   expect_data_table(at$fselect_instance$archive$data, min.rows = 4)

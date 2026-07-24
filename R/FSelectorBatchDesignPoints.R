@@ -24,19 +24,19 @@
 #' \donttest{
 #'
 #' # retrieve task and load learner
-#' task = tsk("pima")
+#' task = tsk("sonar")$select(paste0("V", 1:8))
 #' learner = lrn("classif.rpart")
 #'
 #' # create design
 #' design = mlr3misc::rowwise_table(
-#'   ~age, ~glucose, ~insulin, ~mass, ~pedigree, ~pregnant, ~pressure, ~triceps,
+#'   ~V1, ~V2, ~V3, ~V4, ~V5, ~V6, ~V7, ~V8,
 #'   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       FALSE,    TRUE,
 #'   TRUE, TRUE,     FALSE,    TRUE,  FALSE,     TRUE,       FALSE,    FALSE,
 #'   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       FALSE,    FALSE,
 #'   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 #' )
 #'
-#' # run feature selection on the Pima Indians diabetes data set
+#' # run feature selection on the sonar data set
 #' instance = fselect(
 #'   fselector = fs("design_points", design = design),
 #'   task = task,

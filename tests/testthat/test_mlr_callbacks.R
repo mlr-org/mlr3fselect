@@ -3,7 +3,7 @@ test_that("backup callback works", {
 
   instance = fselect(
     fselector = fs("random_search", batch_size = 2),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -63,7 +63,7 @@ test_that("internal tuning callback works", {
 
   instance = fselect(
     fselector = fs("random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = learner,
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -92,7 +92,7 @@ test_that("internal tuning callback works with AutoFSelector", {
     callbacks = clbk("mlr3fselect.internal_tuning", internal_search_space = internal_search_space)
   )
 
-  afs$train(tsk("pima"))
+  afs$train(tsk("sonar")$select(paste0("V", 1:8)))
 
   expect_data_table(afs$fselect_instance$result)
   expect_names(names(afs$fselect_instance$result), must.include = "internal_tuned_values")
@@ -113,7 +113,7 @@ test_that("async freeze archive callback works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),

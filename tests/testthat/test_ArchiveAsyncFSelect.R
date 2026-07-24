@@ -9,7 +9,7 @@ test_that("ArchiveAsyncFSelect access methods work", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -56,7 +56,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -73,14 +73,14 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   expect_names(
     names(tab),
     must.include = c(
-      "age",
-      "glucose",
-      "insulin",
-      "mass",
-      "pedigree",
-      "pregnant",
-      "pressure",
-      "triceps",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6",
+      "V7",
+      "V8",
       "classif.ce",
       "runtime_learners",
       "timestamp_xs",
@@ -129,7 +129,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works without resample res
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -153,7 +153,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works with empty archive",
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -173,7 +173,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works with multi-crit", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -197,7 +197,7 @@ test_that("ArchiveAsyncFSelect stores models if requested", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),

@@ -55,7 +55,7 @@ test_that("async auto fselector works", {
   )
 
   expect_class(afs, "AutoFSelector")
-  afs$train(tsk("pima"))
+  afs$train(tsk("sonar")$select(paste0("V", 1:8)))
 
   expect_class(afs$fselect_instance, "FSelectInstanceAsyncSingleCrit")
 })
@@ -80,7 +80,7 @@ test_that("async auto fselector works with rush controller", {
 
   expect_class(afs, "AutoFSelector")
   expect_class(afs$instance_args$rush, "Rush")
-  afs$train(tsk("pima"))
+  afs$train(tsk("sonar")$select(paste0("V", 1:8)))
 
   expect_class(afs$fselect_instance, "FSelectInstanceAsyncSingleCrit")
 })

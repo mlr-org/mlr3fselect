@@ -60,8 +60,8 @@ test_that("result$features works", {
 })
 
 test_that("always include variable works", {
-  task = tsk("pima")
-  task$set_col_roles("glucose", "always_included")
+  task = tsk("sonar")$select(paste0("V", 1:8))
+  task$set_col_roles("V2", "always_included")
 
   learner = lrn("classif.rpart")
   resampling = rsmp("cv", folds = 3)
@@ -83,14 +83,14 @@ test_that("always include variable works", {
   walk(data$resample_result, function(rr) {
     expect_names(
       names(rr$learners[[1]]$state$data_prototype) %??% rr$learners[[1]]$state$feature_names,
-      must.include = "glucose"
+      must.include = "V2"
     )
   })
 })
 
 test_that("always include variables works", {
-  task = tsk("pima")
-  task$set_col_roles(c("glucose", "age"), "always_included")
+  task = tsk("sonar")$select(paste0("V", 1:8))
+  task$set_col_roles(c("V2", "V1"), "always_included")
 
   learner = lrn("classif.rpart")
   resampling = rsmp("cv", folds = 3)
@@ -107,18 +107,18 @@ test_that("always include variables works", {
 
   data = as.data.table(instance$archive)
 
-  expect_names(instance$archive$cols_x, disjunct.from = c("glucose", "age"))
-  expect_names(names(instance$archive$data), disjunct.from = c("glucose", "age"))
+  expect_names(instance$archive$cols_x, disjunct.from = c("V2", "V1"))
+  expect_names(names(instance$archive$data), disjunct.from = c("V2", "V1"))
   walk(data$resample_result, function(rr) {
     expect_names(
       names(rr$learners[[1]]$state$data_prototype) %??% rr$learners[[1]]$state$feature_names,
-      must.include = c("glucose", "age")
+      must.include = c("V2", "V1")
     )
   })
 })
 
 test_that("objective contains no benchmark results", {
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   learner = lrn("classif.rpart")
   resampling = rsmp("holdout")
   measure = msr("classif.ce")

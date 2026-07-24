@@ -9,7 +9,7 @@ test_that("initializing FSelectInstanceAsyncSingleCrit works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -33,7 +33,7 @@ test_that("rush controller can be passed to FSelectInstanceAsyncSingleCrit", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -52,7 +52,7 @@ test_that("FSelectInstanceAsyncSingleCrit can be passed to a fselector", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -74,7 +74,7 @@ test_that("assigning a result to FSelectInstanceAsyncSingleCrit works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -98,7 +98,7 @@ test_that("saving the benchmark result with FSelectInstanceAsyncSingleCrit works
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -123,7 +123,7 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -149,7 +149,7 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
 #   })
 
 #   instance = fsi_async(
-#     task = tsk("pima"),
+#     task = tsk("sonar")$select(paste0("V", 1:8)),
 #     learner = lrn("classif.debug", segfault_train = 1),
 #     resampling = rsmp("cv", folds = 3),
 #     measures = msr("classif.ce"),

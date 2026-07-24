@@ -9,7 +9,7 @@ test_that("ArchiveAsyncTuningFrozen works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
