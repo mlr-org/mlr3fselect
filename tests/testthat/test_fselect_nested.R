@@ -1,7 +1,7 @@
 test_that("fselect_nested function works", {
   rr = fselect_nested(
     fselector = fs("random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     inner_resampling = rsmp("holdout"),
     outer_resampling = rsmp("cv", folds = 3),

@@ -92,7 +92,7 @@ test_that("learner without importance method throw an error", {
   expect_error(
     fselect(
       fselector = fs("rfe"),
-      task = tsk("pima"),
+      task = tsk("sonar")$select(paste0("V", 1:8)),
       learner = learner,
       resampling = rsmp("holdout"),
       measures = msr("classif.ce"),
@@ -104,7 +104,7 @@ test_that("learner without importance method throw an error", {
 
 test_that("fix_importance function works", {
   learner = lrn("classif.rpart")
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   learner$train(task)
   feature_names = c("x", task$feature_names)
 
@@ -119,7 +119,7 @@ test_that("fix_importance function works", {
 
 test_that("raw_importance function works", {
   learner = lrn("classif.rpart")
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   learner$train(task)
   feature_names = task$feature_names
 
@@ -130,7 +130,7 @@ test_that("raw_importance function works", {
 
 test_that("rank_importance function works", {
   learner = lrn("classif.rpart")
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   rr = resample(task, learner, rsmp("cv", folds = 3), store_models = TRUE)
   feature_names = task$feature_names
 
@@ -141,7 +141,7 @@ test_that("rank_importance function works", {
 
 test_that("average_importance function works", {
   learner = lrn("classif.rpart")
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   rr = resample(task, learner, rsmp("cv", folds = 3), store_models = TRUE)
   feature_names = task$feature_names
 
@@ -156,7 +156,7 @@ test_that("works without storing models", {
 
   instance = fselect(
     fselector = fs("rfe"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -171,7 +171,7 @@ test_that("works without storing models", {
 
   instance = fselect(
     fselector = fs("rfe"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -193,7 +193,7 @@ test_that("works without storing models", {
 #
 #  instance = fselect(
 #    fselector = fs("rfe"),
-#    task = tsk("pima"),
+#    task = tsk("sonar")$select(paste0("V", 1:8)),
 #    learner = learner,
 #    resampling = rsmp("holdout"),
 #    measures = msr("classif.ce"),

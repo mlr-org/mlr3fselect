@@ -12,7 +12,7 @@
 #' # Run feature selection on the Palmer Penguins data set
 #' instance = fselect(
 #'   fselector = fs("random_search"),
-#'   task = tsk("pima"),
+#'   task = tsk("sonar")$select(paste0("V", 1:8)),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("holdout"),
 #'   measures = msr("classif.ce"),
@@ -143,10 +143,10 @@ load_callback_svm_rfe = function() {
 #' @examples
 #' clbk("mlr3fselect.one_se_rule")
 #'
-#' # Run feature selection on the pima data set with the callback
+#' # Run feature selection on the sonar data set with the callback
 #' instance = fselect(
 #'   fselector = fs("random_search"),
-#'   task = tsk("pima"),
+#'   task = tsk("sonar")$select(paste0("V", 1:8)),
 #'   learner = lrn("classif.rpart"),
 #'   resampling = rsmp ("cv", folds = 3),
 #'   measures = msr("classif.ce"),

@@ -1,6 +1,6 @@
 test_that("fsi function creates a FSelectInstanceBatchSingleCrit", {
   instance = fsi(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -11,7 +11,7 @@ test_that("fsi function creates a FSelectInstanceBatchSingleCrit", {
 
 test_that("fsi function creates a FSelectInstanceBatchMultiCrit", {
   instance = fsi(
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -26,7 +26,7 @@ test_that("fsi and FSelectInstanceBatchSingleCrit are equal", {
 
   expect_equal(fsi_args, formalArgs(FSelectInstanceBatchSingleCrit$public_methods$initialize))
 
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   learner = lrn("classif.rpart")
   resampling = rsmp("holdout")
   measures = msr("classif.ce")
@@ -69,7 +69,7 @@ test_that("fsi and FSelectInstanceBatchMultiCrit are equal", {
 
   expect_equal(fsi_args, formalArgs(FSelectInstanceBatchMultiCrit$public_methods$initialize))
 
-  task = tsk("pima")
+  task = tsk("sonar")$select(paste0("V", 1:8))
   learner = lrn("classif.rpart")
   resampling = rsmp("holdout")
   measures = msrs(c("classif.ce", "classif.acc"))

@@ -1,7 +1,7 @@
 test_that("fselect function works with single measure", {
   instance = fselect(
     fselector = fs("random_search", batch_size = 1),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -16,7 +16,7 @@ test_that("fselect function works with single measure", {
 test_that("fselect function works with multiple measures", {
   instance = fselect(
     fselector = fs("random_search", batch_size = 1),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -31,7 +31,7 @@ test_that("fselect function works with multiple measures", {
 test_that("fselect function accepts string input for method", {
   instance = fselect(
     fselector = fs("random_search", batch_size = 1),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),

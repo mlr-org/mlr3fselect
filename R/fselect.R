@@ -50,8 +50,8 @@
 #'
 #' @export
 #' @examples
-#' # Feature selection on the Pima Indians data set
-#' task = tsk("pima")
+#' # Feature selection on the sonar data set
+#' task = tsk("sonar")$select(paste0("V", 1:8))
 #'
 #' # Load learner
 #' learner = lrn("classif.rpart")

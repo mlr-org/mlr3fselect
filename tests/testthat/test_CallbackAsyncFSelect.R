@@ -200,7 +200,7 @@ test_that("on_eval_after_resample works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -255,7 +255,7 @@ test_that("on_result_end in FSelectInstanceSingleCrit works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -286,7 +286,7 @@ test_that("on_result in FSelectInstanceSingleCrit works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -342,7 +342,7 @@ test_that("on_result_end in FSelectInstanceBatchMultiCrit works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -373,7 +373,7 @@ test_that("on_result in FSelectInstanceBatchMultiCrit works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -407,7 +407,7 @@ test_that("on_resample_begin works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -441,7 +441,7 @@ test_that("on_resample_before_train works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -474,7 +474,7 @@ test_that("on_resample_before_predict works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -510,7 +510,7 @@ test_that("on_resample_end works", {
 
   instance = fselect(
     fselector = fs("async_random_search"),
-    task = tsk("pima"),
+    task = tsk("sonar")$select(paste0("V", 1:8)),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
