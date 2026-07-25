@@ -12,7 +12,7 @@ clbk("mlr3fselect.backup", path = "backup.rds")
 # Run feature selection on the Palmer Penguins data set
 instance = fselect(
   fselector = fs("random_search"),
-  task = tsk("pima"),
+  task = tsk("diabetes"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("holdout"),
   measures = msr("classif.ce"),

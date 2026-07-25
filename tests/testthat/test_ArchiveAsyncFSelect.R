@@ -9,7 +9,7 @@ test_that("ArchiveAsyncFSelect access methods work", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -56,7 +56,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -129,7 +129,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works without resample res
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -153,7 +153,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works with empty archive",
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),
@@ -173,7 +173,7 @@ test_that("ArchiveAsyncFSelect as.data.table function works with multi-crit", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msrs(c("classif.ce", "classif.acc")),
@@ -197,7 +197,7 @@ test_that("ArchiveAsyncFSelect stores models if requested", {
   })
 
   instance = fsi_async(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("cv", folds = 3),
     measures = msr("classif.ce"),

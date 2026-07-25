@@ -52,7 +52,7 @@ test_that("ArchiveBatchFSelect access methods work", {
 test_that("ArchiveBatchFSelect as.data.table function works", {
   instance = fselect(
     fselector = fs("random_search", batch_size = 4),
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
@@ -246,7 +246,7 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
 
   # without benchmark result
   instance = FSelectInstanceBatchSingleCrit$new(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
@@ -282,7 +282,7 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
 
   # empty archive
   instance = FSelectInstanceBatchSingleCrit$new(
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
@@ -294,7 +294,7 @@ test_that("ArchiveBatchFSelect as.data.table function works", {
   # row order
   instance = fselect(
     fselector = fs("random_search", batch_size = 1),
-    task = tsk("pima"),
+    task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),

@@ -38,7 +38,7 @@ Design points to try in search, one per row.}
 \donttest{
 
 # retrieve task and load learner
-task = tsk("pima")
+task = tsk("diabetes")
 learner = lrn("classif.rpart")
 
 # create design
@@ -50,7 +50,7 @@ design = mlr3misc::rowwise_table(
   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 )
 
-# run feature selection on the Pima Indians diabetes data set
+# run feature selection on the diabetes data set
 instance = fselect(
   fselector = fs("design_points", design = design),
   task = task,

@@ -50,8 +50,8 @@
 #'
 #' @export
 #' @examples
-#' # Feature selection on the Pima Indians data set
-#' task = tsk("pima")
+#' # Feature selection on the diabetes data set
+#' task = tsk("diabetes")
 #'
 #' # Load learner
 #' learner = lrn("classif.rpart")

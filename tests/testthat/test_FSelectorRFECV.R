@@ -75,7 +75,7 @@ test_that("learner without importance method throw an error", {
   expect_error(
     fselect(
       fselector = fs("rfecv"),
-      task = tsk("pima"),
+      task = tsk("diabetes"),
       learner = learner,
       resampling = rsmp("holdout"),
       measures = msr("classif.ce"),

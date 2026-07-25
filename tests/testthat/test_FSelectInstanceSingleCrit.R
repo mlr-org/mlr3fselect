@@ -60,7 +60,7 @@ test_that("result$features works", {
 })
 
 test_that("always include variable works", {
-  task = tsk("pima")
+  task = tsk("diabetes")
   task$set_col_roles("glucose", "always_included")
 
   learner = lrn("classif.rpart")
@@ -89,7 +89,7 @@ test_that("always include variable works", {
 })
 
 test_that("always include variables works", {
-  task = tsk("pima")
+  task = tsk("diabetes")
   task$set_col_roles(c("glucose", "age"), "always_included")
 
   learner = lrn("classif.rpart")
@@ -118,7 +118,7 @@ test_that("always include variables works", {
 })
 
 test_that("objective contains no benchmark results", {
-  task = tsk("pima")
+  task = tsk("diabetes")
   learner = lrn("classif.rpart")
   resampling = rsmp("holdout")
   measure = msr("classif.ce")
