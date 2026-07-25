@@ -49,7 +49,7 @@ Suggests:
     rush (>= 1.0.0),
     testthat (>= 3.0.0)
 Remotes:
-    mlr-org/mlr3@remove-pima
+    mlr-org/mlr3
 Config/testthat/edition: 3
 Config/testthat/parallel: false
 Encoding: UTF-8
