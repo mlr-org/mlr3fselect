@@ -63,7 +63,8 @@ extract_inner_fselect_results.ResampleResult = function(x, fselect_instance = FA
     return(data.table())
   }
   tab = imap_dtr(rr$learners, function(learner, i) {
-    data = setalloccol(learner$fselect_result)
+    # copy the result, otherwise the columns below are added to the result of the instance
+    data = copy(learner$fselect_result)
     set(data, j = "iteration", value = i)
     if (fselect_instance) {
       set(data, j = "fselect_instance", value = list(learner$fselect_instance))

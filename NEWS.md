@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `extract_inner_fselect_results()` added the `iteration` and `fselect_instance` columns to the result of the inner `FSelectInstance` by reference, which created a circular reference between the instance and its own result (#172).
 
 # mlr3fselect 1.6.0
 
