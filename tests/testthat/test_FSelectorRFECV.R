@@ -150,3 +150,22 @@ test_that("optimal features are selected", {
 
   expect_equal(instance$result$features[[1]], c("x2", "x3", "x4"))
 })
+
+test_that("rfecv works without storing the benchmark result", {
+  instance = fsi(
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy"),
+    terminator = trm("none"),
+    store_benchmark_result = FALSE
+  )
+
+  optimizer = fs("rfecv", n_features = 1, feature_number = 1)
+  optimizer$optimize(instance)
+  data = instance$archive$data
+
+  expect_names(names(data), disjunct.from = "uhash")
+  expect_names(names(data), must.include = c("importance", "iteration"))
+  pwalk(data, function(x1, x2, x3, x4, importance, ...) expect_equal(x1 + x2 + x3 + x4, length(importance)))
+})
