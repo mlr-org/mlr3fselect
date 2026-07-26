@@ -166,11 +166,13 @@ load_callback_one_se_rule = function() {
     on_optimization_end = function(callback, context) {
       archive = context$instance$archive
       data = as.data.table(archive)
-      data[, "n_features" := map(get("features"), length)]
+      data[, "n_features" := lengths(get("features"))]
 
       # standard error
+      # `sd()` is `NA` for a single evaluation, in this case the smallest feature set is selected
       y = data[[archive$cols_y]]
-      se = sd(y) / sqrt(length(y))
+      n = sum(!is.na(y))
+      se = if (n < 2L) 0 else sd(y, na.rm = TRUE) / sqrt(n)
 
       columns_to_keep = setdiff(names(context$instance$result), "x_domain")
       if (se == 0) {
@@ -179,9 +181,10 @@ load_callback_one_se_rule = function() {
           data[, columns_to_keep, with = FALSE][which.min(n_features)]
       } else {
         # select smallest future set within one standard error of the best
+        # `which()` drops feature sets without a score
         best_y = context$instance$result_y
         context$instance$.__enclos_env__$private$.result =
-          data[y > best_y - se & y < best_y + se, columns_to_keep, with = FALSE][which.min(n_features)]
+          data[which(y > best_y - se & y < best_y + se), columns_to_keep, with = FALSE][which.min(n_features)]
       }
     }
   )
