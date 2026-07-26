@@ -164,7 +164,7 @@ test_that("extract_inner_fselect_results function works with multiple tasks", {
     id = "at_2"
   )
   resampling_outer = rsmp("cv", folds = 2)
-  grid = benchmark_grid(list(tsk("iris"), tsk("pima")), list(at_1, at_2), resampling_outer)
+  grid = benchmark_grid(list(tsk("iris"), tsk("diabetes")), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = TRUE)
 
   ibmr = extract_inner_fselect_results(bmr)

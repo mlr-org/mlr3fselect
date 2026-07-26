@@ -32,7 +32,7 @@
 #'   measure = msr("classif.ce"),
 #'   term_evals = 4)
 #'
-#' afs$train(tsk("pima"))
+#' afs$train(tsk("diabetes"))
 auto_fselector = function(
   fselector,
   learner,
