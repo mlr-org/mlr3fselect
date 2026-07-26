@@ -50,6 +50,11 @@ load_callback_backup = function() {
 #' Runs a recursive feature elimination with a [mlr3learners::LearnerClassifSVM].
 #' The SVM must be configured with `type = "C-classification"` and `kernel = "linear"`.
 #'
+#' @details
+#' The importance score of a feature is the squared weight of the hyperplane that separates the two classes.
+#' The weights are only defined for a linear kernel and a single separating hyperplane,
+#' therefore the callback only works on binary classification tasks.
+#'
 #' @source
 #' `r format_bib("guyon2002")`
 #'
@@ -75,50 +80,59 @@ load_callback_backup = function() {
 #' fselector$optimize(instance)
 NULL
 
+# Support vector machine with a linear kernel that reports the squared weights of the separating hyperplane as
+# importance scores.
+# The R6 generator is created once when the package is loaded so that the class identity and the learner hashes are
+# stable across optimization runs.
+LearnerClassifSVMRFE = R6Class(
+  "LearnerClassifSVMRFE",
+  inherit = mlr3learners::LearnerClassifSVM,
+  public = list(
+    initialize = function() {
+      super$initialize()
+      self$properties = c(self$properties, "importance")
+    },
+
+    importance = function() {
+      w = t(self$model$coefs) %*% self$model$SV
+      x = w * w
+      sort(x[1, ], decreasing = TRUE)
+    }
+  )
+)
+
 load_callback_svm_rfe = function() {
   callback_batch_fselect(
     "mlr3fselect.svm_rfe",
     label = "SVM-RFE Callback",
     man = "mlr3fselect::mlr3fselect.svm_rfe",
     on_optimization_begin = function(callback, context) {
-      requireNamespace("mlr3learners")
+      require_namespaces("mlr3learners")
       learner = context$instance$objective$learner
       assert_class(learner, "LearnerClassifSVM", .var.name = "learner")
       params = learner$param_set$values
 
-      if (isTRUE(params$type != "C-classification") || isTRUE(params$kernel != "linear")) {
-        stop("Only SVMs with `type = 'C-classification'` and `kernel = 'linear'` are supported.")
+      # `identical()` instead of `!=` because an unset parameter is `NULL` and `isTRUE(NULL != "linear")` is `FALSE`
+      if (!identical(params$type, "C-classification") || !identical(params$kernel, "linear")) {
+        stopf("Only SVMs with `type = 'C-classification'` and `kernel = 'linear'` are supported.")
       }
 
-      LearnerClassifSVMRFE = R6Class(
-        "LearnerClassifSVMRFE",
-        inherit = mlr3learners::LearnerClassifSVM,
-        public = list(
-          initialize = function() {
-            super$initialize()
-            self$properties = c(self$properties, "importance")
-          },
-
-          importance = function() {
-            w = t(self$model$coefs) %*% self$model$SV
-            x = w * w
-            sort(x[1, ], decreasing = TRUE)
-          }
+      # the weights of the hyperplane are only unique for a single separating hyperplane
+      task = context$instance$objective$task
+      if (length(task$class_names) > 2L) {
+        stopf(
+          "%s only works on binary classification tasks but %s has %i classes.",
+          format(callback),
+          format(task),
+          length(task$class_names)
         )
-      )
+      }
+
       learner_rfe = LearnerClassifSVMRFE$new()
       learner_rfe$param_set$values = params
       learner_rfe$id = learner$id
       learner_rfe$predict_type = learner$predict_type
-
-      fallback = learner$fallback
-      if (packageVersion("mlr3") > "0.20.2") {
-        method = unname(learner$encapsulation[1])
-        learner_rfe$encapsulate(method, fallback)
-      } else {
-        learner_rfe$encapsulate = learner$encapsulate
-        learner_rfe$fallback = fallback
-      }
+      learner_rfe$encapsulate(unname(learner$encapsulation[1]), learner$fallback)
       learner_rfe$timeout = learner$timeout
       learner_rfe$parallel_predict = learner$parallel_predict
       context$instance$objective$learner = learner_rfe

@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: The `mlr3fselect.svm_rfe` callback accepted support vector machines without a `type` or `kernel` setting, although only `type = "C-classification"` and `kernel = "linear"` are supported. The callback now also errors on multi-class tasks for which the importance scores are not defined (#173).
 
 # mlr3fselect 1.6.0
 

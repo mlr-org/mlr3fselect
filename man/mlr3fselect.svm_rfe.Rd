@@ -14,6 +14,11 @@ ISSN 1573-0565.
 Runs a recursive feature elimination with a \link[mlr3learners:LearnerClassifSVM]{mlr3learners::LearnerClassifSVM}.
 The SVM must be configured with \code{type = "C-classification"} and \code{kernel = "linear"}.
 }
+\details{
+The importance score of a feature is the squared weight of the hyperplane that separates the two classes.
+The weights are only defined for a linear kernel and a single separating hyperplane,
+therefore the callback only works on binary classification tasks.
+}
 \examples{
 \dontshow{if (requireNamespace("mlr3learners", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 clbk("mlr3fselect.svm_rfe")
