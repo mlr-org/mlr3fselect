@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: The asynchronous feature selection ignored the `always_included` column role. Columns with this role were excluded from the models instead of being added to every feature subset (#175).
 
 # mlr3fselect 1.6.0
 
