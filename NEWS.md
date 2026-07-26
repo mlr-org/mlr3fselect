@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `fs("rfecv", recursive = FALSE)` failed with an internal `data.table` error because the importance scores of all resampling iterations were written to a single archive row (#168).
 
 # mlr3fselect 1.6.0
 

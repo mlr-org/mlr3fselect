@@ -68,6 +68,31 @@ test_that("default parameters work", {
   })
 })
 
+test_that("recursive parameter works", {
+  instance = fsi(
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy"),
+    terminator = trm("none"),
+    store_models = TRUE
+  )
+
+  optimizer = fs("rfecv", recursive = FALSE, n_features = 1, feature_number = 1)
+  optimizer$optimize(instance)
+  data = instance$archive$data
+
+  # the importance of the first batch is reused and truncated in the following batches
+  walk(seq(3), function(i) {
+    importances = data[list(i), importance, on = "iteration"]
+    walk(seq(2, length(importances)), function(j) {
+      expect_equal(importances[[j]], importances[[1]][seq(length(importances) + 1 - j)])
+    })
+  })
+
+  pwalk(data, function(x1, x2, x3, x4, importance, ...) expect_equal(x1 + x2 + x3 + x4, length(importance)))
+})
+
 test_that("learner without importance method throw an error", {
   learner = lrn("classif.rpart")
   learner$properties = setdiff(learner$properties, "importance")
