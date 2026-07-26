@@ -165,7 +165,8 @@ FSelectorBatchRFECV = R6Class(
 
       # average performance of feature numbers
       aggr = archive$data[, list("y" = mean(unlist(.SD))), by = "batch_nr", .SDcols = archive$cols_y]
-      best_batch = aggr[order(get("y"), decreasing = TRUE), head(.SD, 1)]$batch_nr
+      # the direction of the codomain determines whether the performance is minimized or maximized
+      best_batch = aggr[which_max(aggr[["y"]] * -archive$codomain$direction, ties_method = "first")]$batch_nr
       n_features = rowSums(archive$data[list(best_batch), , on = "batch_nr"][1, archive$cols_x, with = FALSE])
 
       # use full data set

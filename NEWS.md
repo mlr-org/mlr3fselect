@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `fs("rfecv")` ignored the direction of the measure and selected the feature set size with the *worst* mean performance for minimizing measures such as `msr("classif.ce")` or `msr("regr.mse")`. Feature selection results obtained with `fs("rfecv")` and a minimizing measure are invalid and should be recomputed (#167).
 
 # mlr3fselect 1.6.0
 
