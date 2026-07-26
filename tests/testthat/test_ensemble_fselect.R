@@ -85,7 +85,8 @@ test_that("efs works", {
   expect_equal(efsr$measure$id, "classif.ce") # classification error also used for inner measure
   expect_equal(efsr$active_measure, "inner")
   pf_inner = efsr$pareto_front()
-  expect_data_table(pf_inner, nrows = 3) # pareto front has changed
+  expect_data_table(pf_inner, nrows = 2)
+  expect_false(isTRUE(all.equal(pf_inner[["classif.ce_inner"]], pf[["classif.ce"]]))) # pareto front has changed
   expect_equal(names(pf_inner), c("n_features", "classif.ce_inner"))
   kps_inner = efsr$knee_points()
   expect_data_table(kps_inner, nrows = 1)
@@ -149,7 +150,7 @@ test_that("efs works with rfe", {
 
   # pareto_front
   pf = efsr$pareto_front()
-  expect_data_table(pf, nrows = 4)
+  expect_data_table(pf, nrows = 2)
   expect_equal(names(pf), c("n_features", "classif.ce_inner"))
   pf_pred = efsr$pareto_front(type = "estimated")
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
@@ -422,4 +423,27 @@ test_that("different callbacks can be set", {
 
   expect_true(all(efsr$benchmark_result$score()$learner[[1]]$fselect_instance$archive$data$callback_active))
   expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
+})
+
+test_that("pareto_front only returns non-dominated points", {
+  make_efsr = function(measure) {
+    result = data.table(
+      resampling_iteration = 1:6,
+      learner_id = "classif.rpart",
+      features = list("V1", "V1", "V1", c("V1", "V2"), c("V1", "V2"), c("V1", "V2", "V3")),
+      n_features = c(1L, 1L, 1L, 2L, 2L, 3L)
+    )
+    set(result, j = measure$id, value = c(0.5, 0.4, 0.3, 0.45, 0.2, 0.1))
+    EnsembleFSResult$new(result = result, features = c("V1", "V2", "V3"), measure = measure)
+  }
+
+  # minimizing measure, the best score of each number of features improves with more features
+  pf = make_efsr(msr("classif.ce"))$pareto_front()
+  expect_equal(pf$n_features, c(1, 2, 3))
+  expect_equal(pf$classif.ce, c(0.3, 0.2, 0.1))
+
+  # maximizing measure, no point improves on the best score of one feature
+  pf = make_efsr(msr("classif.acc"))$pareto_front()
+  expect_equal(pf$n_features, 1)
+  expect_equal(pf$classif.acc, 0.5)
 })

@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `EnsembleFSResult$pareto_front()` returned dominated points for minimizing measures and discarded the true front for maximizing measures (#170).
 
 # mlr3fselect 1.6.0
 
