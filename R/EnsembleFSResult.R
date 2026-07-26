@@ -567,6 +567,9 @@ EnsembleFSResult = R6Class(
     #'  See `pareto_front()` method for more details.
     #'
     #' @return A [data.table::data.table] with the knee point(s) of the Pareto front.
+    #' If the Pareto front does not span a range in both the number of features and the performance,
+    #' no knee point can be identified.
+    #' In this case a warning is signaled and the first point of the Pareto front is returned.
     knee_points = function(method = "NBI", type = "empirical", max_nfeatures = NULL) {
       assert_choice(method, choices = c("NBI"))
       assert_choice(type, choices = c("empirical", "estimated"))
@@ -578,6 +581,19 @@ EnsembleFSResult = R6Class(
         self$pareto_front()
       } else {
         self$pareto_front(type = "estimated", max_nfeatures = max_nfeatures)
+      }
+
+      # The distance to the line between the edge points is only defined if the Pareto front spans a range in both
+      # dimensions, otherwise the scaling below divides by zero and every distance is `NaN`
+      if (!nrow(pf)) {
+        return(pf)
+      }
+      if (uniqueN(pf[["n_features"]]) < 2L || uniqueN(pf[[measure_id]]) < 2L) {
+        cli_warn(c(
+          "The Pareto front does not span a range in both dimensions, so no knee point can be identified.",
+          i = "Returning the first point of the Pareto front."
+        ))
+        return(pf[1L])
       }
 
       # Scale the Pareto front data to (0-1) range

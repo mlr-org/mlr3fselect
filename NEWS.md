@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `EnsembleFSResult$knee_points()` silently returned a row of `NA` when the Pareto front did not span a range in both dimensions. The first point of the Pareto front is returned with a warning now (#171).
 
 # mlr3fselect 1.6.0
 
