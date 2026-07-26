@@ -215,8 +215,8 @@ supplied to `as.data.table()`.
 ## Examples
 
 ``` r
-# Feature selection on the Pima Indians data set
-task = tsk("pima")
+# Feature selection on the diabetes data set
+task = tsk("diabetes")
 
 # Load learner
 learner = lrn("classif.rpart")
@@ -240,20 +240,26 @@ learner$train(task)
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:  FALSE   FALSE    TRUE   TRUE    FALSE    FALSE    FALSE   FALSE  0.3632812
-#> 2:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE     TRUE   FALSE  0.3710938
-#> 3:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.3476562
-#> 4:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE    FALSE    TRUE  0.3710938
+#> 1:   TRUE   FALSE    TRUE  FALSE    FALSE    FALSE     TRUE    TRUE  0.5348837
+#> 2:  FALSE   FALSE   FALSE  FALSE    FALSE     TRUE    FALSE   FALSE  0.3720930
+#> 3:   TRUE    TRUE    TRUE  FALSE     TRUE     TRUE     TRUE    TRUE  0.3255814
+#> 4:   TRUE    TRUE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.4883721
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.010 2026-07-24 14:15:15        1        0      0
-#> 2:            0.009 2026-07-24 14:15:15        1        0      0
-#> 3:            0.009 2026-07-24 14:15:15        2        0      0
-#> 4:            0.009 2026-07-24 14:15:15        2        0      0
-#>                               features n_features  resample_result
-#>                                 <list>     <list>           <list>
-#> 1:                        insulin,mass          2 <ResampleResult>
-#> 2:                   pedigree,pressure          2 <ResampleResult>
-#> 3: age,mass,pedigree,pregnant,pressure          5 <ResampleResult>
-#> 4:  age,mass,pedigree,pregnant,triceps          5 <ResampleResult>
+#> 1:            0.008 2026-07-26 10:07:09        1        0      0
+#> 2:            0.008 2026-07-26 10:07:09        1        0      0
+#> 3:            0.008 2026-07-26 10:07:09        2        0      0
+#> 4:            0.008 2026-07-26 10:07:09        2        0      0
+#>                                                 features n_features
+#>                                                   <list>     <list>
+#> 1:                          age,insulin,pressure,triceps          4
+#> 2:                                              pregnant          1
+#> 3: age,glucose,insulin,pedigree,pregnant,pressure,...[7]          7
+#> 4:           age,glucose,mass,pedigree,pregnant,pressure          6
+#>     resample_result
+#>              <list>
+#> 1: <ResampleResult>
+#> 2: <ResampleResult>
+#> 3: <ResampleResult>
+#> 4: <ResampleResult>
 ```

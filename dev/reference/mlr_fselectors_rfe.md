@@ -190,16 +190,10 @@ instance = fselect(
 instance$result
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#>            importance
-#>                <list>
-#> 1: 7,6,5,4,3,2,...[7]
-#>                                                             features n_features
-#>                                                               <list>      <int>
-#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#>    classif.ce
-#>         <num>
-#> 1: 0.07826087
+#> 1:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
+#>    importance                              features n_features classif.ce
+#>        <list>                                <list>      <int>      <num>
+#> 1:      3,2,1 bill_depth,bill_length,flipper_length          3 0.03478261
 
 # all evaluated feature subsets
 as.data.table(instance$archive)
@@ -209,8 +203,8 @@ as.data.table(instance$archive)
 #> 2:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.07826087            0.007 2026-07-24 14:15:31        1        0      0
-#> 2: 0.08695652            0.006 2026-07-24 14:15:31        2        0      0
+#> 1: 0.03478261            0.006 2026-07-26 10:07:23        1        0      0
+#> 2: 0.03478261            0.007 2026-07-26 10:07:23        2        0      0
 #>            importance
 #>                <list>
 #> 1: 7,6,5,4,3,2,...[7]

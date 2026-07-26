@@ -187,9 +187,9 @@ the
 #> ── <EnsembleFSResult> with 2 learners and 2 initial resamplings ────────────────
 #>    resampling_iteration                    learner_id n_features
 #>                   <int>                        <char>      <int>
-#> 1:                    1       classif.rpart.fselector         49
-#> 2:                    2       classif.rpart.fselector         10
-#> 3:                    1 classif.featureless.fselector         10
-#> 4:                    2 classif.featureless.fselector          1
+#> 1:                    1       classif.rpart.fselector         35
+#> 2:                    2       classif.rpart.fselector         19
+#> 3:                    1 classif.featureless.fselector          7
+#> 4:                    2 classif.featureless.fselector          5
 # }
 ```

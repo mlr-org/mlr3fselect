@@ -601,20 +601,20 @@ The objects of this class are cloneable with this method.
   efsr$result
 #>                       learner_id resampling_iteration classif.acc
 #>                           <char>                <int>       <num>
-#> 1:       classif.rpart.fselector                    1   0.7101449
-#> 2:       classif.rpart.fselector                    2   0.7391304
-#> 3: classif.featureless.fselector                    1   0.4782609
+#> 1:       classif.rpart.fselector                    1   0.6811594
+#> 2:       classif.rpart.fselector                    2   0.7971014
+#> 3: classif.featureless.fselector                    1   0.5797101
 #> 4: classif.featureless.fselector                    2   0.5072464
 #>                           features n_features classif.ce_inner
 #>                             <list>      <int>            <num>
-#> 1: V10,V11,V12,V13,V14,V15,...[19]         19        0.1802344
-#> 2: V10,V11,V12,V13,V15,V16,...[10]         10        0.2958680
-#> 3:                          V22,V8          2        0.4383287
-#> 4:                         V21,V25          2        0.4529756
+#> 1:                     V11,V12,V47          3        0.3021893
+#> 2: V10,V11,V12,V13,V15,V16,...[15]         15        0.2516189
+#> 3:                         V10,V24          2        0.5539624
+#> 4:                         V16,V37          2        0.4537465
 #>                                                             importance
 #>                                                                 <list>
-#> 1:       17.33333,16.33333,15.00000,14.00000,12.00000,10.66667,...[19]
-#> 2: 10.000000, 8.333333, 7.333333, 6.666667, 5.666667, 5.000000,...[10]
+#> 1:                                          2.333333,2.000000,1.666667
+#> 2: 13.333333,11.666667,11.666667,10.000000, 9.000000, 8.666667,...[15]
 #> 3:                                                   1.666667,1.333333
 #> 4:                                                                 2,1
 #>                   task                                       learner
@@ -632,32 +632,33 @@ The objects of this class are cloneable with this method.
 
   # returns the stability of the selected features
   efsr$stability(stability_measure = "jaccard")
-#> [1] 0.1008772
+#> [1] 0.05416667
 
   # returns a ranking of all features
   head(efsr$feature_ranking())
-#>    feature    score norm_score borda_score
-#>     <char>    <num>      <num>       <num>
-#> 1:     V15 1.449275  0.5952381   1.0000000
-#> 2:     V10 1.449275  0.5952381   0.9830508
-#> 3:     V16 1.449275  0.5952381   0.9661017
-#> 4:     V36 1.449275  0.5952381   0.9491525
-#> 5:     V17 1.449275  0.5952381   0.9322034
-#> 6:     V11 1.449275  0.5952381   0.9152542
+#>    feature     score norm_score borda_score
+#>     <char>     <num>      <num>       <num>
+#> 1:     V12 1.4782609  0.5762712   1.0000000
+#> 2:     V47 1.4782609  0.5762712   0.9830508
+#> 3:     V11 1.4782609  0.5762712   0.9661017
+#> 4:     V10 1.3768116  0.5367232   0.9491525
+#> 5:     V16 1.3043478  0.5084746   0.9322034
+#> 6:     V18 0.7971014  0.3107345   0.9152542
 
   # returns the empirical pareto front, i.e. n_features vs measure (error)
   efsr$pareto_front()
 #>    n_features classif.acc
 #>         <num>       <num>
-#> 1:          2   0.4782609
-#> 2:          2   0.5072464
-#> 3:         10   0.7391304
+#> 1:          2   0.5072464
+#> 2:          2   0.5797101
+#> 3:          3   0.6811594
+#> 4:         15   0.7971014
 
   # returns the knee points (optimal trade-off between n_features and performance)
   efsr$knee_points()
 #>    n_features classif.acc
 #>         <num>       <num>
-#> 1:          2   0.5072464
+#> 1:          3   0.6811594
 
   # change to use the inner optimization measure
   efsr$set_active_measure(which = "inner")
@@ -666,9 +667,9 @@ The objects of this class are cloneable with this method.
   efsr$pareto_front()
 #>    n_features classif.ce_inner
 #>         <num>            <num>
-#> 1:          2        0.4529756
-#> 2:          2        0.4383287
-#> 3:         10        0.2958680
-#> 4:         19        0.1802344
+#> 1:          2        0.5539624
+#> 2:          2        0.4537465
+#> 3:          3        0.3021893
+#> 4:         15        0.2516189
 # }
 ```

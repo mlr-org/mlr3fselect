@@ -88,14 +88,14 @@ rr = resample(tsk("iris"), at, resampling_outer, store_models = TRUE)
 extract_inner_fselect_results(rr)
 #>    iteration Petal.Length Petal.Width Sepal.Length Sepal.Width classif.ce
 #>        <int>       <lgcl>      <lgcl>       <lgcl>      <lgcl>      <num>
-#> 1:         1        FALSE        TRUE        FALSE       FALSE       0.00
-#> 2:         2         TRUE       FALSE         TRUE        TRUE       0.04
-#>                                 features n_features task_id
-#>                                   <list>      <int>  <char>
-#> 1:                           Petal.Width          1    iris
-#> 2: Petal.Length,Sepal.Length,Sepal.Width          3    iris
-#>                 learner_id resampling_id
-#>                     <char>        <char>
-#> 1: classif.rpart.fselector            cv
-#> 2: classif.rpart.fselector            cv
+#> 1:         1        FALSE        TRUE         TRUE       FALSE       0.04
+#> 2:         2        FALSE        TRUE        FALSE       FALSE       0.04
+#>                    features n_features task_id              learner_id
+#>                      <list>      <int>  <char>                  <char>
+#> 1: Petal.Width,Sepal.Length          2    iris classif.rpart.fselector
+#> 2:              Petal.Width          1    iris classif.rpart.fselector
+#>    resampling_id
+#>           <char>
+#> 1:            cv
+#> 2:            cv
 ```

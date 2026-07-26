@@ -39,26 +39,26 @@ fselector = fs("rfe", feature_number = 5, n_features = 10)
 fselector$optimize(instance)
 #>        V1    V10    V11    V12    V13    V14    V15    V16    V17    V18    V19
 #>    <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:   TRUE   TRUE  FALSE   TRUE  FALSE  FALSE  FALSE  FALSE   TRUE  FALSE  FALSE
+#> 1:   TRUE   TRUE  FALSE   TRUE  FALSE  FALSE  FALSE   TRUE   TRUE   TRUE  FALSE
 #>        V2    V20    V21    V22    V23    V24    V25    V26    V27    V28    V29
 #>    <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:  FALSE  FALSE  FALSE  FALSE   TRUE  FALSE  FALSE  FALSE  FALSE  FALSE  FALSE
+#> 1:  FALSE  FALSE  FALSE  FALSE   TRUE   TRUE   TRUE  FALSE  FALSE  FALSE  FALSE
 #>        V3    V30    V31    V32    V33    V34    V35    V36    V37    V38    V39
 #>    <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:   TRUE   TRUE   TRUE  FALSE  FALSE  FALSE  FALSE   TRUE   TRUE   TRUE  FALSE
+#> 1:   TRUE   TRUE   TRUE   TRUE  FALSE  FALSE  FALSE   TRUE   TRUE  FALSE   TRUE
 #>        V4    V40    V41    V42    V43    V44    V45    V46    V47    V48    V49
 #>    <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:   TRUE  FALSE  FALSE  FALSE  FALSE   TRUE  FALSE   TRUE  FALSE   TRUE   TRUE
+#> 1:   TRUE   TRUE  FALSE  FALSE  FALSE  FALSE   TRUE   TRUE  FALSE   TRUE   TRUE
 #>        V5    V50    V51    V52    V53    V54    V55    V56    V57    V58    V59
 #>    <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:  FALSE   TRUE  FALSE   TRUE  FALSE  FALSE  FALSE  FALSE  FALSE  FALSE  FALSE
+#> 1:  FALSE   TRUE   TRUE   TRUE  FALSE   TRUE  FALSE  FALSE  FALSE   TRUE  FALSE
 #>        V6    V60     V7     V8     V9
 #>    <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:  FALSE  FALSE  FALSE   TRUE   TRUE
+#> 1:  FALSE  FALSE   TRUE   TRUE   TRUE
 #>                                                       importance
 #>                                                           <list>
-#> 1: 17.66667,15.66667,15.33333,15.33333,15.00000,14.00000,...[20]
-#>                         features n_features classif.ce
-#>                           <list>      <int>      <num>
-#> 1: V1,V10,V12,V17,V23,V3,...[20]         20  0.1634921
+#> 1: 29.66667,26.33333,23.66667,22.66667,21.33333,19.66667,...[30]
+#>                          features n_features classif.ce
+#>                            <list>      <int>      <num>
+#> 1: V1,V10,V12,V16,V17,V18,...[30]         30  0.2018634
 ```

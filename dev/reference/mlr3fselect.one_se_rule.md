@@ -19,10 +19,10 @@ clbk("mlr3fselect.one_se_rule")
 #> <CallbackBatchFSelect:mlr3fselect.one_se_rule>: One Standard Error Rule Callback
 #> * Active Stages: on_optimization_end
 
-# Run feature selection on the pima data set with the callback
+# Run feature selection on the diabetes data set with the callback
 instance = fselect(
   fselector = fs("random_search"),
-  task = tsk("pima"),
+  task = tsk("diabetes"),
   learner = lrn("classif.rpart"),
   resampling = rsmp ("cv", folds = 3),
   measures = msr("classif.ce"),
@@ -32,8 +32,8 @@ instance = fselect(
 instance$result
 #>       age glucose insulin   mass pedigree pregnant pressure triceps
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>
-#> 1:   TRUE    TRUE   FALSE  FALSE     TRUE     TRUE    FALSE    TRUE
-#>                                 features n_features classif.ce
-#>                                   <list>     <list>      <num>
-#> 1: age,glucose,pedigree,pregnant,triceps          5  0.2630208
+#> 1:   TRUE    TRUE   FALSE   TRUE    FALSE    FALSE     TRUE    TRUE
+#>                             features n_features classif.ce
+#>                               <list>     <list>      <num>
+#> 1: age,glucose,mass,pressure,triceps          5  0.2969731
 ```

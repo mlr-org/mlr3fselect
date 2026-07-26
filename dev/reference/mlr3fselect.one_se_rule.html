@@ -77,10 +77,10 @@ ISBN 978-1-4614-6849-3.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;CallbackBatchFSelect:mlr3fselect.one_se_rule&gt;: One Standard Error Rule Callback</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Active Stages: on_optimization_end</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Run feature selection on the pima data set with the callback</span></span></span>
+<span class="r-in"><span><span class="co"># Run feature selection on the diabetes data set with the callback</span></span></span>
 <span class="r-in"><span><span class="va">instance</span> <span class="op">=</span> <span class="fu"><a href="fselect.html">fselect</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  fselector <span class="op">=</span> <span class="fu"><a href="fs.html">fs</a></span><span class="op">(</span><span class="st">"random_search"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  task <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"pima"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  task <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"diabetes"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  learner <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.rpart"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  resampling <span class="op">=</span> <span class="fu">rsmp</span> <span class="op">(</span><span class="st">"cv"</span>, folds <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  measures <span class="op">=</span> <span class="fu">msr</span><span class="op">(</span><span class="st">"classif.ce"</span><span class="op">)</span>,</span></span>
@@ -90,10 +90,10 @@ ISBN 978-1-4614-6849-3.</p>
 <span class="r-in"><span><span class="va">instance</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       age glucose insulin   mass pedigree pregnant pressure triceps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;lgcl&gt;  &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;  &lt;lgcl&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE    TRUE   FALSE  FALSE     TRUE     TRUE    FALSE    TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 features n_features classif.ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                   &lt;list&gt;     &lt;list&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,pedigree,pregnant,triceps          5  0.2630208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   TRUE    TRUE   FALSE   TRUE    FALSE    FALSE     TRUE    TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             features n_features classif.ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               &lt;list&gt;     &lt;list&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: age,glucose,mass,pressure,triceps          5  0.2969731</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

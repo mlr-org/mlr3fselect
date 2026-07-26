@@ -101,7 +101,7 @@ The objects of this class are cloneable with this method.
 # \donttest{
 
 # retrieve task and load learner
-task = tsk("pima")
+task = tsk("diabetes")
 learner = lrn("classif.rpart")
 
 # create design
@@ -113,7 +113,7 @@ design = mlr3misc::rowwise_table(
   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 )
 
-# run feature selection on the Pima Indians diabetes data set
+# run feature selection on the diabetes data set
 instance = fselect(
   fselector = fs("design_points", design = design),
   task = task,
@@ -129,22 +129,22 @@ instance$result
 #> 1:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE
 #>                     features n_features classif.ce
 #>                       <list>      <int>      <num>
-#> 1: age,glucose,mass,pregnant          4  0.2578125
+#> 1: age,glucose,mass,pregnant          4  0.3023256
 
 # all evaluated feature sets
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.3085938
-#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2578125
-#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2929688
-#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3085938
+#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.4418605
+#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.3023256
+#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.4418605
+#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.4418605
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.009 2026-07-24 14:15:27        1        0      0
-#> 2:            0.009 2026-07-24 14:15:27        2        0      0
-#> 3:            0.009 2026-07-24 14:15:27        3        0      0
-#> 4:            0.009 2026-07-24 14:15:27        4        0      0
+#> 1:            0.009 2026-07-26 10:07:19        1        0      0
+#> 2:            0.006 2026-07-26 10:07:19        2        0      0
+#> 3:            0.007 2026-07-26 10:07:19        3        0      0
+#> 4:            0.008 2026-07-26 10:07:19        4        0      0
 #>                                      features n_features  resample_result
 #>                                        <list>     <list>           <list>
 #> 1:          age,insulin,mass,pregnant,triceps          5 <ResampleResult>

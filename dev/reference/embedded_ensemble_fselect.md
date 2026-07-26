@@ -120,10 +120,10 @@ Results are stored in an
 #> ── <EnsembleFSResult> with 2 learners and 5 initial resamplings ────────────────
 #>     resampling_iteration          learner_id n_features
 #>                    <int>              <char>      <int>
-#>  1:                    1       classif.rpart          4
-#>  2:                    2       classif.rpart          4
-#>  3:                    3       classif.rpart          6
-#>  4:                    4       classif.rpart          3
+#>  1:                    1       classif.rpart          3
+#>  2:                    2       classif.rpart          5
+#>  3:                    3       classif.rpart          5
+#>  4:                    4       classif.rpart          6
 #>  5:                    5       classif.rpart          5
 #>  6:                    1 classif.featureless          0
 #>  7:                    2 classif.featureless          0
