@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: The asynchronous feature selection ignored the `always_included` column role. Columns with this role were excluded from the models instead of being added to every feature subset (#175).
 * fix: The `mlr3fselect.one_se_rule` callback errored on archives with a single evaluation or with missing scores, and wrote the `n_features` column as a list column instead of an integer column (#174).
 * fix: `extract_inner_fselect_results()` added the `iteration` and `fselect_instance` columns to the result of the inner `FSelectInstance` by reference, which created a circular reference between the instance and its own result (#172).
 * fix: `fs("rfe")` and `fs("rfecv")` failed with an internal `data.table` error when `store_benchmark_result = FALSE` was set because the importance scores were read from the benchmark result of the archive (#169).

@@ -161,3 +161,40 @@ test_that("saving the models with FSelectInstanceAsyncSingleCrit works", {
 
 #   fselector$optimize(instance)
 # })
+
+test_that("always include variable works", {
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
+
+  task = tsk("diabetes")
+  task$set_col_roles("glucose", "always_included")
+
+  instance = fsi_async(
+    task = task,
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 5),
+    store_benchmark_result = TRUE,
+    store_models = TRUE,
+    rush = rush
+  )
+
+  fselector = fs("async_random_search")
+  fselector$optimize(instance)
+
+  expect_names(instance$archive$cols_x, disjunct.from = "glucose")
+  expect_names(names(instance$archive$data), disjunct.from = "glucose")
+  walk(instance$archive$finished_data$resample_result, function(rr) {
+    expect_names(
+      names(rr$learners[[1]]$state$data_prototype) %??% rr$learners[[1]]$state$feature_names,
+      must.include = "glucose"
+    )
+  })
+
+  # the column role is restored after the evaluation
+  expect_equal(instance$objective$task$col_roles$always_included, "glucose")
+})
