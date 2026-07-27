@@ -271,7 +271,14 @@ The \code{uhash} value to filter for.}
   Printer.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{ArchiveBatchFSelect$print()}
+    \preformatted{ArchiveBatchFSelect$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
     \if{html}{\out{</div>}}
   }
 }

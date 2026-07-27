@@ -74,7 +74,8 @@ The \code{random} method returns a random feature set from the best feature sets
 Ignored if multiple measures are used.}
 
 \item{rush}{(\code{Rush})\cr
-If a rush instance is supplied, the optimization runs without batches.}
+Rush instance for the asynchronous feature selection.
+Ignored by batch fselectors, which warn when it is set.}
 }
 \value{
 \link{FSelectInstanceBatchSingleCrit} | \link{FSelectInstanceBatchMultiCrit}
