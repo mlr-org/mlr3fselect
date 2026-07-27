@@ -34,6 +34,6 @@ instance$result
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>
 #> 1:   TRUE    TRUE   FALSE   TRUE    FALSE    FALSE     TRUE    TRUE
 #>                             features n_features classif.ce
-#>                               <list>     <list>      <num>
+#>                               <list>      <int>      <num>
 #> 1: age,glucose,mass,pressure,triceps          5  0.2969731
 ```
