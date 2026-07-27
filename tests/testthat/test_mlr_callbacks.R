@@ -85,6 +85,25 @@ test_that("one_se_rule callback works", {
   )
 
   expect_equal(instance$result_feature_set, c("x1", "x2", "x3"))
+  # the number of features is a scalar and not a list column
+  expect_integer(instance$result$n_features, len = 1)
+})
+
+test_that("one_se_rule callback works with a single evaluation", {
+  instance = fselect(
+    fselector = fs("random_search", batch_size = 1),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy"),
+    term_evals = 1,
+    callbacks = clbk("mlr3fselect.one_se_rule")
+  )
+
+  # the standard error of a single evaluation is `NA`
+  expect_data_table(instance$archive$data, nrows = 1)
+  expect_data_table(instance$result, nrows = 1)
+  expect_equal(instance$result$features[[1]], as.data.table(instance$archive)$features[[1]])
 })
 
 test_that("internal tuning callback works", {

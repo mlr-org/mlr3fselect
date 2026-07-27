@@ -63,11 +63,7 @@ ObjectiveFSelectBatch = R6Class(
 
       tasks = map(private$.xss, function(x) {
         state = self$task$feature_names[unlist(x)]
-        task = self$task$clone()
-        always_included = task$col_roles$always_included
-        task$set_col_roles(always_included, "feature")
-        task$select(c(state, always_included))
-        task
+        select_features(self$task$clone(), state)
       })
 
       # benchmark feature subsets

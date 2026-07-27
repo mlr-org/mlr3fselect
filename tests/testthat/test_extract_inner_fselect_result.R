@@ -377,3 +377,27 @@ test_that("extract_inner_fselect_results function works with benchmark and retur
   )
   expect_equal(unique(ibmr$experiment), c(1, 2))
 })
+
+test_that("extract_inner_fselect_results does not modify the fselect result", {
+  rr = fselect_nested(
+    fs("random_search"),
+    tsk("iris"),
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    rsmp("cv", folds = 2),
+    msr("classif.ce"),
+    term_evals = 4
+  )
+
+  columns = names(rr$learners[[1]]$fselect_result)
+
+  extract_inner_fselect_results(rr)
+  expect_named(rr$learners[[1]]$fselect_result, columns)
+
+  extract_inner_fselect_results(rr, fselect_instance = TRUE)
+  expect_named(rr$learners[[1]]$fselect_result, columns)
+
+  # the instance is not added again when it is not requested
+  irr = extract_inner_fselect_results(rr)
+  expect_names(names(irr), disjunct.from = "fselect_instance")
+})
