@@ -65,7 +65,7 @@ extract_inner_fselect_archives.ResampleResult = function(x, exclude_columns = "u
     return(data.table())
   }
   tab = imap_dtr(rr$learners, function(learner, i) {
-    data = as.data.table(learner$archive, exclude_columns)
+    data = as.data.table(learner$archive, exclude_columns = exclude_columns)
     set(data, j = "iteration", value = i)
   })
   tab[, "task_id" := rr$task$id]
@@ -83,7 +83,7 @@ extract_inner_fselect_archives.BenchmarkResult = function(x, exclude_columns = "
   tab = imap_dtr(
     bmr$resample_results$resample_result,
     function(rr, i) {
-      data = extract_inner_fselect_archives(rr, exclude_columns)
+      data = extract_inner_fselect_archives(rr, exclude_columns = exclude_columns)
       if (nrow(data) > 0) set(data, j = "experiment", value = i)
     },
     .fill = TRUE
