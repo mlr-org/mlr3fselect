@@ -113,3 +113,15 @@ test_that("combine embedded efs results", {
   expect_equal(nrow(get_private(comb1$benchmark_result)$.data$data$fact), 10L)
   expect_equal(nrow(get_private(comb2$benchmark_result)$.data$data$fact), 10L)
 })
+
+test_that("embedded efs works with a single learner", {
+  efsr = embedded_ensemble_fselect(
+    task = tsk("sonar"),
+    learners = lrn("classif.rpart"),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    measure = msr("classif.ce")
+  )
+
+  expect_data_table(efsr$result, nrows = 2)
+  expect_equal(efsr$n_learners, 1)
+})
