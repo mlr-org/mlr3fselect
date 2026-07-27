@@ -29,6 +29,11 @@ select_features = function(task, features) {
   task
 }
 
+# Sums the train and predict times of all learners of a resample result.
+# PRIVATE MLR3 API: `$.data$learner_states()` and `$.view` are private fields of `mlr3::ResampleResult`.
+# There is no public accessor for the learner states, and `$score()` would compute a measure we do not need.
+# The layout is stable for the mlr3 versions supported in DESCRIPTION (>= 1.0.1) and must be re-checked on every
+# mlr3 update. See https://github.com/mlr-org/mlr3/issues for an upstream request for public accessors.
 extract_runtime = function(resample_result) {
   runtimes = map_dbl(
     get_private(resample_result)$.data$learner_states(get_private(resample_result)$.view),

@@ -71,6 +71,9 @@ ObjectiveFSelectAsync = R6Class(
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
       # add runtime, errors and warnings
+      # PRIVATE MLR3 API: `$.data$learner_states()` is a private field of `mlr3::ResampleResult`.
+      # There is no public accessor for the learner logs. The layout is stable for the mlr3 versions supported in
+      # DESCRIPTION (>= 1.0.1) and must be re-checked on every mlr3 update.
       warnings = sum(map_int(get_private(private$.resample_result)$.data$learner_states(), function(s) {
         sum(s$log$class == "warning")
       }))

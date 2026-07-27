@@ -40,6 +40,11 @@ faggregate = function(obj, measure, conditions = FALSE) {
 }
 
 fscore = function(obj, measure, conditions = FALSE) {
+  # PRIVATE MLR3 API: `$.data$data` is the internal storage of `mlr3::ResampleResult` / `mlr3::BenchmarkResult`,
+  # with the `fact` and `uhashes` tables read below, and `get_private(measure)$.score()` is the private scoring
+  # hook of `mlr3::Measure`. Reading them is the whole point of this file: it skips the reassembly that
+  # `$aggregate()` performs. The layout is stable for the mlr3 versions supported in DESCRIPTION (>= 1.0.1) and
+  # must be re-checked on every mlr3 update.
   data = get_private(obj)$.data$data
   # sort by uhash
   tab = data$fact[data$uhashes, c("iteration", "prediction", "uhash", "learner_state"), with = FALSE]
