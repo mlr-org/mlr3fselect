@@ -56,7 +56,7 @@ FSelectorBatchGeneticSearch = R6Class(
       }
       n = inst$objective$domain$length
 
-      mlr3misc::invoke(genalg::rbga.bin, size = n, evalFunc = inst$objective_function, .args = pars)
+      invoke(genalg::rbga.bin, size = n, evalFunc = inst$objective_function, .args = pars)
     }
   )
 )

@@ -41,7 +41,7 @@
 #nolint next line_length_linter
 #'   [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
 #'
-#' @templateVar id rfe
+#' @templateVar id rfecv
 #' @template section_dictionary_fselectors
 #'
 #' @section Control Parameters:
@@ -113,7 +113,7 @@ FSelectorBatchRFECV = R6Class(
         id = "rfecv",
         param_set = ps,
         properties = c("single-crit", "requires_model"),
-        label = "Recursive Feature Elimination",
+        label = "Recursive Feature Elimination with Cross Validation",
         man = "mlr3fselect::mlr_fselectors_rfecv"
       )
     }

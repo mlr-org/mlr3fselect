@@ -5,6 +5,9 @@
 #'
 #' @description
 #' This [CallbackBatchFSelect] writes the [mlr3::BenchmarkResult] after each batch to disk.
+#' The `path` must be set, e.g. `clbk("mlr3fselect.backup", path = "backup.rds")`.
+#' The benchmark result is written to a temporary file first and then renamed,
+#' so that a crash while writing does not destroy the backup of the previous batch.
 #'
 #' @examples
 #' clbk("mlr3fselect.backup", path = "backup.rds")
@@ -27,16 +30,16 @@ load_callback_backup = function() {
     man = "mlr3fselect::mlr3fselect.backup",
     on_optimization_begin = function(callback, context) {
       if (is.null(callback$state$path)) {
-        callback$state$path = "bmr.rds"
+        stopf("The `mlr3fselect.backup` callback requires a `path`, e.g. `clbk('mlr3fselect.backup', path = 'bmr.rds')`.")
       }
-      assert_path_for_output(callback$state$path)
+      assert_path_for_output(callback$state$path, overwrite = TRUE)
     },
 
     on_optimizer_after_eval = function(callback, context) {
-      if (file.exists(callback$state$path)) {
-        unlink(callback$state$path)
-      }
-      saveRDS(context$instance$archive$benchmark_result, callback$state$path)
+      # write to a temporary file first so that a crash during writing does not destroy the previous backup
+      path_tmp = paste0(callback$state$path, ".tmp")
+      saveRDS(context$instance$archive$benchmark_result, path_tmp)
+      file.rename(path_tmp, callback$state$path)
     }
   )
 }
@@ -172,7 +175,7 @@ load_callback_svm_rfe = function() {
 NULL
 
 load_callback_one_se_rule = function() {
-  callback = callback_batch_fselect(
+  callback_batch_fselect(
     "mlr3fselect.one_se_rule",
     label = "One Standard Error Rule Callback",
     man = "mlr3fselect::mlr3fselect.one_se_rule",
@@ -226,18 +229,18 @@ load_callback_internal_tuning = function() {
 
     on_eval_before_archive = function(callback, context) {
       # extract internal tuned values and aggregate folds
-      internal_tuned_values = mlr3misc::map(
+      internal_tuned_values = map(
         context$benchmark_result$resample_results$resample_result,
         function(resample_result) {
-          internal_tuned_values = mlr3misc::transpose_list(mlr3misc::map(
-            mlr3misc::get_private(resample_result)$.data$learner_states(mlr3misc::get_private(resample_result)$.view),
+          internal_tuned_values = transpose_list(map(
+            get_private(resample_result)$.data$learner_states(get_private(resample_result)$.view),
             "internal_tuned_values"
           ))
           callback$state$internal_search_space$aggr_internal_tuned_values(internal_tuned_values)
         }
       )
 
-      data.table::set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
+      set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
     },
 
     on_optimization_end = function(callback, context) {
