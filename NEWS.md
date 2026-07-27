@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `fs("rfecv")` left the resampling of the objective set to an insample resampling, so subsequent evaluations on the same instance silently resampled in-sample (#187).
 * fix: The `mlr3fselect.backup` callback deleted the backup of the previous batch before it wrote the new one, so a crash in between lost the complete run. The benchmark result is now written to a temporary file and renamed afterwards (#188).
 * BREAKING CHANGE: The `mlr3fselect.backup` callback requires the `path` argument now. Previously it wrote a `bmr.rds` file into the working directory of the user (#188).
 * fix: `as.data.table()` on an `EnsembleFSResult` accepts the documented `benchmark_result` argument now to omit the task, learner and resampling columns (#190).
