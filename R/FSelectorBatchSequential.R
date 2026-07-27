@@ -69,7 +69,8 @@ FSelectorBatchSequential = R6Class(
         error_input("No results stored in the archive.")
       }
       uhash = if (include_uhash) "uhash" else NULL
-      res = archive$data[, head(.SD, 1), by = get("batch_nr")]
+      # we have to use the best method to get the same tie breaking as in the optimize method
+      res = map_dtr(seq(archive$n_batch), function(n) archive$best(batch = n))
       res[, c(archive$cols_x, archive$cols_y, "batch_nr", uhash), with = FALSE]
     }
   ),
