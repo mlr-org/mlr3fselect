@@ -4,6 +4,10 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `AutoFSelector$train()` did not check the row ids of an
+  instantiated inner resampling for cross-validation and reported a
+  wrong set number for holdout
+  ([\#197](https://github.com/mlr-org/mlr3fselect/issues/197)).
 - fix: The `mlr3fselect.svm_rfe` callback accepted support vector
   machines without a `type` or `kernel` setting, although only
   `type = "C-classification"` and `kernel = "linear"` are supported. The
