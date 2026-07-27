@@ -72,7 +72,8 @@ fscore_single_measure = function(prediction, measure) {
   # convert pdata to regular prediction
   prediction = as_prediction(prediction, check = FALSE)
 
-  if (is.null(prediction) && length(measure$predict_sets)) {
+  # the early return above guarantees that the measure has predict sets
+  if (is.null(prediction)) {
     return(NaN)
   }
 
