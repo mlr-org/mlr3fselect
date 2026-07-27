@@ -226,18 +226,18 @@ load_callback_internal_tuning = function() {
 
     on_eval_before_archive = function(callback, context) {
       # extract internal tuned values and aggregate folds
-      internal_tuned_values = mlr3misc::map(
+      internal_tuned_values = map(
         context$benchmark_result$resample_results$resample_result,
         function(resample_result) {
-          internal_tuned_values = mlr3misc::transpose_list(mlr3misc::map(
-            mlr3misc::get_private(resample_result)$.data$learner_states(mlr3misc::get_private(resample_result)$.view),
+          internal_tuned_values = transpose_list(map(
+            get_private(resample_result)$.data$learner_states(get_private(resample_result)$.view),
             "internal_tuned_values"
           ))
           callback$state$internal_search_space$aggr_internal_tuned_values(internal_tuned_values)
         }
       )
 
-      data.table::set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
+      set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
     },
 
     on_optimization_end = function(callback, context) {
