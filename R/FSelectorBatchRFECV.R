@@ -153,6 +153,13 @@ FSelectorBatchRFECV = R6Class(
 
       resampling_cv = inst$objective$resampling$clone()
 
+      # the resampling of the objective is replaced by the folds of the cross-validation and by an insample
+      # resampling, restore it when the optimization ends or is aborted
+      original_resampling = inst$objective$constants$values$resampling
+      on.exit({
+        inst$objective$constants$values$resampling = original_resampling
+      })
+
       inst$objective$constants$values$resampling = map(seq(resampling_cv$iters), function(i) {
         custom = rsmp("custom")
         train_sets = list(resampling_cv$train_set(i))

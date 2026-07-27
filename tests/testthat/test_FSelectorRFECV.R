@@ -241,3 +241,19 @@ test_that("rfecv works without storing the benchmark result", {
   expect_names(names(data), must.include = c("importance", "iteration"))
   pwalk(data, function(x1, x2, x3, x4, importance, ...) expect_equal(x1 + x2 + x3 + x4, length(importance)))
 })
+
+test_that("the resampling of the objective is restored", {
+  instance = fsi(
+    task = tsk("penguins"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("none")
+  )
+  resampling = instance$objective$constants$values$resampling
+
+  fs("rfecv", n_features = 2, feature_number = 1)$optimize(instance)
+
+  expect_equal(instance$objective$constants$values$resampling, resampling)
+  expect_equal(instance$objective$constants$values$resampling[[1]], instance$objective$resampling)
+})
