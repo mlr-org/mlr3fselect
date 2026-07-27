@@ -4,7 +4,10 @@ This
 [CallbackBatchFSelect](https://mlr3fselect.mlr-org.com/dev/reference/CallbackBatchFSelect.md)
 writes the
 [mlr3::BenchmarkResult](https://mlr3.mlr-org.com/reference/BenchmarkResult.html)
-after each batch to disk.
+after each batch to disk. The `path` must be set, e.g.
+`clbk("mlr3fselect.backup", path = "backup.rds")`. The benchmark result
+is written to a temporary file first and then renamed, so that a crash
+while writing does not destroy the backup of the previous batch.
 
 ## Examples
 

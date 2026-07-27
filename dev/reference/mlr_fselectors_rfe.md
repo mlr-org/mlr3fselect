@@ -203,8 +203,8 @@ as.data.table(instance$archive)
 #> 2:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.03478261            0.007 2026-07-27 10:11:06        1        0      0
-#> 2: 0.03478261            0.006 2026-07-27 10:11:06        2        0      0
+#> 1: 0.03478261            0.008 2026-07-27 10:19:19        1        0      0
+#> 2: 0.03478261            0.005 2026-07-27 10:19:19        2        0      0
 #>            importance
 #>                <list>
 #> 1: 7,6,5,4,3,2,...[7]

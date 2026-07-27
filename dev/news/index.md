@@ -4,6 +4,15 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: The `mlr3fselect.backup` callback deleted the backup of the
+  previous batch before it wrote the new one, so a crash in between lost
+  the complete run. The benchmark result is now written to a temporary
+  file and renamed afterwards
+  ([\#188](https://github.com/mlr-org/mlr3fselect/issues/188)).
+- BREAKING CHANGE: The `mlr3fselect.backup` callback requires the `path`
+  argument now. Previously it wrote a `bmr.rds` file into the working
+  directory of the user
+  ([\#188](https://github.com/mlr-org/mlr3fselect/issues/188)).
 - fix:
   [`as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html)
   on an `EnsembleFSResult` accepts the documented `benchmark_result`
