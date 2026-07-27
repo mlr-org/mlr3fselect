@@ -61,7 +61,7 @@ embedded_ensemble_fselect = function(
   assert_task(task)
   assert_learners(as_learners(learners), task = task, properties = "selected_features")
   assert_resampling(init_resampling)
-  assert_multi_class(init_resampling, c("ResamplingBootstrap", "ResamplingSubsampling"))
+  assert_choice(class(init_resampling)[1], choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
   assert_measure(measure, task = task)
   assert_flag(store_benchmark_result)
 

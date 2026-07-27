@@ -92,7 +92,7 @@ ensemble_fselect = function(
   assert_task(task)
   assert_learners(as_learners(learners), task = task)
   assert_resampling(init_resampling)
-  assert_multi_class(init_resampling, c("ResamplingBootstrap", "ResamplingSubsampling"))
+  assert_choice(class(init_resampling)[1], choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
   assert_resampling(inner_resampling)
   assert_measure(inner_measure, task = task)
   assert_measure(measure, task = task)
@@ -161,11 +161,12 @@ ensemble_fselect = function(
   set(scores, j = "resampling_id", value = NULL)
   set(scores, j = "uhash", value = NULL)
 
-  # extract importance scores if RFE optimization was used
-  if (inherits(fselector, "FSelectorBatchRFE")) {
-    imp_scores = map(afss, function(afs) {
-      afs$fselect_result$importance[[1]]
-    })
+  # extract importance scores if the fselector stores them e.g. RFE
+  imp_scores = map(afss, function(afs) {
+    result = afs$fselect_result
+    if ("importance" %in% names(result)) result$importance[[1]]
+  })
+  if (every(imp_scores, Negate(is.null))) {
     set(scores, j = "importance", value = imp_scores)
   }
 

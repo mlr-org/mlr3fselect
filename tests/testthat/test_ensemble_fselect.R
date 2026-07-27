@@ -424,23 +424,24 @@ test_that("different callbacks can be set", {
   expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
 })
 
-test_that("efs accepts subclasses of the supported resamplings and fselectors", {
-  ResamplingSubsamplingCustom = R6::R6Class("ResamplingSubsamplingCustom", inherit = mlr3::ResamplingSubsampling)
-  FSelectorBatchRFECustom = R6::R6Class("FSelectorBatchRFECustom", inherit = FSelectorBatchRFE)
+test_that("efs adds the importance column for subclasses of FSelectorBatchRFE", {
+  FSelectorBatchRFECustom = R6Class("FSelectorBatchRFECustom", inherit = FSelectorBatchRFE)
 
   efsr = ensemble_fselect(
     fselector = FSelectorBatchRFECustom$new(),
     task = tsk("sonar"),
-    learners = lrns(c("classif.rpart", "classif.featureless")),
-    init_resampling = ResamplingSubsamplingCustom$new(),
+    learners = lrns("classif.rpart"),
+    init_resampling = rsmp("subsampling", repeats = 2),
     inner_resampling = rsmp("cv", folds = 3),
     inner_measure = msr("classif.ce"),
     measure = msr("classif.ce"),
     terminator = trm("none")
   )
 
-  expect_names(names(efsr$result), must.include = "importance")
+  expect_list(efsr$result$importance, any.missing = FALSE, len = 2)
+})
 
+test_that("efs only accepts bootstrap and subsampling as init_resampling", {
   expect_error(
     ensemble_fselect(
       fselector = fs("random_search"),
