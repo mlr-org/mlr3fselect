@@ -210,6 +210,17 @@ rank_importance = function(learners, features) {
   sort(set_names(pmap_dbl(ranked_importances, function(...) mean(c(...))), names(importances[[1]])), decreasing = TRUE)
 }
 
+# Calculates the importance scores of the feature subsets evaluated in the last batch.
+# The benchmark result of the objective is used instead of the one of the archive because it holds the models of the
+# last batch even if `store_benchmark_result` is `FALSE`.
+batch_importances = function(inst, aggregation) {
+  benchmark_result = get_private(inst$objective)$.benchmark_result
+  map(benchmark_result$uhashes, function(uhash) {
+    rr = benchmark_result$resample_result(uhash = uhash)
+    aggregation(rr$learners, rr$task$feature_names)
+  })
+}
+
 # Returns the sizes of the feature subsets
 rfe_subsets = function(n, n_features, feature_number, subset_sizes, feature_fraction) {
   subsets = if (!is.null(feature_number)) {
@@ -240,11 +251,7 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
   inst$eval_batch(states)
 
   # Calculate the variable importance on the full feature set
-  uhashes = archive$data[list(archive$n_batch), "uhash", on = "batch_nr"][[1]]
-  importances = map(uhashes, function(uhash) {
-    rr = archive$benchmark_result$resample_result(uhash = uhash)
-    aggregation(rr$learners, rr$task$feature_names)
-  })
+  importances = batch_importances(inst, aggregation)
 
   # discard models if requested by the user
   if (!inst$objective$store_models) {
@@ -267,11 +274,7 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
 
     if (recursive) {
       # recalculate the variable importance on the reduced feature subset
-      uhashes = archive$data[list(archive$n_batch), "uhash", on = "batch_nr"][[1]]
-      importances = map(uhashes, function(uhash) {
-        rr = archive$benchmark_result$resample_result(uhash = uhash)
-        aggregation(rr$learners, rr$task$feature_names)
-      })
+      importances = batch_importances(inst, aggregation)
 
       # log importance to archive
       archive$data[list(archive$n_batch), "importance" := importances, on = "batch_nr"]
