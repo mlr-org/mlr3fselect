@@ -423,3 +423,30 @@ test_that("different callbacks can be set", {
   expect_true(all(efsr$benchmark_result$score()$learner[[1]]$fselect_instance$archive$data$callback_active))
   expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
 })
+
+test_that("stability cache distinguishes different stability_args", {
+  efsr = ensemble_fselect(
+    fselector = fs("random_search"),
+    task = tsk("sonar"),
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3)
+  )
+  efsr$rm_zero_features()
+
+  # the same measure with different arguments must not return the cached value
+  p_60 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 60))
+  p_600 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 600))
+
+  expect_false(p_60 == p_600)
+  expect_equal(efsr$stability(stability_measure = "nogueira", stability_args = list(p = 60)), p_60)
+
+  # the same holds for the per learner stability
+  p_60 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 60), global = FALSE)
+  p_600 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 600), global = FALSE)
+
+  expect_false(any(p_60 == p_600))
+})
