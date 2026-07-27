@@ -19,6 +19,7 @@ test_that("as.data.table objects parameter", {
   expect_list(tab$object, "FSelector", any.missing = FALSE)
 })
 
+
 test_that("read-only bindings of a fselector raise a structured error", {
   fselector = fs("random_search")
 
@@ -40,5 +41,4 @@ test_that("reloading the package does not duplicate reflections", {
   expect_equal(sum(mlr_reflections$loaded_packages == "mlr3fselect"), 1L)
   walk(mlr_reflections$task_col_roles, function(col_roles) {
     expect_equal(sum(col_roles == "always_included"), 1L)
-  })
 })
