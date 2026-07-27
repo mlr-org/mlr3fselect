@@ -5,6 +5,13 @@
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
 - fix:
+  [`extract_inner_fselect_archives()`](https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.md)
+  ignored the `exclude_columns` argument because it was passed
+  positionally to
+  [`as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html)
+  where it landed in the `...` argument
+  ([\#180](https://github.com/mlr-org/mlr3fselect/issues/180)).
+- fix:
   [`as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html)
   on an `ArchiveBatchFSelect` returned the `n_features` column as a list
   column instead of an integer column, so operations such as
