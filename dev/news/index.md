@@ -4,6 +4,10 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `fs("rfecv")` had the same label as `fs("rfe")`, so both were
+  indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page
+  also instructed to construct it with `fs("rfe")`
+  ([\#191](https://github.com/mlr-org/mlr3fselect/issues/191)).
 - fix: `AutoFSelector$train()` did not check the row ids of an
   instantiated inner resampling for cross-validation and reported a
   wrong set number for holdout
