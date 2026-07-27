@@ -113,14 +113,22 @@ here.
 - `hash`:
 
   (`character(1)`)  
-  Hash (unique identifier) for this object.
+  Hash (unique identifier) for this object. Covers the id, the parameter
+  values, the predict type, the fallback learner, the parallel predict
+  flag, the
+  [FSelector](https://mlr3fselect.mlr-org.com/dev/reference/FSelector.md),
+  the arguments of the
+  [FSelectInstanceBatchSingleCrit](https://mlr3fselect.mlr-org.com/dev/reference/FSelectInstanceBatchSingleCrit.md)
+  and the store fselect instance flag.
 
 - `phash`:
 
   (`character(1)`)  
-  Hash (unique identifier) for this partial object, excluding some
-  components which are varied systematically during tuning (parameter
-  values) or feature selection (feature names).
+  Hash (unique identifier) for this partial object. The AutoFSelector
+  has no components that are varied systematically during tuning or
+  feature selection, because the search space is created internally from
+  the task. The partial hash is therefore deliberately identical to
+  `$hash`.
 
 ## Methods
 
