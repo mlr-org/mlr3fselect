@@ -3,6 +3,10 @@
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
 * fix: The `mlr3fselect.backup` callback deleted the backup of the previous batch before it wrote the new one, so a crash in between lost the complete run. The benchmark result is now written to a temporary file and renamed afterwards (#188).
 * BREAKING CHANGE: The `mlr3fselect.backup` callback requires the `path` argument now. Previously it wrote a `bmr.rds` file into the working directory of the user (#188).
+* fix: `as.data.table()` on an `EnsembleFSResult` accepts the documented `benchmark_result` argument now to omit the task, learner and resampling columns (#190).
+* fix: The `$print()` methods of `ArchiveBatchFSelect`, `ArchiveAsyncFSelect`, `ArchiveAsyncFSelectFrozen`, `AutoFSelector` and `FSelector` errored with `unused argument` when arguments such as `digits` were passed (#190).
+* fix: `fs("rfecv")` had the same label as `fs("rfe")`, so both were indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page also instructed to construct it with `fs("rfe")` (#191).
+* fix: `AutoFSelector$train()` did not check the row ids of an instantiated inner resampling for cross-validation and reported a wrong set number for holdout (#197).
 * fix: The `mlr3fselect.svm_rfe` callback accepted support vector machines without a `type` or `kernel` setting, although only `type = "C-classification"` and `kernel = "linear"` are supported. The callback now also errors on multi-class tasks for which the importance scores are not defined (#173).
 * fix: The asynchronous feature selection ignored the `always_included` column role. Columns with this role were excluded from the models instead of being added to every feature subset (#175).
 * fix: The `mlr3fselect.one_se_rule` callback errored on archives with a single evaluation or with missing scores, and wrote the `n_features` column as a list column instead of an integer column (#174).

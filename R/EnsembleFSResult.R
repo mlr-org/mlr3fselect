@@ -214,7 +214,7 @@ EnsembleFSResult = R6Class(
 
       # check if `inner_measure` is an `mlr3::Measure`
       if (which == "inner" && is.null(private$.inner_measure)) {
-        stop("No inner_measure was defined during initialization")
+        error_input("No `inner_measure` was defined during initialization.")
       }
 
       private$.active_measure = which
@@ -277,7 +277,7 @@ EnsembleFSResult = R6Class(
         }
 
         # Combine results from both objects
-        private$.result = data.table::rbindlist(list(private$.result, result2), fill = FALSE)
+        private$.result = rbindlist(list(private$.result, result2), fill = FALSE)
 
         # Merge benchmark results if available in both objects
         has_bmr = !is.null(self$benchmark_result)
@@ -523,7 +523,7 @@ EnsembleFSResult = R6Class(
         pf = pf[n_features > 0]
 
         # Fit the linear model
-        form = mlr3misc::formulate(lhs = measure_id, rhs = "n_features_inv")
+        form = formulate(lhs = measure_id, rhs = "n_features_inv")
         model = stats::lm(formula = form, data = pf)
 
         # Predict values using the model to create a smooth curve
@@ -671,8 +671,9 @@ EnsembleFSResult = R6Class(
 )
 
 #' @export
-as.data.table.EnsembleFSResult = function(x, ...) {
-  x$result
+as.data.table.EnsembleFSResult = function(x, ..., benchmark_result = TRUE) {
+  assert_flag(benchmark_result)
+  if (benchmark_result) x$result else copy(get_private(x)$.result)
 }
 
 #' @export

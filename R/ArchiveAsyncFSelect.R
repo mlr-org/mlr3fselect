@@ -47,9 +47,6 @@ ArchiveAsyncFSelect = R6Class(
   public = list(
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    #'
-    #' @param check_values (`logical(1)`)\cr
-    #'   If `TRUE` (default), feature subsets are check for validity.
     initialize = function(
       search_space,
       codomain,
@@ -123,7 +120,7 @@ ArchiveAsyncFSelect = R6Class(
     #' Printer.
     #'
     #' @param ... (ignored).
-    print = function() {
+    print = function(...) {
       cat_cli(cli_h1("{format(self)} with {.val {self$n_evals}} evaluations"))
       print(
         as.data.table(
