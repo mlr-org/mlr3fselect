@@ -589,10 +589,9 @@ EnsembleFSResult = R6Class(
         return(pf)
       }
       if (uniqueN(pf[["n_features"]]) < 2L || uniqueN(pf[[measure_id]]) < 2L) {
-        cli_warn(c(
-          "The Pareto front does not span a range in both dimensions, so no knee point can be identified.",
-          i = "Returning the first point of the Pareto front."
-        ))
+        warning_mlr3(
+          "The Pareto front does not span a range in both dimensions, so no knee point can be identified. Returning the first point of the Pareto front."
+        )
         return(pf[1L])
       }
 
