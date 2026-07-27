@@ -117,26 +117,26 @@ extract_inner_fselect_archives(rr)
 #>         <int>     <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl>
 #>       year classif.ce runtime_learners           timestamp batch_nr warnings
 #>     <lgcl>      <num>            <num>              <POSc>    <int>    <int>
-#>  1:  FALSE 0.08771930            0.006 2026-07-27 10:46:01        1        0
-#>  2:   TRUE 0.08771930            0.007 2026-07-27 10:46:01        1        0
-#>  3:  FALSE 0.15789474            0.006 2026-07-27 10:46:01        1        0
-#>  4:  FALSE 0.31578947            0.006 2026-07-27 10:46:01        1        0
-#>  5:   TRUE 0.08771930            0.006 2026-07-27 10:46:01        1        0
-#>  6:  FALSE 0.15789474            0.006 2026-07-27 10:46:01        1        0
-#>  7:  FALSE 0.57894737            0.005 2026-07-27 10:46:01        1        0
-#>  8:  FALSE 0.28070175            0.006 2026-07-27 10:46:01        1        0
-#>  9:   TRUE 0.19298246            0.006 2026-07-27 10:46:01        1        0
-#> 10:  FALSE 0.24561404            0.006 2026-07-27 10:46:01        1        0
-#> 11:  FALSE 0.31578947            0.007 2026-07-27 10:46:01        1        0
-#> 12:   TRUE 0.03508772            0.006 2026-07-27 10:46:01        1        0
-#> 13:  FALSE 0.59649123            0.006 2026-07-27 10:46:01        1        0
-#> 14:   TRUE 0.08771930            0.006 2026-07-27 10:46:01        1        0
-#> 15:  FALSE 0.31578947            0.006 2026-07-27 10:46:01        1        0
-#> 16:  FALSE 0.05263158            0.007 2026-07-27 10:46:01        1        0
-#> 17:  FALSE 0.08771930            0.006 2026-07-27 10:46:01        1        0
-#> 18:   TRUE 0.31578947            0.006 2026-07-27 10:46:01        1        0
-#> 19:  FALSE 0.03508772            0.007 2026-07-27 10:46:01        1        0
-#> 20:  FALSE 0.22807018            0.006 2026-07-27 10:46:01        1        0
+#>  1:  FALSE 0.08771930            0.006 2026-07-27 10:50:11        1        0
+#>  2:   TRUE 0.08771930            0.007 2026-07-27 10:50:11        1        0
+#>  3:  FALSE 0.15789474            0.005 2026-07-27 10:50:11        1        0
+#>  4:  FALSE 0.31578947            0.006 2026-07-27 10:50:11        1        0
+#>  5:   TRUE 0.08771930            0.006 2026-07-27 10:50:11        1        0
+#>  6:  FALSE 0.15789474            0.005 2026-07-27 10:50:11        1        0
+#>  7:  FALSE 0.57894737            0.005 2026-07-27 10:50:11        1        0
+#>  8:  FALSE 0.28070175            0.005 2026-07-27 10:50:11        1        0
+#>  9:   TRUE 0.19298246            0.007 2026-07-27 10:50:11        1        0
+#> 10:  FALSE 0.24561404            0.006 2026-07-27 10:50:11        1        0
+#> 11:  FALSE 0.31578947            0.005 2026-07-27 10:50:11        1        0
+#> 12:   TRUE 0.03508772            0.007 2026-07-27 10:50:11        1        0
+#> 13:  FALSE 0.59649123            0.005 2026-07-27 10:50:11        1        0
+#> 14:   TRUE 0.08771930            0.006 2026-07-27 10:50:11        1        0
+#> 15:  FALSE 0.31578947            0.007 2026-07-27 10:50:11        1        0
+#> 16:  FALSE 0.05263158            0.007 2026-07-27 10:50:11        1        0
+#> 17:  FALSE 0.08771930            0.006 2026-07-27 10:50:11        1        0
+#> 18:   TRUE 0.31578947            0.005 2026-07-27 10:50:11        1        0
+#> 19:  FALSE 0.03508772            0.007 2026-07-27 10:50:11        1        0
+#> 20:  FALSE 0.22807018            0.006 2026-07-27 10:50:11        1        0
 #>       year classif.ce runtime_learners           timestamp batch_nr warnings
 #>     <lgcl>      <num>            <num>              <POSc>    <int>    <int>
 #>     errors                                                          features
@@ -164,7 +164,7 @@ extract_inner_fselect_archives(rr)
 #>     errors                                                          features
 #>      <int>                                                            <list>
 #>     n_features  resample_result  task_id              learner_id resampling_id
-#>         <list>           <list>   <char>                  <char>        <char>
+#>          <int>           <list>   <char>                  <char>        <char>
 #>  1:          6 <ResampleResult> penguins classif.rpart.fselector            cv
 #>  2:          7 <ResampleResult> penguins classif.rpart.fselector            cv
 #>  3:          1 <ResampleResult> penguins classif.rpart.fselector            cv
@@ -186,5 +186,5 @@ extract_inner_fselect_archives(rr)
 #> 19:          4 <ResampleResult> penguins classif.rpart.fselector            cv
 #> 20:          2 <ResampleResult> penguins classif.rpart.fselector            cv
 #>     n_features  resample_result  task_id              learner_id resampling_id
-#>         <list>           <list>   <char>                  <char>        <char>
+#>          <int>           <list>   <char>                  <char>        <char>
 ```
