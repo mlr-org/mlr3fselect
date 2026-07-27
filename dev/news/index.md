@@ -31,6 +31,11 @@
   indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page
   also instructed to construct it with `fs("rfe")`
   ([\#191](https://github.com/mlr-org/mlr3fselect/issues/191)).
+- fix: `AutoFSelector` ignored the `predict_type` when the final model
+  was fitted, so `$predict()` returned response predictions although
+  e.g. `"prob"` was set. Errors raised while setting the predict type on
+  the final model are not swallowed anymore
+  ([\#184](https://github.com/mlr-org/mlr3fselect/issues/184)).
 - fix: `AutoFSelector$train()` did not check the row ids of an
   instantiated inner resampling for cross-validation and reported a
   wrong set number for holdout
