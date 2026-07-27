@@ -188,7 +188,7 @@ AutoFSelector = R6Class(
     #' @return Named `numeric()`.
     importance = function() {
       if ("importance" %nin% self$instance_args$learner$properties) {
-        stopf("Learner ''%s' cannot calculate important scores.", self$instance_args$learner$id)
+        stopf("Learner '%s' cannot calculate importance scores.", self$instance_args$learner$id)
       }
       if (is.null(self$model$learner$model)) {
         self$instance_args$learner$importance()
@@ -204,7 +204,7 @@ AutoFSelector = R6Class(
     #' @return `character()`.
     selected_features = function() {
       if ("selected_features" %nin% self$instance_args$learner$properties) {
-        stopf("Learner ''%s' cannot select features.", self$instance_args$learner$id)
+        stopf("Learner '%s' cannot select features.", self$instance_args$learner$id)
       }
       if (is.null(self$model$learner$model)) {
         self$instance_args$learner$selected_features()
@@ -243,9 +243,11 @@ AutoFSelector = R6Class(
       }
     },
 
+    #' @description
     #' Printer.
+    #'
     #' @param ... (ignored).
-    print = function() {
+    print = function(...) {
       msg_h = if (is.null(self$label) || is.na(self$label)) "" else paste0(": ", self$label)
       model = if (is.null(self$model)) "-" else class(self$model)[1L]
 
@@ -359,29 +361,22 @@ AutoFSelector = R6Class(
       ia$task = task$clone()
 
       # check if task contains all row ids required for instantiated resampling
+      # `$train_set()` and `$test_set()` are used because the layout of `$instance` differs between resamplings
       if (ia$resampling$is_instantiated) {
-        imap(ia$resampling$instance$train, function(x, i) {
-          if (!test_subset(x, task$row_ids)) {
-            stopf(
-              "Train set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
-              i,
-              ia$resampling$id,
-              task$id,
-              paste(setdiff(x, task$row_ids), collapse = ", ")
-            )
-          }
-        })
-
-        imap(ia$resampling$instance$test, function(x, i) {
-          if (!test_subset(x, task$row_ids)) {
-            stopf(
-              "Test set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
-              i,
-              ia$resampling$id,
-              task$id,
-              paste(setdiff(x, task$row_ids), collapse = ", ")
-            )
-          }
+        walk(seq_len(ia$resampling$iters), function(i) {
+          sets = list(Train = ia$resampling$train_set(i), Test = ia$resampling$test_set(i))
+          imap(sets, function(row_ids, set_type) {
+            if (!test_subset(row_ids, task$row_ids)) {
+              stopf(
+                "%s set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
+                set_type,
+                i,
+                ia$resampling$id,
+                task$id,
+                paste(setdiff(row_ids, task$row_ids), collapse = ", ")
+              )
+            }
+          })
         })
       }
 

@@ -314,7 +314,6 @@ These features are selected internally by the learner.
   }
   \subsection{Returns}{
     \code{logLik}.
-Printer.
   }
 }
 
@@ -322,9 +321,17 @@ Printer.
 \if{html}{\out{<a id="method-AutoFSelector-print"></a>}}
 \if{latex}{\out{\hypertarget{method-AutoFSelector-print}{}}}
 \subsection{\code{AutoFSelector$print()}}{
+  Printer.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{AutoFSelector$print()}
+    \preformatted{AutoFSelector$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
     \if{html}{\out{</div>}}
   }
 }
