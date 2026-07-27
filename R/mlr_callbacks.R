@@ -172,7 +172,7 @@ load_callback_svm_rfe = function() {
 NULL
 
 load_callback_one_se_rule = function() {
-  callback = callback_batch_fselect(
+  callback_batch_fselect(
     "mlr3fselect.one_se_rule",
     label = "One Standard Error Rule Callback",
     man = "mlr3fselect::mlr3fselect.one_se_rule",
