@@ -51,6 +51,10 @@
   instantiated inner resampling for cross-validation and reported a
   wrong set number for holdout
   ([\#197](https://github.com/mlr-org/mlr3fselect/issues/197)).
+- fix: `fs("shadow_variable_search")` left the shadow variables in the
+  task, domain and search space of the instance when the feature
+  selection was aborted because the first selected feature was a shadow
+  variable ([\#183](https://github.com/mlr-org/mlr3fselect/issues/183)).
 - fix: The `mlr3fselect.svm_rfe` callback accepted support vector
   machines without a `type` or `kernel` setting, although only
   `type = "C-classification"` and `kernel = "linear"` are supported. The
