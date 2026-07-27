@@ -180,10 +180,13 @@ instance = fselect(
 instance$result
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
-#>                                 features n_features classif.ce
-#>                                   <list>      <int>      <num>
-#> 1: bill_depth,bill_length,flipper_length          3  0.0377907
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#>                                                             features n_features
+#>                                                               <list>      <int>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#>    classif.ce
+#>         <num>
+#> 1: 0.03488372
 
 # all evaluated feature subsets
 as.data.table(instance$archive)
@@ -196,17 +199,15 @@ as.data.table(instance$archive)
 #> 5:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #> 6:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #> 7:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#> 8:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.05217391            0.007 2026-07-26 10:07:24        1        0      0
-#> 2: 0.04347826            0.006 2026-07-26 10:07:24        1        0      0
-#> 3: 0.04385965            0.006 2026-07-26 10:07:24        1        0      0
-#> 4: 0.06086957            0.007 2026-07-26 10:07:24        2        0      0
-#> 5: 0.04347826            0.006 2026-07-26 10:07:24        2        0      0
-#> 6: 0.04385965            0.005 2026-07-26 10:07:24        2        0      0
-#> 7: 0.03488372            0.025 2026-07-26 10:07:24        3        0      0
-#> 8: 0.03779070            0.005 2026-07-26 10:07:24        4        0      0
+#> 1: 0.05217391            0.006 2026-07-27 07:04:26        1        0      0
+#> 2: 0.04347826            0.006 2026-07-27 07:04:26        1        0      0
+#> 3: 0.04385965            0.004 2026-07-27 07:04:26        1        0      0
+#> 4: 0.06086957            0.004 2026-07-27 07:04:26        2        0      0
+#> 5: 0.04347826            0.004 2026-07-27 07:04:26        2        0      0
+#> 6: 0.04385965            0.005 2026-07-27 07:04:26        2        0      0
+#> 7: 0.03488372            0.021 2026-07-27 07:04:26        3        0      0
 #>                                                            importance iteration
 #>                                                                <list>     <int>
 #> 1:       85.75424,82.52962,66.85897,62.92209,49.04522, 0.00000,...[7]         1
@@ -216,7 +217,6 @@ as.data.table(instance$archive)
 #> 5:                                         85.34940,72.53103,59.53474         2
 #> 6:                                         84.03269,83.55366,73.73138         3
 #> 7: 124.20793,121.52400,102.74919, 87.26186, 78.61700,  0.00000,...[7]        NA
-#> 8:                                         124.2079,121.5240,104.2507        NA
 #>                                                             features n_features
 #>                                                               <list>     <list>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
@@ -226,7 +226,6 @@ as.data.table(instance$archive)
 #> 5:                             bill_depth,bill_length,flipper_length          3
 #> 6:                             bill_depth,bill_length,flipper_length          3
 #> 7: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#> 8:                             bill_depth,bill_length,flipper_length          3
 #>     resample_result
 #>              <list>
 #> 1: <ResampleResult>
@@ -236,7 +235,6 @@ as.data.table(instance$archive)
 #> 5: <ResampleResult>
 #> 6: <ResampleResult>
 #> 7: <ResampleResult>
-#> 8: <ResampleResult>
 
 # subset the task and fit the final model
 task$select(instance$result_feature_set)
