@@ -13,6 +13,13 @@ Learning*, **46**(1), 389–422. ISSN 1573-0565.
 [doi:10.1023/A:1012487302797](https://doi.org/10.1023/A%3A1012487302797)
 .
 
+## Details
+
+The importance score of a feature is the squared weight of the
+hyperplane that separates the two classes. The weights are only defined
+for a linear kernel and a single separating hyperplane, therefore the
+callback only works on binary classification tasks.
+
 ## Examples
 
 ``` r
