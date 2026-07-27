@@ -66,7 +66,7 @@ FSelectorBatchSequential = R6Class(
     optimization_path = function(inst, include_uhash = FALSE) {
       archive = inst$archive
       if (archive$n_batch == 0L) {
-        stop("No results stored in archive")
+        error_input("No results stored in the archive.")
       }
       uhash = if (include_uhash) "uhash" else NULL
       res = archive$data[, head(.SD, 1), by = get("batch_nr")]
