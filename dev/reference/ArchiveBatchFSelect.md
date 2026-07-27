@@ -313,7 +313,13 @@ Printer.
 
 #### Usage
 
-    ArchiveBatchFSelect$print()
+    ArchiveBatchFSelect$print(...)
+
+#### Arguments
+
+- `...`:
+
+  (ignored).
 
 ------------------------------------------------------------------------
 

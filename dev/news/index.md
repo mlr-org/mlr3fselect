@@ -4,6 +4,16 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix:
+  [`as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html)
+  on an `EnsembleFSResult` accepts the documented `benchmark_result`
+  argument now to omit the task, learner and resampling columns
+  ([\#190](https://github.com/mlr-org/mlr3fselect/issues/190)).
+- fix: The `$print()` methods of `ArchiveBatchFSelect`,
+  `ArchiveAsyncFSelect`, `ArchiveAsyncFSelectFrozen`, `AutoFSelector`
+  and `FSelector` errored with `unused argument` when arguments such as
+  `digits` were passed
+  ([\#190](https://github.com/mlr-org/mlr3fselect/issues/190)).
 - fix: `fs("rfecv")` had the same label as `fs("rfe")`, so both were
   indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page
   also instructed to construct it with `fs("rfe")`

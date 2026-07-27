@@ -337,15 +337,23 @@ The log-likelihood of the final model.
 
 #### Returns
 
-`logLik`. Printer.
+`logLik`.
 
 ------------------------------------------------------------------------
 
 ### `AutoFSelector$print()`
 
+Printer.
+
 #### Usage
 
-    AutoFSelector$print()
+    AutoFSelector$print(...)
+
+#### Arguments
+
+- `...`:
+
+  (ignored).
 
 ------------------------------------------------------------------------
 

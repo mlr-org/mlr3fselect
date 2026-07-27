@@ -176,7 +176,13 @@ Print method.
 
 #### Usage
 
-    FSelector$print()
+    FSelector$print(...)
+
+#### Arguments
+
+- `...`:
+
+  (ignored).
 
 #### Returns
 
