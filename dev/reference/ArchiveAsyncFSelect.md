@@ -292,7 +292,7 @@ multi-crit optimization, the Pareto set / front.
 
 #### Usage
 
-    ArchiveAsyncFSelect$best(n_select = 1, ties_method = "least_features")
+    ArchiveAsyncFSelect$best(n_select = 1, ties_method = NULL)
 
 #### Arguments
 
@@ -305,7 +305,8 @@ multi-crit optimization, the Pareto set / front.
 
   (`character(1L)`)  
   Method to break ties when multiple points have the same score. Either
-  `"least_features"` (default) or `"random"`. Ignored for multi-crit
+  `"least_features"` or `"random"`. If `NULL` (default), the global ties
+  method set during initialization is used. Ignored for multi-crit
   optimization. If `n_select > 1L`, the tie method is ignored and the
   first point is returned.
 

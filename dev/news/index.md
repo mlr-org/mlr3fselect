@@ -62,6 +62,12 @@
   task, domain and search space of the instance when the feature
   selection was aborted because the first selected feature was a shadow
   variable ([\#183](https://github.com/mlr-org/mlr3fselect/issues/183)).
+- fix: `ArchiveBatchFSelect$best()` and `ArchiveAsyncFSelect$best()`
+  returned an empty table or a row of missing values when a single score
+  in the archive was `NA`. Missing scores are now skipped.
+  `ArchiveAsyncFSelect$best()` also ignored the `ties_method` set during
+  construction
+  ([\#177](https://github.com/mlr-org/mlr3fselect/issues/177)).
 - fix: The `mlr3fselect.svm_rfe` callback accepted support vector
   machines without a `type` or `kernel` setting, although only
   `type = "C-classification"` and `kernel = "linear"` are supported. The

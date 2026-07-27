@@ -297,7 +297,7 @@ The <code>uhash</code> value to filter for.</p></dd>
 For single-crit optimization, the solution that minimizes / maximizes the objective function.
 For multi-crit optimization, the Pareto set / front.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">best</span><span class="op">(</span>n_select <span class="op">=</span> <span class="fl">1</span>, ties_method <span class="op">=</span> <span class="st">"least_features"</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ArchiveAsyncFSelect</span><span class="op">$</span><span class="fu">best</span><span class="op">(</span>n_select <span class="op">=</span> <span class="fl">1</span>, ties_method <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>n_select</code></dt>
@@ -308,7 +308,8 @@ Ignored for multi-crit optimization.</p></dd>
       <dt><code>ties_method</code></dt>
 <dd><p>(<code>character(1L)</code>)<br>
 Method to break ties when multiple points have the same score.
-Either <code>"least_features"</code> (default) or <code>"random"</code>.
+Either <code>"least_features"</code> or <code>"random"</code>.
+If <code>NULL</code> (default), the global ties method set during initialization is used.
 Ignored for multi-crit optimization.
 If <code>n_select &gt; 1L</code>, the tie method is ignored and the first point is returned.</p></dd>
 
