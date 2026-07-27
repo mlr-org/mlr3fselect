@@ -35,6 +35,39 @@ test_that("svm_rfe callbacks works", {
   expect_list(archive$importance, types = "numeric")
 })
 
+test_that("svm_rfe callback checks the configuration of the svm", {
+  skip_if_not_installed("mlr3learners")
+  skip_if_not_installed("e1071")
+  requireNamespace("mlr3learners")
+
+  run = function(learner, task = tsk("sonar")) {
+    instance = fsi(
+      task = task,
+      learner = learner,
+      resampling = rsmp("holdout"),
+      measures = msr("classif.ce"),
+      terminator = trm("none"),
+      callbacks = clbk("mlr3fselect.svm_rfe"),
+      store_models = TRUE
+    )
+    fs("rfe", feature_number = 5, n_features = 10)$optimize(instance)
+  }
+
+  # an unset type and kernel must not pass the check
+  expect_error(run(lrn("classif.svm")), "Only SVMs with")
+  expect_error(run(lrn("classif.svm", type = "C-classification")), "Only SVMs with")
+  expect_error(
+    run(lrn("classif.svm", type = "C-classification", kernel = "radial")),
+    "Only SVMs with"
+  )
+
+  # the weights of the hyperplane are only defined for binary classification
+  expect_error(
+    run(lrn("classif.svm", type = "C-classification", kernel = "linear"), tsk("penguins")),
+    "only works on binary classification tasks"
+  )
+})
+
 test_that("one_se_rule callback works", {
   score_design = data.table(
     score = c(0.1, 0.1, 0.58, 0.6),
