@@ -214,7 +214,7 @@ EnsembleFSResult = R6Class(
 
       # check if `inner_measure` is an `mlr3::Measure`
       if (which == "inner" && is.null(private$.inner_measure)) {
-        stop("No inner_measure was defined during initialization")
+        error_input("No `inner_measure` was defined during initialization.")
       }
 
       private$.active_measure = which
