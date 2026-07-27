@@ -98,7 +98,7 @@ FSelector = R6Class(
     #' Set of control parameters.
     param_set = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.param_set)) {
-        stop("$param_set is read-only.")
+        error_input("`$param_set` is read-only.")
       }
       private$.param_set
     },
@@ -108,7 +108,7 @@ FSelector = R6Class(
     #' Must be a subset of [`mlr_reflections$fselect_properties`][mlr3::mlr_reflections].
     properties = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.properties)) {
-        stop("$properties is read-only.")
+        error_input("`$properties` is read-only.")
       }
       private$.properties
     },
@@ -118,7 +118,7 @@ FSelector = R6Class(
     #' Note that these packages will be loaded via [requireNamespace()], and are not attached.
     packages = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.packages)) {
-        stop("$packages is read-only.")
+        error_input("`$packages` is read-only.")
       }
       private$.packages
     },
@@ -128,7 +128,7 @@ FSelector = R6Class(
     #' Can be used in tables, plot and text output instead of the ID.
     label = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.param_set)) {
-        stop("$label is read-only.")
+        error_input("`$label` is read-only.")
       }
       private$.label
     },
@@ -138,14 +138,14 @@ FSelector = R6Class(
     #' The referenced help package can be opened via method `$help()`.
     man = function(rhs) {
       if (!missing(rhs) && !identical(rhs, private$.man)) {
-        stop("$man is read-only.")
+        error_input("`$man` is read-only.")
       }
       private$.man
     }
   ),
 
   private = list(
-    .optimize = function(inst) stop("abstract"),
+    .optimize = function(inst) error_bbotk("`.optimize()` is abstract and must be implemented by the subclass."),
 
     .assign_result = function(inst) {
       assert_fselect_instance(inst)

@@ -19,16 +19,25 @@ test_that("as.data.table objects parameter", {
   expect_list(tab$object, "FSelector", any.missing = FALSE)
 })
 
-test_that("print methods accept arguments", {
-  instance = fselect(
-    fselector = fs("random_search", batch_size = 2),
-    task = TEST_MAKE_TSK(),
-    learner = lrn("regr.rpart"),
-    resampling = rsmp("cv", folds = 3),
-    measures = msr("dummy"),
-    term_evals = 2
-  )
+test_that("read-only bindings of a fselector raise a structured error", {
+  fselector = fs("random_search")
 
-  expect_output(print(instance$archive, digits = 3))
-  expect_output(print(fs("random_search"), digits = 3))
+  expect_error(fselector$param_set <- ps(), class = "Mlr3ErrorInput")
+  expect_error(fselector$properties <- "single-crit", class = "Mlr3ErrorInput")
+  expect_error(fselector$packages <- "mlr3", class = "Mlr3ErrorInput")
+  expect_error(fselector$label <- "other", class = "Mlr3ErrorInput")
+  expect_error(fselector$man <- "other", class = "Mlr3ErrorInput")
+})
+  
+test_that("reloading the package does not duplicate reflections", {
+  bbotk_reflections = utils::getFromNamespace("bbotk_reflections", ns = "bbotk")
+  mlr_reflections = utils::getFromNamespace("mlr_reflections", ns = "mlr3")
+
+  register_reflections()
+  register_reflections()
+
+  expect_equal(sum(bbotk_reflections$optimizer_properties == "requires_model"), 1L)
+  expect_equal(sum(mlr_reflections$loaded_packages == "mlr3fselect"), 1L)
+  walk(mlr_reflections$task_col_roles, function(col_roles) {
+    expect_equal(sum(col_roles == "always_included"), 1L)
 })
