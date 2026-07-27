@@ -336,3 +336,41 @@ test_that("hash and phash are stable and identical", {
   at_2$id = "other"
   expect_false(at_1$hash == at_2$hash)
 })
+
+test_that("predict_type is set on the final model", {
+  at = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+
+  # setting the predict type before training only changes the auto fselector
+  at$predict_type = "prob"
+  expect_equal(at$predict_type, "prob")
+
+  at$train(tsk("iris"))
+  expect_equal(at$model$learner$predict_type, "prob")
+
+  # setting the predict type after training also changes the final model
+  at$predict_type = "response"
+  expect_equal(at$predict_type, "response")
+  expect_equal(at$model$learner$predict_type, "response")
+
+  expect_error(at$predict_type <- "se", "does not support predict type")
+})
+
+test_that("predict_type is used for the predictions", {
+  at = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+  at$predict_type = "prob"
+  at$train(tsk("iris"))
+
+  expect_matrix(at$predict(tsk("iris"))$prob)
+})
