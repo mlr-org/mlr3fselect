@@ -5,6 +5,9 @@
 #'
 #' @description
 #' This [CallbackBatchFSelect] writes the [mlr3::BenchmarkResult] after each batch to disk.
+#' The `path` must be set, e.g. `clbk("mlr3fselect.backup", path = "backup.rds")`.
+#' The benchmark result is written to a temporary file first and then renamed,
+#' so that a crash while writing does not destroy the backup of the previous batch.
 #'
 #' @examples
 #' clbk("mlr3fselect.backup", path = "backup.rds")
@@ -27,16 +30,16 @@ load_callback_backup = function() {
     man = "mlr3fselect::mlr3fselect.backup",
     on_optimization_begin = function(callback, context) {
       if (is.null(callback$state$path)) {
-        callback$state$path = "bmr.rds"
+        stopf("The `mlr3fselect.backup` callback requires a `path`, e.g. `clbk('mlr3fselect.backup', path = 'bmr.rds')`.")
       }
-      assert_path_for_output(callback$state$path)
+      assert_path_for_output(callback$state$path, overwrite = TRUE)
     },
 
     on_optimizer_after_eval = function(callback, context) {
-      if (file.exists(callback$state$path)) {
-        unlink(callback$state$path)
-      }
-      saveRDS(context$instance$archive$benchmark_result, callback$state$path)
+      # write to a temporary file first so that a crash during writing does not destroy the previous backup
+      path_tmp = paste0(callback$state$path, ".tmp")
+      saveRDS(context$instance$archive$benchmark_result, path_tmp)
+      file.rename(path_tmp, callback$state$path)
     }
   )
 }

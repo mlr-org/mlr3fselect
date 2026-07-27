@@ -1,6 +1,8 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: The `mlr3fselect.backup` callback deleted the backup of the previous batch before it wrote the new one, so a crash in between lost the complete run. The benchmark result is now written to a temporary file and renamed afterwards (#188).
+* BREAKING CHANGE: The `mlr3fselect.backup` callback requires the `path` argument now. Previously it wrote a `bmr.rds` file into the working directory of the user (#188).
 * fix: `as.data.table()` on an `EnsembleFSResult` accepts the documented `benchmark_result` argument now to omit the task, learner and resampling columns (#190).
 * fix: The `$print()` methods of `ArchiveBatchFSelect`, `ArchiveAsyncFSelect`, `ArchiveAsyncFSelectFrozen`, `AutoFSelector` and `FSelector` errored with `unused argument` when arguments such as `digits` were passed (#190).
 * fix: `fs("rfecv")` had the same label as `fs("rfe")`, so both were indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page also instructed to construct it with `fs("rfe")` (#191).
