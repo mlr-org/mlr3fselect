@@ -83,7 +83,7 @@ ArchiveAsyncFSelectFrozen = R6Class(
     #' Printer.
     #'
     #' @param ... (ignored).
-    print = function() {
+    print = function(...) {
       cat_cli(cli_h1("{.cls {class(self)[1L]}} with {.val {self$n_evals}} evaluations"))
       print(
         as.data.table(

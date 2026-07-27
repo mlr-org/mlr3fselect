@@ -188,7 +188,7 @@ AutoFSelector = R6Class(
     #' @return Named `numeric()`.
     importance = function() {
       if ("importance" %nin% self$instance_args$learner$properties) {
-        stopf("Learner ''%s' cannot calculate important scores.", self$instance_args$learner$id)
+        stopf("Learner '%s' cannot calculate importance scores.", self$instance_args$learner$id)
       }
       if (is.null(self$model$learner$model)) {
         self$instance_args$learner$importance()
@@ -204,7 +204,7 @@ AutoFSelector = R6Class(
     #' @return `character()`.
     selected_features = function() {
       if ("selected_features" %nin% self$instance_args$learner$properties) {
-        stopf("Learner ''%s' cannot select features.", self$instance_args$learner$id)
+        stopf("Learner '%s' cannot select features.", self$instance_args$learner$id)
       }
       if (is.null(self$model$learner$model)) {
         self$instance_args$learner$selected_features()
@@ -243,9 +243,11 @@ AutoFSelector = R6Class(
       }
     },
 
+    #' @description
     #' Printer.
+    #'
     #' @param ... (ignored).
-    print = function() {
+    print = function(...) {
       msg_h = if (is.null(self$label) || is.na(self$label)) "" else paste0(": ", self$label)
       model = if (is.null(self$model)) "-" else class(self$model)[1L]
 
@@ -272,11 +274,15 @@ AutoFSelector = R6Class(
   active = list(
     #' @field archive ([ArchiveBatchFSelect)\cr
     #' Returns [FSelectInstanceBatchSingleCrit] archive.
-    archive = function() self$fselect_instance$archive,
+    archive = function(rhs) {
+      assert_ro_binding(rhs)
+      self$fselect_instance$archive
+    },
 
     #' @field learner ([mlr3::Learner])\cr
     #' Trained learner.
-    learner = function() {
+    learner = function(rhs) {
+      assert_ro_binding(rhs)
       # if there is no trained learner, we return the one in instance args
       if (is.null(self$model$learner$model)) {
         self$instance_args$learner
@@ -287,11 +293,17 @@ AutoFSelector = R6Class(
 
     #' @field fselect_instance ([FSelectInstanceBatchSingleCrit])\cr
     #' Internally created feature selection instance with all intermediate results.
-    fselect_instance = function() self$model$fselect_instance,
+    fselect_instance = function(rhs) {
+      assert_ro_binding(rhs)
+      self$model$fselect_instance
+    },
 
     #' @field fselect_result ([data.table::data.table])\cr
     #' Short-cut to `$result` from [FSelectInstanceBatchSingleCrit].
-    fselect_result = function() self$fselect_instance$result,
+    fselect_result = function(rhs) {
+      assert_ro_binding(rhs)
+      self$fselect_instance$result
+    },
 
     #' @field predict_type (`character(1)`)\cr
     #' Stores the currently active predict type, e.g. `"response"`.
@@ -304,19 +316,18 @@ AutoFSelector = R6Class(
         stopf("Learner '%s' does not support predict type '%s'", self$id, rhs)
       }
 
-      # Catches 'Error: Field/Binding is read-only' bug
-      tryCatch(
-        {
-          self$model$learner$predict_type = rhs
-        },
-        error = function(cond) {}
-      )
+      # the final model only exists after training
+      if (!is.null(self$model$learner)) {
+        self$model$learner$predict_type = rhs
+      }
 
       private$.predict_type = rhs
     },
 
     #' @field hash (`character(1)`)\cr
     #' Hash (unique identifier) for this object.
+    #' Covers the id, the parameter values, the predict type, the fallback learner, the parallel predict flag,
+    #' the [FSelector], the arguments of the [FSelectInstanceBatchSingleCrit] and the store fselect instance flag.
     hash = function(rhs) {
       assert_ro_binding(rhs)
       calculate_hash(
@@ -333,9 +344,10 @@ AutoFSelector = R6Class(
     },
 
     #' @field phash (`character(1)`)\cr
-    #' Hash (unique identifier) for this partial object,
-    #' excluding some components which are varied systematically during tuning (parameter values)
-    #' or feature selection (feature names).
+    #' Hash (unique identifier) for this partial object.
+    #' The [AutoFSelector] has no components that are varied systematically during tuning or feature selection,
+    #' because the search space is created internally from the task.
+    #' The partial hash is therefore deliberately identical to `$hash`.
     phash = function(rhs) {
       assert_ro_binding(rhs)
       self$hash
@@ -349,29 +361,22 @@ AutoFSelector = R6Class(
       ia$task = task$clone()
 
       # check if task contains all row ids required for instantiated resampling
+      # `$train_set()` and `$test_set()` are used because the layout of `$instance` differs between resamplings
       if (ia$resampling$is_instantiated) {
-        imap(ia$resampling$instance$train, function(x, i) {
-          if (!test_subset(x, task$row_ids)) {
-            stopf(
-              "Train set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
-              i,
-              ia$resampling$id,
-              task$id,
-              paste(setdiff(x, task$row_ids), collapse = ", ")
-            )
-          }
-        })
-
-        imap(ia$resampling$instance$test, function(x, i) {
-          if (!test_subset(x, task$row_ids)) {
-            stopf(
-              "Test set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
-              i,
-              ia$resampling$id,
-              task$id,
-              paste(setdiff(x, task$row_ids), collapse = ", ")
-            )
-          }
+        walk(seq_len(ia$resampling$iters), function(i) {
+          sets = list(Train = ia$resampling$train_set(i), Test = ia$resampling$test_set(i))
+          imap(sets, function(row_ids, set_type) {
+            if (!test_subset(row_ids, task$row_ids)) {
+              stopf(
+                "%s set %i of inner resampling '%s' contains row ids not present in task '%s': {%s}",
+                set_type,
+                i,
+                ia$resampling$id,
+                task$id,
+                paste(setdiff(row_ids, task$row_ids), collapse = ", ")
+              )
+            }
+          })
         })
       }
 
@@ -391,6 +396,9 @@ AutoFSelector = R6Class(
 
       learner = ia$learner$clone(deep = TRUE)
       task = task$clone()
+
+      # the final model produces the predictions of the auto fselector
+      learner$predict_type = private$.predict_type
 
       # disable timeout to allow train on full data set without time limit
       # timeout during optimization is not affected

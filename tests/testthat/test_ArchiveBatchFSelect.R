@@ -492,3 +492,11 @@ test_that("local ties method works with batches", {
     identical_to = "x1"
   )
 })
+
+test_that("as.data.table returns n_features as an integer column", {
+  instance = TEST_MAKE_INST_1D()
+  fs("random_search", batch_size = 2)$optimize(instance)
+
+  tab = as.data.table(instance$archive)
+  expect_integer(tab$n_features, any.missing = FALSE, len = nrow(tab))
+})
