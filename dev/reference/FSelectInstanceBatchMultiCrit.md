@@ -247,10 +247,10 @@ fselector$optimize(instance)
 #>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
 #> 2:                                                    flipper_length          7
-#>    classif.ce time_train
-#>         <num>      <num>
-#> 1: 0.07261632      0.003
-#> 2: 0.19471142      0.002
+#>    classif.ce  time_train
+#>         <num>       <num>
+#> 1: 0.07261632 0.003000000
+#> 2: 0.19471142 0.002666667
 
 # Optimal feature sets
 instance$result_feature_set
@@ -272,10 +272,10 @@ as.data.table(instance$archive)
 #> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce  time_train runtime_learners           timestamp batch_nr
 #>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.07261632 0.003000000            0.017 2026-07-27 09:38:32        1
-#> 2: 0.07261632 0.008333333            0.033 2026-07-27 09:38:32        1
-#> 3: 0.25858124 0.002666667            0.014 2026-07-27 09:38:32        2
-#> 4: 0.19471142 0.002000000            0.012 2026-07-27 09:38:32        2
+#> 1: 0.07261632 0.003000000            0.035 2026-07-27 09:41:13        1
+#> 2: 0.07261632 0.003666667            0.019 2026-07-27 09:41:13        1
+#> 3: 0.25858124 0.002666667            0.031 2026-07-27 09:41:13        2
+#> 4: 0.19471142 0.002666667            0.014 2026-07-27 09:41:13        2
 #>    warnings errors
 #>       <int>  <int>
 #> 1:        0      0

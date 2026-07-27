@@ -325,10 +325,10 @@ as.data.table(instance$archive)
 #> 4:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.15400458            0.019 2026-07-27 09:38:33        1        0      0
-#> 2: 0.19768624            0.013 2026-07-27 09:38:33        1        0      0
-#> 3: 0.06112382            0.018 2026-07-27 09:38:33        2        0      0
-#> 4: 0.18893974            0.012 2026-07-27 09:38:33        2        0      0
+#> 1: 0.15400458            0.017 2026-07-27 09:41:14        1        0      0
+#> 2: 0.19768624            0.018 2026-07-27 09:41:14        1        0      0
+#> 3: 0.06112382            0.019 2026-07-27 09:41:14        2        0      0
+#> 4: 0.18893974            0.033 2026-07-27 09:41:14        2        0      0
 #>                                                      features n_features
 #>                                                        <list>     <list>
 #> 1:                  bill_depth,flipper_length,island,sex,year          5
