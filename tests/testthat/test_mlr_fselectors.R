@@ -28,7 +28,7 @@ test_that("read-only bindings of a fselector raise a structured error", {
   expect_error(fselector$label <- "other", class = "Mlr3ErrorInput")
   expect_error(fselector$man <- "other", class = "Mlr3ErrorInput")
 })
-  
+
 test_that("reloading the package does not duplicate reflections", {
   bbotk_reflections = utils::getFromNamespace("bbotk_reflections", ns = "bbotk")
   mlr_reflections = utils::getFromNamespace("mlr_reflections", ns = "mlr3")
@@ -40,4 +40,5 @@ test_that("reloading the package does not duplicate reflections", {
   expect_equal(sum(mlr_reflections$loaded_packages == "mlr3fselect"), 1L)
   walk(mlr_reflections$task_col_roles, function(col_roles) {
     expect_equal(sum(col_roles == "always_included"), 1L)
+  })
 })
