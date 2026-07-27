@@ -52,7 +52,7 @@ The \href{https://mlr-org.com/gallery.html}{gallery} features a collection of ca
 
 This \link{FSelector} can be instantiated with the associated sugar function \code{\link[=fs]{fs()}}:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("rfe")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{fs("rfecv")
 }\if{html}{\out{</div>}}
 }
 

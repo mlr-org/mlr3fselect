@@ -84,11 +84,20 @@ One of \code{"least_features"} (default) or \code{"random"}.}
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="Archive" data-id="help"><a href='../../bbotk/html/Archive.html#method-Archive-help'><code>bbotk::Archive$help()</code></a></span></li>
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="clear"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-clear'><code>bbotk::ArchiveAsync$clear()</code></a></span></li>
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="data_with_state"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-data_with_state'><code>bbotk::ArchiveAsync$data_with_state()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="fail_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-fail_point'><code>bbotk::ArchiveAsync$fail_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="fail_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-fail_points'><code>bbotk::ArchiveAsync$fail_points()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="finish_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-finish_point'><code>bbotk::ArchiveAsync$finish_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="finish_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-finish_points'><code>bbotk::ArchiveAsync$finish_points()</code></a></span></li>
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="nds_selection"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-nds_selection'><code>bbotk::ArchiveAsync$nds_selection()</code></a></span></li>
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="pop_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-pop_point'><code>bbotk::ArchiveAsync$pop_point()</code></a></span></li>
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_failed_point'><code>bbotk::ArchiveAsync$push_failed_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_failed_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_failed_points'><code>bbotk::ArchiveAsync$push_failed_points()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_finished_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_finished_point'><code>bbotk::ArchiveAsync$push_finished_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_finished_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_finished_points'><code>bbotk::ArchiveAsync$push_finished_points()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_point'><code>bbotk::ArchiveAsync$push_point()</code></a></span></li>
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_points'><code>bbotk::ArchiveAsync$push_points()</code></a></span></li>
   <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_point"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_running_point'><code>bbotk::ArchiveAsync$push_running_point()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="bbotk" data-topic="ArchiveAsync" data-id="push_running_points"><a href='../../bbotk/html/ArchiveAsync.html#method-ArchiveAsync-push_running_points'><code>bbotk::ArchiveAsync$push_running_points()</code></a></span></li>
 </ul>
 </details>}}
 \if{html}{\out{<hr>}}
@@ -125,8 +134,6 @@ The option \code{"least_features"} (default) selects the feature set with the le
 If there are multiple best feature sets with the same number of features, one is selected randomly.
 The \code{random} method returns a random feature set from the best feature sets.
 Ignored if multiple measures are used.}
-      \item{\code{check_values}}{(\code{logical(1)})\cr
-If \code{TRUE} (default), feature subsets are check for validity.}
     }
     \if{html}{\out{</div>}}
   }
@@ -232,7 +239,14 @@ The \code{uhash} value to filter for.}
   Printer.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{ArchiveAsyncFSelect$print()}
+    \preformatted{ArchiveAsyncFSelect$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
     \if{html}{\out{</div>}}
   }
 }

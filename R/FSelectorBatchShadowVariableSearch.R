@@ -78,7 +78,7 @@ FSelectorBatchShadowVariableSearch = R6Class(
     #' @return [data.table::data.table]
     optimization_path = function(inst) {
       if (inst$archive$n_batch == 0L) {
-        stop("No results stored in archive")
+        error_input("No results stored in the archive.")
       }
 
       # we have to use the best method to get the same tie breaking as in the optimize method
@@ -134,7 +134,7 @@ FSelectorBatchShadowVariableSearch = R6Class(
         if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
           # stop if the first selected feature is a shadow variable
           if (archive$n_batch == 1) {
-            stop("The first selected feature is a shadow variable.")
+            error_mlr3("The first selected feature is a shadow variable.")
           }
 
           # remove last batch with selected shadow variable from archive

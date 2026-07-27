@@ -24,7 +24,7 @@ URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
 BugReports: https://github.com/mlr-org/mlr3fselect/issues
 Depends:
-    mlr3 (>= 1.0.1),
+    mlr3 (>= 1.7.1.9000),
     R (>= 3.1.0)
 Imports:
     bbotk (>= 1.9.0),
@@ -46,10 +46,11 @@ Suggests:
     processx,
     redux,
     rpart,
-    rush (>= 1.0.0),
+    rush (>= 1.2.1.9000),
     testthat (>= 3.0.0)
 Remotes:
-    mlr-org/mlr3
+    mlr-org/mlr3,
+    mlr-org/rush
 Config/testthat/edition: 3
 Config/testthat/parallel: false
 Encoding: UTF-8

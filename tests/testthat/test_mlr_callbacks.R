@@ -13,6 +13,39 @@ test_that("backup callback works", {
 
   expect_file_exists(file)
   expect_benchmark_result(readRDS(file))
+  expect_false(file.exists(paste0(file, ".tmp")))
+})
+
+test_that("backup callback overwrites an existing backup", {
+  file = tempfile(fileext = ".rds")
+  saveRDS("old backup", file)
+
+  fselect(
+    fselector = fs("random_search", batch_size = 2),
+    task = tsk("diabetes"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    term_evals = 4,
+    callbacks = clbk("mlr3fselect.backup", path = file)
+  )
+
+  expect_benchmark_result(readRDS(file))
+})
+
+test_that("backup callback requires a path", {
+  expect_error(
+    fselect(
+      fselector = fs("random_search", batch_size = 2),
+      task = tsk("diabetes"),
+      learner = lrn("classif.rpart"),
+      resampling = rsmp("cv", folds = 3),
+      measures = msr("classif.ce"),
+      term_evals = 4,
+      callbacks = clbk("mlr3fselect.backup")
+    ),
+    "requires a `path`"
+  )
 })
 
 test_that("svm_rfe callbacks works", {
