@@ -316,13 +316,10 @@ AutoFSelector = R6Class(
         stopf("Learner '%s' does not support predict type '%s'", self$id, rhs)
       }
 
-      # Catches 'Error: Field/Binding is read-only' bug
-      tryCatch(
-        {
-          self$model$learner$predict_type = rhs
-        },
-        error = function(cond) {}
-      )
+      # the final model only exists after training
+      if (!is.null(self$model$learner)) {
+        self$model$learner$predict_type = rhs
+      }
 
       private$.predict_type = rhs
     },
@@ -399,6 +396,9 @@ AutoFSelector = R6Class(
 
       learner = ia$learner$clone(deep = TRUE)
       task = task$clone()
+
+      # the final model produces the predictions of the auto fselector
+      learner$predict_type = private$.predict_type
 
       # disable timeout to allow train on full data set without time limit
       # timeout during optimization is not affected
