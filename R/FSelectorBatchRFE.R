@@ -277,7 +277,12 @@ rfe_workhorse = function(inst, subsets, recursive, aggregation = raw_importance,
       archive$data[list(archive$n_batch), "importance" := importances, on = "batch_nr"]
     } else {
       # log importance to archive
-      set(archive$data, archive$n_evals, "importance", map(importances, function(x) x[seq(j)]))
+      # the batch holds one row per fold, so the truncated importance of each fold is assigned to the whole batch
+      archive$data[
+        list(archive$n_batch),
+        "importance" := map(importances, function(x) x[seq(j)]),
+        on = "batch_nr"
+      ]
     }
   }
   if (folds > 1) {
