@@ -131,12 +131,15 @@ Stores the currently active predict type, e.g. \code{"response"}.
 Must be an element of \verb{$predict_types}.}
 
     \item{\code{hash}}{(\code{character(1)})\cr
-Hash (unique identifier) for this object.}
+Hash (unique identifier) for this object.
+Covers the id, the parameter values, the predict type, the fallback learner, the parallel predict flag,
+the \link{FSelector}, the arguments of the \link{FSelectInstanceBatchSingleCrit} and the store fselect instance flag.}
 
     \item{\code{phash}}{(\code{character(1)})\cr
-Hash (unique identifier) for this partial object,
-excluding some components which are varied systematically during tuning (parameter values)
-or feature selection (feature names).}
+Hash (unique identifier) for this partial object.
+The \link{AutoFSelector} has no components that are varied systematically during tuning or feature selection,
+because the search space is created internally from the task.
+The partial hash is therefore deliberately identical to \verb{$hash}.}
   }
   \if{html}{\out{</div>}}
 }
