@@ -274,11 +274,15 @@ AutoFSelector = R6Class(
   active = list(
     #' @field archive ([ArchiveBatchFSelect)\cr
     #' Returns [FSelectInstanceBatchSingleCrit] archive.
-    archive = function() self$fselect_instance$archive,
+    archive = function(rhs) {
+      assert_ro_binding(rhs)
+      self$fselect_instance$archive
+    },
 
     #' @field learner ([mlr3::Learner])\cr
     #' Trained learner.
-    learner = function() {
+    learner = function(rhs) {
+      assert_ro_binding(rhs)
       # if there is no trained learner, we return the one in instance args
       if (is.null(self$model$learner$model)) {
         self$instance_args$learner
@@ -289,11 +293,17 @@ AutoFSelector = R6Class(
 
     #' @field fselect_instance ([FSelectInstanceBatchSingleCrit])\cr
     #' Internally created feature selection instance with all intermediate results.
-    fselect_instance = function() self$model$fselect_instance,
+    fselect_instance = function(rhs) {
+      assert_ro_binding(rhs)
+      self$model$fselect_instance
+    },
 
     #' @field fselect_result ([data.table::data.table])\cr
     #' Short-cut to `$result` from [FSelectInstanceBatchSingleCrit].
-    fselect_result = function() self$fselect_instance$result,
+    fselect_result = function(rhs) {
+      assert_ro_binding(rhs)
+      self$fselect_instance$result
+    },
 
     #' @field predict_type (`character(1)`)\cr
     #' Stores the currently active predict type, e.g. `"response"`.
