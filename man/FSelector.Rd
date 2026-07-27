@@ -151,7 +151,14 @@ The referenced help package can be opened via method \verb{$help()}.}
   Print method.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{FSelector$print()}
+    \preformatted{FSelector$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{(ignored).}
+    }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{

@@ -84,3 +84,18 @@ test_that("fselect interface is equal to FSelectInstanceAsyncMultiCrit", {
 
   expect_set_equal(fselect_args, instance_args)
 })
+
+test_that("fselect warns when rush is passed to a batch fselector", {
+  expect_warning(
+    fselect(
+      fselector = fs("random_search", batch_size = 1),
+      task = TEST_MAKE_TSK(),
+      learner = lrn("regr.rpart"),
+      resampling = rsmp("cv", folds = 3),
+      measures = msr("dummy"),
+      term_evals = 1,
+      rush = "not a rush instance"
+    ),
+    "`rush` argument is ignored"
+  )
+})
