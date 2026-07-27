@@ -260,7 +260,7 @@ For single-crit optimization, the solution that minimizes / maximizes the object
 For multi-crit optimization, the Pareto set / front.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{ArchiveAsyncFSelect$best(n_select = 1, ties_method = "least_features")}
+    \preformatted{ArchiveAsyncFSelect$best(n_select = 1, ties_method = NULL)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -271,7 +271,8 @@ Amount of points to select.
 Ignored for multi-crit optimization.}
       \item{\code{ties_method}}{(\code{character(1L)})\cr
 Method to break ties when multiple points have the same score.
-Either \code{"least_features"} (default) or \code{"random"}.
+Either \code{"least_features"} or \code{"random"}.
+If \code{NULL} (default), the global ties method set during initialization is used.
 Ignored for multi-crit optimization.
 If \code{n_select > 1L}, the tie method is ignored and the first point is returned.}
     }

@@ -185,13 +185,17 @@ ArchiveBatchFSelect = R6Class(
 
       if (self$codomain$target_length == 1L) {
         y = tab[[self$cols_y]] * -self$codomain$direction
+        if (all(is.na(y))) {
+          return(tab[0L])
+        }
         if (ties_method == "least_features") {
-          ii = which(y == max(y))
+          # NA scores never equal the maximum and are dropped by which()
+          ii = which(y == max(y, na.rm = TRUE))
           tab = tab[ii]
           ii = which_min(rowSums(tab[, self$cols_x, with = FALSE]), ties_method = "random")
           tab[ii]
         } else {
-          ii = which_max(y, ties_method = "random")
+          ii = which_max(y, ties_method = "random", na_rm = TRUE)
           tab[ii]
         }
       } else {
