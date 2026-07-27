@@ -319,3 +319,20 @@ test_that("instantiated resampling with foreign row ids is rejected", {
   expect_error(run("cv", folds = 3), "set 1 of inner resampling 'cv' contains row ids")
   expect_error(run("holdout"), "set 1 of inner resampling 'holdout' contains row ids")
 })
+
+test_that("hash and phash are stable and identical", {
+  at_1 = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+  at_2 = at_1$clone(deep = TRUE)
+
+  expect_equal(at_1$hash, at_2$hash)
+  expect_equal(at_1$phash, at_1$hash)
+
+  at_2$id = "other"
+  expect_false(at_1$hash == at_2$hash)
+})
