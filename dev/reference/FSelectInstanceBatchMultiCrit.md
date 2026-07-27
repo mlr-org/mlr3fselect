@@ -242,30 +242,18 @@ fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
 #> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#> 2:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
-#> 3:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>                                                             features n_features
 #>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#> 2:                                                       bill_length          7
-#> 3:                                                    flipper_length          7
 #>    classif.ce  time_train
 #>         <num>       <num>
-#> 1: 0.07261632 0.003000000
-#> 2: 0.25858124 0.002000000
-#> 3: 0.19471142 0.002666667
+#> 1: 0.07261632 0.002333333
 
 # Optimal feature sets
 instance$result_feature_set
 #> [[1]]
 #> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"
 #> [5] "island"         "sex"            "year"          
-#> 
-#> [[2]]
-#> [1] "bill_length"
-#> 
-#> [[3]]
-#> [1] "flipper_length"
 #> 
 
 # Inspect all evaluated sets
@@ -278,10 +266,10 @@ as.data.table(instance$archive)
 #> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce  time_train runtime_learners           timestamp batch_nr
 #>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.07261632 0.003000000            0.017 2026-07-27 07:08:52        1
-#> 2: 0.07261632 0.005333333            0.023 2026-07-27 07:08:52        1
-#> 3: 0.25858124 0.002000000            0.011 2026-07-27 07:08:52        2
-#> 4: 0.19471142 0.002666667            0.014 2026-07-27 07:08:52        2
+#> 1: 0.07261632 0.002333333            0.014 2026-07-27 07:12:45        1
+#> 2: 0.07261632 0.008333333            0.033 2026-07-27 07:12:45        1
+#> 3: 0.25858124 0.002666667            0.014 2026-07-27 07:12:45        2
+#> 4: 0.19471142 0.002666667            0.030 2026-07-27 07:12:45        2
 #>    warnings errors
 #>       <int>  <int>
 #> 1:        0      0

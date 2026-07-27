@@ -4,6 +4,11 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `fs("rfe")` and `fs("rfecv")` failed with an internal
+  `data.table` error when `store_benchmark_result = FALSE` was set
+  because the importance scores were read from the benchmark result of
+  the archive
+  ([\#169](https://github.com/mlr-org/mlr3fselect/issues/169)).
 - fix: `fs("rfecv", recursive = FALSE)` failed with an internal
   `data.table` error because the importance scores of all resampling
   iterations were written to a single archive row
