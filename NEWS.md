@@ -2,6 +2,12 @@
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
 * fix: The asynchronous feature selection ignored the `always_included` column role. Columns with this role were excluded from the models instead of being added to every feature subset (#175).
+* fix: The `mlr3fselect.one_se_rule` callback errored on archives with a single evaluation or with missing scores, and wrote the `n_features` column as a list column instead of an integer column (#174).
+* fix: `extract_inner_fselect_results()` added the `iteration` and `fselect_instance` columns to the result of the inner `FSelectInstance` by reference, which created a circular reference between the instance and its own result (#172).
+* fix: `fs("rfe")` and `fs("rfecv")` failed with an internal `data.table` error when `store_benchmark_result = FALSE` was set because the importance scores were read from the benchmark result of the archive (#169).
+* fix: `fs("rfecv", recursive = FALSE)` failed with an internal `data.table` error because the importance scores of all resampling iterations were written to a single archive row (#168).
+* fix: `fs("rfecv")` ignored the direction of the measure and selected the feature set size with the worst mean performance for minimizing measures such as `msr("classif.ce")` or `msr("regr.mse")`.
+  Feature selection results obtained with `fs("rfecv")` and a minimizing measure are invalid and should be recomputed (#167).
 
 # mlr3fselect 1.6.0
 
