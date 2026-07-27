@@ -85,6 +85,53 @@ test_that("learner without importance method throw an error", {
   )
 })
 
+test_that("optimal features are selected with a minimizing measure", {
+  LearnerRegrDebugImportance = R6Class(
+    "LearnerRegrDebugImportance",
+    inherit = LearnerRegrDebug,
+    public = list(
+      importance = function() {
+        c(x2 = 1.4, x1 = 0.8, x3 = 1.2, x4 = 1.1)
+      }
+    )
+  )
+
+  learner = LearnerRegrDebugImportance$new()
+  learner$properties = c(learner$properties, "importance")
+
+  # the three features x2, x3 and x4 have the lowest score
+  score_design = data.table(
+    score = c(2, 1, 4, 3),
+    features = list(
+      c("x1", "x2", "x3", "x4"),
+      c("x2", "x3", "x4"),
+      c("x2", "x3"),
+      "x2"
+    )
+  )
+
+  measure = msr("dummy", score_design = score_design, minimize = TRUE)
+
+  instance = fsi(
+    task = TEST_MAKE_TSK(),
+    learner = learner,
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    terminator = trm("none"),
+    store_models = TRUE
+  )
+
+  optimizer = fs("rfecv", n_features = 1, feature_number = 1)
+  optimizer$optimize(instance)
+  data = as.data.table(instance$archive)
+
+  # number of features in the final run
+  expect_feature_number(data[13, 1:4], n = 4)
+  expect_feature_number(data[14, 1:4], n = 3)
+
+  expect_equal(instance$result$features[[1]], c("x2", "x3", "x4"))
+})
+
 test_that("optimal features are selected", {
   LearnerRegrDebugImportance = R6Class(
     "LearnerRegrDebugImportance",
