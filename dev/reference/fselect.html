@@ -176,7 +176,8 @@ Ignored if multiple measures are used.</p></dd>
 
 <dt id="arg-rush">rush<a class="anchor" aria-label="anchor" href="#arg-rush"></a></dt>
 <dd><p>(<code>Rush</code>)<br>
-If a rush instance is supplied, the optimization runs without batches.</p></dd>
+Rush instance for the asynchronous feature selection.
+Ignored by batch fselectors, which warn when it is set.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -255,10 +256,10 @@ Alternatively, measures can be supplied to <code>as.data.table()</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4:   TRUE    TRUE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.4883721</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    runtime_learners           timestamp batch_nr warnings errors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               &lt;num&gt;              &lt;POSc&gt;    &lt;int&gt;    &lt;int&gt;  &lt;int&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.023 2026-07-27 09:53:18        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.006 2026-07-27 09:53:18        1        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.007 2026-07-27 09:53:18        2        0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.007 2026-07-27 09:53:18        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0.028 2026-07-27 09:56:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:            0.007 2026-07-27 09:56:05        1        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            0.008 2026-07-27 09:56:05        2        0      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:            0.009 2026-07-27 09:56:05        2        0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                 features n_features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                   &lt;list&gt;     &lt;list&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:                          age,insulin,pressure,triceps          4</span>

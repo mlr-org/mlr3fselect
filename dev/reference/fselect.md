@@ -127,7 +127,8 @@ fselect(
 - rush:
 
   (`Rush`)  
-  If a rush instance is supplied, the optimization runs without batches.
+  Rush instance for the asynchronous feature selection. Ignored by batch
+  fselectors, which warn when it is set.
 
 ## Value
 
@@ -246,10 +247,10 @@ as.data.table(instance$archive)
 #> 4:   TRUE    TRUE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.4883721
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.023 2026-07-27 09:53:18        1        0      0
-#> 2:            0.006 2026-07-27 09:53:18        1        0      0
-#> 3:            0.007 2026-07-27 09:53:18        2        0      0
-#> 4:            0.007 2026-07-27 09:53:18        2        0      0
+#> 1:            0.028 2026-07-27 09:56:05        1        0      0
+#> 2:            0.007 2026-07-27 09:56:05        1        0      0
+#> 3:            0.008 2026-07-27 09:56:05        2        0      0
+#> 4:            0.009 2026-07-27 09:56:05        2        0      0
 #>                                                 features n_features
 #>                                                   <list>     <list>
 #> 1:                          age,insulin,pressure,triceps          4
