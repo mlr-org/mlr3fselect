@@ -226,6 +226,9 @@ load_callback_internal_tuning = function() {
 
     on_eval_before_archive = function(callback, context) {
       # extract internal tuned values and aggregate folds
+      # PRIVATE MLR3 API: `$.data$learner_states()` and `$.view` are private fields of `mlr3::ResampleResult`.
+      # There is no public accessor for the learner states. The layout is stable for the mlr3 versions supported
+      # in DESCRIPTION (>= 1.0.1) and must be re-checked on every mlr3 update.
       internal_tuned_values = map(
         context$benchmark_result$resample_results$resample_result,
         function(resample_result) {
