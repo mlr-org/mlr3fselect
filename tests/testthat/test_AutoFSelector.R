@@ -284,3 +284,23 @@ test_that("AutoFSelector works with async fselector", {
   expect_data_table(at$fselect_instance$result, nrows = 1)
   expect_data_table(at$fselect_instance$archive$data, min.rows = 4)
 })
+
+test_that("instantiated resampling with foreign row ids is rejected", {
+  run = function(key, ...) {
+    resampling = rsmp(key, ...)
+    resampling$instantiate(tsk("iris"))
+    at = AutoFSelector$new(
+      fselector = fs("random_search", batch_size = 1),
+      learner = lrn("classif.rpart"),
+      resampling = rsmp(key, ...),
+      measure = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 2)
+    )
+    # the constructor rejects instantiated resamplings, so the check is only reachable via `$instance_args`
+    at$instance_args$resampling = resampling
+    at$train(tsk("iris")$filter(1:50))
+  }
+
+  expect_error(run("cv", folds = 3), "set 1 of inner resampling 'cv' contains row ids")
+  expect_error(run("holdout"), "set 1 of inner resampling 'holdout' contains row ids")
+})

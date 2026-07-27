@@ -7,12 +7,7 @@ task_to_domain = function(task) {
 measures_to_codomain = function(measures) {
   measures = as_measures(measures)
   domains = map(measures, function(s) {
-    if ("set_id" %in% names(ps())) {
-      # old paradox
-      get("ParamDbl")$new(id = s$id, tags = ifelse(s$minimize, "minimize", "maximize"))
-    } else {
-      p_dbl(tags = ifelse(s$minimize, "minimize", "maximize"))
-    }
+    p_dbl(tags = if (s$minimize) "minimize" else "maximize")
   })
   names(domains) = ids(measures)
   Codomain$new(domains)

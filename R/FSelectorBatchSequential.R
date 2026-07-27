@@ -66,7 +66,7 @@ FSelectorBatchSequential = R6Class(
     optimization_path = function(inst, include_uhash = FALSE) {
       archive = inst$archive
       if (archive$n_batch == 0L) {
-        stop("No results stored in archive")
+        error_input("No results stored in the archive.")
       }
       uhash = if (include_uhash) "uhash" else NULL
       res = archive$data[, head(.SD, 1), by = get("batch_nr")]
@@ -94,30 +94,27 @@ FSelectorBatchSequential = R6Class(
 
       inst$eval_batch(states)
 
+      # forward selection adds a feature to the best set, backward selection removes one
+      add_feature = pars$strategy == "sfs"
+
       repeat {
-        ({
-          if (archive$n_batch == pars$max_features - pars$min_features + 1) {
-            break
-          }
+        if (archive$n_batch == pars$max_features - pars$min_features + 1) {
+          break
+        }
 
-          res = archive$best(batch = archive$n_batch)
-          best_state = as.logical(res[, feature_names, with = FALSE])
+        res = archive$best(batch = archive$n_batch)
+        best_state = as.logical(res[, feature_names, with = FALSE])
 
-          # Generate new states based on best feature set
-          x = ifelse(pars$strategy == "sfs", FALSE, TRUE)
-          y = ifelse(pars$strategy == "sfs", TRUE, FALSE)
-          z = if (pars$strategy == "sfs") !best_state else best_state
+        # generate new states by flipping one feature of the best feature set
+        candidates = if (add_feature) which(!best_state) else which(best_state)
 
-          states = map_dtr(seq_along(best_state)[z], function(i) {
-            if (best_state[i] == x) {
-              new_state = best_state
-              new_state[i] = y
-              set_names(as.list(new_state), feature_names)
-            }
-          })
-
-          inst$eval_batch(states)
+        states = map_dtr(candidates, function(i) {
+          new_state = best_state
+          new_state[i] = add_feature
+          set_names(as.list(new_state), feature_names)
         })
+
+        inst$eval_batch(states)
       }
     }
   )
