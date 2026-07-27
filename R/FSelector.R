@@ -143,7 +143,7 @@ FSelector = R6Class(
   ),
 
   private = list(
-    .optimize = function(inst) error_mlr3("`.optimize()` is abstract and must be implemented by the subclass."),
+    .optimize = function(inst) error_bbotk("`.optimize()` is abstract and must be implemented by the subclass."),
 
     .assign_result = function(inst) {
       assert_fselect_instance(inst)
