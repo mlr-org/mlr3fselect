@@ -128,32 +128,27 @@ FSelectorBatchShadowVariableSearch = R6Class(
       inst$eval_batch(states)
 
       repeat {
-        ({
-          res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
+        res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
 
-          # check if any shadow variable was selected
-          if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
-            # stop if the first selected feature is a shadow variable
-            if (archive$n_batch == 1) {
-              stop("The first selected feature is a shadow variable.")
-            }
-
-            # remove last batch with selected shadow variable from archive
-            archive = inst$archive
-            archive$data = archive$data[get("batch_nr") != archive$n_batch, ]
-            break
+        # check if any shadow variable was selected
+        if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
+          # stop if the first selected feature is a shadow variable
+          if (archive$n_batch == 1) {
+            stop("The first selected feature is a shadow variable.")
           }
 
-          best_state = as.logical(res)
-          states = map_dtr(seq_along(best_state)[!best_state], function(i) {
-            if (!best_state[i]) {
-              new_state = best_state
-              new_state[i] = TRUE
-              set_names(as.list(new_state), feature_names)
-            }
-          })
-          inst$eval_batch(states)
+          # remove last batch with selected shadow variable from archive
+          archive$data = archive$data[get("batch_nr") != archive$n_batch, ]
+          break
+        }
+
+        best_state = as.logical(res)
+        states = map_dtr(seq_along(best_state)[!best_state], function(i) {
+          new_state = best_state
+          new_state[i] = TRUE
+          set_names(as.list(new_state), feature_names)
         })
+        inst$eval_batch(states)
       }
     }
   )
