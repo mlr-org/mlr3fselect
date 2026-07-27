@@ -18,3 +18,8 @@ test_that("as.data.table objects parameter", {
   expect_data_table(tab)
   expect_list(tab$object, "FSelector", any.missing = FALSE)
 })
+
+test_that("fselectors have unique labels", {
+  tab = as.data.table(mlr_fselectors)
+  expect_equal(anyDuplicated(tab$label), 0L)
+})
