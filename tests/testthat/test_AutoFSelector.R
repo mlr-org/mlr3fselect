@@ -284,3 +284,18 @@ test_that("AutoFSelector works with async fselector", {
   expect_data_table(at$fselect_instance$result, nrows = 1)
   expect_data_table(at$fselect_instance$archive$data, min.rows = 4)
 })
+
+test_that("active bindings are read-only", {
+  at = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+
+  expect_error(at$archive <- 1, "read-only")
+  expect_error(at$learner <- 1, "read-only")
+  expect_error(at$fselect_instance <- 1, "read-only")
+  expect_error(at$fselect_result <- 1, "read-only")
+})
