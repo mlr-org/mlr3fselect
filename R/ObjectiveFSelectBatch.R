@@ -105,11 +105,7 @@ ObjectiveFSelectBatch = R6Class(
       lg$debug("Aggregated performance %s", as_short_string(private$.aggregated_performance))
 
       # add runtime to evaluations
-      time = map_dbl(private$.benchmark_result$resample_results$resample_result, function(rr) {
-        sum(map_dbl(get_private(rr)$.data$learner_states(get_private(rr)$.view), function(state) {
-          state$train_time + state$predict_time
-        }))
-      })
+      time = map_dbl(private$.benchmark_result$resample_results$resample_result, extract_runtime)
       set(private$.aggregated_performance, j = "runtime_learners", value = time)
 
       # store benchmark result in archive
