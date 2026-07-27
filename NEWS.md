@@ -1,6 +1,8 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `as.data.table()` on an `EnsembleFSResult` accepts the documented `benchmark_result` argument now to omit the task, learner and resampling columns (#190).
+* fix: The `$print()` methods of `ArchiveBatchFSelect`, `ArchiveAsyncFSelect`, `ArchiveAsyncFSelectFrozen`, `AutoFSelector` and `FSelector` errored with `unused argument` when arguments such as `digits` were passed (#190).
 * fix: The `mlr3fselect.svm_rfe` callback accepted support vector machines without a `type` or `kernel` setting, although only `type = "C-classification"` and `kernel = "linear"` are supported. The callback now also errors on multi-class tasks for which the importance scores are not defined (#173).
 * fix: The asynchronous feature selection ignored the `always_included` column role. Columns with this role were excluded from the models instead of being added to every feature subset (#175).
 * fix: The `mlr3fselect.one_se_rule` callback errored on archives with a single evaluation or with missing scores, and wrote the `n_features` column as a list column instead of an integer column (#174).

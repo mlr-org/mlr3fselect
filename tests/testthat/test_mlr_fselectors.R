@@ -18,3 +18,17 @@ test_that("as.data.table objects parameter", {
   expect_data_table(tab)
   expect_list(tab$object, "FSelector", any.missing = FALSE)
 })
+
+test_that("print methods accept arguments", {
+  instance = fselect(
+    fselector = fs("random_search", batch_size = 2),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy"),
+    term_evals = 2
+  )
+
+  expect_output(print(instance$archive, digits = 3))
+  expect_output(print(fs("random_search"), digits = 3))
+})

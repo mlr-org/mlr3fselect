@@ -671,8 +671,9 @@ EnsembleFSResult = R6Class(
 )
 
 #' @export
-as.data.table.EnsembleFSResult = function(x, ...) {
-  x$result
+as.data.table.EnsembleFSResult = function(x, ..., benchmark_result = TRUE) {
+  assert_flag(benchmark_result)
+  if (benchmark_result) x$result else copy(get_private(x)$.result)
 }
 
 #' @export

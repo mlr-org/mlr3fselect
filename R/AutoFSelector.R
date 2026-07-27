@@ -243,9 +243,11 @@ AutoFSelector = R6Class(
       }
     },
 
+    #' @description
     #' Printer.
+    #'
     #' @param ... (ignored).
-    print = function() {
+    print = function(...) {
       msg_h = if (is.null(self$label) || is.na(self$label)) "" else paste0(": ", self$label)
       model = if (is.null(self$model)) "-" else class(self$model)[1L]
 
