@@ -4,6 +4,10 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `fs("sequential")$optimization_path()` returned the first
+  evaluated feature set of each batch instead of the best one, so the
+  selected feature set was usually missing from the reported path
+  ([\#182](https://github.com/mlr-org/mlr3fselect/issues/182)).
 - fix: `fs("rfecv")` left the resampling of the objective set to an
   insample resampling, so subsequent evaluations on the same instance
   silently resampled in-sample
