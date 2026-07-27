@@ -4,6 +4,10 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `fs("rfecv")` left the resampling of the objective set to an
+  insample resampling, so subsequent evaluations on the same instance
+  silently resampled in-sample
+  ([\#187](https://github.com/mlr-org/mlr3fselect/issues/187)).
 - fix: The `mlr3fselect.backup` callback deleted the backup of the
   previous batch before it wrote the new one, so a crash in between lost
   the complete run. The benchmark result is now written to a temporary
