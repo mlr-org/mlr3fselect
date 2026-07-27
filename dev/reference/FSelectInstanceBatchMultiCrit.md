@@ -242,18 +242,24 @@ fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
 #> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 2:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>                                                             features n_features
 #>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#> 2:                                                    flipper_length          7
 #>    classif.ce  time_train
 #>         <num>       <num>
-#> 1: 0.07261632 0.002333333
+#> 1: 0.07261632 0.003333333
+#> 2: 0.19471142 0.002666667
 
 # Optimal feature sets
 instance$result_feature_set
 #> [[1]]
 #> [1] "bill_depth"     "bill_length"    "body_mass"      "flipper_length"
 #> [5] "island"         "sex"            "year"          
+#> 
+#> [[2]]
+#> [1] "flipper_length"
 #> 
 
 # Inspect all evaluated sets
@@ -266,10 +272,10 @@ as.data.table(instance$archive)
 #> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce  time_train runtime_learners           timestamp batch_nr
 #>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.07261632 0.002333333            0.014 2026-07-27 07:12:45        1
-#> 2: 0.07261632 0.008333333            0.033 2026-07-27 07:12:45        1
-#> 3: 0.25858124 0.002666667            0.014 2026-07-27 07:12:45        2
-#> 4: 0.19471142 0.002666667            0.030 2026-07-27 07:12:45        2
+#> 1: 0.07261632 0.003333333            0.019 2026-07-27 07:17:31        1
+#> 2: 0.07261632 0.008333333            0.034 2026-07-27 07:17:31        1
+#> 3: 0.25858124 0.002666667            0.014 2026-07-27 07:17:31        2
+#> 4: 0.19471142 0.002666667            0.015 2026-07-27 07:17:31        2
 #>    warnings errors
 #>       <int>  <int>
 #> 1:        0      0

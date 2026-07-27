@@ -4,6 +4,12 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix:
+  [`extract_inner_fselect_results()`](https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_results.md)
+  added the `iteration` and `fselect_instance` columns to the result of
+  the inner `FSelectInstance` by reference, which created a circular
+  reference between the instance and its own result
+  ([\#172](https://github.com/mlr-org/mlr3fselect/issues/172)).
 - fix: `fs("rfe")` and `fs("rfecv")` failed with an internal
   `data.table` error when `store_benchmark_result = FALSE` was set
   because the importance scores were read from the benchmark result of
