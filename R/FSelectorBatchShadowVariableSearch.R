@@ -90,10 +90,17 @@ FSelectorBatchShadowVariableSearch = R6Class(
 
   private = list(
     .optimize = function(inst) {
-      # save initial state
+      # save the initial state on the instance and restore it when the optimization ends
+      # on.exit() also restores the state when the optimization is aborted with an error
       task = inst$objective$task
-      private$.task = suppressWarnings(task$clone(deep = TRUE))
-      private$.domain = inst$objective$domain$clone()
+      original_task = task$clone(deep = TRUE)
+      original_domain = inst$objective$domain$clone()
+      on.exit({
+        inst$objective$task = original_task
+        inst$objective$domain = original_domain
+        inst$archive$search_space = original_domain
+        inst$search_space = original_domain
+      })
 
       # add shadow variables to task
       data = map_dtc(task$data(cols = task$feature_names), shuffle)
@@ -148,21 +155,7 @@ FSelectorBatchShadowVariableSearch = R6Class(
           inst$eval_batch(states)
         })
       }
-    },
-
-    .assign_result = function(inst) {
-      # restore task and domain without shadow variables
-      inst$objective$task = private$.task
-      inst$objective$domain = private$.domain
-      inst$archive$search_space = private$.domain
-      inst$search_space = private$.domain
-
-      assign_result_default(inst)
-    },
-
-    .task = NULL,
-
-    .domain = NULL
+    }
   )
 )
 
