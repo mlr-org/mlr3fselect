@@ -423,3 +423,19 @@ test_that("different callbacks can be set", {
   expect_true(all(efsr$benchmark_result$score()$learner[[1]]$fselect_instance$archive$data$callback_active))
   expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
 })
+
+test_that("as.data.table on an EnsembleFSResult respects benchmark_result", {
+  efsr = ensemble_fselect(
+    fselector = fs("random_search"),
+    task = tsk("sonar"),
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3)
+  )
+
+  expect_names(names(as.data.table(efsr)), must.include = c("task", "learner", "resampling"))
+  expect_disjunct(names(as.data.table(efsr, benchmark_result = FALSE)), c("task", "learner", "resampling"))
+})

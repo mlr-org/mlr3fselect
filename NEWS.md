@@ -1,6 +1,8 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `as.data.table()` on an `EnsembleFSResult` accepts the documented `benchmark_result` argument now to omit the task, learner and resampling columns (#190).
+* fix: The `$print()` methods of `ArchiveBatchFSelect`, `ArchiveAsyncFSelect`, `ArchiveAsyncFSelectFrozen`, `AutoFSelector` and `FSelector` errored with `unused argument` when arguments such as `digits` were passed (#190).
 * fix: `fs("rfecv")` had the same label as `fs("rfe")`, so both were indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page also instructed to construct it with `fs("rfe")` (#191).
 * fix: `AutoFSelector$train()` did not check the row ids of an instantiated inner resampling for cross-validation and reported a wrong set number for holdout (#197).
 * fix: The `mlr3fselect.svm_rfe` callback accepted support vector machines without a `type` or `kernel` setting, although only `type = "C-classification"` and `kernel = "linear"` are supported. The callback now also errors on multi-class tasks for which the importance scores are not defined (#173).

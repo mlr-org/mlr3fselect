@@ -73,8 +73,10 @@ FSelector = R6Class(
     #' @description
     #' Print method.
     #'
+    #' @param ... (ignored).
+    #'
     #' @return (`character()`).
-    print = function() {
+    print = function(...) {
       msg_h = if (is.na(self$label)) "" else paste0(": ", self$label)
       cat_cli({
         cli_h1("{.cls {class(self)[1L]}}{msg_h}")

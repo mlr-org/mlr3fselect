@@ -19,7 +19,6 @@ test_that("as.data.table objects parameter", {
   expect_list(tab$object, "FSelector", any.missing = FALSE)
 })
 
-
 test_that("read-only bindings of a fselector raise a structured error", {
   fselector = fs("random_search")
 
