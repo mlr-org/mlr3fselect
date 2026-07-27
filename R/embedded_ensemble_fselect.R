@@ -65,7 +65,8 @@ embedded_ensemble_fselect = function(
   assert_measure(measure, task = task)
   assert_flag(store_benchmark_result)
 
-  init_resampling$instantiate(task)
+  # instantiate a clone to leave the resampling passed by the user untouched
+  init_resampling = init_resampling$clone(deep = TRUE)$instantiate(task)
 
   design = benchmark_grid(
     tasks = task,
