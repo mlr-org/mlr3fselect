@@ -4,6 +4,10 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `fs("rfecv", recursive = FALSE)` failed with an internal
+  `data.table` error because the importance scores of all resampling
+  iterations were written to a single archive row
+  ([\#168](https://github.com/mlr-org/mlr3fselect/issues/168)).
 - fix: `fs("rfecv")` ignored the direction of the measure and selected
   the feature set size with the worst mean performance for minimizing
   measures such as `msr("classif.ce")` or `msr("regr.mse")`. Feature

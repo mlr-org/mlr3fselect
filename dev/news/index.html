@@ -50,6 +50,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="mlr3fselect-development-version">mlr3fselect (development version)<a class="anchor" aria-label="anchor" href="#mlr3fselect-development-version"></a></h2>
 <ul><li>fix: <code>ArchiveAsyncFSelect</code> pushed results with the removed <code>rush::Rush$push_results()</code> method.</li>
+<li>fix: <code>fs("rfecv", recursive = FALSE)</code> failed with an internal <code>data.table</code> error because the importance scores of all resampling iterations were written to a single archive row (<a href="https://github.com/mlr-org/mlr3fselect/issues/168" class="external-link">#168</a>).</li>
 <li>fix: <code>fs("rfecv")</code> ignored the direction of the measure and selected the feature set size with the worst mean performance for minimizing measures such as <code>msr("classif.ce")</code> or <code>msr("regr.mse")</code>. Feature selection results obtained with <code>fs("rfecv")</code> and a minimizing measure are invalid and should be recomputed (<a href="https://github.com/mlr-org/mlr3fselect/issues/167" class="external-link">#167</a>).</li>
 </ul></div>
     <div class="section level2">
