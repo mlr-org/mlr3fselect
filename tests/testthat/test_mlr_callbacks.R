@@ -13,6 +13,39 @@ test_that("backup callback works", {
 
   expect_file_exists(file)
   expect_benchmark_result(readRDS(file))
+  expect_false(file.exists(paste0(file, ".tmp")))
+})
+
+test_that("backup callback overwrites an existing backup", {
+  file = tempfile(fileext = ".rds")
+  saveRDS("old backup", file)
+
+  fselect(
+    fselector = fs("random_search", batch_size = 2),
+    task = tsk("diabetes"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    term_evals = 4,
+    callbacks = clbk("mlr3fselect.backup", path = file)
+  )
+
+  expect_benchmark_result(readRDS(file))
+})
+
+test_that("backup callback requires a path", {
+  expect_error(
+    fselect(
+      fselector = fs("random_search", batch_size = 2),
+      task = tsk("diabetes"),
+      learner = lrn("classif.rpart"),
+      resampling = rsmp("cv", folds = 3),
+      measures = msr("classif.ce"),
+      term_evals = 4,
+      callbacks = clbk("mlr3fselect.backup")
+    ),
+    "requires a `path`"
+  )
 })
 
 test_that("svm_rfe callbacks works", {
@@ -35,6 +68,39 @@ test_that("svm_rfe callbacks works", {
   expect_list(archive$importance, types = "numeric")
 })
 
+test_that("svm_rfe callback checks the configuration of the svm", {
+  skip_if_not_installed("mlr3learners")
+  skip_if_not_installed("e1071")
+  requireNamespace("mlr3learners")
+
+  run = function(learner, task = tsk("sonar")) {
+    instance = fsi(
+      task = task,
+      learner = learner,
+      resampling = rsmp("holdout"),
+      measures = msr("classif.ce"),
+      terminator = trm("none"),
+      callbacks = clbk("mlr3fselect.svm_rfe"),
+      store_models = TRUE
+    )
+    fs("rfe", feature_number = 5, n_features = 10)$optimize(instance)
+  }
+
+  # an unset type and kernel must not pass the check
+  expect_error(run(lrn("classif.svm")), "Only SVMs with")
+  expect_error(run(lrn("classif.svm", type = "C-classification")), "Only SVMs with")
+  expect_error(
+    run(lrn("classif.svm", type = "C-classification", kernel = "radial")),
+    "Only SVMs with"
+  )
+
+  # the weights of the hyperplane are only defined for binary classification
+  expect_error(
+    run(lrn("classif.svm", type = "C-classification", kernel = "linear"), tsk("penguins")),
+    "only works on binary classification tasks"
+  )
+})
+
 test_that("one_se_rule callback works", {
   score_design = data.table(
     score = c(0.1, 0.1, 0.58, 0.6),
@@ -52,6 +118,25 @@ test_that("one_se_rule callback works", {
   )
 
   expect_equal(instance$result_feature_set, c("x1", "x2", "x3"))
+  # the number of features is a scalar and not a list column
+  expect_integer(instance$result$n_features, len = 1)
+})
+
+test_that("one_se_rule callback works with a single evaluation", {
+  instance = fselect(
+    fselector = fs("random_search", batch_size = 1),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy"),
+    term_evals = 1,
+    callbacks = clbk("mlr3fselect.one_se_rule")
+  )
+
+  # the standard error of a single evaluation is `NA`
+  expect_data_table(instance$archive$data, nrows = 1)
+  expect_data_table(instance$result, nrows = 1)
+  expect_equal(instance$result$features[[1]], as.data.table(instance$archive)$features[[1]])
 })
 
 test_that("internal tuning callback works", {

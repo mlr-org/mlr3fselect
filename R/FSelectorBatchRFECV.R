@@ -41,7 +41,7 @@
 #nolint next line_length_linter
 #'   [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
 #'
-#' @templateVar id rfe
+#' @templateVar id rfecv
 #' @template section_dictionary_fselectors
 #'
 #' @section Control Parameters:
@@ -113,7 +113,7 @@ FSelectorBatchRFECV = R6Class(
         id = "rfecv",
         param_set = ps,
         properties = c("single-crit", "requires_model"),
-        label = "Recursive Feature Elimination",
+        label = "Recursive Feature Elimination with Cross Validation",
         man = "mlr3fselect::mlr_fselectors_rfecv"
       )
     }
@@ -153,6 +153,13 @@ FSelectorBatchRFECV = R6Class(
 
       resampling_cv = inst$objective$resampling$clone()
 
+      # the resampling of the objective is replaced by the folds of the cross-validation and by an insample
+      # resampling, restore it when the optimization ends or is aborted
+      original_resampling = inst$objective$constants$values$resampling
+      on.exit({
+        inst$objective$constants$values$resampling = original_resampling
+      })
+
       inst$objective$constants$values$resampling = map(seq(resampling_cv$iters), function(i) {
         custom = rsmp("custom")
         train_sets = list(resampling_cv$train_set(i))
@@ -165,7 +172,8 @@ FSelectorBatchRFECV = R6Class(
 
       # average performance of feature numbers
       aggr = archive$data[, list("y" = mean(unlist(.SD))), by = "batch_nr", .SDcols = archive$cols_y]
-      best_batch = aggr[order(get("y"), decreasing = TRUE), head(.SD, 1)]$batch_nr
+      # the direction of the codomain determines whether the performance is minimized or maximized
+      best_batch = aggr[which_max(aggr[["y"]] * -archive$codomain$direction, ties_method = "first")]$batch_nr
       n_features = rowSums(archive$data[list(best_batch), , on = "batch_nr"][1, archive$cols_x, with = FALSE])
 
       # use full data set
