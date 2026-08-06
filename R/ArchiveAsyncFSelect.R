@@ -47,9 +47,6 @@ ArchiveAsyncFSelect = R6Class(
   public = list(
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    #'
-    #' @param check_values (`logical(1)`)\cr
-    #'   If `TRUE` (default), feature subsets are check for validity.
     initialize = function(
       search_space,
       codomain,
@@ -123,7 +120,7 @@ ArchiveAsyncFSelect = R6Class(
     #' Printer.
     #'
     #' @param ... (ignored).
-    print = function() {
+    print = function(...) {
       cat_cli(cli_h1("{format(self)} with {.val {self$n_evals}} evaluations"))
       print(
         as.data.table(
@@ -155,12 +152,13 @@ ArchiveAsyncFSelect = R6Class(
     #' Ignored for multi-crit optimization.
     #' @param ties_method (`character(1L)`)\cr
     #' Method to break ties when multiple points have the same score.
-    #' Either `"least_features"` (default) or `"random"`.
+    #' Either `"least_features"` or `"random"`.
+    #' If `NULL` (default), the global ties method set during initialization is used.
     #' Ignored for multi-crit optimization.
     #' If `n_select > 1L`, the tie method is ignored and the first point is returned.
     #'
     #' @return [data.table::data.table()]
-    best = function(n_select = 1, ties_method = "least_features") {
+    best = function(n_select = 1, ties_method = NULL) {
       ties_method = assert_choice(ties_method, c("least_features", "random"), null.ok = TRUE) %??% private$.ties_method
       assert_count(n_select)
       tab = self$finished_data
@@ -169,18 +167,22 @@ ArchiveAsyncFSelect = R6Class(
         if (n_select == 1L) {
           # use which_max to find the best point
           y = tab[[self$cols_y]] * -self$codomain$direction
+          if (all(is.na(y))) {
+            return(tab[0L])
+          }
           if (ties_method == "least_features") {
-            ii = which(y == max(y))
+            # NA scores never equal the maximum and are dropped by which()
+            ii = which(y == max(y, na.rm = TRUE))
             tab = tab[ii]
             ii = which_min(rowSums(tab[, self$cols_x, with = FALSE]), ties_method = "random")
             tab[ii]
           } else {
-            ii = which_max(y, ties_method = "random")
+            ii = which_max(y, ties_method = "random", na_rm = TRUE)
             tab[ii]
           }
         } else {
           # use data.table fast sort to find the best points
-          setorderv(tab, cols = self$cols_y, order = self$codomain$direction)
+          setorderv(tab, cols = self$cols_y, order = self$codomain$direction, na.last = TRUE)
           head(tab, n_select)
         }
       } else {

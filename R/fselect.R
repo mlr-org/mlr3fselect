@@ -45,8 +45,11 @@
 #' @template param_store_models
 #' @template param_check_values
 #' @template param_callbacks
-#' @template param_rush
 #' @template param_ties_method
+#'
+#' @param rush (`Rush`)\cr
+#'   Rush instance for the asynchronous feature selection.
+#'   Ignored by batch fselectors, which warn when it is set.
 #'
 #' @export
 #' @examples
@@ -93,61 +96,35 @@ fselect = function(
   terminator = terminator %??% terminator_selection(term_evals, term_time)
 
   instance = if (inherits(fselector, "FSelectorAsync")) {
-    if (is.null(measures) || inherits(measures, "Measure")) {
-      FSelectInstanceAsyncSingleCrit$new(
-        task = task,
-        learner = learner,
-        resampling = resampling,
-        measure = measures,
-        terminator = terminator,
-        store_benchmark_result = store_benchmark_result,
-        store_models = store_models,
-        check_values = check_values,
-        callbacks = callbacks,
-        rush = rush,
-        ties_method = ties_method
-      )
-    } else {
-      FSelectInstanceAsyncMultiCrit$new(
-        task = task,
-        learner = learner,
-        resampling = resampling,
-        measures = measures,
-        terminator = terminator,
-        store_benchmark_result = store_benchmark_result,
-        store_models = store_models,
-        check_values = check_values,
-        callbacks = callbacks,
-        rush = rush
-      )
-    }
+    fsi_async(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      ties_method = ties_method,
+      rush = rush
+    )
   } else {
-    if (is.null(measures) || inherits(measures, "Measure")) {
-      FSelectInstanceBatchSingleCrit$new(
-        task = task,
-        learner = learner,
-        resampling = resampling,
-        measure = measures,
-        terminator = terminator,
-        store_benchmark_result = store_benchmark_result,
-        store_models = store_models,
-        check_values = check_values,
-        callbacks = callbacks,
-        ties_method = ties_method
-      )
-    } else {
-      FSelectInstanceBatchMultiCrit$new(
-        task = task,
-        learner = learner,
-        resampling = resampling,
-        measures = measures,
-        terminator = terminator,
-        store_benchmark_result = store_benchmark_result,
-        store_models = store_models,
-        check_values = check_values,
-        callbacks = callbacks
-      )
+    if (!is.null(rush)) {
+      warningf("The `rush` argument is ignored by the batch fselector %s.", format(fselector))
     }
+    fsi(
+      task = task,
+      learner = learner,
+      resampling = resampling,
+      measures = measures,
+      terminator = terminator,
+      store_benchmark_result = store_benchmark_result,
+      store_models = store_models,
+      check_values = check_values,
+      callbacks = callbacks,
+      ties_method = ties_method
+    )
   }
   fselector$optimize(instance)
   instance

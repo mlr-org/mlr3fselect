@@ -42,3 +42,23 @@ test_that("optimization_path method works with included uhash", {
   expect_names(names(op), must.include = "uhash")
   expect_equal(op$dummy, c(1, 2, 4, 3))
 })
+
+test_that("optimization_path method returns the best feature set of each batch", {
+  score_design = data.table(
+    score = c(1, 3, 5, 4),
+    features = list("x3", c("x3", "x4"), c("x2", "x3", "x4"), c("x1", "x2", "x3", "x4"))
+  )
+
+  instance = fselect(
+    fselector = fs("sequential"),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy", score_design = score_design, minimize = FALSE)
+  )
+
+  op = fs("sequential")$optimization_path(instance)
+  expect_data_table(op, nrows = 4)
+  expect_equal(op$dummy, c(1, 3, 5, 4))
+  expect_equal(op$dummy[which.max(op$dummy)], instance$result_y[[1]])
+})

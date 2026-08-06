@@ -349,3 +349,34 @@ test_that("extract_inner_fselect_archives function works with autofselector and 
   )
   expect_equal(unique(ibmr$experiment), 1)
 })
+
+test_that("extract_inner_fselect_archives function respects exclude_columns", {
+  rr = fselect_nested(
+    fs("random_search", batch_size = 1),
+    tsk("iris"),
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    rsmp("cv", folds = 2),
+    msr("classif.ce"),
+    term_evals = 4
+  )
+
+  irr = extract_inner_fselect_archives(rr, exclude_columns = NULL)
+  expect_names(names(irr), must.include = "uhash")
+
+  irr = extract_inner_fselect_archives(rr, exclude_columns = c("uhash", "timestamp"))
+  expect_disjunct(names(irr), c("uhash", "timestamp"))
+
+  at = auto_fselector(
+    fs("random_search", batch_size = 1),
+    lrn("classif.rpart"),
+    rsmp("holdout"),
+    msr("classif.ce"),
+    term_evals = 4
+  )
+  grid = benchmark_grid(tsk("iris"), at, rsmp("cv", folds = 2))
+  bmr = benchmark(grid, store_models = TRUE)
+
+  ibmr = extract_inner_fselect_archives(bmr, exclude_columns = NULL)
+  expect_names(names(ibmr), must.include = "uhash")
+})

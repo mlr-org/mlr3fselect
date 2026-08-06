@@ -399,7 +399,8 @@ have also a feature-wise score.
 \subsection{\code{EnsembleFSResult$stability()}}{
   Calculates the stability of the selected features with the \CRANpkg{stabm} package.
 The results are cached.
-When the same stability measure is requested again with different arguments, the cache must be reset.
+The cache key covers the stability measure and the arguments passed to it,
+so the same measure requested with different arguments is calculated again.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{EnsembleFSResult$stability(
@@ -525,6 +526,9 @@ The knee point is determined as the Pareto point with the maximum distance from 
   }
   \subsection{Returns}{
     A \link[data.table:data.table]{data.table::data.table} with the knee point(s) of the Pareto front.
+If the Pareto front does not span a range in both the number of features and the performance,
+no knee point can be identified.
+In this case a warning is signaled and the first point of the Pareto front is returned.
   }
 }
 

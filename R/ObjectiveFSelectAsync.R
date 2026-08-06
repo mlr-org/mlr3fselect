@@ -22,14 +22,19 @@ ObjectiveFSelectAsync = R6Class(
     .eval = function(xs, resampling) {
       lg$debug("Evaluating feature subset %s", as_short_string(xs))
 
-      # restore features
+      # restore features and always included features
+      # the task is not cloned, so the column roles must be restored after the evaluation
       all_features = self$task$feature_names
-      on.exit(self$task$set_col_roles(all_features, "feature"))
+      always_included = self$task$col_roles$always_included
+      on.exit({
+        self$task$set_col_roles(always_included, "always_included")
+        self$task$set_col_roles(all_features, "feature")
+      })
 
       # select features
       private$.xs = xs
       call_back("on_eval_after_xs", self$callbacks, self$context)
-      self$task$select(names(private$.xs)[as.logical(private$.xs)])
+      select_features(self$task, names(private$.xs)[as.logical(private$.xs)])
 
       lg$debug("Resampling feature subset")
 

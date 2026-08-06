@@ -448,3 +448,115 @@ test_that("pareto_front only returns non-dominated points", {
   expect_equal(pf$n_features, 1)
   expect_equal(pf$classif.acc, 0.5)
 })
+
+test_that("efs adds the importance column for subclasses of FSelectorBatchRFE", {
+  FSelectorBatchRFECustom = R6Class("FSelectorBatchRFECustom", inherit = FSelectorBatchRFE)
+
+  efsr = ensemble_fselect(
+    fselector = FSelectorBatchRFECustom$new(),
+    task = tsk("sonar"),
+    learners = lrns("classif.rpart"),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("none")
+  )
+
+  expect_list(efsr$result$importance, any.missing = FALSE, len = 2)
+})
+
+test_that("efs works with a single learner", {
+  efsr = ensemble_fselect(
+    fselector = fs("random_search"),
+    task = tsk("sonar"),
+    learners = lrn("classif.rpart"),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3)
+  )
+
+  expect_data_table(efsr$result, nrows = 2)
+  expect_equal(efsr$n_learners, 1)
+})
+
+test_that("efs only accepts bootstrap and subsampling as init_resampling", {
+  expect_error(
+    ensemble_fselect(
+      fselector = fs("random_search"),
+      task = tsk("sonar"),
+      learners = lrns("classif.rpart"),
+      init_resampling = rsmp("cv", folds = 2),
+      inner_resampling = rsmp("cv", folds = 3),
+      inner_measure = msr("classif.ce"),
+      measure = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 3)
+    ),
+    "init_resampling"
+  )
+})
+
+test_that("knee_points warns on a degenerate pareto front", {
+  result = data.table(
+    resampling_iteration = 1:2,
+    learner_id = "classif.rpart",
+    features = list("V1", "V1"),
+    n_features = c(1L, 1L),
+    classif.ce = c(0.3, 0.2)
+  )
+  efsr = EnsembleFSResult$new(result = result, features = c("V1", "V2"), measure = msr("classif.ce"))
+
+  expect_warning(
+    {
+      kps = efsr$knee_points()
+    },
+    "does not span a range in both dimensions"
+  )
+  expect_data_table(kps, nrows = 1)
+  expect_false(anyNA(kps))
+})
+
+test_that("as.data.table on an EnsembleFSResult respects benchmark_result", {
+  efsr = ensemble_fselect(
+    fselector = fs("random_search"),
+    task = tsk("sonar"),
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3)
+  )
+
+  expect_names(names(as.data.table(efsr)), must.include = c("task", "learner", "resampling"))
+  expect_disjunct(names(as.data.table(efsr, benchmark_result = FALSE)), c("task", "learner", "resampling"))
+})
+
+test_that("stability cache distinguishes different stability_args", {
+  efsr = ensemble_fselect(
+    fselector = fs("random_search"),
+    task = tsk("sonar"),
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3)
+  )
+  efsr$rm_zero_features()
+
+  # the same measure with different arguments must not return the cached value
+  p_60 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 60))
+  p_600 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 600))
+
+  expect_false(p_60 == p_600)
+  expect_equal(efsr$stability(stability_measure = "nogueira", stability_args = list(p = 60)), p_60)
+
+  # the same holds for the per learner stability
+  p_60 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 60), global = FALSE)
+  p_600 = efsr$stability(stability_measure = "nogueira", stability_args = list(p = 600), global = FALSE)
+
+  expect_false(any(p_60 == p_600))
+})

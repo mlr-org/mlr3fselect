@@ -5,6 +5,9 @@
 #'
 #' @description
 #' This [CallbackBatchFSelect] writes the [mlr3::BenchmarkResult] after each batch to disk.
+#' The `path` must be set, e.g. `clbk("mlr3fselect.backup", path = "backup.rds")`.
+#' The benchmark result is written to a temporary file first and then renamed,
+#' so that a crash while writing does not destroy the backup of the previous batch.
 #'
 #' @examples
 #' clbk("mlr3fselect.backup", path = "backup.rds")
@@ -27,16 +30,16 @@ load_callback_backup = function() {
     man = "mlr3fselect::mlr3fselect.backup",
     on_optimization_begin = function(callback, context) {
       if (is.null(callback$state$path)) {
-        callback$state$path = "bmr.rds"
+        stopf("The `mlr3fselect.backup` callback requires a `path`, e.g. `clbk('mlr3fselect.backup', path = 'bmr.rds')`.")
       }
-      assert_path_for_output(callback$state$path)
+      assert_path_for_output(callback$state$path, overwrite = TRUE)
     },
 
     on_optimizer_after_eval = function(callback, context) {
-      if (file.exists(callback$state$path)) {
-        unlink(callback$state$path)
-      }
-      saveRDS(context$instance$archive$benchmark_result, callback$state$path)
+      # write to a temporary file first so that a crash during writing does not destroy the previous backup
+      path_tmp = paste0(callback$state$path, ".tmp")
+      saveRDS(context$instance$archive$benchmark_result, path_tmp)
+      file.rename(path_tmp, callback$state$path)
     }
   )
 }
@@ -49,6 +52,11 @@ load_callback_backup = function() {
 #' @description
 #' Runs a recursive feature elimination with a [mlr3learners::LearnerClassifSVM].
 #' The SVM must be configured with `type = "C-classification"` and `kernel = "linear"`.
+#'
+#' @details
+#' The importance score of a feature is the squared weight of the hyperplane that separates the two classes.
+#' The weights are only defined for a linear kernel and a single separating hyperplane,
+#' therefore the callback only works on binary classification tasks.
 #'
 #' @source
 #' `r format_bib("guyon2002")`
@@ -75,50 +83,59 @@ load_callback_backup = function() {
 #' fselector$optimize(instance)
 NULL
 
+# Support vector machine with a linear kernel that reports the squared weights of the separating hyperplane as
+# importance scores.
+# The R6 generator is created once when the package is loaded so that the class identity and the learner hashes are
+# stable across optimization runs.
+LearnerClassifSVMRFE = R6Class(
+  "LearnerClassifSVMRFE",
+  inherit = mlr3learners::LearnerClassifSVM,
+  public = list(
+    initialize = function() {
+      super$initialize()
+      self$properties = c(self$properties, "importance")
+    },
+
+    importance = function() {
+      w = t(self$model$coefs) %*% self$model$SV
+      x = w * w
+      sort(x[1, ], decreasing = TRUE)
+    }
+  )
+)
+
 load_callback_svm_rfe = function() {
   callback_batch_fselect(
     "mlr3fselect.svm_rfe",
     label = "SVM-RFE Callback",
     man = "mlr3fselect::mlr3fselect.svm_rfe",
     on_optimization_begin = function(callback, context) {
-      requireNamespace("mlr3learners")
+      require_namespaces("mlr3learners")
       learner = context$instance$objective$learner
       assert_class(learner, "LearnerClassifSVM", .var.name = "learner")
       params = learner$param_set$values
 
-      if (isTRUE(params$type != "C-classification") || isTRUE(params$kernel != "linear")) {
-        stop("Only SVMs with `type = 'C-classification'` and `kernel = 'linear'` are supported.")
+      # `identical()` instead of `!=` because an unset parameter is `NULL` and `isTRUE(NULL != "linear")` is `FALSE`
+      if (!identical(params$type, "C-classification") || !identical(params$kernel, "linear")) {
+        stopf("Only SVMs with `type = 'C-classification'` and `kernel = 'linear'` are supported.")
       }
 
-      LearnerClassifSVMRFE = R6Class(
-        "LearnerClassifSVMRFE",
-        inherit = mlr3learners::LearnerClassifSVM,
-        public = list(
-          initialize = function() {
-            super$initialize()
-            self$properties = c(self$properties, "importance")
-          },
-
-          importance = function() {
-            w = t(self$model$coefs) %*% self$model$SV
-            x = w * w
-            sort(x[1, ], decreasing = TRUE)
-          }
+      # the weights of the hyperplane are only unique for a single separating hyperplane
+      task = context$instance$objective$task
+      if (length(task$class_names) > 2L) {
+        stopf(
+          "%s only works on binary classification tasks but %s has %i classes.",
+          format(callback),
+          format(task),
+          length(task$class_names)
         )
-      )
+      }
+
       learner_rfe = LearnerClassifSVMRFE$new()
       learner_rfe$param_set$values = params
       learner_rfe$id = learner$id
       learner_rfe$predict_type = learner$predict_type
-
-      fallback = learner$fallback
-      if (packageVersion("mlr3") > "0.20.2") {
-        method = unname(learner$encapsulation[1])
-        learner_rfe$encapsulate(method, fallback)
-      } else {
-        learner_rfe$encapsulate = learner$encapsulate
-        learner_rfe$fallback = fallback
-      }
+      learner_rfe$encapsulate(unname(learner$encapsulation[1]), learner$fallback)
       learner_rfe$timeout = learner$timeout
       learner_rfe$parallel_predict = learner$parallel_predict
       context$instance$objective$learner = learner_rfe
@@ -158,7 +175,7 @@ load_callback_svm_rfe = function() {
 NULL
 
 load_callback_one_se_rule = function() {
-  callback = callback_batch_fselect(
+  callback_batch_fselect(
     "mlr3fselect.one_se_rule",
     label = "One Standard Error Rule Callback",
     man = "mlr3fselect::mlr3fselect.one_se_rule",
@@ -166,11 +183,13 @@ load_callback_one_se_rule = function() {
     on_optimization_end = function(callback, context) {
       archive = context$instance$archive
       data = as.data.table(archive)
-      data[, "n_features" := map(get("features"), length)]
+      data[, "n_features" := lengths(get("features"))]
 
       # standard error
+      # `sd()` is `NA` for a single evaluation, in this case the smallest feature set is selected
       y = data[[archive$cols_y]]
-      se = sd(y) / sqrt(length(y))
+      n = sum(!is.na(y))
+      se = if (n < 2L) 0 else sd(y, na.rm = TRUE) / sqrt(n)
 
       columns_to_keep = setdiff(names(context$instance$result), "x_domain")
       if (se == 0) {
@@ -179,9 +198,10 @@ load_callback_one_se_rule = function() {
           data[, columns_to_keep, with = FALSE][which.min(n_features)]
       } else {
         # select smallest future set within one standard error of the best
+        # `which()` drops feature sets without a score
         best_y = context$instance$result_y
         context$instance$.__enclos_env__$private$.result =
-          data[y > best_y - se & y < best_y + se, columns_to_keep, with = FALSE][which.min(n_features)]
+          data[which(y > best_y - se & y < best_y + se), columns_to_keep, with = FALSE][which.min(n_features)]
       }
     }
   )
@@ -209,18 +229,18 @@ load_callback_internal_tuning = function() {
 
     on_eval_before_archive = function(callback, context) {
       # extract internal tuned values and aggregate folds
-      internal_tuned_values = mlr3misc::map(
+      internal_tuned_values = map(
         context$benchmark_result$resample_results$resample_result,
         function(resample_result) {
-          internal_tuned_values = mlr3misc::transpose_list(mlr3misc::map(
-            mlr3misc::get_private(resample_result)$.data$learner_states(mlr3misc::get_private(resample_result)$.view),
+          internal_tuned_values = transpose_list(map(
+            get_private(resample_result)$.data$learner_states(get_private(resample_result)$.view),
             "internal_tuned_values"
           ))
           callback$state$internal_search_space$aggr_internal_tuned_values(internal_tuned_values)
         }
       )
 
-      data.table::set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
+      set(context$aggregated_performance, j = "internal_tuned_values", value = list(internal_tuned_values))
     },
 
     on_optimization_end = function(callback, context) {

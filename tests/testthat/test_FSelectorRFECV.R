@@ -68,6 +68,31 @@ test_that("default parameters work", {
   })
 })
 
+test_that("recursive parameter works", {
+  instance = fsi(
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy"),
+    terminator = trm("none"),
+    store_models = TRUE
+  )
+
+  optimizer = fs("rfecv", recursive = FALSE, n_features = 1, feature_number = 1)
+  optimizer$optimize(instance)
+  data = instance$archive$data
+
+  # the importance of the first batch is reused and truncated in the following batches
+  walk(seq(3), function(i) {
+    importances = data[list(i), importance, on = "iteration"]
+    walk(seq(2, length(importances)), function(j) {
+      expect_equal(importances[[j]], importances[[1]][seq(length(importances) + 1 - j)])
+    })
+  })
+
+  pwalk(data, function(x1, x2, x3, x4, importance, ...) expect_equal(x1 + x2 + x3 + x4, length(importance)))
+})
+
 test_that("learner without importance method throw an error", {
   learner = lrn("classif.rpart")
   learner$properties = setdiff(learner$properties, "importance")
@@ -83,6 +108,53 @@ test_that("learner without importance method throw an error", {
     ),
     "does not work with"
   )
+})
+
+test_that("optimal features are selected with a minimizing measure", {
+  LearnerRegrDebugImportance = R6Class(
+    "LearnerRegrDebugImportance",
+    inherit = LearnerRegrDebug,
+    public = list(
+      importance = function() {
+        c(x2 = 1.4, x1 = 0.8, x3 = 1.2, x4 = 1.1)
+      }
+    )
+  )
+
+  learner = LearnerRegrDebugImportance$new()
+  learner$properties = c(learner$properties, "importance")
+
+  # the three features x2, x3 and x4 have the lowest score
+  score_design = data.table(
+    score = c(2, 1, 4, 3),
+    features = list(
+      c("x1", "x2", "x3", "x4"),
+      c("x2", "x3", "x4"),
+      c("x2", "x3"),
+      "x2"
+    )
+  )
+
+  measure = msr("dummy", score_design = score_design, minimize = TRUE)
+
+  instance = fsi(
+    task = TEST_MAKE_TSK(),
+    learner = learner,
+    resampling = rsmp("cv", folds = 3),
+    measures = measure,
+    terminator = trm("none"),
+    store_models = TRUE
+  )
+
+  optimizer = fs("rfecv", n_features = 1, feature_number = 1)
+  optimizer$optimize(instance)
+  data = as.data.table(instance$archive)
+
+  # number of features in the final run
+  expect_feature_number(data[13, 1:4], n = 4)
+  expect_feature_number(data[14, 1:4], n = 3)
+
+  expect_equal(instance$result$features[[1]], c("x2", "x3", "x4"))
 })
 
 test_that("optimal features are selected", {
@@ -149,4 +221,39 @@ test_that("optimal features are selected", {
   expect_equal(data$importance[[4]], c(x2 = 1.4, x3 = 1.2, x4 = 1.1))
 
   expect_equal(instance$result$features[[1]], c("x2", "x3", "x4"))
+})
+
+test_that("rfecv works without storing the benchmark result", {
+  instance = fsi(
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy"),
+    terminator = trm("none"),
+    store_benchmark_result = FALSE
+  )
+
+  optimizer = fs("rfecv", n_features = 1, feature_number = 1)
+  optimizer$optimize(instance)
+  data = instance$archive$data
+
+  expect_names(names(data), disjunct.from = "uhash")
+  expect_names(names(data), must.include = c("importance", "iteration"))
+  pwalk(data, function(x1, x2, x3, x4, importance, ...) expect_equal(x1 + x2 + x3 + x4, length(importance)))
+})
+
+test_that("the resampling of the objective is restored", {
+  instance = fsi(
+    task = tsk("penguins"),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("classif.ce"),
+    terminator = trm("none")
+  )
+  resampling = instance$objective$constants$values$resampling
+
+  fs("rfecv", n_features = 2, feature_number = 1)$optimize(instance)
+
+  expect_equal(instance$objective$constants$values$resampling, resampling)
+  expect_equal(instance$objective$constants$values$resampling[[1]], instance$objective$resampling)
 })
