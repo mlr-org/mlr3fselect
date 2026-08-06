@@ -4,6 +4,12 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix:
+  [`embedded_ensemble_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/embedded_ensemble_fselect.md)
+  instantiated the \[mlr3::Resampling\] passed to `init_resampling` by
+  reference, so the resampling of the user was changed and reused the
+  row ids of the first task when applied to another task
+  ([\#179](https://github.com/mlr-org/mlr3fselect/issues/179)).
 - fix: `EnsembleFSResult$knee_points()` silently returned a row of `NA`
   when the Pareto front did not span a range in both dimensions. The
   first point of the Pareto front is returned with a warning now
