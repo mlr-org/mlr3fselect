@@ -450,7 +450,12 @@ test_that("knee_points warns on a degenerate pareto front", {
   )
   efsr = EnsembleFSResult$new(result = result, features = c("V1", "V2"), measure = msr("classif.ce"))
 
-  expect_warning(kps = efsr$knee_points(), "does not span a range in both dimensions")
+  expect_warning(
+    {
+      kps = efsr$knee_points()
+    },
+    "does not span a range in both dimensions"
+  )
   expect_data_table(kps, nrows = 1)
   expect_false(anyNA(kps))
 })
