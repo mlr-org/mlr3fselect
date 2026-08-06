@@ -5,6 +5,12 @@
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
 - fix:
+  [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fselect.md)
+  dropped the `importance` column for subclasses of `FSelectorBatchRFE`.
+  The column is now added whenever the feature selection result contains
+  importance scores
+  ([\#195](https://github.com/mlr-org/mlr3fselect/issues/195)).
+- fix:
   [`embedded_ensemble_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/embedded_ensemble_fselect.md)
   instantiated the \[mlr3::Resampling\] passed to `init_resampling` by
   reference, so the resampling of the user was changed and reused the
