@@ -424,6 +424,23 @@ test_that("different callbacks can be set", {
   expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
 })
 
+test_that("efs adds the importance column for subclasses of FSelectorBatchRFE", {
+  FSelectorBatchRFECustom = R6Class("FSelectorBatchRFECustom", inherit = FSelectorBatchRFE)
+
+  efsr = ensemble_fselect(
+    fselector = FSelectorBatchRFECustom$new(),
+    task = tsk("sonar"),
+    learners = lrns("classif.rpart"),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("none")
+  )
+
+  expect_list(efsr$result$importance, any.missing = FALSE, len = 2)
+})
+
 test_that("efs works with a single learner", {
   efsr = ensemble_fselect(
     fselector = fs("random_search"),
@@ -438,6 +455,22 @@ test_that("efs works with a single learner", {
 
   expect_data_table(efsr$result, nrows = 2)
   expect_equal(efsr$n_learners, 1)
+})
+
+test_that("efs only accepts bootstrap and subsampling as init_resampling", {
+  expect_error(
+    ensemble_fselect(
+      fselector = fs("random_search"),
+      task = tsk("sonar"),
+      learners = lrns("classif.rpart"),
+      init_resampling = rsmp("cv", folds = 2),
+      inner_resampling = rsmp("cv", folds = 3),
+      inner_measure = msr("classif.ce"),
+      measure = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 3)
+    ),
+    "init_resampling"
+  )
 })
 
 test_that("knee_points warns on a degenerate pareto front", {
