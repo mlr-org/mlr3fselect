@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `EnsembleFSResult$knee_points()` silently returned a row of `NA` when the Pareto front did not span a range in both dimensions. The first point of the Pareto front is returned with a warning now (#171).
 * fix: `extract_inner_fselect_archives()` ignored the `exclude_columns` argument because it was passed positionally to `as.data.table()` where it landed in the `...` argument (#180).
 * fix: `as.data.table()` on an `ArchiveBatchFSelect` returned the `n_features` column as a list column instead of an integer column, so operations such as `sort()` failed with `'x' must be atomic` (#181).
 * fix: `fs("sequential")$optimization_path()` returned the first evaluated feature set of each batch instead of the best one, so the selected feature set was usually missing from the reported path (#182).

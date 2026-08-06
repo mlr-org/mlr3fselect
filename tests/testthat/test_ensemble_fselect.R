@@ -424,6 +424,21 @@ test_that("different callbacks can be set", {
   expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
 })
 
+test_that("knee_points warns on a degenerate pareto front", {
+  result = data.table(
+    resampling_iteration = 1:2,
+    learner_id = "classif.rpart",
+    features = list("V1", "V1"),
+    n_features = c(1L, 1L),
+    classif.ce = c(0.3, 0.2)
+  )
+  efsr = EnsembleFSResult$new(result = result, features = c("V1", "V2"), measure = msr("classif.ce"))
+
+  expect_warning(kps = efsr$knee_points(), "does not span a range in both dimensions")
+  expect_data_table(kps, nrows = 1)
+  expect_false(anyNA(kps))
+})  
+  
 test_that("as.data.table on an EnsembleFSResult respects benchmark_result", {
   efsr = ensemble_fselect(
     fselector = fs("random_search"),
