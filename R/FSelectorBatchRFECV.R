@@ -41,7 +41,7 @@
 #nolint next line_length_linter
 #'   [Recursive Feature Elimination](https://mlr-org.com/gallery/optimization/2023-02-07-recursive-feature-elimination/).
 #'
-#' @templateVar id rfe
+#' @templateVar id rfecv
 #' @template section_dictionary_fselectors
 #'
 #' @section Control Parameters:
@@ -113,7 +113,7 @@ FSelectorBatchRFECV = R6Class(
         id = "rfecv",
         param_set = ps,
         properties = c("single-crit", "requires_model"),
-        label = "Recursive Feature Elimination",
+        label = "Recursive Feature Elimination with Cross Validation",
         man = "mlr3fselect::mlr_fselectors_rfecv"
       )
     }
@@ -152,6 +152,13 @@ FSelectorBatchRFECV = R6Class(
       subsets = rfe_subsets(n, n_features, feature_number, subset_sizes, feature_fraction)
 
       resampling_cv = inst$objective$resampling$clone()
+
+      # the resampling of the objective is replaced by the folds of the cross-validation and by an insample
+      # resampling, restore it when the optimization ends or is aborted
+      original_resampling = inst$objective$constants$values$resampling
+      on.exit({
+        inst$objective$constants$values$resampling = original_resampling
+      })
 
       inst$objective$constants$values$resampling = map(seq(resampling_cv$iters), function(i) {
         custom = rsmp("custom")

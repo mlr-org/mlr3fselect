@@ -52,7 +52,7 @@ test_that("embedded efs works", {
   )
 
   # cannot change to use inner_measure
-  expect_error(efsr$set_active_measure(which = "inner"), "No inner_measure was defined")
+  expect_error(efsr$set_active_measure(which = "inner"), "No `inner_measure` was defined")
   # changing to "outer" leaves us with the same measure
   efsr$set_active_measure(which = "outer")
   expect_equal(efsr$measure$id, "classif.ce") # classification error

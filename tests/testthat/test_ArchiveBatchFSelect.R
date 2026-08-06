@@ -492,3 +492,64 @@ test_that("local ties method works with batches", {
     identical_to = "x1"
   )
 })
+
+test_that("best() ignores feature sets with a missing score", {
+  design = mlr3misc::rowwise_table(
+    ~x1,
+    ~x2,
+    ~x3,
+    ~x4,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    FALSE
+  )
+
+  score_design = data.table(
+    score = c(0.3, 0.2, 0.1),
+    features = list("x1", "x2", "x3")
+  )
+  measure = msr("dummy", score_design = score_design, minimize = FALSE)
+
+  instance = fselect(
+    fselector = fs("design_points", design = design),
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = measure
+  )
+
+  set(instance$archive$data, 1L, "dummy", NA_real_)
+
+  expect_features(
+    instance$archive$best(ties_method = "least_features")[, list(x1, x2, x3, x4)],
+    identical_to = "x2"
+  )
+  expect_features(instance$archive$best(ties_method = "random")[, list(x1, x2, x3, x4)], identical_to = "x2")
+})
+
+test_that("best() returns an empty table if all scores are missing", {
+  instance = TEST_MAKE_INST_1D()
+  fs("random_search", batch_size = 2)$optimize(instance)
+
+  set(instance$archive$data, j = "dummy", value = NA_real_)
+
+  expect_data_table(instance$archive$best(ties_method = "least_features"), nrows = 0L)
+  expect_data_table(instance$archive$best(ties_method = "random"), nrows = 0L)
+})
+
+test_that("as.data.table returns n_features as an integer column", {
+  instance = TEST_MAKE_INST_1D()
+  fs("random_search", batch_size = 2)$optimize(instance)
+
+  tab = as.data.table(instance$archive)
+  expect_integer(tab$n_features, any.missing = FALSE, len = nrow(tab))
+})
