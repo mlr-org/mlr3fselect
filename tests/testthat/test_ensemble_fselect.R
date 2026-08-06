@@ -424,6 +424,22 @@ test_that("different callbacks can be set", {
   expect_null(efsr$benchmark_result$score()$learner[[3]]$fselect_instance$archive$data$callback_active)
 })
 
+test_that("efs works with a single learner", {
+  efsr = ensemble_fselect(
+    fselector = fs("random_search"),
+    task = tsk("sonar"),
+    learners = lrn("classif.rpart"),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    inner_resampling = rsmp("cv", folds = 3),
+    inner_measure = msr("classif.ce"),
+    measure = msr("classif.ce"),
+    terminator = trm("evals", n_evals = 3)
+  )
+
+  expect_data_table(efsr$result, nrows = 2)
+  expect_equal(efsr$n_learners, 1)
+})
+
 test_that("knee_points warns on a degenerate pareto front", {
   result = data.table(
     resampling_iteration = 1:2,
@@ -434,11 +450,16 @@ test_that("knee_points warns on a degenerate pareto front", {
   )
   efsr = EnsembleFSResult$new(result = result, features = c("V1", "V2"), measure = msr("classif.ce"))
 
-  expect_warning(kps = efsr$knee_points(), "does not span a range in both dimensions")
+  expect_warning(
+    {
+      kps = efsr$knee_points()
+    },
+    "does not span a range in both dimensions"
+  )
   expect_data_table(kps, nrows = 1)
   expect_false(anyNA(kps))
-})  
-  
+})
+
 test_that("as.data.table on an EnsembleFSResult respects benchmark_result", {
   efsr = ensemble_fselect(
     fselector = fs("random_search"),
