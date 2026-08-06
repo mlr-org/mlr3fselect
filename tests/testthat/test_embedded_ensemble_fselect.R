@@ -73,6 +73,7 @@ test_that("embedded efs works", {
   expect_equal(efsr_zero$n_learners, 1L)
   expect_equal(efsr_zero$n_resamples, 5L)
   expect_equal(efsr_zero$benchmark_result$n_resample_results, 1L)
+  expect_equal(efsr_zero$pareto_front()$n_features, c(2, 3)) # 0 not included
 })
 
 test_that("combine embedded efs results", {

@@ -86,7 +86,7 @@ test_that("efs works", {
   expect_equal(efsr$active_measure, "inner")
   pf_inner = efsr$pareto_front()
   expect_data_table(pf_inner, nrows = 2)
-  expect_false(isTRUE(all.equal(pf_inner[["classif.ce_inner"]], pf[["classif.ce"]]))) # pareto front has changed
+  expect_false(all(pf_inner[["classif.ce_inner"]] == pf[["classif.ce"]])) # pareto front has changed
   expect_equal(names(pf_inner), c("n_features", "classif.ce_inner"))
   kps_inner = efsr$knee_points()
   expect_data_table(kps_inner, nrows = 1)
@@ -396,6 +396,7 @@ test_that("EnsembleFSResult can remove zero-feature results", {
 
   efsr$rm_zero_features()
   expect_data_table(efsr$result, nrows = 1L)
+  expect_data_table(efsr$pareto_front(), nrows = 1L)
   expect_equal(efsr$result$resampling_iteration, 2L)
   expect_equal(efsr$result$learner_id, "lrn1")
   expect_equal(efsr$result$n_features, 2L)
@@ -442,7 +443,7 @@ test_that("pareto_front only returns non-dominated points", {
   expect_equal(pf$n_features, c(1, 2, 3))
   expect_equal(pf$classif.ce, c(0.3, 0.2, 0.1))
 
-  # maximizing measure, no point improves on the best score of one feature
+  # maximizing measure, no point improves on the best score of only one feature
   pf = make_efsr(msr("classif.acc"))$pareto_front()
   expect_equal(pf$n_features, 1)
   expect_equal(pf$classif.acc, 0.5)
