@@ -519,7 +519,10 @@ The knee point is determined as the Pareto point with the maximum distance from 
 </ul><p></p>
 </div><p></p><div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
-<p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> with the knee point(s) of the Pareto front.</p>
+<p>A <a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a> with the knee point(s) of the Pareto front.
+If the Pareto front does not span a range in both the number of features and the performance,
+no knee point can be identified.
+In this case a warning is signaled and the first point of the Pareto front is returned.</p>
 </div>
 
 </div>

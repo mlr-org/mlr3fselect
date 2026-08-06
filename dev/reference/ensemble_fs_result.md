@@ -556,7 +556,10 @@ The available KPI methods are:
 
 A
 [data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html)
-with the knee point(s) of the Pareto front.
+with the knee point(s) of the Pareto front. If the Pareto front does not
+span a range in both the number of features and the performance, no knee
+point can be identified. In this case a warning is signaled and the
+first point of the Pareto front is returned.
 
 ------------------------------------------------------------------------
 

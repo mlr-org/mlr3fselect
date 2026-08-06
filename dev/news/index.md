@@ -4,6 +4,10 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `EnsembleFSResult$knee_points()` silently returned a row of `NA`
+  when the Pareto front did not span a range in both dimensions. The
+  first point of the Pareto front is returned with a warning now
+  ([\#171](https://github.com/mlr-org/mlr3fselect/issues/171)).
 - fix:
   [`extract_inner_fselect_archives()`](https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.md)
   ignored the `exclude_columns` argument because it was passed
