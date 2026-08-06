@@ -9,6 +9,15 @@
   first point of the Pareto front is returned with a warning now
   ([\#171](https://github.com/mlr-org/mlr3fselect/issues/171)).
 - fix:
+  [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fselect.md)
+  and
+  [`embedded_ensemble_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/embedded_ensemble_fselect.md)
+  failed with a cryptic error when a single \[mlr3::Learner\] was passed
+  to the `learners` argument because the result of
+  [`as_learners()`](https://mlr3.mlr-org.com/reference/as_learner.html)
+  was discarded
+  ([\#178](https://github.com/mlr-org/mlr3fselect/issues/178)).
+- fix:
   [`extract_inner_fselect_archives()`](https://mlr3fselect.mlr-org.com/dev/reference/extract_inner_fselect_archives.md)
   ignored the `exclude_columns` argument because it was passed
   positionally to
