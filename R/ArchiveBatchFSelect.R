@@ -155,7 +155,7 @@ ArchiveBatchFSelect = R6Class(
     #' Printer.
     #'
     #' @param ... (ignored).
-    print = function() {
+    print = function(...) {
       cat_cli(cli_h1("{.cls {class(self)[1]}}"))
       print(self$data[, setdiff(names(self$data), "uhash"), with = FALSE], digits = 2)
     },
@@ -185,13 +185,17 @@ ArchiveBatchFSelect = R6Class(
 
       if (self$codomain$target_length == 1L) {
         y = tab[[self$cols_y]] * -self$codomain$direction
+        if (all(is.na(y))) {
+          return(tab[0L])
+        }
         if (ties_method == "least_features") {
-          ii = which(y == max(y))
+          # NA scores never equal the maximum and are dropped by which()
+          ii = which(y == max(y, na.rm = TRUE))
           tab = tab[ii]
           ii = which_min(rowSums(tab[, self$cols_x, with = FALSE]), ties_method = "random")
           tab[ii]
         } else {
-          ii = which_max(y, ties_method = "random")
+          ii = which_max(y, ties_method = "random", na_rm = TRUE)
           tab[ii]
         }
       } else {
@@ -234,7 +238,7 @@ as.data.table.ArchiveBatchFSelect = function(x, ..., exclude_columns = "uhash", 
 
   # add feature vector
   tab[, "features" := lapply(transpose(.SD), function(col) x$cols_x[col]), .SDcols = x$cols_x]
-  tab[, "n_features" := map(get("features"), length)]
+  tab[, "n_features" := lengths(get("features"))]
 
   if (x$benchmark_result$n_resample_results) {
     # add extra measures

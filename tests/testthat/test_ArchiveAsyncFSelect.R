@@ -213,3 +213,47 @@ test_that("ArchiveAsyncFSelect stores models if requested", {
   expect_gte(instance$archive$benchmark_result$n_resample_results, 3L)
   expect_class(instance$archive$resample_result(1)$learners[[1]]$model, "rpart")
 })
+
+test_that("ArchiveAsyncFSelect$best() uses the ties method set during construction", {
+  rush = start_rush()
+  on.exit({
+    rush$reset()
+    mirai::daemons(0)
+  })
+
+  design = mlr3misc::rowwise_table(
+    ~x1,
+    ~x2,
+    ~x3,
+    ~x4,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE
+  )
+
+  score_design = data.table(
+    score = c(0.2, 0.2),
+    features = list("x1", c("x1", "x2"))
+  )
+
+  instance = fsi_async(
+    task = TEST_MAKE_TSK(),
+    learner = lrn("regr.rpart"),
+    resampling = rsmp("cv", folds = 3),
+    measures = msr("dummy", score_design = score_design, minimize = FALSE),
+    terminator = trm("evals", n_evals = 2),
+    ties_method = "random",
+    rush = rush
+  )
+  fs("async_design_points", design = design)$optimize(instance)
+
+  expect_equal(instance$archive$ties_method, "random")
+  cols_x = instance$archive$cols_x
+  n_features = map_dbl(seq(20), function(i) rowSums(instance$archive$best()[, cols_x, with = FALSE]))
+  expect_gt(length(unique(n_features)), 1L)
+})

@@ -284,3 +284,93 @@ test_that("AutoFSelector works with async fselector", {
   expect_data_table(at$fselect_instance$result, nrows = 1)
   expect_data_table(at$fselect_instance$archive$data, min.rows = 4)
 })
+
+test_that("active bindings are read-only", {
+  at = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+
+  expect_error(at$archive <- 1, "read-only")
+  expect_error(at$learner <- 1, "read-only")
+  expect_error(at$fselect_instance <- 1, "read-only")
+  expect_error(at$fselect_result <- 1, "read-only")
+}) 
+ 
+test_that("instantiated resampling with foreign row ids is rejected", {
+  run = function(key, ...) {
+    resampling = rsmp(key, ...)
+    resampling$instantiate(tsk("iris"))
+    at = AutoFSelector$new(
+      fselector = fs("random_search", batch_size = 1),
+      learner = lrn("classif.rpart"),
+      resampling = rsmp(key, ...),
+      measure = msr("classif.ce"),
+      terminator = trm("evals", n_evals = 2)
+    )
+    # the constructor rejects instantiated resamplings, so the check is only reachable via `$instance_args`
+    at$instance_args$resampling = resampling
+    at$train(tsk("iris")$filter(1:50))
+  }
+
+  expect_error(run("cv", folds = 3), "set 1 of inner resampling 'cv' contains row ids")
+  expect_error(run("holdout"), "set 1 of inner resampling 'holdout' contains row ids")
+})
+
+test_that("hash and phash are stable and identical", {
+  at_1 = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+  at_2 = at_1$clone(deep = TRUE)
+
+  expect_equal(at_1$hash, at_2$hash)
+  expect_equal(at_1$phash, at_1$hash)
+
+  at_2$id = "other"
+  expect_false(at_1$hash == at_2$hash)
+})
+
+test_that("predict_type is set on the final model", {
+  at = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+
+  # setting the predict type before training only changes the auto fselector
+  at$predict_type = "prob"
+  expect_equal(at$predict_type, "prob")
+
+  at$train(tsk("iris"))
+  expect_equal(at$model$learner$predict_type, "prob")
+
+  # setting the predict type after training also changes the final model
+  at$predict_type = "response"
+  expect_equal(at$predict_type, "response")
+  expect_equal(at$model$learner$predict_type, "response")
+
+  expect_error(at$predict_type <- "se", "does not support predict type")
+})
+
+test_that("predict_type is used for the predictions", {
+  at = auto_fselector(
+    fselector = fs("random_search", batch_size = 1),
+    learner = lrn("classif.rpart"),
+    resampling = rsmp("holdout"),
+    measure = msr("classif.ce"),
+    term_evals = 2
+  )
+  at$predict_type = "prob"
+  at$train(tsk("iris"))
+
+  expect_matrix(at$predict(tsk("iris"))$prob)
+})

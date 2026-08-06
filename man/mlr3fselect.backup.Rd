@@ -5,6 +5,9 @@
 \title{Backup Benchmark Result Callback}
 \description{
 This \link{CallbackBatchFSelect} writes the \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} after each batch to disk.
+The \code{path} must be set, e.g. \code{clbk("mlr3fselect.backup", path = "backup.rds")}.
+The benchmark result is written to a temporary file first and then renamed,
+so that a crash while writing does not destroy the backup of the previous batch.
 }
 \examples{
 clbk("mlr3fselect.backup", path = "backup.rds")

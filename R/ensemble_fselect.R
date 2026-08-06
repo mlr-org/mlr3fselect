@@ -90,7 +90,7 @@ ensemble_fselect = function(
   store_models = FALSE
 ) {
   assert_task(task)
-  assert_learners(as_learners(learners), task = task)
+  learners = assert_learners(as_learners(learners), task = task)
   assert_resampling(init_resampling)
   assert_choice(class(init_resampling)[1], choices = c("ResamplingBootstrap", "ResamplingSubsampling"))
   assert_resampling(inner_resampling)
