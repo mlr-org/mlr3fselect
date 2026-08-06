@@ -397,7 +397,8 @@ have also a feature-wise score.</p></li>
 <h3 id="ensemblefsresult-stability-"><code>EnsembleFSResult$stability()</code><a class="anchor" aria-label="anchor" href="#ensemblefsresult-stability-"></a></h3>
 <p>Calculates the stability of the selected features with the <a href="https://CRAN.R-project.org/package=stabm" class="external-link"><span class="pkg">stabm</span></a> package.
 The results are cached.
-When the same stability measure is requested again with different arguments, the cache must be reset.</p><div class="section">
+The cache key covers the stability measure and the arguments passed to it,
+so the same measure requested with different arguments is calculated again.</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">EnsembleFSResult</span><span class="op">$</span><span class="fu">stability</span><span class="op">(</span></span>
 <span>  stability_measure <span class="op">=</span> <span class="st">"jaccard"</span>,</span>

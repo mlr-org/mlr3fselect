@@ -14,6 +14,10 @@
   when the Pareto front did not span a range in both dimensions. The
   first point of the Pareto front is returned with a warning now
   ([\#171](https://github.com/mlr-org/mlr3fselect/issues/171)).
+- fix: `EnsembleFSResult$stability()` cached the results by stability
+  measure only, so the same measure requested with different
+  `stability_args` returned the cached value of the first call
+  ([\#189](https://github.com/mlr-org/mlr3fselect/issues/189)).
 - fix:
   [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fselect.md)
   and

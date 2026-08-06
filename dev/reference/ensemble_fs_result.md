@@ -404,8 +404,9 @@ listing all the features, ordered by decreasing scores (depends on the
 
 Calculates the stability of the selected features with the
 [stabm](https://CRAN.R-project.org/package=stabm) package. The results
-are cached. When the same stability measure is requested again with
-different arguments, the cache must be reset.
+are cached. The cache key covers the stability measure and the arguments
+passed to it, so the same measure requested with different arguments is
+calculated again.
 
 #### Usage
 
