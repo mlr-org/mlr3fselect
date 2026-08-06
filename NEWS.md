@@ -3,6 +3,7 @@
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
 * fix: `embedded_ensemble_fselect()` instantiated the [mlr3::Resampling] passed to `init_resampling` by reference, so the resampling of the user was changed and reused the row ids of the first task when applied to another task (#179).
 * fix: `EnsembleFSResult$knee_points()` silently returned a row of `NA` when the Pareto front did not span a range in both dimensions. The first point of the Pareto front is returned with a warning now (#171).
+* fix: `EnsembleFSResult$stability()` cached the results by stability measure only, so the same measure requested with different `stability_args` returned the cached value of the first call (#189).
 * fix: `ensemble_fselect()` and `embedded_ensemble_fselect()` failed with a cryptic error when a single [mlr3::Learner] was passed to the `learners` argument because the result of `as_learners()` was discarded (#178).
 * fix: `extract_inner_fselect_archives()` ignored the `exclude_columns` argument because it was passed positionally to `as.data.table()` where it landed in the `...` argument (#180).
 * fix: `as.data.table()` on an `ArchiveBatchFSelect` returned the `n_features` column as a list column instead of an integer column, so operations such as `sort()` failed with `'x' must be atomic` (#181).

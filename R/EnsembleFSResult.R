@@ -385,7 +385,8 @@ EnsembleFSResult = R6Class(
     #' @description
     #' Calculates the stability of the selected features with the \CRANpkg{stabm} package.
     #' The results are cached.
-    #' When the same stability measure is requested again with different arguments, the cache must be reset.
+    #' The cache key covers the stability measure and the arguments passed to it,
+    #' so the same measure requested with different arguments is calculated again.
     #'
     #' @param stability_measure (`character(1)`)\cr
     #'  The stability measure to be used.
@@ -411,23 +412,26 @@ EnsembleFSResult = R6Class(
       assert_choice(stability_measure, choices = keys)
       assert_list(stability_args, null.ok = TRUE, names = "named")
 
+      # the arguments change the result, so they must be part of the cache key
+      key = calculate_hash(stability_measure, stability_args)
+
       if (global) {
         # cached results
-        if (!is.null(private$.stability_global[[stability_measure]]) && !reset_cache) {
-          return(private$.stability_global[[stability_measure]])
+        if (!is.null(private$.stability_global[[key]]) && !reset_cache) {
+          return(private$.stability_global[[key]])
         }
 
         fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
-        private$.stability_global[[stability_measure]] = invoke(
+        private$.stability_global[[key]] = invoke(
           fun,
           features = private$.result$features,
           .args = stability_args
         )
-        private$.stability_global[[stability_measure]]
+        private$.stability_global[[key]]
       } else {
         # cached results
-        if (!is.null(private$.stability_learner[[stability_measure]]) && !reset_cache) {
-          return(private$.stability_learner[[stability_measure]])
+        if (!is.null(private$.stability_learner[[key]]) && !reset_cache) {
+          return(private$.stability_learner[[key]])
         }
 
         fun = get(funs[which(stability_measure == keys)], envir = asNamespace("stabm"))
@@ -437,8 +441,8 @@ EnsembleFSResult = R6Class(
           list(score = invoke(fun, features = .SD$features, .args = stability_args)),
           by = learner_id
         ]
-        private$.stability_learner[[stability_measure]] = set_names(tab$score, tab$learner_id)
-        private$.stability_learner[[stability_measure]]
+        private$.stability_learner[[key]] = set_names(tab$score, tab$learner_id)
+        private$.stability_learner[[key]]
       }
     },
 

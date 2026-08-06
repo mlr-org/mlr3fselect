@@ -399,7 +399,8 @@ have also a feature-wise score.
 \subsection{\code{EnsembleFSResult$stability()}}{
   Calculates the stability of the selected features with the \CRANpkg{stabm} package.
 The results are cached.
-When the same stability measure is requested again with different arguments, the cache must be reset.
+The cache key covers the stability measure and the arguments passed to it,
+so the same measure requested with different arguments is calculated again.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{EnsembleFSResult$stability(
