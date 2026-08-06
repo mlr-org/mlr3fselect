@@ -78,7 +78,7 @@ FSelectorBatchShadowVariableSearch = R6Class(
     #' @return [data.table::data.table]
     optimization_path = function(inst) {
       if (inst$archive$n_batch == 0L) {
-        stop("No results stored in archive")
+        error_input("No results stored in the archive.")
       }
 
       # we have to use the best method to get the same tie breaking as in the optimize method
@@ -90,10 +90,17 @@ FSelectorBatchShadowVariableSearch = R6Class(
 
   private = list(
     .optimize = function(inst) {
-      # save initial state
+      # save the initial state on the instance and restore it when the optimization ends
+      # on.exit() also restores the state when the optimization is aborted with an error
       task = inst$objective$task
-      private$.task = suppressWarnings(task$clone(deep = TRUE))
-      private$.domain = inst$objective$domain$clone()
+      original_task = task$clone(deep = TRUE)
+      original_domain = inst$objective$domain$clone()
+      on.exit({
+        inst$objective$task = original_task
+        inst$objective$domain = original_domain
+        inst$archive$search_space = original_domain
+        inst$search_space = original_domain
+      })
 
       # add shadow variables to task
       data = map_dtc(task$data(cols = task$feature_names), shuffle)
@@ -121,48 +128,29 @@ FSelectorBatchShadowVariableSearch = R6Class(
       inst$eval_batch(states)
 
       repeat {
-        ({
-          res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
+        res = archive$best(batch = archive$n_batch)[, feature_names, with = FALSE]
 
-          # check if any shadow variable was selected
-          if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
-            # stop if the first selected feature is a shadow variable
-            if (archive$n_batch == 1) {
-              stop("The first selected feature is a shadow variable.")
-            }
-
-            # remove last batch with selected shadow variable from archive
-            archive = inst$archive
-            archive$data = archive$data[get("batch_nr") != archive$n_batch, ]
-            break
+        # check if any shadow variable was selected
+        if (any(as.logical(res[, shadow_variables, with = FALSE]))) {
+          # stop if the first selected feature is a shadow variable
+          if (archive$n_batch == 1) {
+            error_mlr3("The first selected feature is a shadow variable.")
           }
 
-          best_state = as.logical(res)
-          states = map_dtr(seq_along(best_state)[!best_state], function(i) {
-            if (!best_state[i]) {
-              new_state = best_state
-              new_state[i] = TRUE
-              set_names(as.list(new_state), feature_names)
-            }
-          })
-          inst$eval_batch(states)
+          # remove last batch with selected shadow variable from archive
+          archive$data = archive$data[get("batch_nr") != archive$n_batch, ]
+          break
+        }
+
+        best_state = as.logical(res)
+        states = map_dtr(seq_along(best_state)[!best_state], function(i) {
+          new_state = best_state
+          new_state[i] = TRUE
+          set_names(as.list(new_state), feature_names)
         })
+        inst$eval_batch(states)
       }
-    },
-
-    .assign_result = function(inst) {
-      # restore task and domain without shadow variables
-      inst$objective$task = private$.task
-      inst$objective$domain = private$.domain
-      inst$archive$search_space = private$.domain
-      inst$search_space = private$.domain
-
-      assign_result_default(inst)
-    },
-
-    .task = NULL,
-
-    .domain = NULL
+    }
   )
 )
 

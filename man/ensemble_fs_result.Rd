@@ -526,6 +526,9 @@ The knee point is determined as the Pareto point with the maximum distance from 
   }
   \subsection{Returns}{
     A \link[data.table:data.table]{data.table::data.table} with the knee point(s) of the Pareto front.
+If the Pareto front does not span a range in both the number of features and the performance,
+no knee point can be identified.
+In this case a warning is signaled and the first point of the Pareto front is returned.
   }
 }
 

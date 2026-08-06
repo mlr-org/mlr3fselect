@@ -52,7 +52,7 @@ test_that("embedded efs works", {
   )
 
   # cannot change to use inner_measure
-  expect_error(efsr$set_active_measure(which = "inner"), "No inner_measure was defined")
+  expect_error(efsr$set_active_measure(which = "inner"), "No `inner_measure` was defined")
   # changing to "outer" leaves us with the same measure
   efsr$set_active_measure(which = "outer")
   expect_equal(efsr$measure$id, "classif.ce") # classification error
@@ -112,4 +112,29 @@ test_that("combine embedded efs results", {
   expect_equal(comb2$benchmark_result$n_resample_results, 4L)
   expect_equal(nrow(get_private(comb1$benchmark_result)$.data$data$fact), 10L)
   expect_equal(nrow(get_private(comb2$benchmark_result)$.data$data$fact), 10L)
+})
+
+test_that("embedded efs does not instantiate the resampling of the user", {
+  init_resampling = rsmp("subsampling", repeats = 2)
+
+  embedded_ensemble_fselect(
+    task = tsk("sonar"),
+    learners = lrns(c("classif.rpart", "classif.featureless")),
+    init_resampling = init_resampling,
+    measure = msr("classif.ce")
+  )
+
+  expect_false(init_resampling$is_instantiated)
+})  
+  
+test_that("embedded efs works with a single learner", {
+  efsr = embedded_ensemble_fselect(
+    task = tsk("sonar"),
+    learners = lrn("classif.rpart"),
+    init_resampling = rsmp("subsampling", repeats = 2),
+    measure = msr("classif.ce")
+  )
+
+  expect_data_table(efsr$result, nrows = 2)
+  expect_equal(efsr$n_learners, 1)
 })

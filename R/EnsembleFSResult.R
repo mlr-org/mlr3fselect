@@ -214,7 +214,7 @@ EnsembleFSResult = R6Class(
 
       # check if `inner_measure` is an `mlr3::Measure`
       if (which == "inner" && is.null(private$.inner_measure)) {
-        stop("No inner_measure was defined during initialization")
+        error_input("No `inner_measure` was defined during initialization.")
       }
 
       private$.active_measure = which
@@ -277,7 +277,7 @@ EnsembleFSResult = R6Class(
         }
 
         # Combine results from both objects
-        private$.result = data.table::rbindlist(list(private$.result, result2), fill = FALSE)
+        private$.result = rbindlist(list(private$.result, result2), fill = FALSE)
 
         # Merge benchmark results if available in both objects
         has_bmr = !is.null(self$benchmark_result)
@@ -527,7 +527,7 @@ EnsembleFSResult = R6Class(
         pf = pf[n_features > 0]
 
         # Fit the linear model
-        form = mlr3misc::formulate(lhs = measure_id, rhs = "n_features_inv")
+        form = formulate(lhs = measure_id, rhs = "n_features_inv")
         model = stats::lm(formula = form, data = pf)
 
         # Predict values using the model to create a smooth curve
@@ -571,6 +571,9 @@ EnsembleFSResult = R6Class(
     #'  See `pareto_front()` method for more details.
     #'
     #' @return A [data.table::data.table] with the knee point(s) of the Pareto front.
+    #' If the Pareto front does not span a range in both the number of features and the performance,
+    #' no knee point can be identified.
+    #' In this case a warning is signaled and the first point of the Pareto front is returned.
     knee_points = function(method = "NBI", type = "empirical", max_nfeatures = NULL) {
       assert_choice(method, choices = c("NBI"))
       assert_choice(type, choices = c("empirical", "estimated"))
@@ -582,6 +585,18 @@ EnsembleFSResult = R6Class(
         self$pareto_front()
       } else {
         self$pareto_front(type = "estimated", max_nfeatures = max_nfeatures)
+      }
+
+      # The distance to the line between the edge points is only defined if the Pareto front spans a range in both
+      # dimensions, otherwise the scaling below divides by zero and every distance is `NaN`
+      if (!nrow(pf)) {
+        return(pf)
+      }
+      if (uniqueN(pf[["n_features"]]) < 2L || uniqueN(pf[[measure_id]]) < 2L) {
+        warning_mlr3(
+          "The Pareto front does not span a range in both dimensions, so no knee point can be identified. Returning the first point of the Pareto front."
+        )
+        return(pf[1L])
       }
 
       # Scale the Pareto front data to (0-1) range
@@ -675,8 +690,9 @@ EnsembleFSResult = R6Class(
 )
 
 #' @export
-as.data.table.EnsembleFSResult = function(x, ...) {
-  x$result
+as.data.table.EnsembleFSResult = function(x, ..., benchmark_result = TRUE) {
+  assert_flag(benchmark_result)
+  if (benchmark_result) x$result else copy(get_private(x)$.result)
 }
 
 #' @export

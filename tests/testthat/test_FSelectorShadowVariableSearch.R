@@ -69,3 +69,17 @@ test_that("search is terminated by terminator works", {
   # check that task is restored
   suppressWarnings(expect_equal(instance$objective$task, task))
 })
+
+test_that("state is restored when the optimization is aborted", {
+  score_design = data.table(score = 1, features = "permuted__x1")
+  instance = TEST_MAKE_INST_1D(measure = msr("dummy", score_design = score_design), terminator = trm("none"))
+  task = instance$objective$task$clone()
+  domain = instance$objective$domain$clone()
+  fselector = fs("shadow_variable_search")
+
+  expect_error(fselector$optimize(instance), regexp = "The first selected feature is a shadow variable.")
+
+  expect_equal(instance$search_space, domain)
+  expect_equal(instance$objective$domain, domain)
+  expect_equal(instance$objective$task$feature_names, task$feature_names)
+})
