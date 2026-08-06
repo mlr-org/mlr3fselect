@@ -493,8 +493,8 @@ EnsembleFSResult = R6Class(
         data[order(n_features, -get(measure_id))]
       }
 
-      # Only the best score of a given number of features can be Pareto optimal,
-      # all other points with the same number of features are dominated by it
+      # handle ties: keep the best score of a given number of features as Pareto optimal,
+      # as all other points with the same number of features are dominated by it
       data = unique(data, by = "n_features")
 
       # Keep the points that improve on all points with fewer features
