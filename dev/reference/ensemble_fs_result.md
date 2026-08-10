@@ -652,16 +652,15 @@ The objects of this class are cloneable with this method.
   # returns the empirical pareto front, i.e. n_features vs measure (error)
   efsr$pareto_front()
 #>    n_features classif.acc
-#>         <num>       <num>
-#> 1:          2   0.5072464
-#> 2:          2   0.5797101
-#> 3:          3   0.6811594
-#> 4:         15   0.7971014
+#>         <int>       <num>
+#> 1:          2   0.5797101
+#> 2:          3   0.6811594
+#> 3:         15   0.7971014
 
   # returns the knee points (optimal trade-off between n_features and performance)
   efsr$knee_points()
 #>    n_features classif.acc
-#>         <num>       <num>
+#>         <int>       <num>
 #> 1:          3   0.6811594
 
   # change to use the inner optimization measure
@@ -670,10 +669,9 @@ The objects of this class are cloneable with this method.
   # Pareto front is calculated on the inner measure
   efsr$pareto_front()
 #>    n_features classif.ce_inner
-#>         <num>            <num>
-#> 1:          2        0.5539624
-#> 2:          2        0.4537465
-#> 3:          3        0.3021893
-#> 4:         15        0.2516189
+#>         <int>            <num>
+#> 1:          2        0.4537465
+#> 2:          3        0.3021893
+#> 3:         15        0.2516189
 # }
 ```

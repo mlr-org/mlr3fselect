@@ -4,6 +4,10 @@
 
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
+- fix: `EnsembleFSResult$pareto_front()` correctly now handles ties in
+  the pareto front: in edge cases, it returned dominated points for
+  minimizing measures and discarded the true front for maximizing
+  measures ([\#170](https://github.com/mlr-org/mlr3fselect/issues/170)).
 - fix:
   [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/dev/reference/ensemble_fselect.md)
   dropped the `importance` column for subclasses of `FSelectorBatchRFE`.
