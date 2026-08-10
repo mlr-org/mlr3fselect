@@ -490,34 +490,24 @@ EnsembleFSResult = R6Class(
       cols_to_keep = c("n_features", measure_id)
       data = result[, cols_to_keep, with = FALSE]
 
-      # Order data according to the measure
+      # Order the data by the number of features and put the best score of each number of features first
       data = if (minimize) {
-        data[order(n_features, -get(measure_id))]
-      } else {
         data[order(n_features, get(measure_id))]
+      } else {
+        data[order(n_features, -get(measure_id))]
       }
 
-      # Initialize the Pareto front
-      pf = data.table(n_features = numeric(0))
-      pf[, (measure_id) := numeric(0)]
+      # handle ties: keep the best score of a given number of features as Pareto optimal,
+      # as all other points with the same number of features are dominated by it
+      data = unique(data, by = "n_features")
 
-      # Initialize the best performance to a large number so
-      # that the Pareto front has at least one point
-      best_score = if (minimize) Inf else -Inf
-
-      for (i in seq_row(data)) {
-        # Determine the condition based on minimize
-        if (minimize) {
-          condition = data[[measure_id]][i] < best_score
-        } else {
-          condition = data[[measure_id]][i] > best_score
-        }
-
-        if (condition) {
-          pf = rbind(pf, data[i])
-          best_score = data[[measure_id]][i]
-        }
-      }
+      # Keep the points that improve on all points with fewer features
+      scores = data[[measure_id]]
+      best_scores = shift(
+        if (minimize) cummin(scores) else cummax(scores),
+        fill = if (minimize) Inf else -Inf
+      )
+      pf = data[if (minimize) scores < best_scores else scores > best_scores]
 
       if (type == "estimated") {
         # Transform the data (x => 1/x)

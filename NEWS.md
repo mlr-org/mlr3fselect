@@ -1,6 +1,7 @@
 # mlr3fselect (development version)
 
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
+* fix: `EnsembleFSResult$pareto_front()` correctly now handles ties in the pareto front: in edge cases, it returned dominated points for minimizing measures and discarded the true front for maximizing measures (#170).
 * fix: `ensemble_fselect()` dropped the `importance` column for subclasses of `FSelectorBatchRFE`. The column is now added whenever the feature selection result contains importance scores (#195).
 * fix: `embedded_ensemble_fselect()` instantiated the [mlr3::Resampling] passed to `init_resampling` by reference, so the resampling of the user was changed and reused the row ids of the first task when applied to another task (#179).
 * fix: `EnsembleFSResult$knee_points()` silently returned a row of `NA` when the Pareto front did not span a range in both dimensions. The first point of the Pareto front is returned with a warning now (#171).

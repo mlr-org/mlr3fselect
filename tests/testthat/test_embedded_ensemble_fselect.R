@@ -30,7 +30,9 @@ test_that("embedded efs works", {
 
   # pareto_front
   pf = efsr$pareto_front()
-  expect_data_table(pf, nrows = 7)
+  expect_data_table(pf, nrows = 3)
+  # the empirical Pareto front only holds non-dominated points
+  expect_equal(pf$n_features, c(0, 2, 3))
   expect_equal(names(pf), c("n_features", "classif.ce"))
   pf_pred = efsr$pareto_front(type = "estimated")
   expect_data_table(pf_pred, nrows = max(efsr$result$n_features))
@@ -40,9 +42,9 @@ test_that("embedded efs works", {
   kps = efsr$knee_points()
   expect_data_table(kps, nrows = 1)
   expect_equal(names(kps), c("n_features", "classif.ce"))
+  expect_true(kps$n_features %in% pf$n_features)
   kpse = efsr$knee_points(type = "estimated")
   expect_data_table(kpse, nrows = 1)
-  expect_true(kps$n_features != kpse$n_features)
 
   # data.table conversion
   tab = as.data.table(efsr)
@@ -71,6 +73,7 @@ test_that("embedded efs works", {
   expect_equal(efsr_zero$n_learners, 1L)
   expect_equal(efsr_zero$n_resamples, 5L)
   expect_equal(efsr_zero$benchmark_result$n_resample_results, 1L)
+  expect_equal(efsr_zero$pareto_front()$n_features, c(2, 3)) # 0 not included
 })
 
 test_that("combine embedded efs results", {
