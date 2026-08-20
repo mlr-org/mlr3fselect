@@ -241,26 +241,20 @@ learner$train(task)
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:   TRUE   FALSE    TRUE  FALSE    FALSE    FALSE     TRUE    TRUE  0.5348837
-#> 2:  FALSE   FALSE   FALSE  FALSE    FALSE     TRUE    FALSE   FALSE  0.3720930
-#> 3:   TRUE    TRUE    TRUE  FALSE     TRUE     TRUE     TRUE    TRUE  0.3255814
-#> 4:   TRUE    TRUE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.4883721
+#> 1:  FALSE   FALSE    TRUE   TRUE    FALSE    FALSE    FALSE   FALSE  0.3281250
+#> 2:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE     TRUE   FALSE  0.3671875
+#> 3:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.3085938
+#> 4:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE    FALSE    TRUE  0.3593750
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.007 2026-08-10 09:27:22        1        0      0
-#> 2:            0.006 2026-08-10 09:27:22        1        0      0
-#> 3:            0.007 2026-08-10 09:27:22        2        0      0
-#> 4:            0.006 2026-08-10 09:27:22        2        0      0
-#>                                                 features n_features
-#>                                                   <list>      <int>
-#> 1:                          age,insulin,pressure,triceps          4
-#> 2:                                              pregnant          1
-#> 3: age,glucose,insulin,pedigree,pregnant,pressure,...[7]          7
-#> 4:           age,glucose,mass,pedigree,pregnant,pressure          6
-#>     resample_result
-#>              <list>
-#> 1: <ResampleResult>
-#> 2: <ResampleResult>
-#> 3: <ResampleResult>
-#> 4: <ResampleResult>
+#> 1:            0.007 2026-08-20 09:00:30        1        0      0
+#> 2:            0.007 2026-08-20 09:00:30        1        0      0
+#> 3:            0.009 2026-08-20 09:00:30        2        0      0
+#> 4:            0.008 2026-08-20 09:00:30        2        0      0
+#>                               features n_features  resample_result
+#>                                 <list>      <int>           <list>
+#> 1:                        insulin,mass          2 <ResampleResult>
+#> 2:                   pedigree,pressure          2 <ResampleResult>
+#> 3: age,mass,pedigree,pregnant,pressure          5 <ResampleResult>
+#> 4:  age,mass,pedigree,pregnant,triceps          5 <ResampleResult>
 ```

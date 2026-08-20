@@ -159,10 +159,13 @@ fselector = fs("random_search", batch_size = 2)
 fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
-#>                             features n_features classif.ce
-#>                               <list>      <int>      <num>
-#> 1: bill_length,flipper_length,island          3 0.06684465
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#>                                                             features n_features
+#>                                                               <list>      <int>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#>    classif.ce
+#>         <num>
+#> 1: 0.07561658
 
 # Subset task to optimal feature set
 task$select(instance$result_feature_set)
@@ -174,21 +177,27 @@ learner$train(task)
 as.data.table(instance$archive)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE       FALSE      TRUE           TRUE  FALSE   TRUE  FALSE
-#> 2:      FALSE        TRUE      TRUE           TRUE   TRUE   TRUE  FALSE
-#> 3:       TRUE        TRUE     FALSE          FALSE   TRUE  FALSE  FALSE
-#> 4:      FALSE        TRUE     FALSE           TRUE   TRUE  FALSE  FALSE
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#> 2:       TRUE       FALSE     FALSE          FALSE  FALSE  FALSE   TRUE
+#> 3:      FALSE       FALSE     FALSE          FALSE  FALSE  FALSE   TRUE
+#> 4:       TRUE        TRUE      TRUE           TRUE  FALSE   TRUE   TRUE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.20063565            0.016 2026-08-10 09:27:24        1        0      0
-#> 2: 0.06684465            0.015 2026-08-10 09:27:24        1        0      0
-#> 3: 0.06987033            0.017 2026-08-10 09:27:24        2        0      0
-#> 4: 0.06684465            0.015 2026-08-10 09:27:24        2        0      0
-#>                                           features n_features  resample_result
-#>                                             <list>      <int>           <list>
-#> 1:         bill_depth,body_mass,flipper_length,sex          4 <ResampleResult>
-#> 2: bill_length,body_mass,flipper_length,island,sex          5 <ResampleResult>
-#> 3:                   bill_depth,bill_length,island          3 <ResampleResult>
-#> 4:               bill_length,flipper_length,island          3 <ResampleResult>
+#> 1: 0.07561658            0.020 2026-08-20 09:00:33        1        0      0
+#> 2: 0.25570811            0.015 2026-08-20 09:00:33        1        0      0
+#> 3: 0.58126112            0.018 2026-08-20 09:00:33        2        0      0
+#> 4: 0.07851513            0.021 2026-08-20 09:00:33        2        0      0
+#>                                                             features n_features
+#>                                                               <list>      <int>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#> 2:                                                   bill_depth,year          2
+#> 3:                                                              year          1
+#> 4:          bill_depth,bill_length,body_mass,flipper_length,sex,year          6
+#>     resample_result
+#>              <list>
+#> 1: <ResampleResult>
+#> 2: <ResampleResult>
+#> 3: <ResampleResult>
+#> 4: <ResampleResult>
 # }
 ```

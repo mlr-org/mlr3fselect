@@ -126,25 +126,25 @@ instance = fselect(
 instance$result
 #>       age glucose insulin   mass pedigree pregnant pressure triceps
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>
-#> 1:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE
+#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE
 #>                     features n_features classif.ce
 #>                       <list>      <int>      <num>
-#> 1: age,glucose,mass,pregnant          4  0.3023256
+#> 1: age,insulin,mass,pregnant          4  0.2773438
 
 # all evaluated feature sets
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.4418605
-#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.3023256
-#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.4418605
-#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.4418605
+#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.2773438
+#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2812500
+#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2773438
+#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.2773438
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.006 2026-08-10 09:27:31        1        0      0
-#> 2:            0.007 2026-08-10 09:27:31        2        0      0
-#> 3:            0.007 2026-08-10 09:27:31        3        0      0
-#> 4:            0.008 2026-08-10 09:27:31        4        0      0
+#> 1:            0.009 2026-08-20 09:00:40        1        0      0
+#> 2:            0.008 2026-08-20 09:00:40        2        0      0
+#> 3:            0.010 2026-08-20 09:00:40        3        0      0
+#> 4:            0.009 2026-08-20 09:00:40        4        0      0
 #>                                      features n_features  resample_result
 #>                                        <list>      <int>           <list>
 #> 1:          age,insulin,mass,pregnant,triceps          5 <ResampleResult>
