@@ -1,3 +1,5 @@
+# mlr3fselect (development version)
+
 # mlr3fselect 1.7.0
 
 * fix: Errors raised by mlr3fselect are structured conditions with the `Mlr3Error` class now, so they can be caught by class and are formatted with cli (#198).
