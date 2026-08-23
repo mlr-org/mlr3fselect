@@ -247,10 +247,10 @@ as.data.table(instance$archive)
 #> 4:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE    FALSE    TRUE  0.3593750
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.008 2026-08-20 10:51:57        1        0      0
-#> 2:            0.008 2026-08-20 10:51:57        1        0      0
-#> 3:            0.007 2026-08-20 10:51:57        2        0      0
-#> 4:            0.007 2026-08-20 10:51:57        2        0      0
+#> 1:            0.008 2026-08-23 14:00:42        1        0      0
+#> 2:            0.008 2026-08-23 14:00:42        1        0      0
+#> 3:            0.008 2026-08-23 14:00:42        2        0      0
+#> 4:            0.008 2026-08-23 14:00:42        2        0      0
 #>                               features n_features  resample_result
 #>                                 <list>      <int>           <list>
 #> 1:                        insulin,mass          2 <ResampleResult>

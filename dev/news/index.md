@@ -2,6 +2,17 @@
 
 ## mlr3fselect (development version)
 
+## mlr3fselect 1.7.0
+
+CRAN release: 2026-08-23
+
+- fix: Errors raised by mlr3fselect are structured conditions with the
+  `Mlr3Error` class now, so they can be caught by class and are
+  formatted with cli
+  ([\#198](https://github.com/mlr-org/mlr3fselect/issues/198)).
+- fix: Loading the package repeatedly duplicated the entries that
+  mlr3fselect adds to the reflections of bbotk and mlr3
+  ([\#199](https://github.com/mlr-org/mlr3fselect/issues/199)).
 - fix: `ArchiveAsyncFSelect` pushed results with the removed
   `rush::Rush$push_results()` method.
 - fix: `EnsembleFSResult$pareto_front()` correctly now handles ties in
@@ -87,6 +98,11 @@
   e.g. `"prob"` was set. Errors raised while setting the predict type on
   the final model are not swallowed anymore
   ([\#184](https://github.com/mlr-org/mlr3fselect/issues/184)).
+- fix: The `$archive`, `$learner`, `$fselect_instance` and
+  `$fselect_result` bindings of `AutoFSelector` are read-only now.
+  Previously an assignment failed with `unused argument` instead of the
+  usual read-only error
+  ([\#186](https://github.com/mlr-org/mlr3fselect/issues/186)).
 - fix: `AutoFSelector$train()` did not check the row ids of an
   instantiated inner resampling for cross-validation and reported a
   wrong set number for holdout

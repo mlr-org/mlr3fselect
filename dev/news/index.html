@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mlr3fselect</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.6.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.7.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,12 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="mlr3fselect-development-version">mlr3fselect (development version)<a class="anchor" aria-label="anchor" href="#mlr3fselect-development-version"></a></h2>
-<ul><li>fix: <code>ArchiveAsyncFSelect</code> pushed results with the removed <code>rush::Rush$push_results()</code> method.</li>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.7.0" id="mlr3fselect-170">mlr3fselect 1.7.0<a class="anchor" aria-label="anchor" href="#mlr3fselect-170"></a></h2><p class="text-muted">CRAN release: 2026-08-23</p>
+<ul><li>fix: Errors raised by mlr3fselect are structured conditions with the <code>Mlr3Error</code> class now, so they can be caught by class and are formatted with cli (<a href="https://github.com/mlr-org/mlr3fselect/issues/198" class="external-link">#198</a>).</li>
+<li>fix: Loading the package repeatedly duplicated the entries that mlr3fselect adds to the reflections of bbotk and mlr3 (<a href="https://github.com/mlr-org/mlr3fselect/issues/199" class="external-link">#199</a>).</li>
+<li>fix: <code>ArchiveAsyncFSelect</code> pushed results with the removed <code>rush::Rush$push_results()</code> method.</li>
 <li>fix: <code>EnsembleFSResult$pareto_front()</code> correctly now handles ties in the pareto front: in edge cases, it returned dominated points for minimizing measures and discarded the true front for maximizing measures (<a href="https://github.com/mlr-org/mlr3fselect/issues/170" class="external-link">#170</a>).</li>
 <li>fix: <code><a href="../reference/ensemble_fselect.html">ensemble_fselect()</a></code> dropped the <code>importance</code> column for subclasses of <code>FSelectorBatchRFE</code>. The column is now added whenever the feature selection result contains importance scores (<a href="https://github.com/mlr-org/mlr3fselect/issues/195" class="external-link">#195</a>).</li>
 <li>fix: <code><a href="../reference/embedded_ensemble_fselect.html">embedded_ensemble_fselect()</a></code> instantiated the [mlr3::Resampling] passed to <code>init_resampling</code> by reference, so the resampling of the user was changed and reused the row ids of the first task when applied to another task (<a href="https://github.com/mlr-org/mlr3fselect/issues/179" class="external-link">#179</a>).</li>
@@ -66,6 +71,7 @@
 <li>fix: The <code>$print()</code> methods of <code>ArchiveBatchFSelect</code>, <code>ArchiveAsyncFSelect</code>, <code>ArchiveAsyncFSelectFrozen</code>, <code>AutoFSelector</code> and <code>FSelector</code> errored with <code>unused argument</code> when arguments such as <code>digits</code> were passed (<a href="https://github.com/mlr-org/mlr3fselect/issues/190" class="external-link">#190</a>).</li>
 <li>fix: <code>fs("rfecv")</code> had the same label as <code>fs("rfe")</code>, so both were indistinguishable in <code>as.data.table(mlr_fselectors)</code>. Its manual page also instructed to construct it with <code>fs("rfe")</code> (<a href="https://github.com/mlr-org/mlr3fselect/issues/191" class="external-link">#191</a>).</li>
 <li>fix: <code>AutoFSelector</code> ignored the <code>predict_type</code> when the final model was fitted, so <code>$predict()</code> returned response predictions although e.g. <code>"prob"</code> was set. Errors raised while setting the predict type on the final model are not swallowed anymore (<a href="https://github.com/mlr-org/mlr3fselect/issues/184" class="external-link">#184</a>).</li>
+<li>fix: The <code>$archive</code>, <code>$learner</code>, <code>$fselect_instance</code> and <code>$fselect_result</code> bindings of <code>AutoFSelector</code> are read-only now. Previously an assignment failed with <code>unused argument</code> instead of the usual read-only error (<a href="https://github.com/mlr-org/mlr3fselect/issues/186" class="external-link">#186</a>).</li>
 <li>fix: <code>AutoFSelector$train()</code> did not check the row ids of an instantiated inner resampling for cross-validation and reported a wrong set number for holdout (<a href="https://github.com/mlr-org/mlr3fselect/issues/197" class="external-link">#197</a>).</li>
 <li>fix: <code>fs("shadow_variable_search")</code> left the shadow variables in the task, domain and search space of the instance when the feature selection was aborted because the first selected feature was a shadow variable (<a href="https://github.com/mlr-org/mlr3fselect/issues/183" class="external-link">#183</a>).</li>
 <li>fix: <code>ArchiveBatchFSelect$best()</code> and <code>ArchiveAsyncFSelect$best()</code> returned an empty table or a row of missing values when a single score in the archive was <code>NA</code>. Missing scores are now skipped. <code>ArchiveAsyncFSelect$best()</code> also ignored the <code>ties_method</code> set during construction (<a href="https://github.com/mlr-org/mlr3fselect/issues/177" class="external-link">#177</a>).</li>
