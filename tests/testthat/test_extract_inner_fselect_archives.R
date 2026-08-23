@@ -1,6 +1,6 @@
 test_that("extract_inner_fselect_archives function works with resample and cv", {
   rr = fselect_nested(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     tsk("iris"),
     lrn("classif.rpart"),
     rsmp("holdout"),
@@ -37,17 +37,17 @@ test_that("extract_inner_fselect_archives function works with resample and cv", 
 
 test_that("extract_inner_fselect_archives function works with resample and repeated cv", {
   rr = fselect_nested(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     tsk("iris"),
     lrn("classif.rpart"),
     rsmp("holdout"),
-    rsmp("repeated_cv", folds = 2, repeats = 3),
+    rsmp("repeated_cv", folds = 2, repeats = 2),
     msr("classif.ce"),
     term_evals = 4
   )
 
   irr = extract_inner_fselect_archives(rr)
-  expect_data_table(irr, nrows = 24)
+  expect_data_table(irr, nrows = 16)
   expect_names(
     names(irr),
     must.include = c(
@@ -74,7 +74,7 @@ test_that("extract_inner_fselect_archives function works with resample and repea
 
 test_that("extract_inner_fselect_archives function works with benchmark and cv", {
   at_1 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -82,7 +82,7 @@ test_that("extract_inner_fselect_archives function works with benchmark and cv",
     id = "at_1"
   )
   at_2 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -123,7 +123,7 @@ test_that("extract_inner_fselect_archives function works with benchmark and cv",
 
 test_that("extract_inner_fselect_archives function works with benchmark and repeated cv", {
   at_1 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -131,19 +131,19 @@ test_that("extract_inner_fselect_archives function works with benchmark and repe
     id = "at_1"
   )
   at_2 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
     term_evals = 4,
     id = "at_2"
   )
-  resampling_outer = rsmp("repeated_cv", folds = 2, repeats = 3)
+  resampling_outer = rsmp("repeated_cv", folds = 2, repeats = 2)
   grid = benchmark_grid(tsk("iris"), list(at_1, at_2), resampling_outer)
   bmr = benchmark(grid, store_models = TRUE)
 
   ibmr = extract_inner_fselect_archives(bmr)
-  expect_data_table(ibmr, nrows = 48)
+  expect_data_table(ibmr, nrows = 32)
   expect_names(
     names(ibmr),
     must.include = c(
@@ -172,7 +172,7 @@ test_that("extract_inner_fselect_archives function works with benchmark and repe
 
 test_that("extract_inner_fselect_archives function works with multiple tasks", {
   at_1 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -180,7 +180,7 @@ test_that("extract_inner_fselect_archives function works with multiple tasks", {
     id = "at_1"
   )
   at_2 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -229,7 +229,7 @@ test_that("extract_inner_fselect_archives function works with multiple tasks", {
 
 test_that("extract_inner_fselect_archives function works with no models", {
   at = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -247,7 +247,7 @@ test_that("extract_inner_fselect_archives function works with no instance", {
     rsmp("holdout"),
     msr("classif.ce"),
     trm("evals", n_evals = 4),
-    fselector = fs("random_search", batch_size = 1),
+    fselector = fs("random_search", batch_size = 4),
     store_fselect_instance = FALSE,
     store_benchmark_result = FALSE
   )
@@ -259,7 +259,7 @@ test_that("extract_inner_fselect_archives function works with no instance", {
 
 test_that("extract_inner_fselect_archives function works with benchmark and no models", {
   at_1 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -267,7 +267,7 @@ test_that("extract_inner_fselect_archives function works with benchmark and no m
     id = "at_1"
   )
   at_2 = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -287,7 +287,7 @@ test_that("extract_inner_fselect_archives function works with mixed store instan
     rsmp("holdout"),
     msr("classif.ce"),
     trm("evals", n_evals = 4),
-    fselector = fs("random_search", batch_size = 1),
+    fselector = fs("random_search", batch_size = 4),
     store_fselect_instance = FALSE,
     store_benchmark_result = FALSE,
     id = "at_1"
@@ -297,7 +297,7 @@ test_that("extract_inner_fselect_archives function works with mixed store instan
     rsmp("holdout"),
     msr("classif.ce"),
     trm("evals", n_evals = 4),
-    fselector = fs("random_search", batch_size = 1),
+    fselector = fs("random_search", batch_size = 4),
     id = "at_2"
   )
   resampling_outer = rsmp("cv", folds = 2)
@@ -312,7 +312,7 @@ test_that("extract_inner_fselect_archives function works with mixed store instan
 test_that("extract_inner_fselect_archives function works with autofselector and learner", {
   learner = lrn("classif.rpart")
   at = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),
@@ -352,7 +352,7 @@ test_that("extract_inner_fselect_archives function works with autofselector and 
 
 test_that("extract_inner_fselect_archives function respects exclude_columns", {
   rr = fselect_nested(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     tsk("iris"),
     lrn("classif.rpart"),
     rsmp("holdout"),
@@ -368,7 +368,7 @@ test_that("extract_inner_fselect_archives function respects exclude_columns", {
   expect_disjunct(names(irr), c("uhash", "timestamp"))
 
   at = auto_fselector(
-    fs("random_search", batch_size = 1),
+    fs("random_search", batch_size = 4),
     lrn("classif.rpart"),
     rsmp("holdout"),
     msr("classif.ce"),

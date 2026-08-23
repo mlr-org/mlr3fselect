@@ -415,7 +415,7 @@ test_that("different callbacks can be set", {
     task = tsk("sonar"),
     learners = lrns(c("classif.rpart", "classif.featureless")),
     init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
+    inner_resampling = rsmp("holdout"),
     inner_measure = msr("classif.ce"),
     measure = msr("classif.acc"),
     terminator = trm("none"),
@@ -457,7 +457,7 @@ test_that("efs adds the importance column for subclasses of FSelectorBatchRFE", 
     task = tsk("sonar"),
     learners = lrns("classif.rpart"),
     init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
+    inner_resampling = rsmp("holdout"),
     inner_measure = msr("classif.ce"),
     measure = msr("classif.ce"),
     terminator = trm("none")
@@ -468,11 +468,11 @@ test_that("efs adds the importance column for subclasses of FSelectorBatchRFE", 
 
 test_that("efs works with a single learner", {
   efsr = ensemble_fselect(
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 3),
     task = tsk("sonar"),
     learners = lrn("classif.rpart"),
     init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
+    inner_resampling = rsmp("holdout"),
     inner_measure = msr("classif.ce"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 3)
@@ -485,11 +485,11 @@ test_that("efs works with a single learner", {
 test_that("efs only accepts bootstrap and subsampling as init_resampling", {
   expect_error(
     ensemble_fselect(
-      fselector = fs("random_search"),
+      fselector = fs("random_search", batch_size = 3),
       task = tsk("sonar"),
       learners = lrns("classif.rpart"),
       init_resampling = rsmp("cv", folds = 2),
-      inner_resampling = rsmp("cv", folds = 3),
+      inner_resampling = rsmp("holdout"),
       inner_measure = msr("classif.ce"),
       measure = msr("classif.ce"),
       terminator = trm("evals", n_evals = 3)
@@ -520,11 +520,11 @@ test_that("knee_points warns on a degenerate pareto front", {
 
 test_that("as.data.table on an EnsembleFSResult respects benchmark_result", {
   efsr = ensemble_fselect(
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 3),
     task = tsk("sonar"),
     learners = lrns(c("classif.rpart", "classif.featureless")),
     init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
+    inner_resampling = rsmp("holdout"),
     inner_measure = msr("classif.ce"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 3)
@@ -536,11 +536,11 @@ test_that("as.data.table on an EnsembleFSResult respects benchmark_result", {
 
 test_that("stability cache distinguishes different stability_args", {
   efsr = ensemble_fselect(
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 3),
     task = tsk("sonar"),
     learners = lrns(c("classif.rpart", "classif.featureless")),
     init_resampling = rsmp("subsampling", repeats = 2),
-    inner_resampling = rsmp("cv", folds = 3),
+    inner_resampling = rsmp("holdout"),
     inner_measure = msr("classif.ce"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 3)

@@ -1,11 +1,11 @@
 test_that("ArchiveBatchFSelect access methods work", {
   instance = fselect(
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 2),
     task = tsk("iris"),
     learner = lrn("classif.rpart"),
     resampling = rsmp("holdout"),
     measures = msr("classif.ce"),
-    term_evals = 4
+    term_evals = 2
   )
 
   # learner

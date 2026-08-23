@@ -66,7 +66,7 @@ test_that("store_fselect_instance, store_benchmark_result and store_models flags
   te = trm("evals", n_evals = 2)
   task = tsk("iris")
   ms = msr("classif.ce")
-  fselector = fs("random_search")
+  fselector = fs("random_search", batch_size = 2)
 
   at = AutoFSelector$new(
     lrn("classif.rpart"),
@@ -200,13 +200,13 @@ test_that("AutoFSelector get_base_learner method works", {
   # simple learner
   learner = lrn("classif.rpart")
   afs = AutoFSelector$new(
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 1),
     learner = learner,
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 1)
   )
-  afs$train(tsk("diabetes"))
+  afs$train(tsk("iris"))
 
   expect_learner(afs$base_learner())
   expect_equal(afs$base_learner()$id, "classif.rpart")
@@ -217,13 +217,13 @@ test_that("AutoFSelector get_base_learner method works", {
   learner = as_learner(pipeline_robustify() %>>% lrn("classif.rpart"))
   learner$id = "graphlearner.classif.rpart"
   afs = AutoFSelector$new(
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 1),
     learner = learner,
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 1)
   )
-  afs$train(tsk("diabetes"))
+  afs$train(tsk("iris"))
 
   expect_learner(afs$base_learner(recursive = 0))
   expect_equal(afs$base_learner(recursive = 0)$id, "graphlearner.classif.rpart")
@@ -238,7 +238,7 @@ test_that("AutoFSelector hash works #647 in mlr3", {
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 4),
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 4),
     store_benchmark_result = FALSE
   )
 
@@ -248,7 +248,7 @@ test_that("AutoFSelector hash works #647 in mlr3", {
     resampling = rsmp("holdout"),
     measure = msr("classif.ce"),
     terminator = trm("evals", n_evals = 4),
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 4),
     store_benchmark_result = TRUE
   )
 

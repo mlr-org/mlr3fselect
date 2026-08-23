@@ -1,6 +1,6 @@
 Package: mlr3fselect
 Title: Feature Selection for 'mlr3'
-Version: 1.6.0.9000
+Version: 1.7.0
 Authors@R: c(
     person("Marc", "Becker", , "marcbecker@posteo.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8115-0400")),
@@ -24,7 +24,7 @@ URL: https://mlr3fselect.mlr-org.com,
     https://github.com/mlr-org/mlr3fselect
 BugReports: https://github.com/mlr-org/mlr3fselect/issues
 Depends:
-    mlr3 (>= 1.7.1),
+    mlr3 (>= 1.8.0),
     R (>= 3.1.0)
 Imports:
     bbotk (>= 1.9.0),
@@ -48,9 +48,6 @@ Suggests:
     rpart,
     rush (>= 1.2.1),
     testthat (>= 3.0.0)
-Remotes:
-    mlr-org/mlr3,
-    mlr-org/rush
 Config/testthat/edition: 3
 Config/testthat/parallel: false
 Encoding: UTF-8

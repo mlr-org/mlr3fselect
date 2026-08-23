@@ -1,5 +1,7 @@
-# mlr3fselect (development version)
+# mlr3fselect 1.7.0
 
+* fix: Errors raised by mlr3fselect are structured conditions with the `Mlr3Error` class now, so they can be caught by class and are formatted with cli (#198).
+* fix: Loading the package repeatedly duplicated the entries that mlr3fselect adds to the reflections of bbotk and mlr3 (#199).
 * fix: `ArchiveAsyncFSelect` pushed results with the removed `rush::Rush$push_results()` method.
 * fix: `EnsembleFSResult$pareto_front()` correctly now handles ties in the pareto front: in edge cases, it returned dominated points for minimizing measures and discarded the true front for maximizing measures (#170).
 * fix: `ensemble_fselect()` dropped the `importance` column for subclasses of `FSelectorBatchRFE`. The column is now added whenever the feature selection result contains importance scores (#195).
@@ -17,6 +19,7 @@
 * fix: The `$print()` methods of `ArchiveBatchFSelect`, `ArchiveAsyncFSelect`, `ArchiveAsyncFSelectFrozen`, `AutoFSelector` and `FSelector` errored with `unused argument` when arguments such as `digits` were passed (#190).
 * fix: `fs("rfecv")` had the same label as `fs("rfe")`, so both were indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page also instructed to construct it with `fs("rfe")` (#191).
 * fix: `AutoFSelector` ignored the `predict_type` when the final model was fitted, so `$predict()` returned response predictions although e.g. `"prob"` was set. Errors raised while setting the predict type on the final model are not swallowed anymore (#184).
+* fix: The `$archive`, `$learner`, `$fselect_instance` and `$fselect_result` bindings of `AutoFSelector` are read-only now. Previously an assignment failed with `unused argument` instead of the usual read-only error (#186).
 * fix: `AutoFSelector$train()` did not check the row ids of an instantiated inner resampling for cross-validation and reported a wrong set number for holdout (#197).
 * fix: `fs("shadow_variable_search")` left the shadow variables in the task, domain and search space of the instance when the feature selection was aborted because the first selected feature was a shadow variable (#183).
 * fix: `ArchiveBatchFSelect$best()` and `ArchiveAsyncFSelect$best()` returned an empty table or a row of missing values when a single score in the archive was `NA`. Missing scores are now skipped. `ArchiveAsyncFSelect$best()` also ignored the `ties_method` set during construction (#177).

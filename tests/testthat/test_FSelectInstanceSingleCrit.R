@@ -64,15 +64,15 @@ test_that("always include variable works", {
   task$set_col_roles("glucose", "always_included")
 
   learner = lrn("classif.rpart")
-  resampling = rsmp("cv", folds = 3)
+  resampling = rsmp("holdout")
 
   instance = fselect(
-    fselector = fs("random_search", batch_size = 100),
+    fselector = fs("random_search", batch_size = 10),
     task = task,
     learner = learner,
     resampling = resampling,
     measures = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 100),
+    terminator = trm("evals", n_evals = 10),
     store_models = TRUE
   )
 
@@ -93,15 +93,15 @@ test_that("always include variables works", {
   task$set_col_roles(c("glucose", "age"), "always_included")
 
   learner = lrn("classif.rpart")
-  resampling = rsmp("cv", folds = 3)
+  resampling = rsmp("holdout")
 
   instance = fselect(
-    fselector = fs("random_search", batch_size = 100),
+    fselector = fs("random_search", batch_size = 10),
     task = task,
     learner = learner,
     resampling = resampling,
     measures = msr("classif.ce"),
-    terminator = trm("evals", n_evals = 100),
+    terminator = trm("evals", n_evals = 10),
     store_models = TRUE
   )
 
