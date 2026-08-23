@@ -16,9 +16,9 @@ can be instantiated with the associated sugar function
 For the meaning of the control parameters, see
 [`genalg::rbga.bin()`](https://rdrr.io/pkg/genalg/man/rbga.bin.html).
 [`genalg::rbga.bin()`](https://rdrr.io/pkg/genalg/man/rbga.bin.html)
-internally terminates after `iters` iteration. We set `ìters = 100000`
+internally terminates after `iters` iteration. We set `iters = 100000`
 to allow the termination via our terminators. If more iterations are
-needed, set `ìters` to a higher value in the parameter set.
+needed, set `iters` to a higher value in the parameter set.
 
 ## See also
 
@@ -35,29 +35,29 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
 -\> `FSelectorBatchGeneticSearch`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchGeneticSearch$new()`](#method-FSelectorBatchGeneticSearch-new)
+- [`FSelectorBatchGeneticSearch$new()`](#method-FSelectorBatchGeneticSearch-initialize)
 
 - [`FSelectorBatchGeneticSearch$clone()`](#method-FSelectorBatchGeneticSearch-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
+- [`FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchGeneticSearch$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -68,7 +68,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchGeneticSearch$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -127,18 +127,18 @@ as.data.table(instance$archive)
 #> 10:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>     classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>          <num>            <num>              <POSc>    <int>    <int>  <int>
-#>  1:  0.2521739            0.008 2026-05-22 08:10:07        1        0      0
-#>  2:  0.6173913            0.005 2026-05-22 08:10:07        2        0      0
-#>  3:  0.2260870            0.006 2026-05-22 08:10:07        3        0      0
-#>  4:  0.2869565            0.005 2026-05-22 08:10:07        4        0      0
-#>  5:  0.2869565            0.005 2026-05-22 08:10:07        5        0      0
-#>  6:  0.3043478            0.006 2026-05-22 08:10:07        6        0      0
-#>  7:  0.2260870            0.005 2026-05-22 08:10:07        7        0      0
-#>  8:  0.2521739            0.004 2026-05-22 08:10:07        8        0      0
-#>  9:  0.2521739            0.004 2026-05-22 08:10:08        9        0      0
-#> 10:  0.2260870            0.005 2026-05-22 08:10:08       10        0      0
+#>  1:  0.2521739            0.005 2026-08-23 13:57:25        1        0      0
+#>  2:  0.6173913            0.009 2026-08-23 13:57:25        2        0      0
+#>  3:  0.2260870            0.006 2026-08-23 13:57:25        3        0      0
+#>  4:  0.2869565            0.005 2026-08-23 13:57:25        4        0      0
+#>  5:  0.2869565            0.004 2026-08-23 13:57:25        5        0      0
+#>  6:  0.3043478            0.005 2026-08-23 13:57:25        6        0      0
+#>  7:  0.2260870            0.004 2026-08-23 13:57:25        7        0      0
+#>  8:  0.2521739            0.006 2026-08-23 13:57:25        8        0      0
+#>  9:  0.2521739            0.005 2026-08-23 13:57:25        9        0      0
+#> 10:  0.2260870            0.005 2026-08-23 13:57:25       10        0      0
 #>           features n_features  resample_result
-#>             <list>     <list>           <list>
+#>             <list>      <int>           <list>
 #>  1:    island,year          2 <ResampleResult>
 #>  2:           year          1 <ResampleResult>
 #>  3: flipper_length          1 <ResampleResult>

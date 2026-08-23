@@ -127,7 +127,8 @@ fselect(
 - rush:
 
   (`Rush`)  
-  If a rush instance is supplied, the optimization runs without batches.
+  Rush instance for the asynchronous feature selection. Ignored by batch
+  fselectors, which warn when it is set.
 
 ## Value
 
@@ -215,8 +216,8 @@ supplied to `as.data.table()`.
 ## Examples
 
 ``` r
-# Feature selection on the Pima Indians data set
-task = tsk("pima")
+# Feature selection on the diabetes data set
+task = tsk("diabetes")
 
 # Load learner
 learner = lrn("classif.rpart")
@@ -240,18 +241,18 @@ learner$train(task)
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:  FALSE   FALSE    TRUE   TRUE    FALSE    FALSE    FALSE   FALSE  0.3632812
-#> 2:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE     TRUE   FALSE  0.3710938
-#> 3:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.3476562
-#> 4:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE    FALSE    TRUE  0.3710938
+#> 1:  FALSE   FALSE    TRUE   TRUE    FALSE    FALSE    FALSE   FALSE  0.3281250
+#> 2:  FALSE   FALSE   FALSE  FALSE     TRUE    FALSE     TRUE   FALSE  0.3671875
+#> 3:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE     TRUE   FALSE  0.3085938
+#> 4:   TRUE   FALSE   FALSE   TRUE     TRUE     TRUE    FALSE    TRUE  0.3593750
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.007 2026-05-22 08:09:56        1        0      0
-#> 2:            0.007 2026-05-22 08:09:56        1        0      0
-#> 3:            0.008 2026-05-22 08:09:56        2        0      0
-#> 4:            0.007 2026-05-22 08:09:56        2        0      0
+#> 1:            0.006 2026-08-23 13:57:14        1        0      0
+#> 2:            0.007 2026-08-23 13:57:14        1        0      0
+#> 3:            0.007 2026-08-23 13:57:15        2        0      0
+#> 4:            0.007 2026-08-23 13:57:15        2        0      0
 #>                               features n_features  resample_result
-#>                                 <list>     <list>           <list>
+#>                                 <list>      <int>           <list>
 #> 1:                        insulin,mass          2 <ResampleResult>
 #> 2:                   pedigree,pressure          2 <ResampleResult>
 #> 3: age,mass,pedigree,pregnant,pressure          5 <ResampleResult>

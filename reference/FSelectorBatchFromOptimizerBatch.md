@@ -6,16 +6,16 @@ to [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md).
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
 -\> `FSelectorBatchFromOptimizerBatch`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchFromOptimizerBatch$new()`](#method-FSelectorBatchFromOptimizerBatch-new)
+- [`FSelectorBatchFromOptimizerBatch$new()`](#method-FSelectorBatchFromOptimizerBatch-initialize)
 
 - [`FSelectorBatchFromOptimizerBatch$optimize()`](#method-FSelectorBatchFromOptimizerBatch-optimize)
 
@@ -23,13 +23,13 @@ to [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md).
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchFromOptimizerBatch$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -54,7 +54,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method [`optimize()`](https://rdrr.io/r/stats/optimize.html)
+### `FSelectorBatchFromOptimizerBatch$optimize()`
 
 Performs the feature selection on a
 [FSelectInstanceBatchSingleCrit](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceBatchSingleCrit.md)
@@ -80,7 +80,7 @@ until termination.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchFromOptimizerBatch$clone()`
 
 The objects of this class are cloneable with this method.
 

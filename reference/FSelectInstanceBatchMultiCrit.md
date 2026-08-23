@@ -57,7 +57,7 @@ supplied to `as.data.table()`.
 
 ### Public methods
 
-- [`FSelectInstanceBatchMultiCrit$new()`](#method-FSelectInstanceBatchMultiCrit-new)
+- [`FSelectInstanceBatchMultiCrit$new()`](#method-FSelectInstanceBatchMultiCrit-initialize)
 
 - [`FSelectInstanceBatchMultiCrit$assign_result()`](#method-FSelectInstanceBatchMultiCrit-assign_result)
 
@@ -74,7 +74,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectInstanceBatchMultiCrit$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -149,7 +149,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `assign_result()`
+### `FSelectInstanceBatchMultiCrit$assign_result()`
 
 The [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 object writes the best found feature subsets and estimated performance
@@ -185,7 +185,7 @@ values here. For internal use.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `FSelectInstanceBatchMultiCrit$print()`
 
 Printer.
 
@@ -201,7 +201,7 @@ Printer.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectInstanceBatchMultiCrit$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -240,15 +240,18 @@ fselector$optimize(instance)
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
 #> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#> 2:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
+#> 2:      FALSE        TRUE     FALSE          FALSE  FALSE  FALSE  FALSE
+#> 3:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>                                                             features n_features
 #>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#> 2:                                                    flipper_length          7
+#> 2:                                                       bill_length          7
+#> 3:                                                    flipper_length          7
 #>    classif.ce  time_train
 #>         <num>       <num>
-#> 1: 0.07261632 0.003000000
-#> 2: 0.19471142 0.002333333
+#> 1: 0.07261632 0.002666667
+#> 2: 0.25858124 0.002333333
+#> 3: 0.19471142 0.002333333
 
 # Optimal feature sets
 instance$result_feature_set
@@ -257,6 +260,9 @@ instance$result_feature_set
 #> [5] "island"         "sex"            "year"          
 #> 
 #> [[2]]
+#> [1] "bill_length"
+#> 
+#> [[3]]
 #> [1] "flipper_length"
 #> 
 
@@ -270,10 +276,10 @@ as.data.table(instance$archive)
 #> 4:      FALSE       FALSE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce  time_train runtime_learners           timestamp batch_nr
 #>         <num>       <num>            <num>              <POSc>    <int>
-#> 1: 0.07261632 0.004333333            0.023 2026-05-22 08:09:33        1
-#> 2: 0.07261632 0.003000000            0.018 2026-05-22 08:09:33        1
-#> 3: 0.25858124 0.003000000            0.016 2026-05-22 08:09:33        2
-#> 4: 0.19471142 0.002333333            0.013 2026-05-22 08:09:33        2
+#> 1: 0.07261632 0.002666667            0.015 2026-08-23 13:56:54        1
+#> 2: 0.07261632 0.003000000            0.015 2026-08-23 13:56:54        1
+#> 3: 0.25858124 0.002333333            0.012 2026-08-23 13:56:55        2
+#> 4: 0.19471142 0.002333333            0.013 2026-08-23 13:56:55        2
 #>    warnings errors
 #>       <int>  <int>
 #> 1:        0      0
@@ -281,7 +287,7 @@ as.data.table(instance$archive)
 #> 3:        0      0
 #> 4:        0      0
 #>                                                             features n_features
-#>                                                               <list>     <list>
+#>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
 #> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
 #> 3:                                                       bill_length          1

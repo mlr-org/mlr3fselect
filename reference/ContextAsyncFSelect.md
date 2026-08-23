@@ -67,7 +67,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ContextAsyncFSelect$clone()`
 
 The objects of this class are cloneable with this method.
 

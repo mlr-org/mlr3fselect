@@ -11,7 +11,7 @@ in [mlr3::Learner](https://mlr3.mlr-org.com/reference/Learner.html)).
 
 Guyon I, Weston J, Barnhill S, Vapnik V (2002). “Gene Selection for
 Cancer Classification using Support Vector Machines.” *Machine
-Learning*, **46**(1), 389–422. ISSN 1573-0565,
+Learning*, **46**(1), 389–422. ISSN 1573-0565.
 [doi:10.1023/A:1012487302797](https://doi.org/10.1023/A%3A1012487302797)
 .
 
@@ -118,29 +118,29 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
 -\> `FSelectorBatchRFE`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchRFE$new()`](#method-FSelectorBatchRFE-new)
+- [`FSelectorBatchRFE$new()`](#method-FSelectorBatchRFE-initialize)
 
 - [`FSelectorBatchRFE$clone()`](#method-FSelectorBatchRFE-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
+- [`FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchRFE$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -151,7 +151,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchRFE$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -208,14 +208,14 @@ as.data.table(instance$archive)
 #> 2:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.07826087            0.006 2026-05-22 08:10:09        1        0      0
-#> 2: 0.08695652            0.007 2026-05-22 08:10:09        2        0      0
+#> 1: 0.07826087            0.010 2026-08-23 13:57:27        1        0      0
+#> 2: 0.08695652            0.006 2026-08-23 13:57:27        2        0      0
 #>            importance
 #>                <list>
 #> 1: 7,6,5,4,3,2,...[7]
 #> 2:              3,2,1
 #>                                                             features n_features
-#>                                                               <list>     <list>
+#>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
 #> 2:                             bill_depth,bill_length,flipper_length          3
 #>     resample_result

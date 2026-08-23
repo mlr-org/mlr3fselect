@@ -78,7 +78,7 @@ for each feature subset evaluation.
 
 ### Public methods
 
-- [`ArchiveAsyncFSelect$new()`](#method-ArchiveAsyncFSelect-new)
+- [`ArchiveAsyncFSelect$new()`](#method-ArchiveAsyncFSelect-initialize)
 
 - [`ArchiveAsyncFSelect$learner()`](#method-ArchiveAsyncFSelect-learner)
 
@@ -102,15 +102,24 @@ Inherited methods
 - [`bbotk::Archive$help()`](https://bbotk.mlr-org.com/reference/Archive.html#method-help)
 - [`bbotk::ArchiveAsync$clear()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-clear)
 - [`bbotk::ArchiveAsync$data_with_state()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-data_with_state)
+- [`bbotk::ArchiveAsync$fail_point()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-fail_point)
+- [`bbotk::ArchiveAsync$fail_points()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-fail_points)
+- [`bbotk::ArchiveAsync$finish_point()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-finish_point)
+- [`bbotk::ArchiveAsync$finish_points()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-finish_points)
 - [`bbotk::ArchiveAsync$nds_selection()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-nds_selection)
 - [`bbotk::ArchiveAsync$pop_point()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-pop_point)
 - [`bbotk::ArchiveAsync$push_failed_point()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_failed_point)
+- [`bbotk::ArchiveAsync$push_failed_points()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_failed_points)
+- [`bbotk::ArchiveAsync$push_finished_point()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_finished_point)
+- [`bbotk::ArchiveAsync$push_finished_points()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_finished_points)
+- [`bbotk::ArchiveAsync$push_point()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_point)
 - [`bbotk::ArchiveAsync$push_points()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_points)
 - [`bbotk::ArchiveAsync$push_running_point()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_running_point)
+- [`bbotk::ArchiveAsync$push_running_points()`](https://bbotk.mlr-org.com/reference/ArchiveAsync.html#method-push_running_points)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ArchiveAsyncFSelect$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -156,14 +165,9 @@ Creates a new instance of this
   returns a random feature set from the best feature sets. Ignored if
   multiple measures are used.
 
-- `check_values`:
-
-  (`logical(1)`)  
-  If `TRUE` (default), feature subsets are check for validity.
-
 ------------------------------------------------------------------------
 
-### Method `learner()`
+### `ArchiveAsyncFSelect$learner()`
 
 Retrieve
 [mlr3::Learner](https://mlr3.mlr-org.com/reference/Learner.html) of the
@@ -189,7 +193,7 @@ are mutually exclusive. Learner does not contain a model. Use
 
 ------------------------------------------------------------------------
 
-### Method `learners()`
+### `ArchiveAsyncFSelect$learners()`
 
 Retrieve list of trained
 [mlr3::Learner](https://mlr3.mlr-org.com/reference/Learner.html) objects
@@ -214,7 +218,7 @@ of the i-th evaluation, by position or by unique hash `uhash`. `i` and
 
 ------------------------------------------------------------------------
 
-### Method `predictions()`
+### `ArchiveAsyncFSelect$predictions()`
 
 Retrieve list of
 [mlr3::Prediction](https://mlr3.mlr-org.com/reference/Prediction.html)
@@ -239,7 +243,7 @@ objects of the i-th evaluation, by position or by unique hash `uhash`.
 
 ------------------------------------------------------------------------
 
-### Method `resample_result()`
+### `ArchiveAsyncFSelect$resample_result()`
 
 Retrieve
 [mlr3::ResampleResult](https://mlr3.mlr-org.com/reference/ResampleResult.html)
@@ -264,13 +268,13 @@ of the i-th evaluation, by position or by unique hash `uhash`. `i` and
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `ArchiveAsyncFSelect$print()`
 
 Printer.
 
 #### Usage
 
-    ArchiveAsyncFSelect$print()
+    ArchiveAsyncFSelect$print(...)
 
 #### Arguments
 
@@ -280,7 +284,7 @@ Printer.
 
 ------------------------------------------------------------------------
 
-### Method `best()`
+### `ArchiveAsyncFSelect$best()`
 
 Returns the best scoring feature set(s). For single-crit optimization,
 the solution that minimizes / maximizes the objective function. For
@@ -288,7 +292,7 @@ multi-crit optimization, the Pareto set / front.
 
 #### Usage
 
-    ArchiveAsyncFSelect$best(n_select = 1, ties_method = "least_features")
+    ArchiveAsyncFSelect$best(n_select = 1, ties_method = NULL)
 
 #### Arguments
 
@@ -301,7 +305,8 @@ multi-crit optimization, the Pareto set / front.
 
   (`character(1L)`)  
   Method to break ties when multiple points have the same score. Either
-  `"least_features"` (default) or `"random"`. Ignored for multi-crit
+  `"least_features"` or `"random"`. If `NULL` (default), the global ties
+  method set during initialization is used. Ignored for multi-crit
   optimization. If `n_select > 1L`, the tie method is ignored and the
   first point is returned.
 
@@ -311,7 +316,7 @@ multi-crit optimization, the Pareto set / front.
 
 ------------------------------------------------------------------------
 
-### Method `push_result()`
+### `ArchiveAsyncFSelect$push_result()`
 
 Push result to the archive.
 
@@ -343,7 +348,7 @@ Push result to the archive.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ArchiveAsyncFSelect$clone()`
 
 The objects of this class are cloneable with this method.
 

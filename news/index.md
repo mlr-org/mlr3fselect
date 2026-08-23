@@ -1,5 +1,156 @@
 # Changelog
 
+## mlr3fselect 1.7.0
+
+CRAN release: 2026-08-23
+
+- fix: Errors raised by mlr3fselect are structured conditions with the
+  `Mlr3Error` class now, so they can be caught by class and are
+  formatted with cli
+  ([\#198](https://github.com/mlr-org/mlr3fselect/issues/198)).
+- fix: Loading the package repeatedly duplicated the entries that
+  mlr3fselect adds to the reflections of bbotk and mlr3
+  ([\#199](https://github.com/mlr-org/mlr3fselect/issues/199)).
+- fix: `ArchiveAsyncFSelect` pushed results with the removed
+  `rush::Rush$push_results()` method.
+- fix: `EnsembleFSResult$pareto_front()` correctly now handles ties in
+  the pareto front: in edge cases, it returned dominated points for
+  minimizing measures and discarded the true front for maximizing
+  measures ([\#170](https://github.com/mlr-org/mlr3fselect/issues/170)).
+- fix:
+  [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/ensemble_fselect.md)
+  dropped the `importance` column for subclasses of `FSelectorBatchRFE`.
+  The column is now added whenever the feature selection result contains
+  importance scores
+  ([\#195](https://github.com/mlr-org/mlr3fselect/issues/195)).
+- fix:
+  [`embedded_ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/embedded_ensemble_fselect.md)
+  instantiated the \[mlr3::Resampling\] passed to `init_resampling` by
+  reference, so the resampling of the user was changed and reused the
+  row ids of the first task when applied to another task
+  ([\#179](https://github.com/mlr-org/mlr3fselect/issues/179)).
+- fix: `EnsembleFSResult$knee_points()` silently returned a row of `NA`
+  when the Pareto front did not span a range in both dimensions. The
+  first point of the Pareto front is returned with a warning now
+  ([\#171](https://github.com/mlr-org/mlr3fselect/issues/171)).
+- fix: `EnsembleFSResult$stability()` cached the results by stability
+  measure only, so the same measure requested with different
+  `stability_args` returned the cached value of the first call
+  ([\#189](https://github.com/mlr-org/mlr3fselect/issues/189)).
+- fix:
+  [`ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/ensemble_fselect.md)
+  and
+  [`embedded_ensemble_fselect()`](https://mlr3fselect.mlr-org.com/reference/embedded_ensemble_fselect.md)
+  failed with a cryptic error when a single \[mlr3::Learner\] was passed
+  to the `learners` argument because the result of
+  [`as_learners()`](https://mlr3.mlr-org.com/reference/as_learner.html)
+  was discarded
+  ([\#178](https://github.com/mlr-org/mlr3fselect/issues/178)).
+- fix:
+  [`extract_inner_fselect_archives()`](https://mlr3fselect.mlr-org.com/reference/extract_inner_fselect_archives.md)
+  ignored the `exclude_columns` argument because it was passed
+  positionally to
+  [`as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html)
+  where it landed in the `...` argument
+  ([\#180](https://github.com/mlr-org/mlr3fselect/issues/180)).
+- fix:
+  [`as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html)
+  on an `ArchiveBatchFSelect` returned the `n_features` column as a list
+  column instead of an integer column, so operations such as
+  [`sort()`](https://rdrr.io/r/base/sort.html) failed with
+  `'x' must be atomic`
+  ([\#181](https://github.com/mlr-org/mlr3fselect/issues/181)).
+- fix: `fs("sequential")$optimization_path()` returned the first
+  evaluated feature set of each batch instead of the best one, so the
+  selected feature set was usually missing from the reported path
+  ([\#182](https://github.com/mlr-org/mlr3fselect/issues/182)).
+- fix: `fs("rfecv")` left the resampling of the objective set to an
+  insample resampling, so subsequent evaluations on the same instance
+  silently resampled in-sample
+  ([\#187](https://github.com/mlr-org/mlr3fselect/issues/187)).
+- fix: The `mlr3fselect.backup` callback deleted the backup of the
+  previous batch before it wrote the new one, so a crash in between lost
+  the complete run. The benchmark result is now written to a temporary
+  file and renamed afterwards
+  ([\#188](https://github.com/mlr-org/mlr3fselect/issues/188)).
+- BREAKING CHANGE: The `mlr3fselect.backup` callback requires the `path`
+  argument now. Previously it wrote a `bmr.rds` file into the working
+  directory of the user
+  ([\#188](https://github.com/mlr-org/mlr3fselect/issues/188)).
+- fix:
+  [`as.data.table()`](https://rdrr.io/pkg/data.table/man/as.data.table.html)
+  on an `EnsembleFSResult` accepts the documented `benchmark_result`
+  argument now to omit the task, learner and resampling columns
+  ([\#190](https://github.com/mlr-org/mlr3fselect/issues/190)).
+- fix: The `$print()` methods of `ArchiveBatchFSelect`,
+  `ArchiveAsyncFSelect`, `ArchiveAsyncFSelectFrozen`, `AutoFSelector`
+  and `FSelector` errored with `unused argument` when arguments such as
+  `digits` were passed
+  ([\#190](https://github.com/mlr-org/mlr3fselect/issues/190)).
+- fix: `fs("rfecv")` had the same label as `fs("rfe")`, so both were
+  indistinguishable in `as.data.table(mlr_fselectors)`. Its manual page
+  also instructed to construct it with `fs("rfe")`
+  ([\#191](https://github.com/mlr-org/mlr3fselect/issues/191)).
+- fix: `AutoFSelector` ignored the `predict_type` when the final model
+  was fitted, so `$predict()` returned response predictions although
+  e.g. `"prob"` was set. Errors raised while setting the predict type on
+  the final model are not swallowed anymore
+  ([\#184](https://github.com/mlr-org/mlr3fselect/issues/184)).
+- fix: The `$archive`, `$learner`, `$fselect_instance` and
+  `$fselect_result` bindings of `AutoFSelector` are read-only now.
+  Previously an assignment failed with `unused argument` instead of the
+  usual read-only error
+  ([\#186](https://github.com/mlr-org/mlr3fselect/issues/186)).
+- fix: `AutoFSelector$train()` did not check the row ids of an
+  instantiated inner resampling for cross-validation and reported a
+  wrong set number for holdout
+  ([\#197](https://github.com/mlr-org/mlr3fselect/issues/197)).
+- fix: `fs("shadow_variable_search")` left the shadow variables in the
+  task, domain and search space of the instance when the feature
+  selection was aborted because the first selected feature was a shadow
+  variable ([\#183](https://github.com/mlr-org/mlr3fselect/issues/183)).
+- fix: `ArchiveBatchFSelect$best()` and `ArchiveAsyncFSelect$best()`
+  returned an empty table or a row of missing values when a single score
+  in the archive was `NA`. Missing scores are now skipped.
+  `ArchiveAsyncFSelect$best()` also ignored the `ties_method` set during
+  construction
+  ([\#177](https://github.com/mlr-org/mlr3fselect/issues/177)).
+- fix: The `mlr3fselect.svm_rfe` callback accepted support vector
+  machines without a `type` or `kernel` setting, although only
+  `type = "C-classification"` and `kernel = "linear"` are supported. The
+  callback now also errors on multi-class tasks for which the importance
+  scores are not defined
+  ([\#173](https://github.com/mlr-org/mlr3fselect/issues/173)).
+- fix: The asynchronous feature selection ignored the `always_included`
+  column role. Columns with this role were excluded from the models
+  instead of being added to every feature subset
+  ([\#175](https://github.com/mlr-org/mlr3fselect/issues/175)).
+- fix: The `mlr3fselect.one_se_rule` callback errored on archives with a
+  single evaluation or with missing scores, and wrote the `n_features`
+  column as a list column instead of an integer column
+  ([\#174](https://github.com/mlr-org/mlr3fselect/issues/174)).
+- fix:
+  [`extract_inner_fselect_results()`](https://mlr3fselect.mlr-org.com/reference/extract_inner_fselect_results.md)
+  added the `iteration` and `fselect_instance` columns to the result of
+  the inner `FSelectInstance` by reference, which created a circular
+  reference between the instance and its own result
+  ([\#172](https://github.com/mlr-org/mlr3fselect/issues/172)).
+- fix: `fs("rfe")` and `fs("rfecv")` failed with an internal
+  `data.table` error when `store_benchmark_result = FALSE` was set
+  because the importance scores were read from the benchmark result of
+  the archive
+  ([\#169](https://github.com/mlr-org/mlr3fselect/issues/169)).
+- fix: `fs("rfecv", recursive = FALSE)` failed with an internal
+  `data.table` error because the importance scores of all resampling
+  iterations were written to a single archive row
+  ([\#168](https://github.com/mlr-org/mlr3fselect/issues/168)).
+- fix: `fs("rfecv")` ignored the direction of the measure and selected
+  the feature set size with the worst mean performance for minimizing
+  measures such as `msr("classif.ce")` or `msr("regr.mse")`. Feature
+  selection results obtained with `fs("rfecv")` and a minimizing measure
+  are invalid and should be recomputed
+  ([\#167](https://github.com/mlr-org/mlr3fselect/issues/167)).
+
 ## mlr3fselect 1.6.0
 
 CRAN release: 2026-05-21

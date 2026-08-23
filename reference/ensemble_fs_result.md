@@ -36,14 +36,14 @@ on normal-boundary intersection.” *Structural Optimization*,
 
 Meinshausen, Nicolai, Buhlmann, Peter (2010). “Stability Selection.”
 *Journal of the Royal Statistical Society Series B: Statistical
-Methodology*, **72**(4), 417–473. ISSN 1369-7412,
+Methodology*, **72**(4), 417–473. ISSN 1369-7412.
 [doi:10.1111/J.1467-9868.2010.00740.X](https://doi.org/10.1111/J.1467-9868.2010.00740.X)
-, 0809.2932.
+. 0809.2932.
 
 Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian,
 Becker, Marc, Aittokallio, Tero (2026). “Prognostic biomarker discovery
 in pancreatic cancer through hybrid ensemble feature selection and
-multi-omics data.” *BioData Mining*. ISSN 1756-0381,
+multi-omics data.” *BioData Mining*. ISSN 1756-0381.
 [doi:10.1186/s13040-026-00546-0](https://doi.org/10.1186/s13040-026-00546-0)
 .
 
@@ -102,13 +102,15 @@ multi-omics data.” *BioData Mining*. ISSN 1756-0381,
 
 ### Public methods
 
-- [`EnsembleFSResult$new()`](#method-EnsembleFSResult-new)
+- [`EnsembleFSResult$new()`](#method-EnsembleFSResult-initialize)
 
 - [`EnsembleFSResult$format()`](#method-EnsembleFSResult-format)
 
 - [`EnsembleFSResult$print()`](#method-EnsembleFSResult-print)
 
 - [`EnsembleFSResult$help()`](#method-EnsembleFSResult-help)
+
+- [`EnsembleFSResult$rm_zero_features()`](#method-EnsembleFSResult-rm_zero_features)
 
 - [`EnsembleFSResult$set_active_measure()`](#method-EnsembleFSResult-set_active_measure)
 
@@ -126,7 +128,7 @@ multi-omics data.” *BioData Mining*. ISSN 1756-0381,
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `EnsembleFSResult$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -183,7 +185,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method [`format()`](https://rdrr.io/r/base/format.html)
+### `EnsembleFSResult$format()`
 
 Helper for print outputs.
 
@@ -199,7 +201,7 @@ Helper for print outputs.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `EnsembleFSResult$print()`
 
 Printer.
 
@@ -215,7 +217,7 @@ Printer.
 
 ------------------------------------------------------------------------
 
-### Method [`help()`](https://rdrr.io/r/utils/help.html)
+### `EnsembleFSResult$help()`
 
 Opens the corresponding help page referenced by field `$man`.
 
@@ -225,7 +227,29 @@ Opens the corresponding help page referenced by field `$man`.
 
 ------------------------------------------------------------------------
 
-### Method `set_active_measure()`
+### `EnsembleFSResult$rm_zero_features()`
+
+Removes rows from the ensemble feature selection result where no
+features were selected.
+
+If a benchmark result is stored, the corresponding resampling iterations
+are removed as well. The stability measures are reset and need to be
+recalculated after this operation.
+
+This method modifies the object by reference. To preserve the original
+state, explicitly `$clone()` the object beforehand.
+
+#### Usage
+
+    EnsembleFSResult$rm_zero_features()
+
+#### Returns
+
+Returns the object itself, but modified **by reference**.
+
+------------------------------------------------------------------------
+
+### `EnsembleFSResult$set_active_measure()`
 
 Use this function to change the active measure.
 
@@ -246,7 +270,7 @@ Use this function to change the active measure.
 
 ------------------------------------------------------------------------
 
-### Method `combine()`
+### `EnsembleFSResult$combine()`
 
 Combines a second EnsembleFSResult into the current object, modifying it
 **in-place**. If the second EnsembleFSResult (`efsr`) is `NULL`, the
@@ -282,7 +306,7 @@ Returns the object itself, but modified **by reference**.
 
 ------------------------------------------------------------------------
 
-### Method `feature_ranking()`
+### `EnsembleFSResult$feature_ranking()`
 
 Calculates the feature ranking via
 [`fastVoteR::rank_candidates()`](https://bblodfon.github.io/fastVoteR/reference/rank_candidates.html).
@@ -376,12 +400,13 @@ listing all the features, ordered by decreasing scores (depends on the
 
 ------------------------------------------------------------------------
 
-### Method `stability()`
+### `EnsembleFSResult$stability()`
 
 Calculates the stability of the selected features with the
 [stabm](https://CRAN.R-project.org/package=stabm) package. The results
-are cached. When the same stability measure is requested again with
-different arguments, the cache must be reset.
+are cached. The cache key covers the stability measure and the arguments
+passed to it, so the same measure requested with different arguments is
+calculated again.
 
 #### Usage
 
@@ -425,7 +450,7 @@ stability of the selected features for each learner.
 
 ------------------------------------------------------------------------
 
-### Method `pareto_front()`
+### `EnsembleFSResult$pareto_front()`
 
 This function identifies the **Pareto front** of the ensemble feature
 selection process, i.e., the set of points that represent the trade-off
@@ -458,7 +483,7 @@ Two options are available for the Pareto front:
 - `"empirical"` (default): returns the empirical Pareto front.
 
 - `"estimated"`: the Pareto front points are estimated by fitting a
-  linear model with the inversed of the number of features (\\1/x\\) as
+  linear model with the inverse of the number of features (\\1/x\\) as
   input and the associated performance scores as output.
 
 This method is useful when the Pareto points are sparse and the front
@@ -481,7 +506,7 @@ form the Pareto front.
 
 ------------------------------------------------------------------------
 
-### Method `knee_points()`
+### `EnsembleFSResult$knee_points()`
 
 This function implements various *knee* point identification (KPI)
 methods, which select points in the Pareto front, such that an optimal
@@ -532,11 +557,14 @@ The available KPI methods are:
 
 A
 [data.table::data.table](https://rdrr.io/pkg/data.table/man/data.table.html)
-with the knee point(s) of the Pareto front.
+with the knee point(s) of the Pareto front. If the Pareto front does not
+span a range in both the number of features and the performance, no knee
+point can be identified. In this case a warning is signaled and the
+first point of the Pareto front is returned.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `EnsembleFSResult$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -624,15 +652,14 @@ The objects of this class are cloneable with this method.
   # returns the empirical pareto front, i.e. n_features vs measure (error)
   efsr$pareto_front()
 #>    n_features classif.acc
-#>         <num>       <num>
-#> 1:          2   0.4782609
-#> 2:          2   0.5072464
-#> 3:         10   0.7391304
+#>         <int>       <num>
+#> 1:          2   0.5072464
+#> 2:         10   0.7391304
 
   # returns the knee points (optimal trade-off between n_features and performance)
   efsr$knee_points()
 #>    n_features classif.acc
-#>         <num>       <num>
+#>         <int>       <num>
 #> 1:          2   0.5072464
 
   # change to use the inner optimization measure
@@ -641,10 +668,9 @@ The objects of this class are cloneable with this method.
   # Pareto front is calculated on the inner measure
   efsr$pareto_front()
 #>    n_features classif.ce_inner
-#>         <num>            <num>
-#> 1:          2        0.4529756
-#> 2:          2        0.4383287
-#> 3:         10        0.2958680
-#> 4:         19        0.1802344
+#>         <int>            <num>
+#> 1:          2        0.4383287
+#> 2:         10        0.2958680
+#> 3:         19        0.1802344
 # }
 ```

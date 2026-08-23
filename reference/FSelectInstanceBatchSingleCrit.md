@@ -106,7 +106,7 @@ supplied to `as.data.table()`.
 
 ### Public methods
 
-- [`FSelectInstanceBatchSingleCrit$new()`](#method-FSelectInstanceBatchSingleCrit-new)
+- [`FSelectInstanceBatchSingleCrit$new()`](#method-FSelectInstanceBatchSingleCrit-initialize)
 
 - [`FSelectInstanceBatchSingleCrit$assign_result()`](#method-FSelectInstanceBatchSingleCrit-assign_result)
 
@@ -123,7 +123,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectInstanceBatchSingleCrit$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -207,7 +207,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `assign_result()`
+### `FSelectInstanceBatchSingleCrit$assign_result()`
 
 The [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 writes the best found feature subset and estimated performance value
@@ -244,7 +244,7 @@ here. For internal use.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `FSelectInstanceBatchSingleCrit$print()`
 
 Printer.
 
@@ -260,7 +260,7 @@ Printer.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectInstanceBatchSingleCrit$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -323,12 +323,12 @@ as.data.table(instance$archive)
 #> 4:       TRUE       FALSE     FALSE           TRUE  FALSE  FALSE   TRUE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.15400458            0.019 2026-05-22 08:09:34        1        0      0
-#> 2: 0.19768624            0.014 2026-05-22 08:09:34        1        0      0
-#> 3: 0.06112382            0.017 2026-05-22 08:09:34        2        0      0
-#> 4: 0.18893974            0.016 2026-05-22 08:09:34        2        0      0
+#> 1: 0.15400458            0.016 2026-08-23 13:56:55        1        0      0
+#> 2: 0.19768624            0.012 2026-08-23 13:56:55        1        0      0
+#> 3: 0.06112382            0.015 2026-08-23 13:56:55        2        0      0
+#> 4: 0.18893974            0.034 2026-08-23 13:56:55        2        0      0
 #>                                                      features n_features
-#>                                                        <list>     <list>
+#>                                                        <list>      <int>
 #> 1:                  bill_depth,flipper_length,island,sex,year          5
 #> 2:                                    flipper_length,sex,year          3
 #> 3: bill_depth,bill_length,body_mass,flipper_length,island,sex          6

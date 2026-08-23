@@ -113,20 +113,28 @@ here.
 - `hash`:
 
   (`character(1)`)  
-  Hash (unique identifier) for this object.
+  Hash (unique identifier) for this object. Covers the id, the parameter
+  values, the predict type, the fallback learner, the parallel predict
+  flag, the
+  [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md),
+  the arguments of the
+  [FSelectInstanceBatchSingleCrit](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceBatchSingleCrit.md)
+  and the store fselect instance flag.
 
 - `phash`:
 
   (`character(1)`)  
-  Hash (unique identifier) for this partial object, excluding some
-  components which are varied systematically during tuning (parameter
-  values) or feature selection (feature names).
+  Hash (unique identifier) for this partial object. The AutoFSelector
+  has no components that are varied systematically during tuning or
+  feature selection, because the search space is created internally from
+  the task. The partial hash is therefore deliberately identical to
+  `$hash`.
 
 ## Methods
 
 ### Public methods
 
-- [`AutoFSelector$new()`](#method-AutoFSelector-new)
+- [`AutoFSelector$new()`](#method-AutoFSelector-initialize)
 
 - [`AutoFSelector$base_learner()`](#method-AutoFSelector-base_learner)
 
@@ -155,7 +163,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `AutoFSelector$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -260,7 +268,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `base_learner()`
+### `AutoFSelector$base_learner()`
 
 Extracts the base learner from nested learner objects like
 `GraphLearner` in
@@ -284,7 +292,7 @@ Extracts the base learner from nested learner objects like
 
 ------------------------------------------------------------------------
 
-### Method `importance()`
+### `AutoFSelector$importance()`
 
 The importance scores of the final model.
 
@@ -298,7 +306,7 @@ Named [`numeric()`](https://rdrr.io/r/base/numeric.html).
 
 ------------------------------------------------------------------------
 
-### Method `selected_features()`
+### `AutoFSelector$selected_features()`
 
 The selected features of the final model. These features are selected
 internally by the learner.
@@ -313,7 +321,7 @@ internally by the learner.
 
 ------------------------------------------------------------------------
 
-### Method `oob_error()`
+### `AutoFSelector$oob_error()`
 
 The out-of-bag error of the final model.
 
@@ -327,7 +335,7 @@ The out-of-bag error of the final model.
 
 ------------------------------------------------------------------------
 
-### Method `loglik()`
+### `AutoFSelector$loglik()`
 
 The log-likelihood of the final model.
 
@@ -337,15 +345,17 @@ The log-likelihood of the final model.
 
 #### Returns
 
-`logLik`. Printer.
+`logLik`.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `AutoFSelector$print()`
+
+Printer.
 
 #### Usage
 
-    AutoFSelector$print()
+    AutoFSelector$print(...)
 
 #### Arguments
 
@@ -355,7 +365,7 @@ The log-likelihood of the final model.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `AutoFSelector$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -541,14 +551,14 @@ rr = resample(task, afs, resampling_outer, store_models = TRUE)
 extract_inner_fselect_results(rr)
 #>    iteration bill_depth bill_length body_mass flipper_length island    sex
 #>        <int>     <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl>
-#> 1:         1      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE
-#> 2:         2      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE
-#> 3:         3       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE
+#> 1:         1       TRUE        TRUE     FALSE          FALSE   TRUE   TRUE
+#> 2:         2      FALSE        TRUE     FALSE           TRUE  FALSE  FALSE
+#> 3:         3      FALSE        TRUE      TRUE           TRUE  FALSE  FALSE
 #>      year classif.ce                                  features n_features
 #>    <lgcl>      <num>                                    <list>      <int>
-#> 1:  FALSE 0.03947368                bill_length,flipper_length          2
-#> 2:   TRUE 0.06493506 bill_length,body_mass,flipper_length,year          4
-#> 3:  FALSE 0.09210526         bill_depth,bill_length,island,sex          4
+#> 1:  FALSE 0.09210526         bill_depth,bill_length,island,sex          4
+#> 2:  FALSE 0.03947368                bill_length,flipper_length          2
+#> 3:   TRUE 0.06493506 bill_length,body_mass,flipper_length,year          4
 #>     task_id              learner_id resampling_id
 #>      <char>                  <char>        <char>
 #> 1: penguins classif.rpart.fselector            cv

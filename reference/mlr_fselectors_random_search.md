@@ -51,29 +51,29 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
 -\> `FSelectorBatchRandomSearch`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchRandomSearch$new()`](#method-FSelectorBatchRandomSearch-new)
+- [`FSelectorBatchRandomSearch$new()`](#method-FSelectorBatchRandomSearch-initialize)
 
 - [`FSelectorBatchRandomSearch$clone()`](#method-FSelectorBatchRandomSearch-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
+- [`FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchRandomSearch$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -84,7 +84,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchRandomSearch$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -143,16 +143,16 @@ as.data.table(instance$archive)
 #> 10:       TRUE        TRUE      TRUE           TRUE   TRUE  FALSE   TRUE
 #>     classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>          <num>            <num>              <POSc>    <int>    <int>  <int>
-#>  1: 0.54782609            0.005 2026-05-22 08:10:09        1        0      0
-#>  2: 0.08695652            0.006 2026-05-22 08:10:09        1        0      0
-#>  3: 0.08695652            0.006 2026-05-22 08:10:09        1        0      0
-#>  4: 0.08695652            0.007 2026-05-22 08:10:09        1        0      0
-#>  5: 0.25217391            0.006 2026-05-22 08:10:09        1        0      0
-#>  6: 0.08695652            0.006 2026-05-22 08:10:09        1        0      0
-#>  7: 0.31304348            0.005 2026-05-22 08:10:09        1        0      0
-#>  8: 0.26956522            0.006 2026-05-22 08:10:09        1        0      0
-#>  9: 0.25217391            0.006 2026-05-22 08:10:09        1        0      0
-#> 10: 0.08695652            0.005 2026-05-22 08:10:09        1        0      0
+#>  1: 0.54782609            0.004 2026-08-23 13:57:26        1        0      0
+#>  2: 0.08695652            0.005 2026-08-23 13:57:26        1        0      0
+#>  3: 0.08695652            0.006 2026-08-23 13:57:26        1        0      0
+#>  4: 0.08695652            0.006 2026-08-23 13:57:26        1        0      0
+#>  5: 0.25217391            0.006 2026-08-23 13:57:26        1        0      0
+#>  6: 0.08695652            0.005 2026-08-23 13:57:26        1        0      0
+#>  7: 0.31304348            0.006 2026-08-23 13:57:26        1        0      0
+#>  8: 0.26956522            0.005 2026-08-23 13:57:26        1        0      0
+#>  9: 0.25217391            0.006 2026-08-23 13:57:26        1        0      0
+#> 10: 0.08695652            0.005 2026-08-23 13:57:26        1        0      0
 #>                                                              features
 #>                                                                <list>
 #>  1:                                                               sex
@@ -166,7 +166,7 @@ as.data.table(instance$archive)
 #>  9:               bill_depth,body_mass,flipper_length,island,sex,year
 #> 10:       bill_depth,bill_length,body_mass,flipper_length,island,year
 #>     n_features  resample_result
-#>         <list>           <list>
+#>          <int>           <list>
 #>  1:          1 <ResampleResult>
 #>  2:          5 <ResampleResult>
 #>  3:          6 <ResampleResult>

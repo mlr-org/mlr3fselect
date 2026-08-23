@@ -99,7 +99,7 @@ supplied to `as.data.table()`.
 
 ### Public methods
 
-- [`ArchiveBatchFSelect$new()`](#method-ArchiveBatchFSelect-new)
+- [`ArchiveBatchFSelect$new()`](#method-ArchiveBatchFSelect-initialize)
 
 - [`ArchiveBatchFSelect$add_evals()`](#method-ArchiveBatchFSelect-add_evals)
 
@@ -126,7 +126,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ArchiveBatchFSelect$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -176,7 +176,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `add_evals()`
+### `ArchiveBatchFSelect$add_evals()`
 
 Adds function evaluations to the archive table.
 
@@ -206,7 +206,7 @@ Adds function evaluations to the archive table.
 
 ------------------------------------------------------------------------
 
-### Method `learner()`
+### `ArchiveBatchFSelect$learner()`
 
 Retrieve
 [mlr3::Learner](https://mlr3.mlr-org.com/reference/Learner.html) of the
@@ -232,7 +232,7 @@ are mutually exclusive. Learner does not contain a model. Use
 
 ------------------------------------------------------------------------
 
-### Method `learners()`
+### `ArchiveBatchFSelect$learners()`
 
 Retrieve list of trained
 [mlr3::Learner](https://mlr3.mlr-org.com/reference/Learner.html) objects
@@ -257,7 +257,7 @@ of the i-th evaluation, by position or by unique hash `uhash`. `i` and
 
 ------------------------------------------------------------------------
 
-### Method `predictions()`
+### `ArchiveBatchFSelect$predictions()`
 
 Retrieve list of
 [mlr3::Prediction](https://mlr3.mlr-org.com/reference/Prediction.html)
@@ -282,7 +282,7 @@ objects of the i-th evaluation, by position or by unique hash `uhash`.
 
 ------------------------------------------------------------------------
 
-### Method `resample_result()`
+### `ArchiveBatchFSelect$resample_result()`
 
 Retrieve
 [mlr3::ResampleResult](https://mlr3.mlr-org.com/reference/ResampleResult.html)
@@ -307,13 +307,13 @@ of the i-th evaluation, by position or by unique hash `uhash`. `i` and
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `ArchiveBatchFSelect$print()`
 
 Printer.
 
 #### Usage
 
-    ArchiveBatchFSelect$print()
+    ArchiveBatchFSelect$print(...)
 
 #### Arguments
 
@@ -323,7 +323,7 @@ Printer.
 
 ------------------------------------------------------------------------
 
-### Method `best()`
+### `ArchiveBatchFSelect$best()`
 
 Returns the best scoring feature sets.
 
@@ -355,7 +355,7 @@ Returns the best scoring feature sets.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ArchiveBatchFSelect$clone()`
 
 The objects of this class are cloneable with this method.
 

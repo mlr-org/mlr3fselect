@@ -6,9 +6,9 @@ to [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md).
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorAsync`](https://mlr3fselect.mlr-org.com/reference/FSelectorAsync.md)
+[`FSelectorAsync`](https://mlr3fselect.mlr-org.com/reference/FSelectorAsync.md)
 -\> `FSelectorAsyncFromOptimizerAsync`
 
 ## Active bindings
@@ -22,7 +22,7 @@ to [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md).
 
 ### Public methods
 
-- [`FSelectorAsyncFromOptimizerAsync$new()`](#method-FSelectorAsyncFromOptimizerAsync-new)
+- [`FSelectorAsyncFromOptimizerAsync$new()`](#method-FSelectorAsyncFromOptimizerAsync-initialize)
 
 - [`FSelectorAsyncFromOptimizerAsync$optimize()`](#method-FSelectorAsyncFromOptimizerAsync-optimize)
 
@@ -30,13 +30,13 @@ to [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md).
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorAsyncFromOptimizerAsync$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -61,7 +61,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method [`optimize()`](https://rdrr.io/r/stats/optimize.html)
+### `FSelectorAsyncFromOptimizerAsync$optimize()`
 
 Performs the feature selection on a
 [FSelectInstanceAsyncSingleCrit](https://mlr3fselect.mlr-org.com/reference/FSelectInstanceAsyncSingleCrit.md)
@@ -92,7 +92,7 @@ The final result is returned.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorAsyncFromOptimizerAsync$clone()`
 
 The objects of this class are cloneable with this method.
 

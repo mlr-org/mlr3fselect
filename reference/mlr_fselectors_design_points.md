@@ -44,31 +44,31 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
 -\>
-[`mlr3fselect::FSelectorBatchFromOptimizerBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatchFromOptimizerBatch.md)
+[`FSelectorBatchFromOptimizerBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatchFromOptimizerBatch.md)
 -\> `FSelectorBatchDesignPoints`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchDesignPoints$new()`](#method-FSelectorBatchDesignPoints-new)
+- [`FSelectorBatchDesignPoints$new()`](#method-FSelectorBatchDesignPoints-initialize)
 
 - [`FSelectorBatchDesignPoints$clone()`](#method-FSelectorBatchDesignPoints-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatchFromOptimizerBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatchFromOptimizerBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
+- [`FSelectorBatchFromOptimizerBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatchFromOptimizerBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchDesignPoints$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -79,7 +79,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchDesignPoints$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -100,7 +100,7 @@ The objects of this class are cloneable with this method.
 # \donttest{
 
 # retrieve task and load learner
-task = tsk("pima")
+task = tsk("diabetes")
 learner = lrn("classif.rpart")
 
 # create design
@@ -112,7 +112,7 @@ design = mlr3misc::rowwise_table(
   TRUE, FALSE,    TRUE,     TRUE,  FALSE,     TRUE,       TRUE,     TRUE
 )
 
-# run feature selection on the Pima Indians diabetes data set
+# run feature selection on the diabetes data set
 instance = fselect(
   fselector = fs("design_points", design = design),
   task = task,
@@ -125,27 +125,27 @@ instance = fselect(
 instance$result
 #>       age glucose insulin   mass pedigree pregnant pressure triceps
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>
-#> 1:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE
+#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE
 #>                     features n_features classif.ce
 #>                       <list>      <int>      <num>
-#> 1: age,glucose,mass,pregnant          4  0.2578125
+#> 1: age,insulin,mass,pregnant          4  0.2773438
 
 # all evaluated feature sets
 as.data.table(instance$archive)
 #>       age glucose insulin   mass pedigree pregnant pressure triceps classif.ce
 #>    <lgcl>  <lgcl>  <lgcl> <lgcl>   <lgcl>   <lgcl>   <lgcl>  <lgcl>      <num>
-#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.3085938
-#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2578125
-#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2929688
-#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.3085938
+#> 1:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE    TRUE  0.2773438
+#> 2:   TRUE    TRUE   FALSE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2812500
+#> 3:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE    FALSE   FALSE  0.2773438
+#> 4:   TRUE   FALSE    TRUE   TRUE    FALSE     TRUE     TRUE    TRUE  0.2773438
 #>    runtime_learners           timestamp batch_nr warnings errors
 #>               <num>              <POSc>    <int>    <int>  <int>
-#> 1:            0.009 2026-05-22 08:10:05        1        0      0
-#> 2:            0.029 2026-05-22 08:10:05        2        0      0
-#> 3:            0.007 2026-05-22 08:10:05        3        0      0
-#> 4:            0.009 2026-05-22 08:10:05        4        0      0
+#> 1:            0.007 2026-08-23 13:57:23        1        0      0
+#> 2:            0.007 2026-08-23 13:57:23        2        0      0
+#> 3:            0.007 2026-08-23 13:57:23        3        0      0
+#> 4:            0.029 2026-08-23 13:57:23        4        0      0
 #>                                      features n_features  resample_result
-#>                                        <list>     <list>           <list>
+#>                                        <list>      <int>           <list>
 #> 1:          age,insulin,mass,pregnant,triceps          5 <ResampleResult>
 #> 2:                  age,glucose,mass,pregnant          4 <ResampleResult>
 #> 3:                  age,insulin,mass,pregnant          4 <ResampleResult>

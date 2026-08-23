@@ -47,7 +47,7 @@ or
 
 ### Public methods
 
-- [`ObjectiveFSelect$new()`](#method-ObjectiveFSelect-new)
+- [`ObjectiveFSelect$new()`](#method-ObjectiveFSelect-initialize)
 
 - [`ObjectiveFSelect$clone()`](#method-ObjectiveFSelect-clone)
 
@@ -62,7 +62,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ObjectiveFSelect$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -131,7 +131,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ObjectiveFSelect$clone()`
 
 The objects of this class are cloneable with this method.
 

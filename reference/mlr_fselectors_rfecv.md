@@ -57,7 +57,7 @@ This [FSelector](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 can be instantiated with the associated sugar function
 [`fs()`](https://mlr3fselect.mlr-org.com/reference/fs.md):
 
-    fs("rfe")
+    fs("rfecv")
 
 ## Control Parameters
 
@@ -108,29 +108,29 @@ Other FSelector:
 
 ## Super classes
 
-[`mlr3fselect::FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
+[`FSelector`](https://mlr3fselect.mlr-org.com/reference/FSelector.md)
 -\>
-[`mlr3fselect::FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
+[`FSelectorBatch`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.md)
 -\> `FSelectorBatchRFECV`
 
 ## Methods
 
 ### Public methods
 
-- [`FSelectorBatchRFECV$new()`](#method-FSelectorBatchRFECV-new)
+- [`FSelectorBatchRFECV$new()`](#method-FSelectorBatchRFECV-initialize)
 
 - [`FSelectorBatchRFECV$clone()`](#method-FSelectorBatchRFECV-clone)
 
 Inherited methods
 
-- [`mlr3fselect::FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
-- [`mlr3fselect::FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
-- [`mlr3fselect::FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
-- [`mlr3fselect::FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
+- [`FSelector$format()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-format)
+- [`FSelector$help()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-help)
+- [`FSelector$print()`](https://mlr3fselect.mlr-org.com/reference/FSelector.html#method-print)
+- [`FSelectorBatch$optimize()`](https://mlr3fselect.mlr-org.com/reference/FSelectorBatch.html#method-optimize)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `FSelectorBatchRFECV$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -141,7 +141,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `FSelectorBatchRFECV$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -179,10 +179,13 @@ instance = fselect(
 instance$result
 #>    bill_depth bill_length body_mass flipper_length island    sex   year
 #>        <lgcl>      <lgcl>    <lgcl>         <lgcl> <lgcl> <lgcl> <lgcl>
-#> 1:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
-#>                                 features n_features classif.ce
-#>                                   <list>      <int>      <num>
-#> 1: bill_depth,bill_length,flipper_length          3  0.0377907
+#> 1:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
+#>                                                             features n_features
+#>                                                               <list>      <int>
+#> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
+#>    classif.ce
+#>         <num>
+#> 1: 0.03488372
 
 # all evaluated feature subsets
 as.data.table(instance$archive)
@@ -195,17 +198,15 @@ as.data.table(instance$archive)
 #> 5:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #> 6:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #> 7:       TRUE        TRUE      TRUE           TRUE   TRUE   TRUE   TRUE
-#> 8:       TRUE        TRUE     FALSE           TRUE  FALSE  FALSE  FALSE
 #>    classif.ce runtime_learners           timestamp batch_nr warnings errors
 #>         <num>            <num>              <POSc>    <int>    <int>  <int>
-#> 1: 0.08695652            0.007 2026-05-22 08:10:10        1        0      0
-#> 2: 0.04347826            0.007 2026-05-22 08:10:10        1        0      0
-#> 3: 0.07017544            0.007 2026-05-22 08:10:10        1        0      0
-#> 4: 0.08695652            0.007 2026-05-22 08:10:10        2        0      0
-#> 5: 0.05217391            0.005 2026-05-22 08:10:10        2        0      0
-#> 6: 0.07017544            0.005 2026-05-22 08:10:10        2        0      0
-#> 7: 0.03488372            0.007 2026-05-22 08:10:10        3        0      0
-#> 8: 0.03779070            0.007 2026-05-22 08:10:11        4        0      0
+#> 1: 0.08695652            0.006 2026-08-23 13:57:27        1        0      0
+#> 2: 0.04347826            0.007 2026-08-23 13:57:27        1        0      0
+#> 3: 0.07017544            0.006 2026-08-23 13:57:27        1        0      0
+#> 4: 0.08695652            0.005 2026-08-23 13:57:28        2        0      0
+#> 5: 0.05217391            0.005 2026-08-23 13:57:28        2        0      0
+#> 6: 0.07017544            0.005 2026-08-23 13:57:28        2        0      0
+#> 7: 0.03488372            0.007 2026-08-23 13:57:28        3        0      0
 #>                                                            importance iteration
 #>                                                                <list>     <int>
 #> 1:       91.03050,79.32583,65.55837,60.87563,49.73684, 0.00000,...[7]         1
@@ -215,9 +216,8 @@ as.data.table(instance$archive)
 #> 5:                                         93.12860,78.51597,66.59879         2
 #> 6:                                         85.98832,78.55965,67.19489         3
 #> 7: 124.20793,121.52400,102.74919, 87.26186, 78.61700,  0.00000,...[7]        NA
-#> 8:                                         124.2079,121.5240,104.2507        NA
 #>                                                             features n_features
-#>                                                               <list>     <list>
+#>                                                               <list>      <int>
 #> 1: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
 #> 2: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
 #> 3: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
@@ -225,7 +225,6 @@ as.data.table(instance$archive)
 #> 5:                             bill_depth,bill_length,flipper_length          3
 #> 6:                             bill_depth,bill_length,flipper_length          3
 #> 7: bill_depth,bill_length,body_mass,flipper_length,island,sex,...[7]          7
-#> 8:                             bill_depth,bill_length,flipper_length          3
 #>     resample_result
 #>              <list>
 #> 1: <ResampleResult>
@@ -235,7 +234,6 @@ as.data.table(instance$archive)
 #> 5: <ResampleResult>
 #> 6: <ResampleResult>
 #> 7: <ResampleResult>
-#> 8: <ResampleResult>
 
 # subset the task and fit the final model
 task$select(instance$result_feature_set)

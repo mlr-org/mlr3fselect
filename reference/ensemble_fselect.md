@@ -35,20 +35,20 @@ Learning and Knowledge Discovery in Databases*, **5212 LNAI**, 313–325.
 Abeel, Thomas, Helleputte, Thibault, Van de Peer, Yves, Dupont, Pierre,
 Saeys, Yvan (2010). “Robust biomarker identification for cancer
 diagnosis with ensemble feature selection methods.” *Bioinformatics*,
-**26**, 392–398. ISSN 1367-4803,
+**26**, 392–398. ISSN 1367-4803.
 [doi:10.1093/BIOINFORMATICS/BTP630](https://doi.org/10.1093/BIOINFORMATICS/BTP630)
 .
 
 Pes, Barbara (2020). “Ensemble feature selection for high-dimensional
 data: a stability analysis across multiple domains.” *Neural Computing
-and Applications*, **32**(10), 5951–5973. ISSN 14333058,
+and Applications*, **32**(10), 5951–5973. ISSN 14333058.
 [doi:10.1007/s00521-019-04082-3](https://doi.org/10.1007/s00521-019-04082-3)
 .
 
 Zobolas, John, George, Anne-Marie, Lopez, Alberto, Fischer, Sebastian,
 Becker, Marc, Aittokallio, Tero (2026). “Prognostic biomarker discovery
 in pancreatic cancer through hybrid ensemble feature selection and
-multi-omics data.” *BioData Mining*. ISSN 1756-0381,
+multi-omics data.” *BioData Mining*. ISSN 1756-0381.
 [doi:10.1186/s13040-026-00546-0](https://doi.org/10.1186/s13040-026-00546-0)
 .
 
