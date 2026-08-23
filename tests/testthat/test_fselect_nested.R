@@ -1,6 +1,6 @@
 test_that("fselect_nested function works", {
   rr = fselect_nested(
-    fselector = fs("random_search"),
+    fselector = fs("random_search", batch_size = 2),
     task = tsk("diabetes"),
     learner = lrn("classif.rpart"),
     inner_resampling = rsmp("holdout"),

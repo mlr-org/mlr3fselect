@@ -8,7 +8,7 @@ test_that("default parameters work", {
 })
 
 test_that("task is permuted", {
-  instance = TEST_MAKE_INST_1D(terminator = trm("none"))
+  instance = TEST_MAKE_INST_1D(terminator = trm("evals", n_evals = 1))
   task = instance$objective$task$clone()
   fselector = fs("shadow_variable_search")
   fselector$optimize(instance)

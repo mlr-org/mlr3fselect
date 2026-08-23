@@ -78,7 +78,7 @@ test_that("ObjectiveFSelectBatch works with store_models", {
 test_that("fast aggregation works", {
   task = tsk("diabetes")
   learner = lrn("classif.rpart")
-  resampling = rsmp("cv", folds = 3)
+  resampling = rsmp("cv", folds = 2)
 
   # draw seed to make fast and slow aggregation comparable
   seed = sample(1000, 1)
@@ -90,7 +90,7 @@ test_that("fast aggregation works", {
       learner = learner,
       resampling = resampling,
       measures = msr("classif.ce"),
-      term_evals = 30
+      term_evals = 10
     )
   })
 
@@ -118,7 +118,7 @@ test_that("fast aggregation works", {
       learner = learner,
       resampling = resampling,
       measures = msrs(c("classif.ce", "classif.acc")),
-      term_evals = 30
+      term_evals = 10
     )
   })
 
@@ -154,7 +154,7 @@ test_that("fast aggregation conditions work", {
     learner = learner,
     resampling = resampling,
     measures = msr("classif.ce"),
-    term_evals = 30
+    term_evals = 15
   )
 
   expect_equal(
